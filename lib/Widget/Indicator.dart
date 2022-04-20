@@ -1,12 +1,14 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:flutter/material.dart';
 
-
 class Indicator extends StatelessWidget {
   Indicator({
-     required this.controller,
+    Key? key,
+    required this.controller,
+    required this.indicatorColors,
     this.itemCount: 0,
-  }) : assert(controller != null);
+  })  : assert(controller != null),
+        super(key: key);
 
   /// PageView Controller
   final PageController controller;
@@ -26,6 +28,8 @@ class Indicator extends StatelessWidget {
   /// Spacing of points
   final double spacing = 4.0;
 
+  final List<Color> indicatorColors;
+
   /// Point Widget
   Widget _buildIndicator(
       int index, int pageCount, double dotSize, double spacing) {
@@ -39,8 +43,9 @@ class Indicator extends StatelessWidget {
       child: new Center(
         child: new Material(
           borderRadius: BorderRadius.circular(10),
-          color: isCurrentPageSelected ? selectedColor : normalColor,
-        //  type: MaterialType.circle,
+          // color: isCurrentPageSelected ? selectedColor : normalColor,
+          color: indicatorColors[index],
+          //  type: MaterialType.circle,
           child: new Container(
             width: 30,
             height: dotSize,

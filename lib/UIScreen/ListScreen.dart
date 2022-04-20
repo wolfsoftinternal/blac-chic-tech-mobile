@@ -1,14 +1,15 @@
+import 'package:blackchecktech/Screens/Authentication/signup/view/FullInformationStepsView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/UIScreen/FullInformationSteps.dart';
-import 'package:blackchecktech/UIScreen/OwnProfile.dart';
-import 'package:blackchecktech/UIScreen/Register.dart';
-import 'package:blackchecktech/UIScreen/SignupDetail.dart';
+// import 'package:blackchecktech/UIScreen/OwnProfile.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 
-import 'Signup.dart';
+import '../Screens/Authentication/login/view/LoginView.dart';
 import 'Test.dart';
-import 'Welcome.dart';
+import '../Welcome.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -46,7 +47,7 @@ class ListScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Register(),
+                    builder: (context) => RegisterInfoView(),
                   ));
             },
             child: Padding(
@@ -65,7 +66,7 @@ class ListScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Signup(),
+                    builder: (context) => SignupInfoView(),
                   ));
             },
             child: Padding(
@@ -84,7 +85,7 @@ class ListScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SignupDetail(),
+                    builder: (context) => SignupFormView(),
                   ));
             },
             child: Padding(
@@ -103,13 +104,32 @@ class ListScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => FullInformationSteps(),
+                    builder: (context) => FullInformationStepsView(),
                   ));
             },
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Text(
                 "FullInformationSteps Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginView(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "Login Screen",
                 style: TextStyle(
                     color: Colors.black87,
                     fontFamily: helveticaNeueNeue_medium,
@@ -129,82 +149,6 @@ class ListScreen extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: Text(
                 "Test Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => OwnProfile(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "OwnProfile Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Register(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "Register Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Register(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "Register Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Register(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "Register Screen",
                 style: TextStyle(
                     color: Colors.black87,
                     fontFamily: helveticaNeueNeue_medium,
