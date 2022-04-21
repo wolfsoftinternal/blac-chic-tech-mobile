@@ -9,10 +9,7 @@ class Test extends StatefulWidget {
   _TestState createState() => _TestState();
 }
 
-
-
 class _TestState extends State<Test> {
-
   final PageController controller = PageController(initialPage: 200);
 
   void _pageChanged(int index) {
@@ -38,18 +35,11 @@ class _TestState extends State<Test> {
               ),
             )),
         Indicator(
+          indicatorColors: [],
           controller: controller,
           itemCount: 5,
         ),
       ],
     );
   }
-
-
 }
-
-
-
-
-
-

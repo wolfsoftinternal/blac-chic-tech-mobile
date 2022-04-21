@@ -35,7 +35,7 @@ class BlackButtonDialog extends StatelessWidget {
       ),
       child: SizedBox(
         width: double.infinity,
-        //height: HeightData.fiftyfive,
+        height: HeightData.fiftyfive,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4.0),
@@ -65,7 +65,7 @@ class BlackButtonDialog extends StatelessWidget {
                 shadowColor: Colors.transparent,
                 elevation: 0,
                 padding:
-                EdgeInsets.symmetric(horizontal: 0, vertical: 21),
+                EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                   side: BorderSide(color: black_121212, width: 0),
