@@ -5,4 +5,7 @@ class SharePreData {
 
 // Push Notification (FCM) Token
   static String keyFcmToken = "fcm_token";
+
+  static String keySignupModel = "key_SaveSignupModel";
+
 }

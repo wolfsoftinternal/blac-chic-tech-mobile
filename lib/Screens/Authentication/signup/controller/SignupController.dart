@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,114 +18,79 @@ import '../../../Networks/api_response.dart';
 import '../../login/model/LoginModel.dart';
 
 class SignupController extends GetxController {
-  Rx<TextEditingController> inputText = TextEditingController().obs;
-  Rx<TextEditingController> pswdText = TextEditingController().obs;
+  Rx<TextEditingController> firstnameController = TextEditingController().obs;
+  Rx<TextEditingController> lastnameController = TextEditingController().obs;
+  Rx<TextEditingController> usernameController = TextEditingController().obs;
+  Rx<TextEditingController> emailController = TextEditingController().obs;
+  Rx<TextEditingController> passwordController = TextEditingController().obs;
+  Rx<TextEditingController> confirmpasswordController = TextEditingController().obs;
 
-  RxBool boolRemember = false.obs;
+  Future<void> signupAPI(BuildContext context) async {
+    String url = urlBase + urlSignup;
+    var request = http.MultipartRequest('POST', Uri.parse(url));
 
-  @override
-  void onInit() {
-    super.onInit();
-    print("init State");
+    request.fields.addAll({
+      'first_name': firstnameController.value.text,
+      'last_name': lastnameController.value.text,
+      'user_name': usernameController.value.text,
+      'email': emailController.value.text,
+      'password': passwordController.value.text,
+    });
 
-    checker();
-  }
+    http.StreamedResponse response = await request.send();
 
-  checker() async {
-    var preferences = MySharedPref();
+    if (response.statusCode == 200) {
+      await response.stream.bytesToString().then((value) async {
+        String strData = value;
+        Map<String, dynamic> userModel = json.decode(strData);
+        BaseModel model = BaseModel.fromJson(userModel);
 
-    bool isExist =
-        await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
+        if(model.statusCode==200){
+          SignupModel? signUp = SignupModel.fromJson(userModel);
 
-    if (isExist != null) {
-      boolRemember.value = isExist;
+          var preferences = MySharedPref();
+          await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
 
-      if (isExist == true) {
-        getStoredUserDetails();
-      }
+          // Navigator.pop(context);
+          // Navigator.pushReplacement(context, new MaterialPageRoute(
+          //     builder: (_) => UserName()));
+
+          Get.off(PersonalInfoFormView());
+        }
+        else if(model.statusCode==101){
+          snackBar(context, model.message!);
+        }else{
+          snackBar(context,"Resend Code");
+        }
+
+      });
+    } else {
+      Navigator.pop(context); //pop
+      snackBar(context, response.reasonPhrase!);
     }
   }
 
-  callLoginApi(BuildContext context) async {
-    onLoading(context, "Loading..");
-
-    String url = urlBase + urlGetLogin;
-    final apiReq = Request();
-    // FirebaseMessaging.instance.getToken().then((value) {
-    //   String token = value;
-    //   printData("Token", token);
-
-    // });
-    dynamic body = {
-      'email': inputText.value.text,
-      'password': pswdText.value.text
-    };
-
-    await apiReq.postAPIwithoutAuth(url, body).then((value) async {
-      http.StreamedResponse res = value;
-
-      if (res.statusCode == 200) {
-        await res.stream.bytesToString().then((value) async {
-          Navigator.pop(context); //pop dialogdsds
-
-          String strData = value;
-          Map<String, dynamic> userModel = json.decode(strData);
-          BaseModel model = BaseModel.fromJson(userModel);
-
-          print("status code " + model.statusCode.toString());
-          print("status code " + model.message.toString());
-
-          if (model.statusCode == 200) {
-            snackBar(context, model.message!);
-            LoginModel loginInModel = LoginModel.fromJson(userModel);
-            var preferences = MySharedPref();
-            await preferences.setLoginInModel(
-                loginInModel, SharePreData.keyLoginModel);
-
-            if (boolRemember.value == true) {
-              await preferences.setBool(
-                  SharePreData.keyRememberedUserInfo, true);
-              await preferences.setString(SharePreData.keyRememberPassword,
-                  pswdText.value.text.toString());
-            }
-
-            // if (loginInModel.data!.userName == null) {
-            //   Get.offAll(UserName());
-            // } else if (loginInModel.data.password == null) {
-            //   Get.offAll(Password());
-            // } else {
-            //   Get.offAll(BottomNavigation());
-            // }
-          } else {
-            // Get.offAll(SignIn()); //pop dialogdsds
-            snackBar(context, model.message!);
-          }
-        });
-      } else if (res.statusCode == 101) {
-        Navigator.pop(context); //pop dialogdsds
-        snackBar(context, "Enter valid Credentials");
-      }
-    });
-  }
-
-  Future<void> getStoredUserDetails() async {
-    var preferences = MySharedPref();
-    LoginModel? profileModel =
-        await preferences.getLoginInModel(SharePreData.keyLoginModel);
-
-    inputText.value.text = profileModel!.data!.email!;
-    pswdText.value.text = profileModel.data!.password!;
-  }
-
   bool checkValidation(context) {
-    if (inputText.value.text.isEmpty) {
+    if (firstnameController.value.text.isEmpty) {
+      snackBar(context, "Enter First Name");
+      return false;
+    } else if (lastnameController.value.text.isEmpty) {
+      snackBar(context, "Enter Last Name");
+      return false;
+    } else if (usernameController.value.text.isEmpty) {
       snackBar(context, "Enter Username");
       return false;
-    } else if (pswdText.value.text.isEmpty) {
-      snackBar(context, "Enter password");
+    } else if (!GetUtils.isEmail(emailController.value.text)) {
+      snackBar(context, "Enter valid email");
       return false;
-    } else if (pswdText.value.text.length < 6) {
-      snackBar(context, "Password should not be less than 6 digits");
+    } else if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(passwordController.value.text)) {
+      snackBar(context, "Enter valid password");
+      return false;
+    } else if (confirmpasswordController.value.text.isEmpty) {
+      snackBar(context, "Enter Confirm Password");
+      return false;
+    } else if (passwordController.value.text != confirmpasswordController.value.text) {
+      snackBar(context, "Entered password does not match");
       return false;
     } else {
       return true;
