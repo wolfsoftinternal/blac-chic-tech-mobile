@@ -32,10 +32,9 @@ class LoginController extends GetxController {
   checker() async {
     var preferences = MySharedPref();
 
-    bool isExist =
-        await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
+    bool isExist = await preferences.getBoolValue(SharePreData.keyRememberedUserInfo) ?? false;
 
-    if (isExist != null) {
+    if (isExist) {
       boolRemember.value = isExist;
 
       if (isExist == true) {
@@ -70,15 +69,12 @@ class LoginController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          print("status code " + model.statusCode.toString());
-          print("status code " + model.message.toString());
-
           if (model.statusCode == 200) {
             snackBar(context, model.message!);
             LoginModel loginInModel = LoginModel.fromJson(userModel);
             var preferences = MySharedPref();
-            await preferences.setLoginInModel(
-                loginInModel, SharePreData.keyLoginModel);
+            // await preferences.setLoginInModel(
+            //     loginInModel, SharePreData.keyLoginModel);
 
             if (boolRemember.value == true) {
               await preferences.setBool(
@@ -107,12 +103,12 @@ class LoginController extends GetxController {
   }
 
   Future<void> getStoredUserDetails() async {
-    var preferences = MySharedPref();
-    LoginModel? profileModel =
-        await preferences.getLoginInModel(SharePreData.keyLoginModel);
+  //   var preferences = MySharedPref();
+  //   LoginModel? profileModel =
+  //       await preferences.getLoginInModel(SharePreData.keyLoginModel);
 
-    inputText.value.text = profileModel!.data!.email!;
-    pswdText.value.text = profileModel.data!.password!;
+  //   inputText.value.text = profileModel!.data!.email!;
+  //   pswdText.value.text = profileModel.data!.password!;
   }
 
   bool checkValidation(context) {

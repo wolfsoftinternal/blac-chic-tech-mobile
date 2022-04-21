@@ -68,6 +68,33 @@ class Request {
     return response;
   }
 
+  Future<http.StreamedResponse> postAPIwithoutBearer(url, body) async {
+    Map<String, String> headersWithBearer = {
+      'Content-Type': 'application/json',
+    };
+
+    printData("url", url);
+    printData("Body", body.toString());
+    printData("Header", headersWithBearer.toString());
+
+    if (body != null) {
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
+      request.fields.addAll(body);
+      request.headers.addAll(headersWithBearer);
+      http.StreamedResponse response = await request.send();
+
+      return response;
+    } else {
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
+      request.headers.addAll(headersWithBearer);
+      http.StreamedResponse response = await request.send();
+
+      return response;
+    }
+  }
+
   Future<http.StreamedResponse> postAPIWithMediaWithoutBearer(
       url, body, token, strImg) async {
     Map<String, String> headersWithBearer = {
@@ -88,5 +115,32 @@ class Request {
     http.StreamedResponse response = await request.send();
 
     return response;
+  }
+
+    Future<http.StreamedResponse> postAPI(url, body, token) async {
+    Map<String, String> headersWithBearer = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    };
+    printData("url", url);
+    printData("Body", body.toString());
+    printData("Header", headersWithBearer.toString());
+
+    if (body != null) {
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
+      request.fields.addAll(body);
+      request.headers.addAll(headersWithBearer);
+      http.StreamedResponse response = await request.send();
+
+      return response;
+    } else {
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
+      request.headers.addAll(headersWithBearer);
+      http.StreamedResponse response = await request.send();
+
+      return response;
+    }
   }
 }

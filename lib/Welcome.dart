@@ -1,9 +1,11 @@
+import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'Layout/BlackNextButton.dart';
@@ -48,7 +50,7 @@ class _WelcomeState extends State<Welcome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BlackNextButton(str_get_started, white_ffffff, () {
-                    Get.to(const RegisterInfoView());
+                    Get.to(const PersonalInfoFormView());
                   }),
 
                   const SizedBox(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blackchecktech/Screens/Authentication/login/model/LoginModel.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/model/SignupModel.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -63,20 +64,19 @@ class MySharedPref {
   }
 
   // Used to save user's information
-  setLoginInModel(LoginModel model, String key) async {
+  setSignupModel(SignupModel model, String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print("Value set model ::::::" + model.data!.id.toString());
     prefs.setString(key, json.encode(model.toJson()));
   }
 
   // Used to get user's information
-  Future<LoginModel?> getLoginInModel(String key) async {
+  Future<SignupModel?> getSignupModel(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var myJson = prefs.getString(key);
     if (myJson == null) {
       return null;
     }
-    return LoginModel.fromJson(json.decode(myJson));
+    return SignupModel.fromJson(json.decode(myJson));
   }
 }
