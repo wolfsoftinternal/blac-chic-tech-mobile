@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'Layout/BlackNextButton.dart';
 import 'Screens/Authentication/login/view/LoginView.dart';
 import 'Styles/my_strings.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class _WelcomeState extends State<Welcome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BlackNextButton(str_get_started, white_ffffff, () {
-                    Get.to(const PersonalInfoFormView());
+                      Get.to(const ExperienceInfoFormView());
                   }),
 
                   const SizedBox(

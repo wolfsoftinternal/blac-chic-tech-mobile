@@ -9,3 +9,4 @@ const icon_upload_img = 'assets/images/icon_upload_img.svg';
 const icon_down_arrow_spinner = 'assets/images/icon_down_arrow_spinner.svg';
 const icon_linkedin = 'assets/images/icon_linkedin.svg';
 const icon_instagram = 'assets/images/icon_instagram.svg';
+const search = 'assets/images/search.svg';

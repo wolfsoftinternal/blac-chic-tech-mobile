@@ -100,13 +100,15 @@ setTextFieldNext(
     bool validtion,
     String errorMSg,
     TextInputAction textInputAction,
-    Function onchange) {
+    Function onchange,
+    [bool read = false,]) {
   return Theme(
       data: new ThemeData(
         primaryColor: Colors.green,
         primaryColorDark: Colors.red,
       ),
       child: TextField(
+        readOnly: read,
         style: TextStyle(
             color: black_121212,
             fontWeight: FontWeight.w500,

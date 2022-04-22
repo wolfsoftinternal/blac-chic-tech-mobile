@@ -34,8 +34,6 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
   String? strStateName;
   String? strCityName;
 
-  var _birhtdayController = TextEditingController();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -453,7 +451,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                       ),
                       BlackNextButton(str_continue, black_121212, () {
                         FocusScope.of(context).unfocus();
-                        if (controller.checkValidation(context)) {
+                        if (controller.checkPersonalValidation(context)) {
                           checkNet(context).then((value) {
                             controller.personalInfoAPI(context);
                           });

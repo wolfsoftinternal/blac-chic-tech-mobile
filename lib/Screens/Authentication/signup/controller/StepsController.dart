@@ -5,7 +5,11 @@ import 'package:blackchecktech/Screens/Authentication/signup/model/CityListModel
 import 'package:blackchecktech/Screens/Authentication/signup/model/CountryListModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/StateListModel.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
+import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,6 +35,11 @@ class StepsController extends GetxController {
   RxString strCountryId = "".obs;
   RxString strStateId = "".obs;
   RxString strCityId = "".obs;
+
+  Rx<TextEditingController> currentTitleController = TextEditingController().obs;
+  Rx<TextEditingController> currentCompanyNameController = TextEditingController().obs;
+  Rx<TextEditingController> currentCompanyWebsiteController = TextEditingController().obs;
+  RxList companyList = [].obs;
 
   countryListApi() async {
     String url = urlBase + urlCountryList;
@@ -130,63 +139,182 @@ class StepsController extends GetxController {
   }
 
   personalInfoAPI(BuildContext context) async {
-    // var preferences = MySharedPref();
-    // //User Personal details
-    // SigninModel myModel =
-    // await preferences.getSignInModel(SharePreData.key_SaveSignInModel);
-    // var token = myModel?.data.token;
-    // dynamic body = {
-    //   'search':search,
-    // };
+    var preferences = MySharedPref();
+    SignupModel? myModel =
+    await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = myModel?.data!.token;
 
-    // String url = urlBase + urlStoreList;
-    // final apiReq = Request();
-    // await apiReq.postAPI(url, body, token).then((value) {
-    //   http.StreamedResponse res = value;
+    dynamic body = {
 
-    //   printData("Category List API response status code" , res.statusCode.toString());
+    };
 
-    //   if (res.statusCode == 200) {
-    //     res.stream.bytesToString().then((value) async {
-    //       String strData = value;
-    //       Map<String, dynamic> userModel = json.decode(strData);
-    //       BaseModel model = BaseModel.fromJson(userModel);
+    String url = urlBase + urlPersonalInfo;
+    final apiReq = Request();
+    await apiReq.postAPI(url, body, token).then((value) {
+      http.StreamedResponse res = value;
 
-    //       printData("Category List API response message" , model.message.toString());
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
 
-    //       if(model.statusCode ==500){
-    //         final tokenUpdate = TokenUpdateRequest();
-    //         await tokenUpdate.updateToken();
+          if(model.statusCode == 500){
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
 
-    //         displayMarketList("");
-    //       }else if(model.statusCode==200){
-    //         MarketListModel categoryModel = MarketListModel.fromJson(userModel);
-    //         marketList.value = categoryModel.marketList;
-
-    //         //CategoryList.addAll(categoryModel.data);
-
-    //         printData("marketList list", marketList.toString());
-    //         printData("marketList  length", marketList.length.toString());
-
-    //         if(marketList.length>0){
-    //           isLoading(false);
-    //           boolDisplayMarketProduct.value = true;
-    //         }else{
-    //           boolDisplayMarketProduct.value = false;
-    //         }
-
-    //         printData("Category list", boolDisplayMarketProduct.toString());
-    //       }
-
-    //     });
-    //   }else{
-    //     print(res.reasonPhrase);
-    //   }
-
-    // });
+            personalInfoAPI(context);
+          }else if(model.statusCode==200){
+            Get.to(ExperienceInfoFormView());
+          }
+        });
+      }else{
+        print(res.reasonPhrase);
+      }
+    });
   }
 
-  bool checkValidation(context) {
+  companyListAPI(BuildContext context) async {
+    var preferences = MySharedPref();
+    SignupModel? myModel =
+    await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = myModel?.data!.token;
+
+    String url = urlBase + urlCompanyList;
+    final apiReq = Request();
+    await apiReq.postAPI(url, null, token).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if(model.statusCode == 500){
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            companyListAPI(context);
+          }else if(model.statusCode==200){
+            companyList.value = userModel['data'];
+          }
+        });
+      }else{
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  createCompanyAPI(BuildContext context) async {
+    var preferences = MySharedPref();
+    SignupModel? myModel =
+    await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = myModel?.data!.token;
+
+    dynamic body = {
+
+    };
+
+    String url = urlBase + urlCreateCompany;
+    final apiReq = Request();
+    await apiReq.postAPI(url, body, token).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if(model.statusCode == 500){
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            createCompanyAPI(context);
+          }else if(model.statusCode==200){
+
+          }
+        });
+      }else{
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  experienceInfoAPI(BuildContext context) async {
+    var preferences = MySharedPref();
+    SignupModel? myModel =
+    await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = myModel?.data!.token;
+
+    dynamic body = {
+
+    };
+
+    String url = urlBase + urlExperienceInfo;
+    final apiReq = Request();
+    await apiReq.postAPI(url, body, token).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if(model.statusCode == 500){
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            experienceInfoAPI(context);
+          }else if(model.statusCode==200){
+            Get.to(EducationInfoFormView());
+          }
+        });
+      }else{
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  educationalInfoAPI(BuildContext context) async {
+    var preferences = MySharedPref();
+    SignupModel? myModel =
+    await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = myModel?.data!.token;
+
+    dynamic body = {
+
+    };
+
+    String url = urlBase + urlEducationalInfo;
+    final apiReq = Request();
+    await apiReq.postAPI(url, body, token).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if(model.statusCode == 500){
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            experienceInfoAPI(context);
+          }else if(model.statusCode==200){
+            Get.to(AdditionalQueFormView());
+          }
+        });
+      }else{
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  bool checkPersonalValidation(context) {
     if (strCountryId.value.isEmpty) {
       snackBar(context, "Enter Country");
       return false;
