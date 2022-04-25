@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
+import 'package:blackchecktech/Layout/InputTextLayout.dart';
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
@@ -33,6 +34,8 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
   String? strCountryName;
   String? strStateName;
   String? strCityName;
+  bool checkColor = false;
+  bool checkFillColor = true;
 
   @override
   void initState() {
@@ -295,23 +298,73 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: setDobTextFieldNext(
-                                    controller.dobController.value,
-                                    "Date of Birth",
-                                    false,
-                                    TextInputType.emailAddress,
-                                    false,
-                                    "",
-                                    TextInputAction.next,
-                                    (value){
-                                      controller.dobController.value.text = value;
-                                    },
-                                    (){
-                                      selectDate();
-                                    }
-                                  ),
+                                      controller.dobController.value,
+                                      "Date of Birth",
+                                      false,
+                                      TextInputType.emailAddress,
+                                      false,
+                                      "",
+                                      TextInputAction.next, (value) {
+                                    controller.dobController.value.text = value;
+                                  }, () {
+                                    selectDate();
+                                  },),
                                 ),
                               ),
                             ],
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(
+                        height: 16,
+                      ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: grey_aaaaaa
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(const Radius.circular(4)),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, top: 13, bottom: 12),
+                          child: TextField(
+                            controller: controller.aboutController.value,
+                            maxLines: 5,
+                            minLines: 1,
+                            textInputAction: TextInputAction.newline,
+                            keyboardType: TextInputType.multiline,
+                            style: const TextStyle(
+                                color: black_121212,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontSize: 14.0),
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 0, vertical: 0),
+                              isDense: true,
+                              // you can change this with the top text like you want
+                              labelText: 'About you',
+                              labelStyle: TextStyle(
+                                  color: grey_aaaaaa,
+                                  fontFamily: helveticaNeueNeue_medium,
+                                  fontSize: 14),
+                              hintStyle: TextStyle(
+                                  color: black_121212,
+                                  fontFamily: helveticaNeueNeue_medium,
+                                  fontSize: 14),
+                              border: InputBorder.none,
+                              filled: false,
+                            ),
+                            cursorColor: black_121212,
+                            onEditingComplete: () {
+                              FocusScope.of(context).unfocus();
+                              FocusScope.of(context).nextFocus();
+                            },
+                            onChanged: (inputValue) {},
                           ),
                         ),
                       ),
@@ -358,26 +411,23 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                         child: Padding(
                           padding: const EdgeInsets.only(
                               left: 17.5, right: 17.5, top: 13.5, bottom: 13.5),
-                            child: setSocialTextFieldNext(
-                                    controller.linkedinController.value,
-                                    "Linkedin Account",
-                                    false,
-                                    TextInputType.name,
-                                    false,
-                                    "",
-                                    TextInputAction.next,
-                                    (value){
-                                      
-                                    },
-                                    icon_linkedin
-                                  ),
+                          child: setSocialTextFieldNext(
+                              controller.linkedinController.value,
+                              "Linkedin Account",
+                              false,
+                              TextInputType.name,
+                              false,
+                              "",
+                              TextInputAction.next,
+                              (value) {},
+                              icon_linkedin),
                           // child: Row(
                           //   children: [
-                              // SvgPicture.asset(
-                              //   icon_linkedin,
-                              //   width: 21,
-                              //   height: 21,
-                              // ),
+                          // SvgPicture.asset(
+                          //   icon_linkedin,
+                          //   width: 21,
+                          //   height: 21,
+                          // ),
                           //     const SizedBox(
                           //       width: 17.5,
                           //     ),
@@ -406,18 +456,15 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                           padding: const EdgeInsets.only(
                               left: 17.5, right: 17.5, top: 13.5, bottom: 13.5),
                           child: setSocialTextFieldNext(
-                                    controller.twitterController.value,
-                                    "Twitter Account",
-                                    false,
-                                    TextInputType.name,
-                                    false,
-                                    "",
-                                    TextInputAction.next,
-                                    (value){
-                                      
-                                    },
-                                    icon_linkedin
-                                  ),
+                              controller.twitterController.value,
+                              "Twitter Account",
+                              false,
+                              TextInputType.name,
+                              false,
+                              "",
+                              TextInputAction.next,
+                              (value) {},
+                              icon_linkedin),
                         ),
                       ),
                       const SizedBox(
@@ -432,18 +479,15 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                           padding: const EdgeInsets.only(
                               left: 17.5, right: 17.5, top: 13.5, bottom: 13.5),
                           child: setSocialTextFieldNext(
-                                    controller.instagramController.value,
-                                    "Instagram Account",
-                                    false,
-                                    TextInputType.name,
-                                    false,
-                                    "",
-                                    TextInputAction.next,
-                                    (value){
-                                      
-                                    },
-                                    icon_linkedin
-                                  ),
+                              controller.instagramController.value,
+                              "Instagram Account",
+                              false,
+                              TextInputType.name,
+                              false,
+                              "",
+                              TextInputAction.next,
+                              (value) {},
+                              icon_linkedin),
                         ),
                       ),
                       const SizedBox(
@@ -453,7 +497,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                         FocusScope.of(context).unfocus();
                         if (controller.checkPersonalValidation(context)) {
                           checkNet(context).then((value) {
-                            controller.personalInfoAPI(context);
+                            controller.personalInfoAPI(context, "");
                           });
                         }
                       })
@@ -484,7 +528,10 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                     Padding(
                       padding: const EdgeInsets.only(left: 5.0),
                       child: CupertinoButton(
-                        child: Text('Cancel', style: TextStyle(color: orange_ff881a),),
+                        child: const Text(
+                          'Cancel',
+                          style: TextStyle(color: orange_ff881a),
+                        ),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -493,7 +540,8 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                     Padding(
                       padding: const EdgeInsets.only(right: 5.0),
                       child: CupertinoButton(
-                        child: Text('Done', style: TextStyle(color: orange_ff881a)),
+                        child: const Text('Done',
+                            style: TextStyle(color: orange_ff881a)),
                         onPressed: () {
                           Navigator.of(context).pop(tempPickedDate);
                         },
@@ -502,7 +550,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                   ],
                 ),
               ),
-              Divider(
+              const Divider(
                 height: 0,
                 thickness: 1,
               ),

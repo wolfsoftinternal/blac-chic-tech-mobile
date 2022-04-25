@@ -5,6 +5,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLast
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,57 +27,14 @@ class EducationInfoFormView extends StatefulWidget {
 
 class _EducationState extends State<EducationInfoFormView> {
   StepsController controller = Get.put(StepsController());
-  /*Spinner Code is here*/
-
-  List<DropdownMenuItem<String>> get dropdownItems {
-    List<DropdownMenuItem<String>> menuItems = [
-      const DropdownMenuItem(
-          child: Text("USA",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "USA"),
-      const DropdownMenuItem(
-          child: Text("Canada",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "Canada"),
-      const DropdownMenuItem(
-          child: Text("Brazil",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "Brazil"),
-      const DropdownMenuItem(
-          child: Text("England",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "England"),
-    ];
-    return menuItems;
-  }
-
-  String? selectedValue = null;
-
-  List<Map> educationalDetails = [{}];
   var cards = <Container>[];
+  List<Map> details = [{}];
+  DateTime startDate = DateTime.now();
 
   Container createCard() {
-    var universityController = TextEditingController();
-    var startyearController = TextEditingController();
-    var endyearController = TextEditingController();
-
-    educationalDetails.add({
-      'university': universityController,
-      'start': startyearController,
-      'end': endyearController,
-    });
+    TextEditingController universityController = TextEditingController();
+    TextEditingController startyearController = TextEditingController();
+    TextEditingController endyearController = TextEditingController();
 
     selectStartDate() async {
       DateTime? pickedDate = await showModalBottomSheet<DateTime>(
@@ -94,7 +52,10 @@ class _EducationState extends State<EducationInfoFormView> {
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0),
                         child: CupertinoButton(
-                          child: Text('Cancel', style: TextStyle(color: orange_ff881a),),
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(color: orange_ff881a),
+                          ),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -103,7 +64,8 @@ class _EducationState extends State<EducationInfoFormView> {
                       Padding(
                         padding: const EdgeInsets.only(right: 5.0),
                         child: CupertinoButton(
-                          child: Text('Done', style: TextStyle(color: orange_ff881a)),
+                          child: Text('Done',
+                              style: TextStyle(color: orange_ff881a)),
                           onPressed: () {
                             Navigator.of(context).pop(tempPickedDate);
                           },
@@ -122,7 +84,11 @@ class _EducationState extends State<EducationInfoFormView> {
                       firstDate: DateTime(DateTime.now().year - 100),
                       lastDate: DateTime.now(),
                       selectedDate: DateTime.now(),
-                      onChanged: (DateTime value) { tempPickedDate = value; },
+                      onChanged: (DateTime dateTime) {
+                        tempPickedDate = dateTime;
+                        startDate = dateTime;
+                        Navigator.of(context).pop(tempPickedDate);
+                      },
                     ),
                   ),
                 ),
@@ -131,10 +97,14 @@ class _EducationState extends State<EducationInfoFormView> {
           );
         },
       );
-      final DateFormat formatter = DateFormat('MMM, yyyy');
+      final DateFormat formatter = DateFormat('yyyy');
       final String formattedDate = formatter.format(pickedDate!);
 
       startyearController.text = formattedDate;
+      details.add({
+        'university': universityController.text,
+        'startyear': startyearController.text
+      });
     }
 
     selectEndDate() async {
@@ -153,7 +123,10 @@ class _EducationState extends State<EducationInfoFormView> {
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0),
                         child: CupertinoButton(
-                          child: Text('Cancel', style: TextStyle(color: orange_ff881a),),
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(color: orange_ff881a),
+                          ),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -162,7 +135,8 @@ class _EducationState extends State<EducationInfoFormView> {
                       Padding(
                         padding: const EdgeInsets.only(right: 5.0),
                         child: CupertinoButton(
-                          child: Text('Done', style: TextStyle(color: orange_ff881a)),
+                          child: Text('Done',
+                              style: TextStyle(color: orange_ff881a)),
                           onPressed: () {
                             Navigator.of(context).pop(tempPickedDate);
                           },
@@ -178,10 +152,13 @@ class _EducationState extends State<EducationInfoFormView> {
                 Expanded(
                   child: Container(
                     child: YearPicker(
-                      firstDate: DateTime(DateTime.now().year - 100),
-                      lastDate: DateTime(DateTime.now().year - 20),
+                      firstDate: startDate,
+                      lastDate: DateTime(DateTime.now().year + 10),
                       selectedDate: DateTime.now(),
-                      onChanged: (DateTime value) { tempPickedDate = value; },
+                      onChanged: (DateTime value) {
+                        tempPickedDate = value;
+                        Navigator.of(context).pop(tempPickedDate);
+                      },
                     ),
                   ),
                 ),
@@ -190,10 +167,11 @@ class _EducationState extends State<EducationInfoFormView> {
           );
         },
       );
-      final DateFormat formatter = DateFormat('MMM, yyyy');
+      final DateFormat formatter = DateFormat('yyyy');
       final String formattedDate = formatter.format(pickedDate!);
 
       endyearController.text = formattedDate;
+      details.add({'endyear': endyearController.text});
     }
 
     return Container(
@@ -222,9 +200,11 @@ class _EducationState extends State<EducationInfoFormView> {
                         false,
                         "",
                         TextInputAction.next,
-                            () => {
+                        (value) => {
                           // on Chnages
+                          universityController.text = value
                         },
+                        () {},
                       ),
                     ),
                   ),
@@ -239,22 +219,40 @@ class _EducationState extends State<EducationInfoFormView> {
             children: [
               Expanded(
                 flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: setDobTextFieldNext(
-                    startyearController,
-                    "Start year",
-                    false,
-                    TextInputType.name,
-                    false,
-                    "",
-                    TextInputAction.next,
-                    (value){
-                      startyearController.text = value;
-                    },
-                    (){
-                      selectStartDate();
-                    }
+                child: Container(
+                  height: HeightData.fifty_seven,
+                  decoration: EditTextDecoration,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 12),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: setDobTextFieldNext(
+                              startyearController,
+                              "Start year",
+                              false,
+                              TextInputType.name,
+                              false,
+                              "",
+                              TextInputAction.next,
+                              (value) {
+                                startyearController.text = value;
+                              },
+                              () {
+                                if (universityController.text.isEmpty) {
+                                  snackBar(context, 'Enter university');
+                                } else {
+                                  selectStartDate();
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -263,22 +261,40 @@ class _EducationState extends State<EducationInfoFormView> {
               ),
               Expanded(
                 flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: setDobTextFieldNext(
-                      endyearController,
-                      "End year",
-                      false,
-                      TextInputType.name,
-                      false,
-                      "",
-                      TextInputAction.next,
-                          (value){
-                        endyearController.text = value;
-                      },
-                      (){
-                        selectEndDate();
-                      }
+                child: Container(
+                  height: HeightData.fifty_seven,
+                  decoration: EditTextDecoration,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 12),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: setDobTextFieldNext(
+                              endyearController,
+                              "End year",
+                              false,
+                              TextInputType.name,
+                              false,
+                              "",
+                              TextInputAction.next,
+                              (value) {
+                                endyearController.text = value;
+                              },
+                              () {
+                                if (startyearController.text.isEmpty) {
+                                  snackBar(context, 'Enter start year');
+                                } else {
+                                  selectEndDate();
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -322,6 +338,9 @@ class _EducationState extends State<EducationInfoFormView> {
               // ),
             ],
           ),
+          SizedBox(
+            height: 16,
+          ),
         ],
       ),
     );
@@ -338,113 +357,126 @@ class _EducationState extends State<EducationInfoFormView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white_ffffff,
-      body: Obx(
-    () => Column(
-      children: [
-        const SizedBox(
-          height: 60,
-        ),
-        const ToolbarWithHeader(
-          step: 2,
-        ),
-        Expanded(
-          flex: 1,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Personal Information
-                  Center(
-                    child: Text(str_Education,
-                        style: const TextStyle(
-                            color: black_121212,
-                            fontWeight: FontWeight.w900,
-                            fontFamily: helvetica_neu_bold,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 24.0),
-                        textAlign: TextAlign.center),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
-                  Center(
-                    child: Text(str_personal_info_lorem,
-                        style: const TextStyle(
-                            color: grey_aaaaaa,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: helveticaNeueNeue_medium,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.0,
-                            height: 1.5),
-                        textAlign: TextAlign.center),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 60,
+          ),
+          const ToolbarWithHeader(
+            step: 3,
+          ),
+          Expanded(
+            flex: 1,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Personal Information
+                    Center(
+                      child: Text(str_Education,
+                          style: const TextStyle(
+                              color: black_121212,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: helvetica_neu_bold,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 24.0),
+                          textAlign: TextAlign.center),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
+                    Center(
+                      child: Text(str_personal_info_lorem,
+                          style: const TextStyle(
+                              color: grey_aaaaaa,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: helveticaNeueNeue_medium,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 14.0,
+                              height: 1.5),
+                          textAlign: TextAlign.center),
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
 
-                  Column(
-                    children: [
-                      ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: cards.length,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return cards[index];
-                        },
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            cards.add(createCard());
-                          });
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              border: Border.all(width: 1, color: black_121212)),
-                          child: // Add More
-                          const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Center(
-                              child: Text("+ Add More",
-                                  style: TextStyle(
-                                      color: Color(0xff121212),
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "NeueHelvetica",
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 12.0),
-                                  textAlign: TextAlign.left),
+                    Column(
+                      children: [
+                        ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: cards.length,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return cards[index];
+                          },
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              cards.add(createCard());
+                            });
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border:
+                                    Border.all(width: 1, color: black_121212)),
+                            child: // Add More
+                                const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(
+                                child: Text("+ Add More",
+                                    style: TextStyle(
+                                        color: Color(0xff121212),
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "NeueHelvetica",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.0),
+                                    textAlign: TextAlign.left),
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: BlackNextButton(str_continue, black_121212, () {
-            if (controller.checkPersonalValidation(context)) {
-              checkNet(context).then((value) {
-                controller.educationalInfoAPI(context);
-              });
-            }
-          }),
-        )
-      ],
-    ),
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: BlackNextButton(str_continue, black_121212, () {
+              if (details.toString() != '[{}]') {
+                if (details[0].toString() == "{}") {
+                  details.removeAt(0);
+                }
+
+                List itemList = [];
+
+                itemList.clear();
+                for (var item in details) {
+                  itemList.add(item);
+                }
+                controller.educationalDetails.value = itemList.join(",");
+                print(controller.educationalDetails.value);
+                checkNet(context).then((value) {
+                  controller.educationalInfoAPI(context);
+                });
+              } else {
+                snackBar(context, 'Add educational details');
+              }
+            }),
+          )
+        ],
       ),
     );
   }

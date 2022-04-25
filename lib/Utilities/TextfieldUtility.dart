@@ -3,6 +3,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/route_manager.dart';
 
 setTextFieldWithBorder(
     TextEditingController controller,
@@ -93,22 +94,26 @@ setTextFieldHelveticaMedium(
 }
 
 setTextFieldNext(
-    TextEditingController controller,
-    String hintText,
-    bool secureEntry,
-    TextInputType inputType,
-    bool validtion,
-    String errorMSg,
-    TextInputAction textInputAction,
-    Function onchange,
-    [bool read = false,]) {
+  TextEditingController controller,
+  String hintText,
+  bool secureEntry,
+  TextInputType inputType,
+  bool validtion,
+  String errorMSg,
+  TextInputAction textInputAction,
+  Function onchange,
+  Function()? ontap, [
+  bool read = false,
+]) {
   return Theme(
       data: new ThemeData(
         primaryColor: Colors.green,
         primaryColorDark: Colors.red,
       ),
-      child: TextField(
+      child: TextFormField(
+        controller: controller,
         readOnly: read,
+        onTap: ontap,
         style: TextStyle(
             color: black_121212,
             fontWeight: FontWeight.w500,
@@ -142,7 +147,7 @@ setDobTextFieldNext(
     String errorMSg,
     TextInputAction textInputAction,
     Function onchange,
-    dynamic tap) {
+    dynamic tap,) {
   return Theme(
       data: new ThemeData(
         primaryColor: Colors.green,
@@ -178,7 +183,6 @@ setDobTextFieldNext(
       ));
 }
 
-
 setSocialTextFieldNext(
     TextEditingController controller,
     String hintText,
@@ -203,13 +207,14 @@ setSocialTextFieldNext(
             fontStyle: FontStyle.normal,
             fontSize: 14.0),
         decoration: new InputDecoration(
-          prefixIconConstraints: const BoxConstraints(maxHeight: 21, maxWidth: 38),
-      prefixIcon: Padding(
-        padding: const EdgeInsets.only(right: 17.0),
-        child: SvgPicture.asset(
-          icon,
-        ),
-      ),
+          prefixIconConstraints:
+              const BoxConstraints(maxHeight: 21, maxWidth: 38),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.only(right: 17.0),
+            child: SvgPicture.asset(
+              icon,
+            ),
+          ),
           isDense: true,
           // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
           hintText: hintText,
@@ -221,9 +226,57 @@ setSocialTextFieldNext(
               fontSize: 14.0),
           border: InputBorder.none,
         ),
-
         textInputAction: textInputAction,
         keyboardType: inputType,
         cursorColor: black_121212,
       ));
+}
+
+setTextField(
+    TextEditingController controller,
+    String hintText,
+    bool secureEntry,
+    TextInputType inputType,
+    bool validtion,
+    String errorMSg,
+    TextInputAction textInputAction,
+    Function onchange) {
+  return Container(
+    decoration: BoxDecoration(
+      border: Border.all(color: grey_aaaaaa),
+      borderRadius: const BorderRadius.all(Radius.circular(4)),
+      color: Colors.white,
+    ),
+    child: Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 13, bottom: 12),
+      child: TextField(
+        controller: controller,
+        textInputAction: textInputAction,
+        keyboardType: inputType,
+        style: const TextStyle(
+            color: black_121212,
+            fontFamily: helveticaNeueNeue_medium,
+            fontSize: 14.0),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          isDense: true,
+          // you can change this with the top text like you want
+          labelText: hintText,
+          labelStyle: TextStyle(
+              color: grey_aaaaaa,
+              fontFamily: helveticaNeueNeue_medium,
+              fontSize: 14),
+          hintStyle: TextStyle(
+              color: black_121212,
+              fontFamily: helveticaNeueNeue_medium,
+              fontSize: 14),
+          border: InputBorder.none,
+          filled: false,
+        ),
+        cursorColor: black_121212,
+        onEditingComplete: () {},
+        onChanged: (inputValue) {},
+      ),
+    ),
+  );
 }

@@ -1,15 +1,20 @@
-import 'package:blackchecktech/Utils/SizeConfig.dart';
+import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../Styles/my_colors.dart';
-import '../Styles/my_icons.dart';
-import '../Utilities/Constant.dart';
+
+import '../Styles/my_strings.dart';
 
 class SearchBar extends StatefulWidget {
-  final hint;
-  VoidCallback? onCustomButtonPressed;
 
-  SearchBar({this.hint, onCustomButtonPressed, Key? key}) : super(key: key);
+  SearchBar(
+      {
+      this.controller, this.onSubmit});
+
+  final Function(String)? onSubmit;
+  final TextEditingController? controller;
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -18,25 +23,24 @@ class SearchBar extends StatefulWidget {
 class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Container(
-      margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical!),
+      height: 54,
       decoration: BoxDecoration(
-          borderRadius:
-          BorderRadius.all(Radius.circular(6.7)),
-          color: grey_aaaaaa),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          border: Border.all(color: grey_aaaaaa, width: 1),
+          color: white_ffffff),
       child: Row(
         children: [
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
-          SvgPicture.asset(
-            search,
-            color: grey_aaaaaa,
-            width: 15,
-            height: 15,
-          ),
-          SizedBox(
+            SvgPicture.asset(
+              search,
+              color: black_121212,
+              width: 20,
+              height: 20,
+            ),
+          const SizedBox(
             width: 7.7,
           ),
           Expanded(
@@ -44,21 +48,24 @@ class _SearchBarState extends State<SearchBar> {
             child: Padding(
               padding: const EdgeInsets.all(5),
               child: TextField(
-                style: TextStyle(
+                // searchInput,
+                controller: widget.controller,
+                onSubmitted: widget.onSubmit,
+                style: const TextStyle(
                     color: black_121212,
                     fontFamily: helveticaNeueNeue_medium,
                     fontStyle: FontStyle.normal,
-                    fontSize: 12),
-                decoration: new InputDecoration(
+                    fontSize: 16),
+                decoration: InputDecoration(
                   isDense: true,
-                  contentPadding: EdgeInsets.symmetric(
-                      horizontal: 0, vertical: 10),
-                  hintText: widget.hint,
-                  hintStyle: TextStyle(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                  hintText: 'Search',
+                  hintStyle: const TextStyle(
                       color: grey_aaaaaa,
+                      // fontWeight: FontWeight.w500,
                       fontFamily: helveticaNeueNeue_medium,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 12),
+                      fontSize: 16),
                   border: InputBorder.none,
                 ),
                 keyboardType: TextInputType.text,

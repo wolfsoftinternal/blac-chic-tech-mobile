@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -51,7 +52,7 @@ class _WelcomeState extends State<Welcome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BlackNextButton(str_get_started, white_ffffff, () {
-                      Get.to(const ExperienceInfoFormView());
+                      Get.to(const SignupInfoView());
                   }),
 
                   const SizedBox(

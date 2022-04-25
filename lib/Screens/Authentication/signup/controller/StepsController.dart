@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';
@@ -5,7 +6,9 @@ import 'package:blackchecktech/Screens/Authentication/signup/model/CityListModel
 import 'package:blackchecktech/Screens/Authentication/signup/model/CountryListModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/StateListModel.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/CompanyList.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
@@ -26,6 +29,7 @@ import '../../login/model/LoginModel.dart';
 
 class StepsController extends GetxController {
   Rx<TextEditingController> dobController = TextEditingController().obs;
+  Rx<TextEditingController> aboutController = TextEditingController().obs;
   Rx<TextEditingController> linkedinController = TextEditingController().obs;
   Rx<TextEditingController> twitterController = TextEditingController().obs;
   Rx<TextEditingController> instagramController = TextEditingController().obs;
@@ -40,6 +44,20 @@ class StepsController extends GetxController {
   Rx<TextEditingController> currentCompanyNameController = TextEditingController().obs;
   Rx<TextEditingController> currentCompanyWebsiteController = TextEditingController().obs;
   RxList companyList = [].obs;
+
+  RxBool boolComapnyLogo = false.obs;
+  Rx<TextEditingController> searchCompanyController = TextEditingController().obs;
+  RxString companyName = "Company Name".obs;
+  late List<Map> pastCompanyDetails;
+  RxString educationalDetails = "".obs;
+
+  Rx<TextEditingController> q1Controller = TextEditingController().obs;
+  Rx<TextEditingController> q2Controller = TextEditingController().obs;
+  Rx<TextEditingController> q3Controller = TextEditingController().obs;
+  Rx<TextEditingController> q4Controller = TextEditingController().obs;
+  Rx<TextEditingController> q5Controller = TextEditingController().obs;
+
+  RxString questions = "".obs;
 
   countryListApi() async {
     String url = urlBase + urlCountryList;
@@ -138,43 +156,62 @@ class StepsController extends GetxController {
     });
   }
 
-  personalInfoAPI(BuildContext context) async {
+  Future<void> personalInfoAPI(BuildContext context, String imagePath) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    SignupModel? modelM =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = modelM!.data!.token!;
 
-    dynamic body = {
+    var headers = {'Authorization': 'Bearer ' + token};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse(urlBase + urlPersonalInfo));
 
-    };
-
-    String url = urlBase + urlPersonalInfo;
-    final apiReq = Request();
-    await apiReq.postAPI(url, body, token).then((value) {
-      http.StreamedResponse res = value;
-
-      if (res.statusCode == 200) {
-        res.stream.bytesToString().then((value) async {
-          String strData = value;
-          Map<String, dynamic> userModel = json.decode(strData);
-          BaseModel model = BaseModel.fromJson(userModel);
-
-          if(model.statusCode == 500){
-            final tokenUpdate = TokenUpdateRequest();
-            await tokenUpdate.updateToken();
-
-            personalInfoAPI(context);
-          }else if(model.statusCode==200){
-            Get.to(ExperienceInfoFormView());
-          }
-        });
-      }else{
-        print(res.reasonPhrase);
-      }
+    if(imagePath != ""){
+      request.files.add(await http.MultipartFile.fromPath('image', imagePath));
+    }
+    request.fields.addAll({
+      'country_id': strCountryId.value.toString(),
+      'state_id': strStateId.value.toString(),
+      'city_id': strCityId.value.toString(),
+      'birthdate': dobController.value.text,
+      'about_us': aboutController.value.text,
+      'linkedin_url': linkedinController.value.text,
+      'instagram_url': instagramController.value.text,
+      'twitter_url': twitterController.value.text,
     });
+
+    
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      await response.stream.bytesToString().then((value) async {
+        String strData = value;
+        Map<String, dynamic> userModel = json.decode(strData);
+        BaseModel model = BaseModel.fromJson(userModel);
+
+        if (model.statusCode == 500) {
+          final tokenUpdate = TokenUpdateRequest();
+          await tokenUpdate.updateToken();
+
+          personalInfoAPI(context, imagePath);
+        } else if (model.statusCode == 200) {
+          var preferences = MySharedPref();
+          await preferences.setString('flag', "1");
+
+          Get.to(ExperienceInfoFormView());
+        } else {
+          Navigator.pop(context); //pop
+          snackBar(context, model.message!);
+        }
+      });
+    } else {
+      Navigator.pop(context); //pop
+      print(response.reasonPhrase);
+    }
   }
 
-  companyListAPI(BuildContext context) async {
+  companyListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
     SignupModel? myModel =
     await preferences.getSignupModel(SharePreData.keySignupModel);
@@ -182,7 +219,7 @@ class StepsController extends GetxController {
 
     String url = urlBase + urlCompanyList;
     final apiReq = Request();
-    await apiReq.postAPI(url, null, token).then((value) {
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -195,7 +232,7 @@ class StepsController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            companyListAPI(context);
+            companyListAPI(context, body);
           }else if(model.statusCode==200){
             companyList.value = userModel['data'];
           }
@@ -206,40 +243,47 @@ class StepsController extends GetxController {
     });
   }
 
-  createCompanyAPI(BuildContext context) async {
+  Future<void> createCompanyAPI(BuildContext context, String imagePath) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    SignupModel? modelM =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = modelM!.data!.token!;
 
-    dynamic body = {
+    var headers = {'Authorization': 'Bearer ' + token};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse(urlBase + urlCreateCompany));
 
-    };
-
-    String url = urlBase + urlCreateCompany;
-    final apiReq = Request();
-    await apiReq.postAPI(url, body, token).then((value) {
-      http.StreamedResponse res = value;
-
-      if (res.statusCode == 200) {
-        res.stream.bytesToString().then((value) async {
-          String strData = value;
-          Map<String, dynamic> userModel = json.decode(strData);
-          BaseModel model = BaseModel.fromJson(userModel);
-
-          if(model.statusCode == 500){
-            final tokenUpdate = TokenUpdateRequest();
-            await tokenUpdate.updateToken();
-
-            createCompanyAPI(context);
-          }else if(model.statusCode==200){
-
-          }
-        });
-      }else{
-        print(res.reasonPhrase);
-      }
+    request.files.add(await http.MultipartFile.fromPath('logo', imagePath));
+    request.fields.addAll({
+      'name': currentCompanyNameController.value.text,
     });
+    
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      await response.stream.bytesToString().then((value) async {
+        String strData = value;
+        Map<String, dynamic> userModel = json.decode(strData);
+        BaseModel model = BaseModel.fromJson(userModel);
+
+        if (model.statusCode == 500) {
+          final tokenUpdate = TokenUpdateRequest();
+          await tokenUpdate.updateToken();
+
+          createCompanyAPI(context, imagePath);
+        } else if (model.statusCode == 200) {
+          Get.back();
+          Get.back();
+        } else {
+          Navigator.pop(context); //pop
+          snackBar(context, model.message!);
+        }
+      });
+    } else {
+      Navigator.pop(context); //pop
+      print(response.reasonPhrase);
+    }
   }
 
   experienceInfoAPI(BuildContext context) async {
@@ -248,8 +292,14 @@ class StepsController extends GetxController {
     await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = myModel?.data!.token;
 
-    dynamic body = {
+    String pastJobs = pastCompanyDetails.toString().split(', ').toString();
 
+    print(pastJobs);
+
+    dynamic body = {
+      'current_job_title': currentTitleController.value.text,
+      'current_job_company_name': companyName.value,
+      'past_jobs': pastJobs,
     };
 
     String url = urlBase + urlExperienceInfo;
@@ -269,6 +319,9 @@ class StepsController extends GetxController {
 
             experienceInfoAPI(context);
           }else if(model.statusCode==200){
+            var preferences = MySharedPref();
+            await preferences.setString('flag', "2");
+
             Get.to(EducationInfoFormView());
           }
         });
@@ -285,7 +338,7 @@ class StepsController extends GetxController {
     var token = myModel?.data!.token;
 
     dynamic body = {
-
+      'education' : educationalDetails.value,
     };
 
     String url = urlBase + urlEducationalInfo;
@@ -305,7 +358,48 @@ class StepsController extends GetxController {
 
             experienceInfoAPI(context);
           }else if(model.statusCode==200){
+            var preferences = MySharedPref();
+            await preferences.setString('flag', "3");
             Get.to(AdditionalQueFormView());
+          }
+        });
+      }else{
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  questionsInfoAPI(BuildContext context, type) async {
+    var preferences = MySharedPref();
+    SignupModel? myModel =
+    await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = myModel?.data!.token;
+
+    dynamic body = {
+      'questions' : questions.value,
+      'type': type
+    };
+
+    String url = urlBase + urlQuestion;
+    final apiReq = Request();
+    await apiReq.postAPI(url, body, token).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if(model.statusCode == 500){
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            questionsInfoAPI(context, type);
+          }else if(model.statusCode==200){
+            var preferences = MySharedPref();
+            await preferences.setString('flag', "4");
+            Get.to(AdditionalLastQueView());
           }
         });
       }else{
@@ -327,14 +421,41 @@ class StepsController extends GetxController {
     } else if (dobController.value.text.isEmpty) {
       snackBar(context, "Enter Date of Birth");
       return false;
-    } else if (linkedinController.value.text.isEmpty) {
-      snackBar(context, "Enter Linkedin Account");
+    } else if (aboutController.value.text.isEmpty) {
+      snackBar(context, "Enter About yourself");
       return false;
-    } else if (twitterController.value.text.isEmpty) {
-      snackBar(context, "Entered Twitter Account");
+    // } else if (linkedinController.value.text.isEmpty) {
+    //   snackBar(context, "Enter Linkedin Account");
+    //   return false;
+    // } else if (twitterController.value.text.isEmpty) {
+    //   snackBar(context, "Entered Twitter Account");
+    //   return false;
+    // } else if (instagramController.value.text.isEmpty) {
+    //   snackBar(context, "Entered Instagram Account");
+    //   return false;
+    } else {
+      return true;
+    }
+  }
+
+  bool checkAddCompanyValidation(context) {
+    if(boolComapnyLogo.value == false){
+      snackBar(context, "Upload Company Logo");
       return false;
-    } else if (instagramController.value.text.isEmpty) {
-      snackBar(context, "Entered Instagram Account");
+    }else if (currentCompanyNameController.value.text.isEmpty) {
+      snackBar(context, "Enter Company Name");
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  bool checkExperienceValidation(context) {
+    if (currentTitleController.value.text.isEmpty) {
+      snackBar(context, "Enter current job title");
+      return false;
+    } else if (companyName.value == 'Company Name') {
+      snackBar(context, "Enter current company name");
       return false;
     } else {
       return true;

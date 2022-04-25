@@ -16,9 +16,10 @@ class BlackNextButton extends StatelessWidget {
  // var buttonColor;
   //text color
   var textColor;
+  var size;
   VoidCallback onCustomButtonPressed;
 
-  BlackNextButton(this.inputText,this.textColor, this.onCustomButtonPressed);
+  BlackNextButton(this.inputText,this.textColor, this.onCustomButtonPressed, [this.size]);
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +87,7 @@ class BlackNextButton extends StatelessWidget {
                 shadowColor: Colors.transparent,
                 elevation: 0,
                 padding:
-                EdgeInsets.symmetric(horizontal: 0, vertical: 21),
+                EdgeInsets.symmetric(horizontal: 0, vertical: size == null ? 21 : size),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                   side: BorderSide(color: black_121212, width: 0),

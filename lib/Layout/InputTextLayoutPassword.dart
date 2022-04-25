@@ -112,6 +112,7 @@ class _TextInputState extends State<InputTextLayoutPassword> {
             } else {
               setState(() {
                 checkFillColor = true;
+                checkColor = false;
               });
             }
           },

@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:blackchecktech/Screens/Authentication/signup/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Networks/api_endpoint.dart';
+import 'package:blackchecktech/Screens/Networks/model/TokenUpdateModel.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:http/http.dart' as http;
@@ -36,15 +38,24 @@ class TokenUpdateRequest {
       Map data = json.decode(value.body);
       final datas = json.decode(value.body);
 
-      var model;
-      // TokenUpdateModel model = TokenUpdateModel.fromJson(datas);
-      print("My data" + model.data.token);
+      if(data!=null){
+        TokenUpdateModel model = TokenUpdateModel.fromJson(datas);
+        if (model.data!.token != null) {
+          print("My data" + model.data!.token!);
 
-      myModel!.data!.token = model.data.token;
-      await preferences.setSignupModel(
-          myModel!, SharePreData.keySignupModel);
+          myModel!.data!.token = model.data!.token;
+          await preferences.setSignupModel(
+              myModel!, SharePreData.keySignupModel);
 
-      return model.data.token;
+          return model.data!.token!;
+        }else{
+          return "";
+        }
+      }
+      else{
+        return "";
+      }
     });
+
   }
 }

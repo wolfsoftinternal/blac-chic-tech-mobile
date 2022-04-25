@@ -1,9 +1,14 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
+import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
+import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../Layout/BlackButtonDialog.dart';
 import '../../../../Layout/InputTextLayout.dart';
@@ -20,15 +25,21 @@ class AdditionalQueFormView extends StatefulWidget {
 }
 
 class _AdditionalQueState extends State<AdditionalQueFormView> {
-  var _birhtdayController = TextEditingController();
+    StepsController controller = Get.put(StepsController());  
+
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       backgroundColor: white_ffffff,
       body: Column(
         children: [
+          const SizedBox(
+            height: 60,
+          ),
+          const ToolbarWithHeader(
+            step: 3,
+          ),
           Expanded(
             flex: 1,
             child: SingleChildScrollView(
@@ -69,7 +80,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                     ),
 
                     GestureDetector(
-                      onTap: () => DialogUtils.showDoneDialog(context),
+                      onTap: () {DialogUtils.showDoneDialog(context, controller.q1Controller.value);},
                       child: Container(
                         width: double.infinity,
                         decoration: EditTextDecoration,
@@ -91,7 +102,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       height: 16,
                     ),
                     GestureDetector(
-                      onTap: () => DialogUtilsFuture.showFutureDialog(context),
+                      onTap: () => DialogUtilsFuture.showFutureDialog(context, controller.q2Controller.value),
                       child: Container(
                         width: double.infinity,
                         decoration: EditTextDecoration,
@@ -113,7 +124,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       height: 16,
                     ),
                     GestureDetector(
-                      onTap: () => DialogUtilsDie.showFutureDialog(context),
+                      onTap: () => DialogUtilsDie.showFutureDialog(context, controller.q3Controller.value),
                       child: Container(
                         width: double.infinity,
                         decoration: EditTextDecoration,
@@ -136,7 +147,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       height: 16,
                     ),
                     GestureDetector(
-                      onTap: () => DialogUtilsGood.showFutureDialog(context),
+                      onTap: () => DialogUtilsGood.showFutureDialog(context, controller.q4Controller.value),
                       child: Container(
                         width: double.infinity,
                         decoration: EditTextDecoration,
@@ -158,7 +169,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       height: 16,
                     ),
                     GestureDetector(
-                      onTap: () => DialogUtilsNow.showFutureDialog(context),
+                      onTap: () => DialogUtilsNow.showFutureDialog(context, controller.q5Controller.value),
                       child: Container(
                         width: double.infinity,
                         decoration: EditTextDecoration,
@@ -183,11 +194,60 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
           ),
           Padding(
             padding: const EdgeInsets.all(24.0),
-            child: BlackNextButton(str_continue, black_121212, () {}),
+            child: BlackNextButton(str_continue, black_121212, () {
+              if(controller.q1Controller.value.text.isEmpty && controller.q2Controller.value.text.isEmpty && controller.q3Controller.value.text.isEmpty && controller.q4Controller.value.text.isEmpty && controller.q5Controller.value.text.isEmpty){
+                snackBar(context, 'Please answer the questions');
+              }else{
+
+                List ques = [{}];
+                if (ques[0].toString() == "{}") {
+                  ques.removeAt(0);
+                }
+
+                if(controller.q1Controller.value.text.isNotEmpty){
+                  ques.add({
+                    'answer1': controller.q1Controller.value.text,
+                  });
+                }else if(controller.q2Controller.value.text.isNotEmpty){
+                  ques.add({
+                    'answer2': controller.q2Controller.value.text,
+                  });
+                }else if(controller.q3Controller.value.text.isNotEmpty){
+                  ques.add({
+                    'answer3': controller.q3Controller.value.text,
+                  });
+                }else if(controller.q4Controller.value.text.isNotEmpty){
+                  ques.add({
+                    'answer4': controller.q4Controller.value.text,
+                  });
+                }else if(controller.q5Controller.value.text.isNotEmpty){
+                  ques.add({
+                    'answer5': controller.q5Controller.value.text,
+                  });
+                }
+
+                List itemList = [];
+
+                itemList.clear();
+                for (var item in ques) {
+                  itemList.add(item);
+                }
+                controller.questions.value = itemList.join(",");
+                checkNet(context).then((value) {
+                  controller.questionsInfoAPI(context, 'normal');
+                });
+
+              
+                
+                
+                
+                print(ques);
+              }
+            }),
           )
         ],
       ),
-    ));
+    );
   }
 }
 
@@ -200,6 +260,7 @@ class DialogUtils {
 
   static void showDoneDialog(
     BuildContext context,
+    controller
   ) {
     showDialog(
         context: context,
@@ -239,6 +300,7 @@ class DialogUtils {
                       padding: const EdgeInsets.only(
                           top: 15, bottom: 15, right: 24, left: 24),
                       child: TextFormField(
+                        controller: controller,
                         minLines: 2,
                         maxLines: 10,
                         keyboardType: TextInputType.multiline,
@@ -268,7 +330,9 @@ class DialogUtils {
 
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
+                    child: BlackButtonDialog("Done", white_ffffff, () {
+                      Get.back();
+                    }),
                   )
                 ],
               ),
@@ -287,6 +351,7 @@ class DialogUtilsFuture {
 
   static void showFutureDialog(
     BuildContext context,
+    controller
   ) {
     showDialog(
         context: context,
@@ -326,6 +391,7 @@ class DialogUtilsFuture {
                       padding: const EdgeInsets.only(
                           top: 15, bottom: 15, right: 24, left: 24),
                       child: TextFormField(
+                        controller: controller,
                         minLines: 2,
                         maxLines: 10,
                         keyboardType: TextInputType.multiline,
@@ -355,7 +421,7 @@ class DialogUtilsFuture {
 
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
+                    child: BlackButtonDialog("Done", white_ffffff, () {Get.back();}),
                   )
                 ],
               ),
@@ -374,6 +440,7 @@ class DialogUtilsDie {
 
   static void showFutureDialog(
     BuildContext context,
+    controller
   ) {
     showDialog(
         context: context,
@@ -414,6 +481,7 @@ class DialogUtilsDie {
                       padding: const EdgeInsets.only(
                           top: 15, bottom: 15, right: 24, left: 24),
                       child: TextFormField(
+                        controller: controller,
                         minLines: 2,
                         maxLines: 10,
                         keyboardType: TextInputType.multiline,
@@ -443,7 +511,7 @@ class DialogUtilsDie {
 
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
+                    child: BlackButtonDialog("Done", white_ffffff, () {Get.back();}),
                   )
                 ],
               ),
@@ -462,6 +530,7 @@ class DialogUtilsGood {
 
   static void showFutureDialog(
     BuildContext context,
+    controller
   ) {
     showDialog(
         context: context,
@@ -502,6 +571,7 @@ class DialogUtilsGood {
                       padding: const EdgeInsets.only(
                           top: 15, bottom: 15, right: 24, left: 24),
                       child: TextFormField(
+                        controller: controller,
                         minLines: 2,
                         maxLines: 10,
                         keyboardType: TextInputType.multiline,
@@ -531,7 +601,7 @@ class DialogUtilsGood {
 
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
+                    child: BlackButtonDialog("Done", white_ffffff, () {Get.back();}),
                   )
                 ],
               ),
@@ -550,6 +620,7 @@ class DialogUtilsNow {
 
   static void showFutureDialog(
     BuildContext context,
+    controller
   ) {
     showDialog(
         context: context,
@@ -590,6 +661,7 @@ class DialogUtilsNow {
                       padding: const EdgeInsets.only(
                           top: 15, bottom: 15, right: 24, left: 24),
                       child: TextFormField(
+                        controller: controller,
                         minLines: 2,
                         maxLines: 10,
                         keyboardType: TextInputType.multiline,
@@ -619,7 +691,7 @@ class DialogUtilsNow {
 
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
+                    child: BlackButtonDialog("Done", white_ffffff, () {Get.back();}),
                   )
                 ],
               ),
