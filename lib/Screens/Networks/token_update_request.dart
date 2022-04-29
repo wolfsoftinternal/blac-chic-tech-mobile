@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:blackchecktech/Screens/Authentication/signup/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Networks/api_endpoint.dart';
 import 'package:blackchecktech/Screens/Networks/model/TokenUpdateModel.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
@@ -43,7 +43,7 @@ class TokenUpdateRequest {
         if (model.data!.token != null) {
           print("My data" + model.data!.token!);
 
-          myModel!.data!.token = model.data!.token;
+          myModel!.data!.token = model.data!.token!;
           await preferences.setSignupModel(
               myModel!, SharePreData.keySignupModel);
 

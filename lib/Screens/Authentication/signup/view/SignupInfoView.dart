@@ -1,5 +1,5 @@
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/login/view/LoginView.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';

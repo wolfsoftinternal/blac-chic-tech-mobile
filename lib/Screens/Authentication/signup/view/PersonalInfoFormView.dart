@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/InputTextLayout.dart';
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
@@ -10,11 +12,15 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfo
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../Styles/my_height.dart';
@@ -36,6 +42,8 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
   String? strCityName;
   bool checkColor = false;
   bool checkFillColor = true;
+  File profileImage = File("");
+  String? profilePath;
 
   @override
   void initState() {
@@ -54,7 +62,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
             const SizedBox(
               height: 60,
             ),
-            const ToolbarWithHeader(
+            ToolbarWithHeader(
               step: 0,
             ),
             Expanded(
@@ -104,12 +112,35 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(4)),
                                 color: light_grey_f2f2f2),
-                            child: Padding(
-                              padding: const EdgeInsets.all(24.0),
-                              child: SvgPicture.asset(
-                                icon_upload_img,
-                              ),
-                            ),
+                            child: profileImage.toString() != "File: ''"
+                                ? InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectPhoto();
+                                      });
+                                    },
+                                    child: Image.file(
+                                      profileImage,
+                                      fit: BoxFit.fill,
+                                      height: 72,
+                                      width: 72,
+                                    ),
+                                  )
+                                : InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectPhoto();
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(18.0),
+                                      child: SvgPicture.asset(
+                                        icon_upload_img,
+                                        width: 72,
+                                        height: 72,
+                                        color: grey_aaaaaa,
+                                      ),
+                                    )),
                           ),
                           const SizedBox(
                             width: 16,
@@ -464,7 +495,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               "",
                               TextInputAction.next,
                               (value) {},
-                              icon_linkedin),
+                              icon_twitter),
                         ),
                       ),
                       const SizedBox(
@@ -487,25 +518,25 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               "",
                               TextInputAction.next,
                               (value) {},
-                              icon_linkedin),
+                              icon_instagram),
                         ),
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      BlackNextButton(str_continue, black_121212, () {
-                        FocusScope.of(context).unfocus();
-                        if (controller.checkPersonalValidation(context)) {
-                          checkNet(context).then((value) {
-                            controller.personalInfoAPI(context, "");
-                          });
-                        }
-                      })
                     ],
                   ),
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: BlackNextButton(str_continue, black_121212, () {
+                FocusScope.of(context).unfocus();
+                if (controller.checkPersonalValidation(context)) {
+                  checkNet(context).then((value) {
+                    controller.personalInfoAPI(context, "");
+                  });
+                }
+              }),
+            )
           ],
         ),
       ),
@@ -576,5 +607,56 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
 
     controller.dobController.value.text = formattedDate;
     print(controller.dobController.value.text);
+  }
+
+  selectPhoto() {
+    showImagePicker(context).then((value) {
+      setState(() {
+        if (imagePath.toString() != "File: ''") {
+          controller.boolComapnyLogo.value = true;
+          _cropImage();
+        }
+      });
+    });
+  }
+
+  Future<File> _cropImage() async {
+    File? croppedFile = await ImageCropper().cropImage(
+        sourcePath: imagePath.path,
+        aspectRatioPresets: Platform.isAndroid
+            ? [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ]
+            : [
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio5x3,
+                CropAspectRatioPreset.ratio5x4,
+                CropAspectRatioPreset.ratio7x5,
+                CropAspectRatioPreset.ratio16x9
+              ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: '',
+            toolbarColor: Colors.black,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(
+          title: '',
+        ));
+    if (croppedFile != null) {
+      setState(() {
+        profileImage = croppedFile;
+        profilePath = croppedFile.path;
+      });
+    }
+
+    return croppedFile!;
   }
 }

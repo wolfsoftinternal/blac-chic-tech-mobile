@@ -13,3 +13,9 @@ const urlCompanyList = '/company-list';
 const urlCreateCompany = '/company-create';
 const urlEducationalInfo = '/education-edit';
 const urlQuestion = '/question-edit';
+
+//profile
+const urladmireList = '/admire-list';
+const urladmireDelete = '/admire-delete';
+const urlUserProfile = '/user-profile';
+const urlOtherProfile = '/other-user-profile';

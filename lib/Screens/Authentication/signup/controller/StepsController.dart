@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:blackchecktech/Screens/Authentication/login/view/LoginView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/CityListModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/CountryListModel.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/StateListModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
@@ -12,6 +12,8 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/CompanyList.da
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
+import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,7 @@ import '../../../../Utils/preference_utils.dart';
 import '../../../../Utils/share_predata.dart';
 import '../../../Networks/api_endpoint.dart';
 import '../../../Networks/api_response.dart';
-import '../../login/model/LoginModel.dart';
+import '../../login/model/SignupModel.dart';
 
 class StepsController extends GetxController {
   Rx<TextEditingController> dobController = TextEditingController().obs;
@@ -48,7 +50,7 @@ class StepsController extends GetxController {
   RxBool boolComapnyLogo = false.obs;
   Rx<TextEditingController> searchCompanyController = TextEditingController().obs;
   RxString companyName = "Company Name".obs;
-  late List<Map> pastCompanyDetails;
+  RxString pastCompanyDetails = "".obs;
   RxString educationalDetails = "".obs;
 
   Rx<TextEditingController> q1Controller = TextEditingController().obs;
@@ -57,6 +59,16 @@ class StepsController extends GetxController {
   Rx<TextEditingController> q4Controller = TextEditingController().obs;
   Rx<TextEditingController> q5Controller = TextEditingController().obs;
 
+  Rx<TextEditingController> addtionalController = TextEditingController().obs;
+
+  List<String> tagValues = [];
+
+  RxString ques1 = SharePreData.strQues1.obs;
+  RxString ques2 = SharePreData.strQues2.obs;
+  RxString ques3 = SharePreData.strQues3.obs;
+  RxString ques4 = SharePreData.strQues4.obs;
+  RxString ques5 = SharePreData.strQues5.obs;
+  
   RxString questions = "".obs;
 
   countryListApi() async {
@@ -160,7 +172,7 @@ class StepsController extends GetxController {
     var preferences = MySharedPref();
     SignupModel? modelM =
         await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = modelM!.data!.token!;
+    var token = modelM!.data!.token;
 
     var headers = {'Authorization': 'Bearer ' + token};
     var request = http.MultipartRequest(
@@ -197,7 +209,7 @@ class StepsController extends GetxController {
           personalInfoAPI(context, imagePath);
         } else if (model.statusCode == 200) {
           var preferences = MySharedPref();
-          await preferences.setString('flag', "1");
+          await preferences.setString(SharePreData.keyPersonalInfo, "Done");
 
           Get.to(ExperienceInfoFormView());
         } else {
@@ -247,7 +259,7 @@ class StepsController extends GetxController {
     var preferences = MySharedPref();
     SignupModel? modelM =
         await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = modelM!.data!.token!;
+    var token = modelM!.data!.token;
 
     var headers = {'Authorization': 'Bearer ' + token};
     var request = http.MultipartRequest(
@@ -292,14 +304,10 @@ class StepsController extends GetxController {
     await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = myModel?.data!.token;
 
-    String pastJobs = pastCompanyDetails.toString().split(', ').toString();
-
-    print(pastJobs);
-
     dynamic body = {
       'current_job_title': currentTitleController.value.text,
       'current_job_company_name': companyName.value,
-      'past_jobs': pastJobs,
+      'past_jobs': pastCompanyDetails.value,
     };
 
     String url = urlBase + urlExperienceInfo;
@@ -320,9 +328,21 @@ class StepsController extends GetxController {
             experienceInfoAPI(context);
           }else if(model.statusCode==200){
             var preferences = MySharedPref();
-            await preferences.setString('flag', "2");
+            await preferences.setString(SharePreData.keyExperienceInfo, "Done");
 
-            Get.to(EducationInfoFormView());
+            String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
+            String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
+            String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+
+            if (educationalInfo == "") {
+              Get.to(const EducationInfoFormView());
+            }else if (questionsInfo == "") {
+              Get.to(const AdditionalQueFormView());
+            }else if(lastQuestionsInfo == ""){
+              Get.to(AdditionalLastQueView());
+            }else{
+              Get.offAll(BottomNavigation());
+            }
           }
         });
       }else{
@@ -359,8 +379,18 @@ class StepsController extends GetxController {
             experienceInfoAPI(context);
           }else if(model.statusCode==200){
             var preferences = MySharedPref();
-            await preferences.setString('flag', "3");
-            Get.to(AdditionalQueFormView());
+            await preferences.setString(SharePreData.keyEducationalInfo, "Done");
+
+            String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
+            String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+
+            if (questionsInfo == "") {
+              Get.to(const AdditionalQueFormView());
+            }else if(lastQuestionsInfo == ""){
+              Get.to(AdditionalLastQueView());
+            }else{
+              Get.offAll(BottomNavigation());
+            }
           }
         });
       }else{
@@ -377,7 +407,7 @@ class StepsController extends GetxController {
 
     dynamic body = {
       'questions' : questions.value,
-      'type': type
+      'type': type.toString()
     };
 
     String url = urlBase + urlQuestion;
@@ -398,8 +428,22 @@ class StepsController extends GetxController {
             questionsInfoAPI(context, type);
           }else if(model.statusCode==200){
             var preferences = MySharedPref();
-            await preferences.setString('flag', "4");
-            Get.to(AdditionalLastQueView());
+
+            if(type == 'normal'){
+              await preferences.setString(SharePreData.keyQuestionsInfo, "Done");
+              
+              String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+
+              if(lastQuestionsInfo == ""){
+                Get.to(AdditionalLastQueView());
+              }else{
+                Get.offAll(BottomNavigation());
+              }
+            }else{
+              await preferences.setString(SharePreData.keyLastQuestionsInfo, "Done");
+              Get.offAll(BottomNavigation());
+            }
+            
           }
         });
       }else{

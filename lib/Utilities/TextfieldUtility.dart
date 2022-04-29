@@ -211,7 +211,7 @@ setSocialTextFieldNext(
               const BoxConstraints(maxHeight: 21, maxWidth: 38),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(right: 17.0),
-            child: SvgPicture.asset(
+            child: Image.asset(
               icon,
             ),
           ),
@@ -240,7 +240,7 @@ setTextField(
     bool validtion,
     String errorMSg,
     TextInputAction textInputAction,
-    Function onchange) {
+    Function(String)? onchange) {
   return Container(
     decoration: BoxDecoration(
       border: Border.all(color: grey_aaaaaa),
@@ -274,8 +274,8 @@ setTextField(
           filled: false,
         ),
         cursorColor: black_121212,
-        onEditingComplete: () {},
-        onChanged: (inputValue) {},
+        onSubmitted: onchange,
+        // onChanged: onchange,
       ),
     ),
   );

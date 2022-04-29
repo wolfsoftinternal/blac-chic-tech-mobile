@@ -17,8 +17,8 @@ class BackLayout extends StatelessWidget {
           Navigator.pop(context);
         },
         child: Container(
-          width: 46,
-          height: 46,
+          width: 48,
+          height: 48,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),

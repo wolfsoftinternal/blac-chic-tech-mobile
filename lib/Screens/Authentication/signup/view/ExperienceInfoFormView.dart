@@ -1,10 +1,15 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/CompanyList.dart';
+import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/preference_utils.dart';
+import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,102 +27,29 @@ class ExperienceInfoFormView extends StatefulWidget {
 }
 
 class _ExperienceState extends State<ExperienceInfoFormView> {
-  StepsController controller = Get.put(StepsController());  
-  var cards = <Container>[];
+  StepsController controller = Get.put(StepsController());
+  List cards = [""];
   List<Map> companyDetails = [{}];
 
-  Container createCard() {
-    var pastCompanyTitleController = TextEditingController();
-    var pastCompanyNameController = TextEditingController();
-    var pastCompanyWebsiteController = TextEditingController();
-    companyDetails.add({
-      'title': pastCompanyTitleController.value.text,
-      'company_name': pastCompanyNameController.value.text,
-      'website': pastCompanyWebsiteController.value.text,
-    });
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  height: HeightData.fifty_seven,
-                  child: Center(
-                    child: setTextField(
-                      pastCompanyTitleController,
-                      "Title",
-                      false,
-                      TextInputType.name,
-                      false,
-                      "",
-                      TextInputAction.next,
-                      () => {
-                        // on Chnages
-                      },
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  height: HeightData.fifty_seven,
-                  child: Center(
-                    child: setTextField(
-                      pastCompanyNameController,
-                      "Company Name",
-                      false,
-                      TextInputType.name,
-                      false,
-                      "",
-                      TextInputAction.next,
-                      () => {
-                        // on Chnages
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Container(
-            height: HeightData.fifty_seven,
-            child: Center(
-              child: setTextField(
-                pastCompanyWebsiteController,
-                "Company Website",
-                false,
-                TextInputType.name,
-                false,
-                "",
-                TextInputAction.next,
-                () => {
-                  // on Chnages
-                },
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-        ],
-      ),
-    );
-  }
+  List<TextEditingController> pastCompanyTitleController = [];
+  List<TextEditingController> pastCompanyNameController = [];
+  List<TextEditingController> pastCompanyWebsiteController = [];
+
+  bool isDeleteLast = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    cards.add(createCard());
+    cards.forEach((element) {
+      var titleController = TextEditingController(text: element);
+      var nameController = TextEditingController(text: element);
+      var websiteController = TextEditingController(text: element);
+
+      pastCompanyTitleController.add(titleController);
+      pastCompanyNameController.add(nameController);
+      pastCompanyWebsiteController.add(websiteController);
+    });
   }
 
   @override
@@ -130,9 +62,24 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
             const SizedBox(
               height: 60,
             ),
-            const ToolbarWithHeader(
-              step: 1,
-            ),
+            ToolbarWithHeader(
+                step: 1,
+                ontap: () async {
+                  var preferences = MySharedPref();
+                  String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
+                  String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
+                  String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+
+                  if (educationalInfo == "") {
+                    Get.to(const EducationInfoFormView());
+                  }else if (questionsInfo == "") {
+                    Get.to(const AdditionalQueFormView());
+                  }else if(lastQuestionsInfo == ""){
+                    Get.to(AdditionalLastQueView());
+                  }else{
+                    Get.offAll(BottomNavigation());
+                  }
+                }),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
@@ -234,10 +181,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                 decoration: EditTextDecoration,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                    left: 12,
-                                    right: 12,
-                                    top: 14
-                                  ),
+                                      left: 12, right: 12, top: 14),
                                   child: Padding(
                                     padding: const EdgeInsets.all(5),
                                     child: GestureDetector(
@@ -247,7 +191,11 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         child: Text(
                                           controller.companyName.value,
                                           style: TextStyle(
-                                              color: controller.companyName.value == 'Company Name' ? grey_aaaaaa : black_121212,
+                                              color: controller
+                                                          .companyName.value ==
+                                                      'Company Name'
+                                                  ? grey_aaaaaa
+                                                  : black_121212,
                                               fontWeight: FontWeight.w500,
                                               fontFamily:
                                                   helveticaNeueNeue_medium,
@@ -294,7 +242,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                             false,
                             "",
                             TextInputAction.next,
-                            () => {
+                            (value) => {
                               // on Chnages
                             },
                           ),
@@ -332,16 +280,137 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                             itemCount: cards.length,
                             shrinkWrap: true,
                             itemBuilder: (BuildContext context, int index) {
-                              return cards[index];
+                              return Container(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: SizedBox(
+                                            child: Center(
+                                              child: setTextField(
+                                                pastCompanyTitleController[
+                                                    index],
+                                                "Title",
+                                                false,
+                                                TextInputType.name,
+                                                false,
+                                                "",
+                                                TextInputAction.next,
+                                                (value) {},
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 15,
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: SizedBox(
+                                            child: Center(
+                                              child: setTextField(
+                                                pastCompanyNameController[
+                                                    index],
+                                                "Company Name",
+                                                false,
+                                                TextInputType.name,
+                                                false,
+                                                "",
+                                                TextInputAction.next,
+                                                (value) {},
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Center(
+                                      child: setTextField(
+                                        pastCompanyWebsiteController[index],
+                                        "Company Website",
+                                        false,
+                                        TextInputType.name,
+                                        false,
+                                        "",
+                                        TextInputAction.next,
+                                        (value) {},
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                  ],
+                                ),
+                              );
                             },
                           ),
                           const SizedBox(
                             height: 16,
                           ),
+                          isDeleteLast == true
+                        ? GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              cards.removeLast();
+                              if(cards.length == 1){
+                                isDeleteLast = false;
+                              }
+                            });
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border:
+                                    Border.all(width: 1, color: black_121212)),
+                            child: // Add More
+                                const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(
+                                child: Text("Delete Last",
+                                    style: TextStyle(
+                                        color: Color(0xff121212),
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "NeueHelvetica",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.0),
+                                    textAlign: TextAlign.left),
+                              ),
+                            ),
+                          ),
+                        ) : Container(),
+                        isDeleteLast == true
+                        ? SizedBox(
+                          height: 16,
+                        ) : Container(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                cards.add(createCard());
+                                isDeleteLast = true;
+                                cards.forEach((element) {
+                                  var titleController =
+                                      TextEditingController(text: element);
+                                  var nameController =
+                                      TextEditingController(text: element);
+                                  var websiteController =
+                                      TextEditingController(text: element);
+
+                                  pastCompanyTitleController
+                                      .add(titleController);
+                                  pastCompanyNameController.add(nameController);
+                                  pastCompanyWebsiteController
+                                      .add(websiteController);
+
+                                  if (element.toString() == "") {
+                                    pastCompanyTitleController.remove(element);
+                                  }
+                                });
+                                cards.add("");
                               });
                             },
                             child: Container(
@@ -377,8 +446,27 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
               padding: const EdgeInsets.all(24.0),
               child: BlackNextButton(str_continue, black_121212, () {
                 if (controller.checkExperienceValidation(context)) {
+
+                  companyDetails.clear();
+
+                  for(int i = 0; i<cards.length; i++){
+                    companyDetails.add({
+                      'title': pastCompanyTitleController[i].text,
+                      'company_name': pastCompanyNameController[i].text,
+                      'website': pastCompanyWebsiteController[i].text,
+                    });
+                  }
+
+                  List itemList = [];
+
+                  itemList.clear();
+                  for (var item in companyDetails) {
+                    itemList.add(item);
+                  }
+                  controller.pastCompanyDetails.value = itemList.join(",");
+                  print(controller.pastCompanyDetails.value);
+
                   checkNet(context).then((value) {
-                    controller.pastCompanyDetails = companyDetails;
                     controller.experienceInfoAPI(context);
                   });
                 }

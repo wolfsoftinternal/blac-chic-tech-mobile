@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ import '../../../../Utils/preference_utils.dart';
 import '../../../../Utils/share_predata.dart';
 import '../../../Networks/api_endpoint.dart';
 import '../../../Networks/api_response.dart';
-import '../../login/model/LoginModel.dart';
+import '../../login/model/SignupModel.dart';
 
 class SignupController extends GetxController {
   Rx<TextEditingController> firstnameController = TextEditingController().obs;
@@ -50,10 +49,6 @@ class SignupController extends GetxController {
 
           var preferences = MySharedPref();
           await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
-
-          // Navigator.pop(context);
-          // Navigator.pushReplacement(context, new MaterialPageRoute(
-          //     builder: (_) => UserName()));
 
           Get.off(PersonalInfoFormView());
         }

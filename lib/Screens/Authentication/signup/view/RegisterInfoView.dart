@@ -1,7 +1,18 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
+import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utils/preference_utils.dart';
+import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,8 +61,32 @@ class RegisterInfoView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      BlackNextButton(str_register, white_ffffff, () {
-                        Get.to(const SignupInfoView());
+                      BlackNextButton(str_register, white_ffffff, () async {
+                        var preferences = MySharedPref();                        
+                        SignupModel? myModel = await preferences
+                            .getSignupModel(SharePreData.keySignupModel);
+                        
+                        String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
+                        String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
+                        String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
+                        String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
+                        String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+
+                        if(myModel == null){
+                          Get.to(const SignupFormView());
+                        }else if (personalInfo == "") {
+                          Get.to(const PersonalInfoFormView());
+                        }else if (experienceInfo == "") {
+                          Get.to(const ExperienceInfoFormView());
+                        }else if (educationalInfo == "") {
+                          Get.to(const EducationInfoFormView());
+                        }else if (questionsInfo == "") {
+                          Get.to(const AdditionalQueFormView());
+                        }else if(lastQuestionsInfo == ""){
+                          Get.to(AdditionalLastQueView());
+                        }else{
+                          Get.offAll(BottomNavigation());
+                        }
                       }),
                       const SizedBox(
                         height: 16,

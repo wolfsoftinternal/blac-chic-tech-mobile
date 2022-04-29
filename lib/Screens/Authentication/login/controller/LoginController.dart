@@ -1,6 +1,13 @@
 import 'dart:convert';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
+import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +20,7 @@ import '../../../../Utils/preference_utils.dart';
 import '../../../../Utils/share_predata.dart';
 import '../../../Networks/api_endpoint.dart';
 import '../../../Networks/api_response.dart';
-import '../model/LoginModel.dart';
+import '../model/SignupModel.dart';
 
 class LoginController extends GetxController {
   Rx<TextEditingController> inputText = TextEditingController().obs;
@@ -30,11 +37,12 @@ class LoginController extends GetxController {
   }
 
   checker() async {
-    var preferences = MySharedPref();
+   var preferences = MySharedPref();
 
-    bool isExist = await preferences.getBoolValue(SharePreData.keyRememberedUserInfo) ?? false;
+    bool isExist =
+        await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
 
-    if (isExist) {
+    if (isExist != null) {
       boolRemember.value = isExist;
 
       if (isExist == true) {
@@ -44,15 +52,8 @@ class LoginController extends GetxController {
   }
 
   callLoginApi(BuildContext context) async {
-    onLoading(context, "Loading..");
-
     String url = urlBase + urlGetLogin;
     final apiReq = Request();
-    // FirebaseMessaging.instance.getToken().then((value) {
-    //   String token = value;
-    //   printData("Token", token);
-
-    // });
     dynamic body = {
       'email': inputText.value.text,
       'password': pswdText.value.text
@@ -63,18 +64,17 @@ class LoginController extends GetxController {
 
       if (res.statusCode == 200) {
         await res.stream.bytesToString().then((value) async {
-          Navigator.pop(context); //pop dialogdsds
-
           String strData = value;
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 200) {
-            snackBar(context, model.message!);
-            LoginModel loginInModel = LoginModel.fromJson(userModel);
+            SignupModel loginInModel = SignupModel.fromJson(userModel);
+            
             var preferences = MySharedPref();
-            // await preferences.setLoginInModel(
-            //     loginInModel, SharePreData.keyLoginModel);
+
+            await preferences.setSignupModel(
+                loginInModel, SharePreData.keySignupModel);
 
             if (boolRemember.value == true) {
               await preferences.setBool(
@@ -83,32 +83,42 @@ class LoginController extends GetxController {
                   pswdText.value.text.toString());
             }
 
-            // if (loginInModel.data!.userName == null) {
-            //   Get.offAll(UserName());
-            // } else if (loginInModel.data.password == null) {
-            //   Get.offAll(Password());
-            // } else {
-            //   Get.offAll(BottomNavigation());
-            // }
+            String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
+            String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
+            String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
+            String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
+            String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+
+            if (personalInfo == "") {
+              Get.offAll(const PersonalInfoFormView());
+            }else if (experienceInfo == "") {
+              Get.offAll(const ExperienceInfoFormView());
+            }else if (educationalInfo == "") {
+              Get.offAll(const EducationInfoFormView());
+            }else if (questionsInfo == "") {
+              Get.offAll(const AdditionalQueFormView());
+            }else if(lastQuestionsInfo == ""){
+              Get.offAll(AdditionalLastQueView());
+            }else{
+              Get.offAll(BottomNavigation());
+            }
           } else {
-            // Get.offAll(SignIn()); //pop dialogdsds
             snackBar(context, model.message!);
           }
         });
       } else if (res.statusCode == 101) {
-        Navigator.pop(context); //pop dialogdsds
         snackBar(context, "Enter valid Credentials");
       }
     });
   }
 
   Future<void> getStoredUserDetails() async {
-  //   var preferences = MySharedPref();
-  //   LoginModel? profileModel =
-  //       await preferences.getLoginInModel(SharePreData.keyLoginModel);
+    var preferences = MySharedPref();
+    SignupModel? profileModel =
+        await preferences.getSignupModel(SharePreData.key_UserInfoModel);
 
-  //   inputText.value.text = profileModel!.data!.email!;
-  //   pswdText.value.text = profileModel.data!.password!;
+    inputText.value.text = profileModel!.data!.email!;
+    pswdText.value.text = profileModel.data!.password!;
   }
 
   bool checkValidation(context) {
