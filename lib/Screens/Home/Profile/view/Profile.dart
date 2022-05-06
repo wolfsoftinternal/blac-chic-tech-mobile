@@ -1,12 +1,16 @@
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderAction.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/EventTab.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/PostTab.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/ProfileTab.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/SeeAllAdmires.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/VideoTab.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
+import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,6 +37,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     tabController!.addListener(() {
       activeIndex = tabController!.index;
     });
+    checkNet(context).then((value){
+      controller.postListAPI(context, null);
+      controller.videoListAPI(context);
+      controller.eventListAPI(context);
+    });
   }
 
   @override
@@ -54,36 +63,41 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 ),
                 const Spacer(),
                 Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: controller.details.value.image == null
-                        ? SvgPicture.asset(
-                            placeholder,
-                            height: 48,
-                            width: 48,
-                            fit: BoxFit.cover,
-                          )
-                        : CachedNetworkImage(
-                            imageUrl: controller.details.value.image!,
-                            height: 48,
-                            width: 48,
-                            fit: BoxFit.cover,
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) =>
-                                    SvgPicture.asset(
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.back();
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: controller.details.value.image == null
+                          ? SvgPicture.asset(
                               placeholder,
                               height: 48,
                               width: 48,
                               fit: BoxFit.cover,
-                            ),
-                            errorWidget: (context, url, error) =>
-                                SvgPicture.asset(
-                              placeholder,
+                            )
+                          : CachedNetworkImage(
+                              imageUrl: controller.details.value.image!,
                               height: 48,
                               width: 48,
                               fit: BoxFit.cover,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      SvgPicture.asset(
+                                placeholder,
+                                height: 48,
+                                width: 48,
+                                fit: BoxFit.cover,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  SvgPicture.asset(
+                                placeholder,
+                                height: 48,
+                                width: 48,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
+                    ),
                   ),
                 ),
                 const Spacer(),
@@ -496,9 +510,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     controller: tabController,
                     children: [
                       ProfileTab(),
-                      Container(),
-                      Container(),
-                      Container(),
+                      PostTab(),
+                      VideoTab(),
+                      EventTab(),
                     ],
                   ),
                 ),

@@ -62,29 +62,58 @@ class RegisterInfoView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       BlackNextButton(str_register, white_ffffff, () async {
-                        var preferences = MySharedPref();                        
+                        var preferences = MySharedPref();
                         SignupModel? myModel = await preferences
                             .getSignupModel(SharePreData.keySignupModel);
-                        
-                        String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
-                        String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
-                        String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
-                        String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
-                        String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
 
-                        if(myModel == null){
+                        // String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
+                        // String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
+                        // String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
+                        // String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
+                        // String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+
+                        // if(myModel == null){
+                        //   Get.to(const SignupFormView());
+                        // }else if (personalInfo == "") {
+                        //   Get.to(const PersonalInfoFormView());
+                        // }else if (experienceInfo == "") {
+                        //   Get.to(const ExperienceInfoFormView());
+                        // }else if (educationalInfo == "") {
+                        //   Get.to(const EducationInfoFormView());
+                        // }else if (questionsInfo == "") {
+                        //   Get.to(const AdditionalQueFormView());
+                        // }else if(lastQuestionsInfo == ""){
+                        //   Get.to(AdditionalLastQueView());
+                        // }else{
+                        //   Get.offAll(BottomNavigation());
+                        // }
+
+                        if (myModel == null) {
                           Get.to(const SignupFormView());
-                        }else if (personalInfo == "") {
+                        } else if (myModel.data!.aboutUs == "") {
                           Get.to(const PersonalInfoFormView());
-                        }else if (experienceInfo == "") {
+                        } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
                           Get.to(const ExperienceInfoFormView());
-                        }else if (educationalInfo == "") {
+                        } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
                           Get.to(const EducationInfoFormView());
-                        }else if (questionsInfo == "") {
+                        } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
                           Get.to(const AdditionalQueFormView());
-                        }else if(lastQuestionsInfo == ""){
-                          Get.to(AdditionalLastQueView());
-                        }else{
+                        } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                          String lastQuestionsInfo = "";
+                          for (int i = 0;
+                              i < myModel.data!.questions!.length;
+                              i++) {
+                            if (myModel.data!.questions![i].type ==
+                                "additional") {
+                              lastQuestionsInfo = "Done";
+                            }
+                          }
+                          if (lastQuestionsInfo != "Done") {
+                            Get.to(AdditionalLastQueView());
+                          } else {
+                            Get.offAll(BottomNavigation());
+                          }
+                        } else {
                           Get.offAll(BottomNavigation());
                         }
                       }),

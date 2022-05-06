@@ -17,5 +17,12 @@ const urlQuestion = '/question-edit';
 //profile
 const urladmireList = '/admire-list';
 const urladmireDelete = '/admire-delete';
+//Profile Tab
 const urlUserProfile = '/user-profile';
 const urlOtherProfile = '/other-user-profile';
+//Post Tab
+const urlPostList = '/post-list';
+//video Tab
+const urlVideoList = '/video-list';
+//event Tab
+const urlEventList = '/event-list';

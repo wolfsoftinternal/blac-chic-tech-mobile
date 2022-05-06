@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/Chip.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
@@ -55,11 +56,23 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                 step: 3,
                 ontap: () async {
                   var preferences = MySharedPref();
-                  String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
-
-                  if(lastQuestionsInfo == ""){
-                    Get.to(AdditionalLastQueView());
-                  }else{
+                  SignupModel? myModel = await preferences
+                      .getSignupModel(SharePreData.keySignupModel);
+                  if (myModel!.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                    Get.to(const AdditionalLastQueView());
+                  } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                    String lastQuestionsInfo = "";
+                    for (int i = 0; i < myModel.data!.questions!.length; i++) {
+                      if (myModel.data!.questions![i].type == "additional") {
+                        lastQuestionsInfo = "Done";
+                      }
+                    }
+                    if (lastQuestionsInfo != "Done") {
+                      Get.to(AdditionalLastQueView());
+                    } else {
+                      Get.offAll(BottomNavigation());
+                    }
+                  } else {
                     Get.offAll(BottomNavigation());
                   }
                 }),
@@ -112,17 +125,16 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: // What have you done?
-                                Text(
-                                  controller.ques1.value,
-                                  maxLines: 1,
-                                  style: const TextStyle(
-                                      overflow: TextOverflow.ellipsis,
-                                      color: grey_aaaaaa,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: helveticaNeueNeue_medium,
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 14.0),
-                                  textAlign: TextAlign.left),
+                                Text(controller.ques1.value,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: grey_aaaaaa,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 14.0),
+                                    textAlign: TextAlign.left),
                           ),
                         ),
                       ),
@@ -139,9 +151,8 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: // What have you done?
-                                Text(
-                                  controller.ques2.value,
-                                  maxLines: 1, 
+                                Text(controller.ques2.value,
+                                    maxLines: 1,
                                     style: const TextStyle(
                                         color: grey_aaaaaa,
                                         overflow: TextOverflow.ellipsis,
@@ -246,27 +257,32 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
 
                   if (controller.q1Controller.value.text.isNotEmpty) {
                     ques.add({
-                      'answer1': controller.q1Controller.value.text,
+                      '"question"': '"${SharePreData.strQues1}"',
+                      '"answer"': '"${controller.q1Controller.value.text}"',
                     });
                   }
                   if (controller.q2Controller.value.text.isNotEmpty) {
                     ques.add({
-                      'answer2': controller.q2Controller.value.text,
+                      '"question"': '"${SharePreData.strQues2}"',
+                      '"answer"': '"${controller.q2Controller.value.text}"',
                     });
                   }
                   if (controller.q3Controller.value.text.isNotEmpty) {
                     ques.add({
-                      'answer3': controller.q3Controller.value.text,
+                      '"question"': '"${SharePreData.strQues3}"',
+                      '"answer"': '"${controller.q3Controller.value.text}"',
                     });
                   }
                   if (controller.q4Controller.value.text.isNotEmpty) {
                     ques.add({
-                      'answer4': controller.q4Controller.value.text,
+                      '"question"': '"${SharePreData.strQues4}"',
+                      '"answer"': '"${controller.q4Controller.value.text}"',
                     });
                   }
                   if (controller.q5Controller.value.text.isNotEmpty) {
                     ques.add({
-                      'answer5': controller.q5Controller.value.text,
+                      '"question"': '"${SharePreData.strQues5}"',
+                      '"answer"': '"${controller.q5Controller.value.text}"',
                     });
                   }
 
@@ -278,7 +294,8 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                   for (var item in ques) {
                     itemList.add(item);
                   }
-                  controller.questions.value = itemList.join(",");
+                  controller.questions.clear();
+                  controller.questions.value = itemList;
 
                   print(controller.questions.value);
                   checkNet(context).then((value) {

@@ -37,7 +37,7 @@ class LoginController extends GetxController {
   }
 
   checker() async {
-   var preferences = MySharedPref();
+    var preferences = MySharedPref();
 
     bool isExist =
         await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
@@ -70,7 +70,7 @@ class LoginController extends GetxController {
 
           if (model.statusCode == 200) {
             SignupModel loginInModel = SignupModel.fromJson(userModel);
-            
+
             var preferences = MySharedPref();
 
             await preferences.setSignupModel(
@@ -83,23 +83,34 @@ class LoginController extends GetxController {
                   pswdText.value.text.toString());
             }
 
-            String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
-            String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
-            String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
-            String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
-            String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+            SignupModel? myModel =
+                await preferences.getSignupModel(SharePreData.keySignupModel);
 
-            if (personalInfo == "") {
+            if (myModel!.data!.aboutUs == "") {
               Get.offAll(const PersonalInfoFormView());
-            }else if (experienceInfo == "") {
+            } else if (myModel.data!.currentJobs == null ||
+                myModel.data!.currentJobs.toString() == '[]') {
               Get.offAll(const ExperienceInfoFormView());
-            }else if (educationalInfo == "") {
+            } else if (myModel.data!.educations == null ||
+                myModel.data!.educations.toString() == '[]') {
               Get.offAll(const EducationInfoFormView());
-            }else if (questionsInfo == "") {
+            } else if (myModel.data!.questions == null ||
+                myModel.data!.questions.toString() == '[]') {
               Get.offAll(const AdditionalQueFormView());
-            }else if(lastQuestionsInfo == ""){
-              Get.offAll(AdditionalLastQueView());
-            }else{
+            } else if (myModel.data!.questions == null ||
+                myModel.data!.questions.toString() == '[]') {
+              String lastQuestionsInfo = "";
+              for (int i = 0; i < myModel.data!.questions!.length; i++) {
+                if (myModel.data!.questions![i].type == "additional") {
+                  lastQuestionsInfo = "Done";
+                }
+              }
+              if (lastQuestionsInfo != "Done") {
+                Get.offAll(AdditionalLastQueView());
+              } else {
+                Get.offAll(BottomNavigation());
+              }
+            } else {
               Get.offAll(BottomNavigation());
             }
           } else {

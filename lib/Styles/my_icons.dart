@@ -22,3 +22,5 @@ const chat_icon = 'assets/images/chat.svg';
 const check_icon = 'assets/images/check.svg';
 const calendar_icon = 'assets/images/calendar.svg';
 const question_icon = 'assets/images/question.svg';
+const icon_play = 'assets/images/play.svg';
+const icon_location = 'assets/images/location.svg';

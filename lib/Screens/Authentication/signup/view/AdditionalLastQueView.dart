@@ -172,7 +172,14 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
             }else if(RegExp(r"[\w-._]+").allMatches(controller.addtionalController.value.text).length < 10){
               snackBar(context, 'Minimum 10 words required');
             }else{
-              controller.questions.value = controller.addtionalController.value.text;
+              controller.questions.clear();
+              controller.questions.add(
+                {
+                  '"question"':'"What should the world know about you ?"',
+                  '"answer"':'"${controller.q5Controller.value.text}"',
+                }
+              );
+              // = controller.addtionalController.value.text;
               checkNet(context).then((value) {
                 controller.questionsInfoAPI(context, 'additional');
               }); 
@@ -183,92 +190,5 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
         ),
       ),
     );
-  }
-}
-
-class DialogUtils {
-  static DialogUtils _instance = new DialogUtils.internal();
-
-  DialogUtils.internal();
-
-  factory DialogUtils() => _instance;
-
-  static void showDoneDialog(
-    BuildContext context,
-  ) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0)), //this right here
-            child: Container(
-              height: 360,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // WHAT HAVE YOU DONE ?
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 24, bottom: 16),
-                      child: Text("WHAT HAVE YOU DONE ?",
-                          style: const TextStyle(
-                              color: black_121212,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: helvetica_neu_bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                          textAlign: TextAlign.left),
-                    ),
-                  ),
-
-                  Container(
-                    height: 0.7,
-                    color: Colors.black12,
-                  ),
-
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15, bottom: 15, right: 24, left: 24),
-                      child: TextFormField(
-                        minLines: 2,
-                        maxLines: 10,
-                        keyboardType: TextInputType.multiline,
-                        style: TextStyle(
-                            color: black_121212,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: helveticaNeueNeue_medium,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.0),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          hintText: 'Please type here...',
-                          hintStyle: TextStyle(
-                              color: grey_aaaaaa,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: helveticaNeueNeue_medium,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
   }
 }

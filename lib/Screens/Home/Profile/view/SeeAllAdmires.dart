@@ -1,5 +1,5 @@
 import 'package:blackchecktech/Layout/ToolbarWithHeaderAction.dart';
-import 'package:blackchecktech/Layout/ToolbarWithHeaderTitle.dart';
+import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -28,7 +28,7 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
           SizedBox(
             height: 60,
           ),
-          ToolbarWithHeaderTitle("Fade Admires"),
+          ToolbarWithHeaderCenterTitle("Fade Admires"),
           Expanded(
             flex: 1,
             child: SingleChildScrollView(

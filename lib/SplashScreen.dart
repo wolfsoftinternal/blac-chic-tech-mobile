@@ -28,33 +28,59 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 2), () async {
-      var preferences = MySharedPref();                        
-      SignupModel? myModel = await preferences
-          .getSignupModel(SharePreData.keySignupModel);
-      
-      String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
-      String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
-      String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
-      String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
-      String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+      var preferences = MySharedPref();
+      SignupModel? myModel =
+          await preferences.getSignupModel(SharePreData.keySignupModel);
 
-      if(myModel == null){
+      // String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
+      // String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
+      // String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
+      // String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
+      // String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+
+      // if(myModel == null){
+      //   Get.offAll(const Welcome());
+      // }else if (personalInfo == "") {
+      //   Get.offAll(const PersonalInfoFormView());
+      // }else if (experienceInfo == "") {
+      //   Get.offAll(const ExperienceInfoFormView());
+      // }else if (educationalInfo == "") {
+      //   Get.offAll(const EducationInfoFormView());
+      // }else if (questionsInfo == "") {
+      //   Get.offAll(const AdditionalQueFormView());
+      // }else if(lastQuestionsInfo == ""){
+      //   Get.offAll(AdditionalLastQueView());
+      // }else{
+      //   Get.offAll(BottomNavigation());
+      // }
+      if (myModel == null) {
         Get.offAll(const Welcome());
-      }else if (personalInfo == "") {
+      } else if (myModel.data!.aboutUs == "") {
         Get.offAll(const PersonalInfoFormView());
-      }else if (experienceInfo == "") {
+      } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
         Get.offAll(const ExperienceInfoFormView());
-      }else if (educationalInfo == "") {
+      } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
         Get.offAll(const EducationInfoFormView());
-      }else if (questionsInfo == "") {
+      } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
         Get.offAll(const AdditionalQueFormView());
-      }else if(lastQuestionsInfo == ""){
-        Get.offAll(AdditionalLastQueView());
-      }else{
+      } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+        String lastQuestionsInfo = "";
+        for (int i = 0; i < myModel.data!.questions!.length; i++) {
+          if (myModel.data!.questions![i].type == "additional") {
+            lastQuestionsInfo = "Done";
+          }
+        }
+        if (lastQuestionsInfo != "Done") {
+          Get.offAll(AdditionalLastQueView());
+        } else {
+          Get.offAll(BottomNavigation());
+        }
+      } else {
         Get.offAll(BottomNavigation());
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

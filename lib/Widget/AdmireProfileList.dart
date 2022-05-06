@@ -78,7 +78,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           padding: const EdgeInsets.only(left: 24.0, right: 24.0),
           child: Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * .50),
+              SizedBox(height: MediaQuery.of(context).size.height * .55),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -131,7 +131,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           padding: const EdgeInsets.only(left: 24.0, right: 24.0),
           child: Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * .70,),
+              SizedBox(height: MediaQuery.of(context).size.height * .76,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
@@ -66,17 +67,26 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                 step: 1,
                 ontap: () async {
                   var preferences = MySharedPref();
-                  String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
-                  String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
-                  String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+                  SignupModel? myModel = await preferences
+                      .getSignupModel(SharePreData.keySignupModel);
 
-                  if (educationalInfo == "") {
+                  if (myModel!.data!.educations == null || myModel.data!.educations.toString() == '[]') {
                     Get.to(const EducationInfoFormView());
-                  }else if (questionsInfo == "") {
+                  } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
                     Get.to(const AdditionalQueFormView());
-                  }else if(lastQuestionsInfo == ""){
-                    Get.to(AdditionalLastQueView());
-                  }else{
+                  } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                    String lastQuestionsInfo = "";
+                    for (int i = 0; i < myModel.data!.questions!.length; i++) {
+                      if (myModel.data!.questions![i].type == "additional") {
+                        lastQuestionsInfo = "Done";
+                      }
+                    }
+                    if (lastQuestionsInfo != "Done") {
+                      Get.to(AdditionalLastQueView());
+                    } else {
+                      Get.offAll(BottomNavigation());
+                    }
+                  } else {
                     Get.offAll(BottomNavigation());
                   }
                 }),
@@ -353,41 +363,43 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                             height: 16,
                           ),
                           isDeleteLast == true
-                        ? GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              cards.removeLast();
-                              if(cards.length == 1){
-                                isDeleteLast = false;
-                              }
-                            });
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                border:
-                                    Border.all(width: 1, color: black_121212)),
-                            child: // Add More
-                                const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Center(
-                                child: Text("Delete Last",
-                                    style: TextStyle(
-                                        color: Color(0xff121212),
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "NeueHelvetica",
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 12.0),
-                                    textAlign: TextAlign.left),
-                              ),
-                            ),
-                          ),
-                        ) : Container(),
-                        isDeleteLast == true
-                        ? SizedBox(
-                          height: 16,
-                        ) : Container(),
+                              ? GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      cards.removeLast();
+                                      if (cards.length == 1) {
+                                        isDeleteLast = false;
+                                      }
+                                    });
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        border: Border.all(
+                                            width: 1, color: black_121212)),
+                                    child: // Add More
+                                        const Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Center(
+                                        child: Text("Delete Last",
+                                            style: TextStyle(
+                                                color: Color(0xff121212),
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "NeueHelvetica",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.left),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Container(),
+                          isDeleteLast == true
+                              ? SizedBox(
+                                  height: 16,
+                                )
+                              : Container(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
@@ -446,14 +458,14 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
               padding: const EdgeInsets.all(24.0),
               child: BlackNextButton(str_continue, black_121212, () {
                 if (controller.checkExperienceValidation(context)) {
-
                   companyDetails.clear();
 
-                  for(int i = 0; i<cards.length; i++){
+                  for (int i = 0; i < cards.length; i++) {
                     companyDetails.add({
-                      'title': pastCompanyTitleController[i].text,
-                      'company_name': pastCompanyNameController[i].text,
-                      'website': pastCompanyWebsiteController[i].text,
+                      '"title"': '"${pastCompanyTitleController[i].text}"',
+                      '"company_name"':
+                          '"${pastCompanyNameController[i].text}"',
+                      '"website"': '"${pastCompanyWebsiteController[i].text}"',
                     });
                   }
 
@@ -463,7 +475,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                   for (var item in companyDetails) {
                     itemList.add(item);
                   }
-                  controller.pastCompanyDetails.value = itemList.join(",");
+                  controller.pastCompanyDetails.value = itemList;
                   print(controller.pastCompanyDetails.value);
 
                   checkNet(context).then((value) {

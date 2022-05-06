@@ -42,16 +42,20 @@ class StepsController extends GetxController {
   RxString strStateId = "".obs;
   RxString strCityId = "".obs;
 
-  Rx<TextEditingController> currentTitleController = TextEditingController().obs;
-  Rx<TextEditingController> currentCompanyNameController = TextEditingController().obs;
-  Rx<TextEditingController> currentCompanyWebsiteController = TextEditingController().obs;
+  Rx<TextEditingController> currentTitleController =
+      TextEditingController().obs;
+  Rx<TextEditingController> currentCompanyNameController =
+      TextEditingController().obs;
+  Rx<TextEditingController> currentCompanyWebsiteController =
+      TextEditingController().obs;
   RxList companyList = [].obs;
 
   RxBool boolComapnyLogo = false.obs;
-  Rx<TextEditingController> searchCompanyController = TextEditingController().obs;
+  Rx<TextEditingController> searchCompanyController =
+      TextEditingController().obs;
   RxString companyName = "Company Name".obs;
-  RxString pastCompanyDetails = "".obs;
-  RxString educationalDetails = "".obs;
+  RxList pastCompanyDetails = [].obs;
+  RxList educationalDetails = [].obs;
 
   Rx<TextEditingController> q1Controller = TextEditingController().obs;
   Rx<TextEditingController> q2Controller = TextEditingController().obs;
@@ -68,8 +72,8 @@ class StepsController extends GetxController {
   RxString ques3 = SharePreData.strQues3.obs;
   RxString ques4 = SharePreData.strQues4.obs;
   RxString ques5 = SharePreData.strQues5.obs;
-  
-  RxString questions = "".obs;
+
+  RxList questions = [].obs;
 
   countryListApi() async {
     String url = urlBase + urlCountryList;
@@ -92,7 +96,6 @@ class StepsController extends GetxController {
             countrylist.addAll(countryListModel.data!);
 
             printData("Country List length ", countrylist.length.toString());
-
           } else {
             print(res.reasonPhrase);
           }
@@ -134,7 +137,7 @@ class StepsController extends GetxController {
     });
   }
 
-  cityListApi(String countryId,String stateId) async {
+  cityListApi(String countryId, String stateId) async {
     //clearing city list
     cityList.clear();
 
@@ -159,7 +162,6 @@ class StepsController extends GetxController {
           if (model.statusCode == 200) {
             CityListModel cityListModel = CityListModel.fromJson(userModel);
             cityList.addAll(cityListModel.data!);
-
           } else {
             print(res.reasonPhrase);
           }
@@ -174,11 +176,11 @@ class StepsController extends GetxController {
         await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = modelM!.data!.token;
 
-    var headers = {'Authorization': 'Bearer ' + token};
-    var request = http.MultipartRequest(
-        'POST', Uri.parse(urlBase + urlPersonalInfo));
+    var headers = {'Authorization': 'Bearer ' + token!};
+    var request =
+        http.MultipartRequest('POST', Uri.parse(urlBase + urlPersonalInfo));
 
-    if(imagePath != ""){
+    if (imagePath != "") {
       request.files.add(await http.MultipartFile.fromPath('image', imagePath));
     }
     request.fields.addAll({
@@ -192,7 +194,6 @@ class StepsController extends GetxController {
       'twitter_url': twitterController.value.text,
     });
 
-    
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
 
@@ -208,9 +209,10 @@ class StepsController extends GetxController {
 
           personalInfoAPI(context, imagePath);
         } else if (model.statusCode == 200) {
-          var preferences = MySharedPref();
-          await preferences.setString(SharePreData.keyPersonalInfo, "Done");
+          SignupModel? signUp = SignupModel.fromJson(userModel);
 
+          var preferences = MySharedPref();
+          await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
           Get.to(ExperienceInfoFormView());
         } else {
           Navigator.pop(context); //pop
@@ -226,7 +228,7 @@ class StepsController extends GetxController {
   companyListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
     SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
+        await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = myModel?.data!.token;
 
     String url = urlBase + urlCompanyList;
@@ -240,16 +242,16 @@ class StepsController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             companyListAPI(context, body);
-          }else if(model.statusCode==200){
+          } else if (model.statusCode == 200) {
             companyList.value = userModel['data'];
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -261,15 +263,15 @@ class StepsController extends GetxController {
         await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = modelM!.data!.token;
 
-    var headers = {'Authorization': 'Bearer ' + token};
-    var request = http.MultipartRequest(
-        'POST', Uri.parse(urlBase + urlCreateCompany));
+    var headers = {'Authorization': 'Bearer ' + token!};
+    var request =
+        http.MultipartRequest('POST', Uri.parse(urlBase + urlCreateCompany));
 
     request.files.add(await http.MultipartFile.fromPath('logo', imagePath));
     request.fields.addAll({
       'name': currentCompanyNameController.value.text,
     });
-    
+
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
 
@@ -301,13 +303,14 @@ class StepsController extends GetxController {
   experienceInfoAPI(BuildContext context) async {
     var preferences = MySharedPref();
     SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
+        await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = myModel?.data!.token;
 
     dynamic body = {
       'current_job_title': currentTitleController.value.text,
       'current_job_company_name': companyName.value,
-      'past_jobs': pastCompanyDetails.value,
+      'current_job_website': currentCompanyWebsiteController.value.text,
+      'past_jobs': pastCompanyDetails.toJson().toString(),
     };
 
     String url = urlBase + urlExperienceInfo;
@@ -321,31 +324,38 @@ class StepsController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             experienceInfoAPI(context);
-          }else if(model.statusCode==200){
+          } else if (model.statusCode == 200) {
+            SignupModel? signUp = SignupModel.fromJson(userModel);
+
             var preferences = MySharedPref();
-            await preferences.setString(SharePreData.keyExperienceInfo, "Done");
-
-            String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
-            String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
-            String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
-
-            if (educationalInfo == "") {
+            await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
+            if (myModel?.data!.educations == null) {
               Get.to(const EducationInfoFormView());
-            }else if (questionsInfo == "") {
+            } else if (myModel?.data!.questions == null) {
               Get.to(const AdditionalQueFormView());
-            }else if(lastQuestionsInfo == ""){
-              Get.to(AdditionalLastQueView());
-            }else{
+            } else if (myModel?.data!.questions == null) {
+              String lastQuestionsInfo = "";
+              for (int i = 0; i < myModel!.data!.questions!.length; i++) {             
+                if (myModel.data!.questions![i].type == "additional") {
+                  lastQuestionsInfo = "Done";
+                }
+              }
+              if (lastQuestionsInfo != "Done") {
+                Get.to(AdditionalLastQueView());
+              }else {
+                Get.offAll(BottomNavigation());
+              }
+            } else {
               Get.offAll(BottomNavigation());
             }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -354,11 +364,11 @@ class StepsController extends GetxController {
   educationalInfoAPI(BuildContext context) async {
     var preferences = MySharedPref();
     SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
+        await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = myModel?.data!.token;
 
     dynamic body = {
-      'education' : educationalDetails.value,
+      'education': educationalDetails.toJson().toString(),
     };
 
     String url = urlBase + urlEducationalInfo;
@@ -372,28 +382,36 @@ class StepsController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             experienceInfoAPI(context);
-          }else if(model.statusCode==200){
+          } else if (model.statusCode == 200) {
+            SignupModel? signUp = SignupModel.fromJson(userModel);
+
             var preferences = MySharedPref();
-            await preferences.setString(SharePreData.keyEducationalInfo, "Done");
-
-            String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
-            String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
-
-            if (questionsInfo == "") {
+            await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
+            if (myModel?.data!.questions == null) {
               Get.to(const AdditionalQueFormView());
-            }else if(lastQuestionsInfo == ""){
-              Get.to(AdditionalLastQueView());
-            }else{
+            } else if (myModel?.data!.questions == null) {
+              String lastQuestionsInfo = "";
+              for (int i = 0; i < myModel!.data!.questions!.length; i++) {             
+                if (myModel.data!.questions![i].type == "additional") {
+                  lastQuestionsInfo = "Done";
+                }
+              }
+              if (lastQuestionsInfo != "Done") {
+                Get.to(AdditionalLastQueView());
+              }else {
+                Get.offAll(BottomNavigation());
+              }
+            } else {
               Get.offAll(BottomNavigation());
             }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -402,11 +420,11 @@ class StepsController extends GetxController {
   questionsInfoAPI(BuildContext context, type) async {
     var preferences = MySharedPref();
     SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
+        await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = myModel?.data!.token;
 
     dynamic body = {
-      'questions' : questions.value,
+      'questions': questions.toJson().toString(),
       'type': type.toString()
     };
 
@@ -421,32 +439,36 @@ class StepsController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             questionsInfoAPI(context, type);
-          }else if(model.statusCode==200){
+          } else if (model.statusCode == 200) {
+            SignupModel? signUp = SignupModel.fromJson(userModel);
+
             var preferences = MySharedPref();
-
-            if(type == 'normal'){
-              await preferences.setString(SharePreData.keyQuestionsInfo, "Done");
-              
-              String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
-
-              if(lastQuestionsInfo == ""){
+            await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
+            if (myModel?.data!.questions == null) {
+              Get.to(const AdditionalLastQueView());
+            } else if (myModel?.data!.questions == null) {
+              String lastQuestionsInfo = "";
+              for (int i = 0; i < myModel!.data!.questions!.length; i++) {             
+                if (myModel.data!.questions![i].type == "additional") {
+                  lastQuestionsInfo = "Done";
+                }
+              }
+              if (lastQuestionsInfo != "Done") {
                 Get.to(AdditionalLastQueView());
-              }else{
+              }else {
                 Get.offAll(BottomNavigation());
               }
-            }else{
-              await preferences.setString(SharePreData.keyLastQuestionsInfo, "Done");
+            } else {
               Get.offAll(BottomNavigation());
             }
-            
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -468,28 +490,28 @@ class StepsController extends GetxController {
     } else if (aboutController.value.text.isEmpty) {
       snackBar(context, "Enter About yourself");
       return false;
-    // } else if (linkedinController.value.text.isEmpty) {
-    //   snackBar(context, "Enter Linkedin Account");
-    //   return false;
-    // } else if (twitterController.value.text.isEmpty) {
-    //   snackBar(context, "Entered Twitter Account");
-    //   return false;
-    // } else if (instagramController.value.text.isEmpty) {
-    //   snackBar(context, "Entered Instagram Account");
-    //   return false;
+      // } else if (linkedinController.value.text.isEmpty) {
+      //   snackBar(context, "Enter Linkedin Account");
+      //   return false;
+      // } else if (twitterController.value.text.isEmpty) {
+      //   snackBar(context, "Entered Twitter Account");
+      //   return false;
+      // } else if (instagramController.value.text.isEmpty) {
+      //   snackBar(context, "Entered Instagram Account");
+      //   return false;
     } else {
       return true;
     }
   }
 
   bool checkAddCompanyValidation(context) {
-    if(boolComapnyLogo.value == false){
+    if (boolComapnyLogo.value == false) {
       snackBar(context, "Upload Company Logo");
       return false;
-    }else if (currentCompanyNameController.value.text.isEmpty) {
+    } else if (currentCompanyNameController.value.text.isEmpty) {
       snackBar(context, "Enter Company Name");
       return false;
-    }else{
+    } else {
       return true;
     }
   }
