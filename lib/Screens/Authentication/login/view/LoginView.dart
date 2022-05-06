@@ -30,8 +30,7 @@ class _LoginState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -41,7 +40,7 @@ class _LoginState extends State<LoginView> {
               child: Column(
                 children: [
                   const SizedBox(
-                    height: 25,
+                    height: 60,
                   ),
                   Stack(
                     children: [
@@ -85,13 +84,7 @@ class _LoginState extends State<LoginView> {
                               controller.inputText.value,
                               false,
                               TextInputAction.next,
-                              TextInputType.text, (v) {
-                            if (v.isEmpty) {
-                              return "Enter Username";
-                            } else {
-                              return null;
-                            }
-                          }),
+                              TextInputType.text, (v) {}),
                           const SizedBox(
                             height: 16,
                           ),
@@ -100,13 +93,7 @@ class _LoginState extends State<LoginView> {
                               controller.pswdText.value,
                               false,
                               TextInputAction.next,
-                              TextInputType.text, (v) {
-                            if (v!.isEmpty) {
-                              return "Enter Password";
-                            } else {
-                              return null;
-                            }
-                          }),
+                              TextInputType.text, (v) {}),
                           const SizedBox(
                             height: 20,
                           ),
@@ -117,6 +104,8 @@ class _LoginState extends State<LoginView> {
                                 onTap: () {
                                   setState(() {
                                     selectedsecond = !selectedsecond;
+                                    controller.boolRemember.value =
+                                        selectedsecond;
                                   });
                                 },
                                 child: Row(
@@ -124,31 +113,31 @@ class _LoginState extends State<LoginView> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
-                                      height: 20,
-                                      width: 20,
-                                      decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(3)),
-                                          border: Border.all(
-                                              color: selectedsecond
-                                                  ? const Color(0xffdbdbdb)
-                                                  : orange_ff881a,
-                                              width: 1),
-                                          color: selectedsecond
-                                              ? const Color(0xffffffff)
-                                              : orange_ff881a),
-                                      child: selectedsecond
-                                          ? const Icon(
-                                              Icons.check,
-                                              size: 18.0,
-                                              color: Colors.white,
-                                            )
-                                          : const Icon(
-                                              Icons.check,
-                                              size: 18.0,
-                                              color: Colors.white,
-                                            ),
-                                    ),
+                                        height: 20,
+                                        width: 20,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(3)),
+                                            border: Border.all(
+                                                color: selectedsecond
+                                                    ? orange_ff881a
+                                                    : const Color(0xffdbdbdb),
+                                                width: 1),
+                                            color: selectedsecond
+                                                ? orange_ff881a
+                                                : const Color(0xffffffff)),
+                                        child: selectedsecond
+                                            ? const Icon(
+                                                Icons.check,
+                                                size: 18.0,
+                                                color: Colors.white,
+                                              )
+                                            : const Icon(
+                                                Icons.check,
+                                                size: 18.0,
+                                                color: Colors.white,
+                                              )),
                                     const SizedBox(
                                       width: 11.7,
                                     ),
@@ -232,6 +221,6 @@ class _LoginState extends State<LoginView> {
           )
         ],
       ),
-    ));
+    );
   }
 }

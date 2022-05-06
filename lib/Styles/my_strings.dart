@@ -26,3 +26,5 @@ var str_Experience = "Experience";
 var str_continue = "Continue";
 var str_personal_info_lorem = "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Massa nulla.";
 var str_pwd_validation_text = "Password should be at least 8 characters long and contain a mixture of letters, numbers and other characters.";
+var str_about = "About you";
+var str_done = "Done";

@@ -1,5 +1,13 @@
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/login/view/LoginView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
+import 'package:blackchecktech/Utils/preference_utils.dart';
+import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -95,8 +103,28 @@ class SignupInfoView extends StatelessWidget {
                       const SizedBox(
                         height: 24,
                       ),
-                      BlackNextButton(str_signup, white_ffffff, () {
-                        Get.to(const SignupFormView());
+                      BlackNextButton(str_signup, white_ffffff, () async {
+                        var preferences = MySharedPref();
+                        String flag = await preferences.getStringValue('flag');
+                        
+                        SignupModel? myModel = await preferences
+                            .getSignupModel(SharePreData.keySignupModel);
+
+                        if(myModel == null){
+                          Get.to(const SignupFormView());
+                        }else if (flag == "0") {
+                          Get.to(const PersonalInfoFormView());
+                        }else if (flag == "1") {
+                          Get.to(const ExperienceInfoFormView());
+                        }else if (flag == "2") {
+                          Get.to(const EducationInfoFormView());
+                        }else if (flag == "3") {
+                          Get.to(const AdditionalQueFormView());
+                        }else if(flag == "4"){
+                          Get.to(AdditionalLastQueView());
+                        }else{
+                          Get.to(const PersonalInfoFormView());
+                        }
                       }),
                       const SizedBox(
                         height: 16,

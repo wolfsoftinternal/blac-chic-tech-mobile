@@ -1,9 +1,23 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
+import 'package:blackchecktech/Layout/Chip.dart';
+import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
+import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
+import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/preference_utils.dart';
+import 'package:blackchecktech/Utils/share_predata.dart';
+import 'package:blackchecktech/Widget/QuestionsDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:material_tag_editor/tag_editor.dart';
 
 import '../../../../Layout/BlackButtonDialog.dart';
 import '../../../../Layout/InputTextLayout.dart';
@@ -20,611 +34,288 @@ class AdditionalQueFormView extends StatefulWidget {
 }
 
 class _AdditionalQueState extends State<AdditionalQueFormView> {
-  var _birhtdayController = TextEditingController();
+  StepsController controller = Get.put(StepsController());
+  List<String> _values = [];
+  _onDelete(index) {
+    setState(() {
+      _values.removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       backgroundColor: white_ffffff,
-      body: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Personal Information
-                    Center(
-                      child: Text(str_Additional_Questions,
-                          style: TextStyle(
-                              color: black_121212,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: helvetica_neu_bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 24.0),
-                          textAlign: TextAlign.center),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
-                    Center(
-                      child: Text(str_personal_info_lorem,
-                          style: TextStyle(
-                              color: grey_aaaaaa,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: helveticaNeueNeue_medium,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0,
-                              height: 1.5),
-                          textAlign: TextAlign.center),
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
+      body: Obx(
+        () => Column(
+          children: [
+            const SizedBox(
+              height: 60,
+            ),
+            ToolbarWithHeader(
+                step: 3,
+                ontap: () async {
+                  var preferences = MySharedPref();
+                  SignupModel? myModel = await preferences
+                      .getSignupModel(SharePreData.keySignupModel);
+                  if (myModel!.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                    Get.to(const AdditionalLastQueView());
+                  } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                    String lastQuestionsInfo = "";
+                    for (int i = 0; i < myModel.data!.questions!.length; i++) {
+                      if (myModel.data!.questions![i].type == "additional") {
+                        lastQuestionsInfo = "Done";
+                      }
+                    }
+                    if (lastQuestionsInfo != "Done") {
+                      Get.to(AdditionalLastQueView());
+                    } else {
+                      Get.offAll(BottomNavigation());
+                    }
+                  } else {
+                    Get.offAll(BottomNavigation());
+                  }
+                }),
+            Expanded(
+              flex: 1,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Personal Information
+                      Center(
+                        child: Text(str_Additional_Questions,
+                            style: TextStyle(
+                                color: black_121212,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: helvetica_neu_bold,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 24.0),
+                            textAlign: TextAlign.center),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
+                      Center(
+                        child: Text(str_personal_info_lorem,
+                            style: TextStyle(
+                                color: grey_aaaaaa,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.0,
+                                height: 1.5),
+                            textAlign: TextAlign.center),
+                      ),
+                      SizedBox(
+                        height: 32,
+                      ),
 
-                    GestureDetector(
-                      onTap: () => DialogUtils.showDoneDialog(context),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: EditTextDecoration,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: // What have you done?
-                              Text("What have you done?",
-                                  style: const TextStyle(
-                                      color: grey_aaaaaa,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: helveticaNeueNeue_medium,
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 14.0),
-                                  textAlign: TextAlign.left),
+                      GestureDetector(
+                        onTap: () {
+                          showDoneDialog(context, 'q1');
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: // What have you done?
+                                Text(controller.ques1.value,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: grey_aaaaaa,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 14.0),
+                                    textAlign: TextAlign.left),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    GestureDetector(
-                      onTap: () => DialogUtilsFuture.showFutureDialog(context),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: EditTextDecoration,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: // What have you done?
-                              Text("What will you be doing in the future ?",
-                                  style: const TextStyle(
-                                      color: grey_aaaaaa,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: helveticaNeueNeue_medium,
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 14.0),
-                                  textAlign: TextAlign.left),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showDoneDialog(context, 'q2');
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: // What have you done?
+                                Text(controller.ques2.value,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        color: grey_aaaaaa,
+                                        overflow: TextOverflow.ellipsis,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 14.0),
+                                    textAlign: TextAlign.left),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    GestureDetector(
-                      onTap: () => DialogUtilsDie.showFutureDialog(context),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: EditTextDecoration,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: // What have you done?
-                              Text(
-                                  "What hill are you 1000% willing to die on ?",
-                                  style: const TextStyle(
-                                      color: grey_aaaaaa,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: helveticaNeueNeue_medium,
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 14.0),
-                                  textAlign: TextAlign.left),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      GestureDetector(
+                        onTap: () => showDoneDialog(context, 'q3'),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: // What have you done?
+                                Text(controller.ques3.value,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        color: grey_aaaaaa,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 14.0),
+                                    textAlign: TextAlign.left),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    GestureDetector(
-                      onTap: () => DialogUtilsGood.showFutureDialog(context),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: EditTextDecoration,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: // What have you done?
-                              Text("Come to me for - what are you good at ?",
-                                  style: const TextStyle(
-                                      color: grey_aaaaaa,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: helveticaNeueNeue_medium,
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 14.0),
-                                  textAlign: TextAlign.left),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      GestureDetector(
+                        onTap: () => showDoneDialog(context, 'q4'),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: // What have you done?
+                                Text(controller.ques4.value,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        color: grey_aaaaaa,
+                                        overflow: TextOverflow.ellipsis,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 14.0),
+                                    textAlign: TextAlign.left),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    GestureDetector(
-                      onTap: () => DialogUtilsNow.showFutureDialog(context),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: EditTextDecoration,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: // What have you done?
-                              Text("What are you working on right now ?",
-                                  style: const TextStyle(
-                                      color: grey_aaaaaa,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: helveticaNeueNeue_medium,
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 14.0),
-                                  textAlign: TextAlign.left),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      GestureDetector(
+                        onTap: () => showDoneDialog(context, 'q5'),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: // What have you done?
+                                Text(controller.ques5.value,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        color: grey_aaaaaa,
+                                        overflow: TextOverflow.ellipsis,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 14.0),
+                                    textAlign: TextAlign.left),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: BlackNextButton(str_continue, black_121212, () {}),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: BlackNextButton(str_continue, black_121212, () {
+                if (controller.q1Controller.value.text.isEmpty &&
+                    controller.q2Controller.value.text.isEmpty &&
+                    controller.q3Controller.value.text.isEmpty &&
+                    controller.q4Controller.value.text.isEmpty &&
+                    controller.q5Controller.value.text.isEmpty) {
+                  snackBar(context, 'Please answer the questions');
+                } else {
+                  List ques = [{}];
+                  if (ques[0].toString() == "{}") {
+                    ques.removeAt(0);
+                  }
+
+                  if (controller.q1Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues1}"',
+                      '"answer"': '"${controller.q1Controller.value.text}"',
+                    });
+                  }
+                  if (controller.q2Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues2}"',
+                      '"answer"': '"${controller.q2Controller.value.text}"',
+                    });
+                  }
+                  if (controller.q3Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues3}"',
+                      '"answer"': '"${controller.q3Controller.value.text}"',
+                    });
+                  }
+                  if (controller.q4Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues4}"',
+                      '"answer"': '"${controller.q4Controller.value.text}"',
+                    });
+                  }
+                  if (controller.q5Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues5}"',
+                      '"answer"': '"${controller.q5Controller.value.text}"',
+                    });
+                  }
+
+                  print(ques);
+
+                  List itemList = [];
+
+                  itemList.clear();
+                  for (var item in ques) {
+                    itemList.add(item);
+                  }
+                  controller.questions.clear();
+                  controller.questions.value = itemList;
+
+                  print(controller.questions.value);
+                  checkNet(context).then((value) {
+                    controller.questionsInfoAPI(context, 'normal');
+                  });
+                  print(ques);
+                }
+              }),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
-}
 
-class DialogUtils {
-  static DialogUtils _instance = new DialogUtils.internal();
-
-  DialogUtils.internal();
-
-  factory DialogUtils() => _instance;
-
-  static void showDoneDialog(
-    BuildContext context,
-  ) {
+  void showDoneDialog(BuildContext context, quesIndex) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0)), //this right here
-            child: Container(
-              height: 360,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // WHAT HAVE YOU DONE ?
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 24, bottom: 16),
-                      child: Text("WHAT HAVE YOU DONE ?",
-                          style: const TextStyle(
-                              color: black_121212,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: helvetica_neu_bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                          textAlign: TextAlign.left),
-                    ),
-                  ),
-
-                  Container(
-                    height: 0.7,
-                    color: Colors.black12,
-                  ),
-
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15, bottom: 15, right: 24, left: 24),
-                      child: TextFormField(
-                        minLines: 2,
-                        maxLines: 10,
-                        keyboardType: TextInputType.multiline,
-                        style: TextStyle(
-                            color: black_121212,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: helveticaNeueNeue_medium,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.0),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          hintText: 'Please type here...',
-                          hintStyle: TextStyle(
-                              color: grey_aaaaaa,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: helveticaNeueNeue_medium,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
-}
-
-class DialogUtilsFuture {
-  static DialogUtilsFuture _instance = new DialogUtilsFuture.internal();
-
-  DialogUtilsFuture.internal();
-
-  factory DialogUtilsFuture() => _instance;
-
-  static void showFutureDialog(
-    BuildContext context,
-  ) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0)), //this right here
-            child: Container(
-              height: 360,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // WHAT HAVE YOU DONE ?
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 24, bottom: 16),
-                      child: Text("WHAT WILL YOU BE DOING IN THE FUTURE ?",
-                          style: const TextStyle(
-                              color: black_121212,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: helvetica_neu_bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                          textAlign: TextAlign.center),
-                    ),
-                  ),
-
-                  Container(
-                    height: 0.7,
-                    color: Colors.black12,
-                  ),
-
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15, bottom: 15, right: 24, left: 24),
-                      child: TextFormField(
-                        minLines: 2,
-                        maxLines: 10,
-                        keyboardType: TextInputType.multiline,
-                        style: TextStyle(
-                            color: black_121212,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: helveticaNeueNeue_medium,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.0),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          hintText: 'Please type here...',
-                          hintStyle: TextStyle(
-                              color: grey_aaaaaa,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: helveticaNeueNeue_medium,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
-}
-
-class DialogUtilsDie {
-  static DialogUtilsDie _instance = new DialogUtilsDie.internal();
-
-  DialogUtilsDie.internal();
-
-  factory DialogUtilsDie() => _instance;
-
-  static void showFutureDialog(
-    BuildContext context,
-  ) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0)), //this right here
-            child: Container(
-              height: 360,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // WHAT HAVE YOU DONE ?
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 24, bottom: 16, left: 16, right: 16),
-                      child: Text("WHAT HILL ARE YOU 1000% WILLING TO DIE ON ?",
-                          style: const TextStyle(
-                              color: black_121212,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: helvetica_neu_bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                          textAlign: TextAlign.center),
-                    ),
-                  ),
-
-                  Container(
-                    height: 0.7,
-                    color: Colors.black12,
-                  ),
-
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15, bottom: 15, right: 24, left: 24),
-                      child: TextFormField(
-                        minLines: 2,
-                        maxLines: 10,
-                        keyboardType: TextInputType.multiline,
-                        style: TextStyle(
-                            color: black_121212,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: helveticaNeueNeue_medium,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.0),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          hintText: 'Please type here...',
-                          hintStyle: TextStyle(
-                              color: grey_aaaaaa,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: helveticaNeueNeue_medium,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
-}
-
-class DialogUtilsGood {
-  static DialogUtilsGood _instance = new DialogUtilsGood.internal();
-
-  DialogUtilsGood.internal();
-
-  factory DialogUtilsGood() => _instance;
-
-  static void showFutureDialog(
-    BuildContext context,
-  ) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0)), //this right here
-            child: Container(
-              height: 360,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // WHAT HAVE YOU DONE ?
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 24, bottom: 16, left: 16, right: 16),
-                      child: Text("COME TO ME FOR - WHAT ARE YOU GOOD AT ?",
-                          style: const TextStyle(
-                              color: black_121212,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: helvetica_neu_bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                          textAlign: TextAlign.center),
-                    ),
-                  ),
-
-                  Container(
-                    height: 0.7,
-                    color: Colors.black12,
-                  ),
-
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15, bottom: 15, right: 24, left: 24),
-                      child: TextFormField(
-                        minLines: 2,
-                        maxLines: 10,
-                        keyboardType: TextInputType.multiline,
-                        style: TextStyle(
-                            color: black_121212,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: helveticaNeueNeue_medium,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.0),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          hintText: 'Please type here...',
-                          hintStyle: TextStyle(
-                              color: grey_aaaaaa,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: helveticaNeueNeue_medium,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
-}
-
-class DialogUtilsNow {
-  static DialogUtilsNow _instance = new DialogUtilsNow.internal();
-
-  DialogUtilsNow.internal();
-
-  factory DialogUtilsNow() => _instance;
-
-  static void showFutureDialog(
-    BuildContext context,
-  ) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0)), //this right here
-            child: Container(
-              height: 360,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // WHAT HAVE YOU DONE ?
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 24, bottom: 16, left: 16, right: 16),
-                      child: Text("WHAT ARE YOU WORKING ON RIGHT NOW ?",
-                          style: const TextStyle(
-                              color: black_121212,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: helvetica_neu_bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                          textAlign: TextAlign.center),
-                    ),
-                  ),
-
-                  Container(
-                    height: 0.7,
-                    color: Colors.black12,
-                  ),
-
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15, bottom: 15, right: 24, left: 24),
-                      child: TextFormField(
-                        minLines: 2,
-                        maxLines: 10,
-                        keyboardType: TextInputType.multiline,
-                        style: TextStyle(
-                            color: black_121212,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: helveticaNeueNeue_medium,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.0),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          hintText: 'Please type here...',
-                          hintStyle: TextStyle(
-                              color: grey_aaaaaa,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: helveticaNeueNeue_medium,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: BlackButtonDialog("Done", white_ffffff, () {}),
-                  )
-                ],
-              ),
-            ),
-          );
+          return QuestionsDialog(quesIndex);
         });
   }
 }

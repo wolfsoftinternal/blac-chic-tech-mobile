@@ -1,63 +1,61 @@
-// import 'dart:convert';
+import 'dart:convert';
 
-// import 'package:groceryboouser/Screens/Authentication/SignIn/model/SigninModel.dart';
-// import 'package:groceryboouser/Screens/Networks/api_endpoint.dart';
-// import 'package:groceryboouser/Screens/Networks/model/TokenUpdateModel.dart';
-// import 'package:groceryboouser/Utils/preference_utils.dart';
-// import 'package:groceryboouser/Utils/share_predata.dart';
-// import 'package:http/http.dart' as http;
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Networks/api_endpoint.dart';
+import 'package:blackchecktech/Screens/Networks/model/TokenUpdateModel.dart';
+import 'package:blackchecktech/Utils/preference_utils.dart';
+import 'package:blackchecktech/Utils/share_predata.dart';
+import 'package:http/http.dart' as http;
 
-// class TokenUpdateRequest {
-//   SigninModel myModel;
+class TokenUpdateRequest {
+  SignupModel? myModel;
 
-//   String url = urlBase + urlAutoLogin;
-//   var preferences = MySharedPref();
+  String url = urlBase + urlAutoLogin;
+  var preferences = MySharedPref();
 
-//   Future<http.Response> post() async {
-//     myModel =
-//         await preferences.getSignInModel(SharePreData.key_SaveSignInModel);
+  Future<http.Response> post() async {
+    myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
 
-//     dynamic body = jsonEncode({
-//       'user_id': myModel.data.id,
-//     });
+    dynamic body = jsonEncode({
+      'user_id': myModel!.data!.id,
+    });
 
-//     Map<String, String> headers = {
-//       'Content-Type': 'application/json'
-//     };
+    Map<String, String> headers = {
+      'Content-Type': 'application/json'
+    };
 
-//     print(url);
-//     print(body);
-//     print(headers);
-//     return http
-//         .post(Uri.parse(url), headers: headers, body: body)
-//         .timeout(Duration(minutes: 5));
-//   }
+    print(url);
+    print(body);
+    print(headers);
+    return http
+        .post(Uri.parse(url), headers: headers, body: body)
+        .timeout(Duration(minutes: 5));
+  }
 
-//   Future<String> updateToken(){
-//     return post().then((value) async {
-//       Map data = json.decode(value.body);
-//       final datas = json.decode(value.body);
+  Future<String> updateToken(){
+    return post().then((value) async {
+      Map data = json.decode(value.body);
+      final datas = json.decode(value.body);
 
-//       if(data!=null){
-//         TokenUpdateModel model = TokenUpdateModel.fromJson(datas);
-//         if (model.data.token != null) {
-//           print("My data" + model.data.token);
+      if(data!=null){
+        TokenUpdateModel model = TokenUpdateModel.fromJson(datas);
+        if (model.data!.token != null) {
+          print("My data" + model.data!.token!);
 
-//           myModel.data.token = model.data.token;
-//           await preferences.setSignInModel(
-//               myModel, SharePreData.key_SaveSignInModel);
+          myModel!.data!.token = model.data!.token!;
+          await preferences.setSignupModel(
+              myModel!, SharePreData.keySignupModel);
 
-//           return model.data.token;
-//         }else{
-//           return null;
-//         }
-//       }
-//       else{
-//         return null;
-//       }
-//       return null;
-//     });
+          return model.data!.token!;
+        }else{
+          return "";
+        }
+      }
+      else{
+        return "";
+      }
+    });
 
-//   }
-
-// }
+  }
+}

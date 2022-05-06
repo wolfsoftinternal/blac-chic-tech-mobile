@@ -1,0 +1,131 @@
+import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utilities/TextUtilities.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:video_player/video_player.dart';
+
+class VideoTab extends StatefulWidget {
+  VideoTab({Key? key}) : super(key: key);
+
+  @override
+  State<VideoTab> createState() => _VideoTabState();
+}
+
+class _VideoTabState extends State<VideoTab> {
+  AdmireProfileController controller = Get.put(AdmireProfileController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: white_ffffff,
+      body:
+          Obx(
+            () =>
+          Padding(
+              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              child: StaggeredGridView.countBuilder(
+                crossAxisCount: 4,
+                itemCount: controller.videoList.length,
+                shrinkWrap: true,
+                primary: false,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {},
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 220,
+                          child: FutureBuilder(
+                            future: controller.initializeVideoPlayerFuture[index],
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return AspectRatio(
+                                  aspectRatio: controller.videoController[index].value.aspectRatio,
+                                  child: VideoPlayer(controller.videoController[index]),
+                                );
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              color: trans,
+                              height: 32,
+                              width: 47,
+                              child: Center(
+                                child: setHelceticaBold(
+                                   controller.videoList[index].duration!,
+                                   12.0,
+                                   white_ffffff,
+                                   FontWeight.w500,
+                                   FontStyle.normal
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Center(
+                            child: InkWell(
+                          onTap: () {
+                            if (controller.videoController[index].value.isPlaying) {
+                              setState(() {
+                                controller.videoController[index].pause();
+                              });
+                            } else {
+                              setState(() {
+                                controller.videoController[index].play();
+                              });
+                            }
+                          },
+                          child: controller.videoController[index].value.isPlaying
+                            // ? Container(
+                            //   height: 40,
+                            //   width: 40,
+                            //   decoration: BoxDecoration(
+                            //     color: trans,
+                            //     borderRadius: BorderRadius.circular(50.0),
+                            //   ),
+                            //   child: Icon(
+                            //     Icons.pause, color: white_ffffff,
+                            //     size: 20,
+                            //   )
+                            // )
+                            ? Container()
+                            : controller.videoController[index].value.position == controller.videoController[index].value.duration
+                            ? SvgPicture.asset(icon_play)
+                            : SvgPicture.asset(icon_play)
+                        )),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 15.0),
+                          child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: setHelceticaBold(
+                                  controller.postList[index].caption!,
+                                  12.0,
+                                  white_ffffff,
+                                  FontWeight.w500,
+                                  FontStyle.normal)),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                staggeredTileBuilder: (int index) =>
+                    new StaggeredTile.count(2, index.isEven ? 2.6 : 2),
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
+              )),
+          )
+    );
+  }
+}  

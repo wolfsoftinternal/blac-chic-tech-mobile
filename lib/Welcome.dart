@@ -1,5 +1,8 @@
+import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -11,6 +14,7 @@ import 'package:get/get.dart';
 import 'Layout/BlackNextButton.dart';
 import 'Screens/Authentication/login/view/LoginView.dart';
 import 'Styles/my_strings.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -50,7 +54,7 @@ class _WelcomeState extends State<Welcome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BlackNextButton(str_get_started, white_ffffff, () {
-                    Get.to(const PersonalInfoFormView());
+                      Get.to(const RegisterInfoView());
                   }),
 
                   const SizedBox(

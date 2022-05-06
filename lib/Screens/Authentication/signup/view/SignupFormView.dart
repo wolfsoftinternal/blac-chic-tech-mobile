@@ -168,12 +168,15 @@ class _SignupDetailState extends State<SignupFormView> {
                             width: 7,
                           ),
                           Expanded(
-                            child: setHelveticaMedium(
-                                str_pwd_validation_text,
-                                11,
-                                grey_aaaaaa,
-                                FontWeight.w500,
-                                FontStyle.normal),
+                            child: Container(
+                              child: setHelveticaMedium(
+                                  str_pwd_validation_text,
+                                  11,
+                                  grey_aaaaaa,
+                                  FontWeight.w500,
+                                  FontStyle.normal,
+                                  null, 3),
+                            ),
                           )
                         ],
                       ),

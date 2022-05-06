@@ -31,7 +31,7 @@ class _TextInputState extends State<InputTextLayout> {
         border: Border.all(
           color: checkColor == true ? orange_ff881a : light_grey_f2f2f2,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderRadius: const BorderRadius.all(const Radius.circular(4)),
         color: checkFillColor == false
             ? checkColor == true
                 ? Colors.white
@@ -42,7 +42,7 @@ class _TextInputState extends State<InputTextLayout> {
         padding:
             const EdgeInsets.only(left: 16, right: 16, top: 13, bottom: 12),
         child: TextFormField(
-          style: TextStyle(
+          style: const TextStyle(
               color: black_121212,
               fontFamily: helveticaNeueNeue_medium,
               fontSize: 14.0),
@@ -56,15 +56,15 @@ class _TextInputState extends State<InputTextLayout> {
                 : LengthLimitingTextInputFormatter(200),
           ],
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             isDense: true,
             // you can change this with the top text like you want
             labelText: widget.hintData,
-            labelStyle: TextStyle(
+            labelStyle: const TextStyle(
                 color: grey_aaaaaa,
                 fontFamily: helveticaNeueNeue_medium,
                 fontSize: 14),
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
                 color: black_121212,
                 fontFamily: helveticaNeueNeue_medium,
                 fontSize: 14),
@@ -89,6 +89,7 @@ class _TextInputState extends State<InputTextLayout> {
             } else {
               setState(() {
                 checkFillColor = true;
+                checkColor = false;
               });
             }
           },

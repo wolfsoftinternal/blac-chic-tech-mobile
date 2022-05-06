@@ -1,3 +1,4 @@
+import 'package:blackchecktech/SplashScreen.dart';
 import 'package:blackchecktech/UIScreen/ListScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Welcome(),
+      home: SplashScreen(),
       // home: ListScreen(),
     );
   }
