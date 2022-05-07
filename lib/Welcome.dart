@@ -9,6 +9,7 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:get/get.dart';
 
 import 'Layout/BlackNextButton.dart';
@@ -37,17 +38,17 @@ class _WelcomeState extends State<Welcome> {
                 child:
                     FittedBox(child: Image.asset(img_girl), fit: BoxFit.cover)),
             Padding(
-              padding: const EdgeInsets.only(top: 50),
+              padding:  EdgeInsets.only(top: 50.h),
               child: Align(
                   alignment: Alignment.topCenter,
                   child: Image.asset(
                     img_logo,
-                    width: 72,
-                    height: 72,
+                    width: 72.r,
+                    height: 72.r,
                   )),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 33),
+              padding:  EdgeInsets.only(left: 24.w, right: 24.w, bottom: 33.h),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -57,8 +58,8 @@ class _WelcomeState extends State<Welcome> {
                       Get.to(const RegisterInfoView());
                   }),
 
-                  const SizedBox(
-                    height: 16,
+                   SizedBox(
+                    height: 16.h,
                   ),
 
                   // footer text
@@ -71,11 +72,11 @@ class _WelcomeState extends State<Welcome> {
                       child: RichText(
                           text: TextSpan(children: [
                         TextSpan(
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: white_ffffff,
                                 fontFamily: helveticaNeueNeue_medium,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 12.0),
+                                fontSize: 12.0.sp),
                             text: str_already_have),
                         TextSpan(
                             // recognizer: TapGestureRecognizer()
@@ -83,11 +84,11 @@ class _WelcomeState extends State<Welcome> {
                             //     print("Clicked");
                             //     Get.to(const LoginView());
                             //   },
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: orange_ff881a,
                                 fontFamily: helvetica_neu_bold,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 12.0),
+                                fontSize: 12.0.sp),
                             text: str_signin)
                       ])),
                     ),
