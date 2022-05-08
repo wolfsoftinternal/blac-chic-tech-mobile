@@ -2,6 +2,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:get/get.dart';
 
 class InputTextLayout extends StatefulWidget {
@@ -31,7 +32,7 @@ class _TextInputState extends State<InputTextLayout> {
         border: Border.all(
           color: checkColor == true ? orange_ff881a : light_grey_f2f2f2,
         ),
-        borderRadius: const BorderRadius.all(const Radius.circular(4)),
+        borderRadius:  BorderRadius.all( Radius.circular(4.r)),
         color: checkFillColor == false
             ? checkColor == true
                 ? Colors.white
@@ -40,12 +41,12 @@ class _TextInputState extends State<InputTextLayout> {
       ),
       child: Padding(
         padding:
-            const EdgeInsets.only(left: 16, right: 16, top: 13, bottom: 12),
+             EdgeInsets.only(left: 16.w, right: 16.w, top: 13.h, bottom: 12.h),
         child: TextFormField(
-          style: const TextStyle(
+          style:  TextStyle(
               color: black_121212,
               fontFamily: helveticaNeueNeue_medium,
-              fontSize: 14.0),
+              fontSize: 14.0.sp),
           keyboardType: widget.inputType,
           inputFormatters: [
             widget.numKeypad == true
@@ -60,14 +61,14 @@ class _TextInputState extends State<InputTextLayout> {
             isDense: true,
             // you can change this with the top text like you want
             labelText: widget.hintData,
-            labelStyle: const TextStyle(
+            labelStyle:  TextStyle(
                 color: grey_aaaaaa,
                 fontFamily: helveticaNeueNeue_medium,
-                fontSize: 14),
-            hintStyle: const TextStyle(
+                fontSize: 14.sp),
+            hintStyle:  TextStyle(
                 color: black_121212,
                 fontFamily: helveticaNeueNeue_medium,
-                fontSize: 14),
+                fontSize: 14.sp),
             border: InputBorder.none,
             filled: false,
           ),

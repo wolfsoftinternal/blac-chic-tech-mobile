@@ -12,6 +12,7 @@ import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:get/get.dart';
 
 import '../../../../Styles/my_height.dart';
@@ -60,8 +61,8 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
       body: Obx(
         () => Column(
           children: [
-            const SizedBox(
-              height: 60,
+             SizedBox(
+              height: 60.h,
             ),
             ToolbarWithHeader(
                 step: 1,
@@ -94,7 +95,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
               flex: 1,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
+                  padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,31 +103,31 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                       // Personal Information
                       Center(
                         child: Text(str_Experience,
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: black_121212,
                                 fontWeight: FontWeight.w900,
                                 fontFamily: helvetica_neu_bold,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 24.0),
+                                fontSize: 24.sp),
                             textAlign: TextAlign.center),
                       ),
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
                       // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
                       Center(
                         child: Text(str_personal_info_lorem,
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: grey_aaaaaa,
                                 fontWeight: FontWeight.w500,
                                 fontFamily: helveticaNeueNeue_medium,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 14.0,
-                                height: 1.5),
+                                fontSize: 14.sp,
+                                height: 1.5.h),
                             textAlign: TextAlign.center),
                       ),
-                      const SizedBox(
-                        height: 32,
+                       SizedBox(
+                        height: 32.h,
                       ),
 
                       // InputTextLayout(
@@ -137,16 +138,16 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                       //     TextInputType.emailAddress),
 
                       // YOUR CURRENT JOB
-                      const Text("YOUR CURRENT JOB",
+                       Text("YOUR CURRENT JOB",
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w900,
                               fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
+                              fontSize: 12.sp),
                           textAlign: TextAlign.left),
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
                       Row(
                         children: [
@@ -156,13 +157,13 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                               height: HeightData.fifty_seven,
                               decoration: EditTextDecoration,
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 12,
-                                  right: 12,
+                                padding:  EdgeInsets.only(
+                                  left: 12.w,
+                                  right: 12.w,
                                 ),
                                 child: Center(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(5),
+                                    padding:  EdgeInsets.all(5.r),
                                     child: setTextFieldNext(
                                         controller.currentTitleController.value,
                                         "Title",
@@ -180,8 +181,8 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 15,
+                           SizedBox(
+                            width: 15.w,
                           ),
                           Expanded(
                             flex: 1,
@@ -190,10 +191,10 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                 height: HeightData.fifty_seven,
                                 decoration: EditTextDecoration,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 12, right: 12, top: 14),
+                                  padding:  EdgeInsets.only(
+                                      left: 12.w, right: 12.w, top: 14.h),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(5),
+                                    padding:  EdgeInsets.all(5.r),
                                     child: GestureDetector(
                                         onTap: () {
                                           Get.to(CompanyList());
@@ -210,7 +211,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                               fontFamily:
                                                   helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 14.0),
+                                              fontSize: 14.sp),
                                         )),
                                     // child: setTextFieldNext(
                                     //   controller.currentCompanyNameController.value,
@@ -236,8 +237,8 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         ],
                       ),
 
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
 
                       Container(
@@ -259,29 +260,29 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         ),
                       ),
 
-                      const SizedBox(
-                        height: 32,
+                       SizedBox(
+                        height: 32.h,
                       ),
 
-                      const Text("YOUR PAST JOB",
+                       Text("YOUR PAST JOB",
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w900,
                               fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
+                              fontSize: 12.sp),
                           textAlign: TextAlign.left),
-                      const SizedBox(
-                        height: 4,
+                       SizedBox(
+                        height: 4.h,
                       ),
                       // you can add more then one.
-                      const Text("you can add more then one.",
+                       Text("you can add more then one.",
                           style: TextStyle(
                               color: Color(0xffaaaaaa),
                               fontWeight: FontWeight.w500,
                               fontFamily: "NeueHelvetica",
                               fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
+                              fontSize: 12.sp),
                           textAlign: TextAlign.left),
                       Column(
                         children: [
@@ -313,8 +314,8 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(
-                                          width: 15,
+                                         SizedBox(
+                                          width: 15.w,
                                         ),
                                         Expanded(
                                           flex: 1,
@@ -336,8 +337,8 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(
-                                      height: 16,
+                                     SizedBox(
+                                      height: 16.h,
                                     ),
                                     Center(
                                       child: setTextField(
@@ -352,15 +353,15 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 16,
+                                      height: 16.h,
                                     ),
                                   ],
                                 ),
                               );
                             },
                           ),
-                          const SizedBox(
-                            height: 16,
+                           SizedBox(
+                            height: 16.h,
                           ),
                           isDeleteLast == true
                               ? GestureDetector(
@@ -375,12 +376,12 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
+                                        borderRadius: BorderRadius.circular(4.r),
                                         border: Border.all(
-                                            width: 1, color: black_121212)),
+                                            width: 1.w, color: black_121212)),
                                     child: // Add More
-                                        const Padding(
-                                      padding: EdgeInsets.all(16.0),
+                                         Padding(
+                                      padding: EdgeInsets.all(16.r),
                                       child: Center(
                                         child: Text("Delete Last",
                                             style: TextStyle(
@@ -388,7 +389,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                                 fontWeight: FontWeight.w500,
                                                 fontFamily: "NeueHelvetica",
                                                 fontStyle: FontStyle.normal,
-                                                fontSize: 12.0),
+                                                fontSize: 12.sp),
                                             textAlign: TextAlign.left),
                                       ),
                                     ),
@@ -397,7 +398,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                               : Container(),
                           isDeleteLast == true
                               ? SizedBox(
-                                  height: 16,
+                                  height: 16.h,
                                 )
                               : Container(),
                           GestureDetector(
@@ -428,12 +429,12 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
+                                  borderRadius: BorderRadius.circular(4.r),
                                   border: Border.all(
-                                      width: 1, color: black_121212)),
+                                      width: 1.w, color: black_121212)),
                               child: // Add More
-                                  const Padding(
-                                padding: EdgeInsets.all(16.0),
+                                   Padding(
+                                padding: EdgeInsets.all(16.r),
                                 child: Center(
                                   child: Text("+ Add More",
                                       style: TextStyle(
@@ -441,7 +442,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                           fontWeight: FontWeight.w500,
                                           fontFamily: "NeueHelvetica",
                                           fontStyle: FontStyle.normal,
-                                          fontSize: 12.0),
+                                          fontSize: 12.sp),
                                       textAlign: TextAlign.left),
                                 ),
                               ),
@@ -455,7 +456,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding:  EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
                 if (controller.checkExperienceValidation(context)) {
                   companyDetails.clear();

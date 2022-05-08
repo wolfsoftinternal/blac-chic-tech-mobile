@@ -17,6 +17,7 @@ import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -59,8 +60,8 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
       body: Obx(
         () => Column(
           children: [
-            const SizedBox(
-              height: 60,
+             SizedBox(
+              height: 60.h,
             ),
             ToolbarWithHeader(
               step: 0,
@@ -68,7 +69,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
+                  padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 24.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,41 +77,41 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                       // Personal Information
                       Center(
                         child: Text(str_personal_info,
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: black_121212,
                                 fontWeight: FontWeight.w900,
                                 fontFamily: helvetica_neu_bold,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 24.0),
+                                fontSize: 24.0.sp),
                             textAlign: TextAlign.center),
                       ),
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
                       // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
                       Center(
                         child: Text(str_personal_info_lorem,
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: grey_aaaaaa,
                                 fontWeight: FontWeight.w500,
                                 fontFamily: helveticaNeueNeue_medium,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 14.0,
-                                height: 1.5),
+                                fontSize: 14.sp,
+                                height: 1.5.h),
                             textAlign: TextAlign.center),
                       ),
-                      const SizedBox(
-                        height: 32,
+                       SizedBox(
+                        height: 32.h,
                       ),
                       // Rectangle 1407
                       Row(
                         children: [
                           Container(
-                            width: 72,
-                            height: 72,
-                            decoration: const BoxDecoration(
+                            width: 72.w,
+                            height: 72.h,
+                            decoration:  BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
+                                    BorderRadius.all(Radius.circular(4.r)),
                                 color: light_grey_f2f2f2),
                             child: profileImage.toString() != "File: ''"
                                 ? InkWell(
@@ -119,11 +120,15 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                         selectPhoto();
                                       });
                                     },
-                                    child: Image.file(
-                                      profileImage,
-                                      fit: BoxFit.fill,
-                                      height: 72,
-                                      width: 72,
+                                    child: ClipRRect(
+                                      borderRadius:
+                                      BorderRadius.circular(4.r),
+                                      child: Image.file(
+                                        profileImage,
+                                        fit: BoxFit.fill,
+                                        height: 72.r,
+                                        width: 72.r,
+                                      ),
                                     ),
                                   )
                                 : InkWell(
@@ -133,32 +138,32 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                       });
                                     },
                                     child: Padding(
-                                      padding: const EdgeInsets.all(18.0),
+                                      padding:  EdgeInsets.all(18.0.r),
                                       child: SvgPicture.asset(
                                         icon_upload_img,
-                                        width: 72,
-                                        height: 72,
+                                        width: 72.r,
+                                        height: 72.r,
                                         color: grey_aaaaaa,
                                       ),
                                     )),
                           ),
-                          const SizedBox(
-                            width: 16,
+                           SizedBox(
+                            width: 16.w,
                           ),
                           // UPLOAD PHOTO
-                          const Text("UPLOAD PHOTO",
+                           Text("UPLOAD PHOTO",
                               style: TextStyle(
                                   color: black_121212,
                                   fontWeight: FontWeight.w900,
                                   fontFamily: helvetica_neu_bold,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 12.0),
+                                  fontSize: 12.sp),
                               textAlign: TextAlign.left)
                         ],
                       ),
 
-                      const SizedBox(
-                        height: 23.3,
+                       SizedBox(
+                        height: 23.3.h,
                       ),
 
                       Row(
@@ -170,25 +175,25 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               decoration: EditTextDecoration,
                               child: DropdownButtonHideUnderline(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10),
+                                  padding:  EdgeInsets.only(
+                                      left: 10.w, right: 10.w),
                                   child: DropdownButton(
                                       //  validator: (value) => value == null ? "Select a country" : null,
                                       dropdownColor: Colors.white,
                                       value: strCountryName,
-                                      hint: const Text("Country",
+                                      hint:  Text("Country",
                                           style: TextStyle(
                                               color: grey_aaaaaa,
                                               fontWeight: FontWeight.w500,
                                               fontFamily:
                                                   helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 14.0),
+                                              fontSize: 14.sp),
                                           textAlign: TextAlign.left),
                                       icon: SvgPicture.asset(
                                         icon_down_arrow_spinner,
-                                        width: 12,
-                                        height: 12,
+                                        width: 12.r,
+                                        height: 12.r,
                                       ),
                                       onChanged: (String? value) {
                                         setState(() {
@@ -211,8 +216,8 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 16,
+                           SizedBox(
+                            width: 16.w,
                           ),
                           Expanded(
                             flex: 1,
@@ -221,24 +226,24 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               decoration: EditTextDecoration,
                               child: DropdownButtonHideUnderline(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10),
+                                  padding:  EdgeInsets.only(
+                                      left: 10.w, right: 10.w),
                                   child: DropdownButton(
                                     dropdownColor: Colors.white,
                                     value: strStateName,
-                                    hint: const Text("State",
+                                    hint:  Text("State",
                                         style: TextStyle(
                                             color: grey_aaaaaa,
                                             fontWeight: FontWeight.w500,
                                             fontFamily:
                                                 helveticaNeueNeue_medium,
                                             fontStyle: FontStyle.normal,
-                                            fontSize: 14.0),
+                                            fontSize: 14.sp),
                                         textAlign: TextAlign.left),
                                     icon: SvgPicture.asset(
                                       icon_down_arrow_spinner,
-                                      width: 12,
-                                      height: 12,
+                                      width: 12.r,
+                                      height: 12.r,
                                     ),
                                     onChanged: (String? value) {
                                       setState(() {
@@ -265,8 +270,8 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                         ],
                       ),
 
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
 
                       Container(
@@ -275,22 +280,22 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                         decoration: EditTextDecoration,
                         child: DropdownButtonHideUnderline(
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            padding:  EdgeInsets.only(left: 10.w, right: 10.w),
                             child: DropdownButton(
                               dropdownColor: Colors.white,
                               value: strCityName,
-                              hint: const Text("City",
+                              hint:  Text("City",
                                   style: TextStyle(
                                       color: grey_aaaaaa,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: helveticaNeueNeue_medium,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 14.0),
+                                      fontSize: 14.sp),
                                   textAlign: TextAlign.left),
                               icon: SvgPicture.asset(
                                 icon_down_arrow_spinner,
-                                width: 12,
-                                height: 12,
+                                width: 12.r,
+                                height: 12.r,
                               ),
                               onChanged: (String? value) {
                                 setState(() {
@@ -309,17 +314,17 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                         ),
                       ),
 
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
 
                       Container(
                         height: HeightData.fifty_seven,
                         decoration: EditTextDecoration,
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 12,
-                            right: 12,
+                          padding:  EdgeInsets.only(
+                            left: 12.w,
+                            right: 12.w,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -327,7 +332,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               Expanded(
                                 flex: 1,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(5),
+                                  padding:  EdgeInsets.all(5.r),
                                   child: setDobTextFieldNext(
                                       controller.dobController.value,
                                       "Date of Birth",
@@ -347,8 +352,8 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                         ),
                       ),
 
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
 
                       Container(
@@ -357,23 +362,23 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                             color: grey_aaaaaa
                           ),
                           borderRadius:
-                              const BorderRadius.all(const Radius.circular(4)),
+                               BorderRadius.all( Radius.circular(4.r)),
                           color: Colors.white,
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 16, top: 13, bottom: 12),
+                          padding:  EdgeInsets.only(
+                              left: 16.w, right: 16.w, top: 13.h, bottom: 12.h),
                           child: TextField(
                             controller: controller.aboutController.value,
                             maxLines: 5,
                             minLines: 1,
                             textInputAction: TextInputAction.newline,
                             keyboardType: TextInputType.multiline,
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: black_121212,
                                 fontFamily: helveticaNeueNeue_medium,
-                                fontSize: 14.0),
-                            decoration: const InputDecoration(
+                                fontSize: 14.sp),
+                            decoration:  InputDecoration(
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 0, vertical: 0),
                               isDense: true,
@@ -382,11 +387,11 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               labelStyle: TextStyle(
                                   color: grey_aaaaaa,
                                   fontFamily: helveticaNeueNeue_medium,
-                                  fontSize: 14),
+                                  fontSize: 14.sp),
                               hintStyle: TextStyle(
                                   color: black_121212,
                                   fontFamily: helveticaNeueNeue_medium,
-                                  fontSize: 14),
+                                  fontSize: 14.sp),
                               border: InputBorder.none,
                               filled: false,
                             ),
@@ -400,52 +405,52 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                         ),
                       ),
 
-                      const SizedBox(
-                        height: 24,
+                       SizedBox(
+                        height: 24.h,
                       ),
                       Row(
                         children: [
                           Expanded(
                             flex: 1,
                             child: Container(
-                              height: 0.7,
+                              height: 0.7.h,
                               color: Colors.black12,
                             ),
                           ),
 
-                          SizedBox(width: 5,),
+                          SizedBox(width: 5.w,),
                           // Social Media Account
-                          const Text("Social Media Account",
+                           Text("Social Media Account",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                   fontFamily: "NeueHelvetica",
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14.0),
+                                  fontSize: 14.sp),
                               textAlign: TextAlign.left),
 
-                          SizedBox(width: 5,),
+                          SizedBox(width: 5.w,),
 
                           Expanded(
                             flex: 1,
                             child: Container(
-                              height: 0.7,
+                              height: 0.7.h,
                               color: Colors.black12,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 24,
+                       SizedBox(
+                        height: 24.h,
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(4.r),
                             border:
-                                Border.all(width: 1, color: light_grey_f2f2f2)),
+                                Border.all(width: 1.w, color: light_grey_f2f2f2)),
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 17.5, right: 17.5, top: 13.5, bottom: 13.5),
+                          padding:  EdgeInsets.only(
+                              left: 17.5.w, right: 17.5.w, top: 13.5.h, bottom: 13.5.h),
                           child: setSocialTextFieldNext(
                               controller.linkedinController.value,
                               "Linkedin Account",
@@ -479,17 +484,17 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                           // ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(4.r),
                             border:
-                                Border.all(width: 1, color: light_grey_f2f2f2)),
+                                Border.all(width: 1.w, color: light_grey_f2f2f2)),
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 17.5, right: 17.5, top: 13.5, bottom: 13.5),
+                          padding:  EdgeInsets.only(
+                              left: 17.5.w, right: 17.5.w, top: 13.5.h, bottom: 13.5.h),
                           child: setSocialTextFieldNext(
                               controller.twitterController.value,
                               "Twitter Account",
@@ -502,17 +507,17 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               icon_twitter),
                         ),
                       ),
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(4.r),
                             border:
-                                Border.all(width: 1, color: light_grey_f2f2f2)),
+                                Border.all(width: 1.w, color: light_grey_f2f2f2)),
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 17.5, right: 17.5, top: 13.5, bottom: 13.5),
+                          padding:  EdgeInsets.only(
+                              left: 17.5.w, right: 17.5.w, top: 13.5.h, bottom: 13.5.h),
                           child: setSocialTextFieldNext(
                               controller.instagramController.value,
                               "Instagram Account",
@@ -531,7 +536,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding:  EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
                 FocusScope.of(context).unfocus();
                 if (controller.checkPersonalValidation(context)) {
@@ -553,7 +558,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
       builder: (context) {
         DateTime? tempPickedDate = DateTime.now();
         return Container(
-          height: 250,
+          height: 250.h,
           child: Column(
             children: <Widget>[
               Container(
@@ -561,7 +566,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
+                      padding:  EdgeInsets.only(left: 5.w),
                       child: CupertinoButton(
                         child: const Text(
                           'Cancel',
@@ -573,7 +578,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 5.0),
+                      padding:  EdgeInsets.only(right: 5.w),
                       child: CupertinoButton(
                         child: const Text('Done',
                             style: TextStyle(color: orange_ff881a)),

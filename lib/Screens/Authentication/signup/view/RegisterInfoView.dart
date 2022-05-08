@@ -14,6 +14,7 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:get/get.dart';
 
 import '../../../../Styles/my_icons.dart';
@@ -43,8 +44,8 @@ class RegisterInfoView extends StatelessWidget {
                         child: Image.asset(img_girl), fit: BoxFit.cover)),
                 Image.asset(
                   img_logo,
-                  width: 72,
-                  height: 72,
+                  width: 72.r,
+                  height: 72.r,
                 )
               ],
             ),
@@ -56,7 +57,7 @@ class RegisterInfoView extends StatelessWidget {
                 height: double.infinity,
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding:  EdgeInsets.all(24.0.r),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,8 +118,8 @@ class RegisterInfoView extends StatelessWidget {
                           Get.offAll(BottomNavigation());
                         }
                       }),
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -128,18 +129,18 @@ class RegisterInfoView extends StatelessWidget {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: const Color(0xfff2f2f2),
-                            borderRadius: BorderRadius.circular(4.0),
+                            borderRadius: BorderRadius.circular(4.0.r),
                           ),
                           child: // Already have an account
                               Padding(
                             padding: const EdgeInsets.all(17.0),
                             child: Center(
                               child: Text(str_already_have_second,
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                       color: black_121212,
                                       fontFamily: helvetica_neu_bold,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 16.0),
+                                      fontSize: 16.0.sp),
                                   textAlign: TextAlign.left),
                             ),
                           ),
@@ -151,15 +152,15 @@ class RegisterInfoView extends StatelessWidget {
                       // By continuing and signing up for an account, you confirm that you agree to Black Chic Tech User Agre
                       RichText(
                           textAlign: TextAlign.center,
-                          text: const TextSpan(children: [
+                          text:  TextSpan(children: [
                             TextSpan(
                                 style: TextStyle(
                                     color: Color(0xff121212),
                                     fontWeight: FontWeight.w400,
                                     fontFamily: "Helvetica",
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 10.0,
-                                    height: 1.5),
+                                    fontSize: 10.0.sp,
+                                    height: 1.5.h),
                                 text:
                                     "By continuing and signing up for an account, you confirm that you agree to Black Chic Tech "),
                             TextSpan(
@@ -168,8 +169,8 @@ class RegisterInfoView extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     fontFamily: "Helvetica",
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 10.0,
-                                    height: 1.5),
+                                    fontSize: 10.0.sp,
+                                    height: 1.5.h),
                                 text: "User Agreement,"),
                             TextSpan(
                                 style: TextStyle(
@@ -177,8 +178,8 @@ class RegisterInfoView extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     fontFamily: "Helvetica",
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 10.0,
-                                    height: 1.5),
+                                    fontSize: 10.0.sp,
+                                    height: 1.5.h),
                                 text:
                                     " and acknowledge that you have read Black Chic Tech "),
                             TextSpan(

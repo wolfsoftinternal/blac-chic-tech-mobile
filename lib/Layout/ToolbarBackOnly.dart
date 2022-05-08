@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -11,17 +12,17 @@ class BackLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 24),
+      margin: EdgeInsets.only(left: 24.w),
       child:  GestureDetector(
         onTap: (){
           Navigator.pop(context);
         },
         child: Container(
-          width: 48,
-          height: 48,
+          width: 48.r,
+          height: 48.r,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.1),
@@ -32,8 +33,8 @@ class BackLayout extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: SvgPicture.asset(icon_back_black_arrow,width: 24,height: 24,),
+            padding:  EdgeInsets.all(12.0.r),
+            child: SvgPicture.asset(icon_back_black_arrow,width: 24.w,height: 24.w,),
           ),
         ),
       ),

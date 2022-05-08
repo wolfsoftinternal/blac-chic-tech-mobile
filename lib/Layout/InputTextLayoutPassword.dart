@@ -2,6 +2,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 
 class InputTextLayoutPassword extends StatefulWidget {
   final String hintData;
@@ -35,12 +36,12 @@ class _TextInputState extends State<InputTextLayoutPassword> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 60.h,
       decoration: BoxDecoration(
         border: Border.all(
           color: checkColor == true ? orange_ff881a : light_grey_f2f2f2,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderRadius: BorderRadius.all(Radius.circular(4.r)),
         color: checkFillColor == false
             ? checkColor == true
                 ? Colors.white
@@ -48,12 +49,12 @@ class _TextInputState extends State<InputTextLayoutPassword> {
             : light_grey_f2f2f2,
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 5, top: 12, bottom: 12),
+        padding:  EdgeInsets.only(left: 16.w, right: 5.w, top: 12.h, bottom: 12.h),
         child: TextFormField(
-          style: const TextStyle(
+          style:  TextStyle(
               color: black_121212,
               fontFamily: helveticaNeueNeue_medium,
-              fontSize: 14.0),
+              fontSize: 14.0.sp),
           keyboardType: widget.inputType,
           inputFormatters: [
             widget.numKeypad == true
@@ -80,14 +81,14 @@ class _TextInputState extends State<InputTextLayoutPassword> {
                     _isObscure = !_isObscure;
                   });
                 }),
-            labelStyle: const TextStyle(
+            labelStyle:  TextStyle(
                 color: grey_aaaaaa,
                 fontFamily: helveticaNeueNeue_medium,
-                fontSize: 14),
-            hintStyle: const TextStyle(
+                fontSize: 14.sp),
+            hintStyle:  TextStyle(
                 color: black_121212,
                 fontFamily: helveticaNeueNeue_medium,
-                fontSize: 14),
+                fontSize: 14.sp),
             border: InputBorder.none,
             filled: false,
           ),
