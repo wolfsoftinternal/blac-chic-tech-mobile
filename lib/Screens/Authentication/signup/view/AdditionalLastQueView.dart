@@ -10,6 +10,7 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -36,8 +37,8 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
       body: Obx(
         () => Column(
     children: [
-        const SizedBox(
-          height: 60,
+         SizedBox(
+          height: 60.h,
         ),
         ToolbarWithHeader(
           step: 4,
@@ -49,7 +50,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
           flex: 1,
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
+              padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,11 +63,11 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                             fontWeight: FontWeight.w900,
                             fontFamily: helvetica_neu_bold,
                             fontStyle: FontStyle.normal,
-                            fontSize: 24.0),
+                            fontSize: 24.sp),
                         textAlign: TextAlign.center),
                   ),
                   SizedBox(
-                    height: 16,
+                    height: 16.h,
                   ),
                   // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
                   Center(
@@ -76,17 +77,17 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                             fontWeight: FontWeight.w500,
                             fontFamily: helveticaNeueNeue_medium,
                             fontStyle: FontStyle.normal,
-                            fontSize: 14.0,
-                            height: 1.5),
+                            fontSize: 14.sp,
+                            height: 1.5.h),
                         textAlign: TextAlign.center),
                   ),
                   SizedBox(
-                    height: 32,
+                    height: 32.h,
                   ),
 
                   Container(
                     decoration: EditTextDecoration,
-                    height: 250,
+                    height: 250.h,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,8 +95,8 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                         Expanded(
                           flex: 1,
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15, bottom: 2, right: 24, left: 24),
+                            padding:  EdgeInsets.only(
+                                top: 15.h, bottom: 2.h, right: 24.w, left: 24.w),
                             child: TextFormField(
                               controller: controller.addtionalController.value,
                               minLines: 2,
@@ -106,7 +107,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                                   fontWeight: FontWeight.w500,
                                   fontFamily: helveticaNeueNeue_medium,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14.0),
+                                  fontSize: 14.sp),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
@@ -119,7 +120,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                                     fontWeight: FontWeight.w500,
                                     fontFamily: helveticaNeueNeue_medium,
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 14.0),
+                                    fontSize: 14.sp),
                               ),
                             ),
                           ),
@@ -127,30 +128,30 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(4.r),
                           ),
-                          margin: EdgeInsets.all(16),
+                          margin: EdgeInsets.all(16.r),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 10),
+                            padding:  EdgeInsets.symmetric(
+                                horizontal: 12.w, vertical: 10.h),
                             child: Row(
                               mainAxisAlignment:
                                   MainAxisAlignment.spaceBetween,
                               children: [
                                 // Minimal in 10 word
                                 Text("Minimal in 10 word",
-                                    style: const TextStyle(
-                                        color: const Color(0xff121212),
+                                    style:  TextStyle(
+                                        color:  Color(0xff121212),
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "NeueHelvetica",
                                         fontStyle: FontStyle.normal,
-                                        fontSize: 12.0),
+                                        fontSize: 12.sp),
                                     textAlign: TextAlign.left),
 
                                 SvgPicture.asset(
                                   icon_info,
-                                  width: 20,
-                                  height: 20,
+                                  width: 20.r,
+                                  height: 20.r,
                                 )
                               ],
                             ),
@@ -165,7 +166,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding:  EdgeInsets.all(24.r),
           child: BlackNextButton(str_done, black_121212, () {
             if(controller.addtionalController.value.text.isEmpty){
               snackBar(context, 'Please answer the question');

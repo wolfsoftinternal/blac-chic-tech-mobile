@@ -164,7 +164,7 @@ setDobTextFieldNext(
             fontWeight: FontWeight.w500,
             fontFamily: helveticaNeueNeue_medium,
             fontStyle: FontStyle.normal,
-            fontSize: 14.0),
+            fontSize: 14.sp),
         decoration: new InputDecoration(
           isDense: true,
           // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
@@ -174,7 +174,7 @@ setDobTextFieldNext(
               fontWeight: FontWeight.w500,
               fontFamily: helveticaNeueNeue_medium,
               fontStyle: FontStyle.normal,
-              fontSize: 14.0),
+              fontSize: 14.sp),
           border: InputBorder.none,
         ),
 
