@@ -2,6 +2,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:get/get.dart';
 
 import '../../../../Layout/BlackNextButton.dart';
@@ -47,34 +48,34 @@ class _LoginState extends State<LoginView> {
                       BackLayout(),
 
                       // LOGIN
-                      const Padding(
-                        padding: EdgeInsets.only(top: 10),
+                       Padding(
+                        padding: EdgeInsets.only(top: 15.h),
                         child: Center(
                           child: Text("LOGIN",
                               style: TextStyle(
                                   fontFamily: helvetica_neu_bold,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 16.0),
+                                  fontSize: 16.0.sp),
                               textAlign: TextAlign.center),
                         ),
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 51,
+                   SizedBox(
+                    height: 51.h,
                   ),
                   Image.asset(
                     img_logo,
-                    width: 94,
-                    height: 94,
+                    width: 94.r,
+                    height: 94.r,
                   ),
-                  const SizedBox(
-                    height: 57,
+                   SizedBox(
+                    height: 57.h,
                   ),
                   Form(
                     key: formKey,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      padding:  EdgeInsets.symmetric(horizontal: 24.w),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,8 +86,8 @@ class _LoginState extends State<LoginView> {
                               false,
                               TextInputAction.next,
                               TextInputType.text, (v) {}),
-                          const SizedBox(
-                            height: 16,
+                           SizedBox(
+                            height: 16.h,
                           ),
                           InputTextLayoutPassword(
                               str_pwd,
@@ -94,8 +95,8 @@ class _LoginState extends State<LoginView> {
                               false,
                               TextInputAction.next,
                               TextInputType.text, (v) {}),
-                          const SizedBox(
-                            height: 20,
+                           SizedBox(
+                            height: 20.h,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,12 +114,12 @@ class _LoginState extends State<LoginView> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
-                                        height: 20,
-                                        width: 20,
+                                        height: 20.h,
+                                        width: 20.w,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(3)),
+                                                 BorderRadius.all(
+                                                    Radius.circular(3.r)),
                                             border: Border.all(
                                                 color: selectedsecond
                                                     ? orange_ff881a
@@ -128,44 +129,44 @@ class _LoginState extends State<LoginView> {
                                                 ? orange_ff881a
                                                 : const Color(0xffffffff)),
                                         child: selectedsecond
-                                            ? const Icon(
+                                            ?  Icon(
                                                 Icons.check,
-                                                size: 18.0,
+                                                size: 18.0.r,
                                                 color: Colors.white,
                                               )
-                                            : const Icon(
+                                            :  Icon(
                                                 Icons.check,
-                                                size: 18.0,
+                                                size: 18.0.r,
                                                 color: Colors.white,
                                               )),
-                                    const SizedBox(
-                                      width: 11.7,
+                                     SizedBox(
+                                      width: 11.7.w,
                                     ),
                                     // Save password
-                                    const Text("Remember me",
+                                     Text("Remember me",
                                         style: TextStyle(
                                             color: grey_aaaaaa,
                                             fontFamily:
                                                 helveticaNeueNeue_medium,
                                             fontStyle: FontStyle.normal,
-                                            fontSize: 12.0),
+                                            fontSize: 12.0.sp),
                                         textAlign: TextAlign.left)
                                   ],
                                 ),
                               ),
                               // Forgot password
-                              const Text("Forgot password?",
+                               Text("Forgot password?",
                                   style: TextStyle(
                                       color: grey_aaaaaa,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: helveticaNeueNeue_medium,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 12.0),
+                                      fontSize: 12.0.sp),
                                   textAlign: TextAlign.right)
                             ],
                           ),
-                          const SizedBox(
-                            height: 40,
+                           SizedBox(
+                            height: 40.h,
                           ),
                           BlackNextButton(str_login, white_ffffff, () {
                             // if (formKey.currentState!.validate()) {}
@@ -188,20 +189,20 @@ class _LoginState extends State<LoginView> {
 
           // Text
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding:  EdgeInsets.all(12.0.r),
             child: GestureDetector(
               onTap: () {
                 Get.to(const SignupFormView());
               },
               child: RichText(
-                  text: const TextSpan(children: [
+                  text:  TextSpan(children: [
                 TextSpan(
                     style: TextStyle(
                         color: Color(0xffaaaaaa),
                         fontWeight: FontWeight.w500,
                         fontFamily: "NeueHelvetica",
                         fontStyle: FontStyle.normal,
-                        fontSize: 14.0),
+                        fontSize: 14.0.sp),
                     text: "Dont have an account yet? "),
                 TextSpan(
                   style: TextStyle(
@@ -209,7 +210,7 @@ class _LoginState extends State<LoginView> {
                       fontWeight: FontWeight.w700,
                       fontFamily: "NeueHelvetica",
                       fontStyle: FontStyle.normal,
-                      fontSize: 14.0),
+                      fontSize: 14.0.sp),
                   text: "Create Account",
                   // recognizer: TapGestureRecognizer()
                   //   ..onTap = () {
