@@ -15,6 +15,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/QuestionsDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:material_tag_editor/tag_editor.dart';
@@ -49,8 +50,8 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
       body: Obx(
         () => Column(
           children: [
-            const SizedBox(
-              height: 60,
+             SizedBox(
+              height: 60.h,
             ),
             ToolbarWithHeader(
                 step: 3,
@@ -80,7 +81,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
               flex: 1,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
+                  padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,11 +94,11 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                                 fontWeight: FontWeight.w900,
                                 fontFamily: helvetica_neu_bold,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 24.0),
+                                fontSize: 24.sp),
                             textAlign: TextAlign.center),
                       ),
                       SizedBox(
-                        height: 16,
+                        height: 16.h,
                       ),
                       // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
                       Center(
@@ -107,12 +108,12 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                                 fontWeight: FontWeight.w500,
                                 fontFamily: helveticaNeueNeue_medium,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 14.0,
-                                height: 1.5),
+                                fontSize: 14.sp,
+                                height: 1.5.h),
                             textAlign: TextAlign.center),
                       ),
                       SizedBox(
-                        height: 32,
+                        height: 32.h,
                       ),
 
                       GestureDetector(
@@ -123,23 +124,23 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Padding(
-                            padding: const EdgeInsets.all(16),
+                            padding:  EdgeInsets.all(16.r),
                             child: // What have you done?
                                 Text(controller.ques1.value,
                                     maxLines: 1,
-                                    style: const TextStyle(
+                                    style:  TextStyle(
                                         overflow: TextOverflow.ellipsis,
                                         color: grey_aaaaaa,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: helveticaNeueNeue_medium,
                                         fontStyle: FontStyle.normal,
-                                        fontSize: 14.0),
+                                        fontSize: 14.sp),
                                     textAlign: TextAlign.left),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 16,
+                        height: 16.h,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -149,23 +150,23 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Padding(
-                            padding: const EdgeInsets.all(16),
+                            padding:  EdgeInsets.all(16.r),
                             child: // What have you done?
                                 Text(controller.ques2.value,
                                     maxLines: 1,
-                                    style: const TextStyle(
+                                    style:  TextStyle(
                                         color: grey_aaaaaa,
                                         overflow: TextOverflow.ellipsis,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: helveticaNeueNeue_medium,
                                         fontStyle: FontStyle.normal,
-                                        fontSize: 14.0),
+                                        fontSize: 14.sp),
                                     textAlign: TextAlign.left),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 16,
+                        height: 16.h,
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q3'),
@@ -173,22 +174,22 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Padding(
-                            padding: const EdgeInsets.all(16),
+                            padding:  EdgeInsets.all(16.r),
                             child: // What have you done?
                                 Text(controller.ques3.value,
                                     maxLines: 1,
-                                    style: const TextStyle(
+                                    style:  TextStyle(
                                         color: grey_aaaaaa,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: helveticaNeueNeue_medium,
                                         fontStyle: FontStyle.normal,
-                                        fontSize: 14.0),
+                                        fontSize: 14.sp),
                                     textAlign: TextAlign.left),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 16,
+                        height: 16.h,
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q4'),
@@ -196,23 +197,23 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Padding(
-                            padding: const EdgeInsets.all(16),
+                            padding:  EdgeInsets.all(16.r),
                             child: // What have you done?
                                 Text(controller.ques4.value,
                                     maxLines: 1,
-                                    style: const TextStyle(
+                                    style:  TextStyle(
                                         color: grey_aaaaaa,
                                         overflow: TextOverflow.ellipsis,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: helveticaNeueNeue_medium,
                                         fontStyle: FontStyle.normal,
-                                        fontSize: 14.0),
+                                        fontSize: 14.sp),
                                     textAlign: TextAlign.left),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 16,
+                        height: 16.h,
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q5'),
@@ -220,17 +221,17 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Padding(
-                            padding: const EdgeInsets.all(16),
+                            padding:  EdgeInsets.all(16.sp),
                             child: // What have you done?
                                 Text(controller.ques5.value,
                                     maxLines: 1,
-                                    style: const TextStyle(
+                                    style:  TextStyle(
                                         color: grey_aaaaaa,
                                         overflow: TextOverflow.ellipsis,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: helveticaNeueNeue_medium,
                                         fontStyle: FontStyle.normal,
-                                        fontSize: 14.0),
+                                        fontSize: 14.sp),
                                     textAlign: TextAlign.left),
                           ),
                         ),
@@ -241,7 +242,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding:  EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
                 if (controller.q1Controller.value.text.isEmpty &&
                     controller.q2Controller.value.text.isEmpty &&

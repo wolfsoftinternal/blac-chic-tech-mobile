@@ -2,6 +2,7 @@ import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +16,8 @@ class ToolbarWithHeader extends StatelessWidget {
     return Row(
       children: [
         BackLayout(),
-        const SizedBox(
-          width: 30,
+         SizedBox(
+          width: 30.w,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -30,8 +31,8 @@ class ToolbarWithHeader extends StatelessWidget {
                   fontFamily: helveticaNeueNeue_medium),
             ),
             SizedBox(
-              height: 30,
-              width: 190,
+              height: 30.h,
+              width: 190.h,
               child: ListView.builder(
                   itemCount: 5,
                   scrollDirection: Axis.horizontal,
@@ -39,16 +40,16 @@ class ToolbarWithHeader extends StatelessWidget {
                     return Row(
                       children: [
                         Container(
-                          height: 6,
-                          width: 30,
+                          height: 6.h,
+                          width: 30.w,
                           decoration: BoxDecoration(
                             color: step == index ? orange_ff881a : grey_aaaaaa,
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(5.0)),
+                                 BorderRadius.all(Radius.circular(5.r)),
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                         SizedBox(
+                          width: 10.w,
                         )
                       ],
                     );
@@ -60,7 +61,7 @@ class ToolbarWithHeader extends StatelessWidget {
         step == 0
             ? Container()
             : Padding(
-                padding: const EdgeInsets.only(right: 24.0),
+                padding:  EdgeInsets.only(right: 24.r),
                 child: InkWell(
                     onTap: ontap,
                     child: Text(
