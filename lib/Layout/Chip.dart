@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 
 class ChipLayout extends StatelessWidget {
   final String label;
@@ -12,14 +13,14 @@ class ChipLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      labelPadding: const EdgeInsets.only(left: 8.0),
-      backgroundColor: Colors.white,
+      labelPadding:  EdgeInsets.only(right: 8.w,left: 8.w),
+      backgroundColor: Color(0x80f2f2f2),
       label: Text(label),
       deleteIcon: Container(
-        height: 26,
-        width: 26,
+        height: 26.r,
+        width: 26.r,
         decoration: BoxDecoration(
-            shape: BoxShape.circle, color: Colors.grey.withOpacity(0.2)),
+            shape: BoxShape.circle, color: Color(0x80f2f2f2).withOpacity(0.2)),
         child: Padding(
           padding: const EdgeInsets.all(5.0),
           child: Icon(

@@ -3,6 +3,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Styles/my_height.dart';
@@ -66,7 +67,7 @@ class BlackNextButton extends StatelessWidget {
                       Text(inputText,
                         style: TextStyle(
                         fontFamily: helvetica_neu_bold,
-                        fontSize: 16
+                        fontSize: 16.sp
                       ),
                       ),
 
@@ -75,8 +76,8 @@ class BlackNextButton extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: SvgPicture.asset(icon_next_arrow,width: 16,height: 16,),
+                    padding:  EdgeInsets.only(right: 16.w),
+                    child: SvgPicture.asset(icon_next_arrow,width: 16.r,height: 16.r,),
                   )
                 ],
               ), // Button

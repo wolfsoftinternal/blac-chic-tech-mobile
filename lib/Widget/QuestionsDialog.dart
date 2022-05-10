@@ -6,6 +6,7 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:get/get.dart';
 import 'package:material_tag_editor/tag_editor.dart';
 
@@ -31,17 +32,17 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
     return Container(
       child: Dialog(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0)), //this right here
+                borderRadius: BorderRadius.circular(4.r)), //this right here
             child: Container(
-              height: 360,
+              height: 360.h,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // WHAT HAVE YOU DONE ?
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 24, bottom: 16, left: 24, right: 24),
+                    padding:  EdgeInsets.only(
+                        top: 24.h, bottom: 16.h, left: 24.w, right: 24.w),
                     child: Center(
                       child: Text(
                           widget.quesIndex == 'q1'
@@ -53,18 +54,18 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                                       : widget.quesIndex == 'q4'
                                           ? SharePreData.strQues4.toUpperCase()
                                           : SharePreData.strQues5.toUpperCase(),
-                          style: const TextStyle(
+                          style:  TextStyle(
                               color: black_121212,
                               fontWeight: FontWeight.w900,
                               fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
-                              fontSize: 14.0),
+                              fontSize: 14.sp),
                           textAlign: TextAlign.left),
                     ),
                   ),
 
                   Container(
-                    height: 0.7,
+                    height: 0.7.h,
                     color: Colors.black12,
                   ),
 
@@ -72,8 +73,8 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                       ? Expanded(
                           flex: 1,
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15, bottom: 15, right: 24, left: 24),
+                            padding:  EdgeInsets.only(
+                                top: 15.h, bottom: 15.h, right: 24.w, left: 24.w),
                             child: TagEditor(
                               length: controller.tagValues.length,
                               hasAddButton: true,
@@ -107,8 +108,8 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                       : Expanded(
                           flex: 1,
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15, bottom: 15, right: 24, left: 24),
+                            padding:  EdgeInsets.only(
+                                top: 15.h, bottom: 15.h, right: 24.w, left: 24.w),
                             child: TextFormField(
                               controller: widget.quesIndex == 'q1'
                                   ? controller.q1Controller.value
@@ -127,7 +128,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                                   fontWeight: FontWeight.w500,
                                   fontFamily: helveticaNeueNeue_medium,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14.0),
+                                  fontSize: 14.sp),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
@@ -140,14 +141,14 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                                     fontWeight: FontWeight.w500,
                                     fontFamily: helveticaNeueNeue_medium,
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 14.0),
+                                    fontSize: 14.sp),
                               ),
                             ),
                           ),
                         ),
 
                   Padding(
-                    padding: const EdgeInsets.all(24.0),
+                    padding:  EdgeInsets.all(24.r),
                     child: BlackButtonDialog("Done", white_ffffff, () {
                       if (widget.quesIndex == 'q1') {
                         if (controller.q1Controller.value.text == '') {

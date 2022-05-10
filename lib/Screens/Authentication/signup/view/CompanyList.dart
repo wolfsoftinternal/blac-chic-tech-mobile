@@ -16,6 +16,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -43,11 +44,11 @@ class _CompanyListState extends State<CompanyList> {
       body: Obx(
         () => Column(
           children: [
-            const SizedBox(
-              height: 60,
+             SizedBox(
+              height: 60.h,
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 24.0),
+              padding:  EdgeInsets.only(right: 24.0.r),
               child: ToolbarWithHeaderAction(
                 'Select Your Company',
                 plus,
@@ -68,7 +69,7 @@ class _CompanyListState extends State<CompanyList> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
+                   EdgeInsets.only(left: 24.w, right: 24.w, top: 24.h),
               child: SearchBar(
                 controller: controller.searchCompanyController.value,
                 onSubmit: (v) {
@@ -85,7 +86,7 @@ class _CompanyListState extends State<CompanyList> {
                   itemCount: controller.companyList.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+                      padding:  EdgeInsets.only(left: 24.w, right: 24.w, bottom: 24.h),
                       child: InkWell(
                         onTap: () {
                           controller.companyName.value =
@@ -95,26 +96,26 @@ class _CompanyListState extends State<CompanyList> {
                         child: Row(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(3),
+                              borderRadius: BorderRadius.circular(3.r),
                               child: CachedNetworkImage(
                                 imageUrl: controller.companyList[index]['logo'],
-                                height: 50, width: 50,
+                                height: 50.r, width: 50.r,
                                 fit: BoxFit.cover,
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) =>
-                                        SvgPicture.asset(placeholder, height: 50, width: 50,),
-                                errorWidget: (context, url, error) => SvgPicture.asset(placeholder, height: 50, width: 50,),
+                                        SvgPicture.asset(placeholder, height: 50.r, width: 50.r,),
+                                errorWidget: (context, url, error) => SvgPicture.asset(placeholder, height: 50.r, width: 50.r,),
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
+                             SizedBox(
+                              width: 10.w,
                             ),
                             Text(
                               controller.companyList[index]['name'],
-                              style: const TextStyle(
+                              style:  TextStyle(
                                   fontFamily: helveticaNeueNeue_medium,
                                   color: black_121212,
-                                  fontSize: 14),
+                                  fontSize: 14.sp),
                             ),
                           ],
                         ),

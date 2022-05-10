@@ -2,6 +2,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFo
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/route_manager.dart';
 
@@ -119,7 +120,7 @@ setTextFieldNext(
             fontWeight: FontWeight.w500,
             fontFamily: helveticaNeueNeue_medium,
             fontStyle: FontStyle.normal,
-            fontSize: 14.0),
+            fontSize: 14.sp),
         decoration: new InputDecoration(
           isDense: true,
           // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
@@ -129,7 +130,7 @@ setTextFieldNext(
               fontWeight: FontWeight.w500,
               fontFamily: helveticaNeueNeue_medium,
               fontStyle: FontStyle.normal,
-              fontSize: 14.0),
+              fontSize: 14.sp),
           border: InputBorder.none,
         ),
         textInputAction: textInputAction,
@@ -163,7 +164,7 @@ setDobTextFieldNext(
             fontWeight: FontWeight.w500,
             fontFamily: helveticaNeueNeue_medium,
             fontStyle: FontStyle.normal,
-            fontSize: 14.0),
+            fontSize: 14.sp),
         decoration: new InputDecoration(
           isDense: true,
           // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
@@ -173,7 +174,7 @@ setDobTextFieldNext(
               fontWeight: FontWeight.w500,
               fontFamily: helveticaNeueNeue_medium,
               fontStyle: FontStyle.normal,
-              fontSize: 14.0),
+              fontSize: 14.sp),
           border: InputBorder.none,
         ),
 
@@ -205,12 +206,12 @@ setSocialTextFieldNext(
             fontWeight: FontWeight.w500,
             fontFamily: helveticaNeueNeue_medium,
             fontStyle: FontStyle.normal,
-            fontSize: 14.0),
+            fontSize: 14.sp),
         decoration: new InputDecoration(
           prefixIconConstraints:
-              const BoxConstraints(maxHeight: 21, maxWidth: 38),
+               BoxConstraints(maxHeight: 21.h, maxWidth: 38.w),
           prefixIcon: Padding(
-            padding: const EdgeInsets.only(right: 17.0),
+            padding:  EdgeInsets.only(right: 17.w),
             child: Image.asset(
               icon,
             ),
@@ -223,7 +224,7 @@ setSocialTextFieldNext(
               fontWeight: FontWeight.w500,
               fontFamily: helveticaNeueNeue_medium,
               fontStyle: FontStyle.normal,
-              fontSize: 14.0),
+              fontSize: 14.sp),
           border: InputBorder.none,
         ),
         textInputAction: textInputAction,

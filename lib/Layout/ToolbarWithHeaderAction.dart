@@ -2,6 +2,7 @@ import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -30,16 +31,16 @@ class ToolbarWithHeaderAction extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontFamily: helvetica_neu_bold,
                   fontStyle: FontStyle.normal,
-                  fontSize: 16),
+                  fontSize: 16.sp),
               textAlign: TextAlign.center),
           InkWell(
             onTap: onCustomButtonPressed,
             child: Container(
-              width: 46,
-              height: 46,
+              width: 48.w,
+              height: 48.h,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.1),
@@ -50,11 +51,11 @@ class ToolbarWithHeaderAction extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding:  EdgeInsets.all(12.r),
                 child: SvgPicture.asset(
                   actionIcon,
-                  width: 24,
-                  height: 24,
+                  width: 24.r,
+                  height: 24.r,
                 ),
               ),
             ),

@@ -9,6 +9,7 @@ import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -38,49 +39,49 @@ class _SignupDetailState extends State<SignupFormView> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 60,
+             SizedBox(
+              height: 60.h,
             ),
             BackLayout(),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24),
+                  padding:  EdgeInsets.only(left: 24.w, right: 24.w),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 24,
+                       SizedBox(
+                        height: 24.h,
                       ),
                       // Let’s get started
                       Center(
                         child: Text(str_lets,
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: black_121212,
                                 fontFamily: helvetica_neu_bold,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 24.0),
+                                fontSize: 24.0.sp),
                             textAlign: TextAlign.left),
                       ),
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
                       // Tell us a little bit about yourself to create your account.
                       Center(
                         child: Text(str_tell_us,
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: grey_aaaaaa,
                                 fontFamily: helveticaNeueNeue_medium,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 14.0,
-                                height: 1.2),
+                                fontSize: 14.0.sp,
+                                height: 1.2.h),
                             textAlign: TextAlign.center),
                       ),
 
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
                       Row(
                         children: [
@@ -94,8 +95,8 @@ class _SignupDetailState extends State<SignupFormView> {
                               (v) {}
                             )
                           ),
-                          const SizedBox(
-                            width: 8,
+                           SizedBox(
+                            width: 8.h,
                           ),
                           Expanded(
                             child: InputTextLayout(
@@ -109,8 +110,8 @@ class _SignupDetailState extends State<SignupFormView> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
+                       SizedBox(
+                        height: 16.h,
                       ),
                       InputTextLayout(
                         str_username, 
@@ -120,8 +121,8 @@ class _SignupDetailState extends State<SignupFormView> {
                         TextInputType.text,
                         (v) {}
                       ),
-                      const SizedBox(
-                        height: 16,
+                      SizedBox(
+                        height: 16.h,
                       ),
                       InputTextLayout(
                         str_email,
@@ -131,8 +132,8 @@ class _SignupDetailState extends State<SignupFormView> {
                         TextInputType.emailAddress,
                         (v) {}
                       ),
-                      const SizedBox(
-                        height: 16,
+                      SizedBox(
+                        height: 16.h,
                       ),
                       InputTextLayoutPassword(
                         str_pwd,
@@ -142,8 +143,8 @@ class _SignupDetailState extends State<SignupFormView> {
                         TextInputType.text,
                         (v) {}
                       ),
-                      const SizedBox(
-                        height: 16,
+                      SizedBox(
+                        height: 16.h,
                       ),
                       InputTextLayoutPassword(
                         str_confirmPwd,
@@ -152,8 +153,8 @@ class _SignupDetailState extends State<SignupFormView> {
                         TextInputAction.done,
                         TextInputType.text, (v) {}
                       ),
-                      const SizedBox(
-                        height: 24,
+                      SizedBox(
+                        height: 16.h,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -161,21 +162,22 @@ class _SignupDetailState extends State<SignupFormView> {
                         children: [
                           SvgPicture.asset(
                             icon_info,
-                            width: 15,
-                            height: 15,
+                            width: 15.r,
+                            height: 15.r,
                           ),
-                          const SizedBox(
-                            width: 7,
+                           SizedBox(
+                            width: 7.w,
                           ),
                           Expanded(
                             child: Container(
                               child: setHelveticaMedium(
                                   str_pwd_validation_text,
-                                  11,
+                                  11.sp,
                                   grey_aaaaaa,
                                   FontWeight.w500,
                                   FontStyle.normal,
-                                  null, 3),
+                                  null,
+                                  3),
                             ),
                           )
                         ],
@@ -192,7 +194,7 @@ class _SignupDetailState extends State<SignupFormView> {
               ),
             ),
              Padding(
-              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              padding:  EdgeInsets.only(left: 24.w, right: 24.w),
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: BlackNextButton(str_signup, white_ffffff, () {
@@ -228,46 +230,46 @@ class DialogUtils {
         builder: (BuildContext context) {
           return Dialog(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0)), //this right here
+                borderRadius: BorderRadius.circular(4.0.r)), //this right here
             child: SizedBox(
-              height: 290,
+              height: 290.h,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding:  EdgeInsets.all(12.0.r),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
                       img_varification,
-                      width: 120,
-                      height: 97,
+                      width: 120.r,
+                      height: 97.r,
                       fit: BoxFit.cover,
                     ),
-                    const SizedBox(
-                      height: 27,
+                     SizedBox(
+                      height: 27.h,
                     ),
                     // We Sent You An Email
                     Text(str_we_have,
-                        style: const TextStyle(
+                        style:  TextStyle(
                             color: black_121212,
                             fontFamily: helvetica_neu_bold,
                             fontStyle: FontStyle.normal,
-                            fontSize: 16.0),
+                            fontSize: 16.0.sp),
                         textAlign: TextAlign.left),
-                    const SizedBox(
-                      height: 12,
+                     SizedBox(
+                      height: 12.h,
                     ),
                     // Tap on the email link to activate your account.
                     Text(str_tap_on,
-                        style: const TextStyle(
+                        style:  TextStyle(
                             color: grey_aaaaaa,
                             fontFamily: helveticaNeueNeue_medium,
                             fontStyle: FontStyle.normal,
-                            fontSize: 12.0,
-                            height: 1.5),
+                            fontSize: 12.0.sp,
+                            height: 1.5.h),
                         textAlign: TextAlign.center),
-                    const SizedBox(
-                      height: 10,
+                     SizedBox(
+                      height: 10.h,
                     ),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
