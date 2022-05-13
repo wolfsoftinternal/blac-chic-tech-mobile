@@ -26,6 +26,7 @@ class AdmireProfileController extends GetxController {
   RxList<AdmireList> admireList = <AdmireList>[].obs;
   Rx<UserDetails> details = UserDetails().obs;
   RxList<PostList> postList = <PostList>[].obs;
+  RxList<PostList> postDetailList = <PostList>[].obs;
   RxList<VideoList> videoList = <VideoList>[].obs;
   RxList<EventList> eventList = <EventList>[].obs;
   List<VideoPlayerController> videoController = [];
@@ -208,7 +209,11 @@ class AdmireProfileController extends GetxController {
             PostListModel detail =
             PostListModel.fromJson(userModel);
 
-            postList.value = detail.data!;
+            if(body == null){
+              postList.value = detail.data!;
+            }else{
+              postDetailList.value = detail.data!;
+            }            
           }
         });
       }else{

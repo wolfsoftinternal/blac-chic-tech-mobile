@@ -47,6 +47,7 @@ class PostList {
         this.updatedAt,
         this.deletedAt,
         this.taggedUsers,
+        this.isFocus,
     });
 
     int? id;
@@ -61,6 +62,7 @@ class PostList {
     DateTime? updatedAt;
     dynamic deletedAt;
     List<TaggedUser>? taggedUsers;
+    int? isFocus;
 
     factory PostList.fromJson(Map<String, dynamic> json) => PostList(
         id: json["id"],
@@ -75,6 +77,7 @@ class PostList {
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
         taggedUsers: List<TaggedUser>.from(json["tagged_users"].map((x) => TaggedUser.fromJson(x))),
+        isFocus: json["is_focus"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -90,6 +93,7 @@ class PostList {
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
         "tagged_users": List<dynamic>.from(taggedUsers!.map((x) => x.toJson())),
+        "is_focus": isFocus,
     };
 }
 
