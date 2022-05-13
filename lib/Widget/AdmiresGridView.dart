@@ -15,10 +15,12 @@ Widget AdmiresGridView(_crossAxisCount) {
     shrinkWrap: true,
     padding: EdgeInsets.all(0),
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: _crossAxisCount,
-        childAspectRatio: _crossAxisCount == 3 ? 0.85 : _crossAxisCount == 4 ? 0.6 : _crossAxisCount == 5 ? 0.75 : 0.9,
-        mainAxisSpacing: 10.0,
-        crossAxisSpacing: 12.0,
+      crossAxisCount: _crossAxisCount,
+      childAspectRatio: _crossAxisCount == 3 ? 0.85
+                      : _crossAxisCount == 4 ? 0.6
+                      : _crossAxisCount == 5 ? 0.75 : 0.9,
+      mainAxisSpacing: 10.0,
+      crossAxisSpacing: 12.0,
     ),
     itemCount: controller.admireList.length,
     itemBuilder: (context, index) {

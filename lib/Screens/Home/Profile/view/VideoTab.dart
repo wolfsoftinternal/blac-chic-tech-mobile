@@ -29,7 +29,7 @@ class _VideoTabState extends State<VideoTab> {
               padding: const EdgeInsets.only(left: 24.0, right: 24.0),
               child: StaggeredGridView.countBuilder(
                 crossAxisCount: 4,
-                itemCount: controller.videoList.length,
+                itemCount: controller.videoList.length == 0 ? 0 : controller.videoList.length,
                 shrinkWrap: true,
                 primary: false,
                 itemBuilder: (BuildContext context, int index) {
@@ -64,7 +64,7 @@ class _VideoTabState extends State<VideoTab> {
                               width: 47,
                               child: Center(
                                 child: setHelceticaBold(
-                                   controller.videoList[index].duration!,
+                                   controller.videoList[index].duration ?? "",
                                    12.0,
                                    white_ffffff,
                                    FontWeight.w500,
