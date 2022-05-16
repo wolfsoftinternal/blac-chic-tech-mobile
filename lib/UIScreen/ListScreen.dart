@@ -3,6 +3,11 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoVi
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/UIScreen/CreatPost.dart';
+import 'package:blackchecktech/UIScreen/PostLocation.dart';
+import 'package:blackchecktech/UIScreen/TagPeople.dart';
+import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
+import 'package:blackchecktech/UIScreen/UploadVideos.dart';
 // import 'package:blackchecktech/UIScreen/OwnProfile.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +28,101 @@ class ListScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UploadVideoDetail(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "UploadVideoDetail Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UploadVideos(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "UploadVideos Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PostLocation(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "PostLocation Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TagPeople(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "TagPeople Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatPost(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "CreatPost Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
           GestureDetector(
             onTap: () {
               Navigator.push(

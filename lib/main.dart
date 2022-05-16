@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SplashScreen(),
-        // home: ListScreen(),
+      //  home: SplashScreen(),
+         home: ListScreen(),
       ),
     );
   }
