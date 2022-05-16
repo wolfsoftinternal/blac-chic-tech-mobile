@@ -94,6 +94,55 @@ setTextFieldHelveticaMedium(
       ));
 }
 
+setTextFieldHelveticaMediumBorder(
+    TextEditingController controller,
+    String hintText,
+    bool secureEntry,
+    TextInputType inputType,
+    bool validtion,
+    String errorMSg,
+    TextInputAction textInputAction,
+    Function onchange) {
+  return Theme(
+      data: new ThemeData(
+        primaryColor: Colors.green,
+        primaryColorDark: Colors.red,
+      ),
+      child: TextField(
+        style: TextStyle(
+            color: black_121212,
+            fontWeight: FontWeight.w500,
+            fontFamily: helveticaNeueNeue_medium,
+            fontStyle: FontStyle.normal,
+            fontSize: 14.sp),
+        decoration: new InputDecoration(
+          isDense: true,
+          // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+          hintText: hintText,
+          hintStyle: TextStyle(
+              color: grey_aaaaaa,
+              fontWeight: FontWeight.w500,
+              fontFamily: helveticaNeueNeue_medium,
+              fontStyle: FontStyle.normal,
+              fontSize: 14.sp),
+          border: InputBorder.none,
+          filled: true,
+          fillColor: Colors.white70,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderSide: BorderSide(color:grey_e8e8e8, width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderSide: BorderSide(color: grey_e8e8e8),
+          ),
+        ),
+        textInputAction: textInputAction,
+        keyboardType: inputType,
+        cursorColor: black_121212,
+      ));
+}
+
 setTextFieldNext(
   TextEditingController controller,
   String hintText,
@@ -176,6 +225,7 @@ setDobTextFieldNext(
               fontStyle: FontStyle.normal,
               fontSize: 14.sp),
           border: InputBorder.none,
+
         ),
 
         textInputAction: textInputAction,
