@@ -2,6 +2,7 @@
 const img_girl = 'assets/images/img_girl.png';
 const img_logo = 'assets/images/img_logo.png';
 const img_varification = 'assets/images/img_varification.png';
+const location_icon = 'assets/images/location_icon.png';
 const icon_next_arrow = 'assets/images/icon_next_arrow.svg';
 const icon_back_black_arrow = 'assets/images/icon_back_black_arrow.svg';
 const icon_info = 'assets/images/icon_info.svg';
@@ -17,6 +18,9 @@ const add_icon = 'assets/images/add.svg';
 const settings_icon = 'assets/images/settings.svg';
 const home_icon = 'assets/images/home.png';
 const feed_icon = 'assets/images/category.svg';
+const upload_video_icon = 'assets/images/upload_video_icon.svg';
+const light_search_icon = 'assets/images/icon_light_search.svg';
+const orange_tick_icon = 'assets/images/orange_tick.svg';
 const chat_icon = 'assets/images/chat.svg';
 // const profile_icon = 'assets/images/settings.svg';
 const check_icon = 'assets/images/check.svg';

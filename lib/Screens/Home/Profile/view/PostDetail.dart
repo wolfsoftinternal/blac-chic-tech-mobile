@@ -122,7 +122,7 @@ class _PostDetailState extends State<PostDetail> {
                                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                                       child: Row(
                                         children: [
-                                          GestureDetector(child: Icon(Icons.heart_broken, color: Colors.red,)),
+                                          GestureDetector(child: Icon(Icons.image, color: Colors.red,)),
                                           SizedBox(width: 8,),
                                           setHelceticaBold("1,2k liked", 14, white_ffffff, FontWeight.w500, FontStyle.normal)
                                         ],
