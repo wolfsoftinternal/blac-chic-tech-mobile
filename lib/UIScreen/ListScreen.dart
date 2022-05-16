@@ -6,6 +6,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/UIScreen/CreatPost.dart';
 import 'package:blackchecktech/UIScreen/PostLocation.dart';
 import 'package:blackchecktech/UIScreen/TagPeople.dart';
+import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
 import 'package:blackchecktech/UIScreen/UploadVideos.dart';
 // import 'package:blackchecktech/UIScreen/OwnProfile.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -27,6 +28,25 @@ class ListScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UploadVideoDetail(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "UploadVideoDetail Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
           GestureDetector(
             onTap: () {
               Navigator.push(
