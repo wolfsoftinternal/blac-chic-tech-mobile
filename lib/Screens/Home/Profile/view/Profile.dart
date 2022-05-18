@@ -11,6 +11,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -102,7 +103,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 ),
                 const Spacer(),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    createBottomSheet(context);
+                  },
                   child: Container(
                     width: 48,
                     height: 48,
@@ -179,7 +182,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                 ),
                               )
                               : Container(),
-                              controller.details.value.currentJobs!.title != null
+                              controller.details.value.currentJobs != null
+                              ? controller.details.value.currentJobs!.title != null
                               ? Padding(
                                   padding: const EdgeInsets.only(top: 12),
                                   child: Align(
@@ -196,8 +200,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                         FontStyle.normal),
                                   ),
                                 )
-                              : Container(),
-                              controller.details.value.currentJobs!.website != null
+                              : Container() : Container(),
+                              controller.details.value.currentJobs != null
+                              ? controller.details.value.currentJobs!.website != null
                               ? Padding(
                                   padding: const EdgeInsets.only(top: 5.0),
                                   child: Align(
@@ -210,7 +215,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                         FontStyle.normal),
                                   ),
                                 )
-                              : Container(),
+                              : Container() : Container(),
                               controller.details.value.aboutUs != null
                               ? Padding(
                                   padding: const EdgeInsets.only(top: 5.0),

@@ -60,6 +60,7 @@ class EventList {
         this.createdAt,
         this.updatedAt,
         this.deletedAt,
+        this.admissionData,
         this.countryDetails,
         this.stateDetails,
         this.cityDetails,
@@ -93,6 +94,7 @@ class EventList {
     DateTime? createdAt;
     DateTime? updatedAt;
     dynamic deletedAt;
+    List<Benefit>? admissionData;
     Details? countryDetails;
     Details? stateDetails;
     Details? cityDetails;
@@ -126,6 +128,7 @@ class EventList {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
+        admissionData: json["admission_data"] != null ? List<Benefit>.from(json["admission_data"].map((x) => Benefit.fromJson(x))) : null,
         countryDetails: Details.fromJson(json["country_details"]),
         stateDetails: Details.fromJson(json["state_details"]),
         cityDetails: Details.fromJson(json["city_details"]),
@@ -160,6 +163,7 @@ class EventList {
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
+        "admission_data": List<dynamic>.from(admissionData!.map((x) => x.toJson())),
         "country_details": countryDetails!.toJson(),
         "state_details": stateDetails!.toJson(),
         "city_details": cityDetails!.toJson(),
@@ -205,7 +209,7 @@ class Benefit {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
-        benefits: List<dynamic>.from(json["benefits"].map((x) => x)),
+        benefits: json["benefits"] != null ? List<dynamic>.from(json["benefits"].map((x) => x)) : null,
     );
 
     Map<String, dynamic> toJson() => {

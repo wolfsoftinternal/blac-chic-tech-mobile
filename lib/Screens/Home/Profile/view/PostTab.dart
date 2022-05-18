@@ -23,69 +23,80 @@ class _PostTabState extends State<PostTab> {
     return Scaffold(
       backgroundColor: white_ffffff,
       body: Obx(
-            () =>
-          Padding(
-              padding:
-                  const EdgeInsets.only(left: 24.0, right: 24.0),
-              child: StaggeredGridView.countBuilder(
-                crossAxisCount: 4,
-                itemCount: controller.postList.length,
-                shrinkWrap: true,
-                primary: false,
-                itemBuilder: (BuildContext context, int index) => 
-                GestureDetector(
-                  onTap: (){
-                    Get.to(PostDetail(id: controller.postList[index].id));
-                  },
-                  child: Stack(
-                    children: [
-                      Container(
-                        child: controller.postList[index].image == null
-                        ? ClipRRect(
+        () => controller.postList.isEmpty
+        ? Container(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(img_logo, height: 80, width: 80,),
+              setHelceticaBold("NO POSTS YET", 16, grey_aaaaaa, FontWeight.w500, FontStyle.normal, 0.5)
+            ],
+          ),
+        )
+        : Padding(
+            padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+            child: StaggeredGridView.countBuilder(
+              crossAxisCount: 4,
+              itemCount: controller.postList.length,
+              shrinkWrap: true,
+              primary: false,
+              itemBuilder: (BuildContext context, int index) => 
+              GestureDetector(
+                onTap: (){
+                  Get.to(PostDetail(id: controller.postList[index].id));
+                },
+                child: Stack(
+                  children: [
+                    Container(
+                      child: controller.postList[index].image == null
+                      ? ClipRRect(
+                        borderRadius: BorderRadius.all(const Radius.circular(5)),
+                        child: SvgPicture.asset(
+                            placeholder,
+                             fit: BoxFit.cover,
+                             height: 220,
+                          ),
+                      )
+                      : ClipRRect(
                           borderRadius: BorderRadius.all(const Radius.circular(5)),
-                          child: SvgPicture.asset(
+                        child: CachedNetworkImage(
+                            imageUrl: controller.postList[index].image!,
+                            fit: BoxFit.cover,
+                            height: 220,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    SvgPicture.asset(
                               placeholder,
                                fit: BoxFit.cover,
                                height: 220,
                             ),
-                        )
-                        : ClipRRect(
-                            borderRadius: BorderRadius.all(const Radius.circular(5)),
-                          child: CachedNetworkImage(
-                              imageUrl: controller.postList[index].image!,
-                              fit: BoxFit.cover,
-                              height: 220,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      SvgPicture.asset(
-                                placeholder,
-                                 fit: BoxFit.cover,
-                                 height: 220,
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  SvgPicture.asset(
-                                placeholder,
-                                 fit: BoxFit.cover,
-                                 height: 220,
-                              ),
+                            errorWidget: (context, url, error) =>
+                                SvgPicture.asset(
+                              placeholder,
+                               fit: BoxFit.cover,
+                               height: 220,
                             ),
-                        ),
+                          ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 15.0),
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: setHelceticaBold(controller.postList[index].caption!, 12.0, white_ffffff, FontWeight.w500, FontStyle.normal)
-                        ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15.0),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: setHelceticaBold(controller.postList[index].caption!, 12.0, white_ffffff, FontWeight.w500, FontStyle.normal)
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                staggeredTileBuilder: (int index) =>
-                    new StaggeredTile.count(2, index.isEven ? 2.6 : 2),
-                mainAxisSpacing: 8.0,
-                crossAxisSpacing: 8.0,
-              )),
+              ),
+              staggeredTileBuilder: (int index) =>
+                  new StaggeredTile.count(2, index.isEven ? 2.6 : 2),
+              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 8.0,
+            )
+        ),
       ),
     );
   }
