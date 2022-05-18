@@ -3,9 +3,11 @@ import 'dart:convert';
 
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/model/EventDetailModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/PostListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/VideoListModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/EventDetail.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,6 +32,7 @@ class AdmireProfileController extends GetxController {
   RxList<VideoList> videoList = <VideoList>[].obs;
   RxList<EventList> eventList = <EventList>[].obs;
   List<VideoPlayerController> videoController = [];
+  Rx<EventList> eventDetails = EventList().obs;
   late List initializeVideoPlayerFuture = [];
   List video = [];
   
@@ -292,6 +295,48 @@ class AdmireProfileController extends GetxController {
             EventListModel.fromJson(userModel);
 
             eventList.value = detail.data!;
+          }
+        });
+      }else{
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  eventDetailAPI(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    SignupModel? myModel =
+    await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = myModel?.data!.token;
+
+    dynamic body = {
+      'event_id': id.toString(),
+    };
+
+    String url = urlBase + urlEventDetail;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if(model.statusCode == 500){
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            eventDetailAPI(context, id);
+          }else if(model.statusCode==200){
+            EventDetailModel detail =
+            EventDetailModel.fromJson(userModel);
+
+            eventDetails.value = detail.data!;
+
+            Get.to(EventDetail());
           }
         });
       }else{

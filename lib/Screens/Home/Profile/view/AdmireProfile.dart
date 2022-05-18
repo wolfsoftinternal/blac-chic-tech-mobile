@@ -5,6 +5,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/AdmireProfileList.dart';
+import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,12 @@ class _AdmireProfileState extends State<AdmireProfile> {
                       children: [
                         GestureDetector(onTap: (){Get.back();},child: SvgPicture.asset(icon_back_black_arrow,width: 24,height: 24, color: white_ffffff,)),                     
                         Spacer(),
-                        SvgPicture.asset(add_icon),
+                        GestureDetector(
+                          onTap: (){
+                            createBottomSheet(context);
+                          },
+                          child: SvgPicture.asset(add_icon)
+                        ),
                         SizedBox(height: 5,),
                         SvgPicture.asset(settings_icon, height: 48, width: 48,),
                       ],

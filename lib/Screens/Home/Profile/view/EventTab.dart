@@ -3,6 +3,7 @@ import 'package:blackchecktech/Screens/Home/Profile/view/EventDetail.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
+import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,19 @@ class _EventTabState extends State<EventTab> {
     return Scaffold(
       backgroundColor: white_ffffff,
       body: Obx(
-        () => Padding(
+        () => controller.eventList.isEmpty
+        ? Container(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(img_logo, height: 80, width: 80,),
+              setHelceticaBold("NO EVENTS YET", 16, grey_aaaaaa, FontWeight.w500, FontStyle.normal, 0.5)
+            ],
+          ),
+        )
+        : Padding(
           padding: const EdgeInsets.only(left: 24.0, right: 24.0),
           child: SingleChildScrollView(
             child: Column(
@@ -48,7 +61,9 @@ class _EventTabState extends State<EventTab> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: (){
-                        Get.to(EventDetail());
+                        checkNet(context).then((value){
+                          controller.eventDetailAPI(context, controller.eventList[index].id);
+                        });
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 32.0),

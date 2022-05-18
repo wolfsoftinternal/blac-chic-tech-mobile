@@ -23,7 +23,23 @@ class _ProfileTabState extends State<ProfileTab> {
     return Scaffold(
       backgroundColor: white_ffffff,
       body: Obx(
-        () => Padding(
+        () => 
+        controller.details.value.pastJobs.toString() == "[]"
+        && controller.details.value.educations.toString() == "[]"
+        && controller.details.value.dateOfBirth == null
+        && controller.details.value.questions.toString() == "[]"
+        ? Container(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(img_logo, height: 80, width: 80,),
+              setHelceticaBold("NO INFORMATION AVAILABLE", 16, grey_aaaaaa, FontWeight.w500, FontStyle.normal, 0.5)
+            ],
+          ),
+        )
+        : Padding(
           padding: const EdgeInsets.only(left: 24.0, right: 24.0),
           child: SingleChildScrollView(
             child: Column(

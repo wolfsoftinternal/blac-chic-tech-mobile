@@ -23,9 +23,20 @@ class _VideoTabState extends State<VideoTab> {
     return Scaffold(
       backgroundColor: white_ffffff,
       body:
-          Obx(
-            () =>
-          Padding(
+        Obx(
+          () => controller.videoList.isEmpty
+          ? Container(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(img_logo, height: 80, width: 80,),
+                setHelceticaBold("NO VIDEOS YET", 16, grey_aaaaaa, FontWeight.w500, FontStyle.normal, 0.5)
+              ],
+            ),
+          )
+          :  Padding(
               padding: const EdgeInsets.only(left: 24.0, right: 24.0),
               child: StaggeredGridView.countBuilder(
                 crossAxisCount: 4,
@@ -59,12 +70,12 @@ class _VideoTabState extends State<VideoTab> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              color: trans,
+                              color: transparent,
                               height: 32,
                               width: 47,
                               child: Center(
                                 child: setHelceticaBold(
-                                   controller.videoList[index].duration ?? "",
+                                   controller.videoList[index].duration ?? "00:00",
                                    12.0,
                                    white_ffffff,
                                    FontWeight.w500,
@@ -77,17 +88,18 @@ class _VideoTabState extends State<VideoTab> {
                         Center(
                             child: InkWell(
                           onTap: () {
-                            if (controller.videoController[index].value.isPlaying) {
-                              setState(() {
-                                controller.videoController[index].pause();
-                              });
-                            } else {
-                              setState(() {
-                                controller.videoController[index].play();
-                              });
-                            }
+                            // if (controller.videoController[index].value.isPlaying) {
+                            //   setState(() {
+                            //     controller.videoController[index].pause();
+                            //   });
+                            // } else {
+                            //   setState(() {
+                            //     controller.videoController[index].play();
+                            //   });
+                            // }
                           },
-                          child: controller.videoController[index].value.isPlaying
+                          child: 
+                          // controller.videoController[index].value.isPlaying
                             // ? Container(
                             //   height: 40,
                             //   width: 40,
@@ -100,15 +112,15 @@ class _VideoTabState extends State<VideoTab> {
                             //     size: 20,
                             //   )
                             // )
-                            ? Container()
-                            : controller.videoController[index].value.position == controller.videoController[index].value.duration
-                            ? SvgPicture.asset(icon_play)
-                            : SvgPicture.asset(icon_play)
+                            // ? Container()
+                            // : controller.videoController[index].value.position == controller.videoController[index].value.duration
+                            SvgPicture.asset(icon_play)
+                            // : SvgPicture.asset(icon_play)
                         )),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 15.0),
+                          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15.0),
                           child: Align(
-                              alignment: Alignment.bottomCenter,
+                              alignment: Alignment.bottomLeft,
                               child: setHelceticaBold(
                                   controller.postList[index].caption!,
                                   12.0,

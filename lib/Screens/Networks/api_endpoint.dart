@@ -24,5 +24,16 @@ const urlOtherProfile = '/other-user-profile';
 const urlPostList = '/post-list';
 //video Tab
 const urlVideoList = '/video-list';
+const urlVideoCreate = '/video-create';
 //event Tab
 const urlEventList = '/event-list';
+const urlEventDetail = '/event-details';
+
+//language
+const urlLanguageList = '/langauge-list';
+
+//Topic
+const urlTopicList = '/topic-list';
+
+//user List
+const urlUserList = '/user/list';

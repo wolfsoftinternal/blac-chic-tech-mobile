@@ -28,3 +28,7 @@ const calendar_icon = 'assets/images/calendar.svg';
 const question_icon = 'assets/images/question.svg';
 const icon_play = 'assets/images/play.svg';
 const icon_location = 'assets/images/location.svg';
+const black_more_dot_icon = 'assets/images/black_more_dot.svg';
+const create_post = 'assets/images/create_post.svg';
+const create_video = 'assets/images/create_video.svg';
+const create_event = 'assets/images/create_event.svg';
