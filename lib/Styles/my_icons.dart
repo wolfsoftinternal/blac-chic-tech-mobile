@@ -32,3 +32,6 @@ const black_more_dot_icon = 'assets/images/black_more_dot.svg';
 const create_post = 'assets/images/create_post.svg';
 const create_video = 'assets/images/create_video.svg';
 const create_event = 'assets/images/create_event.svg';
+const icon_map_marker_png = 'assets/images/map_marker.png';
+const icon_current_loc = 'assets/images/current_loc.svg';
+const location_pin = 'assets/images/iconly_bulk_location.svg';

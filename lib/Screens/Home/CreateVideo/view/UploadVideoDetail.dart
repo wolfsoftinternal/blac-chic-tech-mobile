@@ -16,6 +16,7 @@ import 'package:blackchecktech/Widget/EditTextDecoration.dart';
 import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
 import 'package:blackchecktech/Widget/SpinnerDecorationBorder.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,100 +35,13 @@ class UploadVideoDetail extends StatefulWidget {
 class _UploadVideoDetailState extends State<UploadVideoDetail> {
   VideoController controller = Get.put(VideoController());
 
-  /*Topic Spinner Code is here*/
-
-  List<DropdownMenuItem<String>> get dropdownItems {
-    List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(
-          child: Text("USA",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "USA"),
-      DropdownMenuItem(
-          child: Text("Canada",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "Canada"),
-      DropdownMenuItem(
-          child: Text("Brazil",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "Brazil"),
-      DropdownMenuItem(
-          child: Text("England",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "England"),
-    ];
-    return menuItems;
-  }
-
-  String? selectedValue = null;
-
-  /*Language Spinner Code is here*/
-
-  List<DropdownMenuItem<String>> get dropdownItemslang {
-    List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(
-          child: Text("English",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "English"),
-      DropdownMenuItem(
-          child: Text("Hindi",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "Hindi"),
-      DropdownMenuItem(
-          child: Text("Gujarati",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "Gujarati"),
-      DropdownMenuItem(
-          child: Text("Marathi",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: helveticaNeueNeue_medium,
-                  color: black_121212)),
-          value: "Marathi"),
-    ];
-    return menuItems;
-  }
-
-  String? selectedValuelang = null;
-
-  List<TagPeopleModel> onDealsModel = [];
-  List<TagPeopleModel> selectedList = [];
-
   @override
   void initState() {
-    onDealsModel.clear();
-    onDealsModel
-        .add(TagPeopleModel("assets/images/img_girl.png", "claireroman"));
-    onDealsModel
-        .add(TagPeopleModel("assets/images/img_girl.png", "tokyoguinere"));
-    onDealsModel
-        .add(TagPeopleModel("assets/images/img_girl.png", "naidafortes"));
-    onDealsModel
-        .add(TagPeopleModel("assets/images/img_girl.png", "tokyoguinere"));
     super.initState();
     checkNet(context).then((value){
       controller.topicListAPI(context);
       controller.languageListAPI(context);
+      controller.userListAPI(context, '');
     });
   }
 
@@ -149,166 +63,184 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                 children: [
                   StatefulBuilder(
                       builder: (BuildContext context, StateSetter setState) {
-                    return Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            height: 15,
-                          ),
-
-                          // Rectangle 1329
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: Opacity(
-                              opacity: 0.4000000059604645,
-                              child: Container(
-                                  width: 48,
-                                  height: 4,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4)),
-                                      color: const Color(0xff96a6a3))),
+                    return Obx(
+                      () => Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(
+                              height: 15,
                             ),
-                          ),
 
-                          SizedBox(
-                            height: 24.h,
-                          ),
+                            // Rectangle 1329
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Opacity(
+                                opacity: 0.4000000059604645,
+                                child: Container(
+                                    width: 48,
+                                    height: 4,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.all(Radius.circular(4)),
+                                        color: const Color(0xff96a6a3))),
+                              ),
+                            ),
 
-                          // SPEAKERS
-                          Center(
-                            child: Text("SPEAKERS",
-                                style: const TextStyle(
-                                    color: const Color(0xff121212),
-                                    fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 16.0),
-                                textAlign: TextAlign.left),
-                          ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
 
-                          Divider(
-                            thickness: 1,
-                            height: 1,
-                            color: Color(0xfff4f6f6),
-                          ),
+                            // SPEAKERS
+                            Center(
+                              child: Text("SPEAKERS",
+                                  style: const TextStyle(
+                                      color: const Color(0xff121212),
+                                      fontWeight: FontWeight.w900,
+                                      fontFamily: "NeueHelvetica",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 16.0),
+                                  textAlign: TextAlign.left),
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
 
-                          Padding(
-                            padding: const EdgeInsets.all(24.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SearchBarTag(placeholder: "Search people"),
-                                SizedBox(
-                                  height: 24.h,
-                                ),
-                                ListView.builder(
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  padding: EdgeInsets.all(0),
-                                  itemCount: onDealsModel.length,
-                                  itemBuilder: (context, i) => GestureDetector(
-                                    onTap: () {
-                                      setState(
-                                        () {
-                                          if (selectedList
-                                              .contains(onDealsModel[i])) {
-                                            selectedList
-                                                .remove(onDealsModel[i]);
-                                          } else {
-                                            selectedList.add(onDealsModel[i]);
-                                          }
-                                        },
-                                      );
-                                      print(selectedList.length);
-                                      print(onDealsModel.length);
+                            Divider(
+                              thickness: 1,
+                              height: 1,
+                              color: Color(0xfff4f6f6),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(24.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SearchBarTag(
+                                    placeholder: "Search people",
+                                    onSubmit: (value){
+                                      checkNet(context).then((value) {
+                                        controller.userListAPI(context, controller.searchController.value.text);
+                                      });
                                     },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 16.h),
-                                      child: Container(
-                                        color: Colors.white,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                child: Image.asset(
-                                                  onDealsModel[i].image,
-                                                  width: 40.w,
+                                    controller: controller.searchController.value,
+                                  ),
+                                  SizedBox(
+                                    height: 24.h,
+                                  ),
+                                  ListView.builder(
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    padding: EdgeInsets.all(0),
+                                    itemCount: controller.userList.length,
+                                    itemBuilder: (context, i) => GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            if (controller.selectedList
+                                                .contains(controller.userList[i])) {
+                                              controller.selectedList
+                                                  .remove(controller.userList[i]);
+                                            } else {
+                                              controller.selectedList.add(controller.userList[i]);
+                                            }
+                                          },
+                                        );
+                                        print(controller.selectedList.length);
+                                        print(controller.userList.length);
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.only(bottom: 16.h),
+                                        child: Container(
+                                          color: Colors.white,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.circular(50),
+                                                child: controller.userList[i].image == null
+                                                ? SvgPicture.asset(
+                                                  placeholder,
                                                   height: 40.h,
+                                                  width: 40.w,
                                                   fit: BoxFit.cover,
-                                                )),
-                                            SizedBox(
-                                              width: 16.w,
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  // claireroman
-                                                  Text(onDealsModel[i].title,
-                                                      style: TextStyle(
-                                                          color: grey_aaaaaa,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 14.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                  SizedBox(
-                                                    height: 2.h,
-                                                  ),
-                                                  // Claire Roman
-                                                  Text("Claire Roman",
-                                                      style: TextStyle(
-                                                          color: black_121212,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 14.sp),
-                                                      textAlign: TextAlign.left)
-                                                ],
+                                                )
+                                                : CachedNetworkImage(
+                                                  imageUrl: controller.userList[i].image!,
+                                                  height: 40.h, width: 40.w,
+                                                  fit: BoxFit.cover,
+                                                  progressIndicatorBuilder: (context, url, downloadProgress) => SvgPicture.asset(placeholder, height: 40.h, width: 40.w, fit: BoxFit.cover,),
+                                                  errorWidget: (context, url, error) => SvgPicture.asset(placeholder, height: 40.h, width: 40.w, fit: BoxFit.cover,),
+                                                ),
                                               ),
-                                            ),
-                                            SvgPicture.asset(
-                                              selectedList
-                                                      .contains(onDealsModel[i])
-                                                  ? orange_tick_icon
-                                                  : icon_next_arrow,
-                                              width: 25.w,
-                                              height: 25.h,
-                                            )
-                                          ],
+                                              SizedBox(
+                                                width: 16.w,
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    // claireroman
+                                                    Text(controller.userList[i].userName != null ? controller.userList[i].userName! : "",
+                                                        style: TextStyle(
+                                                            color: grey_aaaaaa,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontFamily:
+                                                                helveticaNeueNeue_medium,
+                                                            fontStyle:
+                                                                FontStyle.normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left),
+                                                    SizedBox(
+                                                      height: 2.h,
+                                                    ),
+                                                    // Claire Roman
+                                                    Text(controller.userList[i].firstName != null ? controller.userList[i].firstName!.capitalizeFirst! + " " + controller.userList[i].lastName!.capitalizeFirst! : "",
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontFamily:
+                                                                helveticaNeueNeue_medium,
+                                                            fontStyle:
+                                                                FontStyle.normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign: TextAlign.left)
+                                                  ],
+                                                ),
+                                              ),
+                                              SvgPicture.asset(
+                                                controller.selectedList
+                                                        .contains(controller.userList[i])
+                                                    ? orange_tick_icon
+                                                    : icon_next_arrow,
+                                                width: 25.w,
+                                                height: 25.h,
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   }),
@@ -321,455 +253,503 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Expanded(
-            flex: 1,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 60,),
-                  ToolbarWithHeaderCenterTitle("UPLOAD VIDEO"),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: 24.w, right: 24.w, top: 40.h, bottom: 24.h),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // UPLOAD VIDEO
-                        Text("VIDEO TITLE",
-                            style: TextStyle(
-                                color: black_121212,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: "Roboto",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12.sp),
-                            textAlign: TextAlign.left),
+    return Obx(
+      () => Scaffold(
+        backgroundColor: Colors.white,
+        body: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Expanded(
+              flex: 1,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 60,),
+                    ToolbarWithHeaderCenterTitle("UPLOAD VIDEO"),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 24.w, right: 24.w, top: 40.h, bottom: 24.h),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // UPLOAD VIDEO
+                          Text("VIDEO TITLE",
+                              style: TextStyle(
+                                  color: black_121212,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: "Roboto",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12.sp),
+                              textAlign: TextAlign.left),
 
-                        SizedBox(
-                          height: 14.h,
-                        ),
+                          SizedBox(
+                            height: 14.h,
+                          ),
 
-                        setTextFieldHelveticaMediumBorder(
-                          controller.titleController.value,
-                          "Type here...",
-                          false,
-                          TextInputType.text,
-                          false,
-                          "",
-                          TextInputAction.next,
-                          () => {
-                            // on Chnages
-                          },
-                        ),
+                          setTextFieldHelveticaMediumBorder(
+                            controller.titleController.value,
+                            "Type here...",
+                            false,
+                            TextInputType.text,
+                            false,
+                            "",
+                            TextInputAction.next,
+                            () => {
+                              // on Chnages
+                            },
+                          ),
 
-                        SizedBox(
-                          height: 24.h,
-                        ),
+                          SizedBox(
+                            height: 24.h,
+                          ),
 
-                        Text("TOPIC",
-                            style: TextStyle(
-                                color: black_121212,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: "Roboto",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12.sp),
-                            textAlign: TextAlign.left),
+                          Text("TOPIC",
+                              style: TextStyle(
+                                  color: black_121212,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: "Roboto",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12.sp),
+                              textAlign: TextAlign.left),
 
-                        SizedBox(
-                          height: 14.h,
-                        ),
+                          SizedBox(
+                            height: 14.h,
+                          ),
 
-                        Container(
-                          height: 50.h,
-                          width: double.infinity,
-                          decoration: SpinnerDecorationBorder,
-                          child: DropdownButtonHideUnderline(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              child: DropdownButton(
-                                  //  validator: (value) => value == null ? "Select a country" : null,
-                                  dropdownColor: Colors.white,
-                                  value: controller.topicName.value,
-                                  hint: Text("Select Topic",
-                                      style: TextStyle(
-                                          color: grey_aaaaaa,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: helveticaNeueNeue_medium,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 14.sp),
-                                      textAlign: TextAlign.left),
-                                  icon: SvgPicture.asset(
-                                    icon_down_arrow_spinner,
-                                    width: 12.w,
-                                    height: 12.h,
-                                  ),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      controller.topicName.value = newValue!;
-                                    });
-                                  },
-                                  items: controller.dropDownTopicItems),
+                          Container(
+                            height: 50.h,
+                            width: double.infinity,
+                            decoration: SpinnerDecorationBorder,
+                            child: DropdownButtonHideUnderline(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 10, right: 10,),
+                                child: DropdownButton(
+                                    dropdownColor: Colors.white,
+                                    value: controller.topicName.value,
+                                    hint: Text("Select Topic",
+                                        style: TextStyle(
+                                            color: grey_aaaaaa,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: helveticaNeueNeue_medium,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 14.sp),
+                                        textAlign: TextAlign.left),
+                                    icon: SvgPicture.asset(
+                                      icon_down_arrow_spinner,
+                                      width: 12.w,
+                                      height: 12.h,
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        controller.topicName.value = newValue!;
+                                      });
+                                    },
+                                    items: controller.dropDownTopicItems),
+                              ),
                             ),
                           ),
-                        ),
 
-                        SizedBox(
-                          height: 24.h,
-                        ),
+                          SizedBox(
+                            height: 24.h,
+                          ),
 
-                        Text("LANGUAGE",
-                            style: TextStyle(
-                                color: black_121212,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: "Roboto",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12.sp),
-                            textAlign: TextAlign.left),
+                          Text("LANGUAGE",
+                              style: TextStyle(
+                                  color: black_121212,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: "Roboto",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12.sp),
+                              textAlign: TextAlign.left),
 
-                        SizedBox(
-                          height: 14.h,
-                        ),
+                          SizedBox(
+                            height: 14.h,
+                          ),
 
-                        Container(
-                          height: 50.h,
-                          width: double.infinity,
-                          decoration: SpinnerDecorationBorder,
-                          child: DropdownButtonHideUnderline(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              child: DropdownButton(
-                                  //  validator: (value) => value == null ? "Select a country" : null,
-                                  dropdownColor: Colors.white,
-                                  value: selectedValuelang,
-                                  hint: Text("Select Language",
-                                      style: TextStyle(
-                                          color: grey_aaaaaa,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: helveticaNeueNeue_medium,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 14.sp),
-                                      textAlign: TextAlign.left),
-                                  icon: SvgPicture.asset(
-                                    icon_down_arrow_spinner,
-                                    width: 12.w,
-                                    height: 12.h,
-                                  ),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      selectedValuelang = newValue!;
-                                    });
-                                  },
-                                  items: dropdownItemslang),
+                          Container(
+                            height: 50.h,
+                            width: double.infinity,
+                            decoration: SpinnerDecorationBorder,
+                            child: DropdownButtonHideUnderline(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 10, right: 10),
+                                child: DropdownButton(
+                                    //  validator: (value) => value == null ? "Select a country" : null,
+                                    dropdownColor: Colors.white,
+                                    value: controller.languageName.value,
+                                    hint: Text("Select Language",
+                                        style: TextStyle(
+                                            color: grey_aaaaaa,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: helveticaNeueNeue_medium,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 14.sp),
+                                        textAlign: TextAlign.left),
+                                    icon: SvgPicture.asset(
+                                      icon_down_arrow_spinner,
+                                      width: 12.w,
+                                      height: 12.h,
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        controller.languageName.value = newValue!;
+                                      });
+                                    },
+                                    items: controller.dropDownLanguageItems),
+                              ),
                             ),
                           ),
-                        ),
 
-                        SizedBox(
-                          height: 24.h,
-                        ),
-
-                        Text("EMBED CODE",
-                            style: TextStyle(
-                                color: black_121212,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: "Roboto",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12.sp),
-                            textAlign: TextAlign.left),
-
-                        SizedBox(
-                          height: 14.h,
-                        ),
-
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Color(0x66f5f5f5),
-                            borderRadius: BorderRadius.circular(4),
-                            border: Border.all(width: 1, color: grey_aaaaaa),
+                          SizedBox(
+                            height: 24.h,
                           ),
-                          child: // <iframe width="560" height="315" src="https://www.youtube.com/embed/yfwNi4aK1_w" title="YouTube vide
-                              Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                                "<iframe width=560 height=315 src=https:www.youtube.com/embed/yfwNi4aK1_w title=YouTube video player frameborder=0 allow=accelerometer autoplay clipboard-write encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>",
-                                style: const TextStyle(
-                                    color: const Color(0xff121212),
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "NeueHelvetica",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 11.0),
-                                textAlign: TextAlign.left),
+
+                          Text("VIDEO LINK",
+                              style: TextStyle(
+                                  color: black_121212,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: "Roboto",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12.sp),
+                              textAlign: TextAlign.left),
+
+                          SizedBox(
+                            height: 14.h,
                           ),
-                        ),
 
-                        SizedBox(
-                          height: 24.h,
-                        ),
+                          setTextFieldHelveticaMediumBorder(
+                            controller.linkController.value,
+                            "Type here...",
+                            false,
+                            TextInputType.text,
+                            false,
+                            "",
+                            TextInputAction.next,
+                            () => {
+                              // on Chnages
+                            },
+                            3
+                          ),
 
-                        Text("DESCRIPTION",
-                            style: TextStyle(
-                                color: black_121212,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: "Roboto",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12.sp),
-                            textAlign: TextAlign.left),
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //     color: Color(0x66f5f5f5),
+                          //     borderRadius: BorderRadius.circular(4),
+                          //     border: Border.all(width: 1, color: grey_aaaaaa),
+                          //   ),
+                          //   child: // <iframe width="560" height="315" src="https://www.youtube.com/embed/yfwNi4aK1_w" title="YouTube vide
+                          //       Padding(
+                          //     padding: const EdgeInsets.all(16.0),
+                          //     child: Text(
+                          //         "<iframe width=560 height=315 src=https:www.youtube.com/embed/yfwNi4aK1_w title=YouTube video player frameborder=0 allow=accelerometer autoplay clipboard-write encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>",
+                          //         style: const TextStyle(
+                          //             color: const Color(0xff121212),
+                          //             fontWeight: FontWeight.w500,
+                          //             fontFamily: "NeueHelvetica",
+                          //             fontStyle: FontStyle.normal,
+                          //             fontSize: 11.0),
+                          //         textAlign: TextAlign.left),
+                          //   ),
+                          // ),
 
-                        SizedBox(
-                          height: 14.h,
-                        ),
+                          SizedBox(
+                            height: 24.h,
+                          ),
 
-                        Container(
-                          decoration: SpinnerDecorationBorder,
-                          height: 122.h,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 4.h,
-                                      bottom: 2.h,
-                                      right: 24.w,
-                                      left: 16.w),
-                                  child: TextFormField(
-                                    controller: controller.descController.value,
-                                    minLines: 2,
-                                    maxLines: 15,
-                                    keyboardType: TextInputType.multiline,
-                                    cursorColor: black_121212,
-                                    style: TextStyle(
-                                        color: black_121212,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: helveticaNeueNeue_medium,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 14.sp),
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      contentPadding: EdgeInsets.zero,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      hintText: 'Write a Description...',
-                                      hintStyle: TextStyle(
-                                          color: grey_aaaaaa,
+                          Text("DESCRIPTION",
+                              style: TextStyle(
+                                  color: black_121212,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: "Roboto",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12.sp),
+                              textAlign: TextAlign.left),
+
+                          SizedBox(
+                            height: 14.h,
+                          ),
+
+                          Container(
+                            decoration: SpinnerDecorationBorder,
+                            height: 122.h,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 4.h,
+                                        bottom: 2.h,
+                                        right: 24.w,
+                                        left: 16.w),
+                                    child: TextFormField(
+                                      controller: controller.descController.value,
+                                      minLines: 2,
+                                      maxLines: 15,
+                                      keyboardType: TextInputType.multiline,
+                                      cursorColor: black_121212,
+                                      style: TextStyle(
+                                          color: black_121212,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
                                           fontStyle: FontStyle.normal,
                                           fontSize: 14.sp),
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        contentPadding: EdgeInsets.zero,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                        errorBorder: InputBorder.none,
+                                        disabledBorder: InputBorder.none,
+                                        hintText: 'Write a Description...',
+                                        hintStyle: TextStyle(
+                                            color: grey_aaaaaa,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: helveticaNeueNeue_medium,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 14.sp),
+                                      ),
                                     ),
                                   ),
                                 ),
+                              ],
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 24.h,
+                          ),
+
+                          Text("RELATED TAGS",
+                              style: TextStyle(
+                                  color: black_121212,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: "Roboto",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12.sp),
+                              textAlign: TextAlign.left),
+
+                          SizedBox(
+                            height: 14.h,
+                          ),
+
+                          Container(
+                            decoration: SpinnerDecorationBorder,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              // child: Row(
+                              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //   children: [
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     borderRadius: BorderRadius.circular(40),
+                                  //     color: Color(0xffebebeb),
+                                  //   ),
+                                  //   child: // Frame 8618
+
+                                  //       Padding(
+                                  //     padding: const EdgeInsets.only(
+                                  //         left: 16, right: 16, top: 8, bottom: 8),
+                                  //     child: Text("Tag name",
+                                  //         style: TextStyle(
+                                  //             color: Color(0xff3f3f3f),
+                                  //             fontWeight: FontWeight.w700,
+                                  //             fontFamily: "Inter",
+                                  //             fontStyle: FontStyle.normal,
+                                  //             fontSize: 12.sp),
+                                  //         textAlign: TextAlign.left),
+                                  //   ),
+                                  // ),
+
+                                  child: TagEditor(
+                                    controller: controller.tagController.value,
+                                    length: controller.tagValues.length,
+                                    hasAddButton: true,
+                                    resetTextOnSubmitted: true,
+                                    delimiters: [',', ' '],
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'^[a-z A-Z]+$')),
+                                    ],
+                                    inputDecoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Tag name',
+                                    ),
+                                    onTagChanged: (newValue) {
+                                      setState(() {
+                                        controller.tagValues.add(newValue);
+                                      });
+                                    },
+                                    onSubmitted: (newValue) {
+                                      setState(() {
+                                        controller.tagValues.add(newValue);
+                                      });
+                                    },
+                                    tagBuilder: (context, index) =>
+                                        ChipLayout(
+                                      index: index,
+                                      label: controller.tagValues[index],
+                                      onDeleted: _onDelete,
+                                    ),
+                                  ),
+
+                                  // ADD TAG
+                                  // InkWell(
+                                  //   onTap: (){
+                                  //     setState(() {
+                                  //       controller.tagValues.add(controller.tagController.value.text);
+                                  //     });
+                                  //   },
+                                  //   child: Text("ADD TAG",
+                                  //       style: TextStyle(
+                                  //           color: Color(0xffff8819),
+                                  //           fontWeight: FontWeight.w500,
+                                  //           fontFamily: "Inter",
+                                  //           fontStyle: FontStyle.normal,
+                                  //           fontSize: 12.sp),
+                                  //       textAlign: TextAlign.left),
+                                  // )
+                              //   ],
+                              // ),
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 24.h,
+                          ),
+
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                displayRecurringOrderBottomSheet(context);
+                              });
+                            },
+                            child: Container(
+                              color: white_ffffff,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("TAG SPEAKERS",
+                                      style: TextStyle(
+                                          color: black_121212,
+                                          fontWeight: FontWeight.w900,
+                                          fontFamily: "Roboto",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 12.sp),
+                                      textAlign: TextAlign.left),
+                                  Icon(
+                                    Icons.add,
+                                    size: 15,
+                                    color: orange_ff881a,
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 24.h,
-                        ),
-
-                        Text("RELATED TAGS",
-                            style: TextStyle(
-                                color: black_121212,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: "Roboto",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12.sp),
-                            textAlign: TextAlign.left),
-
-                        SizedBox(
-                          height: 14.h,
-                        ),
-
-                        Container(
-                          decoration: SpinnerDecorationBorder,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            // child: Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //   children: [
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //     borderRadius: BorderRadius.circular(40),
-                                //     color: Color(0xffebebeb),
-                                //   ),
-                                //   child: // Frame 8618
-
-                                //       Padding(
-                                //     padding: const EdgeInsets.only(
-                                //         left: 16, right: 16, top: 8, bottom: 8),
-                                //     child: Text("Tag name",
-                                //         style: TextStyle(
-                                //             color: Color(0xff3f3f3f),
-                                //             fontWeight: FontWeight.w700,
-                                //             fontFamily: "Inter",
-                                //             fontStyle: FontStyle.normal,
-                                //             fontSize: 12.sp),
-                                //         textAlign: TextAlign.left),
-                                //   ),
-                                // ),
-
-                                child: TagEditor(
-                                  controller: controller.tagController.value,
-                                  length: controller.tagValues.length,
-                                  hasAddButton: true,
-                                  resetTextOnSubmitted: true,
-                                  delimiters: [',', ' '],
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'^[a-z A-Z]+$')),
-                                  ],
-                                  inputDecoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Tag name',
-                                  ),
-                                  onTagChanged: (newValue) {
-                                    setState(() {
-                                      controller.tagValues.add(newValue);
-                                    });
-                                  },
-                                  onSubmitted: (newValue) {
-                                    setState(() {
-                                      controller.tagValues.add(newValue);
-                                    });
-                                  },
-                                  tagBuilder: (context, index) =>
-                                      ChipLayout(
-                                    index: index,
-                                    label: controller.tagValues[index],
-                                    onDeleted: _onDelete,
-                                  ),
-                                ),
-
-                                // ADD TAG
-                                // InkWell(
-                                //   onTap: (){
-                                //     setState(() {
-                                //       controller.tagValues.add(controller.tagController.value.text);
-                                //     });
-                                //   },
-                                //   child: Text("ADD TAG",
-                                //       style: TextStyle(
-                                //           color: Color(0xffff8819),
-                                //           fontWeight: FontWeight.w500,
-                                //           fontFamily: "Inter",
-                                //           fontStyle: FontStyle.normal,
-                                //           fontSize: 12.sp),
-                                //       textAlign: TextAlign.left),
-                                // )
-                            //   ],
-                            // ),
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 24.h,
-                        ),
-
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              displayRecurringOrderBottomSheet(context);
-                            });
-                          },
-                          child: Container(
-                            color: white_ffffff,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("TAG SPEAKERS",
-                                    style: TextStyle(
-                                        color: black_121212,
-                                        fontWeight: FontWeight.w900,
-                                        fontFamily: "Roboto",
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 12.sp),
-                                    textAlign: TextAlign.left),
-                                Icon(
-                                  Icons.add,
-                                  size: 15,
-                                  color: orange_ff881a,
-                                )
-                              ],
                             ),
                           ),
-                        ),
 
-                        SizedBox(
-                          height: 14.h,
-                        ),
-
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            color: Color(0xffebebeb),
+                          controller.selectedList.isEmpty
+                          ? Container()
+                          : SizedBox(
+                            height: 14.h,
                           ),
-                          child: // Frame 8618
 
-                              Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, top: 8, bottom: 8),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(50),
-                                    child: Image.asset(
-                                      "assets/images/img_girl.png",
-                                      width: 17.w,
-                                      height: 17.h,
-                                      fit: BoxFit.cover,
-                                    )),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                // @HennaBack
-                                Text("@HennaBack",
-                                    style: TextStyle(
-                                        color: black_121212,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: "Roboto",
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 11.sp),
-                                    textAlign: TextAlign.left),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Icon(
-                                  Icons.cancel_outlined,
-                                  size: 12,
-                                )
-                              ],
+                          controller.selectedList.isEmpty
+                          ? Container()
+                          : Container(
+                            height: 37.h,
+                            width: MediaQuery.of(context).size.width,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.selectedList.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(40),
+                                      color: grey_f5f5f5
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(50),
+                                            child: controller.selectedList[index].image == null
+                                            ? SvgPicture.asset(
+                                              placeholder,
+                                              height: 17.h,
+                                              width: 17.w,
+                                              fit: BoxFit.cover,
+                                            )
+                                            : CachedNetworkImage(
+                                              imageUrl: controller.selectedList[index].image!,
+                                              height: 17.h, width: 17.w,
+                                              fit: BoxFit.cover,
+                                              progressIndicatorBuilder: (context, url, downloadProgress) => SvgPicture.asset(placeholder, height: 17.h, width: 17.w, fit: BoxFit.cover,),
+                                              errorWidget: (context, url, error) => SvgPicture.asset(placeholder, height: 17.h, width: 17.w, fit: BoxFit.cover,),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Text("@${controller.selectedList[index].userName != null ? controller.selectedList[index].userName! : controller.selectedList[index].firstName ?? ""}",
+                                              style: TextStyle(
+                                                  color: black_121212,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: "Roboto",
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 11.sp),
+                                              textAlign: TextAlign.left),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          GestureDetector(
+                                            onTap: (){
+                                              print("object");
+                                              controller.selectedList.remove(controller.userList[index]);
+                                            },
+                                            child: Icon(
+                                              Icons.cancel_outlined,
+                                              size: 12,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
                             ),
                           ),
-                        ),
-
-                        SizedBox(
-                          height: 100.h,
-                        ),
-                      ],
+                          SizedBox(
+                            height: 100.h,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: BlackButton("Next", Colors.white, () {}),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: BlackButton("Next", Colors.white, () {
+                if (controller.checkVideoValidation(context)) {
+                  checkNet(context).then((value) {
+                    controller.createVideoApi(context);
+                  });
+                }
+              }),
+            )
+          ],
+        ),
       ),
     );
   }

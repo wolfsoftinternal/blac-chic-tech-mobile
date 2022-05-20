@@ -24,15 +24,17 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
 
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-       home: SplashScreen(),
-        //  home: ListScreen(),
-      ),
+      builder: (BuildContext context,child) { 
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+         home: SplashScreen(),
+          //  home: ListScreen(),
+        );
+      },
     );
   }
 }

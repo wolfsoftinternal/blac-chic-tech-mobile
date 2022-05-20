@@ -89,7 +89,6 @@ class _UploadVideosState extends State<UploadVideos> {
                               setState(() { });
                               controller.videoFile.value = pickedFile.path;
                               controller.duration.value = controller.videoController!.value.duration.toString();
-                              controller.videoController!.seekTo(Duration(seconds: 1));
                               _chewieController = ChewieController(
                                 videoPlayerController: controller.videoController!,
                                 aspectRatio: 5 / 4,
@@ -146,7 +145,6 @@ class _UploadVideosState extends State<UploadVideos> {
                             setState(() { });
                             controller.videoFile.value = pickedFile.path;
                             controller.duration.value = controller.videoController!.value.duration.toString();
-                            controller.videoController!.seekTo(Duration(seconds: 1));
                             _chewieController = ChewieController(
                                 videoPlayerController: controller.videoController!,
                                 aspectRatio: 5 / 4,
