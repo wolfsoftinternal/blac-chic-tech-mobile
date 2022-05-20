@@ -6,6 +6,7 @@ const location_icon = 'assets/images/location_icon.png';
 const icon_next_arrow = 'assets/images/icon_next_arrow.svg';
 const icon_back_black_arrow = 'assets/images/icon_back_black_arrow.svg';
 const icon_info = 'assets/images/icon_info.svg';
+const icon_upload_image = 'assets/images/icon_upload_image.svg';
 const icon_upload_img = 'assets/images/icon_upload_img.svg';
 const icon_down_arrow_spinner = 'assets/images/icon_down_arrow_spinner.svg';
 const icon_linkedin = 'assets/images/linkedin.png';

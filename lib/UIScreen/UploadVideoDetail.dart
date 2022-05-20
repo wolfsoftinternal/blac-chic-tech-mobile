@@ -159,7 +159,8 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          SearchBarTag(placeholder: "Search people"),
+
+                                       //   SearchBarTag(placeholder: "Search people"),
 
                                           SizedBox(
                                             height: 24.h,
