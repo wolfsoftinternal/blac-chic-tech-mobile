@@ -7,13 +7,15 @@ import 'package:iconly/iconly.dart';
 
 
 class SearchBarTag extends StatelessWidget {
-  const SearchBarTag({Key? key, required this.placeholder}) : super(key: key);
-
+  const SearchBarTag({Key? key, required this.placeholder, this.onSubmit, this.controller}) : super(key: key);
+  final Function(String)? onSubmit;
+  final TextEditingController? controller;
   final String placeholder;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller!,
       decoration: InputDecoration(
         filled: true,
         hintText: placeholder,
@@ -34,6 +36,7 @@ class SearchBarTag extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.r),
         ),
       ),
+      onSubmitted: onSubmit,
     );
   }
 }

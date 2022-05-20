@@ -80,3 +80,18 @@ Text setHelveticaBoldCenter(String text, double size, Color color, FontWeight we
         fontStyle: fontStyle),
   );
 }
+
+Text setRoboto(String text, double size, Color color, FontWeight weight) {
+  return Text(
+    text,
+    overflow: TextOverflow.ellipsis,
+    style: TextStyle(
+      color: color,
+      fontWeight: weight,
+      fontFamily: "Roboto",
+      fontStyle: FontStyle.normal,
+      fontSize: size
+    ),
+    textAlign: TextAlign.left
+  );
+}

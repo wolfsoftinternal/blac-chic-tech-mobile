@@ -1,4 +1,6 @@
+import 'package:blackchecktech/Screens/Home/CreateEvent/view/CreateEvent.dart';
 import 'package:blackchecktech/Screens/Home/CreatePost/view/CreatPost.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/view/UploadVideoDetail.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/view/UploadVideos.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -53,6 +55,7 @@ createBottomSheet(context) {
                         padding: const EdgeInsets.only(top: 40.0),
                         child: InkWell(
                           onTap: () {
+                            Get.back();
                             Get.to(CreatPost());
                           },
                           child: Row(
@@ -70,7 +73,8 @@ createBottomSheet(context) {
                         padding: const EdgeInsets.only(top: 40.0),
                         child: InkWell(
                           onTap: (){
-                            Get.to(UploadVideos());
+                            Get.back();
+                            Get.to(UploadVideoDetail());
                           },
                           child: Row(
                             children: [
@@ -85,14 +89,20 @@ createBottomSheet(context) {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 40.0, bottom: 10.0),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset(create_event),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            setHelceticaBold("Events", 16, black_121212, FontWeight.w500, FontStyle.normal, -0.32),
-                          ],
+                        child: InkWell(
+                          onTap: (){
+                            Get.back();
+                            Get.to(CreateEvent());
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(create_event),
+                              const SizedBox(
+                                width: 16,
+                              ),
+                              setHelceticaBold("Events", 16, black_121212, FontWeight.w500, FontStyle.normal, -0.32),
+                            ],
+                          ),
                         ),
                       )
                     ],

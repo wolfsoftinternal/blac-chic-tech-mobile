@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/route_manager.dart';
+import 'package:http/http.dart';
 
 setTextFieldWithBorder(
     TextEditingController controller,
@@ -102,19 +105,23 @@ setTextFieldHelveticaMediumBorder(
     bool validtion,
     String errorMSg,
     TextInputAction textInputAction,
-    Function onchange) {
+    Function onchange,
+    [int? max]) {
   return Theme(
       data: new ThemeData(
         primaryColor: Colors.green,
         primaryColorDark: Colors.red,
       ),
       child: TextField(
+        controller: controller,
         style: TextStyle(
             color: black_121212,
             fontWeight: FontWeight.w500,
             fontFamily: helveticaNeueNeue_medium,
             fontStyle: FontStyle.normal,
             fontSize: 14.sp),
+        maxLines: max,
+        minLines: 1,
         decoration: new InputDecoration(
           isDense: true,
           // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
@@ -140,6 +147,67 @@ setTextFieldHelveticaMediumBorder(
         textInputAction: textInputAction,
         keyboardType: inputType,
         cursorColor: black_121212,
+      ));
+}
+
+setTextFieldHelveticaMediumOrangeBorder(
+    TextEditingController controller,
+    String hintText,
+    bool secureEntry,
+    TextInputType inputType,
+    TextInputAction textInputAction,
+    Function onchange,
+    String? Function(String? val)? validator,
+    bool readonly,
+    [Function()? onTap]) {
+  return Theme(
+      data: new ThemeData(
+        primaryColor: Colors.green,
+        primaryColorDark: Colors.red,
+      ),
+      child: TextFormField(
+        controller: controller,
+        style: TextStyle(
+            color: black_121212,
+            fontWeight: FontWeight.w500,
+            fontFamily: helveticaNeueNeue_medium,
+            fontStyle: FontStyle.normal,
+            fontSize: 14.sp),
+        validator: validator,
+        readOnly: readonly,
+        decoration: new InputDecoration(
+          isDense: true,
+          // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+          hintText: hintText,
+          hintStyle: TextStyle(
+              color: grey_aaaaaa,
+              fontWeight: FontWeight.w500,
+              fontFamily: helveticaNeueNeue_medium,
+              fontStyle: FontStyle.normal,
+              fontSize: 14.sp),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderSide: BorderSide(color: grey_e8e8e8, width: 1),
+          ),
+          filled: true,
+          fillColor: Colors.white70,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderSide: BorderSide(color:grey_e8e8e8, width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderSide: BorderSide(color: orange_ff881a),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderSide: BorderSide(color: Colors.red),
+          ),
+        ),
+        textInputAction: textInputAction,
+        keyboardType: inputType,
+        cursorColor: black_121212,
+        onTap: onTap,
       ));
 }
 
