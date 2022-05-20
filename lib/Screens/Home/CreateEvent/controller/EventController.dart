@@ -36,6 +36,7 @@ class EventController extends GetxController {
   RxList<UserList> selectedList = <UserList>[].obs;
   RxList<UserList> searchList = <UserList>[].obs;
   RxString benefitDetails = ''.obs;
+  RxString admissionDetails = ''.obs;
   RxString selectName = "Select All".obs; 
   RxDouble latitude = 0.0.obs;
   RxDouble longitude = 0.0.obs;
