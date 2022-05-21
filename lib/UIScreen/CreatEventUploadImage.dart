@@ -144,6 +144,9 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
 
+
+                                      /*--------------Please Uncomment the below search bar--------------*/
+
                                       //   SearchBarTag(placeholder: "Search people"),
 
                                       SizedBox(
@@ -326,6 +329,8 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
+
+                                      /*--------------Please Uncomment the below search bar--------------*/
 
                                       //   SearchBarTag(placeholder: "Search people"),
 
