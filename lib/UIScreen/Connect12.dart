@@ -70,7 +70,7 @@ class _Connect12State extends State<Connect12> {
                       color:grey_f5f5f5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       SvgPicture.asset(search),
