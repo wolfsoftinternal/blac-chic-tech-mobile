@@ -70,9 +70,6 @@ class BlackButton extends StatelessWidget {
                         fontSize: 16.sp
                       ),
                       ),
-
-
-
                     ],
                   ),
 

@@ -35,3 +35,6 @@ const create_event = 'assets/images/create_event.svg';
 const icon_map_marker_png = 'assets/images/map_marker.png';
 const icon_current_loc = 'assets/images/current_loc.svg';
 const location_pin = 'assets/images/iconly_bulk_location.svg';
+const filter = 'assets/images/icon_filter.svg';
+const photo_user = 'assets/images/man.jpg';
+const icon_tick_blue = 'assets/images/tick_blue.svg';

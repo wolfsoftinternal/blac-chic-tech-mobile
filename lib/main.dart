@@ -1,10 +1,11 @@
 import 'package:blackchecktech/SplashScreen.dart';
+import 'package:blackchecktech/UIScreen/Connect12.dart';
 import 'package:blackchecktech/UIScreen/ListScreen.dart';
+import 'package:blackchecktech/UIScreen/Test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
-
 import 'Welcome.dart';
 
 GetIt getIt = GetIt.instance;
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-         home: SplashScreen(),
+         home: Connect12(),
           //  home: ListScreen(),
         );
       },
