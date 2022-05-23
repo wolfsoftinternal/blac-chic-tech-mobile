@@ -9,6 +9,8 @@ import 'Welcome.dart';
 
 GetIt getIt = GetIt.instance;
 
+const Color themeColor = Color(0xff00bc56);
+
 void main() {
   runApp(const MyApp());
 }
