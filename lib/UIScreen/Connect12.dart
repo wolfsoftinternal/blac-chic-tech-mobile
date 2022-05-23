@@ -4,6 +4,7 @@ import 'package:blackchecktech/Model/FollowGridModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
@@ -70,7 +71,6 @@ class _Connect12State extends State<Connect12> {
                       color:grey_f5f5f5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       SvgPicture.asset(search),
@@ -395,25 +395,16 @@ class _Connect12State extends State<Connect12> {
                         children: [
                           Stack(
                             children: [
-                              Container(
-                                width: double.infinity,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(8.0.w),
-                                      topRight: Radius.circular(8.0.w)),
-                                  child: Image.asset(
-                                    resultGridModel[i].imgProfile,
-                                    height: 134.h,
-                                    width: double.infinity,
-                                    fit: BoxFit.fill,
-                                  ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(8.0.w),
+                                    topRight: Radius.circular(8.0.w)),
+                                child: Image.asset(
+                                  resultGridModel[i].imgProfile,
+                                  height: 134.h,
+                                  width: double.infinity,
+                                  fit: BoxFit.fill,
                                 ),
-                              ),
-                              Image.asset(
-                                resultGridModel[i].imgProfile,
-                                height: 134.h,
-                                width: double.infinity,
-                                fit: BoxFit.fill,
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -429,7 +420,7 @@ class _Connect12State extends State<Connect12> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: 60.h),
+                                margin: EdgeInsets.only(top: 55.h),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -448,9 +439,6 @@ class _Connect12State extends State<Connect12> {
 
                                         SvgPicture.asset(icon_tick_blue,height: 30,width: 30,)
                                       ],
-                                    ),
-                                    SizedBox(
-                                      height: 4.h,
                                     ),
                                     Center(
                                       child: Text(
@@ -472,9 +460,11 @@ class _Connect12State extends State<Connect12> {
                           Center(
                             child: Container(
                               transform: Matrix4.translationValues(0, -18, 0),
+
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 18.w, vertical: 11.h),
+                                  horizontal: 17.w, vertical: 11.h),
                               decoration: BoxDecoration(
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(40.r),
                                 boxShadow: [
                                   BoxShadow(
@@ -487,22 +477,27 @@ class _Connect12State extends State<Connect12> {
                                     spreadRadius: 2.0,
                                   ), //BoxShadow
                                 ],
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Color(0xff1c2535),
-                                    Color(0xff04080f)
-                                  ],
-                                  stops: [0.0, 5.0],
-                                ),
                               ),
-                              child: Text(
-                                "Followed",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: helvetica_neu_bold,
-                                    fontSize: 11.sp),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SvgPicture.asset(
+                                    icon_add_user,
+                                    height: 11.h,
+                                    width: 11.w,
+                                  ),
+                                  SizedBox(
+                                    width: 4.w,
+                                  ),
+                                  Text(
+                                    "Follow",
+                                    style: TextStyle(
+                                        fontSize: 11.sp,
+                                        fontFamily: helvetica_neu_bold,
+                                        color: black_121212),
+                                  )
+                                ],
                               ),
                             ),
                           ),
@@ -529,6 +524,7 @@ class _Connect12State extends State<Connect12> {
                                   color: black_121212),
                             ),
                           ),
+
                         ],
                       ),
                     );
