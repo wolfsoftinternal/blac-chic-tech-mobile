@@ -21,7 +21,7 @@ class _Connect12State extends State<Connect12> {
   List<FollowGridModel> resultGridModel = [
     FollowGridModel(
         photo_user,
-        "Jessie Ellen",
+        "Jessie Ellen1",
         "Product manager and brand\nstrategist @capitalone",
         "UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk"),
     FollowGridModel(
