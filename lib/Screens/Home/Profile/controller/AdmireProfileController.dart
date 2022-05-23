@@ -256,6 +256,9 @@ class AdmireProfileController extends GetxController {
 
             videoController.clear();
             for(int i = 0; i<videoList.length; i++){
+              if(videoList[i].file == null){
+                videoList.remove(videoList[i]);
+              }
               videoController.add(VideoPlayerController.network(videoList[i].file!));
               initializeVideoPlayerFuture.add(videoController[i].initialize());
             }
