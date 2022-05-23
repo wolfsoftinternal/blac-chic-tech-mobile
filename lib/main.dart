@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
-
-import 'UIScreen/EventList.dart';
 import 'Welcome.dart';
 
 GetIt getIt = GetIt.instance;
