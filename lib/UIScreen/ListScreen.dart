@@ -2,12 +2,14 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/FullInformatio
 import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
+import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/UIScreen/BcConnect.dart';
 import 'package:blackchecktech/UIScreen/Connect12.dart';
 import 'package:blackchecktech/UIScreen/CreatEventUploadImage.dart';
 import 'package:blackchecktech/UIScreen/CreatPost.dart';
 import 'package:blackchecktech/UIScreen/CreateEventDetail.dart';
+import 'package:blackchecktech/UIScreen/EventList2.dart';
 import 'package:blackchecktech/UIScreen/PostGalleryPicker.dart';
 import 'package:blackchecktech/UIScreen/PostLocation.dart';
 import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
@@ -39,13 +41,13 @@ class ListScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Connect12(),
+                    builder: (context) => EventList2(),
                   ));
             },
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Text(
-                "Connect12 Screen",
+                "EventList2 Screen",
                 style: TextStyle(
                     color: Colors.black87,
                     fontFamily: helveticaNeueNeue_medium,

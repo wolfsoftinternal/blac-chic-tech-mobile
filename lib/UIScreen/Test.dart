@@ -37,9 +37,8 @@ class _TestState extends State<Test> {
               Center(
                 child: Container(
                   transform: Matrix4.translationValues(0, -18, 0),
-
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 17.w, vertical: 11.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 17.w, vertical: 11.h),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(40.r),
@@ -78,15 +77,14 @@ class _TestState extends State<Test> {
                   ),
                 ),
               ),
-
-
-
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Center(
                 child: Container(
                   transform: Matrix4.translationValues(0, -18, 0),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 18.w, vertical: 11.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.w, vertical: 11.h),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40.r),
                     boxShadow: [
@@ -103,10 +101,7 @@ class _TestState extends State<Test> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xff1c2535),
-                        Color(0xff04080f)
-                      ],
+                      colors: [Color(0xff1c2535), Color(0xff04080f)],
                       stops: [0.0, 5.0],
                     ),
                   ),
@@ -119,7 +114,16 @@ class _TestState extends State<Test> {
                   ),
                 ),
               ),
-
+              Center(child: InkWell(child: SvgPicture.asset(filter))),
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: Text(
+                    "Data",
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  ),
+                ),
+              )
             ],
           ),
         ),
