@@ -33,6 +33,8 @@ class BcConnect extends StatefulWidget {
 
 class _BcConnectState extends State<BcConnect> {
 
+  String? dropdownValue;
+
   List<FollowFriendModel> onFollowFriendModel = [
     FollowFriendModel('assets/images/grid_img_one.png', 'Queen South'),
     FollowFriendModel('assets/images/grid_img_one.png', 'Jessica J'),
@@ -43,6 +45,10 @@ class _BcConnectState extends State<BcConnect> {
   ];
 
   var _firstnameController = TextEditingController();
+
+  bool isSimpleBid = false;
+  bool isAutoBid = false;
+  bool isLayoutFirst = false;
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +110,10 @@ class _BcConnectState extends State<BcConnect> {
                           TextInputAction.next,
                           TextInputType.text),
                       ),
+
+
+
+
 
                       // Recently Search
                       Padding(
