@@ -10,6 +10,8 @@ import 'Welcome.dart';
 
 GetIt getIt = GetIt.instance;
 
+const Color themeColor = Color(0xff00bc56);
+
 void main() {
   runApp(const MyApp());
 }
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
          home: Connect12(),
-          //  home: ListScreen(),
+       
         );
       },
     );

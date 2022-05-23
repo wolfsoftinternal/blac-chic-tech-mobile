@@ -36,12 +36,12 @@ class _CreateEventState extends State<CreateEvent> {
   TimeOfDay? startTime;
   List cards = [""];
   List benefits = [];
-  List<TextEditingController> beneController = [];
   List cardsTicketPrice = [""];
   List ticketPrice = [];
   List<String> categoryController = [];
   List<TextEditingController> amountController = [];
   List<List<TextEditingController>> benefitController = [];
+  int i = 0;
 
 
   List<DropdownMenuItem<String>> get dropdownItems{
@@ -64,23 +64,18 @@ class _CreateEventState extends State<CreateEvent> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // cards.forEach((element) {
-    //   var benefitsController = TextEditingController(text: element);
-    //   benefitController![element].add(benefitsController);
-    // });
-
     categoryController.add("Premium");
-    benefitController.add(amountController);
+    List<TextEditingController> beneController = [];
+    benefitController.add(beneController);
     cardsTicketPrice.forEach((element) {
       var ticketCategoryController = element;
       var ticketAmountController = TextEditingController(text: element);
-      // var ticketBeneController = TextEditingController(text: element);
-      // var benefitsController = TextEditingController(text: element);
+      var ticketBeneController = TextEditingController(text: element);
+
       categoryController.add(ticketCategoryController);
       amountController.add(ticketAmountController);
-      // ticketBenefitController.add(ticketBeneController);
-      // benefitController.add(benefitsController);
-      // benefitController![element].add(benefitsController);
+      beneController.add(ticketBeneController);
+      
       for (var element in cards) {
         var benefitsController = TextEditingController(text: element);
         benefitController[0][0] = benefitsController;
@@ -255,7 +250,7 @@ class _CreateEventState extends State<CreateEvent> {
                                       fontSize: 14.sp),
                                   // validator: validator,
                                   readOnly: true,
-                                  decoration: new InputDecoration(
+                                  decoration: InputDecoration(
                                     isDense: true,
                                     // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                                     hintText: 'Type here...',
@@ -283,9 +278,7 @@ class _CreateEventState extends State<CreateEvent> {
                                       borderRadius: BorderRadius.all(Radius.circular(6.7)),
                                       borderSide: BorderSide(color: Colors.red),
                                     ),
-                                    suffix: cards.length == 1 
-                                      ? Container() 
-                                      :  Padding(padding: EdgeInsets.all(10.0), child: SvgPicture.asset(icon_location)),
+                                    suffixIcon: Padding(padding: EdgeInsets.all(10.0), child: SvgPicture.asset(icon_location)),
                                   ),
                                   cursorColor: black_121212,
                                   onTap: (){
@@ -361,6 +354,28 @@ class _CreateEventState extends State<CreateEvent> {
                                       onTap: () {
                                         setState(() {
                                           controller.selectedAdmission.value = 0;
+                                          categoryController = [];
+                                          amountController = [];
+                                          benefitController = [];
+                                          cardsTicketPrice = [""];
+
+                                          categoryController.add("Premium");
+                                          List<TextEditingController> beneController = [];
+                                          benefitController.add(beneController);
+                                          cardsTicketPrice.forEach((element) {
+                                            var ticketCategoryController = element;
+                                            var ticketAmountController = TextEditingController(text: element);
+                                            var ticketBeneController = TextEditingController(text: element);
+
+                                            categoryController.add(ticketCategoryController);
+                                            amountController.add(ticketAmountController);
+                                            beneController.add(ticketBeneController);
+
+                                            for (var element in cards) {
+                                              var benefitsController = TextEditingController(text: element);
+                                              benefitController[0][0] = benefitsController;
+                                            }
+                                          });
                                         });
                                       },
                                       child: Container(
@@ -397,6 +412,19 @@ class _CreateEventState extends State<CreateEvent> {
                                       onTap: () {
                                         setState(() {
                                           controller.selectedAdmission.value = 1;
+                                          benefitController = [];
+                                          cardsTicketPrice = [""];
+                                          List<TextEditingController> beneController = [];
+                                          benefitController.add(beneController);
+                                          cardsTicketPrice.forEach((element) {
+                                            var ticketBeneController = TextEditingController(text: element);
+                                            beneController.add(ticketBeneController);
+                                            
+                                            for (var element in cards) {
+                                              var benefitsController = TextEditingController(text: element);
+                                              benefitController[0][0] = benefitsController;
+                                            }
+                                          });
                                         });
                                       },
                                       child: Container(
@@ -433,6 +461,19 @@ class _CreateEventState extends State<CreateEvent> {
                                       onTap: () {
                                         setState(() {
                                           controller.selectedAdmission.value = 2;
+                                          benefitController = [];
+                                          cardsTicketPrice = [""];
+                                          List<TextEditingController> beneController = [];
+                                          benefitController.add(beneController);
+                                          cardsTicketPrice.forEach((element) {
+                                            var ticketBeneController = TextEditingController(text: element);
+                                            beneController.add(ticketBeneController);
+                                            
+                                            for (var element in cards) {
+                                              var benefitsController = TextEditingController(text: element);
+                                              benefitController[0][0] = benefitsController;
+                                            }
+                                          });
                                         });
                                       },
                                       child: Container(
@@ -686,7 +727,7 @@ class _CreateEventState extends State<CreateEvent> {
                                           children: [
                                             ListView.builder(
                                               physics: const NeverScrollableScrollPhysics(),
-                                              itemCount: cards.length,
+                                              itemCount: benefitController[i].length,
                                               shrinkWrap: true,
                                               padding: EdgeInsets.zero,
                                               itemBuilder: (BuildContext context, int index) {
@@ -734,9 +775,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                         : GestureDetector(
                                                           onTap: (){
                                                             setState(() {
-                                                              if(index != 0 ){
-                                                                cards.remove(cards[index]);
-                                                              }
+                                                              benefitController[i].remove(benefitController[i][index]);
                                                             });
                                                           },
                                                           child: Icon(Icons.close, color: grey_aaaaaa,)
@@ -750,14 +789,8 @@ class _CreateEventState extends State<CreateEvent> {
                                             GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  cardsTicketPrice.forEach((element) {
-                                                    var benefit = TextEditingController(text: element);
-                                                    benefitController[i].add(benefit);
-
-                                                    if (element.toString() == "") {
-                                                      benefitController[i].remove(element);
-                                                    }
-                                                  });
+                                                  var benefit = TextEditingController(text: '');
+                                                  benefitController[i].add(benefit);
                                                   cards.add("");
                                                 });
                                               },
@@ -799,29 +832,30 @@ class _CreateEventState extends State<CreateEvent> {
                                 onTap: () {
                                   setState(() {
                                     categoryController.add("Premium");
+                                    ++i;
+                                    List<TextEditingController> beneController = [];
+                                    beneController.add(TextEditingController(text: ''));
+                                    benefitController.add(beneController);
                                     cardsTicketPrice.forEach((element) {
                                       var ticketCategoryController = element;
                                       var ticketAmountController = TextEditingController(text: element);
-                                      // var ticketBeneController = TextEditingController(text: element);
 
                                       categoryController.add(ticketCategoryController);
                                       amountController.add(ticketAmountController);
-                                      // ticketBenefitController.add(ticketBeneController);
 
                                       if (element.toString() == "") {
                                         categoryController.remove(element);
                                         amountController.remove(element);
-                                        // ticketBenefitController.remove(element);
                                       }
-                                      cardsTicketPrice.forEach((element) {
-                                        var benefit = TextEditingController(text: element);
-                                        benefitController[1][0] = benefit;
+                                      
+                                      for (var element in cards) {
+                                        var benefitsController = TextEditingController(text: element);
+                                        benefitController[i].add(benefitsController);
 
-                                        if (element.toString() == "") {
-                                          benefitController[1].remove(element);
+                                        if(element.toString() == ""){
+                                          benefitController[i].remove(benefitsController);
                                         }
-                                      });
-                                      cards.add("");
+                                      }
                                     });
                                     cardsTicketPrice.add("");
                                   });
@@ -844,19 +878,44 @@ class _CreateEventState extends State<CreateEvent> {
               padding: const EdgeInsets.all(24.0),
               child: BlackButton("Next", Colors.white, () {
                 // if (eventKey.currentState!.validate()) {
-                  // benefits.clear();
-                  // for (int i = 0; i < cards.length; i++) {
-                  //   benefits.add(benefitController[i].text);
-                  // }
+                  benefits.clear();
+                  ticketPrice.clear();
 
-                  // List itemList = [];
-                  // itemList.clear();
-                  // for (var item in benefits) {
-                  //   itemList.add(item);
-                  // }
-                  // controller.benefitDetails.value = itemList.join(',');
-                  // print(controller.benefitDetails.value);
-                  // checkNet(context).then((value) {});
+                  if(controller.selectedAdmission.value == 0){
+                    for (int i = 0; i < cardsTicketPrice.length; i++) {
+                      for(int j = 0; j < benefitController[i].length; j++){
+                        benefits.add(benefitController[i][j].text);
+                        ticketPrice.add({
+                          '"Price"': '"${amountController[i].text}"',
+                          '"category"': '"${categoryController[i]}"',
+                          '"benifits"': '"$benefits"'
+                        });
+                      }
+                    }
+
+                    List itemList = [];
+                    itemList.clear();
+                    for (var item in ticketPrice) {
+                      itemList.add(item);
+                    }
+                    controller.admissionDetails.value = itemList.join(',');
+                    print(controller.admissionDetails.value);
+                  }else{
+                    for (int i = 0; i < cardsTicketPrice.length; i++) {
+                      for(int j = 0; j < benefitController[i].length; j++){
+                        benefits.add(benefitController[i][j].text);
+                      }
+                    }
+
+                    List itemList = [];
+                    itemList.clear();
+                    for (var item in benefits) {
+                      itemList.add(item);
+                    }
+                    controller.benefitDetails.value = itemList.join(',');
+                    print(controller.benefitDetails.value);
+                  }
+                  
                 // }
               }),
             )

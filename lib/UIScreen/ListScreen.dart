@@ -3,8 +3,13 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoVi
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/UIScreen/BcConnect.dart';
+import 'package:blackchecktech/UIScreen/CreatEventUploadImage.dart';
 import 'package:blackchecktech/UIScreen/CreatPost.dart';
+import 'package:blackchecktech/UIScreen/CreateEventDetail.dart';
+import 'package:blackchecktech/UIScreen/PostGalleryPicker.dart';
 import 'package:blackchecktech/UIScreen/PostLocation.dart';
+import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
 import 'package:blackchecktech/UIScreen/TagPeople.dart';
 import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
 import 'package:blackchecktech/UIScreen/UploadVideos.dart';
@@ -28,6 +33,101 @@ class ListScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BcConnect(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "BcConnect Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PostGalleryPicker(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "PostGalleryPicker Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateEventDetail(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "CreateEventDetail Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisteredPeople(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "RegisteredPeople Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatEventUploadImage(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "CreatEventUploadImage Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
           GestureDetector(
             onTap: () {
               Navigator.push(
