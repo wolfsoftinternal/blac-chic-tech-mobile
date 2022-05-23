@@ -74,11 +74,11 @@ class _InputTextStaicState extends State<InputTextStaic> {
           Expanded(
             flex: 1,
             child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  top: 16,
-                  bottom: 16
+              padding:  EdgeInsets.only(
+                  left: 10.w,
+                  right: 10.w,
+                  top: 16.h,
+                  bottom: 16.h
               ),
 
               child: TextFormField(
@@ -98,8 +98,9 @@ class _InputTextStaicState extends State<InputTextStaic> {
                   // you can change this with the top text like you want
                   // labelText: hint,
                   // labelStyle: TextStyle(color: grey_aaaaaa,fontFamily: helveticaNeueNeue_medium,fontSize: 14),
+                  hintText: hint,
                   hintStyle: TextStyle(
-                      color: black_121212, fontFamily: helveticaNeueNeue_medium,fontSize: 14),
+                      color: grey_aaaaaa, fontFamily: helveticaNeueNeue_medium,fontSize: 14),
                   border: InputBorder.none,
                   filled: false,
                 ),
