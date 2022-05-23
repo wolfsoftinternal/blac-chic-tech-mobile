@@ -603,6 +603,8 @@ packages:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
+    version: "4.4.0"
+
     version: "5.0.0"
   photo_manager:
     dependency: "direct main"
@@ -611,7 +613,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-    version: "4.4.0"
   platform:
     dependency: transitive
     description:

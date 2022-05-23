@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
-
 import 'Welcome.dart';
 
 GetIt getIt = GetIt.instance;
@@ -35,10 +34,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-       //  home: SplashScreen(),
-            home: ListScreen(),
          home: Connect12(),
-          //  home: ListScreen(),
+       
         );
       },
     );
