@@ -133,6 +133,101 @@ class ListScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
+                    builder: (context) => BcConnect(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "BcConnect Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PostGalleryPicker(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "PostGalleryPicker Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateEventDetail(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "CreateEventDetail Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisteredPeople(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "RegisteredPeople Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatEventUploadImage(),
+                  ));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "CreatEventUploadImage Screen",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontFamily: helveticaNeueNeue_medium,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
                     builder: (context) => UploadVideoDetail(),
                   ));
             },
