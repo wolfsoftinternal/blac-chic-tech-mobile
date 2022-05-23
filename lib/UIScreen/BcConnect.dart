@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 import '../Model/FollowFriendModel.dart';
@@ -46,9 +47,8 @@ class _BcConnectState extends State<BcConnect> {
 
   var _firstnameController = TextEditingController();
 
-  bool isSimpleBid = false;
-  bool isAutoBid = false;
-  bool isLayoutFirst = false;
+  bool isFollow = true;
+  bool isFollowed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -110,9 +110,6 @@ class _BcConnectState extends State<BcConnect> {
                           TextInputAction.next,
                           TextInputType.text),
                       ),
-
-
-
 
 
                       // Recently Search
@@ -273,45 +270,112 @@ class _BcConnectState extends State<BcConnect> {
                                   ],
                                 ),
 
-                                Positioned(
-                                  top: 115.h,
-                                  left: 40.w,
-                                  child: Padding(
-                                    padding:  EdgeInsets.only(top: 0.h),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50.r),
-                                        gradient: LinearGradient(
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.topCenter,
-                                            colors: [Color(0xff1c2535), Color(0xff04080f)]),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color(0x26121212).withOpacity(0.2),
-                                            spreadRadius: 5,
-                                            blurRadius: 7,
-                                            offset: Offset(0, 3), // changes position of shadow
+                                Visibility(
+                                  visible: isFollowed,
+                                  child: Positioned(
+                                    top: 115.h,
+                                    left: 40.w,
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        setState(() {
+                                          isFollowed = false;
+                                          isFollow = true;
+                                        });
+                                      },
+                                      child: Padding(
+                                        padding:  EdgeInsets.only(top: 0.h),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(50.r),
+                                            gradient: LinearGradient(
+                                                begin: Alignment.bottomCenter,
+                                                end: Alignment.topCenter,
+                                                colors: [Color(0xff1c2535), Color(0xff04080f)]),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color(0x26121212).withOpacity(0.2),
+                                                spreadRadius: 5,
+                                                blurRadius: 7,
+                                                offset: Offset(0, 3), // changes position of shadow
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                      child: // Followed
-                                      Padding(
-                                        padding:  EdgeInsets.only(left: 20.w,right: 20.w,top: 10.h,bottom: 10.h),
-                                        child: Text(
-                                            "Followed",
-                                            style:  TextStyle(
-                                                color:  const Color(0xffffffff),
-                                                fontWeight: FontWeight.w700,
-                                                fontFamily: "NeueHelvetica",
-                                                fontStyle:  FontStyle.normal,
-                                                fontSize: 11.sp
+                                          child: // Followed
+                                          Padding(
+                                            padding:  EdgeInsets.only(left: 20.w,right: 20.w,top: 10.h,bottom: 10.h),
+                                            child: Text(
+                                                "Followed",
+                                                style:  TextStyle(
+                                                    color:  const Color(0xffffffff),
+                                                    fontWeight: FontWeight.w700,
+                                                    fontFamily: "NeueHelvetica",
+                                                    fontStyle:  FontStyle.normal,
+                                                    fontSize: 11.sp
+                                                ),
+                                                textAlign: TextAlign.left
                                             ),
-                                            textAlign: TextAlign.left
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                )
+                                ),
+
+                                Visibility(
+                                  visible: isFollow,
+                                  child: Positioned(
+                                    top: 115.h,
+                                    left: 40.w,
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        setState(() {
+                                          isFollowed = true;
+                                          isFollow = false;
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 17.w, vertical: 11.h),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(40.r),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0x194343b2).withOpacity(0.15),
+                                              offset: const Offset(
+                                                5.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 10.0,
+                                              spreadRadius: 2.0,
+                                            ), //BoxShadow
+                                          ],
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            SvgPicture.asset(
+                                              icon_add_user,
+                                              height: 11.h,
+                                              width: 11.w,
+                                            ),
+                                            SizedBox(
+                                              width: 4.w,
+                                            ),
+                                            Text(
+                                              "Follow",
+                                              style: TextStyle(
+                                                  fontSize: 11.sp,
+                                                  fontFamily: helvetica_neu_bold,
+                                                  color: black_121212),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
