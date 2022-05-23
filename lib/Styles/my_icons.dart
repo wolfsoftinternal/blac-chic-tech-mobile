@@ -37,3 +37,7 @@ const icon_map_marker_png = 'assets/images/map_marker.png';
 const grid_img_one = 'assets/images/grid_img_one.png';
 const icon_current_loc = 'assets/images/current_loc.svg';
 const location_pin = 'assets/images/iconly_bulk_location.svg';
+const filter = 'assets/images/icon_filter.svg';
+const photo_user = 'assets/images/man.jpg';
+const icon_tick_blue = 'assets/images/tick_blue.svg';
+const icon_add_user = 'assets/images/iconly_bulk_add_user.svg';

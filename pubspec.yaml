@@ -133,6 +133,10 @@ flutter:
     - family: HelveticaNeueNeue Thin
       fonts:
         - asset: fonts/HelveticaNeue-Thin.ttf
+
+    - family: robotoRegular
+      fonts:
+        - asset: fonts/roboto_regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
