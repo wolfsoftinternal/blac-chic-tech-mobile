@@ -13,6 +13,7 @@ const blue_0a84ff = Color(0xff0a84ff);
 const grey_f4f6f6 = Color(0xfff4f6f6);
 const grey_f5f5f5 = Color(0xfff5f5f5);
 const transparent = Color(0x19aaaaaa);
+const gray_b3ffffff = Color(0xb3ffffff);
 
 
 

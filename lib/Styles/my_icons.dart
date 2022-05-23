@@ -41,3 +41,6 @@ const filter = 'assets/images/icon_filter.svg';
 const photo_user = 'assets/images/man.jpg';
 const icon_tick_blue = 'assets/images/tick_blue.svg';
 const icon_add_user = 'assets/images/iconly_bulk_add_user.svg';
+const icon_right_forward_arrow = 'assets/images/icon_right_forward_arrow.svg';
+const icon_ticket = 'assets/images/icon_ticket.svg';
+const icon_calendar = 'assets/images/icon_calendar.svg';
