@@ -14,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 
 class ProfileSetting extends StatefulWidget {
@@ -24,7 +25,7 @@ class ProfileSetting extends StatefulWidget {
 }
 
 class _ProfileSettingState extends State<ProfileSetting> {
-
+  bool status = false;
 
 
   @override
@@ -233,36 +234,71 @@ class _ProfileSettingState extends State<ProfileSetting> {
                           SizedBox(width: 16.w,),
 
                           Expanded(
-                            flex: 1,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                // Go Incognito
-                                Text(
-                                    "Go Incognito",
-                                    style:  TextStyle(
-                                        color:  black_121212,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: "NeueHelvetica",
-                                        fontStyle:  FontStyle.normal,
-                                        fontSize: 16.sp
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          // Go Incognito
+                                          Text(
+                                              "Go Incognito",
+                                              style:  TextStyle(
+                                                  color:  black_121212,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: "NeueHelvetica",
+                                                  fontStyle:  FontStyle.normal,
+                                                  fontSize: 16.sp
+                                              ),
+                                              textAlign: TextAlign.left
+                                          ),
+                                          SizedBox(height: 5.h,),
+                                          // Hide yourself for a while
+                                          Text(
+                                              "Hide yourself for a while",
+                                              style:  TextStyle(
+                                                  color: grey_aaaaaa,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "NeueHelvetica",
+                                                  fontStyle:  FontStyle.normal,
+                                                  fontSize: 14.sp
+                                              ),
+                                              textAlign: TextAlign.left
+                                          ),
+
+
+                                        ],
+                                      ),
                                     ),
-                                    textAlign: TextAlign.left
-                                ),
-                                SizedBox(height: 5.h,),
-                                // Hide yourself for a while
-                                Text(
-                                    "Hide yourself for a while",
-                                    style:  TextStyle(
-                                        color: grey_aaaaaa,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "NeueHelvetica",
-                                        fontStyle:  FontStyle.normal,
-                                        fontSize: 14.sp
+
+                                    FlutterSwitch(
+                                      width: 40.0,
+                                      height: 20.0,
+                                      activeColor: Color(0xff38bf49),
+                                      inactiveColor: Color(0xffe9ecec),
+                                      valueFontSize: 0.0,
+                                      toggleSize: 15.0,
+                                      value: status,
+                                      borderRadius: 15.0,
+                                      padding: 2.0,
+                                      showOnOff: true,
+                                      onToggle: (val) {
+                                        setState(() {
+                                          status = val;
+                                        });
+                                      },
                                     ),
-                                    textAlign: TextAlign.left
+                                  ],
                                 ),
+
                                 SizedBox(height: 15.h,),
 
                                 Container(
@@ -272,10 +308,10 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                         color:  view_line_f4f6f6
                                     )
                                 ),
-
                               ],
                             ),
                           ),
+
 
 
                         ],

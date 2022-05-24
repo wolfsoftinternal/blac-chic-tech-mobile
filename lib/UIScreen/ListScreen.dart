@@ -3,12 +3,16 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoVi
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/UIScreen/AboutMe.dart';
+import 'package:blackchecktech/UIScreen/AdmireGrid.dart';
 import 'package:blackchecktech/UIScreen/BcConnect.dart';
 import 'package:blackchecktech/UIScreen/Connect12.dart';
 import 'package:blackchecktech/UIScreen/CreatEventUploadImage.dart';
 import 'package:blackchecktech/UIScreen/CreatPost.dart';
 import 'package:blackchecktech/UIScreen/CreateEventDetail.dart';
 import 'package:blackchecktech/UIScreen/EditProfile.dart';
+import 'package:blackchecktech/UIScreen/EventTicket.dart';
+import 'package:blackchecktech/UIScreen/EventTicketTxnId.dart';
 import 'package:blackchecktech/UIScreen/PostGalleryPicker.dart';
 import 'package:blackchecktech/UIScreen/PostLocation.dart';
 import 'package:blackchecktech/UIScreen/ProfileSetting.dart';
@@ -37,6 +41,82 @@ class ListScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventTicketTxnId(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "EventTicketTxnId Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventTicket(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "EventTicket Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AboutMe(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "AboutMe Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AdmireGrid(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "AdmireGrid Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
             GestureDetector(
               onTap: () {
                 Navigator.push(
