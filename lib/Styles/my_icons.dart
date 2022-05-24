@@ -1,6 +1,7 @@
 
 const img_girl = 'assets/images/img_girl.png';
 const setting_girl_img = 'assets/images/setting_girl_img.png';
+const barcode = 'assets/images/barcode.png';
 const img_logo = 'assets/images/img_logo.png';
 const img_varification = 'assets/images/img_varification.png';
 const location_icon = 'assets/images/location_icon.png';
@@ -55,3 +56,7 @@ const icon_twitter_svg = 'assets/images/icon_twitter.svg';
 const icon_instagram_svg = 'assets/images/icon_instagram.svg';
 const icon_edit_blue = 'assets/images/icon_edit_blue.svg';
 const icon_add_user = 'assets/images/iconly_bulk_add_user.svg';
+const icon_apple = 'assets/images/icon_apple.svg';
+const icon_spotify = 'assets/images/icon_spotify.svg';
+const icon_add_black = 'assets/images/icon_add_black.svg';
+const icon_cancel = 'assets/images/icon_cancel.svg';
