@@ -17,9 +17,9 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> {
   List<VideoCommentsModel> videoCommentsList = [
-    VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies pellentesque "),
-    VideoCommentsModel(photo_user, 'HennaBack', "Jennifer Lawrence","2 day ago","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies pellentesque "),
-    VideoCommentsModel(photo_user, 'tokyoguinere', "Tokyo Guinere","2 day ago","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies pellentesque "),
+    VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
+    VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
+    VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
   ];
 
   @override
@@ -33,10 +33,8 @@ class _TestState extends State<Test> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-
               Container(
-                margin: EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
+                margin: EdgeInsets.only(top: 16.h,),
                 child: ListView.builder(
                     shrinkWrap: true,
                     primary: false,
@@ -49,51 +47,54 @@ class _TestState extends State<Test> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipOval(
-                                  child: Image.asset(videoCommentsList[i].imgUser,height: 40.h,width:40.w,fit: BoxFit.fill,),
-                                ),
-                                SizedBox(width: 16.w,),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Column(mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(videoCommentsList[i].tvTitle,style: TextStyle(
-                                                fontFamily: helveticaNeueNeue_medium,color: grey_aaaaaa,
-                                                fontSize: 14.sp
-                                            ),),
-                                            SizedBox(height: 8.h,),
-                                            Text(videoCommentsList[i].tvSubTitle,style: TextStyle(
-                                                fontFamily: helvetica_neu_bold,color:black_121212,
-                                                fontSize: 14.sp),),
-                                          ],
-                                        ),
-                                        Text(videoCommentsList[i].tvDays,style: TextStyle(
-                                            fontFamily: roboto_regular,color: grey_aaaaaa,
-                                            fontSize: 14.sp),),
-                                      ],),
-                                    SizedBox(height: 12.h),
-                                    Text(videoCommentsList[i].tvComments,style: TextStyle(
-                                        fontFamily: roboto_regular,color: grey_3f3f3f,
-                                        fontSize: 14.sp),),
+                            Container(
+                              margin: EdgeInsets.only(left: 24.w,right: 24.w),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipOval(
+                                    child: Image.asset(videoCommentsList[i].imgUser,height: 40.h,width:40.w,fit: BoxFit.fill,),
+                                  ),
+                                  SizedBox(width: 16.w,),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Column(mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(videoCommentsList[i].tvTitle,style: TextStyle(
+                                                  fontFamily: helveticaNeueNeue_medium,color: grey_aaaaaa,
+                                                  fontSize: 14.sp
+                                              ),),
+                                              SizedBox(height: 2.h,),
+                                              Text(videoCommentsList[i].tvSubTitle,style: TextStyle(
+                                                  fontFamily: helvetica_neu_bold,color:black_121212,
+                                                  fontSize: 14.sp),),
+                                            ],
+                                          ),
+                                          Text(videoCommentsList[i].tvDays,style: TextStyle(
+                                              fontFamily: roboto_regular,color: grey_aaaaaa,
+                                              fontSize: 14.sp),),
+                                        ],),
+                                      SizedBox(height: 12.h),
+                                      Text(videoCommentsList[i].tvComments,style: TextStyle(
+                                          fontFamily: roboto_regular,color: grey_3f3f3f,
+                                          fontSize: 14.sp),),
 
-                                  ],
-                                )
-                              ],
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                             Container(
                               margin: EdgeInsets.only(top: 12.h),
-                              height: 1,
+                              height: 1.5.h,
                               color: grey_f4f6f6,
                             )
                           ],
