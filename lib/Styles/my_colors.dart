@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 const black_121212 = Color(0xff121212);
+const opcity_black_121212 = Color(0x99121212);
 const white_ffffff = Color(0xffffffff);
 const opcity_white_ffffff = Color(0xB3ffffff);
 const grey_aaaaaa = Color(0xffaaaaaa);

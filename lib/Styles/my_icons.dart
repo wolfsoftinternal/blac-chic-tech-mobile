@@ -44,3 +44,4 @@ const icon_add_user = 'assets/images/iconly_bulk_add_user.svg';
 const icon_right_forward_arrow = 'assets/images/icon_right_forward_arrow.svg';
 const icon_ticket = 'assets/images/icon_ticket.svg';
 const icon_calendar = 'assets/images/icon_calendar.svg';
+const icon_send = 'assets/images/icon_send.svg';

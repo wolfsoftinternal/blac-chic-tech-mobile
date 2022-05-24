@@ -2,7 +2,6 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/FullInformatio
 import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
-import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/UIScreen/BcConnect.dart';
 import 'package:blackchecktech/UIScreen/Connect12.dart';
@@ -10,6 +9,8 @@ import 'package:blackchecktech/UIScreen/CreatEventUploadImage.dart';
 import 'package:blackchecktech/UIScreen/CreatPost.dart';
 import 'package:blackchecktech/UIScreen/CreateEventDetail.dart';
 import 'package:blackchecktech/UIScreen/EventList2.dart';
+import 'package:blackchecktech/UIScreen/EventSearch.dart';
+import 'package:blackchecktech/UIScreen/OwnEventList.dart';
 import 'package:blackchecktech/UIScreen/PostGalleryPicker.dart';
 import 'package:blackchecktech/UIScreen/PostLocation.dart';
 import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
@@ -21,8 +22,12 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 
 import '../Screens/Authentication/login/view/LoginView.dart';
+import 'FindSpeaker.dart';
+import 'SpeakersVideos.dart';
 import 'Test.dart';
 import '../Welcome.dart';
+import 'VideoComments.dart';
+import 'VideoSearch.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -32,448 +37,564 @@ class ListScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       backgroundColor: white_ffffff,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EventList2(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "EventList2 Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventList2(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "EventList2 Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BcConnect(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "BcConnect Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BcConnect(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "BcConnect Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PostGalleryPicker(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "PostGalleryPicker Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PostGalleryPicker(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "PostGalleryPicker Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreateEventDetail(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "CreateEventDetail Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateEventDetail(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "CreateEventDetail Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RegisteredPeople(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "RegisteredPeople Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisteredPeople(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "RegisteredPeople Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreatEventUploadImage(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "CreatEventUploadImage Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreatEventUploadImage(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "CreatEventUploadImage Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BcConnect(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "BcConnect Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BcConnect(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "BcConnect Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PostGalleryPicker(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "PostGalleryPicker Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PostGalleryPicker(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "PostGalleryPicker Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreateEventDetail(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "CreateEventDetail Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateEventDetail(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "CreateEventDetail Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RegisteredPeople(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "RegisteredPeople Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisteredPeople(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "RegisteredPeople Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreatEventUploadImage(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "CreatEventUploadImage Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreatEventUploadImage(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "CreatEventUploadImage Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UploadVideoDetail(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "UploadVideoDetail Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UploadVideoDetail(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "UploadVideoDetail Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UploadVideos(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "UploadVideos Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UploadVideos(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "UploadVideos Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PostLocation(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "PostLocation Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PostLocation(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "PostLocation Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TagPeople(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "TagPeople Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TagPeople(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "TagPeople Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreatPost(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "CreatPost Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreatPost(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "CreatPost Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Welcome(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "Welcome Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Welcome(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Welcome Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RegisterInfoView(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "Register Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisterInfoView(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Register Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SignupInfoView(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "Signup Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignupInfoView(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Signup Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SignupFormView(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "SignupDetail Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignupFormView(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "SignupDetail Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FullInformationStepsView(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "FullInformationSteps Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FullInformationStepsView(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "FullInformationSteps Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginView(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "Login Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginView(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Login Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Test(),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "Test Screen",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Test(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Test Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
               ),
             ),
-          ),
-        ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OwnEventList(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Own Event List Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventSearch(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "EventSearch Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FindSpeaker(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "FindSpeaker Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SpeakersVideos(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "SpeakersVideos Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VideoSearch(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "VideoSearch Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VideoComments(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "VideoComments Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     ));
   }

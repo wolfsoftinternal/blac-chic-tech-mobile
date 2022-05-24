@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../Model/VideoCommentsModel.dart';
+
 class Test extends StatefulWidget {
   const Test({Key? key}) : super(key: key);
 
@@ -14,11 +16,11 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  final PageController controller = PageController(initialPage: 200);
-
-  void _pageChanged(int index) {
-    setState(() {});
-  }
+  List<VideoCommentsModel> videoCommentsList = [
+    VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies pellentesque "),
+    VideoCommentsModel(photo_user, 'HennaBack', "Jennifer Lawrence","2 day ago","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies pellentesque "),
+    VideoCommentsModel(photo_user, 'tokyoguinere', "Tokyo Guinere","2 day ago","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies pellentesque "),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,99 +33,75 @@ class _TestState extends State<Test> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 15,
-              ),
-              Center(
-                child: Container(
-                  transform: Matrix4.translationValues(0, -18, 0),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 17.w, vertical: 11.h),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(40.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x194343b2).withOpacity(0.15),
-                        offset: const Offset(
-                          5.0,
-                          5.0,
+
+
+              Container(
+                margin: EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: videoCommentsList.length,
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (context, i) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 12.h),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipOval(
+                                  child: Image.asset(videoCommentsList[i].imgUser,height: 40.h,width:40.w,fit: BoxFit.fill,),
+                                ),
+                                SizedBox(width: 16.w,),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Column(mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(videoCommentsList[i].tvTitle,style: TextStyle(
+                                                fontFamily: helveticaNeueNeue_medium,color: grey_aaaaaa,
+                                                fontSize: 14.sp
+                                            ),),
+                                            SizedBox(height: 8.h,),
+                                            Text(videoCommentsList[i].tvSubTitle,style: TextStyle(
+                                                fontFamily: helvetica_neu_bold,color:black_121212,
+                                                fontSize: 14.sp),),
+                                          ],
+                                        ),
+                                        Text(videoCommentsList[i].tvDays,style: TextStyle(
+                                            fontFamily: roboto_regular,color: grey_aaaaaa,
+                                            fontSize: 14.sp),),
+                                      ],),
+                                    SizedBox(height: 12.h),
+                                    Text(videoCommentsList[i].tvComments,style: TextStyle(
+                                        fontFamily: roboto_regular,color: grey_3f3f3f,
+                                        fontSize: 14.sp),),
+
+                                  ],
+                                )
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 12.h),
+                              height: 1,
+                              color: grey_f4f6f6,
+                            )
+                          ],
                         ),
-                        blurRadius: 10.0,
-                        spreadRadius: 2.0,
-                      ), //BoxShadow
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SvgPicture.asset(
-                        icon_add_user,
-                        height: 11.h,
-                        width: 11.w,
-                      ),
-                      SizedBox(
-                        width: 4.w,
-                      ),
-                      Text(
-                        "Follow",
-                        style: TextStyle(
-                            fontSize: 11.sp,
-                            fontFamily: helvetica_neu_bold,
-                            color: black_121212),
-                      )
-                    ],
-                  ),
-                ),
+                      );
+                    }),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: Container(
-                  transform: Matrix4.translationValues(0, -18, 0),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 18.w, vertical: 11.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x194343b2).withOpacity(0.15),
-                        offset: const Offset(
-                          5.0,
-                          5.0,
-                        ),
-                        blurRadius: 10.0,
-                        spreadRadius: 2.0,
-                      ), //BoxShadow
-                    ],
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Color(0xff1c2535), Color(0xff04080f)],
-                      stops: [0.0, 5.0],
-                    ),
-                  ),
-                  child: Text(
-                    "Followed",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: helvetica_neu_bold,
-                        fontSize: 11.sp),
-                  ),
-                ),
-              ),
-              Center(child: InkWell(child: SvgPicture.asset(filter))),
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: Text(
-                    "Data",
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  ),
-                ),
-              )
+
             ],
           ),
         ),

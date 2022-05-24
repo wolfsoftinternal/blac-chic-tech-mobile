@@ -1,26 +1,23 @@
-import 'package:blackchecktech/Model/EventList2Model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:iconly/iconly.dart';
 
-import '../Layout/BlackButton.dart';
-import '../Layout/InputTextStaticFilter.dart';
-import '../Layout/ToolbarWithHeaderCenterTitle.dart';
+import '../Layout/ToolbarBackOnly.dart';
+import '../Model/EventList2Model.dart';
 import '../Styles/my_colors.dart';
 import '../Styles/my_icons.dart';
 import '../Utilities/Constant.dart';
 import '../Utilities/TextUtilities.dart';
 
-class EventList2 extends StatefulWidget {
+class OwnEventList extends StatefulWidget {
+  const OwnEventList({Key? key}) : super(key: key);
+
   @override
-  _EventList2State createState() => _EventList2State();
+  _OwnEventListState createState() => _OwnEventListState();
 }
 
-class _EventList2State extends State<EventList2> {
+class _OwnEventListState extends State<OwnEventList> {
   List<EventList2Model> eventList = [
     EventList2Model('Ria Rich', 'Startup Bootcamp 2022',
         "Dec 24, 2021 at 14:00 PM", "Royal Avenue", "Paid"),
@@ -29,10 +26,6 @@ class _EventList2State extends State<EventList2> {
     EventList2Model('Ria Rich', 'Startup Bootcamp 2022',
         "Dec 24, 2021 at 14:00 PM", "Royal Avenue", "Invite only"),
   ];
-
-
-  bool isLayoutFirst = false;
-  var _firstnameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,66 +39,88 @@ class _EventList2State extends State<EventList2> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                /*---- Toolbar ----*/
                 Container(
-                    margin: EdgeInsets.only(top: 15.h),
-                    child: ToolbarWithHeaderCenterTitle("EVENTS")),
-
-                Padding(
-                  padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 32.h),
-                  child: InputTextStaicFilter(
-                      "Search by event name, venue, speakers ...",
-                      _firstnameController,
-                      false,
-                      TextInputAction.next,
-                      TextInputType.text),
-                ),
-
-
-                Container(
-                  padding: EdgeInsets.only(
-                      left: 16.w, right: 10.w, bottom: 10.h, top: 10.h),
-                  margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 15.h),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: blue_0a84ff, width: 1.w),
-                      borderRadius: BorderRadius.all(Radius.circular(4.r)),
-                      color: Colors.white),
+                  margin: EdgeInsets.only(top: 15.h),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      SvgPicture.asset(
-                        icon_ticket,
-                        height: 15.h,
-                        width: 15.w,
+                      BackLayout(),
+                      Container(
+                        height: 48.h,
+                        width: 48.w,
                       ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      Expanded(
-                        child: Text(
-                          "My Event",
-                          style: TextStyle(
-                              fontFamily: helveticaNeueNeue_medium,
-                              fontSize: 15.sp,
-                              color: black_121212),
+                      const Spacer(),
+                      Center(
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(50.r),
+                              child: SvgPicture.asset(
+                                placeholder,
+                                height: 48.h,
+                                width: 48.w,
+                                fit: BoxFit.cover,
+                              )),
                         ),
                       ),
-                      SvgPicture.asset(
-                        icon_right_forward_arrow,
-                        height: 16.h,
-                        width: 16.w,
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          // createBottomSheet(context);
+                        },
+                        child: Container(
+                          width: 48.w,
+                          height: 48.h,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8.h, horizontal: 8.w),
+                            child: SvgPicture.asset(
+                              add_icon,
+                              width: 24.w,
+                              height: 24.h,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(right: 10.w),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            width: 55.w,
+                            height: 55.h,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            child: SvgPicture.asset(
+                              settings_icon,
+                              width: 40.w,
+                              height: 40.h,
+                              color: black_121212,
+                            ),
+                          ),
+                        ),
                       )
                     ],
                   ),
                 ),
+
                 SizedBox(
                   height: 24.h,
                 ),
+
+                /*------ List View ------*/
                 Container(
                   margin: EdgeInsets.only(left: 16.w, right: 16.w),
                   child: ListView.builder(
                       shrinkWrap: true,
                       primary: false,
+                      scrollDirection: Axis.vertical,
                       itemCount: eventList.length,
                       padding: EdgeInsets.zero,
                       itemBuilder: (context, i) {
@@ -118,7 +133,7 @@ class _EventList2State extends State<EventList2> {
                                   height: 207.h,
                                   child: ClipRRect(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(5.r)),
+                                        BorderRadius.all(Radius.circular(5.r)),
                                     child: SvgPicture.asset(
                                       placeholder,
                                       fit: BoxFit.cover,
@@ -133,7 +148,7 @@ class _EventList2State extends State<EventList2> {
                                       top: 8.h, left: 8.w, right: 8.w),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Container(
@@ -213,7 +228,7 @@ class _EventList2State extends State<EventList2> {
                                         ),
                                         Padding(
                                           padding:
-                                          const EdgeInsets.only(left: 4.0),
+                                              const EdgeInsets.only(left: 4.0),
                                           child: setHelceticaBold(
                                               eventList[i].tvEventDate,
                                               10,
@@ -234,7 +249,7 @@ class _EventList2State extends State<EventList2> {
                                       children: [
                                         Padding(
                                           padding:
-                                          const EdgeInsets.only(right: 4.0),
+                                              const EdgeInsets.only(right: 4.0),
                                           child: setHelceticaBold(
                                               eventList[i].tvEventVenue,
                                               10,
@@ -266,17 +281,9 @@ class _EventList2State extends State<EventList2> {
                             ],
                           ),
                         );
-                      }),
+                      }
+                      ),
                 ),
-
-                Container(
-                  margin: EdgeInsets.only(bottom: 25.h),
-                  child: Center(
-                    child: Text(
-                      "Load More", style: TextStyle(fontFamily: roboto_bold,
-                        fontSize: 14.sp, color: blue_0a84ff),),
-                  ),
-                )
               ],
             ),
           ),
