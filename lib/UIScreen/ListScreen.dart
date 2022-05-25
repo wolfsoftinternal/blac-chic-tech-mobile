@@ -10,6 +10,10 @@ import 'package:blackchecktech/UIScreen/Connect12.dart';
 import 'package:blackchecktech/UIScreen/CreatEventUploadImage.dart';
 import 'package:blackchecktech/UIScreen/CreatPost.dart';
 import 'package:blackchecktech/UIScreen/CreateEventDetail.dart';
+
+import 'package:blackchecktech/UIScreen/EventList2.dart';
+import 'package:blackchecktech/UIScreen/EventSearch.dart';
+import 'package:blackchecktech/UIScreen/OwnEventList.dart';
 import 'package:blackchecktech/UIScreen/EditProfile.dart';
 import 'package:blackchecktech/UIScreen/EventTicket.dart';
 import 'package:blackchecktech/UIScreen/EventTicketTxnId.dart';
@@ -25,8 +29,15 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 
 import '../Screens/Authentication/login/view/LoginView.dart';
+import 'FindSpeaker.dart';
+import 'MyPlayList.dart';
+import 'MyPurchasedEvent.dart';
+import 'SpeakersVideos.dart';
 import 'Test.dart';
 import '../Welcome.dart';
+import 'TransactionsPayoutsTabs.dart';
+import 'VideoComments.dart';
+import 'VideoSearch.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -46,12 +57,15 @@ class ListScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+
+                      builder: (context) => EventList2(),
                       builder: (context) => EventTicketTxnId(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
+                  "EventList2 Screen",
                   "EventTicketTxnId Screen",
                   style: TextStyle(
                       color: Colors.black87,
@@ -65,12 +79,14 @@ class ListScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+                      builder: (context) => BcConnect(),
                       builder: (context) => EventTicket(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
+                  "BcConnect Screen",
                   "EventTicket Screen",
                   style: TextStyle(
                       color: Colors.black87,
@@ -84,12 +100,14 @@ class ListScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+                      builder: (context) => PostGalleryPicker(),
                       builder: (context) => AboutMe(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
+                  "PostGalleryPicker Screen",
                   "AboutMe Screen",
                   style: TextStyle(
                       color: Colors.black87,
@@ -103,12 +121,14 @@ class ListScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+                      builder: (context) => CreateEventDetail(),
                       builder: (context) => AdmireGrid(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
+                  "CreateEventDetail Screen",
                   "AdmireGrid Screen",
                   style: TextStyle(
                       color: Colors.black87,
@@ -122,12 +142,14 @@ class ListScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+                      builder: (context) => RegisteredPeople(),
                       builder: (context) => EditProfile(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
+                  "RegisteredPeople Screen",
                   "EditProfile Screen",
                   style: TextStyle(
                       color: Colors.black87,
@@ -141,12 +163,14 @@ class ListScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+                      builder: (context) => CreatEventUploadImage(),
                       builder: (context) => ProfileSetting(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
+                  "CreatEventUploadImage Screen",
                   "ProfileSetting Screen",
                   style: TextStyle(
                       color: Colors.black87,
@@ -490,6 +514,177 @@ class ListScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Test Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OwnEventList(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Own Event List Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventSearch(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "EventSearch Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FindSpeaker(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "FindSpeaker Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SpeakersVideos(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "SpeakersVideos Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VideoSearch(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "VideoSearch Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VideoComments(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "VideoComments Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyPlayList(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "MyPlayList Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyPurchasedEvent(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "MyPurchasedEvent Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TransactionsPayoutsTabs(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "TransactionsPayoutsTabs Screen",
                   style: TextStyle(
                       color: Colors.black87,
                       fontFamily: helveticaNeueNeue_medium,

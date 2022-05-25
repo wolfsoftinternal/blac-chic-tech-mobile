@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../Model/VideoCommentsModel.dart';
+import '../Styles/my_colors.dart';
+
 class Test extends StatefulWidget {
   const Test({Key? key}) : super(key: key);
 
@@ -14,11 +17,12 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  final PageController controller = PageController(initialPage: 200);
 
-  void _pageChanged(int index) {
-    setState(() {});
-  }
+  bool Bg1 = false;
+  bool Bg2 = false;
+
+  bool tv1 = false;
+  bool tv2 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,94 +35,69 @@ class _TestState extends State<Test> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 15,
-              ),
-              Center(
-                child: Container(
-                  transform: Matrix4.translationValues(0, -18, 0),
 
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 17.w, vertical: 11.h),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(40.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x194343b2).withOpacity(0.15),
-                        offset: const Offset(
-                          5.0,
-                          5.0,
+
+
+
+              Container(
+                margin: EdgeInsets.only(left: 24.w,right: 24.w,top: 16.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            Bg1 = true;
+                            Bg2 = false;
+                          });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 15.h),
+                          decoration: BoxDecoration(
+                            color:Bg1?black_121212: grey_f5f5f5,
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          child: Center(
+                            child: Text("Transactions",style: TextStyle(
+                              fontSize: 16.sp,color: black_121212,
+                              fontFamily: roboto_bold
+                            ),),
+                          ),
                         ),
-                        blurRadius: 10.0,
-                        spreadRadius: 2.0,
-                      ), //BoxShadow
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SvgPicture.asset(
-                        icon_add_user,
-                        height: 11.h,
-                        width: 11.w,
                       ),
-                      SizedBox(
-                        width: 4.w,
-                      ),
-                      Text(
-                        "Follow",
-                        style: TextStyle(
-                            fontSize: 11.sp,
-                            fontFamily: helvetica_neu_bold,
-                            color: black_121212),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-
-
-
-              SizedBox(height: 20,),
-              Center(
-                child: Container(
-                  transform: Matrix4.translationValues(0, -18, 0),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 18.w, vertical: 11.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x194343b2).withOpacity(0.15),
-                        offset: const Offset(
-                          5.0,
-                          5.0,
-                        ),
-                        blurRadius: 10.0,
-                        spreadRadius: 2.0,
-                      ), //BoxShadow
-                    ],
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xff1c2535),
-                        Color(0xff04080f)
-                      ],
-                      stops: [0.0, 5.0],
                     ),
-                  ),
-                  child: Text(
-                    "Followed",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: helvetica_neu_bold,
-                        fontSize: 11.sp),
-                  ),
+
+                    SizedBox(width: 16.w,),
+
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            Bg1 = false;
+                            Bg2 = true;
+                          });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 15.h),
+                          decoration: BoxDecoration(
+                            color:Bg2?black_121212: grey_f5f5f5,
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          child: Center(
+                            child: Text("Payouts",style: TextStyle(
+                              fontSize: 16.sp,color: black_121212,
+                              fontFamily: roboto_bold
+                            ),),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              )
 
             ],
           ),
