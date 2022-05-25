@@ -23,8 +23,6 @@ class _MyPlayListState extends State<MyPlayList> {
         "Steve Roshein","Posted Dec 2021"),
     SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly and supporting criminal justice...",
         "Steve Roshein","Posted Dec 2021"),
-    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly and supporting criminal justice...",
-        "Steve Roshein","Posted Dec 2021"),
   ];
 
   @override
@@ -122,8 +120,29 @@ class _MyPlayListState extends State<MyPlayList> {
                                             ),
                                           ),
                                         ),
-                                        SvgPicture.asset(search,color: black_121212,),
 
+
+
+                                  PopupMenuButton(
+                                        itemBuilder: (context) => [
+                                          const PopupMenuItem(
+                                            child: Text("Remove"),
+                                            textStyle: TextStyle(
+                                              color: black_121212,
+                                              fontFamily: roboto_regular,
+                                               fontSize: 14
+                                            ),
+                                            value: 1,
+                                          ),
+                                        ],
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 24,
+                                        vertical: 10
+                                      ),
+                                      icon: Image.asset(img_more,width: 16.w,height: 16.w,)),
                                       ],
                                     )),
                               );

@@ -1,6 +1,7 @@
 
 const img_girl = 'assets/images/img_girl.png';
 const img_close = 'assets/images/close.png';
+const img_more = 'assets/images/more.png';
 const setting_girl_img = 'assets/images/setting_girl_img.png';
 const feature_img_1 = 'assets/images/feature_img_1.png';
 const bct_logo = 'assets/images/bct_logo.png';
