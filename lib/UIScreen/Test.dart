@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Model/VideoCommentsModel.dart';
+import '../Styles/my_colors.dart';
 
 class Test extends StatefulWidget {
   const Test({Key? key}) : super(key: key);
@@ -16,11 +17,12 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  List<VideoCommentsModel> videoCommentsList = [
-    VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
-    VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
-    VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
-  ];
+
+  bool Bg1 = false;
+  bool Bg2 = false;
+
+  bool tv1 = false;
+  bool tv2 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,75 +35,69 @@ class _TestState extends State<Test> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: EdgeInsets.only(top: 16.h,),
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    primary: false,
-                    itemCount: videoCommentsList.length,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, i) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: 12.h),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 24.w,right: 24.w),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipOval(
-                                    child: Image.asset(videoCommentsList[i].imgUser,height: 40.h,width:40.w,fit: BoxFit.fill,),
-                                  ),
-                                  SizedBox(width: 16.w,),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Column(mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(videoCommentsList[i].tvTitle,style: TextStyle(
-                                                  fontFamily: helveticaNeueNeue_medium,color: grey_aaaaaa,
-                                                  fontSize: 14.sp
-                                              ),),
-                                              SizedBox(height: 2.h,),
-                                              Text(videoCommentsList[i].tvSubTitle,style: TextStyle(
-                                                  fontFamily: helvetica_neu_bold,color:black_121212,
-                                                  fontSize: 14.sp),),
-                                            ],
-                                          ),
-                                          Text(videoCommentsList[i].tvDays,style: TextStyle(
-                                              fontFamily: roboto_regular,color: grey_aaaaaa,
-                                              fontSize: 14.sp),),
-                                        ],),
-                                      SizedBox(height: 12.h),
-                                      Text(videoCommentsList[i].tvComments,style: TextStyle(
-                                          fontFamily: roboto_regular,color: grey_3f3f3f,
-                                          fontSize: 14.sp),),
 
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 12.h),
-                              height: 1.5.h,
-                              color: grey_f4f6f6,
-                            )
-                          ],
+
+
+
+              Container(
+                margin: EdgeInsets.only(left: 24.w,right: 24.w,top: 16.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            Bg1 = true;
+                            Bg2 = false;
+                          });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 15.h),
+                          decoration: BoxDecoration(
+                            color:Bg1?black_121212: grey_f5f5f5,
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          child: Center(
+                            child: Text("Transactions",style: TextStyle(
+                              fontSize: 16.sp,color: black_121212,
+                              fontFamily: roboto_bold
+                            ),),
+                          ),
                         ),
-                      );
-                    }),
-              ),
+                      ),
+                    ),
+
+                    SizedBox(width: 16.w,),
+
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            Bg1 = false;
+                            Bg2 = true;
+                          });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 15.h),
+                          decoration: BoxDecoration(
+                            color:Bg2?black_121212: grey_f5f5f5,
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          child: Center(
+                            child: Text("Payouts",style: TextStyle(
+                              fontSize: 16.sp,color: black_121212,
+                              fontFamily: roboto_bold
+                            ),),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
 
             ],
           ),

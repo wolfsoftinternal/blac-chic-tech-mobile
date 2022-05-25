@@ -1,4 +1,3 @@
-import 'package:blackchecktech/Model/SpeakersVideoModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,29 +5,27 @@ import 'package:flutter_svg/svg.dart';
 
 import '../Layout/SearchBarWithRightIcon.dart';
 import '../Layout/ToolbarWithHeaderCenterTitle.dart';
+import '../Model/SpeakersVideoModel.dart';
 import '../Styles/my_colors.dart';
 import '../Styles/my_icons.dart';
 import '../Utilities/Constant.dart';
 
-class SpeakersVideos extends StatefulWidget {
-  const SpeakersVideos({Key? key}) : super(key: key);
+class MyPlayList extends StatefulWidget {
+  const MyPlayList({Key? key}) : super(key: key);
 
   @override
-  _SpeakersVideosState createState() => _SpeakersVideosState();
+  _MyPlayListState createState() => _MyPlayListState();
 }
 
-class _SpeakersVideosState extends State<SpeakersVideos> {
-
-
+class _MyPlayListState extends State<MyPlayList> {
   List<SpeakersVideoModel> speakerVideoList = [
-    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly — and \nsupporting criminal justice...",
+    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly and supporting criminal justice...",
         "Steve Roshein","Posted Dec 2021"),
-    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly — and \nsupporting criminal justice...",
+    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly and supporting criminal justice...",
         "Steve Roshein","Posted Dec 2021"),
-    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly — and \nsupporting criminal justice...",
+    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly and supporting criminal justice...",
         "Steve Roshein","Posted Dec 2021"),
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +40,11 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
             children: [
               Container(
                   margin: EdgeInsets.only(top: 15.h),
-                  child: ToolbarWithHeaderCenterTitle("CLAIRE ROMAN")),
+                  child: ToolbarWithHeaderCenterTitle("MY PLAY LIST")),
 
               SearchBarWithRightIcon(),
-
               Container(
-                margin: EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
+                margin: EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
                 child: ListView.builder(
                     shrinkWrap: true,
                     primary: false,
@@ -56,7 +52,7 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                     padding: EdgeInsets.zero,
                     itemBuilder: (context, i) {
                       return Padding(
-                        padding: EdgeInsets.only(bottom: 25.h),
+                        padding: EdgeInsets.only(bottom: 20.h),
                         child: Container(
                             width: double.infinity,
                             child:Row(
@@ -92,28 +88,34 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                   ],
                                 ),
 
-                                SizedBox(width: 16.w,),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(height: 3.h,),
+                                Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.only(left: 16.w,right: 10.w),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 3.h,),
 
-                                    Text(speakerVideoList[i].tvHeading,style: TextStyle(
-                                        fontFamily: helvetica_neu_bold,color: black_121212,
-                                        fontSize: 14
-                                    ),),
-                                    SizedBox(height: 8.h,),
-                                    Text(speakerVideoList[i].tvTitle,style: TextStyle(
-                                        fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
-                                        fontSize: 10),),
-                                    SizedBox(height: 2.h,),
-                                    Text(speakerVideoList[i].tvDate,style: TextStyle(
-                                        fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
-                                        fontSize: 8),),
+                                        Text(speakerVideoList[i].tvHeading,style: TextStyle(
+                                            fontFamily: helvetica_neu_bold,color: black_121212,
+                                            fontSize: 14
+                                        ),),
+                                        SizedBox(height: 8.h,),
+                                        Text(speakerVideoList[i].tvTitle,style: TextStyle(
+                                            fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
+                                            fontSize: 10),),
+                                        SizedBox(height: 2.h,),
+                                        Text(speakerVideoList[i].tvDate,style: TextStyle(
+                                            fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
+                                            fontSize: 8),),
 
-                                  ],
-                                )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SvgPicture.asset(search,color: black_121212,),
+
                               ],
                             )),
                       );

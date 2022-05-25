@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../Layout/SearchBar.dart';
 import '../Model/EventSearchModel.dart';
 import '../Utilities/TextUtilities.dart';
 
@@ -37,46 +38,7 @@ class _EventSearchState extends State<EventSearch> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                Container(
-                  margin: EdgeInsets.only(top: 24.h, right: 24.w, left: 24.w),
-                  padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                  decoration: BoxDecoration(
-                      // border: Border.all(color: grey_e9ecec, width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(4)),
-                      color: grey_f5f5f5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      SvgPicture.asset(search),
-                      SizedBox(width: 16.w,),
-                      Expanded(
-                        child: new TextField(
-                          style: const TextStyle(
-                              color: black_121212,
-                              fontFamily: roboto_medium,
-                              fontSize: 14.0),
-                          decoration: new InputDecoration(
-                            isDense: true,
-                            hintText: "Search",
-                            hintStyle: TextStyle(
-                                color: black_121212,
-                                fontFamily: roboto_medium,
-                                fontSize: 14.0),
-                            border: InputBorder.none,
-                          ),
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                        ),
-                      ),
-                      SvgPicture.asset(search),
-
-                    ],
-                  ),
-                ),
-
-
+                SearchBar(""),
                 SizedBox(
                   height: 24.h,
                 ),

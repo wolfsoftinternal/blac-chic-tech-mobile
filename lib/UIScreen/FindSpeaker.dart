@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../Layout/SearchBarWithRightIcon.dart';
 import '../Layout/ToolbarWithHeaderCenterTitle.dart';
 import '../Model/FindSpeakerModel.dart';
 import '../Styles/my_colors.dart';
@@ -36,43 +37,7 @@ class _FindSpeakerState extends State<FindSpeaker> {
               Container(
                   margin: EdgeInsets.only(top: 15.h),
                   child: ToolbarWithHeaderCenterTitle("FIND A SPEAKER")),
-              Container(
-                margin: EdgeInsets.only(top: 24.h, right: 24.w, left: 24.w),
-                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
-                decoration: BoxDecoration(
-                    // border: Border.all(color: grey_e9ecec, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    color: grey_f5f5f5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        style: const TextStyle(
-                            color: black_121212,
-                            fontFamily: roboto_medium,
-                            fontSize: 14.0),
-                        decoration: new InputDecoration(
-                          isDense: true,
-                          hintText: "Search.......",
-                          hintStyle: TextStyle(
-                              color: grey_aaaaaa,
-                              fontFamily: roboto_medium,
-                              fontSize: 14.0),
-                          border: InputBorder.none,
-                        ),
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                      ),
-                    ),
-                    SvgPicture.asset(
-                      search,
-                      color: black_121212,
-                    ),
-                  ],
-                ),
-              ),
+              SearchBarWithRightIcon(),
               Container(
                 margin: EdgeInsets.only(top: 16.h, left: 24.w),
                 child: Text(

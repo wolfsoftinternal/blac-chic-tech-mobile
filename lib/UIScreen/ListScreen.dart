@@ -23,9 +23,12 @@ import 'package:flutter/material.dart';
 
 import '../Screens/Authentication/login/view/LoginView.dart';
 import 'FindSpeaker.dart';
+import 'MyPlayList.dart';
+import 'MyPurchasedEvent.dart';
 import 'SpeakersVideos.dart';
 import 'Test.dart';
 import '../Welcome.dart';
+import 'TransactionsPayoutsTabs.dart';
 import 'VideoComments.dart';
 import 'VideoSearch.dart';
 
@@ -586,6 +589,63 @@ class ListScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "VideoComments Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyPlayList(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "MyPlayList Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyPurchasedEvent(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "MyPurchasedEvent Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TransactionsPayoutsTabs(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "TransactionsPayoutsTabs Screen",
                   style: TextStyle(
                       color: Colors.black87,
                       fontFamily: helveticaNeueNeue_medium,

@@ -39,7 +39,6 @@ class _VideoCommentsState extends State<VideoComments> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Container(
                         margin: EdgeInsets.only(top: 15.h),
                         child: ToolbarWithHeaderCenterTitle("COMMENTS")),
