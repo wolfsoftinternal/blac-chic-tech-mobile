@@ -1,6 +1,8 @@
 
 const img_girl = 'assets/images/img_girl.png';
 const setting_girl_img = 'assets/images/setting_girl_img.png';
+const feature_img_1 = 'assets/images/feature_img_1.png';
+const bct_logo = 'assets/images/bct_logo.png';
 const barcode = 'assets/images/barcode.png';
 const img_logo = 'assets/images/img_logo.png';
 const img_varification = 'assets/images/img_varification.png';
@@ -64,3 +66,6 @@ const icon_apple = 'assets/images/icon_apple.svg';
 const icon_spotify = 'assets/images/icon_spotify.svg';
 const icon_add_black = 'assets/images/icon_add_black.svg';
 const icon_cancel = 'assets/images/icon_cancel.svg';
+const icon_feature_next_arrow = 'assets/images/icon_feature_next_arrow.svg';
+const icon_filter_orange = 'assets/images/icon_filter_orange.svg';
+const icon_play_list_orange = 'assets/images/icon_play_list_orange.svg';
