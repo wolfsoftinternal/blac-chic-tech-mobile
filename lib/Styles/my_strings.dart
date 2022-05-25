@@ -29,3 +29,4 @@ var str_pwd_validation_text = "Password should be at least 8 characters long and
 var str_about = "About you";
 var str_done = "Done";
 var str_doller = "\$1000.00";
+

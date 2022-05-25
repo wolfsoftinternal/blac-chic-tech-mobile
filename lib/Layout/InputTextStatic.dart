@@ -159,7 +159,6 @@ class _InputTextStaicState extends State<InputTextStaic> {
               GestureDetector(
                 onTap: (){
                   setState(() {
-
                     if(_hasBeenPressednBidNow = !_hasBeenPressednBidNow){
                       isLayoutFirst=true;
                     }else {

@@ -3,16 +3,23 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoVi
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/UIScreen/AboutMe.dart';
+import 'package:blackchecktech/UIScreen/AdmireGrid.dart';
 import 'package:blackchecktech/UIScreen/BcConnect.dart';
 import 'package:blackchecktech/UIScreen/Connect12.dart';
 import 'package:blackchecktech/UIScreen/CreatEventUploadImage.dart';
 import 'package:blackchecktech/UIScreen/CreatPost.dart';
 import 'package:blackchecktech/UIScreen/CreateEventDetail.dart';
+
 import 'package:blackchecktech/UIScreen/EventList2.dart';
 import 'package:blackchecktech/UIScreen/EventSearch.dart';
 import 'package:blackchecktech/UIScreen/OwnEventList.dart';
+import 'package:blackchecktech/UIScreen/EditProfile.dart';
+import 'package:blackchecktech/UIScreen/EventTicket.dart';
+import 'package:blackchecktech/UIScreen/EventTicketTxnId.dart';
 import 'package:blackchecktech/UIScreen/PostGalleryPicker.dart';
 import 'package:blackchecktech/UIScreen/PostLocation.dart';
+import 'package:blackchecktech/UIScreen/ProfileSetting.dart';
 import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
 import 'package:blackchecktech/UIScreen/TagPeople.dart';
 import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
@@ -50,13 +57,16 @@ class ListScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+
                       builder: (context) => EventList2(),
+                      builder: (context) => EventTicketTxnId(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "EventList2 Screen",
+                  "EventTicketTxnId Screen",
                   style: TextStyle(
                       color: Colors.black87,
                       fontFamily: helveticaNeueNeue_medium,
@@ -70,12 +80,14 @@ class ListScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => BcConnect(),
+                      builder: (context) => EventTicket(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "BcConnect Screen",
+                  "EventTicket Screen",
                   style: TextStyle(
                       color: Colors.black87,
                       fontFamily: helveticaNeueNeue_medium,
@@ -89,12 +101,14 @@ class ListScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => PostGalleryPicker(),
+                      builder: (context) => AboutMe(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "PostGalleryPicker Screen",
+                  "AboutMe Screen",
                   style: TextStyle(
                       color: Colors.black87,
                       fontFamily: helveticaNeueNeue_medium,
@@ -108,12 +122,14 @@ class ListScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => CreateEventDetail(),
+                      builder: (context) => AdmireGrid(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "CreateEventDetail Screen",
+                  "AdmireGrid Screen",
                   style: TextStyle(
                       color: Colors.black87,
                       fontFamily: helveticaNeueNeue_medium,
@@ -127,12 +143,14 @@ class ListScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => RegisteredPeople(),
+                      builder: (context) => EditProfile(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "RegisteredPeople Screen",
+                  "EditProfile Screen",
                   style: TextStyle(
                       color: Colors.black87,
                       fontFamily: helveticaNeueNeue_medium,
@@ -146,12 +164,33 @@ class ListScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => CreatEventUploadImage(),
+                      builder: (context) => ProfileSetting(),
                     ));
               },
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "CreatEventUploadImage Screen",
+                  "ProfileSetting Screen",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 16),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Connect12(),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Connect12 Screen",
                   style: TextStyle(
                       color: Colors.black87,
                       fontFamily: helveticaNeueNeue_medium,
