@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Layout/SearchBar.dart';
+import '../Layout/ToolbarBackOnly.dart';
 import '../Model/EventSearchModel.dart';
 import '../Utilities/TextUtilities.dart';
 
@@ -27,6 +28,7 @@ class _EventSearchState extends State<EventSearch> {
     EventSearchModel('Ria Rich', 'Startup Bootcamp 2022',
         "Dec 24, 2021 at 14:00 PM", "Royal Avenue"),
   ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,6 +40,54 @@ class _EventSearchState extends State<EventSearch> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                  margin: EdgeInsets.only(left: 24.w,right: 24.w,top: 15.h),
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: 40.r,
+                          height: 40.r,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 6,
+                                blurRadius: 10,
+                                offset:
+                                    Offset(1, 4), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(12.0.r),
+                            child: Image.asset(img_close,width: 16.w,height: 16.h,),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 10.h),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("Search".toUpperCase(),style: TextStyle(
+                                fontSize: 16,color: black_121212,
+                                fontFamily: helvetica_neu_bold,
+                              ),)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SearchBar(""),
                 SizedBox(
                   height: 24.h,
@@ -59,7 +109,7 @@ class _EventSearchState extends State<EventSearch> {
                                   height: 207.h,
                                   child: ClipRRect(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(5.r)),
+                                        BorderRadius.all(Radius.circular(5.r)),
                                     child: SvgPicture.asset(
                                       placeholder,
                                       fit: BoxFit.cover,
@@ -70,8 +120,7 @@ class _EventSearchState extends State<EventSearch> {
                               Align(
                                 alignment: Alignment.topRight,
                                 child: Container(
-                                  margin: EdgeInsets.only(
-                                      top: 8.h, right: 8.w),
+                                  margin: EdgeInsets.only(top: 8.h, right: 8.w),
                                   child: Container(
                                       height: 29.h,
                                       width: 133.w,
@@ -128,7 +177,7 @@ class _EventSearchState extends State<EventSearch> {
                                         ),
                                         Padding(
                                           padding:
-                                          const EdgeInsets.only(left: 4.0),
+                                              const EdgeInsets.only(left: 4.0),
                                           child: setHelceticaBold(
                                               eventSerchList[i].tvEventDate,
                                               10,
@@ -149,7 +198,7 @@ class _EventSearchState extends State<EventSearch> {
                                       children: [
                                         Padding(
                                           padding:
-                                          const EdgeInsets.only(right: 4.0),
+                                              const EdgeInsets.only(right: 4.0),
                                           child: setHelceticaBold(
                                               eventSerchList[i].tvEventVenue,
                                               10,

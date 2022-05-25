@@ -17,10 +17,8 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-
   bool Bg1 = true;
   bool Bg2 = false;
-
   bool tv1 = true;
   bool tv2 = false;
 

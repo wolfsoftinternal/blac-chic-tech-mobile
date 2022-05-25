@@ -139,7 +139,7 @@ class _EventList2State extends State<EventList2> {
                                       Container(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 15.w),
-                                        height: 25.h,
+                                        height: 26.h,
                                         decoration: BoxDecoration(
                                           color: Color(0xe6ff881a),
                                           borderRadius: BorderRadius.all(
