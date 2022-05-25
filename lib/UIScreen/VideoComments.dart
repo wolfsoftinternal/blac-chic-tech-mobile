@@ -17,7 +17,7 @@ class VideoComments extends StatefulWidget {
 
 class _VideoCommentsState extends State<VideoComments> {
   List<VideoCommentsModel> videoCommentsList = [
-    VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
+    VideoCommentsModel(photo_user, 'Jennifer ', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
     VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
     VideoCommentsModel(photo_user, 'Jennifer', "Henna Back","2 day ago","Lorem ipsum dolor sit amet,consectetur\nadipiscing elit. Vel vitae malesuada\nfaucibus"),
   ];
