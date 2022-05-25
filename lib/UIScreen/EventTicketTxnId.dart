@@ -43,7 +43,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SvgPicture.asset(icon_cancel,width: 26.w,height: 26.h,),
+                      SvgPicture.asset(icon_cancel,width: 30.w,height: 30.h,),
 
                       SizedBox(height: 32.h,),
 
@@ -233,6 +233,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
+
                                           Expanded(
                                             flex:1,
                                             child: Column(
