@@ -18,10 +18,10 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> {
 
-  bool Bg1 = false;
+  bool Bg1 = true;
   bool Bg2 = false;
 
-  bool tv1 = false;
+  bool tv1 = true;
   bool tv2 = false;
 
   @override
@@ -59,8 +59,8 @@ class _TestState extends State<Test> {
                           ),
                           child: Center(
                             child: Text("Transactions",style: TextStyle(
-                              fontSize: 16.sp,color: tv1?Colors.white: black_121212,
-                              fontFamily: roboto_bold
+                                fontSize: 16.sp,color: tv1?Colors.white: black_121212,
+                                fontFamily: roboto_bold
                             ),),
                           ),
                         ),
@@ -87,8 +87,8 @@ class _TestState extends State<Test> {
                           ),
                           child: Center(
                             child: Text("Payouts",style: TextStyle(
-                              fontSize: 16.sp,color:tv2 ?Colors.white: black_121212,
-                              fontFamily: roboto_bold
+                                fontSize: 16.sp,color:tv2 ?Colors.white: black_121212,
+                                fontFamily: roboto_bold
                             ),),
                           ),
                         ),
