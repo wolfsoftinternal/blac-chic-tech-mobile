@@ -21,7 +21,7 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     return               Container(
       margin: EdgeInsets.only(top: 24.h, right: 24.w, left: 24.w),
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
+      padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 16.w),
       decoration: BoxDecoration(
         // border: Border.all(color: grey_e9ecec, width: 1),
           borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -54,10 +54,8 @@ class _SearchBarState extends State<SearchBar> {
               textInputAction: TextInputAction.next,
             ),
           ),
-          SvgPicture.asset(
-            search,
-            color: black_121212,
-          ),
+          Image.asset(img_close,
+            color: black_121212,width: 12.w,height: 12.h,)
         ],
       ),
     );
