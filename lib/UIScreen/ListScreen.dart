@@ -56,6 +56,26 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
+                          builder: (context) => Test(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      "Test Screen",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
                           builder: (context) => TransactionsPayoutsTabs(),
                         ));
                   },
@@ -671,25 +691,6 @@ class ListScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       "Login Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Test(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Test Screen",
                       style: TextStyle(
                           color: Colors.black87,
                           fontFamily: helveticaNeueNeue_medium,
