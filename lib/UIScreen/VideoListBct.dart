@@ -17,6 +17,7 @@ import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Model/SpeakersVideoModel.dart';
+import '../Widget/SpinnerDecorationBorder.dart';
 import '../Widget/search_bar_demo.dart';
 
 
@@ -43,6 +44,47 @@ class _VideoListBctState extends State<VideoListBct> {
     SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly and supporting criminal justice...",
         "Steve Roshein","Posted Dec 2021"),
   ];
+
+  /*Topic Spinner Code is here*/
+
+  List<DropdownMenuItem<String>> get dropdownItems{
+    List<DropdownMenuItem<String>> menuItems = [
+      DropdownMenuItem(child: Text("Technology",style: TextStyle(
+          fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "USA"),
+      DropdownMenuItem(child: Text("Entertainment",style: TextStyle(
+          fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Canada"),
+      DropdownMenuItem(child: Text("Design",style: TextStyle(
+          fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Brazil"),
+      DropdownMenuItem(child: Text("Business",style: TextStyle(
+          fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "England"),
+    ];
+    return menuItems;
+  }
+
+  String? selectedValue = null;
+
+
+  /*Language Spinner Code is here*/
+
+  List<DropdownMenuItem<String>> get dropdownItemslang{
+    List<DropdownMenuItem<String>> menuItems = [
+      DropdownMenuItem(child: Text("English",style: TextStyle(
+          fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "English"),
+      DropdownMenuItem(child: Text("Hindi",style: TextStyle(
+          fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Hindi"),
+      DropdownMenuItem(child: Text("Gujarati",style: TextStyle(
+          fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Gujarati"),
+      DropdownMenuItem(child: Text("Marathi",style: TextStyle(
+          fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Marathi"),
+    ];
+    return menuItems;
+  }
+
+  String? selectedValuelang = null;
+
+  bool isLayoutFirst = false;
+  bool isTextChange = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +174,7 @@ class _VideoListBctState extends State<VideoListBct> {
                          children: [
                            SearchBarDemo(
                              placeholder: "Search Talks...",
+                             fillcolor: white_ffffff,
                            ),
                            SizedBox(height: 16.h,),
 
@@ -232,23 +275,35 @@ class _VideoListBctState extends State<VideoListBct> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(icon_filter_orange,width: 24.w,height: 24.h,),
-                            SizedBox(width: 10.w,),
-                            // More filters
-                            Text(
-                                "More filters",
-                                style:  TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "Roboto",
-                                    fontStyle:  FontStyle.normal,
-                                    fontSize: 14.sp
-                                ),
-                                textAlign: TextAlign.left
-                            )
-                          ],
+                        GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              if(isTextChange = !isTextChange){
+                                isLayoutFirst=true;
+                              }else {
+                                isLayoutFirst=false;
+                              }
+                            }
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(icon_filter_orange,width: 24.w,height: 24.h,),
+                              SizedBox(width: 10.w,),
+                              // More filters
+                              Text(
+                                  isTextChange?"Close filters":"More filters",
+                                  style:  TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: "Roboto",
+                                      fontStyle:  FontStyle.normal,
+                                      fontSize: 14.sp
+                                  ),
+                                  textAlign: TextAlign.left
+                              )
+                            ],
+                          ),
                         ),
 
                         Container(
@@ -285,6 +340,141 @@ class _VideoListBctState extends State<VideoListBct> {
                             color:  Color(0xffebebeb)
                         ),
 
+                    ),
+
+
+                    Visibility(
+                      visible:  isLayoutFirst ,
+                      child: Padding(
+                        padding:  EdgeInsets.only(left: 24.w,right: 24.w,top: 24.h,),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 50.h,
+                              width: double.infinity,
+                              decoration: SpinnerDecorationBorder,
+                              child: DropdownButtonHideUnderline(
+                                child: Padding(
+                                  padding:  EdgeInsets.only(left: 10,right: 10),
+                                  child: DropdownButton(
+                                    //  validator: (value) => value == null ? "Select a country" : null,
+                                      dropdownColor: Colors.white,
+                                      value: selectedValuelang,
+                                      hint: Text(
+                                          "Topic",
+                                          style:  TextStyle(
+                                              color:  grey_aaaaaa,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: helveticaNeueNeue_medium,
+                                              fontStyle:  FontStyle.normal,
+                                              fontSize: 14.sp
+                                          ),
+                                          textAlign: TextAlign.left
+                                      ),
+                                      icon: SvgPicture.asset(icon_down_arrow_spinner,width: 12.w,height: 12.h,),
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          selectedValuelang = newValue!;
+                                        });
+                                      },
+                                      items: dropdownItemslang),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 12.h,
+                            ),
+                            Container(
+                              height: 50.h,
+                              width: double.infinity,
+                              decoration: SpinnerDecorationBorder,
+                              child: DropdownButtonHideUnderline(
+                                child: Padding(
+                                  padding:  EdgeInsets.only(left: 10,right: 10),
+                                  child: DropdownButton(
+                                    //  validator: (value) => value == null ? "Select a country" : null,
+                                      dropdownColor: Colors.white,
+                                      value: selectedValue,
+                                      hint: Text(
+                                          "Language",
+                                          style:  TextStyle(
+                                              color:  grey_aaaaaa,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: helveticaNeueNeue_medium,
+                                              fontStyle:  FontStyle.normal,
+                                              fontSize: 14.sp
+                                          ),
+                                          textAlign: TextAlign.left
+                                      ),
+                                      icon: SvgPicture.asset(icon_down_arrow_spinner,width: 12.w,height: 12.h,),
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          selectedValue = newValue!;
+                                        });
+                                      },
+                                      items: dropdownItems),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 12.h,),
+                            Row(
+                              children: [
+
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    height: 50.h,
+                                    decoration: BoxDecoration(
+
+                                      color: black_121212,
+                                      borderRadius: BorderRadius.circular(4.r),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                          "Apply Filter",
+                                          style:  TextStyle(
+                                              color:  white_ffffff,
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: "NeueHelvetica",
+                                              fontStyle:  FontStyle.normal,
+                                              fontSize: 12.sp
+                                          ),
+                                          textAlign: TextAlign.left
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 15.w,),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    height: 50.h,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xfff5f5f5),
+                                      borderRadius: BorderRadius.circular(4.r),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                          "Clear",
+                                          style:  TextStyle(
+                                              color:  const Color(0xff121212),
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: "NeueHelvetica",
+                                              fontStyle:  FontStyle.normal,
+                                              fontSize: 12.sp
+                                          ),
+                                          textAlign: TextAlign.left
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                              ],
+                            )
+
+                          ],
+                        ),
+                      ),
                     ),
 
                     Container(

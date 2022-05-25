@@ -34,6 +34,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
   bool checkColor = false;
   bool checkFillColor = true;
   bool _hasBeenPressednBidNow = false;
+  bool isLayoutFirst = false;
 
   String? dropdownValue;
   // Function validator;
@@ -43,7 +44,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
   late TextInputAction textInputAction;
   late TextInputType inputType;
   bool numKeypad = false;
-  bool isLayoutFirst = false;
+
 
   _InputTextStaicState(String hintData,TextEditingController controller,bool numKeypad,TextInputAction textInputAction,
       TextInputType inputType,){

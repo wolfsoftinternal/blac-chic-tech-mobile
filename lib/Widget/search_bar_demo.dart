@@ -7,9 +7,10 @@ import 'package:iconly/iconly.dart';
 
 
 class SearchBarDemo extends StatelessWidget {
-  const SearchBarDemo({Key? key, required this.placeholder}) : super(key: key);
+  const SearchBarDemo({Key? key, required this.placeholder,required this.fillcolor}) : super(key: key);
 
   final String placeholder;
+  final Color fillcolor;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class SearchBarDemo extends StatelessWidget {
           color: grey_aaaaaa,
           size: 20.r,
         ),
-        fillColor: white_ffffff,
+        fillColor: fillcolor,
         hintStyle: TextStyle(
           fontSize: 14.sp,
           // fontWeight: FontWeight.w500,
