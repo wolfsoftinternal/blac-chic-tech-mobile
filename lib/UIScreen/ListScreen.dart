@@ -15,6 +15,7 @@ import 'package:blackchecktech/UIScreen/EventSearch.dart';
 import 'package:blackchecktech/UIScreen/EventTicket.dart';
 import 'package:blackchecktech/UIScreen/EventTicketTxnId.dart';
 import 'package:blackchecktech/UIScreen/Featured.dart';
+import 'package:blackchecktech/UIScreen/FilterTopicList.dart';
 import 'package:blackchecktech/UIScreen/FindSpeaker.dart';
 import 'package:blackchecktech/UIScreen/MyPlayList.dart';
 import 'package:blackchecktech/UIScreen/MyPurchasedEvent.dart';
@@ -51,6 +52,25 @@ class ListScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FilterTopicList(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      "FilterTopicList Screen",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
