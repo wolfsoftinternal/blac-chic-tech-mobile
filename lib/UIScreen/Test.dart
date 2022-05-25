@@ -35,23 +35,20 @@ class _TestState extends State<Test> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-
-
-
               Container(
                 margin: EdgeInsets.only(left: 24.w,right: 24.w,top: 16.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Expanded(
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             Bg1 = true;
                             Bg2 = false;
+                            tv1 = true;
+                            tv2 = false;
                           });
                         },
                         child: Container(
@@ -62,7 +59,7 @@ class _TestState extends State<Test> {
                           ),
                           child: Center(
                             child: Text("Transactions",style: TextStyle(
-                              fontSize: 16.sp,color: black_121212,
+                              fontSize: 16.sp,color: tv1?Colors.white: black_121212,
                               fontFamily: roboto_bold
                             ),),
                           ),
@@ -78,6 +75,8 @@ class _TestState extends State<Test> {
                           setState(() {
                             Bg1 = false;
                             Bg2 = true;
+                            tv1 = false;
+                            tv2 = true;
                           });
                         },
                         child: Container(
@@ -88,7 +87,7 @@ class _TestState extends State<Test> {
                           ),
                           child: Center(
                             child: Text("Payouts",style: TextStyle(
-                              fontSize: 16.sp,color: black_121212,
+                              fontSize: 16.sp,color:tv2 ?Colors.white: black_121212,
                               fontFamily: roboto_bold
                             ),),
                           ),

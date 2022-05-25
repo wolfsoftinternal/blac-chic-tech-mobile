@@ -34,61 +34,73 @@ class _FindSpeakerState extends State<FindSpeaker> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                  margin: EdgeInsets.only(top: 15.h),
-                  child: ToolbarWithHeaderCenterTitle("FIND A SPEAKER")),
-              SearchBarWithRightIcon(),
-              Container(
-                margin: EdgeInsets.only(top: 16.h, left: 24.w),
-                child: Text(
-                  "115 Speakers",
-                  style: TextStyle(
-                      color: grey_aaaaaa,
-                      fontSize: 14.sp,
-                      fontFamily: roboto_regular),
+
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      Container(
+                          margin: EdgeInsets.only(top: 15.h),
+                          child: ToolbarWithHeaderCenterTitle("FIND A SPEAKER")),
+                      SearchBarWithRightIcon(),
+                      Container(
+                        margin: EdgeInsets.only(top: 16.h, left: 24.w),
+                        child: Text(
+                          "115 Speakers",
+                          style: TextStyle(
+                              color: grey_aaaaaa,
+                              fontSize: 14.sp,
+                              fontFamily: roboto_regular),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            primary: false,
+                            itemCount: findSpeakerList.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, i) {
+                              return Padding(
+                                padding: EdgeInsets.only(bottom: 25.h),
+                                child: Container(
+                                    width: double.infinity,
+                                    child:Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+
+                                        ClipOval(
+                                          child: Image.asset(findSpeakerList[i].imgUser,height: 40.h,width:40.h,fit: BoxFit.fill,),
+                                        ),
+                                        SizedBox(width: 16.w,),
+                                        Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(findSpeakerList[i].tvTitle,style: TextStyle(
+                                                fontFamily: helveticaNeueNeue_medium,color: grey_aaaaaa,
+                                                fontSize: 14
+                                            ),),
+                                            SizedBox(height: 3.h,),
+                                            Text(findSpeakerList[i].tvSubTitle,style: TextStyle(
+                                                fontFamily: helvetica_neu_bold,color: black_121212,
+                                                fontSize: 14
+                                            ),),
+
+                                          ],
+                                        )
+                                      ],
+                                    )),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    primary: false,
-                    itemCount: findSpeakerList.length,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, i) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: 25.h),
-                        child: Container(
-                            width: double.infinity,
-                            child:Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-
-                                ClipOval(
-                                  child: Image.asset(findSpeakerList[i].imgUser,height: 40.h,width:40.h,fit: BoxFit.fill,),
-                                ),
-                                SizedBox(width: 16.w,),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(findSpeakerList[i].tvTitle,style: TextStyle(
-                                      fontFamily: helveticaNeueNeue_medium,color: grey_aaaaaa,
-                                      fontSize: 14
-                                    ),),
-                                    SizedBox(height: 3.h,),
-                                    Text(findSpeakerList[i].tvSubTitle,style: TextStyle(
-                                        fontFamily: helvetica_neu_bold,color: black_121212,
-                                        fontSize: 14
-                                    ),),
-
-                                  ],
-                                )
-                              ],
-                            )),
-                      );
-                    }),
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 25.h),

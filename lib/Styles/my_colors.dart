@@ -17,9 +17,5 @@ const transparent = Color(0x19aaaaaa);
 const gray_b3ffffff = Color(0xb3ffffff);
 const black_121925 = Color(0xff121925);
 const view_line_f4f6f6 = Color(0xfff4f6f6);
-
-
-
-
-
+const parrot_1ad04d = Color(0xff1ad04d);
 
