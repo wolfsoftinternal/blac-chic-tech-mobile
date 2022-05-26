@@ -156,8 +156,8 @@ class _EventList2State extends State<EventList2> {
                                         ),
                                       ),
                                       Container(
+                                        padding: EdgeInsets.only(right: 6.w),
                                           height: 29.h,
-                                          width: 133.w,
                                           decoration: BoxDecoration(
                                             gradient: LinearGradient(colors: [
                                               Color(0xff1c2535),

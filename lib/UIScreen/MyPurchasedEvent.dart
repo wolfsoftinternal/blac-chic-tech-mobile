@@ -188,7 +188,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                           ),
                                           Container(
                                               height: 29.h,
-                                              width: 133.w,
+                                              padding: EdgeInsets.only(right: 6.w),
                                               decoration: BoxDecoration(
                                                 gradient: LinearGradient(colors: [
                                                   Color(0xff1c2535),

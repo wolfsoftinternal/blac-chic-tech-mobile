@@ -36,6 +36,7 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 
 import '../Screens/Authentication/login/view/LoginView.dart';
+import 'EventList2.dart';
 import 'Test.dart';
 import '../Welcome.dart';
 
@@ -83,6 +84,25 @@ class ListScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       "Test Screen",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EventList2(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      "EventList2 Screen",
                       style: TextStyle(
                           color: Colors.black87,
                           fontFamily: helveticaNeueNeue_medium,

@@ -126,7 +126,7 @@ class _EventSearchState extends State<EventSearch> {
                                   margin: EdgeInsets.only(top: 8.h, right: 8.w),
                                   child: Container(
                                       height: 29.h,
-                                      width: 133.w,
+                                      width: 138.w,
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(colors: [
                                           Color(0xff1c2535),
