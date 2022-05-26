@@ -7,6 +7,8 @@ import 'package:blackchecktech/Styles/my_height.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
+import 'package:blackchecktech/Utilities/TextfieldUtility.dart';
+import 'package:blackchecktech/Utilities/Validator.dart';
 import 'package:blackchecktech/Widget/EditTextDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,144 +84,144 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                    Container(height: 46, width: 46,)
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
-              child: setRoboto('Location address', 12.sp, grey_aaaaaa, FontWeight.w900),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 14.0, left: 24.0, right: 24.0),
-              child: Row(
-                children: [
-                  SvgPicture.asset(location_pin, width: 24, height: 24),
-                  setRoboto(controller.addressController.value.text, 12.sp, grey_aaaaaa, FontWeight.w900),
-                  Spacer(),
-                  GestureDetector(
-                    onTap: (){
-                      Get.back();
-                    },
-                    child: Icon(Icons.arrow_forward_ios_rounded)
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: Divider(
-                color: grey_e8e8e8,
-              ),
-            ),
+
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: HeightData.fifty_eight,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: EditTextDecoration,
-                      child: Padding(
-                        padding:  EdgeInsets.only(
-                            left: 12.w, right: 12.w, top: 10.h),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Landmark',
-                              style: TextStyle(
-                                  color: grey_aaaaaa,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: helvetica_neu_bold,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12.sp),
-                            ),
-                            SizedBox(height: 5,),
-                            Text(
-                              controller.landmarkController.value.text,
-                              style: TextStyle(
-                                  color: black_121212,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: helvetica_neu_bold,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 15.sp),
+                            setRoboto('LANDMARK', 12.sp, grey_aaaaaa, FontWeight.w900),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 14.0),
+                              child: setTextFieldHelveticaMediumOrangeBorder(
+                                controller.landmarkController.value,
+                                "Landmark",
+                                false,
+                                TextInputType.text,
+                                TextInputAction.next,
+                                () => {
+                                  // on Chnages
+                                },
+                                validatetitle,
+                                false,
+                              ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 14.0),
-                      child: Container(
-                        height: HeightData.fifty_eight,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: EditTextDecoration,
-                        child: Padding(
-                          padding:  EdgeInsets.only(
-                              left: 12.w, right: 12.w, top: 10.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Street name',
-                                style: TextStyle(
-                                    color: grey_aaaaaa,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: helvetica_neu_bold,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 12.sp),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            setRoboto('ADDRESS', 12.sp, grey_aaaaaa, FontWeight.w900),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 14.0),
+                              child: setTextFieldHelveticaMediumOrangeBorder(
+                                controller.street1Controller.value,
+                                "Address",
+                                false,
+                                TextInputType.text,
+                                TextInputAction.next,
+                                () => {
+                                  // on Chnages
+                                },
+                                validatetitle,
+                                false,
                               ),
-                              SizedBox(height: 5,),
-                              Text(
-                                controller.street1Controller.value.text,
-                                style: TextStyle(
-                                    color: black_121212,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: helvetica_neu_bold,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 15.sp),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 14.0),
-                      child: Container(
-                        height: HeightData.fifty_eight,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: EditTextDecoration,
-                        child: Padding(
-                          padding:  EdgeInsets.only(
-                              left: 12.w, right: 12.w, top: 10.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Street name 2',
-                                style: TextStyle(
-                                    color: grey_aaaaaa,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: helvetica_neu_bold,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 12.sp),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            setRoboto('ADDRESS 2', 12.sp, grey_aaaaaa, FontWeight.w900),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 14.0),
+                              child: setTextFieldHelveticaMediumOrangeBorder(
+                                controller.street2Controller.value,
+                                "Address 2",
+                                false,
+                                TextInputType.text,
+                                TextInputAction.next,
+                                () => {
+                                  // on Chnages
+                                },
+                                validatetitle,
+                                false,
                               ),
-                              SizedBox(height: 5,),
-                              Text(
-                                controller.street2Controller.value.text,
-                                style: TextStyle(
-                                    color: black_121212,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: helvetica_neu_bold,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 15.sp),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  setRoboto('CITY', 12.sp, grey_aaaaaa, FontWeight.w900),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 14.0),
+                                    child: setTextFieldHelveticaMediumOrangeBorder(
+                                      controller.cityController.value,
+                                      "City",
+                                      false,
+                                      TextInputType.text,
+                                      TextInputAction.next,
+                                      () => {
+                                        // on Chnages
+                                      },
+                                      validatetitle,
+                                      false,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  setRoboto('COUNTRY', 12.sp, grey_aaaaaa, FontWeight.w900),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 14.0),
+                                    child: setTextFieldHelveticaMediumOrangeBorder(
+                                      controller.countryController.value,
+                                      "Country",
+                                      false,
+                                      TextInputType.text,
+                                      TextInputAction.next,
+                                      () => {
+                                        // on Chnages
+                                      },
+                                      validatetitle,
+                                      false
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

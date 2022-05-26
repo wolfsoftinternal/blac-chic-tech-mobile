@@ -2,12 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventDetailModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/PostListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/VideoListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventDetail.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/EventListDetail.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +21,6 @@ import 'package:video_player/video_player.dart';
 
 import '../../../../Model/BaseModel.dart';
 import '../../../../Utils/CommonWidget.dart';
-import '../../../../Utils/GeneralFunctions.dart';
 import '../../../../Utils/preference_utils.dart';
 import '../../../../Utils/share_predata.dart';
 import '../../../Networks/api_endpoint.dart';
@@ -26,25 +28,37 @@ import '../../../Networks/api_response.dart';
 
 class AdmireProfileController extends GetxController {
   RxList<AdmireList> admireList = <AdmireList>[].obs;
+  RxList<AdmireList> otherAdmireList = <AdmireList>[].obs;
   Rx<UserDetails> details = UserDetails().obs;
   RxList<PostList> postList = <PostList>[].obs;
   RxList<PostList> postDetailList = <PostList>[].obs;
   RxList<VideoList> videoList = <VideoList>[].obs;
+  RxList<VideoList> videoDetailList = <VideoList>[].obs;
   RxList<EventList> eventList = <EventList>[].obs;
+  RxList<EventList> eventDetailList = <EventList>[].obs;
   List<VideoPlayerController> videoController = [];
+  List<VideoPlayerController> videoControllerList = [];
   Rx<EventList> eventDetails = EventList().obs;
   late List initializeVideoPlayerFuture = [];
+  late List initializeVideoPlayerFutureList = [];
   List video = [];
-  
-  admireListAPI(BuildContext context) async {
+  Rx<Duration> position = Duration().obs;
+  Rx<Duration> duration = Duration().obs;
+  RxBool isRearrange = false.obs;
+  RxList<UserList> selectedList = <UserList>[].obs;
+  RxList<UserList> searchList = <UserList>[].obs;
+  Rx<TextEditingController> searchController = TextEditingController().obs;
+  RxInt selectedIndex = 1.obs;
+  RxString admire = ''.obs;
+  // EventController controller = Get.put(EventController());
+
+  admireListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urladmireList;
     final apiReq = Request();
-    await apiReq.postAPI(url, null, token.toString()).then((value) {
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -53,19 +67,22 @@ class AdmireProfileController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            admireListAPI(context);
-          }else if(model.statusCode==200){
-            AdmireListModel detail =
-            AdmireListModel.fromJson(userModel);
+            admireListAPI(context, body);
+          } else if (model.statusCode == 200) {
+            AdmireListModel detail = AdmireListModel.fromJson(userModel);
 
-            admireList.value = detail.data!;
+            if (body == null) {
+              admireList.value = detail.data!;
+            } else {
+              otherAdmireList.value = detail.data!;
+            }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -73,11 +90,9 @@ class AdmireProfileController extends GetxController {
 
   admireDeleteAPI(BuildContext context, id) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
-    String url = urlBase + urladmireDelete;
+    String url = urlBase + urlDeleteAdmire;
     final apiReq = Request();
     dynamic body = {
       'admire_id': id.toString(),
@@ -92,16 +107,16 @@ class AdmireProfileController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             admireDeleteAPI(context, id);
-          }else if(model.statusCode==200){
-            admireListAPI(context);
+          } else if (model.statusCode == 200) {
+            admireListAPI(context, null);
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -109,9 +124,7 @@ class AdmireProfileController extends GetxController {
 
   userProfileAPI(BuildContext context) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urlUserProfile;
     final apiReq = Request();
@@ -125,20 +138,19 @@ class AdmireProfileController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             userProfileAPI(context);
-          }else if(model.statusCode==200){
-            UserDetails admireListModel =
-            UserDetails.fromJson(userModel);
+          } else if (model.statusCode == 200) {
+            SignupModel admireListModel = SignupModel.fromJson(userModel);
 
-            details.value = admireListModel;
+            details.value = admireListModel.data!;
             Get.to(Profile());
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -146,9 +158,7 @@ class AdmireProfileController extends GetxController {
 
   admireProfileAPI(BuildContext context, id) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urlOtherProfile;
     final apiReq = Request();
@@ -165,21 +175,21 @@ class AdmireProfileController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             admireProfileAPI(context, id);
-          }else if(model.statusCode==200){
+          } else if (model.statusCode == 200) {
             UserDetails admireListModel =
-            UserDetails.fromJson(userModel['data']);
+                UserDetails.fromJson(userModel['data']);
 
             details.value = admireListModel;
             print(details);
             Get.to(Profile());
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -187,9 +197,7 @@ class AdmireProfileController extends GetxController {
 
   postListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urlPostList;
     final apiReq = Request();
@@ -203,38 +211,35 @@ class AdmireProfileController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             postListAPI(context, body);
-          }else if(model.statusCode==200){
-            PostListModel detail =
-            PostListModel.fromJson(userModel);
+          } else if (model.statusCode == 200) {
+            PostListModel detail = PostListModel.fromJson(userModel);
 
-            if(body == null){
+            if (body == null) {
               postList.value = detail.data!;
-            }else{
+            } else {
               postDetailList.value = detail.data!;
-            }            
+            }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
   }
 
-  videoListAPI(BuildContext context) async {
+  videoListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urlVideoList;
     final apiReq = Request();
 
-    await apiReq.postAPI(url, null, token.toString()).then((value) {
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -243,43 +248,54 @@ class AdmireProfileController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            videoListAPI(context);
-          }else if(model.statusCode==200){
-            VideoListModel detail =
-            VideoListModel.fromJson(userModel);
+            videoListAPI(context, body);
+          } else if (model.statusCode == 200) {
+            VideoListModel detail = VideoListModel.fromJson(userModel);
 
-            videoList.value = detail.data!;
-
-            videoController.clear();
-            for(int i = 0; i<videoList.length; i++){
-              if(videoList[i].file == null){
-                videoList.remove(videoList[i]);
+            if (body == null) {
+              videoList.value = detail.data!;
+              for (int i = 0; i < videoList.length; i++) {
+                if (videoList[i].file == null) {
+                  videoList.remove(videoList[i]);
+                }
+                videoControllerList
+                    .add(VideoPlayerController.network(videoList[i].file!));
+                initializeVideoPlayerFutureList
+                    .add(videoControllerList[i].initialize());
               }
-              videoController.add(VideoPlayerController.network(videoList[i].file!));
-              initializeVideoPlayerFuture.add(videoController[i].initialize());
+            } else {
+              videoDetailList.value = detail.data!;
+              videoController.clear();
+              for (int i = 0; i < videoDetailList.length; i++) {
+                if (videoDetailList[i].file == null) {
+                  videoDetailList.remove(videoDetailList[i]);
+                }
+                videoController.add(
+                    VideoPlayerController.network(videoDetailList[i].file!));
+                initializeVideoPlayerFuture
+                    .add(videoController[i].initialize());
+              }
             }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
   }
 
-  eventListAPI(BuildContext context) async {
+  eventListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urlEventList;
     final apiReq = Request();
 
-    await apiReq.postAPI(url, null, token.toString()).then((value) {
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -288,19 +304,22 @@ class AdmireProfileController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            eventListAPI(context);
-          }else if(model.statusCode==200){
-            EventListModel detail =
-            EventListModel.fromJson(userModel);
+            eventListAPI(context, body);
+          } else if (model.statusCode == 200) {
+            EventListModel detail = EventListModel.fromJson(userModel);
 
-            eventList.value = detail.data!;
+            if (body == null) {
+              eventList.value = detail.data!;
+            } else {
+              eventDetailList.value = detail.data!;
+            }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -308,9 +327,7 @@ class AdmireProfileController extends GetxController {
 
   eventDetailAPI(BuildContext context, id) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     dynamic body = {
       'event_id': id.toString(),
@@ -328,21 +345,132 @@ class AdmireProfileController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             eventDetailAPI(context, id);
-          }else if(model.statusCode==200){
-            EventDetailModel detail =
-            EventDetailModel.fromJson(userModel);
-
+          } else if (model.statusCode == 200) {
+            EventDetailModel detail = EventDetailModel.fromJson(userModel);
             eventDetails.value = detail.data!;
-
             Get.to(EventDetail());
           }
         });
-      }else{
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  eventDeleteAPI(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    dynamic body = {
+      'event_id': id.toString(),
+    };
+
+    String url = urlBase + urlDeleteEvent;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            eventDetailAPI(context, id);
+          } else if (model.statusCode == 200) {
+            Get.back();
+            Get.back();
+            Get.to(EventListDetail(
+              id: id,
+            ));
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  replaceAdmireAPI(BuildContext context, id, number) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    dynamic body = {
+      'admire_id': id.toString(),
+      'admire_number': number.toString()
+    };
+
+    String url = urlBase + urlReplaceAdmire;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            replaceAdmireAPI(context, id, number);
+          } else if (model.statusCode == 200) {
+            Get.back();
+            Get.back();
+            Get.to(EventListDetail(
+              id: id,
+            ));
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  createAdmireAPI(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    dynamic body = {
+      'admire_id': id.toString(),
+    };
+
+    String url = urlBase + urlCreateAdmire;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            createAdmireAPI(context, id);
+          } else if (model.statusCode == 200) {
+            snackBar(context, model.message!);
+          }
+        });
+      } else {
         print(res.reasonPhrase);
       }
     });

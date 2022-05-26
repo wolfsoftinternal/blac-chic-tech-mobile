@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/VideoDetail.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
@@ -44,20 +45,22 @@ class _VideoTabState extends State<VideoTab> {
                 shrinkWrap: true,
                 primary: false,
                 itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {},
+                  return InkWell(
+                    onTap: () {
+                      Get.to(VideoDetail(id: controller.videoList[index].id));
+                    },
                     child: Stack(
                       children: [
                         Container(
                           height: 220,
                           child: FutureBuilder(
-                            future: controller.initializeVideoPlayerFuture[index],
+                            future: controller.initializeVideoPlayerFutureList[index],
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==
                                   ConnectionState.done) {
                                 return AspectRatio(
-                                  aspectRatio: controller.videoController[index].value.aspectRatio,
-                                  child: VideoPlayer(controller.videoController[index]),
+                                  aspectRatio: controller.videoControllerList[index].value.aspectRatio,
+                                  child: VideoPlayer(controller.videoControllerList[index]),
                                 );
                               } else {
                                 return Container();
@@ -88,6 +91,7 @@ class _VideoTabState extends State<VideoTab> {
                         Center(
                             child: InkWell(
                           onTap: () {
+                            Get.to(VideoDetail(id: controller.videoList[index].id));
                             // if (controller.videoController[index].value.isPlaying) {
                             //   setState(() {
                             //     controller.videoController[index].pause();
