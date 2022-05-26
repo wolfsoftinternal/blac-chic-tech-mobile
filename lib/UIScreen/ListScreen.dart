@@ -38,6 +38,7 @@ import 'package:flutter/material.dart';
 import '../Screens/Authentication/login/view/LoginView.dart';
 import 'Test.dart';
 import '../Welcome.dart';
+import 'VideoDetailTab.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -52,6 +53,25 @@ class ListScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VideoDetailTab(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      "VideoDetailTab Screen",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
