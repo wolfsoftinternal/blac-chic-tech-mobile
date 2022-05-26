@@ -36,11 +36,57 @@ class _VideoSearchState extends State<VideoSearch> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 15.h,),
+              Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 24.w),
 
-              Container(
-                  margin: EdgeInsets.only(top: 15.h),
-                  child: ToolbarWithHeaderCenterTitle("SEARCH")),
+                    child:  GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 48.r,
+                        height: 48.r,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          // borderRadius: BorderRadius.circular(10.r),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.1),
+                              spreadRadius: 6,
+                              blurRadius: 10,
+                              offset: Offset(1, 4), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding:  EdgeInsets.all(5.0.r),
+                          child: SvgPicture.asset(icon_cancel,width: 30.w,height: 30.w,),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:  EdgeInsets.only(top: 15),
+                    child: Center(child: // TOPICS
+                    Text(
+                        "SEARCH",
+                        style: const TextStyle(
+                            color:  const Color(0xff121212),
+                            fontWeight: FontWeight.w900,
+                            fontFamily: "NeueHelvetica",
+                            fontStyle:  FontStyle.normal,
+                            fontSize: 16.0
+                        ),
+                        textAlign: TextAlign.left
+                    )),
+                  ),
 
+                ],
+              ),
 
               SearchBar(""),
               Container(
@@ -52,7 +98,7 @@ class _VideoSearchState extends State<VideoSearch> {
                     padding: EdgeInsets.zero,
                     itemBuilder: (context, i) {
                       return Padding(
-                        padding: EdgeInsets.only(bottom: 25.h),
+                        padding: EdgeInsets.only(bottom: 16.h),
                         child: Container(
                             width: double.infinity,
                             child:Row(

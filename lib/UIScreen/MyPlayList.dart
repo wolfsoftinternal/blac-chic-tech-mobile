@@ -50,7 +50,7 @@ class _MyPlayListState extends State<MyPlayList> {
 
                       SearchBarWithRightIcon(),
                       Container(
-                        margin: EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
+                        margin: EdgeInsets.only(top: 24.h, left: 24.w, right: 0.w),
                         child: ListView.builder(
                             shrinkWrap: true,
                             primary: false,
@@ -58,7 +58,7 @@ class _MyPlayListState extends State<MyPlayList> {
                             padding: EdgeInsets.zero,
                             itemBuilder: (context, i) {
                               return Padding(
-                                padding: EdgeInsets.only(bottom: 20.h),
+                                padding: EdgeInsets.only(bottom: 16.h),
                                 child: Container(
                                     width: double.infinity,
                                     child:Row(

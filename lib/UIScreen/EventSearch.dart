@@ -40,53 +40,56 @@ class _EventSearchState extends State<EventSearch> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.only(left: 24.w,right: 24.w,top: 15.h),
-                  child: Stack(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
+                SizedBox(height: 15.h,),
+                Stack(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 24.w),
+
+                      child:  GestureDetector(
+                        onTap: (){
                           Navigator.pop(context);
                         },
                         child: Container(
-                          width: 40.r,
-                          height: 40.r,
+                          width: 48.r,
+                          height: 48.r,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.r),
+                            shape: BoxShape.circle,
+                            // borderRadius: BorderRadius.circular(10.r),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.1),
                                 spreadRadius: 6,
                                 blurRadius: 10,
-                                offset:
-                                    Offset(1, 4), // changes position of shadow
+                                offset: Offset(1, 4), // changes position of shadow
                               ),
                             ],
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(12.0.r),
-                            child: Image.asset(img_close,width: 16.w,height: 16.h,),
+                            padding:  EdgeInsets.all(5.0.r),
+                            child: SvgPicture.asset(icon_cancel,width: 30.w,height: 30.w,),
                           ),
                         ),
                       ),
-                      Center(
-                        child: Container(
-                          margin: EdgeInsets.only(top: 10.h),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text("Search".toUpperCase(),style: TextStyle(
-                                fontSize: 16,color: black_121212,
-                                fontFamily: helvetica_neu_bold,
-                              ),)
-                            ],
+                    ),
+                    Padding(
+                      padding:  EdgeInsets.only(top: 15),
+                      child: Center(child: // TOPICS
+                      Text(
+                          "SEARCH",
+                          style: const TextStyle(
+                              color:  const Color(0xff121212),
+                              fontWeight: FontWeight.w900,
+                              fontFamily: "NeueHelvetica",
+                              fontStyle:  FontStyle.normal,
+                              fontSize: 16.0
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
+                          textAlign: TextAlign.left
+                      )),
+                    ),
+
+                  ],
                 ),
                 SearchBar(""),
                 SizedBox(
@@ -101,7 +104,7 @@ class _EventSearchState extends State<EventSearch> {
                       padding: EdgeInsets.zero,
                       itemBuilder: (context, i) {
                         return Padding(
-                          padding: EdgeInsets.only(bottom: 32.h),
+                          padding: EdgeInsets.only(bottom: 16.h),
                           child: Stack(
                             children: [
                               Container(
