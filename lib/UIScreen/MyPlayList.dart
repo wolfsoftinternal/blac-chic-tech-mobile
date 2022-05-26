@@ -20,7 +20,7 @@ class MyPlayList extends StatefulWidget {
 class _MyPlayListState extends State<MyPlayList> {
   List<SpeakersVideoModel> speakerVideoList = [
     SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly and supporting criminal justice...",
-        "Steve Roshein","Posted Dec 2021"),
+        "Steve Roshein","Posted Dec 2025"),
     SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly and supporting criminal justice...",
         "Steve Roshein","Posted Dec 2021"),
   ];
@@ -120,10 +120,7 @@ class _MyPlayListState extends State<MyPlayList> {
                                             ),
                                           ),
                                         ),
-
-
-
-                                  PopupMenuButton(
+                                        PopupMenuButton(
                                         itemBuilder: (context) => [
                                           const PopupMenuItem(
                                             child: Text("Remove"),
