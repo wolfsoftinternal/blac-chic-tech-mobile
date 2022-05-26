@@ -541,7 +541,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                 FocusScope.of(context).unfocus();
                 if (controller.checkPersonalValidation(context)) {
                   checkNet(context).then((value) {
-                    controller.personalInfoAPI(context, "");
+                    controller.personalInfoAPI(context, imagePath.path.toString());
                   });
                 }
               }),

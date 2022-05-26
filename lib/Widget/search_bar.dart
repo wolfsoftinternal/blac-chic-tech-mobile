@@ -5,9 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iconly/iconly.dart';
 
-
 class SearchBarTag extends StatelessWidget {
-  const SearchBarTag({Key? key, required this.placeholder, this.onSubmit, this.controller}) : super(key: key);
+  const SearchBarTag(
+      {Key? key, required this.placeholder, this.onSubmit, this.controller})
+      : super(key: key);
   final Function(String)? onSubmit;
   final TextEditingController? controller;
   final String placeholder;
@@ -15,7 +16,7 @@ class SearchBarTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller!,
+      controller: controller,
       decoration: InputDecoration(
         filled: true,
         hintText: placeholder,

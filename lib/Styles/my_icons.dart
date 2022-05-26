@@ -75,3 +75,5 @@ const icon_add_play_list = 'assets/images/icon_add_play_list.svg';
 const icon_heart = 'assets/images/icon_heart.svg';
 const icon_message = 'assets/images/icon_message.svg';
 const icon_share = 'assets/images/icon_share.svg';
+const loader = 'assets/images/loader.gif';
+const view_profile = 'assets/images/iconly_bold_profile.svg';

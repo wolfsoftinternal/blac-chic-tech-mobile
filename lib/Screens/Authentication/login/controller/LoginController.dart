@@ -76,6 +76,9 @@ class LoginController extends GetxController {
             await preferences.setSignupModel(
                 loginInModel, SharePreData.keySignupModel);
 
+            await preferences.setString(
+                SharePreData.keytoken, loginInModel.data!.token.toString());
+
             if (boolRemember.value == true) {
               await preferences.setBool(
                   SharePreData.keyRememberedUserInfo, true);
@@ -86,7 +89,7 @@ class LoginController extends GetxController {
             SignupModel? myModel =
                 await preferences.getSignupModel(SharePreData.keySignupModel);
 
-            if (myModel!.data!.aboutUs == "") {
+            if (myModel!.data!.aboutUs == "" || myModel.data!.aboutUs == null) {
               Get.offAll(const PersonalInfoFormView());
             } else if (myModel.data!.currentJobs == null ||
                 myModel.data!.currentJobs.toString() == '[]') {
@@ -97,15 +100,20 @@ class LoginController extends GetxController {
             } else if (myModel.data!.questions == null ||
                 myModel.data!.questions.toString() == '[]') {
               Get.offAll(const AdditionalQueFormView());
-            } else if (myModel.data!.questions == null ||
-                myModel.data!.questions.toString() == '[]') {
+            } else if (myModel.data!.questions != null ||
+                myModel.data!.questions.toString() != '[]') {
+              String questionsInfo = "";
               String lastQuestionsInfo = "";
               for (int i = 0; i < myModel.data!.questions!.length; i++) {
-                if (myModel.data!.questions![i].type == "additional") {
+                if (myModel.data!.questions![i].type == "normal") {
+                  questionsInfo = "Done";
+                } else {
                   lastQuestionsInfo = "Done";
                 }
               }
-              if (lastQuestionsInfo != "Done") {
+              if (questionsInfo != "Done") {
+                Get.offAll(AdditionalQueFormView());
+              } else if (lastQuestionsInfo != "Done") {
                 Get.offAll(AdditionalLastQueView());
               } else {
                 Get.offAll(BottomNavigation());

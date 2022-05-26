@@ -172,9 +172,7 @@ class StepsController extends GetxController {
 
   Future<void> personalInfoAPI(BuildContext context, String imagePath) async {
     var preferences = MySharedPref();
-    SignupModel? modelM =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = modelM!.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     var headers = {'Authorization': 'Bearer ' + token!};
     var request =
@@ -227,9 +225,7 @@ class StepsController extends GetxController {
 
   companyListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urlCompanyList;
     final apiReq = Request();
@@ -259,9 +255,7 @@ class StepsController extends GetxController {
 
   Future<void> createCompanyAPI(BuildContext context, String imagePath) async {
     var preferences = MySharedPref();
-    SignupModel? modelM =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = modelM!.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     var headers = {'Authorization': 'Bearer ' + token!};
     var request =
@@ -304,7 +298,7 @@ class StepsController extends GetxController {
     var preferences = MySharedPref();
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     dynamic body = {
       'current_job_title': currentTitleController.value.text,
@@ -333,21 +327,25 @@ class StepsController extends GetxController {
             SignupModel? signUp = SignupModel.fromJson(userModel);
 
             var preferences = MySharedPref();
-            await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
-            if (myModel?.data!.educations == null) {
+            await preferences.setSignupModel(
+                signUp, SharePreData.keySignupModel);
+            if (myModel?.data!.educations == null ||
+                myModel?.data!.educations.toString() == '[]') {
               Get.to(const EducationInfoFormView());
-            } else if (myModel?.data!.questions == null) {
+            } else if (myModel?.data!.questions == null ||
+                myModel?.data!.questions.toString() == '[]') {
               Get.to(const AdditionalQueFormView());
-            } else if (myModel?.data!.questions == null) {
+            } else if (myModel?.data!.questions == null ||
+                myModel?.data!.questions.toString() == '[]') {
               String lastQuestionsInfo = "";
-              for (int i = 0; i < myModel!.data!.questions!.length; i++) {             
+              for (int i = 0; i < myModel!.data!.questions!.length; i++) {
                 if (myModel.data!.questions![i].type == "additional") {
                   lastQuestionsInfo = "Done";
                 }
               }
               if (lastQuestionsInfo != "Done") {
                 Get.to(AdditionalLastQueView());
-              }else {
+              } else {
                 Get.offAll(BottomNavigation());
               }
             } else {
@@ -365,7 +363,7 @@ class StepsController extends GetxController {
     var preferences = MySharedPref();
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     dynamic body = {
       'education': educationalDetails.toJson().toString(),
@@ -391,19 +389,22 @@ class StepsController extends GetxController {
             SignupModel? signUp = SignupModel.fromJson(userModel);
 
             var preferences = MySharedPref();
-            await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
-            if (myModel?.data!.questions == null) {
+            await preferences.setSignupModel(
+                signUp, SharePreData.keySignupModel);
+            if (myModel?.data!.questions == null ||
+                myModel?.data!.questions.toString() == '[]') {
               Get.to(const AdditionalQueFormView());
-            } else if (myModel?.data!.questions == null) {
+            } else if (myModel?.data!.questions == null ||
+                myModel?.data!.questions.toString() == '[]') {
               String lastQuestionsInfo = "";
-              for (int i = 0; i < myModel!.data!.questions!.length; i++) {             
+              for (int i = 0; i < myModel!.data!.questions!.length; i++) {
                 if (myModel.data!.questions![i].type == "additional") {
                   lastQuestionsInfo = "Done";
                 }
               }
               if (lastQuestionsInfo != "Done") {
                 Get.to(AdditionalLastQueView());
-              }else {
+              } else {
                 Get.offAll(BottomNavigation());
               }
             } else {
@@ -419,9 +420,7 @@ class StepsController extends GetxController {
 
   questionsInfoAPI(BuildContext context, type) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     dynamic body = {
       'questions': questions.toJson().toString(),
@@ -448,19 +447,29 @@ class StepsController extends GetxController {
             SignupModel? signUp = SignupModel.fromJson(userModel);
 
             var preferences = MySharedPref();
-            await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
-            if (myModel?.data!.questions == null) {
+            await preferences.setSignupModel(
+                signUp, SharePreData.keySignupModel);
+            SignupModel? myModel =
+                await preferences.getSignupModel(SharePreData.keySignupModel);
+            if (myModel?.data!.questions == null ||
+                myModel?.data!.questions.toString() == '[]') {
               Get.to(const AdditionalLastQueView());
-            } else if (myModel?.data!.questions == null) {
+            } else if (myModel?.data!.questions != null ||
+                myModel?.data!.questions.toString() != '[]') {
+              String questionsInfo = "";
               String lastQuestionsInfo = "";
-              for (int i = 0; i < myModel!.data!.questions!.length; i++) {             
-                if (myModel.data!.questions![i].type == "additional") {
+              for (int i = 0; i < myModel!.data!.questions!.length; i++) {
+                if (myModel.data!.questions![i].type == "normal") {
+                  questionsInfo = "Done";
+                } else {
                   lastQuestionsInfo = "Done";
                 }
               }
-              if (lastQuestionsInfo != "Done") {
-                Get.to(AdditionalLastQueView());
-              }else {
+              if (questionsInfo != "Done") {
+                Get.offAll(AdditionalQueFormView());
+              } else if (lastQuestionsInfo != "Done") {
+                Get.offAll(AdditionalLastQueView());
+              } else {
                 Get.offAll(BottomNavigation());
               }
             } else {

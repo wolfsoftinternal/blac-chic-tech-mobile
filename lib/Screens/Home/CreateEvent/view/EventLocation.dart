@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:blackchecktech/Layout/BlackButton.dart';
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/ConfirmLocation.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
@@ -28,6 +29,8 @@ class EventLocation extends StatefulWidget {
 
 class _EventLocationState extends State<EventLocation> {
   EventController controller = Get.put(EventController());
+  StepsController stepsController = Get.put(StepsController());
+
   final List<Marker> _markers = [];
 
   late GoogleMapController _controller;
@@ -53,6 +56,9 @@ class _EventLocationState extends State<EventLocation> {
   @override
   void initState() {
     super.initState();
+    checkNet(context).then((value) {
+      stepsController.countryListApi();
+    });
     init();
   }
 
@@ -382,6 +388,30 @@ class _EventLocationState extends State<EventLocation> {
             controller.addressController.value.text = _address;
             controller.latitude.value = lat;
             controller.longitude.value = lng;
+
+            for (var item in stepsController.countrylist) {
+              if (item.name == value.countryName!) {
+                controller.countryId.value = item.id!;
+              }
+              if(controller.countryId.value != 0){
+                checkNet(context).then((value) => stepsController.stateListApi(controller.countryId.value.toString()));
+              }
+            }
+
+            for (var item in stepsController.stateList) {
+              if (item.name == value.region!.split(', ')[1]) {
+                controller.stateId.value = item.id!;
+              }
+              if(controller.stateId.value != 0){
+                checkNet(context).then((value) => stepsController.cityListApi(controller.countryId.value.toString(), controller.stateId.value.toString()));
+              }
+            }
+
+            for (var item in stepsController.cityList) {
+              if (item.name == value.city!) {
+                controller.cityId.value = item.id!;
+              }
+            }
           }
         }));
   }

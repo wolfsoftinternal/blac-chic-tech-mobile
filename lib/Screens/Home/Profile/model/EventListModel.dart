@@ -1,109 +1,112 @@
 import 'dart:convert';
 
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 
-EventListModel eventListModelFromJson(String str) => EventListModel.fromJson(json.decode(str));
+EventListModel eventListModelFromJson(String str) =>
+    EventListModel.fromJson(json.decode(str));
 
 String eventListModelToJson(EventListModel data) => json.encode(data.toJson());
 
 class EventListModel {
-    EventListModel({
-        this.success,
-        this.statusCode,
-        this.message,
-        this.data,
-    });
+  EventListModel({
+    this.success,
+    this.statusCode,
+    this.message,
+    this.data,
+  });
 
-    bool? success;
-    int? statusCode;
-    String? message;
-    List<EventList>? data;
+  bool? success;
+  int? statusCode;
+  String? message;
+  List<EventList>? data;
 
-    factory EventListModel.fromJson(Map<String, dynamic> json) => EventListModel(
+  factory EventListModel.fromJson(Map<String, dynamic> json) => EventListModel(
         success: json["success"],
         statusCode: json["status_code"],
         message: json["message"],
-        data: List<EventList>.from(json["data"].map((x) => EventList.fromJson(x))),
-    );
+        data: List<EventList>.from(
+            json["data"].map((x) => EventList.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "success": success,
         "status_code": statusCode,
         "message": message,
         "data": List<dynamic>.from(data!.map((x) => x.toJson())),
-    };
+      };
 }
 
 class EventList {
-    EventList({
-        this.id,
-        this.userId,
-        this.title,
-        this.startDate,
-        this.startTime,
-        this.startDateTime,
-        this.endDate,
-        this.endTime,
-        this.endDateTime,
-        this.venue,
-        this.address,
-        this.latitude,
-        this.longitude,
-        this.poster,
-        this.countryId,
-        this.stateId,
-        this.cityId,
-        this.details,
-        this.status,
-        this.type,
-        this.price,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-        this.admissionData,
-        this.countryDetails,
-        this.stateDetails,
-        this.cityDetails,
-        this.hosts,
-        this.speakers,
-        this.benefits,
-        this.invitedUsers,
-    });
+  EventList({
+    this.id,
+    this.userId,
+    this.title,
+    this.startDate,
+    this.startTime,
+    this.startDateTime,
+    this.endDate,
+    this.endTime,
+    this.endDateTime,
+    this.venue,
+    this.address,
+    this.latitude,
+    this.longitude,
+    this.poster,
+    this.countryId,
+    this.stateId,
+    this.cityId,
+    this.details,
+    this.status,
+    this.type,
+    this.price,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+    this.admissionData,
+    this.countryDetails,
+    this.stateDetails,
+    this.cityDetails,
+    this.hosts,
+    this.speakers,
+    this.benefits,
+    this.invitedUsers,
+  });
 
-    int? id;
-    int? userId;
-    String? title;
-    String? startDate;
-    String? startTime;
-    DateTime? startDateTime;
-    dynamic endDate;
-    dynamic endTime;
-    dynamic endDateTime;
-    String? venue;
-    String? address;
-    String? latitude;
-    String? longitude;
-    dynamic poster;
-    int? countryId;
-    int? stateId;
-    int? cityId;
-    String? details;
-    int? status;
-    String? type;
-    String? price;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    dynamic deletedAt;
-    List<Benefit>? admissionData;
-    Details? countryDetails;
-    Details? stateDetails;
-    Details? cityDetails;
-    List<Host>? hosts;
-    List<Host>? speakers;
-    List<Benefit>? benefits;
-    List<dynamic>? invitedUsers;
+  int? id;
+  int? userId;
+  String? title;
+  String? startDate;
+  String? startTime;
+  DateTime? startDateTime;
+  dynamic endDate;
+  dynamic endTime;
+  dynamic endDateTime;
+  String? venue;
+  String? address;
+  String? latitude;
+  String? longitude;
+  dynamic poster;
+  int? countryId;
+  int? stateId;
+  int? cityId;
+  String? details;
+  int? status;
+  String? type;
+  String? price;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  dynamic deletedAt;
+  List<Benefit>? admissionData;
+  Details? countryDetails;
+  Details? stateDetails;
+  Details? cityDetails;
+  List<UserList>? hosts;
+  List<UserList>? speakers;
+  List<Benefit>? benefits;
+  List<UserList>? invitedUsers;
 
-    factory EventList.fromJson(Map<String, dynamic> json) => EventList(
+  factory EventList.fromJson(Map<String, dynamic> json) => EventList(
         id: json["id"],
         userId: json["user_id"],
         title: json["title"],
@@ -128,17 +131,32 @@ class EventList {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
-        admissionData: json["admission_data"] != null ? List<Benefit>.from(json["admission_data"].map((x) => Benefit.fromJson(x))) : null,
-        countryDetails: Details.fromJson(json["country_details"]),
-        stateDetails: Details.fromJson(json["state_details"]),
-        cityDetails: Details.fromJson(json["city_details"]),
-        hosts: List<Host>.from(json["hosts"].map((x) => Host.fromJson(x))),
-        speakers: List<Host>.from(json["speakers"].map((x) => Host.fromJson(x))),
-        benefits: List<Benefit>.from(json["benefits"].map((x) => Benefit.fromJson(x))),
-        invitedUsers: List<dynamic>.from(json["invited_users"].map((x) => x)),
-    );
+        admissionData: json["admission_data"] != null
+            ? List<Benefit>.from(
+                json["admission_data"].map((x) => Benefit.fromJson(x)))
+            : null,
+        countryDetails: json["country_details"] == null
+            ? null
+            : Details.fromJson(json["country_details"]),
+        stateDetails: json["state_details"] == null
+            ? null
+            : Details.fromJson(json["state_details"]),
+        cityDetails: json["city_details"] == null
+            ? null
+            : Details.fromJson(json["city_details"]),
+        hosts:
+            List<UserList>.from(json["hosts"].map((x) => UserList.fromJson(x))),
+        speakers: List<UserList>.from(
+            json["speakers"].map((x) => UserList.fromJson(x))),
+        benefits: json["benefits"] != null
+            ? List<Benefit>.from(
+                json["benefits"].map((x) => Benefit.fromJson(x)))
+            : null,
+        invitedUsers: List<UserList>.from(
+            json["invited_users"].map((x) => UserList.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
         "title": title,
@@ -163,43 +181,45 @@ class EventList {
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
-        "admission_data": List<dynamic>.from(admissionData!.map((x) => x.toJson())),
+        "admission_data":
+            List<dynamic>.from(admissionData!.map((x) => x.toJson())),
         "country_details": countryDetails!.toJson(),
         "state_details": stateDetails!.toJson(),
         "city_details": cityDetails!.toJson(),
         "hosts": List<dynamic>.from(hosts!.map((x) => x.toJson())),
         "speakers": List<dynamic>.from(speakers!.map((x) => x.toJson())),
         "benefits": List<dynamic>.from(benefits!.map((x) => x.toJson())),
-        "invited_users": List<dynamic>.from(invitedUsers!.map((x) => x)),
-    };
+        "invited_users":
+            List<dynamic>.from(invitedUsers!.map((x) => x.toJson())),
+      };
 }
 
 class Benefit {
-    Benefit({
-        this.id,
-        this.userId,
-        this.eventId,
-        this.category,
-        this.price,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-        this.benefits,
-    });
+  Benefit({
+    this.id,
+    this.userId,
+    this.eventId,
+    this.category,
+    this.price,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+    this.benefits,
+  });
 
-    int? id;
-    int? userId;
-    int? eventId;
-    String? category;
-    String? price;
-    int? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    dynamic deletedAt;
-    List<dynamic>? benefits;
+  int? id;
+  int? userId;
+  int? eventId;
+  String? category;
+  String? price;
+  int? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  dynamic deletedAt;
+  List<dynamic>? benefits;
 
-    factory Benefit.fromJson(Map<String, dynamic> json) => Benefit(
+  factory Benefit.fromJson(Map<String, dynamic> json) => Benefit(
         id: json["id"],
         userId: json["user_id"],
         eventId: json["event_id"],
@@ -209,10 +229,12 @@ class Benefit {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
-        benefits: json["benefits"] != null ? List<dynamic>.from(json["benefits"].map((x) => x)) : null,
-    );
+        benefits: json["benefits"] != null
+            ? List<dynamic>.from(json["benefits"].map((x) => x))
+            : null,
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
         "event_id": eventId,
@@ -223,79 +245,79 @@ class Benefit {
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
         "benefits": List<dynamic>.from(benefits!.map((x) => x)),
-    };
+      };
 }
 
 class Host {
-    Host({
-        this.id,
-        this.firstName,
-        this.lastName,
-        this.fullName,
-        this.userName,
-        this.email,
-        this.password,
-        this.dateOfBirth,
-        this.countryId,
-        this.stateId,
-        this.cityId,
-        this.image,
-        this.linkedinUrl,
-        this.instagramUrl,
-        this.twitterUrl,
-        this.socialType,
-        this.socialId,
-        this.aboutUs,
-        this.address,
-        this.latitude,
-        this.longitude,
-        this.website,
-        this.otp,
-        this.role,
-        this.emailVerifiedAt,
-        this.isActive,
-        this.isConfirm,
-        this.isVisible,
-        this.rememberToken,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-    });
+  Host({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.fullName,
+    this.userName,
+    this.email,
+    this.password,
+    this.dateOfBirth,
+    this.countryId,
+    this.stateId,
+    this.cityId,
+    this.image,
+    this.linkedinUrl,
+    this.instagramUrl,
+    this.twitterUrl,
+    this.socialType,
+    this.socialId,
+    this.aboutUs,
+    this.address,
+    this.latitude,
+    this.longitude,
+    this.website,
+    this.otp,
+    this.role,
+    this.emailVerifiedAt,
+    this.isActive,
+    this.isConfirm,
+    this.isVisible,
+    this.rememberToken,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+  });
 
-    int? id;
-    String? firstName;
-    String? lastName;
-    String? fullName;
-    String? userName;
-    String? email;
-    String? password;
-    dynamic dateOfBirth;
-    int? countryId;
-    int? stateId;
-    int? cityId;
-    String? image;
-    String? linkedinUrl;
-    String? instagramUrl;
-    String? twitterUrl;
-    dynamic socialType;
-    dynamic socialId;
-    dynamic aboutUs;
-    dynamic address;
-    dynamic latitude;
-    dynamic longitude;
-    String ?website;
-    dynamic otp;
-    int? role;
-    dynamic emailVerifiedAt;
-    int? isActive;
-    int? isConfirm;
-    int? isVisible;
-    dynamic rememberToken;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    dynamic deletedAt;
+  int? id;
+  String? firstName;
+  String? lastName;
+  String? fullName;
+  String? userName;
+  String? email;
+  String? password;
+  dynamic dateOfBirth;
+  int? countryId;
+  int? stateId;
+  int? cityId;
+  String? image;
+  String? linkedinUrl;
+  String? instagramUrl;
+  String? twitterUrl;
+  dynamic socialType;
+  dynamic socialId;
+  dynamic aboutUs;
+  dynamic address;
+  dynamic latitude;
+  dynamic longitude;
+  String? website;
+  dynamic otp;
+  int? role;
+  dynamic emailVerifiedAt;
+  int? isActive;
+  int? isConfirm;
+  int? isVisible;
+  dynamic rememberToken;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  dynamic deletedAt;
 
-    factory Host.fromJson(Map<String, dynamic> json) => Host(
+  factory Host.fromJson(Map<String, dynamic> json) => Host(
         id: json["id"],
         firstName: json["first_name"],
         lastName: json["last_name"],
@@ -309,7 +331,8 @@ class Host {
         cityId: json["city_id"],
         image: json["image"] == null ? null : json["image"],
         linkedinUrl: json["linkedin_url"] == null ? null : json["linkedin_url"],
-        instagramUrl: json["instagram_url"] == null ? null : json["instagram_url"],
+        instagramUrl:
+            json["instagram_url"] == null ? null : json["instagram_url"],
         twitterUrl: json["twitter_url"] == null ? null : json["twitter_url"],
         socialType: json["social_type"],
         socialId: json["social_id"],
@@ -328,9 +351,9 @@ class Host {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "first_name": firstName,
         "last_name": lastName,
@@ -363,5 +386,5 @@ class Host {
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
-    };
+      };
 }

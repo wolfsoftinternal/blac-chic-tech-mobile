@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 
 import 'Constant.dart';
 
-Text setHelveticaMedium(String text, double size, Color color, FontWeight weight,
-    FontStyle fontStyle, [spacing, maxline]) {
+Text setHelveticaMedium(String text, double size, Color color,
+    FontWeight weight, FontStyle fontStyle,
+    [spacing, maxline]) {
   return Text(
     text,
     softWrap: true,
@@ -20,8 +21,8 @@ Text setHelveticaMedium(String text, double size, Color color, FontWeight weight
   );
 }
 
-Text setHelveticaRegular(String text, double size, Color color, FontWeight weight,
-    FontStyle fontStyle) {
+Text setHelveticaRegular(String text, double size, Color color,
+    FontWeight weight, FontStyle fontStyle) {
   return Text(
     text,
     softWrap: true,
@@ -36,7 +37,8 @@ Text setHelveticaRegular(String text, double size, Color color, FontWeight weigh
 }
 
 Text setHelceticaBold(String text, double size, Color color, FontWeight weight,
-    FontStyle fontStyle, [spacing]) {
+    FontStyle fontStyle,
+    [spacing]) {
   return Text(
     text,
     softWrap: true,
@@ -66,8 +68,8 @@ Text setHelveticaLight(String text, double size, Color color, FontWeight weight,
   );
 }
 
-Text setHelveticaBoldCenter(String text, double size, Color color, FontWeight weight,
-    FontStyle fontStyle,TextAlign textAlign) {
+Text setHelveticaBoldCenter(String text, double size, Color color,
+    FontWeight weight, FontStyle fontStyle, TextAlign textAlign) {
   return Text(
     text,
     softWrap: true,
@@ -82,16 +84,13 @@ Text setHelveticaBoldCenter(String text, double size, Color color, FontWeight we
 }
 
 Text setRoboto(String text, double size, Color color, FontWeight weight) {
-  return Text(
-    text,
-    overflow: TextOverflow.ellipsis,
-    style: TextStyle(
-      color: color,
-      fontWeight: weight,
-      fontFamily: "Roboto",
-      fontStyle: FontStyle.normal,
-      fontSize: size
-    ),
-    textAlign: TextAlign.left
-  );
+  return Text(text,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+          color: color,
+          fontWeight: weight,
+          fontFamily: "Roboto",
+          fontStyle: FontStyle.normal,
+          fontSize: size),
+      textAlign: TextAlign.left);
 }
