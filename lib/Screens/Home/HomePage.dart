@@ -13,7 +13,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List values = ["YOUR PROFILE", "NFT MARKETPLACE", "COMMUNITY", "BC-CONNECT", "VIDEOS", "FEATURE", "EVENTS"];
+  List values = [
+    "YOUR PROFILE",
+    "NFT MARKETPLACE",
+    "COMMUNITY",
+    "BC-CONNECT",
+    "VIDEOS",
+    "FEATURE",
+    "EVENTS"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,58 +35,67 @@ class _HomePageState extends State<HomePage> {
               height: 60,
             ),
             Center(
-              child: Image.asset(
-                img_logo,
-                height: 58,
-                width: 58,
-              )
-            ),
+                child: Image.asset(
+              img_logo,
+              height: 58,
+              width: 58,
+            )),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
                 child: ListView.builder(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: values.length,
-                  itemBuilder: ((context, index) {
-                    return GestureDetector(
-                      onTap: (){
-                        if(index == 0){
-                          Get.to(AdmireProfile());
-                        }
-                      },
-                      child: Container(
-                        height: 68,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: index % 2 != 0 ? black_121212 : white_ffffff,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(5.0)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: Text(
-                                values[index],
-                                style: TextStyle(
-                                  color: index % 2 != 0 ? white_ffffff : black_121212,
-                                  fontSize: 22,
-                                  fontFamily: helvetica_neu_bold,
-                                  fontWeight: FontWeight.w500,
+                    primary: false,
+                    shrinkWrap: true,
+                    itemCount: values.length,
+                    itemBuilder: ((context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          if (index == 0) {
+                            Get.to(AdmireProfile());
+                          }
+                        },
+                        child: Container(
+                          height: 68,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: index % 2 != 0 ? black_121212 : white_ffffff,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5.0)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 12.0),
+                                  child: Text(
+                                    values[index],
+                                    style: TextStyle(
+                                      color: index % 2 != 0
+                                          ? white_ffffff
+                                          : black_121212,
+                                      fontSize: 22,
+                                      fontFamily: helvetica_neu_bold,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                                 ),
+                                onTap: () {
+
+                                },
                               ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(right: 12.0),
-                              child: Icon(Icons.arrow_forward, color: grey_aaaaaa,),
-                            )
-                          ],
+                              const Padding(
+                                padding: EdgeInsets.only(right: 12.0),
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  color: grey_aaaaaa,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  })),
+                      );
+                    })),
               ),
             ),
           ],
