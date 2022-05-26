@@ -48,6 +48,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              /*---- ToolBar -----*/
               Container(
                   margin: EdgeInsets.only(top: 15.h),
                   child: ToolbarWithHeaderCenterTitle("MY EVENTS")),
@@ -128,174 +129,176 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
               /*--------------- Upcoming Tab --------------*/
               Visibility(
                 visible: _isFirstLayout,
-                child: SingleChildScrollView(
-                  child: Container(
-                    margin: EdgeInsets.only(left: 16.w, right: 16.w,top: 24.h),
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        primary: false,
-                        itemCount: eventList.length,
-                        padding: EdgeInsets.zero,
-                        itemBuilder: (context, i) {
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: 16.h),
-                            child: Stack(
-                              children: [
-                                Container(
-                                    width: double.infinity,
-                                    height: 207.h,
-                                    child: ClipRRect(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(5.r)),
-                                      child: SvgPicture.asset(
-                                        placeholder,
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                        height: 207.h,
-                                      ),
-                                    )),
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                        top: 8.h, left: 8.w, right: 8.w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 15.w),
-                                          height: 26.h,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xe6ff881a),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(25.r)),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              eventList[i].tvPaymentType,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.white,
-                                                  fontFamily: roboto_bold),
-                                            ),
-                                          ),
+                child: Expanded(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      margin: EdgeInsets.only(left: 16.w, right: 16.w,top: 24.h),
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          primary: false,
+                          itemCount: eventList.length,
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (context, i) {
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: 16.h),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                      width: double.infinity,
+                                      height: 207.h,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(5.r)),
+                                        child: SvgPicture.asset(
+                                          placeholder,
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          height: 207.h,
                                         ),
-                                        Container(
-                                            height: 29.h,
-                                            width: 133.w,
+                                      )),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                          top: 8.h, left: 8.w, right: 8.w),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 15.w),
+                                            height: 26.h,
                                             decoration: BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                Color(0xff1c2535),
-                                                Color(0xff04080f)
-                                              ]),
+                                              color: Color(0xe6ff881a),
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(4.r)),
+                                                  Radius.circular(25.r)),
                                             ),
-                                            child: Row(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 6.0.w, right: 6.0.w),
-                                                  child: Icon(
-                                                    Icons.person,
-                                                    size: 17,
-                                                    color: grey_aaaaaa,
+                                            child: Center(
+                                              child: Text(
+                                                eventList[i].tvPaymentType,
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.white,
+                                                    fontFamily: roboto_bold),
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                              height: 29.h,
+                                              width: 133.w,
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(colors: [
+                                                  Color(0xff1c2535),
+                                                  Color(0xff04080f)
+                                                ]),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(4.r)),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 6.0.w, right: 6.0.w),
+                                                    child: Icon(
+                                                      Icons.person,
+                                                      size: 17,
+                                                      color: grey_aaaaaa,
+                                                    ),
                                                   ),
-                                                ),
-                                                setHelveticaMedium(
-                                                    "Hosted by",
-                                                    11,
-                                                    gray_b3ffffff,
-                                                    FontWeight.w500,
-                                                    FontStyle.normal,
-                                                    -0.22),
-                                                SizedBox(
-                                                  width: 4.w,
-                                                ),
-                                                setHelceticaBold(
-                                                    eventList[i].tvUserName,
-                                                    11,
-                                                    white_ffffff,
-                                                    FontWeight.w500,
-                                                    FontStyle.normal,
-                                                    -0.22),
-                                              ],
-                                            )),
-                                      ],
+                                                  setHelveticaMedium(
+                                                      "Hosted by",
+                                                      11,
+                                                      gray_b3ffffff,
+                                                      FontWeight.w500,
+                                                      FontStyle.normal,
+                                                      -0.22),
+                                                  SizedBox(
+                                                    width: 4.w,
+                                                  ),
+                                                  setHelceticaBold(
+                                                      eventList[i].tvUserName,
+                                                      11,
+                                                      white_ffffff,
+                                                      FontWeight.w500,
+                                                      FontStyle.normal,
+                                                      -0.22),
+                                                ],
+                                              )),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Positioned(
-                                    bottom: 19,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 16.0),
-                                      child: Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            calendar_icon,
-                                            height: 12,
-                                            width: 12,
-                                          ),
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.only(left: 4.0),
-                                            child: setHelceticaBold(
-                                                eventList[i].tvEventDate,
-                                                10,
-                                                white_ffffff,
-                                                FontWeight.w500,
-                                                FontStyle.normal,
-                                                -0.4),
-                                          ),
-                                        ],
-                                      ),
-                                    )),
-                                Positioned(
-                                    bottom: 19,
-                                    right: 16,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 16.0),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.only(right: 4.0),
-                                            child: setHelceticaBold(
-                                                eventList[i].tvEventVenue,
-                                                10,
-                                                white_ffffff,
-                                                FontWeight.w500,
-                                                FontStyle.normal,
-                                                -0.4),
-                                          ),
-                                          SvgPicture.asset(
-                                            icon_location,
-                                            height: 12,
-                                            width: 12,
-                                          ),
-                                        ],
-                                      ),
-                                    )),
-                                Positioned(
-                                    bottom: 40,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 16.0),
-                                      child: setHelceticaBold(
-                                          eventList[i].tvEventName,
-                                          22,
-                                          white_ffffff,
-                                          FontWeight.w500,
-                                          FontStyle.normal,
-                                          -0.88),
-                                    )),
-                              ],
-                            ),
-                          );
-                        }),
+                                  Positioned(
+                                      bottom: 19,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 16.0),
+                                        child: Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              calendar_icon,
+                                              height: 12,
+                                              width: 12,
+                                            ),
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.only(left: 4.0),
+                                              child: setHelceticaBold(
+                                                  eventList[i].tvEventDate,
+                                                  10,
+                                                  white_ffffff,
+                                                  FontWeight.w500,
+                                                  FontStyle.normal,
+                                                  -0.4),
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                  Positioned(
+                                      bottom: 19,
+                                      right: 16,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 16.0),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.only(right: 4.0),
+                                              child: setHelceticaBold(
+                                                  eventList[i].tvEventVenue,
+                                                  10,
+                                                  white_ffffff,
+                                                  FontWeight.w500,
+                                                  FontStyle.normal,
+                                                  -0.4),
+                                            ),
+                                            SvgPicture.asset(
+                                              icon_location,
+                                              height: 12,
+                                              width: 12,
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                  Positioned(
+                                      bottom: 40,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 16.0),
+                                        child: setHelceticaBold(
+                                            eventList[i].tvEventName,
+                                            22,
+                                            white_ffffff,
+                                            FontWeight.w500,
+                                            FontStyle.normal,
+                                            -0.88),
+                                      )),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
                   ),
                 ),
               ),
