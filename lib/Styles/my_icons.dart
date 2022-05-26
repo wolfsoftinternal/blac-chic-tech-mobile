@@ -71,3 +71,7 @@ const icon_cancel = 'assets/images/icon_cancel.svg';
 const icon_feature_next_arrow = 'assets/images/icon_feature_next_arrow.svg';
 const icon_filter_orange = 'assets/images/icon_filter_orange.svg';
 const icon_play_list_orange = 'assets/images/icon_play_list_orange.svg';
+const icon_add_play_list = 'assets/images/icon_add_play_list.svg';
+const icon_heart = 'assets/images/icon_heart.svg';
+const icon_message = 'assets/images/icon_message.svg';
+const icon_share = 'assets/images/icon_share.svg';
