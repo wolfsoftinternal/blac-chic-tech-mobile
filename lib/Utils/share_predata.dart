@@ -7,6 +7,7 @@ class SharePreData {
   static String keyFcmToken = "fcm_token";
 
   static String keySignupModel = "key_SaveSignupModel";
+  static String keytoken = "key_SaveToken";
   static String keyPersonalInfo = "key_SavePersonal";
   static String keyExperienceInfo = "key_SaveExperienceInfo";
   static String keyEducationalInfo = "key_SaveEducationalInfo";

@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -24,6 +25,7 @@ class InvitePeople extends StatefulWidget {
 class _InvitePeopleState extends State<InvitePeople> {
   EventController controller = Get.put(EventController());
   VideoController videoController = Get.put(VideoController());
+  AdmireProfileController admireProfileController = Get.put(AdmireProfileController());
   @override
   void initState() {
     // TODO: implement initState

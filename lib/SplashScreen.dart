@@ -55,22 +55,31 @@ class _SplashScreenState extends State<SplashScreen> {
       // }
       if (myModel == null) {
         Get.offAll(const Welcome());
-      } else if (myModel.data!.aboutUs == "") {
+      } else if (myModel.data!.aboutUs == "" || myModel.data!.aboutUs == null) {
         Get.offAll(const PersonalInfoFormView());
-      } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
+      } else if (myModel.data!.currentJobs == null ||
+          myModel.data!.currentJobs.toString() == '[]') {
         Get.offAll(const ExperienceInfoFormView());
-      } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
+      } else if (myModel.data!.educations == null ||
+          myModel.data!.educations.toString() == '[]') {
         Get.offAll(const EducationInfoFormView());
-      } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+      } else if (myModel.data!.questions == null ||
+          myModel.data!.questions.toString() == '[]') {
         Get.offAll(const AdditionalQueFormView());
-      } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+      } else if (myModel.data!.questions != null ||
+          myModel.data!.questions.toString() != '[]') {
+        String questionsInfo = "";
         String lastQuestionsInfo = "";
         for (int i = 0; i < myModel.data!.questions!.length; i++) {
-          if (myModel.data!.questions![i].type == "additional") {
+          if (myModel.data!.questions![i].type == "normal") {
+            questionsInfo = "Done";
+          } else {
             lastQuestionsInfo = "Done";
           }
         }
-        if (lastQuestionsInfo != "Done") {
+        if (questionsInfo != "Done") {
+          Get.offAll(AdditionalQueFormView());
+        } else if (lastQuestionsInfo != "Done") {
           Get.offAll(AdditionalLastQueView());
         } else {
           Get.offAll(BottomNavigation());

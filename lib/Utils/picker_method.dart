@@ -1,3 +1,5 @@
+import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
@@ -180,19 +182,22 @@ class PickMethod {
   factory PickMethod.common(int maxAssetsCount) {
     print("click thay che");
     return PickMethod(
-      icon: '📹',
-      name: 'Common picker',
-      description: 'Pick images and videos.',
-      method: (BuildContext context, List<AssetEntity> assets) {
+      icon: '',
+      name: '',
+      description: '',
+      method: (BuildContext context, List<AssetEntity> assets) async {
         print("click thay che");
-        return AssetPicker.pickAssets(
-
+        var picker = await AssetPicker.pickAssets(
           context,
           pickerConfig: AssetPickerConfig(
             maxAssets: maxAssetsCount,
             selectedAssets: assets,
           ),
         );
+        print(assets.length);
+        image = assets;
+        print("iejfkdjjfj $image");
+        // return picker;
       },
     );
   }
@@ -380,7 +385,7 @@ class PickMethod {
   final String description;
 
   /// The core function that defines how to use the picker.
-  final Future<List<AssetEntity>?> Function(
+  final Function(
     BuildContext context,
     List<AssetEntity> selectedAssets,
   ) method;
