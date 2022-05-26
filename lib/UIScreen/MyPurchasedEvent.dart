@@ -17,6 +17,7 @@ class MyPurchasedEvent extends StatefulWidget {
 }
 
 class _MyPurchasedEventState extends State<MyPurchasedEvent> {
+  /*updated*/
   bool Bg1 = true;
   bool Bg2 = false;
 
