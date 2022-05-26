@@ -64,7 +64,7 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                             padding: EdgeInsets.zero,
                             itemBuilder: (context, i) {
                               return Padding(
-                                padding: EdgeInsets.only(bottom: 25.h),
+                                padding: EdgeInsets.only(bottom: 16.h),
                                 child: Container(
                                     width: double.infinity,
                                     child:Row(
