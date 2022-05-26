@@ -1,5 +1,6 @@
 
 const img_girl = 'assets/images/img_girl.png';
+const img_giral_crop = 'assets/images/img_giral_crop.png';
 const img_close = 'assets/images/close.png';
 const img_more = 'assets/images/more.png';
 const setting_girl_img = 'assets/images/setting_girl_img.png';
@@ -71,6 +72,10 @@ const icon_cancel = 'assets/images/icon_cancel.svg';
 const icon_feature_next_arrow = 'assets/images/icon_feature_next_arrow.svg';
 const icon_filter_orange = 'assets/images/icon_filter_orange.svg';
 const icon_play_list_orange = 'assets/images/icon_play_list_orange.svg';
+
+const icon_light_heart = 'assets/images/icon_light_heart.svg';
+const icon_share = 'assets/images/icon_share.svg';
+
 const icon_add_play_list = 'assets/images/icon_add_play_list.svg';
 const icon_heart = 'assets/images/icon_heart.svg';
 const icon_message = 'assets/images/icon_message.svg';

@@ -9,4 +9,5 @@ const String helveticaNeueNeue_thin = "HelveticaNeueNeue Thin";
 const String roboto_regular = "robotoRegular ";
 const String roboto_medium = "robotoMedium ";
 const String roboto_bold = "robotoBold ";
+const String poppins_BoldItalic = "poppins BoldItalic ";
 
