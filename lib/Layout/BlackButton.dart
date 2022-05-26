@@ -70,9 +70,6 @@ class BlackButton extends StatelessWidget {
                         fontSize: 16.sp
                       ),
                       ),
-
-
-
                     ],
                   ),
 
@@ -85,7 +82,7 @@ class BlackButton extends StatelessWidget {
                 shadowColor: Colors.transparent,
                 elevation: 0,
                 padding:
-                EdgeInsets.symmetric(horizontal: 0, vertical: size == null ? 21 : size),
+                EdgeInsets.symmetric(horizontal: 0, vertical: size == null ? 18 : size),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                   side: BorderSide(color: black_121212, width: 0),

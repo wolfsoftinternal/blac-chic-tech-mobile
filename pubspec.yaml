@@ -55,6 +55,8 @@ dependencies:
   location: ^4.3.0
   audio_video_progress_bar: ^0.10.0
   chewie: ^1.3.2
+  flutter_switch: ^0.3.2
+
 
   wechat_assets_picker:
 #    path: ../
@@ -133,6 +135,18 @@ flutter:
     - family: HelveticaNeueNeue Thin
       fonts:
         - asset: fonts/HelveticaNeue-Thin.ttf
+
+    - family: robotoRegular
+      fonts:
+        - asset: fonts/roboto_regular.ttf
+
+    - family: robotoMedium
+      fonts:
+        - asset: fonts/roboto_medium.ttf
+
+    - family: robotoBold
+      fonts:
+        - asset: fonts/roboto_bold.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
