@@ -66,7 +66,7 @@ class _EducationState extends State<EducationInfoFormView> {
       backgroundColor: white_ffffff,
       body: Column(
         children: [
-           SizedBox(
+          SizedBox(
             height: 60.h,
           ),
           ToolbarWithHeader(
@@ -76,17 +76,24 @@ class _EducationState extends State<EducationInfoFormView> {
                 SignupModel? myModel = await preferences
                     .getSignupModel(SharePreData.keySignupModel);
 
-                if (myModel!.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                if (myModel!.data!.questions == null ||
+                    myModel.data!.questions.toString() == '[]') {
                   Get.to(const AdditionalQueFormView());
-                } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                } else if (myModel.data!.questions == null ||
+                    myModel.data!.questions.toString() == '[]') {
+                  String questionsInfo = "";
                   String lastQuestionsInfo = "";
                   for (int i = 0; i < myModel.data!.questions!.length; i++) {
-                    if (myModel.data!.questions![i].type == "additional") {
+                    if (myModel.data!.questions![i].type == "normal") {
+                      questionsInfo = "Done";
+                    } else {
                       lastQuestionsInfo = "Done";
                     }
                   }
-                  if (lastQuestionsInfo != "Done") {
-                    Get.to(AdditionalLastQueView());
+                  if (questionsInfo != "Done") {
+                    Get.offAll(AdditionalQueFormView());
+                  } else if (lastQuestionsInfo != "Done") {
+                    Get.offAll(AdditionalLastQueView());
                   } else {
                     Get.offAll(BottomNavigation());
                   }
@@ -98,7 +105,7 @@ class _EducationState extends State<EducationInfoFormView> {
             flex: 1,
             child: SingleChildScrollView(
               child: Padding(
-                padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
+                padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +113,7 @@ class _EducationState extends State<EducationInfoFormView> {
                     // Personal Information
                     Center(
                       child: Text(str_Education,
-                          style:  TextStyle(
+                          style: TextStyle(
                               color: black_121212,
                               fontWeight: FontWeight.w900,
                               fontFamily: helvetica_neu_bold,
@@ -114,13 +121,13 @@ class _EducationState extends State<EducationInfoFormView> {
                               fontSize: 24.sp),
                           textAlign: TextAlign.center),
                     ),
-                     SizedBox(
+                    SizedBox(
                       height: 16.h,
                     ),
                     // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
                     Center(
                       child: Text(str_personal_info_lorem,
-                          style:  TextStyle(
+                          style: TextStyle(
                               color: grey_aaaaaa,
                               fontWeight: FontWeight.w500,
                               fontFamily: helveticaNeueNeue_medium,
@@ -129,7 +136,7 @@ class _EducationState extends State<EducationInfoFormView> {
                               height: 1.5.h),
                           textAlign: TextAlign.center),
                     ),
-                     SizedBox(
+                    SizedBox(
                       height: 32.h,
                     ),
 
@@ -147,7 +154,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                     height: HeightData.fifty_seven,
                                     decoration: EditTextDecoration,
                                     child: Padding(
-                                      padding:  EdgeInsets.only(
+                                      padding: EdgeInsets.only(
                                         left: 12.w,
                                         right: 12.w,
                                       ),
@@ -158,7 +165,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                           Expanded(
                                             flex: 1,
                                             child: Padding(
-                                              padding:  EdgeInsets.all(5.r),
+                                              padding: EdgeInsets.all(5.r),
                                               child: setTextFieldNext(
                                                 universityController[index],
                                                 "University/School",
@@ -178,7 +185,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                       ),
                                     ),
                                   ),
-                                   SizedBox(
+                                  SizedBox(
                                     height: 16.h,
                                   ),
                                   Row(
@@ -189,7 +196,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                           height: HeightData.fifty_seven,
                                           decoration: EditTextDecoration,
                                           child: Padding(
-                                            padding:  EdgeInsets.only(
+                                            padding: EdgeInsets.only(
                                                 left: 12.w, right: 12.w),
                                             child: Row(
                                               children: [
@@ -197,7 +204,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                   flex: 1,
                                                   child: Padding(
                                                     padding:
-                                                         EdgeInsets.all(5.r),
+                                                        EdgeInsets.all(5.r),
                                                     child: setDobTextFieldNext(
                                                       startyearController[
                                                           index],
@@ -231,14 +238,13 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                           Widget>[
                                                                         Padding(
                                                                           padding:
-                                                                               EdgeInsets.only(left: 5.w),
+                                                                              EdgeInsets.only(left: 5.w),
                                                                           child:
                                                                               CupertinoButton(
                                                                             child:
                                                                                 Text(
                                                                               'Cancel',
-                                                                              style:
-                                                                              TextStyle(color: orange_ff881a),
+                                                                              style: TextStyle(color: orange_ff881a),
                                                                             ),
                                                                             onPressed:
                                                                                 () {
@@ -248,7 +254,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                         ),
                                                                         Padding(
                                                                           padding:
-                                                                               EdgeInsets.only(right: 5.w),
+                                                                              EdgeInsets.only(right: 5.w),
                                                                           child:
                                                                               CupertinoButton(
                                                                             child:
@@ -323,7 +329,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                           ),
                                         ),
                                       ),
-                                       SizedBox(
+                                      SizedBox(
                                         width: 16.w,
                                       ),
                                       Expanded(
@@ -332,7 +338,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                           height: HeightData.fifty_seven,
                                           decoration: EditTextDecoration,
                                           child: Padding(
-                                            padding:  EdgeInsets.only(
+                                            padding: EdgeInsets.only(
                                                 left: 12.w, right: 12.w),
                                             child: Row(
                                               children: [
@@ -340,7 +346,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                   flex: 1,
                                                   child: Padding(
                                                     padding:
-                                                         EdgeInsets.all(5.r),
+                                                        EdgeInsets.all(5.r),
                                                     child: setDobTextFieldNext(
                                                       endyearController[index],
                                                       "End year",
@@ -381,7 +387,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                             Widget>[
                                                                           Padding(
                                                                             padding:
-                                                                                 EdgeInsets.only(left: 5.w),
+                                                                                EdgeInsets.only(left: 5.w),
                                                                             child:
                                                                                 CupertinoButton(
                                                                               child: Text(
@@ -395,7 +401,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                           ),
                                                                           Padding(
                                                                             padding:
-                                                                                 EdgeInsets.only(right: 5.w),
+                                                                                EdgeInsets.only(right: 5.w),
                                                                             child:
                                                                                 CupertinoButton(
                                                                               child: Text('Done', style: TextStyle(color: orange_ff881a)),
@@ -475,7 +481,7 @@ class _EducationState extends State<EducationInfoFormView> {
                             );
                           },
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 19.h,
                         ),
                         isDeleteLast == true
@@ -495,7 +501,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                       border: Border.all(
                                           width: 1, color: black_121212)),
                                   child: // Add More
-                                       Padding(
+                                      Padding(
                                     padding: EdgeInsets.all(16.r),
                                     child: Center(
                                       child: Text("Delete Last",
@@ -540,16 +546,15 @@ class _EducationState extends State<EducationInfoFormView> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4.r),
-                                border:
-                                    Border.all(width: 1.w, color: black_121212)),
+                                border: Border.all(
+                                    width: 1.w, color: black_121212)),
                             child: // Add More
-                                 Padding(
+                                Padding(
                               padding: EdgeInsets.all(16.r),
                               child: Center(
                                 child: Text("+ Add More",
                                     style: TextStyle(
                                         color: Color(0xff121212),
-
                                         fontFamily: helvetica_neu_bold,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 12.sp),
@@ -566,7 +571,7 @@ class _EducationState extends State<EducationInfoFormView> {
             ),
           ),
           Padding(
-            padding:  EdgeInsets.all(24.sp),
+            padding: EdgeInsets.all(24.sp),
             child: BlackNextButton(str_continue, black_121212, () {
               details.clear();
 

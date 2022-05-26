@@ -3,10 +3,9 @@
 // in the LICENSE file.
 
 import 'package:blackchecktech/Utils/page_mixin.dart';
+import 'package:blackchecktech/Utils/picker_method.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
-
-import '../Utils/picker_method.dart';
 
 class MultiAssetsPage extends StatefulWidget {
   // const MultiAssetsPage({super.key});
@@ -18,7 +17,7 @@ class MultiAssetsPage extends StatefulWidget {
 class _MultiAssetsPageState extends State<MultiAssetsPage>
     with AutomaticKeepAliveClientMixin, ExamplePageMixin {
   @override
-  int get maxAssetsCount => 1;
+  int get maxAssetsCount => 10;
 
   /// Check each method's source code for more details.
   @override

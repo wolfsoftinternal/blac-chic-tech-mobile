@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 File imagePath = File("");
+List<AssetEntity>? image;
 
 snackBar(BuildContext context, String message) {
   return ScaffoldMessenger.of(context).showSnackBar(
@@ -12,6 +15,25 @@ snackBar(BuildContext context, String message) {
       content: Text(message),
       duration: Duration(seconds: 2),
     ),
+  );
+}
+
+void onLoading(BuildContext context, String msg) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return Center(
+        child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: Image.asset(loader, height: 35, width: 35)),
+      );
+    },
   );
 }
 

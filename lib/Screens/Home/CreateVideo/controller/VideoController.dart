@@ -44,9 +44,7 @@ class VideoController extends GetxController {
 
   topicListAPI(BuildContext context) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urlTopicList;
     final apiReq = Request();
@@ -107,9 +105,7 @@ class VideoController extends GetxController {
 
   languageListAPI(BuildContext context) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urlLanguageList;
     final apiReq = Request();
@@ -171,9 +167,7 @@ class VideoController extends GetxController {
   //Speaker List / Host List
   userListAPI(BuildContext context, search) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
 
     dynamic body = {
       'search' : search.toString(),
@@ -211,9 +205,7 @@ class VideoController extends GetxController {
 
   createVideoApi(BuildContext context) async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
-    await preferences.getSignupModel(SharePreData.keySignupModel);
-    var token = myModel?.data!.token;
+    var token = await preferences.getStringValue(SharePreData.keytoken);
     List speaker = [];
 
     for(var item in selectedList){    

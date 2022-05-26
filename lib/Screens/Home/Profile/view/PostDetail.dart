@@ -1,12 +1,19 @@
+import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderTitle.dart';
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/preference_utils.dart';
+import 'package:blackchecktech/Utils/share_predata.dart';
+import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
+import 'package:blackchecktech/Widget/ReportBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +27,7 @@ class PostDetail extends StatefulWidget {
 
 class _PostDetailState extends State<PostDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
+  int userId = 0;
 
   @override
   void initState() {
@@ -31,6 +39,14 @@ class _PostDetailState extends State<PostDetail> {
     checkNet(context).then((value) {
       controller.postListAPI(context, body);
     });
+    init();
+  }
+
+  init() async {
+    var preferences = MySharedPref();
+    SignupModel? myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
+    userId = myModel!.data!.id!.toInt();
   }
 
   @override
@@ -42,7 +58,117 @@ class _PostDetailState extends State<PostDetail> {
           SizedBox(
             height: 60,
           ),
-          ToolbarWithHeaderTitle("POST"),
+          Container(
+            child: Row(
+              children: [
+                BackLayout(),
+                Container(
+                  height: 48,
+                  width: 48,
+                ),
+                const Spacer(),
+                Center(
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.back();
+                      Get.back();
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: controller.details.value.image == null
+                          ? SvgPicture.asset(
+                              placeholder,
+                              height: 48,
+                              width: 48,
+                              fit: BoxFit.cover,
+                            )
+                          : CachedNetworkImage(
+                              imageUrl: controller.details.value.image!,
+                              height: 48,
+                              width: 48,
+                              fit: BoxFit.cover,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      SvgPicture.asset(
+                                placeholder,
+                                height: 48,
+                                width: 48,
+                                fit: BoxFit.cover,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  SvgPicture.asset(
+                                placeholder,
+                                height: 48,
+                                width: 48,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                userId == controller.details.value.id
+                ? GestureDetector(
+                  onTap: () {
+                    createBottomSheet(context);
+                  },
+                  child: Container(
+                    width: 48.w,
+                    height: 48.h,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset(
+                        add_icon,
+                        width: 24,
+                        height: 24,
+                      ),
+                    ),
+                  ),
+                ) : Container(
+                   width: 48.w,
+                   height: 48.h,
+                ),
+                userId == controller.details.value.id
+                ? Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: 55.w,
+                      height: 55.h,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: SvgPicture.asset(
+                        settings_icon,
+                        width: 40,
+                        height: 40,
+                        color: black_121212,
+                      ),
+                    ),
+                  ),
+                ) : Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              displayBottomSheet(context);
+                            },
+                            child: Container(
+                              width: 55.w,
+                              height: 55.h,
+                              child:
+                                  Icon(Icons.more_horiz, color: black_121212),
+                            ),
+                          ),
+                        )
+              ],
+            ),
+          ),
           Expanded(
             child: ListView.builder(
                 shrinkWrap: true,
@@ -60,7 +186,7 @@ class _PostDetailState extends State<PostDetail> {
                             color: Color(0x17747796).withOpacity(0.07),
                             spreadRadius: 10,
                             blurRadius: 5,
-                            offset: Offset(0, -10), // changes position of shadow
+                            offset: Offset(0, 10), // changes position of shadow
                           ),
                         ],
                         borderRadius: BorderRadius.all(const Radius.circular(5)),

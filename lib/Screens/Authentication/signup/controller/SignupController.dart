@@ -50,6 +50,8 @@ class SignupController extends GetxController {
           var preferences = MySharedPref();
           await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
 
+          await preferences.setString(SharePreData.keytoken, signUp.data!.token.toString());
+
           Get.off(PersonalInfoFormView());
         }
         else if(model.statusCode==101){

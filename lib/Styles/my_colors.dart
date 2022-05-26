@@ -8,6 +8,7 @@ const opcity_white_ffffff = Color(0xB3ffffff);
 const grey_aaaaaa = Color(0xffaaaaaa);
 const grey_e8e8e8 = Color(0xffe8e8e8);
 const light_grey_f2f2f2 = Color(0xfff2f2f2);
+const orange = Color(0xe6ff881a);
 const orange_ff881a = Color(0xffff881a);
 const grey_3f3f3f = Color(0xff3f3f3f);
 const blue_0a84ff = Color(0xff0a84ff);
