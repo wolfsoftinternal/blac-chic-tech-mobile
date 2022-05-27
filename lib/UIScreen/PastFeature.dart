@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -27,10 +29,12 @@ class _PastFeatureState extends State<PastFeature> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Stack(
                   children: [
-                    Image.asset(img_girl,width: double.infinity,height: 500.h,fit: BoxFit.fill,),
+                    ImageFiltered(
+                        imageFilter: ImageFilter.blur(sigmaY:10,sigmaX:10), //SigmaX and Y are just for X and Y directions
+                        child: Image.asset(img_girl,width: double.infinity,height: 500.h,fit: BoxFit.fill,) //here you can use any widget you'd like to blur .
+                    ),
                     Container(
                       margin: EdgeInsets.only(top: 20.h,left: 24.w,right: 24.w),
                       child: Row(
@@ -68,12 +72,12 @@ class _PastFeatureState extends State<PastFeature> {
                                 margin: EdgeInsets.only(top: 20),
                                 child: Text("FADE",style: TextStyle(
                                     fontFamily: helvetica_neu_bold,fontSize: 100.sp,
-                                    color: orange_ff881a,letterSpacing: -10
+                                    color: orange_ff881a,letterSpacing: -10,
                                 ),),
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.only(bottom: 25.h),
+                              margin: EdgeInsets.only(bottom: 30.h),
                               padding: EdgeInsets.symmetric(vertical:20.h,horizontal: 17.w),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
@@ -81,8 +85,8 @@ class _PastFeatureState extends State<PastFeature> {
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                   colors: [
-                                    Color(0xff1c2535),
-                                    Color(0xff04080f)
+                                    Color(0x331c2535),
+                                    Color(0x4d04080f)
                                   ],
                                   stops: [0.0, 5.0],
                                 ),
@@ -93,7 +97,7 @@ class _PastFeatureState extends State<PastFeature> {
                                 children: [
 
                                   SvgPicture.asset(icon_light_heart),
-                                  SizedBox(height: 25.h,),
+                                  SizedBox(height: 35.h,),
                                   SvgPicture.asset(icon_share),
                                 ],
                               ),
@@ -103,7 +107,7 @@ class _PastFeatureState extends State<PastFeature> {
                       ),
 
                       Container(
-                        margin: EdgeInsets.only(top: 15.h,left: 24.w,right: 24.w),
+                        margin: EdgeInsets.only(top: 0.h,left: 24.w,right: 24.w),
                         child: Text("On Growth Hacking Life , Love & Bookings Africa",style: TextStyle(
                             fontFamily: helvetica_neu_bold,fontSize: 24.sp,
                             color: black_121212
@@ -126,7 +130,7 @@ class _PastFeatureState extends State<PastFeature> {
                           ),),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 24.w,top: 15.h,bottom: 25.h),
+                        margin: EdgeInsets.only(left: 24.w,top: 15.h,bottom: 0.h),
                         child: Row(mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -142,8 +146,6 @@ class _PastFeatureState extends State<PastFeature> {
                     ],
                   ),
                 )
-
-
               ],
             ),
           ),

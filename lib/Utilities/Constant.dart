@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-
 const String helvetica_neu_bold = "Helvetica Neu Bold";
 const String helveticaNeue = "HelveticaNeue";
 const String helveticaNeueNeue_light = "HelveticaNeueNeue Light";
