@@ -37,14 +37,14 @@ class _DemoState extends State<Demo> {
                     children: [
                       ImageFiltered(
                           imageFilter: ImageFilter.blur(sigmaY:10,sigmaX:10), //SigmaX and Y are just for X and Y directions
-                          child: Image.asset(img_girl,width: double.infinity,height: 500.h,fit: BoxFit.fill,) //here you can use any widget you'd like to blur .
+                          child: Image.asset(img_giral_crop,width: double.infinity,height: 500.h,fit: BoxFit.fill,) //here you can use any widget you'd like to blur .
                       ),
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Positioned(
                           bottom: 25.h,
                           child: Container(
-                            height: 125.h,
+                            height: 115.h,
                             margin: EdgeInsets.only(bottom: 30.h,right: 24),
                             padding: EdgeInsets.symmetric(vertical:20.h,horizontal: 17.w),
                             decoration: BoxDecoration(
@@ -64,8 +64,8 @@ class _DemoState extends State<Demo> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
 
-                                SvgPicture.asset(icon_light_heart),
-                                SizedBox(height: 35.h,),
+                                Image.asset(iconly_light_heart,width: 25,height: 25,),
+                                SizedBox(height: 25.h,),
                                 SvgPicture.asset(icon_share),
                               ],
                             ),
@@ -94,7 +94,7 @@ class _DemoState extends State<Demo> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Image.asset(setting_girl_img,width: 220.w,height: 302.h,fit: BoxFit.fill,),
+                              Image.asset(img_giral_crop,width: 220.w,height: 302.h,fit: BoxFit.fill,),
                             ],
                           )),
                       Container(

@@ -1,6 +1,7 @@
 
 const img_girl = 'assets/images/img_girl.png';
 const img_giral_crop = 'assets/images/img_giral_crop.png';
+const iconly_light_heart = 'assets/images/iconly_light_heart.png';
 const img_close = 'assets/images/close.png';
 const img_more = 'assets/images/more.png';
 const setting_girl_img = 'assets/images/setting_girl_img.png';
