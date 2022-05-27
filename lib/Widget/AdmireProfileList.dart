@@ -254,9 +254,9 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                     controller.userProfileAPI(context);
                   // }
                   //  else {
-                  //   controller.admireProfileAPI(
-                  //     context, widget.admireList.admireDetails!.id
-                  //   );
+                    // controller.admireProfileAPI(
+                    //   context, widget.admireList.admireDetails!.id
+                    // );
                   // }
                 },
                 child: Row(
