@@ -29,7 +29,7 @@ class _PastFeatureState extends State<PastFeature> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 500,
+                height: 500.h,
                 child: Stack(
                   children: [
                     ImageFiltered(
@@ -66,7 +66,7 @@ class _PastFeatureState extends State<PastFeature> {
               ),
 
               Container(
-                margin: EdgeInsets.only(right: 24,left: 24),
+                margin: EdgeInsets.only(right: 24.w,left: 24.w),
                 transform: Matrix4.translationValues(0, -5, 0),
 
                 child: Row(
@@ -80,11 +80,10 @@ class _PastFeatureState extends State<PastFeature> {
                     ),
                     Container(
                       transform: Matrix4.translationValues(0, -30, 0),
-
                       height: 115.h,
                       padding: EdgeInsets.symmetric(horizontal: 17.w),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(4.r),
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
@@ -98,9 +97,9 @@ class _PastFeatureState extends State<PastFeature> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(iconly_light_heart,width: 25,height: 25,),
+                          Image.asset(iconly_light_heart,width: 25.w,height: 25.h,),
                           SizedBox(height: 25.h,),
-                          SvgPicture.asset(icon_share,width: 25,height: 25,),
+                          SvgPicture.asset(icon_share,width: 25.w,height: 25.h,),
                         ],
                       ),
                     ),
@@ -109,7 +108,7 @@ class _PastFeatureState extends State<PastFeature> {
               ),
 
               Container(
-                margin: EdgeInsets.only(top: 10.h,left: 24.w,right: 24.w),
+                margin: EdgeInsets.only(top: 2.h,left: 24.w,right: 24.w),
                 child: Text("On Growth Hacking Life , Love & Bookings Africa",style: TextStyle(
                     fontFamily: helvetica_neu_bold,fontSize: 24.sp,
                     color: black_121212
@@ -128,14 +127,14 @@ class _PastFeatureState extends State<PastFeature> {
                 margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w),
                 child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies ",
                   style: TextStyle(
-                      height: 1.3,
+                      height: 1.3.h,
                       fontWeight: FontWeight.w500,
                       fontFamily: roboto_medium,fontSize: 12.sp,
                       color:opcity_black_B3121212
                   ),),
               ),
               Container(
-                margin: EdgeInsets.only(left: 24.w,top: 15.h,bottom: 10.h),
+                margin: EdgeInsets.only(left: 24.w,top: 10.h,bottom: 10.h),
                 child: Row(mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
