@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/ReplaceWith.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -17,8 +18,9 @@ import 'package:reorderable_grid_view/reorderable_grid_view.dart';
 import '../Utils/preference_utils.dart';
 
 class AdmiresGridView extends StatefulWidget {
+  final type;
   final crossAxisCount;
-  AdmiresGridView({Key? key, this.crossAxisCount}) : super(key: key);
+  AdmiresGridView({Key? key, this.type, this.crossAxisCount}) : super(key: key);
 
   @override
   State<AdmiresGridView> createState() => _AdmiresGridViewState();
@@ -58,14 +60,18 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
               : widget.crossAxisCount == 5
                   ? 0.75
                   : 0.9,
-      children: userId == controller.details.value.id
+      children: widget.type == 'user'
           ? controller.admireList.map((e) => buildItem(e)).toList()
           : controller.otherAdmireList.map((e) => buildItem(e)).toList(),
       onReorder: (oldIndex, newIndex) {
-        if (userId == controller.details.value.id) {
+        if (widget.type == 'user') {
           setState(() {
             final element = controller.admireList.removeAt(oldIndex);
             controller.admireList.insert(newIndex, element);
+          });
+
+          checkNet(context).then((value) {
+            controller.rearrangeAdmireAPI(context, newIndex, controller.admireList[newIndex].number);
           });
         }
       },
@@ -77,16 +83,14 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
         color: white_ffffff,
         elevation: 0,
         key: ValueKey(admireList),
-        child: userId == admireList.id
-            ? Container()
-            : Padding(
+        child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Obx(
                   () => Column(
                     children: [
                       Stack(
                         children: [
-                          userId == controller.details.value.id
+                          widget.type == 'user'
                               ? PopupMenuButton(
                                   position: PopupMenuPosition.under,
                                   child: ClipRRect(
@@ -122,10 +126,19 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                   ),
                                   onSelected: (i) {
                                     if (i == 1) {
+                                      if(userId == admireList.admireDetails!.id){
+                                        controller.userProfileAPI(context);
+                                      }else{
+                                        controller.admireProfileAPI(
+                                          context, admireList.admireDetails!.id
+                                        );
+                                      }
                                     } else if (i == 2) {
                                       Get.to(ReplaceWith(
-                                          name: admireList
-                                              .admireDetails!.firstName));
+                                        name: admireList.admireDetails!.firstName,
+                                        id: admireList.admireId,
+                                        isFrom: 'user',
+                                      ));
                                     } else if (i == 3) {
                                       setState(() {
                                         Widget cancelButton = TextButton(

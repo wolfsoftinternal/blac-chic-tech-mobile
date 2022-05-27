@@ -182,7 +182,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                         primary: false,
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: (controller.admireList.length - 2) + 1,
+                        itemCount: controller.admireList.length,
                         itemBuilder: ((context, index) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 12.0),
@@ -192,7 +192,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(50),
-                                  child: controller.admireList[1 + index]
+                                  child: controller.admireList[index]
                                               .admireDetails!.image ==
                                           null
                                       ? SvgPicture.asset(
@@ -202,7 +202,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                                         )
                                       : CachedNetworkImage(
                                           imageUrl: controller
-                                              .admireList[1 + index]
+                                              .admireList[index]
                                               .admireDetails!
                                               .image!,
                                           height: 48,
@@ -227,7 +227,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                                   height: 8,
                                 ),
                                 setHelveticaMedium(
-                                    controller.admireList[1 + index]
+                                    controller.admireList[index]
                                             .admireDetails!.firstName ??
                                         "",
                                     12,
