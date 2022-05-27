@@ -9,6 +9,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -76,8 +77,8 @@ class _EventTabState extends State<EventTab> {
                                 child: Stack(
                                   children: [
                                     Container(
-                                      width: 343,
-                                      height: 207,
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 207.h,
                                       child: controller
                                                   .eventList[index].poster ==
                                               null
@@ -87,8 +88,8 @@ class _EventTabState extends State<EventTab> {
                                               child: SvgPicture.asset(
                                                 placeholder,
                                                 fit: BoxFit.cover,
-                                                width: 343,
-                                                height: 207,
+                                                width: MediaQuery.of(context).size.width,
+                                                height: 207.h,
                                               ),
                                             )
                                           : ClipRRect(
@@ -98,24 +99,24 @@ class _EventTabState extends State<EventTab> {
                                                 imageUrl: controller
                                                     .eventList[index].poster!,
                                                 fit: BoxFit.cover,
-                                                width: 343,
-                                                height: 207,
+                                                width: MediaQuery.of(context).size.width,
+                                                height: 207.h,
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                             downloadProgress) =>
                                                         SvgPicture.asset(
                                                   placeholder,
                                                   fit: BoxFit.cover,
-                                                  width: 343,
-                                                  height: 207,
+                                                  width: MediaQuery.of(context).size.width,
+                                                  height: 207.h,
                                                 ),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         SvgPicture.asset(
                                                   placeholder,
                                                   fit: BoxFit.cover,
-                                                  width: 343,
-                                                  height: 207,
+                                                  width: MediaQuery.of(context).size.width,
+                                                  height: 207.h,
                                                 ),
                                               ),
                                             ),

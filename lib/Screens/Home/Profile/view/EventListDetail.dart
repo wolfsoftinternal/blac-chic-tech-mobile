@@ -156,19 +156,18 @@ class _EventListDetailState extends State<EventListDetail> {
                         ),
                       )
                     : Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              displayBottomSheet(context);
-                            },
-                            child: Container(
-                              width: 55.w,
-                              height: 55.h,
-                              child:
-                                  Icon(Icons.more_horiz, color: black_121212),
-                            ),
+                        padding: const EdgeInsets.only(right: 10.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            displayBottomSheet(context);
+                          },
+                          child: Container(
+                            width: 55.w,
+                            height: 55.h,
+                            child: Icon(Icons.more_horiz, color: black_121212),
                           ),
-                        )
+                        ),
+                      )
               ],
             ),
           ),
@@ -196,8 +195,8 @@ class _EventListDetailState extends State<EventListDetail> {
                         child: Stack(
                           children: [
                             Container(
-                              width: 343,
-                              height: 207,
+                              width: MediaQuery.of(context).size.width,
+                              height: 207.h,
                               child: controller.eventDetailList[index].poster ==
                                       null
                                   ? ClipRRect(
@@ -206,8 +205,9 @@ class _EventListDetailState extends State<EventListDetail> {
                                       child: SvgPicture.asset(
                                         placeholder,
                                         fit: BoxFit.cover,
-                                        width: 343,
-                                        height: 207,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 207.h,
                                       ),
                                     )
                                   : ClipRRect(
@@ -217,22 +217,25 @@ class _EventListDetailState extends State<EventListDetail> {
                                         imageUrl: controller
                                             .eventDetailList[index].poster!,
                                         fit: BoxFit.cover,
-                                        width: 343,
-                                        height: 207,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 207.h,
                                         progressIndicatorBuilder:
                                             (context, url, downloadProgress) =>
                                                 SvgPicture.asset(
                                           placeholder,
                                           fit: BoxFit.cover,
-                                          width: 343,
-                                          height: 207,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 207.h,
                                         ),
                                         errorWidget: (context, url, error) =>
                                             SvgPicture.asset(
                                           placeholder,
                                           fit: BoxFit.cover,
-                                          width: 343,
-                                          height: 207,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 207.h,
                                         ),
                                       ),
                                     ),

@@ -62,6 +62,7 @@ createBottomSheet(context) {
                                         controller.postListAPI(context, null);
                                       })
                                     });
+                                    setState((){});
                               },
                               child: Row(
                                 children: [
@@ -85,6 +86,7 @@ createBottomSheet(context) {
                                         controller.videoListAPI(context, null);
                                       })
                                     });
+                                    setState((){});
                               },
                               child: Row(
                                 children: [
@@ -109,6 +111,7 @@ createBottomSheet(context) {
                                         controller.eventListAPI(context, null);
                                       })
                                     });
+                                setState((){});
                               },
                               child: Row(
                                 children: [

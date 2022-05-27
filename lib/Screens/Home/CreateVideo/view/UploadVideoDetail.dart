@@ -471,7 +471,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   height: 24.h,
                                 ),
 
-                                Text("VIDEO LINK",
+                                Text("EMBED CODE",
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w900,
@@ -841,14 +841,18 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                                         SizedBox(
                                                           width: 5.w,
                                                         ),
-                                                        GestureDetector(
+                                                        InkWell(
                                                           onTap: () {
-                                                            print("object");
-                                                            controller
-                                                                .selectedList
-                                                                .remove(controller
-                                                                        .userList[
-                                                                    index]);
+                                                            if(controller.selectedList.length == 1){
+                                                              controller.selectedList.clear();
+                                                            }else {
+                                                              var selectedIndex = controller.selectedList[index].id;
+                                                              for(var item in controller.userList){
+                                                                if(selectedIndex == item.id){
+                                                                  controller.selectedList.remove(item);
+                                                                }
+                                                              }
+                                                            }
                                                           },
                                                           child: Icon(
                                                             Icons

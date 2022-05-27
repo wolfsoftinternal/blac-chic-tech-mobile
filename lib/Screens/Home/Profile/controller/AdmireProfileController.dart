@@ -401,13 +401,13 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  replaceAdmireAPI(BuildContext context, id, number) async {
+  replaceAdmireAPI(BuildContext context, id, newId, userID) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
     dynamic body = {
       'admire_id': id.toString(),
-      'admire_number': number.toString()
+      'new_admire_id': newId.toString()
     };
 
     String url = urlBase + urlReplaceAdmire;
@@ -426,13 +426,50 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            replaceAdmireAPI(context, id, number);
+            replaceAdmireAPI(context, id, newId, body);
           } else if (model.statusCode == 200) {
+            if(userID == null){
+              admireListAPI(context, null);
+            }else{
+              admireListAPI(context, userID);
+            }
             Get.back();
-            Get.back();
-            Get.to(EventListDetail(
-              id: id,
-            ));
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  rearrangeAdmireAPI(BuildContext context, id, num) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    dynamic body = {
+      'admire_id': id.toString(),
+      'admire_number': num.toString()
+    };
+
+    String url = urlBase + urlRearrangeAdmire;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            rearrangeAdmireAPI(context, id, num);
+          } else if (model.statusCode == 200) {
+            admireListAPI(context, null);
           }
         });
       } else {

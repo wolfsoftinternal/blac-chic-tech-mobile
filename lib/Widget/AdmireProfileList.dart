@@ -31,6 +31,7 @@ class AdmireProfileList extends StatefulWidget {
 class _AdmireProfileListState extends State<AdmireProfileList> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
   int userId = 0;
+  SignupModel? myModel;
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
 
   init() async {
     var preferences = MySharedPref();
-    SignupModel? myModel =
+    myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel!.data!.id!.toInt();
     setState(() {});
@@ -61,7 +62,8 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 fit: BoxFit.cover,
               )
             : CachedNetworkImage(
-                imageUrl: widget.admireList.admireDetails!.image!,
+                imageUrl: myModel!.data!.image!,
+                // widget.admireList.admireDetails!.image!,
                 height: MediaQuery.of(context).size.height * .83,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -79,23 +81,10 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   fit: BoxFit.cover,
                 ),
               ),
-        GestureDetector(
-            onTap: () async {
-              var preferences = MySharedPref();
-              SignupModel? modelM =
-                  await preferences.getSignupModel(SharePreData.keySignupModel);
-
-              if (modelM!.data!.id == widget.admireList.admireId) {
-                controller.userProfileAPI(context);
-              } else {
-                controller.admireProfileAPI(
-                    context, widget.admireList.admireDetails!.id);
-              }
-            },
-            child: Container(
-              color: Colors.black.withOpacity(0.3),
-              height: MediaQuery.of(context).size.height * .83,
-            )),
+        Container(
+          color: Colors.black.withOpacity(0.3),
+          height: MediaQuery.of(context).size.height * .83,
+        ),
         Padding(
           padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 50.0),
           child: Row(
@@ -116,33 +105,36 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   onTap: () {
                     createBottomSheet(context);
                   },
-                  child: userId == widget.admireList.admireDetails!.id
-                      ? SvgPicture.asset(add_icon)
-                      : Container(
-                          height: 48,
-                          width: 48,
-                        )),
+                  child: 
+                  // userId == widget.admireList.admireDetails!.id ?
+                      SvgPicture.asset(add_icon)
+                      // : Container(
+                      //     height: 48,
+                      //     width: 48,
+                      //   )
+              ),
               SizedBox(
                 height: 5,
               ),
               GestureDetector(
                 onTap: () {},
-                child: userId == widget.admireList.admireDetails!.id
-                    ? SvgPicture.asset(
+                child: 
+                // userId == widget.admireList.admireDetails!.id ?
+                    SvgPicture.asset(
                         settings_icon,
                         height: 48,
                         width: 48,
                       )
-                    : GestureDetector(
-                        onTap: () {
-                          displayBottomSheet(context);
-                        },
-                        child: Container(
-                          height: 48,
-                          width: 48,
-                          child: Icon(Icons.more_horiz, color: Colors.white),
-                        ),
-                      ),
+                    // : GestureDetector(
+                    //     onTap: () {
+                    //       displayBottomSheet(context);
+                    //     },
+                    //     child: Container(
+                    //       height: 48,
+                    //       width: 48,
+                    //       child: Icon(Icons.more_horiz, color: Colors.white),
+                    //     ),
+                    //   ),
               ),
             ],
           ),
@@ -157,9 +149,12 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 height: MediaQuery.of(context).size.width * 0.068,
                 child: FittedBox(
                   child: setHelceticaBold(
-                      widget.admireList.admireDetails!.userName != null
-                          ? "@" + widget.admireList.admireDetails!.userName!
-                          : "@" + widget.admireList.admireDetails!.firstName!,
+                      // widget.admireList.admireDetails!.userName != null
+                      //     ? "@" + widget.admireList.admireDetails!.userName!
+                      //     : "@" + widget.admireList.admireDetails!.firstName!,
+                      myModel!.data!.userName != null
+                          ? "@" + myModel!.data!.userName!
+                          : "@" + myModel!.data!.firstName!,
                       20,
                       white_ffffff,
                       FontWeight.w600,
@@ -174,7 +169,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           padding: const EdgeInsets.only(left: 24.0, right: 24.0),
           child: Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * .55),
+              SizedBox(height: MediaQuery.of(context).size.height * .52),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -183,10 +178,14 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                     height: MediaQuery.of(context).size.width * 0.10,
                     child: FittedBox(
                       child: setHelceticaBold(
-                          widget.admireList.admireDetails!.fullName != null
-                              ? widget.admireList.admireDetails!.fullName!
-                                  .toUpperCase()
-                              : "",
+                          // widget.admireList.admireDetails!.fullName != null
+                          //     ? widget.admireList.admireDetails!.fullName!
+                          //         .toUpperCase()
+                          //     : "",
+                          myModel!.data!.fullName != null
+                          ? myModel!.data!.fullName!
+                              .toUpperCase()
+                          : "",
                           40,
                           white_ffffff,
                           FontWeight.w600,
@@ -205,11 +204,19 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 children: [
                   Expanded(
                     child: Text(
-                      widget.admireList.admireDetails!.currentJobs != null
-                          ? widget.admireList.admireDetails!.currentJobs!.title!
+                      // widget.admireList.admireDetails!.currentJobs != null
+                      //     ? widget.admireList.admireDetails!.currentJobs!.title!
+                      //             .toUpperCase() +
+                      //         ' - ' +
+                      //         widget.admireList.admireDetails!.currentJobs!
+                      //             .companyName!
+                      //             .toUpperCase()
+                      //     : "",
+                      myModel!.data!.currentJobs != null
+                          ? myModel!.data!.currentJobs!.title!
                                   .toUpperCase() +
                               ' - ' +
-                              widget.admireList.admireDetails!.currentJobs!
+                              myModel!.data!.currentJobs!
                                   .companyName!
                                   .toUpperCase()
                           : "",
@@ -235,26 +242,81 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           child: Column(
             children: [
               SizedBox(
+                height: MediaQuery.of(context).size.height * .69,
+              ),
+              GestureDetector(
+                onTap: (){
+                  // var preferences = MySharedPref();
+                  // SignupModel? modelM =
+                  //     await preferences.getSignupModel(SharePreData.keySignupModel);
+
+                  // if (modelM!.data!.id == widget.admireList.admireId) {
+                    controller.userProfileAPI(context);
+                  // }
+                  //  else {
+                  //   controller.admireProfileAPI(
+                  //     context, widget.admireList.admireDetails!.id
+                  //   );
+                  // }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(4),
+                        color: grey_94ffffff,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+                        child: setHelveticaMedium(
+                            'View Profile',
+                            16,
+                            black_121212,
+                            FontWeight.w500,
+                            FontStyle.normal),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+          child: Column(
+            children: [
+              SizedBox(
                 height: MediaQuery.of(context).size.height * .76,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  widget.admireList.admireDetails!.cityDetails != null
+                  // widget.admireList.admireDetails!.cityDetails != null
+                  myModel!.data!.cityDetails != null
                       ? Icon(
                           Icons.location_on,
                           color: orange_ff881a,
                         )
                       : Container(),
                   setHelveticaMedium(
-                    widget.admireList.admireDetails!.cityDetails != null
-                        ? widget.admireList.admireDetails!.cityDetails!.name! +
+                    // widget.admireList.admireDetails!.cityDetails != null
+                    //     ? widget.admireList.admireDetails!.cityDetails!.name! +
+                    //         ', ' +
+                    //         widget
+                    //             .admireList.admireDetails!.stateDetails!.name! +
+                    //         ', ' +
+                    //         widget
+                    //             .admireList.admireDetails!.countryDetails!.name!
+                    //     : "",
+                    myModel!.data!.cityDetails != null
+                        ? myModel!.data!.cityDetails!.name! +
                             ', ' +
-                            widget
-                                .admireList.admireDetails!.stateDetails!.name! +
+                            myModel!.data!.stateDetails!.name! +
                             ', ' +
-                            widget
-                                .admireList.admireDetails!.countryDetails!.name!
+                            myModel!.data!.countryDetails!.name!
                         : "",
                     10,
                     Colors.white70,

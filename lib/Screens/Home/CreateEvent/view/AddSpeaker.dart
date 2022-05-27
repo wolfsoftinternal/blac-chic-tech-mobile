@@ -4,6 +4,7 @@ import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/CreateEventDetail.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_height.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -111,6 +112,10 @@ class _AddSpeakerState extends State<AddSpeaker> {
                               margin: const EdgeInsets.only(left: 23, right: 23),
                               child: BlackNextButton('Done', black_121212, () {
                                 if (speakerKey.currentState!.validate()) {
+                                  UserList userList = UserList();
+                                  userList.userName = controller.speakerController.value.text;
+                                  controller.selectedSpeaker.add(userList);
+                                  Get.back();
                                   Get.back();
                                 }
                               }),
