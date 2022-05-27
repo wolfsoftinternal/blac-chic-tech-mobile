@@ -1408,13 +1408,13 @@ class _CreateEventState extends State<CreateEvent> {
                   if (controller.selectedAdmission.value == 0) {
                     for (int i = 0; i < cardsTicketPrice.length; i++) {
                       for (int j = 0; j < benefitController[i].length; j++) {
-                        benefits.add(benefitController[i][j].text);
-                        ticketPrice.add({
-                          '"Price"': '"${amountController[i].text}"',
-                          '"category"': '"${categoryController[i]}"',
-                          '"benifits"': '"$benefits"'
-                        });
+                        benefits.add('"${benefitController[i][j].text}"');
                       }
+                      ticketPrice.add({
+                          '"price"': '"${amountController[i].text}"',
+                          '"category"': '"${categoryController[i]}"',
+                          '"benifits"': benefits
+                        });
                     }
 
                     List itemList = [];
@@ -1422,6 +1422,7 @@ class _CreateEventState extends State<CreateEvent> {
                     for (var item in ticketPrice) {
                       itemList.add(item);
                     }
+                    controller.admissionDetails.clear();
                     controller.admissionDetails.value = itemList;
                     controller.admissionType.value = 'ticket_price';
                     print(controller.admissionDetails.value);

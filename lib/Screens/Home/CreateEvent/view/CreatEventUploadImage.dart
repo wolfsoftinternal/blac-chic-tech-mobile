@@ -812,17 +812,30 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50),
-                                                      child: controller
-                                                                  .selectedSpeaker[
-                                                                      index]
-                                                                  .image ==
-                                                              null
-                                                          ? SvgPicture.asset(
-                                                              placeholder,
-                                                              height: 17.h,
-                                                              width: 17.w,
-                                                              fit: BoxFit.cover,
-                                                            )
+                                                      child: controller.selectedSpeaker[index].image == null
+                                                          ? Container(
+                                                            height: 17.h,
+                                                            width: 17.w,
+                                                            color: orange,
+                                                            child: ClipRRect(
+                                                            borderRadius: BorderRadius.circular(50.0),
+                                                            child: Center(
+                                                              child: Text(
+                                                                controller.selectedSpeaker[index].userName != null ? controller.selectedSpeaker[index].userName[0].toString().toUpperCase() : controller.selectedSpeaker[index].firstName[0].toString().toUpperCase(),
+                                                                style: TextStyle(
+                                                            color: white_ffffff,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontFamily:
+                                                                "Roboto",
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 11.sp),
+                                                        textAlign:
+                                                            TextAlign.left)
+                                                            ),
+                                                          ),
+                                                          )
                                                           : CachedNetworkImage(
                                                               imageUrl: controller
                                                                   .selectedSpeaker[
@@ -876,14 +889,21 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () {
-                                                        print("object");
-                                                        controller
-                                                            .selectedSpeaker
-                                                            .remove(
-                                                                videoController
-                                                                        .userList[
-                                                                    index]);
-                                                      },
+                                                            if(controller.selectedSpeaker.length == 1){
+                                                              controller.selectedSpeaker.clear();
+                                                            }else {
+                                                              if(controller.selectedSpeaker[index].id == null){
+                                                                controller.selectedSpeaker.remove(controller.selectedSpeaker[index]);
+                                                              }else{
+                                                                var selectedIndex = controller.selectedSpeaker[index].id;
+                                                                for(var item in videoController.userList){
+                                                                  if(selectedIndex == item.id){
+                                                                    controller.selectedSpeaker.remove(item);
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          },
                                                       child: Icon(
                                                         Icons.cancel_outlined,
                                                         size: 12,

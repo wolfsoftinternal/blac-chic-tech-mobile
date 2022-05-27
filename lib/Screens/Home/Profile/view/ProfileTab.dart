@@ -61,7 +61,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       SizedBox(
                         height: 32,
                       ),
-                      controller.details.value.pastJobs!.isNotEmpty
+                      controller.details.value.pastJobs!.length > 1
                           ? Padding(
                               padding: const EdgeInsets.only(bottom: 16.0),
                               child: Container(

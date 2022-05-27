@@ -47,7 +47,7 @@ class EventController extends GetxController {
   RxDouble longitude = 0.0.obs;
   RxInt selectedAdmission = 0.obs;
   RxString poster = ''.obs;
-  RxList<UserList> selectedSpeaker = <UserList>[].obs;
+  RxList<dynamic> selectedSpeaker = <dynamic>[].obs;
   RxString speakers = ''.obs;
   RxList<UserList> selectedHost = <UserList>[].obs;
   RxString host = ''.obs;
@@ -147,7 +147,11 @@ class EventController extends GetxController {
         } else if (model.statusCode == 200) {
           var id = userModel['data']['id'];
           checkNet(context)
-              .then((value) => controller.eventDetailAPI(context, id));
+              .then((value) => controller.eventDetailAPI(context, id)).then((value) {
+                Get.back();
+          Get.back();
+          Get.back();});
+          
         }
       });
     } else {

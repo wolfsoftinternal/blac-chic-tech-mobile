@@ -11,7 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class SeeAllAdmires extends StatefulWidget {
-  SeeAllAdmires({Key? key}) : super(key: key);
+  final type;
+  SeeAllAdmires({Key? key, this.type}) : super(key: key);
 
   @override
   State<SeeAllAdmires> createState() => _SeeAllAdmiresState();
@@ -41,28 +42,27 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white_ffffff,
-      body: Obx(
-        () => Column(
-          children: [
-            SizedBox(
-              height: 60,
-            ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BackLayout(),
-                  Text('ADMIRES',
-                      style: TextStyle(
-                          color: black_121212,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: helvetica_neu_bold,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 16.sp),
-                      textAlign: TextAlign.center),
-                  Padding(
+      body: Column(
+        children: [
+          SizedBox(
+            height: 60,
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BackLayout(),
+                Text('ADMIRES',
+                    style: TextStyle(
+                        color: black_121212,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: helvetica_neu_bold,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 16.sp),
+                    textAlign: TextAlign.center),
+                Padding(
                     padding: const EdgeInsets.only(right: 24.0),
-                    child: userId == controller.details.value.id
+                    child: widget.type == 'user'
                         ? InkWell(
                             onTap: () {
                               if (controller.isRearrange.value == false) {
@@ -86,44 +86,42 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
                         : Container(
                             width: 48.r,
                             height: 48.r,
-                          ),
-                  )
-                ],
-              ),
+                          ))
+              ],
             ),
-            Expanded(
-              flex: 1,
-              child: SingleChildScrollView(
-                child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        if (constraints.maxWidth < 310) {
-                          _crossAxisCount = 3;
-                          return AdmiresGridView(
-                              crossAxisCount: _crossAxisCount);
-                        }
-                        if (constraints.maxWidth > 310 &&
-                            constraints.maxWidth < 520) {
-                          _crossAxisCount = 4;
-                          return AdmiresGridView(
-                              crossAxisCount: _crossAxisCount);
-                        } else if (constraints.maxWidth > 520 &&
-                            constraints.maxWidth < 720) {
-                          _crossAxisCount = 5;
-                          return AdmiresGridView(
-                              crossAxisCount: _crossAxisCount);
-                        } else {
-                          _crossAxisCount = 6;
-                          return AdmiresGridView(
-                              crossAxisCount: _crossAxisCount);
-                        }
-                      },
-                    )),
-              ),
+          ),
+          Expanded(
+            flex: 1,
+            child: SingleChildScrollView(
+              child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      if (constraints.maxWidth < 310) {
+                        _crossAxisCount = 3;
+                        return AdmiresGridView(
+                            crossAxisCount: _crossAxisCount, type: widget.type);
+                      }
+                      if (constraints.maxWidth > 310 &&
+                          constraints.maxWidth < 520) {
+                        _crossAxisCount = 4;
+                        return AdmiresGridView(
+                            crossAxisCount: _crossAxisCount, type: widget.type);
+                      } else if (constraints.maxWidth > 520 &&
+                          constraints.maxWidth < 720) {
+                        _crossAxisCount = 5;
+                        return AdmiresGridView(
+                            crossAxisCount: _crossAxisCount, type: widget.type);
+                      } else {
+                        _crossAxisCount = 6;
+                        return AdmiresGridView(
+                            crossAxisCount: _crossAxisCount, type: widget.type);
+                      }
+                    },
+                  )),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

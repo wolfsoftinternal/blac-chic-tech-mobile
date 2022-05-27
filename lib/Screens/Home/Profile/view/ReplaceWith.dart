@@ -11,6 +11,7 @@ import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileCont
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/AddLocationView.dart';
 import 'package:blackchecktech/Widget/EditTextDecoration.dart';
@@ -25,7 +26,9 @@ import 'package:get/get.dart';
 
 class ReplaceWith extends StatefulWidget {
   final name;
-  const ReplaceWith({Key? key, this.name}) : super(key: key);
+  final id;
+  final isFrom;
+  const ReplaceWith({Key? key, this.name, this.id, this.isFrom}) : super(key: key);
 
   @override
   _ReplaceWithState createState() => _ReplaceWithState();
@@ -57,12 +60,13 @@ class _ReplaceWithState extends State<ReplaceWith> {
                     videoController.userListAPI(
                         context, controller.searchController.value.text);
                   });
-                  // for (var item in videoController.userList) {
-                  //   if (controller.selectedList.contains(item)) {
-                  //     controller.searchList.clear();
-                  //     controller.searchList.add(item);
-                  //   }
-                  // }
+                  print(videoController);
+                  for (var item in videoController.userList) {
+                    if (controller.selectedList.contains(item)) {
+                      controller.searchList.clear();
+                      controller.searchList.add(item);
+                    }
+                  }
                 },
                 controller: controller.searchController.value,
               ),
@@ -201,8 +205,7 @@ class _ReplaceWithState extends State<ReplaceWith> {
                                         ),
                                       ),
                                       SvgPicture.asset(
-                                        controller.selectedList[0].id ==
-                                                videoController.userList[i].id
+                                        controller.selectedList.contains(videoController.userList[i])
                                             ? orange_tick_icon
                                             : icon_next_arrow,
                                         width: 25.w,
@@ -224,8 +227,16 @@ class _ReplaceWithState extends State<ReplaceWith> {
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: BlackButton('Replace', white_ffffff, () {
+                if(controller.selectedList.isEmpty){
+                  snackBar(context, 'Select replacement');
+                }
                 checkNet(context).then((value) {
-                  controller.replaceAdmireAPI(context, 'id', 'number');
+                  if(widget.isFrom == 'user'){
+                    controller.replaceAdmireAPI(context, widget.id, controller.selectedList[0].id, null);
+                  }else{
+                    dynamic body = {'user_id': controller.details.value.id.toString()};
+                    controller.replaceAdmireAPI(context, widget.id, controller.selectedList[0].id, body);
+                  }
                 });
               }),
             )
