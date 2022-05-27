@@ -53,6 +53,7 @@ class UserList {
         this.latitude,
         this.longitude,
         this.website,
+        this.isAdmire,
     });
 
     int? id;
@@ -66,6 +67,7 @@ class UserList {
     int? countryId;
     int? stateId;
     int? cityId;
+    int? isAdmire;
     dynamic linkedinUrl;
     dynamic instagramUrl;
     dynamic twitterUrl;
@@ -95,6 +97,7 @@ class UserList {
         latitude: json["latitude"],
         longitude: json["longitude"],
         website: json["website"],
+        isAdmire : json["is_admire"],
     );
 
     Map<String, dynamic> toJson() => {

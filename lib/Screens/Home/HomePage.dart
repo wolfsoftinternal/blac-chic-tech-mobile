@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Screens/Home/BCConnect/view/BcConnect.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,6 +53,8 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           if (index == 0) {
                             Get.to(AdmireProfile());
+                          }else if(index == 3){
+                            Get.to(BcConnect());
                           }
                         },
                         child: Container(
@@ -65,24 +68,19 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              GestureDetector(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 12.0),
-                                  child: Text(
-                                    values[index],
-                                    style: TextStyle(
-                                      color: index % 2 != 0
-                                          ? white_ffffff
-                                          : black_121212,
-                                      fontSize: 22,
-                                      fontFamily: helvetica_neu_bold,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 12.0),
+                                child: Text(
+                                  values[index],
+                                  style: TextStyle(
+                                    color: index % 2 != 0
+                                        ? white_ffffff
+                                        : black_121212,
+                                    fontSize: 22,
+                                    fontFamily: helvetica_neu_bold,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                onTap: () {
-
-                                },
                               ),
                               const Padding(
                                 padding: EdgeInsets.only(right: 12.0),

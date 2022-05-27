@@ -5,7 +5,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/UIScreen/AboutMe.dart';
 import 'package:blackchecktech/UIScreen/AdmireGrid.dart';
-import 'package:blackchecktech/UIScreen/BcConnect.dart';
+import 'package:blackchecktech/Screens/Home/BCConnect/view/BcConnect.dart';
 import 'package:blackchecktech/UIScreen/Connect12.dart';
 import 'package:blackchecktech/UIScreen/CreatEventUploadImage.dart';
 import 'package:blackchecktech/UIScreen/CreatPost.dart';
