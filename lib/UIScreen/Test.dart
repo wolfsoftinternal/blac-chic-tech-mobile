@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -94,8 +96,12 @@ class _TestState extends State<Test> {
                     ),
                   ],
                 ),
-              )
+              ),
 
+              ImageFiltered(
+                  imageFilter: ImageFilter.blur(sigmaY:10,sigmaX:10), //SigmaX and Y are just for X and Y directions
+                  child: Image.asset(img_girl,width: double.infinity,height: 200.h,fit: BoxFit.fill,) //here you can use any widget you'd like to blur .
+              ),
             ],
           ),
         ),
