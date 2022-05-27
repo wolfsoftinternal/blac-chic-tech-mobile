@@ -37,7 +37,7 @@ class SearchBarTag extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.r),
         ),
       ),
-      onSubmitted: onSubmit,
+      onChanged: onSubmit,
     );
   }
 }

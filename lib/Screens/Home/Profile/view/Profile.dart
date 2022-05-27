@@ -492,10 +492,10 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                           : Container(),
                   userId != controller.details.value.id
                       ? controller.otherAdmireList.length > 1
-                          ? SeeAllAdmiresWidget()
+                          ? SeeAllAdmiresWidget(userId)
                           : Container()
                       : controller.admireList.length > 1
-                          ? SeeAllAdmiresWidget()
+                          ? SeeAllAdmiresWidget(userId)
                           : Container(),
                   userId != controller.details.value.id
                       ? controller.otherAdmireList.length > 1
@@ -635,7 +635,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     );
   }
 
-  Padding SeeAllAdmiresWidget() {
+  Padding SeeAllAdmiresWidget(userId) {
     return Padding(
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Row(
@@ -650,7 +650,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
           const Spacer(),
           GestureDetector(
             onTap: () {
-              Get.to(SeeAllAdmires());
+              if(userId == controller.details.value.id){
+                Get.to(SeeAllAdmires(type: 'user'));
+              }else{
+                Get.to(SeeAllAdmires(type: 'other'));
+              }
+              
             },
             child: setHelveticaMedium('See More', 12, grey_aaaaaa,
                 FontWeight.w600, FontStyle.normal, -0.24),

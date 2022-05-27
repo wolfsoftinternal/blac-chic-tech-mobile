@@ -19,7 +19,7 @@ const urladmireList = '/mobile/admire-list';
 const urlDeleteAdmire = '/mobile/admire-delete';
 const urlRearrangeAdmire = '/mobile/admire-re-arrange';
 const urlCreateAdmire = '/mobile/admire-create';
-const urlReplaceAdmire = '';
+const urlReplaceAdmire = '/mobile/admire-replace';
 
 //Profile Tab
 const urlUserProfile = '/mobile/user-profile';

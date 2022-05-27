@@ -221,20 +221,20 @@ class _EventDetailState extends State<EventDetail> {
                       padding: const EdgeInsets.only(top: 12.0),
                       child: controller.eventDetails.value.type ==
                               'ticket_price'
-                          ? Row(
+                          ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                setHelveticaMedium(
-                                    "Admission\nFees",
-                                    15,
+                                setHelceticaBold(
+                                    "Admission Fees",
+                                    14,
                                     black_121212,
                                     FontWeight.w500,
                                     FontStyle.normal),
                                 SizedBox(
-                                  width: 20,
+                                  height: 20,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 100,
                                   width:
                                       MediaQuery.of(context).size.width * 0.60,
                                   child: ListView.builder(
@@ -248,29 +248,44 @@ class _EventDetailState extends State<EventDetail> {
                                         return Padding(
                                           padding:
                                               const EdgeInsets.only(right: 8.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              setHelveticaMedium(
-                                                  "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
-                                                  22,
-                                                  Colors.red,
-                                                  FontWeight.w500,
-                                                  FontStyle.normal),
-                                              setHelveticaRegular(
-                                                  controller
-                                                      .eventDetails
-                                                      .value
-                                                      .admissionData![index]
-                                                      .category!,
-                                                  18,
-                                                  grey_3f3f3f,
-                                                  FontWeight.w500,
-                                                  FontStyle.normal),
-                                            ],
+                                          child: Container(
+                                            height: 100.h,
+                                            width: 120.w,
+                                            decoration: BoxDecoration(
+                                              color: white_ffffff,
+                                              borderRadius: BorderRadius.circular(8 ),
+                                              boxShadow: [
+                                              BoxShadow(
+                                                color: black_121212.withOpacity(0.07),
+                                                spreadRadius: 2,
+                                                blurRadius: 10,
+                                                offset: Offset(0, 10),
+                                              )]
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                setHelveticaMedium(
+                                                    controller
+                                                        .eventDetails
+                                                        .value
+                                                        .admissionData![index]
+                                                        .category!,
+                                                    18,
+                                                    black_121212,
+                                                    FontWeight.w500,
+                                                    FontStyle.normal),
+                                                setHelveticaMedium(
+                                                    "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
+                                                    22,
+                                                    orange_ff881a,
+                                                    FontWeight.w500,
+                                                    FontStyle.normal),
+                                              ],
+                                            ),
                                           ),
                                         );
                                       }),
@@ -1000,14 +1015,27 @@ class _EventDetailState extends State<EventDetail> {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         decoration:
-                            BoxDecoration(color: white_ffffff, boxShadow: [
-                          BoxShadow(
-                            color: black_121212.withOpacity(0.07),
-                            spreadRadius: 15,
-                            blurRadius: 10,
-                            offset: Offset(0, 8),
-                          )
-                        ]),
+                          BoxDecoration(
+                            gradient: LinearGradient(
+                                        colors: [
+                                          const Color(0xFF1c2535),
+                                          const Color(0xFF04080f),
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        stops: [0.0, 1.0],
+                                        tileMode: TileMode.clamp),
+                            color: white_ffffff,
+                            borderRadius: BorderRadius.circular(4), 
+                            boxShadow: [
+                              BoxShadow(
+                                color: black_121212.withOpacity(0.07),
+                                spreadRadius: 8,
+                                blurRadius: 10,
+                                offset: Offset(-2, 8),
+                              )
+                            ]
+                          ),
                         child: Padding(
                           padding: const EdgeInsets.all(18),
                           child: Row(
@@ -1016,13 +1044,29 @@ class _EventDetailState extends State<EventDetail> {
                               setHelceticaBold(
                                   "Registered People",
                                   18,
-                                  blue_0a84ff,
+                                  white_ffffff,
                                   FontWeight.w500,
                                   FontStyle.normal),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: blue_0a84ff,
-                              )
+                              Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 8.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            color: orange_ff881a,
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+                                            child: setHelveticaMedium(
+                                                'View',
+                                                16,
+                                                white_ffffff,
+                                                FontWeight.w500,
+                                                FontStyle.normal),
+                                          ),
+                                        ),
+                                      ),
                             ],
                           ),
                         ),

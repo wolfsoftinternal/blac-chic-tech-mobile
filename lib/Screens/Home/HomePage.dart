@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Screens/Home/Event/view/EventList.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -56,6 +57,9 @@ class _HomePageState extends State<HomePage> {
                           }else if(index == 3){
                             Get.to(BcConnect());
                           }
+                          if(index == 6){
+                          Get.to(EventList());
+                        }
                         },
                         child: Container(
                           height: 68,
