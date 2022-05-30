@@ -95,6 +95,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     width: 48.w,
                   ),
                   const Spacer(),
+
                   Center(
                     child: GestureDetector(
                       onTap: () {
