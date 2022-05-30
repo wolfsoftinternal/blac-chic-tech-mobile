@@ -28,54 +28,6 @@ class _TestState extends State<Test> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Container(
-              //   height: 500.h,
-              //     decoration: BoxDecoration(
-              //       color: Colors.pink,
-              //
-              //       image: DecorationImage(
-              //         image: ExactAssetImage(img_giral_crop),
-              //         fit: BoxFit.cover,
-              //       ),
-              //     ),
-              //     child: BackdropFilter(
-              //         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              //         child: SafeArea(
-              //           child: Padding(
-              //             padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),
-              //             child: Column(
-              //               children: [
-              //                 FlatButton.icon(
-              //                   onPressed: () {
-              //                     print('Heheheheheeh');
-              //                     Navigator.pushNamed(context, '/location');
-              //                   },
-              //                   icon: Icon(Icons.edit_location),
-              //                   label: Text('ashidufhiu'),
-              //                 ),
-              //                 SizedBox(height: 20.0),
-              //                 Row(
-              //                   mainAxisAlignment: MainAxisAlignment.center,
-              //                   children: <Widget>[
-              //                     Text(
-              //                       'location',
-              //                       style: TextStyle(
-              //                         fontSize: 34.0,
-              //                         letterSpacing: 2.0,
-              //                       ),
-              //                     ),
-              //                   ],
-              //                 ),
-              //                 SizedBox(height: 20.0),
-              //                 Text(
-              //                   'time',
-              //                   style: TextStyle(fontSize: 65.0),
-              //                 ),
-              //               ],
-              //             ),
-              //           ),
-              //         ))),
-
               SizedBox(
                 height: 500.h,
                 child: Stack(
