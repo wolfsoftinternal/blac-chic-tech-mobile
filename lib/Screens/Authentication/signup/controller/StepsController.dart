@@ -2,18 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:blackchecktech/Screens/Authentication/login/view/LoginView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/CityListModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/CountryListModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/StateListModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/CompanyList.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
-import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -211,7 +207,7 @@ class StepsController extends GetxController {
 
           var preferences = MySharedPref();
           await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
-          Get.to(ExperienceInfoFormView());
+          Get.to(const ExperienceInfoFormView());
         } else {
           Navigator.pop(context); //pop
           snackBar(context, model.message!);
@@ -344,7 +340,7 @@ class StepsController extends GetxController {
                 }
               }
               if (lastQuestionsInfo != "Done") {
-                Get.to(AdditionalLastQueView());
+                Get.to(const AdditionalLastQueView());
               } else {
                 Get.offAll(BottomNavigation());
               }
@@ -403,7 +399,7 @@ class StepsController extends GetxController {
                 }
               }
               if (lastQuestionsInfo != "Done") {
-                Get.to(AdditionalLastQueView());
+                Get.to(const AdditionalLastQueView());
               } else {
                 Get.offAll(BottomNavigation());
               }
@@ -466,9 +462,9 @@ class StepsController extends GetxController {
                 }
               }
               if (questionsInfo != "Done") {
-                Get.offAll(AdditionalQueFormView());
+                Get.offAll(const AdditionalQueFormView());
               } else if (lastQuestionsInfo != "Done") {
-                Get.offAll(AdditionalLastQueView());
+                Get.offAll(const AdditionalLastQueView());
               } else {
                 Get.offAll(BottomNavigation());
               }

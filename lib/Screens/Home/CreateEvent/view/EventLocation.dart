@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:blackchecktech/Layout/BlackButton.dart';
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
@@ -9,7 +7,6 @@ import 'package:blackchecktech/Screens/Home/CreateEvent/view/ConfirmLocation.dar
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +14,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocode/geocode.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 
 class EventLocation extends StatefulWidget {
@@ -39,7 +35,7 @@ class _EventLocationState extends State<EventLocation> {
   String _address = "";
 
   late LocationData _currentPosition;
-  Location _location = Location();
+  final Location _location = Location();
   bool _isLoading = false;
   final search = TextEditingController();
 
@@ -69,7 +65,7 @@ class _EventLocationState extends State<EventLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -183,7 +179,7 @@ class _EventLocationState extends State<EventLocation> {
                         child: Row(
                           children: [
                             BackLayout(),
-                            SizedBox(width: 20,),
+                            const SizedBox(width: 20,),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.70,
                               height: 52.r,
@@ -195,13 +191,13 @@ class _EventLocationState extends State<EventLocation> {
                                     color: Colors.grey.withOpacity(0.1),
                                     spreadRadius: 6,
                                     blurRadius: 10,
-                                    offset: Offset(1, 4), // changes position of shadow
+                                    offset: const Offset(1, 4), // changes position of shadow
                                   ),
                                 ],
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 12.0),
-                                child: Container(
+                                child: SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.6,
                                   child: TextField(
                                     controller: search,
@@ -313,7 +309,7 @@ class _EventLocationState extends State<EventLocation> {
                                   const SizedBox(
                                     width: 8,
                                   ),
-                                  Container(
+                                  SizedBox(
                                     width: 260,
                                     child: Text(_address,
                                         style: const TextStyle(
@@ -426,7 +422,7 @@ class _EventLocationState extends State<EventLocation> {
     //   return;
     // }
 
-    Get.to(ConfirmLocation());
+    Get.to(const ConfirmLocation());
   }
 
   getLoc() async {

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class SpeakersVideoModel{
   String imgVideo,tvTime,tvHeading,tvTitle,tvDate;

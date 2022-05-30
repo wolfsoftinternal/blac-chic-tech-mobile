@@ -1,5 +1,4 @@
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
-import 'package:blackchecktech/Layout/ToolbarWithHeaderAction.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventTab.dart';
@@ -90,7 +89,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               child: Row(
                 children: [
                   BackLayout(),
-                  Container(
+                  const SizedBox(
                     height: 48,
                     width: 48,
                   ),
@@ -156,7 +155,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             ),
                           ),
                         )
-                      : Container(
+                      : SizedBox(
                           height: 48.h,
                           width: 48.w,
                         ),
@@ -187,11 +186,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             onTap: () {
                               displayBottomSheet(context);
                             },
-                            child: Container(
+                            child: SizedBox(
                               width: 55.w,
                               height: 55.h,
                               child:
-                                  Icon(Icons.more_horiz, color: black_121212),
+                                  const Icon(Icons.more_horiz, color: black_121212),
                             ),
                           ),
                         )
@@ -294,7 +293,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                             const EdgeInsets.only(top: 5.0),
                                         child: Align(
                                           alignment: Alignment.topLeft,
-                                          child: Container(
+                                          child: SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
@@ -312,7 +311,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                         ),
                                       )
                                     : Container(),
-                                Container(
+                                SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.86,
                                   child: Row(
@@ -371,7 +370,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                           ? InkWell(
                                               onTap: () {
                                                 if (controller.admire.value ==
-                                                    'Admire')
+                                                    'Admire') {
                                                   checkNet(context)
                                                       .then((value) {
                                                     controller.createAdmireAPI(
@@ -379,6 +378,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                         controller
                                                             .details.value.id);
                                                   });
+                                                }
                                               },
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
@@ -388,8 +388,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                     color: Colors.grey
                                                         .withOpacity(0.1),
                                                     borderRadius:
-                                                        BorderRadius.all(
-                                                            const Radius
+                                                        const BorderRadius.all(
+                                                            Radius
                                                                 .circular(40)),
                                                   ),
                                                   child: Padding(
@@ -397,7 +397,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                         const EdgeInsets.all(
                                                             12.0),
                                                     child: Row(children: [
-                                                      Icon(
+                                                      const Icon(
                                                         Icons
                                                             .person_add_alt_sharp,
                                                         color: orange,
@@ -480,38 +480,38 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     thickness: 1,
                   ),
                   userId != controller.details.value.id
-                      ? controller.otherAdmireList.length >= 1
+                      ? controller.otherAdmireList.isNotEmpty
                           ? const SizedBox(
                               height: 24,
                             )
                           : Container()
-                      : controller.admireList.length >= 1
+                      : controller.admireList.isNotEmpty
                           ? const SizedBox(
                               height: 24,
                             )
                           : Container(),
                   userId != controller.details.value.id
-                      ? controller.otherAdmireList.length >= 1
+                      ? controller.otherAdmireList.isNotEmpty
                           ? SeeAllAdmiresWidget(userId)
                           : Container()
-                      : controller.admireList.length >= 1
+                      : controller.admireList.isNotEmpty
                           ? SeeAllAdmiresWidget(userId)
                           : Container(),
                   userId != controller.details.value.id
-                      ? controller.otherAdmireList.length >= 1
+                      ? controller.otherAdmireList.isNotEmpty
                           ? Admires(userId: userId, controller: controller)
                           : Container()
-                      : controller.admireList.length >= 1
+                      : controller.admireList.isNotEmpty
                           ? Admires(userId: userId, controller: controller)
                           : Container(),
                   userId != controller.details.value.id
-                      ? controller.otherAdmireList.length >= 1
+                      ? controller.otherAdmireList.isNotEmpty
                           ? const Divider(
                               color: grey_f4f6f6,
                               thickness: 1,
                             )
                           : Container()
-                      : controller.admireList.length >= 1
+                      : controller.admireList.isNotEmpty
                           ? const Divider(
                               color: grey_f4f6f6,
                               thickness: 1,
@@ -534,8 +534,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             Tab(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
+                                children: const [
+                                  Text(
                                     'Profile',
                                     textAlign: TextAlign.left,
                                     maxLines: 1,
@@ -552,8 +552,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             Tab(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
+                                children: const [
+                                  Text(
                                     'Posts',
                                     textAlign: TextAlign.left,
                                     maxLines: 1,
@@ -570,8 +570,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             Tab(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
+                                children: const [
+                                  Text(
                                     'Videos',
                                     textAlign: TextAlign.left,
                                     maxLines: 1,
@@ -588,8 +588,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             Tab(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
+                                children: const [
+                                  Text(
                                     'Events',
                                     textAlign: TextAlign.left,
                                     maxLines: 1,
@@ -618,7 +618,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   Expanded(
                     child: TabBarView(
                       controller: tabController,
-                      children: [
+                      children: const [
                         ProfileTab(),
                         PostTab(),
                         VideoTab(),
@@ -651,9 +651,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
           GestureDetector(
             onTap: () {
               if(userId == controller.details.value.id){
-                Get.to(SeeAllAdmires(type: 'user'));
+                Get.to(const SeeAllAdmires(type: 'user'));
               }else{
-                Get.to(SeeAllAdmires(type: 'other'));
+                Get.to(const SeeAllAdmires(type: 'other'));
               }
               
             },
@@ -689,7 +689,7 @@ class Admires extends StatelessWidget {
     return Padding(
       padding:
           const EdgeInsets.only(left: 24.0, right: 24.0, top: 16, bottom: 16),
-      child: Container(
+      child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.09,
         width: double.infinity,
         child: ListView.builder(
@@ -697,7 +697,7 @@ class Admires extends StatelessWidget {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemCount: userId != controller.details.value.id
-              ? controller.otherAdmireList.length == 0
+              ? controller.otherAdmireList.isEmpty
                   ? 0
                   : controller.otherAdmireList.length
               : controller.admireList.length,

@@ -1,16 +1,14 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../Styles/my_strings.dart';
 
 class SearchBar extends StatefulWidget {
 
-  SearchBar(
+  const SearchBar(
       {
       this.controller, this.onSubmit});
 

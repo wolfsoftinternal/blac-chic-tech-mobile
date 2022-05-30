@@ -1,9 +1,6 @@
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
-import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -11,11 +8,8 @@ import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
-import 'package:blackchecktech/Widget/ReportBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -100,7 +94,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                     height: 24,
                     color: white_ffffff,
                   )),
-              Spacer(),
+              const Spacer(),
               GestureDetector(
                   onTap: () {
                     createBottomSheet(context);
@@ -113,7 +107,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                       //     width: 48,
                       //   )
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               GestureDetector(
@@ -144,7 +138,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.50,
                 height: MediaQuery.of(context).size.width * 0.068,
                 child: FittedBox(
@@ -173,7 +167,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.80,
                     height: MediaQuery.of(context).size.width * 0.10,
                     child: FittedBox(
@@ -195,7 +189,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Row(
@@ -296,7 +290,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 children: [
                   // widget.admireList.admireDetails!.cityDetails != null
                   myModel!.data!.cityDetails != null
-                      ? Icon(
+                      ? const Icon(
                           Icons.location_on,
                           color: orange_ff881a,
                         )

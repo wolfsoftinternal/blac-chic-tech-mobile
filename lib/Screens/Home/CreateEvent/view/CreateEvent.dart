@@ -25,7 +25,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class CreateEvent extends StatefulWidget {
-  CreateEvent({Key? key}) : super(key: key);
+  const CreateEvent({Key? key}) : super(key: key);
 
   @override
   State<CreateEvent> createState() => _CreateEventState();
@@ -93,7 +93,7 @@ class _CreateEventState extends State<CreateEvent> {
     categoryController.add("Premium");
     List<TextEditingController> beneController = [];
     benefitController.add(beneController);
-    cardsTicketPrice.forEach((element) {
+    for (var element in cardsTicketPrice) {
       var ticketCategoryController = element;
       var ticketAmountController = TextEditingController(text: element);
       var ticketBeneController = TextEditingController(text: element);
@@ -106,7 +106,7 @@ class _CreateEventState extends State<CreateEvent> {
         var benefitsController = TextEditingController(text: element);
         benefitController[0][0] = benefitsController;
       }
-    });
+    }
     checkNet(context).then((value) {
       videoController.userListAPI(context, '');
     });
@@ -444,8 +444,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   beneController = [];
                                               benefitController
                                                   .add(beneController);
-                                              cardsTicketPrice
-                                                  .forEach((element) {
+                                              for (var element in cardsTicketPrice) {
                                                 var ticketCategoryController =
                                                     element;
                                                 var ticketAmountController =
@@ -469,7 +468,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   benefitController[0][0] =
                                                       benefitsController;
                                                 }
-                                              });
+                                              }
                                             });
                                           },
                                           child: Container(
@@ -532,8 +531,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   beneController = [];
                                               benefitController
                                                   .add(beneController);
-                                              cardsTicketPrice
-                                                  .forEach((element) {
+                                              for (var element in cardsTicketPrice) {
                                                 var ticketBeneController =
                                                     TextEditingController(
                                                         text: element);
@@ -547,7 +545,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   benefitController[0][0] =
                                                       benefitsController;
                                                 }
-                                              });
+                                              }
                                             });
                                           },
                                           child: Container(
@@ -610,8 +608,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   beneController = [];
                                               benefitController
                                                   .add(beneController);
-                                              cardsTicketPrice
-                                                  .forEach((element) {
+                                              for (var element in cardsTicketPrice) {
                                                 var ticketBeneController =
                                                     TextEditingController(
                                                         text: element);
@@ -625,7 +622,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   benefitController[0][0] =
                                                       benefitsController;
                                                 }
-                                              });
+                                              }
                                             });
                                           },
                                           child: Container(
@@ -941,7 +938,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                           24.0),
                                                                   child: Row(
                                                                     children: [
-                                                                      Container(
+                                                                      SizedBox(
                                                                         width: controller.selectedList.length ==
                                                                                 1
                                                                             ? 25
@@ -956,8 +953,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                               Alignment.centerLeft,
                                                                           children: <
                                                                               Widget>[
-                                                                            if (controller.selectedList.length >=
-                                                                                1)
+                                                                            if (controller.selectedList.isNotEmpty)
                                                                               SizedBox(
                                                                                 height: 20.h,
                                                                                 width: 20.w,
@@ -1339,8 +1335,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                       text: ''));
                                               benefitController
                                                   .add(beneController);
-                                              cardsTicketPrice
-                                                  .forEach((element) {
+                                              for (var element in cardsTicketPrice) {
                                                 var ticketCategoryController =
                                                     element;
                                                 var ticketAmountController =
@@ -1372,7 +1367,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                         benefitsController);
                                                   }
                                                 }
-                                              });
+                                              }
                                               cardsTicketPrice.add("");
                                             });
                                           },
@@ -1476,7 +1471,7 @@ class _CreateEventState extends State<CreateEvent> {
       context: context,
       builder: (context) {
         DateTime? tempPickedDate = DateTime.now();
-        return Container(
+        return SizedBox(
           height: 250.h,
           child: Column(
             children: <Widget>[
@@ -1543,7 +1538,7 @@ class _CreateEventState extends State<CreateEvent> {
       context: context,
       builder: (context) {
         DateTime? tempPickedDate = DateTime.now();
-        return Container(
+        return SizedBox(
           height: 250.h,
           child: Column(
             children: <Widget>[

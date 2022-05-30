@@ -1,16 +1,11 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:flutter_svg/svg.dart';
 
-import 'ToolbarBackOnly.dart';
 
 ToolbarCreatPost(BuildContext context, String title, String subtitle) {
   return PreferredSize(
-    preferredSize: Size.fromHeight(60.0),
+    preferredSize: const Size.fromHeight(60.0),
     child: Padding(
       padding: const EdgeInsets.only(right: 22),
       child: Container(
@@ -21,7 +16,7 @@ ToolbarCreatPost(BuildContext context, String title, String subtitle) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   size: 30,
                   color: Colors.black,
@@ -30,7 +25,7 @@ ToolbarCreatPost(BuildContext context, String title, String subtitle) {
                   Navigator.pop(context);
                 }),
             Text(title,
-                style: TextStyle(
+                style: const TextStyle(
                     color: black_121212,
                     /*  fontWeight: FontWeight.w700,*/ /*akib changes*/
                     fontFamily: helvetica_neu_bold,
@@ -49,7 +44,7 @@ ToolbarCreatPost(BuildContext context, String title, String subtitle) {
                     left: 16, right: 16, top: 8, bottom: 8),
                 child: Text(subtitle,
                     style: const TextStyle(
-                        color: const Color(0xffffffff),
+                        color: Color(0xffffffff),
                         fontWeight: FontWeight.w900,
                         fontFamily: helveticaNeueNeue_medium,
                         fontStyle: FontStyle.normal,

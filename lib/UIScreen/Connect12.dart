@@ -4,7 +4,6 @@ import 'package:blackchecktech/Model/FollowGridModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
@@ -78,13 +77,13 @@ class _Connect12State extends State<Connect12> {
                         width: 12.w,
                       ),
                       Expanded(
-                        child: new TextField(
+                        child: TextField(
                           // controller: titleController,
                           style: const TextStyle(
                               color: black_121212,
                               fontFamily: helveticaNeueNeue_medium,
                               fontSize: 14.0),
-                          decoration: new InputDecoration(
+                          decoration: InputDecoration(
                             isDense: true,
                             hintText: "Search",
                             hintStyle: TextStyle(
@@ -109,7 +108,7 @@ class _Connect12State extends State<Connect12> {
                               spreadRadius: 6,
                               blurRadius: 10,
                               offset:
-                                  Offset(1, 4), // changes position of shadow
+                                  const Offset(1, 4), // changes position of shadow
                             ),
                           ],
                         ),
@@ -157,7 +156,7 @@ class _Connect12State extends State<Connect12> {
                       Expanded(
                         flex: 1,
                         child: Container(
-                          padding: EdgeInsets.only(left: 16, right: 10),
+                          padding: const EdgeInsets.only(left: 16, right: 10),
                           decoration: BoxDecoration(
                             color: grey_f5f5f5,
                             borderRadius: BorderRadius.circular(4),
@@ -165,7 +164,7 @@ class _Connect12State extends State<Connect12> {
                           ),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
-                              hint: new Text(
+                              hint: const Text(
                                 "Role",
                                 style: TextStyle(
                                     color: Colors.black,
@@ -219,7 +218,7 @@ class _Connect12State extends State<Connect12> {
                       Expanded(
                         flex: 1,
                         child: Container(
-                          padding: EdgeInsets.only(left: 16, right: 10),
+                          padding: const EdgeInsets.only(left: 16, right: 10),
                           decoration: BoxDecoration(
                             color: grey_f5f5f5,
                             borderRadius: BorderRadius.circular(4),
@@ -227,7 +226,7 @@ class _Connect12State extends State<Connect12> {
                           ),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
-                              hint: new Text(
+                              hint: const Text(
                                 "Industry",
                                 style: TextStyle(
                                     color: Colors.black,
@@ -279,8 +278,8 @@ class _Connect12State extends State<Connect12> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 16, right: 10),
-                  margin: EdgeInsets.only(left: 16, right: 16, top: 8),
+                  padding: const EdgeInsets.only(left: 16, right: 10),
+                  margin: const EdgeInsets.only(left: 16, right: 16, top: 8),
                   decoration: BoxDecoration(
                     color: grey_f5f5f5,
                     borderRadius: BorderRadius.circular(4),
@@ -288,7 +287,7 @@ class _Connect12State extends State<Connect12> {
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                      hint: new Text(
+                      hint: const Text(
                         "Country",
                         style: TextStyle(
                             color: Colors.black,
@@ -361,7 +360,7 @@ class _Connect12State extends State<Connect12> {
                   primary: false,
                   shrinkWrap: true,
                   padding: EdgeInsets.only(left: 15.w, right: 10.w),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 0.72 / 1,
                       crossAxisSpacing: 17,
@@ -369,18 +368,18 @@ class _Connect12State extends State<Connect12> {
                   itemCount: resultGridModel.length,
                   itemBuilder: (context, i) {
                     return Container(
-                      margin: EdgeInsets.only(bottom: 19),
+                      margin: const EdgeInsets.only(bottom: 19),
                       height: 0,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: new BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(8.0.w),
                             bottomRight: Radius.circular(8.0.w)),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Color(0x19121212),
-                            offset: const Offset(
+                            offset: Offset(
                               5.0,
                               5.0,
                             ),
@@ -407,7 +406,7 @@ class _Connect12State extends State<Connect12> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   gradient: LinearGradient(
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
@@ -468,7 +467,7 @@ class _Connect12State extends State<Connect12> {
                                 borderRadius: BorderRadius.circular(40.r),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0x194343b2).withOpacity(0.15),
+                                    color: const Color(0x194343b2).withOpacity(0.15),
                                     offset: const Offset(
                                       5.0,
                                       5.0,

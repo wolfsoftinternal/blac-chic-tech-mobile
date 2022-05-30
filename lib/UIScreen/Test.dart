@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -149,7 +148,7 @@ class _TestState extends State<Test> {
                             padding: EdgeInsets.symmetric(horizontal: 17.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.r),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [

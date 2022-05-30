@@ -63,11 +63,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Test2(),
+                          builder: (context) => const Test2(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "Test2 Screen",
                       style: TextStyle(
@@ -85,8 +85,8 @@ class ListScreen extends StatelessWidget {
                           builder: (context) => ProgressBarStep(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "FoureStep Screen",
                       style: TextStyle(
@@ -101,11 +101,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => VideoDetailTab(),
+                          builder: (context) => const VideoDetailTab(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "VideoDetailTab Screen",
                       style: TextStyle(
@@ -120,11 +120,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => FilterTopicList(),
+                          builder: (context) => const FilterTopicList(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "FilterTopicList Screen",
                       style: TextStyle(
@@ -139,11 +139,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Demo(),
+                          builder: (context) => const Demo(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "Demo Screen",
                       style: TextStyle(
@@ -158,11 +158,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Test(),
+                          builder: (context) => const Test(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "Test Screen",
                       style: TextStyle(
@@ -177,11 +177,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PastFeature(),
+                          builder: (context) => const PastFeature(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "PastFeature Screen",
                       style: TextStyle(
@@ -199,8 +199,8 @@ class ListScreen extends StatelessWidget {
                           builder: (context) => EventList2(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "EventList2 Screen",
                       style: TextStyle(
@@ -216,11 +216,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TransactionsPayoutsTabs(),
+                          builder: (context) => const TransactionsPayoutsTabs(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "TransactionsPayoutsTabs Screen",
                       style: TextStyle(
@@ -235,11 +235,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyPurchasedEvent(),
+                          builder: (context) => const MyPurchasedEvent(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "MyPurchasedEvent Screen",
                       style: TextStyle(
@@ -254,11 +254,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyPlayList(),
+                          builder: (context) => const MyPlayList(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "MyPlayList Screen",
                       style: TextStyle(
@@ -273,11 +273,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => VideoComments(),
+                          builder: (context) => const VideoComments(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "VideoComments Screen",
                       style: TextStyle(
@@ -292,11 +292,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => VideoSearch(),
+                          builder: (context) => const VideoSearch(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "VideoSearch Screen",
                       style: TextStyle(
@@ -311,11 +311,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SpeakersVideos(),
+                          builder: (context) => const SpeakersVideos(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "SpeakersVideos Screen",
                       style: TextStyle(
@@ -330,11 +330,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => FindSpeaker(),
+                          builder: (context) => const FindSpeaker(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "FindSpeaker Screen",
                       style: TextStyle(
@@ -349,11 +349,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EventSearch(),
+                          builder: (context) => const EventSearch(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "EventSearch Screen",
                       style: TextStyle(
@@ -368,11 +368,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => VideoListBct(),
+                          builder: (context) => const VideoListBct(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "VideoListBct Screen",
                       style: TextStyle(
@@ -387,11 +387,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Featured(),
+                          builder: (context) => const Featured(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "Featured Screen",
                       style: TextStyle(
@@ -406,11 +406,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EventTicketTxnId(),
+                          builder: (context) => const EventTicketTxnId(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "EventTicketTxnId Screen",
                       style: TextStyle(
@@ -425,11 +425,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EventTicket(),
+                          builder: (context) => const EventTicket(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "EventTicket Screen",
                       style: TextStyle(
@@ -444,11 +444,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AboutMe(),
+                          builder: (context) => const AboutMe(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "AboutMe Screen",
                       style: TextStyle(
@@ -463,11 +463,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AdmireGrid(),
+                          builder: (context) => const AdmireGrid(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "AdmireGrid Screen",
                       style: TextStyle(
@@ -482,11 +482,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EditProfile(),
+                          builder: (context) => const EditProfile(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "EditProfile Screen",
                       style: TextStyle(
@@ -501,11 +501,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProfileSetting(),
+                          builder: (context) => const ProfileSetting(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "ProfileSetting Screen",
                       style: TextStyle(
@@ -520,11 +520,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Connect12(),
+                          builder: (context) => const Connect12(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "Connect12 Screen",
                       style: TextStyle(
@@ -539,11 +539,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BcConnect(),
+                          builder: (context) => const BcConnect(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "BcConnect Screen",
                       style: TextStyle(
@@ -558,11 +558,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PostGalleryPicker(),
+                          builder: (context) => const PostGalleryPicker(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "PostGalleryPicker Screen",
                       style: TextStyle(
@@ -577,11 +577,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CreateEventDetail(),
+                          builder: (context) => const CreateEventDetail(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "CreateEventDetail Screen",
                       style: TextStyle(
@@ -596,11 +596,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RegisteredPeople(),
+                          builder: (context) => const RegisteredPeople(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "RegisteredPeople Screen",
                       style: TextStyle(
@@ -615,11 +615,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CreatEventUploadImage(),
+                          builder: (context) => const CreatEventUploadImage(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "CreatEventUploadImage Screen",
                       style: TextStyle(
@@ -634,11 +634,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => UploadVideoDetail(),
+                          builder: (context) => const UploadVideoDetail(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "UploadVideoDetail Screen",
                       style: TextStyle(
@@ -653,11 +653,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => UploadVideos(),
+                          builder: (context) => const UploadVideos(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "UploadVideos Screen",
                       style: TextStyle(
@@ -672,11 +672,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PostLocation(),
+                          builder: (context) => const PostLocation(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "PostLocation Screen",
                       style: TextStyle(
@@ -691,11 +691,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TagPeople(),
+                          builder: (context) => const TagPeople(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "TagPeople Screen",
                       style: TextStyle(
@@ -710,11 +710,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CreatPost(),
+                          builder: (context) => const CreatPost(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "CreatPost Screen",
                       style: TextStyle(
@@ -729,11 +729,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Welcome(),
+                          builder: (context) => const Welcome(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "Welcome Screen",
                       style: TextStyle(
@@ -748,11 +748,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RegisterInfoView(),
+                          builder: (context) => const RegisterInfoView(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "Register Screen",
                       style: TextStyle(
@@ -767,11 +767,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignupInfoView(),
+                          builder: (context) => const SignupInfoView(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "Signup Screen",
                       style: TextStyle(
@@ -786,11 +786,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignupFormView(),
+                          builder: (context) => const SignupFormView(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "SignupDetail Screen",
                       style: TextStyle(
@@ -805,11 +805,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => FullInformationStepsView(),
+                          builder: (context) => const FullInformationStepsView(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "FullInformationSteps Screen",
                       style: TextStyle(
@@ -824,11 +824,11 @@ class ListScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LoginView(),
+                          builder: (context) => const LoginView(),
                         ));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Text(
                       "Login Screen",
                       style: TextStyle(

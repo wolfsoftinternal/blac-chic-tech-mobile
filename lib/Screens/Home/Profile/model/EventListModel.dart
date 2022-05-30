@@ -148,10 +148,10 @@ class EventList {
             List<UserList>.from(json["hosts"].map((x) => UserList.fromJson(x))),
         speakers: List<UserList>.from(
             json["speakers"].map((x) => UserList.fromJson(x))),
-        benefits: json["benefits"] != null
-            ? List<Benefit>.from(
-                json["benefits"].map((x) => Benefit.fromJson(x)))
-            : null,
+        // benefits: json["benefits"] != null
+        //     ? List<Benefit>.from(
+        //         json["benefits"].map((x) => Benefit.fromJson(x)))
+        //     : null,
         invitedUsers: List<UserList>.from(
             json["invited_users"].map((x) => UserList.fromJson(x))),
       );
@@ -188,7 +188,7 @@ class EventList {
         "city_details": cityDetails!.toJson(),
         "hosts": List<dynamic>.from(hosts!.map((x) => x.toJson())),
         "speakers": List<dynamic>.from(speakers!.map((x) => x.toJson())),
-        "benefits": List<dynamic>.from(benefits!.map((x) => x.toJson())),
+        // "benefits": List<dynamic>.from(benefits!.map((x) => x.toJson())),
         "invited_users":
             List<dynamic>.from(invitedUsers!.map((x) => x.toJson())),
       };
@@ -329,18 +329,18 @@ class Host {
         countryId: json["country_id"],
         stateId: json["state_id"],
         cityId: json["city_id"],
-        image: json["image"] == null ? null : json["image"],
-        linkedinUrl: json["linkedin_url"] == null ? null : json["linkedin_url"],
+        image: json["image"],
+        linkedinUrl: json["linkedin_url"],
         instagramUrl:
-            json["instagram_url"] == null ? null : json["instagram_url"],
-        twitterUrl: json["twitter_url"] == null ? null : json["twitter_url"],
+            json["instagram_url"],
+        twitterUrl: json["twitter_url"],
         socialType: json["social_type"],
         socialId: json["social_id"],
         aboutUs: json["about_us"],
         address: json["address"],
         latitude: json["latitude"],
         longitude: json["longitude"],
-        website: json["website"] == null ? null : json["website"],
+        website: json["website"],
         otp: json["otp"],
         role: json["role"],
         emailVerifiedAt: json["email_verified_at"],
@@ -365,17 +365,17 @@ class Host {
         "country_id": countryId,
         "state_id": stateId,
         "city_id": cityId,
-        "image": image == null ? null : image,
-        "linkedin_url": linkedinUrl == null ? null : linkedinUrl,
-        "instagram_url": instagramUrl == null ? null : instagramUrl,
-        "twitter_url": twitterUrl == null ? null : twitterUrl,
+        "image": image,
+        "linkedin_url": linkedinUrl,
+        "instagram_url": instagramUrl,
+        "twitter_url": twitterUrl,
         "social_type": socialType,
         "social_id": socialId,
         "about_us": aboutUs,
         "address": address,
         "latitude": latitude,
         "longitude": longitude,
-        "website": website == null ? null : website,
+        "website": website,
         "otp": otp,
         "role": role,
         "email_verified_at": emailVerifiedAt,

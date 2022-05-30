@@ -2,14 +2,13 @@ import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileCont
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
-import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ProfileTab extends StatefulWidget {
-  ProfileTab({Key? key}) : super(key: key);
+  const ProfileTab({Key? key}) : super(key: key);
 
   @override
   State<ProfileTab> createState() => _ProfileTabState();
@@ -30,7 +29,7 @@ class _ProfileTabState extends State<ProfileTab> {
                     controller.details.value.dateOfBirth == null &&
                     controller.details.value.questions.toString() == "[]" ||
                 controller.details.value.questions == null
-            ? Container(
+            ? SizedBox(
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,12 +52,12 @@ class _ProfileTabState extends State<ProfileTab> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 32,
                       ),
                       setHelceticaBold('About Me', 16, black_121212,
                           FontWeight.w600, FontStyle.normal, -0.32),
-                      SizedBox(
+                      const SizedBox(
                         height: 32,
                       ),
                       controller.details.value.pastJobs!.length > 1
@@ -309,7 +308,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                         child: Row(
                                           children: [
                                             SvgPicture.asset(calendar_icon),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 8,
                                             ),
                                             setHelceticaBold(
@@ -367,7 +366,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                             child: Row(
                                               children: [
                                                 SvgPicture.asset(question_icon),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 8,
                                                 ),
                                                 setHelceticaBold(
@@ -426,7 +425,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                         child: Row(
                                           children: [
                                             SvgPicture.asset(question_icon),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 8,
                                             ),
                                             setHelceticaBold(
@@ -484,7 +483,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                         child: Row(
                                           children: [
                                             SvgPicture.asset(question_icon),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 8,
                                             ),
                                             setHelceticaBold(
@@ -542,7 +541,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                         child: Row(
                                           children: [
                                             SvgPicture.asset(question_icon),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 8,
                                             ),
                                             setHelceticaBold(
@@ -600,7 +599,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                         child: Row(
                                           children: [
                                             SvgPicture.asset(question_icon),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 8,
                                             ),
                                             setHelceticaBold(

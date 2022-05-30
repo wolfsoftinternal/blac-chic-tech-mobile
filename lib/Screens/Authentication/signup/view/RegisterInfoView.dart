@@ -6,9 +6,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoF
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
 import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
-import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
@@ -110,7 +108,7 @@ class RegisterInfoView extends StatelessWidget {
                             }
                           }
                           if (lastQuestionsInfo != "Done") {
-                            Get.to(AdditionalLastQueView());
+                            Get.to(const AdditionalLastQueView());
                           } else {
                             Get.offAll(BottomNavigation());
                           }
@@ -155,7 +153,7 @@ class RegisterInfoView extends StatelessWidget {
                           text:  TextSpan(children: [
                             TextSpan(
                                 style: TextStyle(
-                                    color: Color(0xff121212),
+                                    color: const Color(0xff121212),
                                     fontWeight: FontWeight.w400,
                                     fontFamily: "Helvetica",
                                     fontStyle: FontStyle.normal,
@@ -165,7 +163,7 @@ class RegisterInfoView extends StatelessWidget {
                                     "By continuing and signing up for an account, you confirm that you agree to Black Chic Tech "),
                             TextSpan(
                                 style: TextStyle(
-                                    color: Color(0xffff881a),
+                                    color: const Color(0xffff881a),
                                     fontWeight: FontWeight.w400,
                                     fontFamily: "Helvetica",
                                     fontStyle: FontStyle.normal,
@@ -174,7 +172,7 @@ class RegisterInfoView extends StatelessWidget {
                                 text: "User Agreement,"),
                             TextSpan(
                                 style: TextStyle(
-                                    color: Color(0xff121212),
+                                    color: const Color(0xff121212),
                                     fontWeight: FontWeight.w400,
                                     fontFamily: "Helvetica",
                                     fontStyle: FontStyle.normal,
@@ -182,7 +180,7 @@ class RegisterInfoView extends StatelessWidget {
                                     height: 1.5.h),
                                 text:
                                     " and acknowledge that you have read Black Chic Tech "),
-                            TextSpan(
+                            const TextSpan(
                                 style: TextStyle(
                                     color: Color(0xffff881a),
                                     fontWeight: FontWeight.w400,

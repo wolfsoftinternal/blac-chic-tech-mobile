@@ -14,7 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class AddComapny extends StatefulWidget {
-  AddComapny({Key? key}) : super(key: key);
+  const AddComapny({Key? key}) : super(key: key);
 
   @override
   State<AddComapny> createState() => _AddComapnyState();
@@ -124,7 +124,7 @@ class _AddComapnyState extends State<AddComapny> {
                                                 imagePath = File("");
                                               });
                                             },
-                                            child: Icon(
+                                            child: const Icon(
                                               Icons.delete,
                                               size: 20,
                                             ),

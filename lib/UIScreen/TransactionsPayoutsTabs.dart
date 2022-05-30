@@ -1,9 +1,6 @@
 import 'package:blackchecktech/Model/PayoutsModel.dart';
-import 'package:blackchecktech/Model/PayoutsModel.dart';
-import 'package:blackchecktech/Model/PayoutsModel.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -216,7 +213,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                       Container(
                         margin: EdgeInsets.only(top: 15.h, left: 24.w, right: 24.w),
                         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           // border: Border.all(color: grey_e9ecec, width: 1),
                             borderRadius: BorderRadius.all(Radius.circular(4)),
                             color: grey_f5f5f5),
@@ -231,13 +228,13 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            Expanded(
+                            const Expanded(
                               child: TextField(
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: black_121212,
                                     fontFamily: roboto_medium,
                                     fontSize: 14.0),
-                                decoration: new InputDecoration(
+                                decoration: InputDecoration(
                                   isDense: true,
                                   hintText: "Search.......",
                                   hintStyle: TextStyle(
@@ -272,7 +269,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                     borderRadius: BorderRadius.circular(4.r),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color(0x194343b2).withOpacity(0.15),
+                                        color: const Color(0x194343b2).withOpacity(0.15),
                                         offset: const Offset(
                                           5.0,
                                           5.0,
@@ -369,7 +366,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                       Container(
                         margin: EdgeInsets.only(top: 15.h, left: 24.w, right: 24.w),
                         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           // border: Border.all(color: grey_e9ecec, width: 1),
                             borderRadius: BorderRadius.all(Radius.circular(4)),
                             color: grey_f5f5f5),
@@ -384,13 +381,13 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            Expanded(
+                            const Expanded(
                               child: TextField(
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: black_121212,
                                     fontFamily: roboto_medium,
                                     fontSize: 14.0),
-                                decoration: new InputDecoration(
+                                decoration: InputDecoration(
                                   isDense: true,
                                   hintText: "Search.......",
                                   hintStyle: TextStyle(
@@ -425,7 +422,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                     borderRadius: BorderRadius.circular(4.r),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color(0x194343b2).withOpacity(0.15),
+                                        color: const Color(0x194343b2).withOpacity(0.15),
                                         offset: const Offset(
                                           5.0,
                                           5.0,

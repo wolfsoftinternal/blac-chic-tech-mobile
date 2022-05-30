@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../Layout/ToolbarWithHeaderCenterTitle.dart';
 import '../Model/SpeakersVideoModel.dart';
 import '../Styles/my_colors.dart';
 import '../Styles/my_icons.dart';
@@ -58,7 +57,7 @@ class _VideoSearchState extends State<VideoSearch> {
                               color: Colors.grey.withOpacity(0.1),
                               spreadRadius: 6,
                               blurRadius: 10,
-                              offset: Offset(1, 4), // changes position of shadow
+                              offset: const Offset(1, 4), // changes position of shadow
                             ),
                           ],
                         ),
@@ -69,13 +68,13 @@ class _VideoSearchState extends State<VideoSearch> {
                       ),
                     ),
                   ),
-                  Padding(
+                  const Padding(
                     padding:  EdgeInsets.only(top: 15),
                     child: Center(child: // TOPICS
                     Text(
                         "SEARCH",
-                        style: const TextStyle(
-                            color:  const Color(0xff121212),
+                        style: TextStyle(
+                            color:  Color(0xff121212),
                             fontWeight: FontWeight.w900,
                             fontFamily: "NeueHelvetica",
                             fontStyle:  FontStyle.normal,
@@ -99,7 +98,7 @@ class _VideoSearchState extends State<VideoSearch> {
                     itemBuilder: (context, i) {
                       return Padding(
                         padding: EdgeInsets.only(bottom: 16.h),
-                        child: Container(
+                        child: SizedBox(
                             width: double.infinity,
                             child:Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -117,7 +116,7 @@ class _VideoSearchState extends State<VideoSearch> {
                                       padding: EdgeInsets.symmetric(vertical: 1.5.h,horizontal: 6.w),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(4),
-                                        gradient: LinearGradient(
+                                        gradient: const LinearGradient(
                                           begin: Alignment.topCenter,
                                           end: Alignment.bottomCenter,
                                           colors: [
@@ -141,16 +140,16 @@ class _VideoSearchState extends State<VideoSearch> {
                                   children: [
                                     SizedBox(height: 3.h,),
 
-                                    Text(videoSearchList[i].tvHeading,style: TextStyle(
+                                    Text(videoSearchList[i].tvHeading,style: const TextStyle(
                                         fontFamily: helvetica_neu_bold,color: black_121212,
                                         fontSize: 14
                                     ),),
                                     SizedBox(height: 8.h,),
-                                    Text(videoSearchList[i].tvTitle,style: TextStyle(
+                                    Text(videoSearchList[i].tvTitle,style: const TextStyle(
                                         fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
                                         fontSize: 10),),
                                     SizedBox(height: 2.h,),
-                                    Text(videoSearchList[i].tvDate,style: TextStyle(
+                                    Text(videoSearchList[i].tvDate,style: const TextStyle(
                                         fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
                                         fontSize: 8),),
 

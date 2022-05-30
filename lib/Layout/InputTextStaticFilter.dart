@@ -1,6 +1,5 @@
 import 'package:blackchecktech/Screens/Authentication/signup/model/CityListModel.dart';
 import 'package:blackchecktech/Screens/Home/Event/controller/EventDetailController.dart';
-import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
@@ -56,7 +55,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
 
   _InputTextStaicFilterState(String hintData,TextEditingController controller,bool numKeypad,TextInputAction textInputAction,
       TextInputType inputType,){
-    this.hint = hintData;
+    hint = hintData;
     this.controller = controller;
     this.numKeypad = numKeypad;
     this.textInputAction = textInputAction;
@@ -79,7 +78,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                 light_grey_f2f2f2:
                 light_grey_f2f2f2,
               ),
-              borderRadius: BorderRadius.all(Radius.circular(4)),
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
               color: checkFillColor == false
                   ? checkColor == true
                   ? Colors.white
@@ -105,7 +104,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                     ),
 
                     child: TextFormField(
-                      style:  TextStyle(
+                      style:  const TextStyle(
                           color: black_121212,
                           fontFamily: helveticaNeueNeue_medium,
                           fontSize: 14.0
@@ -116,13 +115,13 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                         numKeypad== true ? LengthLimitingTextInputFormatter(10) : LengthLimitingTextInputFormatter(200),
                       ],
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                         isDense: true,
                         // you can change this with the top text like you want
                         // labelText: hint,
                         // labelStyle: TextStyle(color: grey_aaaaaa,fontFamily: helveticaNeueNeue_medium,fontSize: 14),
                         hintText: hint,
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                             color: grey_aaaaaa, fontFamily: helveticaNeueNeue_medium,fontSize: 14),
                         border: InputBorder.none,
                         filled: false,
@@ -189,7 +188,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                           spreadRadius: 6,
                           blurRadius: 10,
                           offset:
-                          Offset(1, 4), // changes position of shadow
+                          const Offset(1, 4), // changes position of shadow
                         ),
                       ],
                     ),
@@ -282,7 +281,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
-                                hint: new Text("City",
+                                hint: Text("City",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontFamily: helveticaNeueNeue_medium,
@@ -360,7 +359,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                     focusNode: AlwaysDisabledFocusNode(),
                                     decoration: InputDecoration(
                                       isDense: true,
-                                      contentPadding: EdgeInsets.symmetric(
+                                      contentPadding: const EdgeInsets.symmetric(
                                           horizontal: 0, vertical: 0),
                                       hintText: 'Date',
                                       hintStyle: Theme.of(context)
@@ -486,7 +485,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
       context: context,
       builder: (context) {
         DateTime? tempPickedDate = DateTime.now();
-        return Container(
+        return SizedBox(
           height: 250.h,
           child: Column(
             children: <Widget>[

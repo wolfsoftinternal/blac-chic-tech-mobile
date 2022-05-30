@@ -7,7 +7,6 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoF
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
-import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +14,6 @@ import 'package:http/http.dart' as http;
 
 import '../../../../Model/BaseModel.dart';
 import '../../../../Utils/CommonWidget.dart';
-import '../../../../Utils/GeneralFunctions.dart';
 import '../../../../Utils/preference_utils.dart';
 import '../../../../Utils/share_predata.dart';
 import '../../../Networks/api_endpoint.dart';
@@ -42,12 +40,10 @@ class LoginController extends GetxController {
     bool isExist =
         await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
 
-    if (isExist != null) {
-      boolRemember.value = isExist;
+    boolRemember.value = isExist;
 
-      if (isExist == true) {
-        getStoredUserDetails();
-      }
+    if (isExist == true) {
+      getStoredUserDetails();
     }
   }
 
@@ -112,9 +108,9 @@ class LoginController extends GetxController {
                 }
               }
               if (questionsInfo != "Done") {
-                Get.offAll(AdditionalQueFormView());
+                Get.offAll(const AdditionalQueFormView());
               } else if (lastQuestionsInfo != "Done") {
-                Get.offAll(AdditionalLastQueView());
+                Get.offAll(const AdditionalLastQueView());
               } else {
                 Get.offAll(BottomNavigation());
               }

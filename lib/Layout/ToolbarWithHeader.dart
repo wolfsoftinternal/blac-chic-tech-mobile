@@ -3,8 +3,6 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class ToolbarWithHeader extends StatelessWidget {
   final step;
@@ -64,9 +62,9 @@ class ToolbarWithHeader extends StatelessWidget {
                 padding:  EdgeInsets.only(right: 24.r),
                 child: InkWell(
                     onTap: ontap,
-                    child: Text(
+                    child: const Text(
                       "Skip",
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: black_121212,
                           fontWeight: FontWeight.bold,
                           fontFamily: helveticaNeueNeue_medium),

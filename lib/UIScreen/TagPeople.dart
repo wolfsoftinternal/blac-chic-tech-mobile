@@ -3,11 +3,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleMode
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -55,10 +51,10 @@ class _TagPeopleState extends State<TagPeople> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                               colors: [
-                                const Color(0xFF1c2535),
-                                const Color(0xFF04080f),
+                                Color(0xFF1c2535),
+                                Color(0xFF04080f),
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
@@ -70,13 +66,13 @@ class _TagPeopleState extends State<TagPeople> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.person_add,size: 15,color: Colors.white,),
+                              const Icon(Icons.person_add,size: 15,color: Colors.white,),
                               SizedBox(width: 5.w,),
                               // Tag People
-                              Text(
+                              const Text(
                                   "Tag People",
-                                  style: const TextStyle(
-                                      color:  const Color(0xffffffff),
+                                  style: TextStyle(
+                                      color:  Color(0xffffffff),
                                       fontWeight: FontWeight.w900,
                                       fontFamily: "NeueHelvetica",
                                       fontStyle:  FontStyle.normal,
@@ -94,13 +90,13 @@ class _TagPeopleState extends State<TagPeople> {
                 ),
 
                 Padding(
-                  padding:  EdgeInsets.all(24.0),
+                  padding:  const EdgeInsets.all(24.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
-                      SearchBarTag(
+                      const SearchBarTag(
                         placeholder: 'Search people ...',
                       ),
 
@@ -109,7 +105,7 @@ class _TagPeopleState extends State<TagPeople> {
                       ListView.builder(
                         primary: false,
                         shrinkWrap: true,
-                        padding: EdgeInsets.all(0),
+                        padding: const EdgeInsets.all(0),
                         itemCount: onDealsModel.length,
                         itemBuilder: (context, i) => GestureDetector(
                           onTap: () {

@@ -1,7 +1,6 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
-import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/ReplaceWith.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -20,7 +19,7 @@ import '../Utils/preference_utils.dart';
 class AdmiresGridView extends StatefulWidget {
   final type;
   final crossAxisCount;
-  AdmiresGridView({Key? key, this.type, this.crossAxisCount}) : super(key: key);
+  const AdmiresGridView({Key? key, this.type, this.crossAxisCount}) : super(key: key);
 
   @override
   State<AdmiresGridView> createState() => _AdmiresGridViewState();
@@ -92,7 +91,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                         children: [
                           widget.type == 'user'
                               ? PopupMenuButton(
-                                  position: PopupMenuPosition.under,
+                                  // position: PopupMenuPosition.under,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(50),
                                     child: admireList.admireDetails!.image ==
@@ -142,7 +141,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                     } else if (i == 3) {
                                       setState(() {
                                         Widget cancelButton = TextButton(
-                                          child: Text("Yes"),
+                                          child: const Text("Yes"),
                                           onPressed: () {
                                             setState(() {
                                               checkNet(context).then((value) {
@@ -155,7 +154,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                           },
                                         );
                                         Widget continueButton = TextButton(
-                                          child: Text("No"),
+                                          child: const Text("No"),
                                           onPressed: () {
                                             setState(() {
                                               Get.back();
@@ -164,7 +163,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                         );
 
                                         AlertDialog alert = AlertDialog(
-                                          content: Text(
+                                          content: const Text(
                                               "Are you sure you want to delete this admire?"),
                                           actions: [
                                             cancelButton,
@@ -187,7 +186,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
-                                            children: [
+                                            children: const [
                                               Text(
                                                 "View Profile",
                                                 style: TextStyle(
@@ -209,7 +208,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
-                                            children: [
+                                            children: const [
                                               Text(
                                                 "Replace with...",
                                                 style: TextStyle(
@@ -233,14 +232,14 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                "Remove ${admireList.admireDetails!.firstName != null ? admireList.admireDetails!.firstName : ""}",
-                                                style: TextStyle(
+                                                "Remove ${admireList.admireDetails!.firstName ?? ""}",
+                                                style: const TextStyle(
                                                     color: Colors.black,
                                                     fontFamily:
                                                         helveticaNeueNeue_medium,
                                                     fontSize: 14),
                                               ),
-                                              Icon(
+                                              const Icon(
                                                 Icons.close,
                                                 color: Colors.red,
                                               )
@@ -286,7 +285,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                     onTap: () {
                                       setState(() {
                                         Widget cancelButton = TextButton(
-                                          child: Text("Yes"),
+                                          child: const Text("Yes"),
                                           onPressed: () {
                                             setState(() {
                                               checkNet(context).then((value) {
@@ -299,7 +298,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                           },
                                         );
                                         Widget continueButton = TextButton(
-                                          child: Text("No"),
+                                          child: const Text("No"),
                                           onPressed: () {
                                             setState(() {
                                               Get.back();
@@ -308,7 +307,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                         );
 
                                         AlertDialog alert = AlertDialog(
-                                          content: Text(
+                                          content: const Text(
                                               "Are you sure you want to delete this admire?"),
                                           actions: [
                                             cancelButton,
@@ -332,7 +331,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                           borderRadius:
                                               BorderRadius.circular(50.0),
                                         ),
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.close,
                                           color: white_ffffff,
                                           size: 12,
@@ -342,7 +341,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                               : Container()
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       setHelceticaBold(
@@ -352,7 +351,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                           FontWeight.w500,
                           FontStyle.normal,
                           -0.1),
-                      SizedBox(
+                      const SizedBox(
                         height: 2,
                       ),
                       setHelveticaMedium(

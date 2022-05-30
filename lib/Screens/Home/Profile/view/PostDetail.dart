@@ -1,5 +1,4 @@
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
-import 'package:blackchecktech/Layout/ToolbarWithHeaderTitle.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
@@ -55,14 +54,14 @@ class _PostDetailState extends State<PostDetail> {
       backgroundColor: white_ffffff,
       body: Obx(
         () => Column(children: [
-          SizedBox(
+          const SizedBox(
             height: 60,
           ),
           Container(
             child: Row(
               children: [
                 BackLayout(),
-                Container(
+                const SizedBox(
                   height: 48,
                   width: 48,
                 ),
@@ -128,7 +127,7 @@ class _PostDetailState extends State<PostDetail> {
                       ),
                     ),
                   ),
-                ) : Container(
+                ) : SizedBox(
                    width: 48.w,
                    height: 48.h,
                 ),
@@ -158,11 +157,11 @@ class _PostDetailState extends State<PostDetail> {
                             onTap: () {
                               displayBottomSheet(context);
                             },
-                            child: Container(
+                            child: SizedBox(
                               width: 55.w,
                               height: 55.h,
                               child:
-                                  Icon(Icons.more_horiz, color: black_121212),
+                                  const Icon(Icons.more_horiz, color: black_121212),
                             ),
                           ),
                         )
@@ -183,13 +182,13 @@ class _PostDetailState extends State<PostDetail> {
                         color: white_ffffff,
                         boxShadow: [
                           BoxShadow(
-                            color: Color(0x17747796).withOpacity(0.07),
+                            color: const Color(0x17747796).withOpacity(0.07),
                             spreadRadius: 10,
                             blurRadius: 5,
-                            offset: Offset(0, 10), // changes position of shadow
+                            offset: const Offset(0, 10), // changes position of shadow
                           ),
                         ],
-                        borderRadius: BorderRadius.all(const Radius.circular(5)),
+                        borderRadius: const BorderRadius.all(Radius.circular(5)),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
@@ -197,21 +196,21 @@ class _PostDetailState extends State<PostDetail> {
                           children: [
                             Stack(
                               children: [
-                                Container(
+                                SizedBox(
                                   height: 300,
                                   width: MediaQuery.of(context).size.width,
                                   child: controller.postDetailList[index].image == null
                                       ? ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              const Radius.circular(5)),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(5)),
                                           child: SvgPicture.asset(
                                             placeholder,
                                             fit: BoxFit.fill,
                                           ),
                                         )
                                       : ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              const Radius.circular(5)),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(5)),
                                           child: CachedNetworkImage(
                                             imageUrl:
                                                 controller.postDetailList[index].image!,
@@ -236,20 +235,20 @@ class _PostDetailState extends State<PostDetail> {
                                   child: Container(
                                     height: 40,
                                     width: 120,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       gradient: LinearGradient(colors: [
                                         Color(0xff1c2535),
                                         Color(0xff04080f)
                                       ]),
                                       borderRadius: BorderRadius.all(
-                                          const Radius.circular(40)),
+                                          Radius.circular(40)),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                                       child: Row(
                                         children: [
-                                          GestureDetector(child: Icon(Icons.image, color: Colors.red,)),
-                                          SizedBox(width: 8,),
+                                          GestureDetector(child: const Icon(Icons.image, color: Colors.red,)),
+                                          const SizedBox(width: 8,),
                                           setHelceticaBold("1,2k liked", 14, white_ffffff, FontWeight.w500, FontStyle.normal)
                                         ],
                                       ),
@@ -258,7 +257,7 @@ class _PostDetailState extends State<PostDetail> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             Align(
@@ -269,7 +268,7 @@ class _PostDetailState extends State<PostDetail> {
                                     TextSpan(
                                       text:
                                           "@${controller.postDetailList[index].address!} ",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 14,
                                           fontFamily: helvetica_neu_bold,
                                           fontWeight: FontWeight.w600,
@@ -278,7 +277,7 @@ class _PostDetailState extends State<PostDetail> {
                                     ),
                                     TextSpan(
                                       text: controller.postDetailList[index].caption!,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 14,
                                           fontFamily: helveticaNeueNeue_medium,
                                           fontWeight: FontWeight.w400,

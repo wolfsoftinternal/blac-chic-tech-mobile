@@ -3,9 +3,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
 import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,10 +49,10 @@ class _CreatPostState extends State<CreatPost> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                               colors: [
-                                const Color(0xFF1c2535),
-                                const Color(0xFF04080f),
+                                Color(0xFF1c2535),
+                                Color(0xFF04080f),
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
@@ -66,13 +64,13 @@ class _CreatPostState extends State<CreatPost> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.person_add,size: 15,color: Colors.white,),
+                              const Icon(Icons.person_add,size: 15,color: Colors.white,),
                               SizedBox(width: 5.w,),
                               // Tag People
-                              Text(
+                              const Text(
                                   "Tag People",
-                                  style: const TextStyle(
-                                      color:  const Color(0xffffffff),
+                                  style: TextStyle(
+                                      color:  Color(0xffffffff),
                                       fontWeight: FontWeight.w900,
                                       fontFamily: "NeueHelvetica",
                                       fontStyle:  FontStyle.normal,
@@ -90,13 +88,13 @@ class _CreatPostState extends State<CreatPost> {
                 ),
 
                 Padding(
-                  padding:  EdgeInsets.all(24.0),
+                  padding:  const EdgeInsets.all(24.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // CAPTION
-                      Text(
+                      const Text(
                           "CAPTION",
                           style:  TextStyle(
                               color:  black_121212,
@@ -162,7 +160,7 @@ class _CreatPostState extends State<CreatPost> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                               "ADD LOCATION",
                               style:  TextStyle(
                                   color:  black_121212,
@@ -183,7 +181,7 @@ class _CreatPostState extends State<CreatPost> {
                   ),
                 ),
                 
-                Container(
+                SizedBox(
                   height: 35.h,
                   child: ListView.separated(
                     separatorBuilder:

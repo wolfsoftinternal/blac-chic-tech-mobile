@@ -144,7 +144,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                               padding: EdgeInsets.only(bottom: 16.h),
                               child: Stack(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                       width: double.infinity,
                                       height: 207.h,
                                       child: ClipRRect(
@@ -172,14 +172,14 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                                 horizontal: 15.w),
                                             height: 26.h,
                                             decoration: BoxDecoration(
-                                              color: Color(0xe6ff881a),
+                                              color: const Color(0xe6ff881a),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(25.r)),
                                             ),
                                             child: Center(
                                               child: Text(
                                                 eventList[i].tvPaymentType,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.white,
                                                     fontFamily: roboto_bold),
@@ -190,7 +190,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                               height: 29.h,
                                               padding: EdgeInsets.only(right: 6.w),
                                               decoration: BoxDecoration(
-                                                gradient: LinearGradient(colors: [
+                                                gradient: const LinearGradient(colors: [
                                                   Color(0xff1c2535),
                                                   Color(0xff04080f)
                                                 ]),
@@ -202,7 +202,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                                   Padding(
                                                     padding: EdgeInsets.only(
                                                         left: 6.0.w, right: 6.0.w),
-                                                    child: Icon(
+                                                    child: const Icon(
                                                       Icons.person,
                                                       size: 17,
                                                       color: grey_aaaaaa,
@@ -313,7 +313,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                     Container(
                       margin: EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
                       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         // border: Border.all(color: grey_e9ecec, width: 1),
                           borderRadius: BorderRadius.all(Radius.circular(4)),
                           color: grey_f5f5f5),
@@ -328,13 +328,13 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                           SizedBox(
                             width: 10.w,
                           ),
-                          Expanded(
+                          const Expanded(
                             child: TextField(
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: black_121212,
                                   fontFamily: roboto_medium,
                                   fontSize: 14.0),
-                              decoration: new InputDecoration(
+                              decoration: InputDecoration(
                                 isDense: true,
                                 hintText: "Search.......",
                                 hintStyle: TextStyle(

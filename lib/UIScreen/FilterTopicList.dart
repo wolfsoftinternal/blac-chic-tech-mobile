@@ -1,19 +1,7 @@
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
-import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/UIScreen/Featured.dart';
 import 'package:blackchecktech/UIScreen/FeaturedScreenOne.dart';
 import 'package:blackchecktech/UIScreen/FeaturedScreenSecond.dart';
-import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -76,7 +64,7 @@ class _FilterTopicListState extends State<FilterTopicList> {
                                 color: Colors.grey.withOpacity(0.1),
                                 spreadRadius: 6,
                                 blurRadius: 10,
-                                offset: Offset(1, 4), // changes position of shadow
+                                offset: const Offset(1, 4), // changes position of shadow
                               ),
                             ],
                           ),
@@ -87,13 +75,13 @@ class _FilterTopicListState extends State<FilterTopicList> {
                         ),
                       ),
                     ),
-                    Padding(
+                    const Padding(
                       padding:  EdgeInsets.only(top: 15),
                       child: Center(child: // TOPICS
                       Text(
                           "TOPICS",
-                          style: const TextStyle(
-                              color:  const Color(0xff121212),
+                          style: TextStyle(
+                              color:  Color(0xff121212),
                               fontWeight: FontWeight.w900,
                               fontFamily: "NeueHelvetica",
                               fontStyle:  FontStyle.normal,
@@ -106,7 +94,7 @@ class _FilterTopicListState extends State<FilterTopicList> {
                   ],
                 ),
                 SizedBox(height: 24.h,),
-                SearchBarDemo(
+                const SearchBarDemo(
                   placeholder: "Search topics...",
                   fillcolor: Color(0xfff5f5f5),
                 ),
@@ -133,14 +121,14 @@ class _FilterTopicListState extends State<FilterTopicList> {
                         height: 20,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
-                          color: Color(0xfff5f5f5)
+                          color: const Color(0xfff5f5f5)
                         ),
                         child: // D
                         Center(
                           child: Text(
                               onBusinessTypeModel[i].title,
                               style:  TextStyle(
-                                  color:  myposition== onBusinessTypeModel[i].id ?orange_ff881a: Color(0xff000000),
+                                  color:  myposition== onBusinessTypeModel[i].id ?orange_ff881a: const Color(0xff000000),
                                   fontWeight: FontWeight.w700,
                                   fontFamily: "NeueHelvetica",
                                   fontStyle:  FontStyle.normal,
@@ -157,7 +145,7 @@ class _FilterTopicListState extends State<FilterTopicList> {
                   flex: 1,
                   child: Container(
 
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: white_ffffff),
                     child: getCotainWidget(myposition),
                   ),
@@ -171,19 +159,19 @@ class _FilterTopicListState extends State<FilterTopicList> {
   getCotainWidget(int myposition) {
     if(myposition == 1)
     {
-      return A_TopicaList();
+      return const A_TopicaList();
     }
     else if(myposition == 2)
     {
-      return FeaturedScreenSecond();
+      return const FeaturedScreenSecond();
     }
     else if(myposition == 3)
     {
-      return FeaturedScreenOne();
+      return const FeaturedScreenOne();
     }
     else if(myposition == 4)
     {
-      return FeaturedScreenSecond();
+      return const FeaturedScreenSecond();
     }
   }
 

@@ -37,7 +37,7 @@ class _UploadVideosState extends State<UploadVideos> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 60,
           ),
           ToolbarWithHeaderCenterTitle("UPLOAD VIDEO"),
@@ -66,15 +66,15 @@ class _UploadVideosState extends State<UploadVideos> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.r),
-                        color: Color(0xfff5f5f5),
+                        color: const Color(0xfff5f5f5),
                         border: Border.all(
                           width: 1,
-                          color: Color(0x66f5f5f5)
+                          color: const Color(0x66f5f5f5)
                         ),
                       ),
                       child: _video != null 
                       ? Container(
-                        child: Container(
+                        child: SizedBox(
                             height: 276.h,
                             child: Chewie(
                               controller: _chewieController!,
@@ -109,7 +109,7 @@ class _UploadVideosState extends State<UploadVideos> {
                               Text(
                                   "Upload Video",
                                   style:  TextStyle(
-                                      color:   Color(0xff273433),
+                                      color:   const Color(0xff273433),
                                       fontWeight: FontWeight.w900,
                                       fontFamily: "NeueHelvetica",
                                       fontStyle:  FontStyle.normal,
@@ -122,7 +122,7 @@ class _UploadVideosState extends State<UploadVideos> {
                               Text(
                                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae facilisis sit nunc lorem. Morbi orci, risus,",
                                   style:  TextStyle(
-                                      color:   Color(0xff96a6a3),
+                                      color:   const Color(0xff96a6a3),
                                       fontWeight: FontWeight.w500,
                                       fontFamily: "Roboto",
                                       fontStyle:  FontStyle.normal,
@@ -169,7 +169,7 @@ class _UploadVideosState extends State<UploadVideos> {
               if(_video == null){
                 snackBar(context, 'Please upload video');
               }else{
-                Get.to(UploadVideoDetail());
+                Get.to(const UploadVideoDetail());
               }
             }),
           )

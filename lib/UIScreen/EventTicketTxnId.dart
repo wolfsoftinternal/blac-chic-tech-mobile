@@ -1,16 +1,5 @@
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
-import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,7 +22,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: Color(0xfff5f5f5),
+          backgroundColor: const Color(0xfff5f5f5),
           body: Column(
             children: [
               SingleChildScrollView(
@@ -53,7 +42,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                         children: [
                           Container(
                             width: double.infinity,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: white_ffffff,
                               boxShadow: [BoxShadow(
                                   color:  Colors.grey,
@@ -93,7 +82,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                           borderRadius: BorderRadius.circular(3),
                                           border: Border.all(
                                             width: 1,
-                                            color: Color(0xfff5f5f5)
+                                            color: const Color(0xfff5f5f5)
                                           )
                                         ),
                                         child: Row(
@@ -101,7 +90,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                             Expanded(
                                               flex:1,
                                               child: Padding(
-                                                padding:  EdgeInsets.all(8.0),
+                                                padding:  const EdgeInsets.all(8.0),
                                                 child: Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
@@ -138,7 +127,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                             Container(
                                                 width:1,
                                                 height: 50,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                     color:  view_line_f4f6f6
                                                 )
                                             ),
@@ -146,7 +135,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                             Expanded(
                                               flex:1,
                                               child: Padding(
-                                                padding:  EdgeInsets.all(8.0),
+                                                padding:  const EdgeInsets.all(8.0),
                                                 child: Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
@@ -183,7 +172,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                             Container(
                                                 width:1,
                                                 height: 50,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                     color:  view_line_f4f6f6
                                                 )
                                             ),
@@ -191,7 +180,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                             Expanded(
                                               flex:1,
                                               child: Padding(
-                                                padding:  EdgeInsets.all(8.0),
+                                                padding:  const EdgeInsets.all(8.0),
                                                 child: Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
@@ -239,12 +228,12 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
+                                              children: const [
                                                 // GOLD - $50
                                                 Text(
                                                     "GOLD - \$50",
-                                                    style: const TextStyle(
-                                                        color:  const Color(0xff121212),
+                                                    style: TextStyle(
+                                                        color:  Color(0xff121212),
                                                         fontWeight: FontWeight.w900,
                                                         fontFamily: "Roboto",
                                                         fontStyle:  FontStyle.normal,
@@ -258,8 +247,8 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                   opacity : 0.699999988079071,
                                                   child:   Text(
                                                       "Trxn ID 12321312112113",
-                                                      style: const TextStyle(
-                                                          color:  const Color(0xff121212),
+                                                      style: TextStyle(
+                                                          color:  Color(0xff121212),
                                                           fontWeight: FontWeight.w400,
                                                           fontFamily: "Roboto",
                                                           fontStyle:  FontStyle.normal,
@@ -277,12 +266,12 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
+                                              children: const [
                                                 // GOLD - $50
                                                 Text(
                                                     "2",
-                                                    style: const TextStyle(
-                                                        color:  const Color(0xff121212),
+                                                    style: TextStyle(
+                                                        color:  Color(0xff121212),
                                                         fontWeight: FontWeight.w900,
                                                         fontFamily: "Roboto",
                                                         fontStyle:  FontStyle.normal,
@@ -296,8 +285,8 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                   opacity : 0.699999988079071,
                                                   child:   Text(
                                                       "Qty",
-                                                      style: const TextStyle(
-                                                          color:  const Color(0xff121212),
+                                                      style: TextStyle(
+                                                          color:  Color(0xff121212),
                                                           fontWeight: FontWeight.w400,
                                                           fontFamily: "Roboto",
                                                           fontStyle:  FontStyle.normal,
@@ -311,10 +300,10 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                             ),
                                           ),
                                           // $100
-                                          Text(
+                                          const Text(
                                               "\$100",
-                                              style: const TextStyle(
-                                                  color:  const Color(0xff121212),
+                                              style: TextStyle(
+                                                  color:  Color(0xff121212),
                                                   fontWeight: FontWeight.w900,
                                                   fontFamily: "Roboto",
                                                   fontStyle:  FontStyle.normal,
@@ -350,14 +339,14 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                             ),
                           ),
 
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 125),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 125),
                             child: MySeparator(color: Color(0xffeaecec)),
                           ),
                           Positioned(
                               left: -25,
                               child: Padding(
-                                padding:  EdgeInsets.only(bottom: 100),
+                                padding:  const EdgeInsets.only(bottom: 100),
                                 child: Container(
                                   height: 50,
                                   width: 50,
@@ -370,7 +359,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                           Positioned(
                               right: -25,
                               child: Padding(
-                                padding:  EdgeInsets.only(bottom: 100),
+                                padding:  const EdgeInsets.only(bottom: 100),
                                 child: Container(
                                   height: 50,
                                   width: 50,

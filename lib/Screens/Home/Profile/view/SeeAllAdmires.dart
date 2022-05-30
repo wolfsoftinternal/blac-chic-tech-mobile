@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 
 class SeeAllAdmires extends StatefulWidget {
   final type;
-  SeeAllAdmires({Key? key, this.type}) : super(key: key);
+  const SeeAllAdmires({Key? key, this.type}) : super(key: key);
 
   @override
   State<SeeAllAdmires> createState() => _SeeAllAdmiresState();
@@ -44,7 +44,7 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
       backgroundColor: white_ffffff,
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 60,
           ),
           Container(
@@ -83,7 +83,7 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
                                     fontSize: 16.sp),
                                 textAlign: TextAlign.center),
                           )
-                        : Container(
+                        : SizedBox(
                             width: 48.r,
                             height: 48.r,
                           ))

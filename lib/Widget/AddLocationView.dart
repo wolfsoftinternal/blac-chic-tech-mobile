@@ -16,10 +16,10 @@ class AddLocationView extends StatelessWidget {
       padding: EdgeInsets.all(10.r),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40.r),
-        color: Color(0xfff5f5f5),
+        color: const Color(0xfff5f5f5),
       ),
       child: Text(title,
-          style: TextStyle(
+          style: const TextStyle(
               color: black_121212,
               fontWeight: FontWeight.w500,
               fontFamily: "NeueHelvetica",

@@ -12,7 +12,7 @@ import 'package:material_tag_editor/tag_editor.dart';
 
 class QuestionsDialog extends StatefulWidget {
   final quesIndex;
-  QuestionsDialog(this.quesIndex);
+  const QuestionsDialog(this.quesIndex);
 
   @override
   State<QuestionsDialog> createState() => _QuestionsDialogState();
@@ -33,7 +33,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
       child: Dialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4.r)), //this right here
-            child: Container(
+            child: SizedBox(
               height: 360.h,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -79,12 +79,12 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                               length: controller.tagValues.length,
                               hasAddButton: true,
                               resetTextOnSubmitted: true,
-                              delimiters: [',', ' '],
+                              delimiters: const [',', ' '],
                               inputFormatters: <TextInputFormatter>[
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'^[a-z A-Z]+$')),
                               ],
-                              inputDecoration: InputDecoration(
+                              inputDecoration: const InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Please type here...',),
                               onTagChanged: (newValue) {
