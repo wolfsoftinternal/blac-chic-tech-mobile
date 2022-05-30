@@ -26,6 +26,7 @@ import 'package:blackchecktech/UIScreen/ProfileSetting.dart';
 import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
 import 'package:blackchecktech/UIScreen/SpeakersVideos.dart';
 import 'package:blackchecktech/UIScreen/TagPeople.dart';
+import 'package:blackchecktech/UIScreen/Test2.dart';
 import 'package:blackchecktech/UIScreen/TransactionsPayoutsTabs.dart';
 import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
 import 'package:blackchecktech/UIScreen/UploadVideos.dart';
@@ -57,6 +58,25 @@ class ListScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Test2(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      "Test2 Screen",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(

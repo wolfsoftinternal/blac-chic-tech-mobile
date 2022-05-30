@@ -149,7 +149,7 @@ class _DemoState extends State<Demo> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 12.h,left: 24.w,right: 24.w),
-                child: Text("Fade Ogunro - CEO Bookings Africa",style: TextStyle(
+                child: Text("123 Fade Ogunro - CEO Bookings Africa",style: TextStyle(
                     fontFamily: poppins_BoldItalic,fontSize: 12.sp,
                     fontWeight: FontWeight.w700,
                     fontStyle: FontStyle.italic,

@@ -1,12 +1,7 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/UIScreen/PastFeature.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../Layout/ToolbarBackOnly.dart';
 import 'Test.dart';
-
-
 
 class ProgressBarStep extends StatefulWidget {
   @override
@@ -20,21 +15,14 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-
-
-
     _progressAnimcontroller = AnimationController(
       duration: Duration(milliseconds: 200),
       vsync: this,
     );
-
     _progressAnimation = Tween<double>(begin: beginWidth, end: endWidth)
         .animate(_progressAnimcontroller);
-
     _setProgressAnim(0, 1);
   }
-
-
      double? growStepWidth = 1;
      double? beginWidth = 1;
      double?  endWidth = 1;
@@ -49,10 +37,8 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
       _progressAnimation = Tween<double>(begin: beginWidth, end: endWidth)
           .animate(_progressAnimcontroller);
     });
-
     _progressAnimcontroller.reset();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +49,6 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-
           Expanded(
             flex: 1,
             child: PageView(
@@ -76,7 +61,6 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
                Test(),
                 PastFeature(),
                 Test(),
-
               ],
             ),
           ),
@@ -91,7 +75,6 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Row(
                       children: <Widget>[
                         AnimatedProgressBar(
@@ -122,7 +105,6 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
 class AnimatedProgressBar extends AnimatedWidget {
   AnimatedProgressBar({Key? key, required Animation<double> animation})
       : super(key: key, listenable: animation);
-
   Widget build(BuildContext context) {
    //  Listenable animation = listenable ;
      final animation = listenable as Animation<double>;
