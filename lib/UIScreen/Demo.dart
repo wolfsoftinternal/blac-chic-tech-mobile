@@ -115,7 +115,7 @@ class _DemoState extends State<Demo> {
 
                     Container(
                       margin: EdgeInsets.only(top: 10.h,left: 24.w,right: 24.w),
-                      child: Text("On Growth Hacking Life , Love & Bookings Africa",style: TextStyle(
+                      child: Text("On Growth Hacking Life 123 , Love & Bookings Africa",style: TextStyle(
                           fontFamily: helvetica_neu_bold,fontSize: 24.sp,
                           color: black_121212
                       ),),
