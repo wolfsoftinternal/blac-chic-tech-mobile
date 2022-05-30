@@ -94,6 +94,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     height: 48.h,
                     width: 48.w,
                   ),
+
                   const Spacer(),
 
                   Center(
@@ -687,7 +688,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               }
               
             },
-            child: setHelveticaMedium('See More', 12, grey_aaaaaa,
+            child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
                 FontWeight.w500, FontStyle.normal, -0.24),
           ),
           const SizedBox(
