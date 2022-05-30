@@ -882,8 +882,8 @@ class _EventDetailState extends State<EventDetail> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            setHelceticaBold(
-                                                "@${controller.eventDetails.value.speakers![index].userName!}",
+                                            setHelceticaBold(controller.eventDetails.value.speakers![index].userName != null
+                                                ? "@${controller.eventDetails.value.speakers![index].userName!}" : "@${controller.eventDetails.value.speakers![index].firstName!}",
                                                 14,
                                                 black_121212,
                                                 FontWeight.w500,

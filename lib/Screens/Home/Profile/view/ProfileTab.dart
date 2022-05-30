@@ -243,47 +243,44 @@ class _ProfileTabState extends State<ProfileTab> {
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             top: 12.0, left: 16.0),
-                                        child: Expanded(
-                                          flex: 1,
-                                          child: ListView.builder(
-                                              padding: EdgeInsets.zero,
-                                              shrinkWrap: true,
-                                              itemCount: controller.details
-                                                  .value.educations!.length,
-                                              itemBuilder: (context, index) {
-                                                return Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 12.0),
-                                                  child: setHelveticaMedium(
-                                                      controller
-                                                              .details
-                                                              .value
-                                                              .educations![
-                                                                  index]
-                                                              .schoolUniversity! +
-                                                          " / " +
-                                                          controller
-                                                              .details
-                                                              .value
-                                                              .educations![
-                                                                  index]
-                                                              .startYear! +
-                                                          ' - ' +
-                                                          controller
-                                                              .details
-                                                              .value
-                                                              .educations![
-                                                                  index]
-                                                              .endYear!,
-                                                      16,
-                                                      grey_aaaaaa,
-                                                      FontWeight.w500,
-                                                      FontStyle.normal,
-                                                      -0.32),
-                                                );
-                                              }),
-                                        ),
+                                        child: ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            itemCount: controller.details
+                                                .value.educations!.length,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.only(
+                                                        bottom: 12.0),
+                                                child: setHelveticaMedium(
+                                                    controller
+                                                            .details
+                                                            .value
+                                                            .educations![
+                                                                index]
+                                                            .schoolUniversity! +
+                                                        " / " +
+                                                        controller
+                                                            .details
+                                                            .value
+                                                            .educations![
+                                                                index]
+                                                            .startYear! +
+                                                        ' - ' +
+                                                        controller
+                                                            .details
+                                                            .value
+                                                            .educations![
+                                                                index]
+                                                            .endYear!,
+                                                    16,
+                                                    grey_aaaaaa,
+                                                    FontWeight.w500,
+                                                    FontStyle.normal,
+                                                    -0.32),
+                                              );
+                                            }),
                                       )
                                     ],
                                   ),
