@@ -480,38 +480,38 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     thickness: 1,
                   ),
                   userId != controller.details.value.id
-                      ? controller.otherAdmireList.length > 1
+                      ? controller.otherAdmireList.length >= 1
                           ? const SizedBox(
                               height: 24,
                             )
                           : Container()
-                      : controller.admireList.length > 1
+                      : controller.admireList.length >= 1
                           ? const SizedBox(
                               height: 24,
                             )
                           : Container(),
                   userId != controller.details.value.id
-                      ? controller.otherAdmireList.length > 1
+                      ? controller.otherAdmireList.length >= 1
                           ? SeeAllAdmiresWidget(userId)
                           : Container()
-                      : controller.admireList.length > 1
+                      : controller.admireList.length >= 1
                           ? SeeAllAdmiresWidget(userId)
                           : Container(),
                   userId != controller.details.value.id
-                      ? controller.otherAdmireList.length > 1
+                      ? controller.otherAdmireList.length >= 1
                           ? Admires(userId: userId, controller: controller)
                           : Container()
-                      : controller.admireList.length > 1
+                      : controller.admireList.length >= 1
                           ? Admires(userId: userId, controller: controller)
                           : Container(),
                   userId != controller.details.value.id
-                      ? controller.otherAdmireList.length > 1
+                      ? controller.otherAdmireList.length >= 1
                           ? const Divider(
                               color: grey_f4f6f6,
                               thickness: 1,
                             )
                           : Container()
-                      : controller.admireList.length > 1
+                      : controller.admireList.length >= 1
                           ? const Divider(
                               color: grey_f4f6f6,
                               thickness: 1,
@@ -699,8 +699,8 @@ class Admires extends StatelessWidget {
           itemCount: userId != controller.details.value.id
               ? controller.otherAdmireList.length == 0
                   ? 0
-                  : (controller.otherAdmireList.length - 2) + 1
-              : (controller.admireList.length - 2) + 1,
+                  : controller.otherAdmireList.length
+              : controller.admireList.length,
           itemBuilder: ((context, index) {
             return Padding(
               padding: const EdgeInsets.only(right: 12.0),
@@ -711,7 +711,7 @@ class Admires extends StatelessWidget {
                   userId != controller.details.value.id
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(50),
-                          child: controller.otherAdmireList[1 + index]
+                          child: controller.otherAdmireList[index]
                                       .admireDetails!.image ==
                                   null
                               ? SvgPicture.asset(
@@ -721,7 +721,7 @@ class Admires extends StatelessWidget {
                                 )
                               : CachedNetworkImage(
                                   imageUrl: controller
-                                      .otherAdmireList[1 + index]
+                                      .otherAdmireList[index]
                                       .admireDetails!
                                       .image!,
                                   height: 48,
@@ -744,7 +744,7 @@ class Admires extends StatelessWidget {
                         )
                       : ClipRRect(
                           borderRadius: BorderRadius.circular(50),
-                          child: controller.admireList[1 + index].admireDetails!
+                          child: controller.admireList[index].admireDetails!
                                       .image ==
                                   null
                               ? SvgPicture.asset(
@@ -753,7 +753,7 @@ class Admires extends StatelessWidget {
                                   width: 48,
                                 )
                               : CachedNetworkImage(
-                                  imageUrl: controller.admireList[1 + index]
+                                  imageUrl: controller.admireList[index]
                                       .admireDetails!.image!,
                                   height: 48,
                                   width: 48,
@@ -778,10 +778,10 @@ class Admires extends StatelessWidget {
                   ),
                   setHelveticaMedium(
                       userId != controller.details.value.id
-                          ? controller.otherAdmireList[1 + index].admireDetails!
+                          ? controller.otherAdmireList[index].admireDetails!
                                   .firstName ??
                               ""
-                          : controller.admireList[1 + index].admireDetails!
+                          : controller.admireList[index].admireDetails!
                                   .firstName ??
                               "",
                       12,
