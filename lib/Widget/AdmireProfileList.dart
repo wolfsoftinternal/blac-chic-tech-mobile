@@ -10,6 +10,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -80,7 +81,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           height: MediaQuery.of(context).size.height * .83,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 50.0),
+          padding:  EdgeInsets.only(left: 24.w,top: 50.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -90,8 +91,8 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   },
                   child: SvgPicture.asset(
                     icon_back_black_arrow,
-                    width: 24,
-                    height: 24,
+                    width: 24.w,
+                    height: 24.h,
                     color: white_ffffff,
                   )),
               const Spacer(),
@@ -101,23 +102,28 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   },
                   child: 
                   // userId == widget.admireList.admireDetails!.id ?
-                      SvgPicture.asset(add_icon)
+                      Container(
+                        height: 48.h,
+                          width: 48.w,
+                          child: Padding(
+                            padding:  EdgeInsets.all(10.r),
+                            child: SvgPicture.asset(
+                                add_icon,width: 24.w,height: 24.h,),
+                          ))
                       // : Container(
                       //     height: 48,
                       //     width: 48,
                       //   )
               ),
-              const SizedBox(
-                height: 5,
-              ),
+
               GestureDetector(
                 onTap: () {},
                 child: 
                 // userId == widget.admireList.admireDetails!.id ?
                     SvgPicture.asset(
                         settings_icon,
-                        height: 48,
-                        width: 48,
+                        height: 48.h,
+                        width: 48.w,
                       )
                     // : GestureDetector(
                     //     onTap: () {
@@ -134,7 +140,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 60.0),
+          padding:  EdgeInsets.only(top: 60.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -149,7 +155,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                       myModel!.data!.userName != null
                           ? "@" + myModel!.data!.userName!
                           : "@" + myModel!.data!.firstName!,
-                      20,
+                      20.sp,
                       white_ffffff,
                       FontWeight.w600,
                       FontStyle.normal,
@@ -160,7 +166,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
           child: Column(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * .52),
@@ -180,7 +186,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                           ? myModel!.data!.fullName!
                               .toUpperCase()
                           : "",
-                          40,
+                          40.sp,
                           white_ffffff,
                           FontWeight.w600,
                           FontStyle.normal,
@@ -189,8 +195,8 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 24,
+               SizedBox(
+                height: 24.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -216,8 +222,8 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                           : "",
                       softWrap: true,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style:  TextStyle(
+                        fontSize: 16.sp,
                         fontFamily: helveticaNeueNeue_medium,
                         fontWeight: FontWeight.w600,
                         color: Colors.white70,
@@ -232,7 +238,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
           child: Column(
             children: [
               SizedBox(
@@ -259,14 +265,14 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius:
-                            BorderRadius.circular(4),
+                            BorderRadius.circular(4.r),
                         color: grey_94ffffff,
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+                        padding:  EdgeInsets.only(top: 8.h, bottom: 8.h, left: 16.w, right: 16.w),
                         child: setHelveticaMedium(
                             'View Profile',
-                            16,
+                            16.sp,
                             black_121212,
                             FontWeight.w500,
                             FontStyle.normal),
@@ -279,7 +285,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
           child: Column(
             children: [
               SizedBox(
@@ -292,6 +298,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   myModel!.data!.cityDetails != null
                       ? const Icon(
                           Icons.location_on,
+                          size: 12,
                           color: orange_ff881a,
                         )
                       : Container(),
@@ -312,7 +319,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                             ', ' +
                             myModel!.data!.countryDetails!.name!
                         : "",
-                    10,
+                    10.sp,
                     Colors.white70,
                     FontWeight.w600,
                     FontStyle.normal,
