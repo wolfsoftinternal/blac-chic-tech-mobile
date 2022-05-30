@@ -17,6 +17,7 @@ import 'package:blackchecktech/UIScreen/EventTicketTxnId.dart';
 import 'package:blackchecktech/UIScreen/Featured.dart';
 import 'package:blackchecktech/UIScreen/FilterTopicList.dart';
 import 'package:blackchecktech/UIScreen/FindSpeaker.dart';
+import 'package:blackchecktech/UIScreen/ProgressBarStep.dart';
 import 'package:blackchecktech/UIScreen/MyPlayList.dart';
 import 'package:blackchecktech/UIScreen/MyPurchasedEvent.dart';
 import 'package:blackchecktech/UIScreen/PostGalleryPicker.dart';
@@ -56,6 +57,25 @@ class ListScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProgressBarStep(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      "FoureStep Screen",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -106,6 +126,25 @@ class ListScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       "Demo Screen",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Test(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      "Test Screen",
                       style: TextStyle(
                           color: Colors.black87,
                           fontFamily: helveticaNeueNeue_medium,

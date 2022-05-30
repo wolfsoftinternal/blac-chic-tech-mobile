@@ -332,17 +332,16 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                             titleSpacing: 0,
                             elevation: 0,
                             shadowColor: grey_aaaaaa,
-                            automaticallyImplyLeading: false,
                             backgroundColor: Color(0x80f2f2f2),
                             bottom: new PreferredSize(
-                              preferredSize: new Size(0, -2),
+                              preferredSize: new Size(0, -3),
                               child: new Container(
                                 child: new TabBar(
 
                                   isScrollable: true,
-                                  //indicatorSize: TabBarIndicatorSize.label,
                                   indicatorColor: orange_ff881a,
                                   indicatorWeight: 3,
+
                                   indicatorSize: TabBarIndicatorSize.label,
                                   labelColor: black_121212,
                                   unselectedLabelColor: grey_aaaaaa,
