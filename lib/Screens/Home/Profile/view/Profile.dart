@@ -83,18 +83,19 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       body: Obx(
         () => Column(
           children: [
-            const SizedBox(
-              height: 60,
+             SizedBox(
+              height: 60.h,
             ),
             Container(
               child: Row(
                 children: [
                   BackLayout(),
                   Container(
-                    height: 48,
-                    width: 48,
+                    height: 48.h,
+                    width: 48.w,
                   ),
                   const Spacer(),
+
                   Center(
                     child: GestureDetector(
                       onTap: () {
