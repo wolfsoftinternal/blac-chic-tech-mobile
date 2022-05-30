@@ -59,8 +59,9 @@ class Request {
 
     request.fields.addAll(body);
 
-    if (strImg != null && strImg.isNotEmpty)
+    if (strImg.isNotEmpty) {
       request.files.add(await http.MultipartFile.fromPath('image', strImg));
+    }
 
     request.headers.addAll(headersWithBearer);
     http.StreamedResponse response = await request.send();

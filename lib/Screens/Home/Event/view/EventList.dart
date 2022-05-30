@@ -1,23 +1,17 @@
 import 'package:blackchecktech/Layout/InputTextStaticFilter.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
-import 'package:blackchecktech/Model/EventList2Model.dart';
 import 'package:blackchecktech/Screens/Home/Event/controller/EventDetailController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
-import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:iconly/iconly.dart';
 import 'package:intl/intl.dart';
 
 class EventList extends StatefulWidget {
@@ -30,7 +24,7 @@ class _EventListState extends State<EventList> {
   AdmireProfileController admireProfileController = Get.put(AdmireProfileController());
 
   bool isLayoutFirst = false;
-  var _firstnameController = TextEditingController();
+  final _firstnameController = TextEditingController();
 
   @override
   void initState() {
@@ -53,7 +47,7 @@ class _EventListState extends State<EventList> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
                 Container(child: ToolbarWithHeaderCenterTitle("EVENTS")),
@@ -108,7 +102,7 @@ class _EventListState extends State<EventList> {
                   height: 24.h,
                 ),
                 controller.eventList.isEmpty
-                    ? Container(
+                    ? SizedBox(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.50,
                         child: Column(
@@ -137,21 +131,21 @@ class _EventListState extends State<EventList> {
                                 onTap: () {
                                   checkNet(context).then((value) {
                                     admireProfileController.eventDetailAPI(context,
-                                        controller.eventList[i].id);
+                                        controller.eventList[i].id, 'event');
                                   });
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(bottom: 32.h),
                                   child: Stack(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: MediaQuery.of(context).size.width,
                                         height: 207.h,
                                         child: controller.eventList[i].poster ==
                                                 null
                                             ? ClipRRect(
-                                                borderRadius: BorderRadius.all(
-                                                    const Radius.circular(5)),
+                                                borderRadius: const BorderRadius.all(
+                                                    Radius.circular(5)),
                                                 child: SvgPicture.asset(
                                                   placeholder,
                                                   fit: BoxFit.cover,
@@ -162,8 +156,8 @@ class _EventListState extends State<EventList> {
                                                 ),
                                               )
                                             : ClipRRect(
-                                                borderRadius: BorderRadius.all(
-                                                    const Radius.circular(5)),
+                                                borderRadius: const BorderRadius.all(
+                                                    Radius.circular(5)),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
                                                       controller.eventList[i].poster!,
@@ -211,14 +205,14 @@ class _EventListState extends State<EventList> {
                                                     horizontal: 15.w),
                                                 height: 26.h,
                                                 decoration: BoxDecoration(
-                                                  color: Color(0xe6ff881a),
+                                                  color: const Color(0xe6ff881a),
                                                   borderRadius: BorderRadius.all(
                                                       Radius.circular(25.r)),
                                                 ),
                                                 child: Center(
                                                   child: Text(
                                                     controller.eventList[i].type!,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 12,
                                                         color: Colors.white,
                                                         fontFamily: roboto_bold),
@@ -230,7 +224,7 @@ class _EventListState extends State<EventList> {
                                                       EdgeInsets.only(right: 6.w),
                                                   height: 29.h,
                                                   decoration: BoxDecoration(
-                                                    gradient: LinearGradient(
+                                                    gradient: const LinearGradient(
                                                         colors: [
                                                           Color(0xff1c2535),
                                                           Color(0xff04080f)
@@ -245,7 +239,7 @@ class _EventListState extends State<EventList> {
                                                         padding: EdgeInsets.only(
                                                             left: 6.0.w,
                                                             right: 6.0.w),
-                                                        child: Icon(
+                                                        child: const Icon(
                                                           Icons.person,
                                                           size: 17,
                                                           color: grey_aaaaaa,

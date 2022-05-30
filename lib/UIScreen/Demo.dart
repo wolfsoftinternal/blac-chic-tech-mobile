@@ -2,9 +2,7 @@ import 'dart:ui';
 
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -29,7 +27,7 @@ class _DemoState extends State<Demo> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 height: 500,
                 child: Stack(
                   children: [
@@ -98,7 +96,7 @@ class _DemoState extends State<Demo> {
               ),
 
               Container(
-                margin: EdgeInsets.only(right: 24,left: 24),
+                margin: const EdgeInsets.only(right: 24,left: 24),
                 transform: Matrix4.translationValues(0, -5, 0),
 
                 child: Row(
@@ -117,7 +115,7 @@ class _DemoState extends State<Demo> {
                       padding: EdgeInsets.symmetric(horizontal: 17.w),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [

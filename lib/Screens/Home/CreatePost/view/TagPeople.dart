@@ -1,20 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Screens/Home/CreatePost/controller/PostController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -87,7 +81,7 @@ class _TagPeopleState extends State<TagPeople> {
                               left: 16, right: 16, top: 8, bottom: 8),
                           child: Text('Done',
                               style: const TextStyle(
-                                  color: const Color(0xffffffff),
+                                  color: Color(0xffffffff),
                                   fontWeight: FontWeight.w900,
                                   fontFamily: helveticaNeueNeue_medium,
                                   fontStyle: FontStyle.normal,
@@ -113,7 +107,7 @@ class _TagPeopleState extends State<TagPeople> {
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
-                      Container(
+                      SizedBox(
                         height: 50,
                         child: ListView.builder(
                             primary: false,
@@ -128,10 +122,10 @@ class _TagPeopleState extends State<TagPeople> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4),
                                     gradient: LinearGradient(
-                                        colors: [
-                                          const Color(0xFFFFFFFF),
-                                          const Color(0xFFaaaaaa),
-                                          const Color(0xFF3f3f3f),
+                                        colors: const [
+                                          Color(0xFFFFFFFF),
+                                          Color(0xFFaaaaaa),
+                                          Color(0xFF3f3f3f),
                                         ],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter),
@@ -149,7 +143,7 @@ class _TagPeopleState extends State<TagPeople> {
                                                 : controller
                                                     .selectedList[i].firstName!,
                                             style: const TextStyle(
-                                                color: const Color(0xffffffff),
+                                                color: Color(0xffffffff),
                                                 fontWeight: FontWeight.w900,
                                                 fontFamily: "NeueHelvetica",
                                                 fontStyle: FontStyle.normal,

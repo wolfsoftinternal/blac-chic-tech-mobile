@@ -1,9 +1,6 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Styles/my_height.dart';
 
@@ -26,10 +23,10 @@ class BlackButtonDialog extends StatelessWidget {
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Color(0x17747796).withOpacity(0.07),
+              color: const Color(0x17747796).withOpacity(0.07),
               spreadRadius: 10,
               blurRadius: 5,
-              offset: Offset(0, 10), // changes position of shadow
+              offset: const Offset(0, 10), // changes position of shadow
             ),
           ]
       ),
@@ -39,7 +36,7 @@ class BlackButtonDialog extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4.0),
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [ Color(0xff1c2535),  Color(0xff04080f)],
@@ -50,7 +47,7 @@ class BlackButtonDialog extends StatelessWidget {
               child: //
 
                   Text(inputText,
-                    style: TextStyle(
+                    style: const TextStyle(
                     fontFamily: helvetica_neu_bold,
                     fontSize: 16
                   ),
@@ -65,10 +62,10 @@ class BlackButtonDialog extends StatelessWidget {
                 shadowColor: Colors.transparent,
                 elevation: 0,
                 padding:
-                EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
-                  side: BorderSide(color: black_121212, width: 0),
+                  side: const BorderSide(color: black_121212, width: 0),
                 ),
               )),
         ),

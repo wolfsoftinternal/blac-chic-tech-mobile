@@ -1,26 +1,19 @@
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
-import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/SeeAllAdmires.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
-import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
-import 'package:blackchecktech/Utils/preference_utils.dart';
-import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/AdmireProfileList.dart';
-import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../Authentication/login/model/SignupModel.dart';
 
 class AdmireProfile extends StatefulWidget {
-  AdmireProfile({Key? key}) : super(key: key);
+  const AdmireProfile({Key? key}) : super(key: key);
 
   @override
   State<AdmireProfile> createState() => _AdmireProfileState();
@@ -58,7 +51,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                 child: Container(
                     width: 80,
                     height: 80,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                     ),
@@ -71,7 +64,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                     child: Stack(
                       children: [
                         PageView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             controller: pageController,
                             itemCount: controller.admireList.length,
                             onPageChanged: (v) {
@@ -153,18 +146,18 @@ class _AdmireProfileState extends State<AdmireProfile> {
                             FontWeight.w600,
                             FontStyle.normal,
                             -0.28),
-                        Spacer(),
+                        const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            Get.to(SeeAllAdmires(type: 'user'));
+                            Get.to(const SeeAllAdmires(type: 'user'));
                           },
                           child: setHelveticaMedium('See More', 12, grey_aaaaaa,
                               FontWeight.w600, FontStyle.normal, -0.24),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.arrow_forward,
                           color: grey_aaaaaa,
                           size: 12,
@@ -175,7 +168,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 24.0, right: 24.0, top: 15),
-                    child: Container(
+                    child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.10,
                       width: double.infinity,
                       child: ListView.builder(
@@ -223,7 +216,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                                           ),
                                         ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
                                 setHelveticaMedium(

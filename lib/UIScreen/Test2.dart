@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,7 +27,7 @@ class _Test2State extends State<Test2> {
             child: Stack(
               children: [
 
-                Container(
+                SizedBox(
                   height: 500,
                   child: Stack(
                     children: [
@@ -97,7 +96,7 @@ class _Test2State extends State<Test2> {
                 ),
 
                 Container(
-                  margin: EdgeInsets.only(top:475),
+                  margin: const EdgeInsets.only(top:475),
                   // transform: Matrix4.translationValues(0, 255, 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -112,7 +111,7 @@ class _Test2State extends State<Test2> {
 
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(top: 20),
+                                margin: const EdgeInsets.only(top: 20),
                                 child: Text("FADE",style: TextStyle(
                                   fontFamily: helvetica_neu_bold,fontSize: 100.sp,
                                   color: orange_ff881a,letterSpacing: -10,
@@ -124,7 +123,7 @@ class _Test2State extends State<Test2> {
                               padding: EdgeInsets.symmetric(vertical:20.h,horizontal: 17.w),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                   colors: [

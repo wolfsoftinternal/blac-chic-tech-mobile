@@ -1,19 +1,6 @@
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
-import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 
 class RelatedTags extends StatefulWidget {
@@ -31,7 +18,7 @@ class _RelatedTagsState extends State<RelatedTags> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: Color(0x80f2f2f2),
+          backgroundColor: const Color(0x80f2f2f2),
           body: Padding(
             padding:  EdgeInsets.only(left: 16.w,right: 16.w),
             child: Column(
@@ -45,7 +32,7 @@ class _RelatedTagsState extends State<RelatedTags> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50.r),
-                        color: Color(0xff1c2535),
+                        color: const Color(0xff1c2535),
                       ),
                       child: // Africans
                       Padding(
@@ -63,11 +50,11 @@ class _RelatedTagsState extends State<RelatedTags> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 10,),
+                    const SizedBox(width: 10,),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50.r),
-                        color: Color(0xff1c2535),
+                        color: const Color(0xff1c2535),
                       ),
                       child: // Africans
                       Padding(
@@ -93,7 +80,7 @@ class _RelatedTagsState extends State<RelatedTags> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50.r),
-                        color: Color(0xff1c2535),
+                        color: const Color(0xff1c2535),
                       ),
                       child: // Africans
                       Padding(
@@ -111,11 +98,11 @@ class _RelatedTagsState extends State<RelatedTags> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 10,),
+                    const SizedBox(width: 10,),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50.r),
-                        color: Color(0xff1c2535),
+                        color: const Color(0xff1c2535),
                       ),
                       child: // Africans
                       Padding(

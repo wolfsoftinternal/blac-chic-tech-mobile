@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 var str_login = "Login";
 var str_signup = "Sign Up";

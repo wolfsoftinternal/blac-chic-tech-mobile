@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 
-import 'UIScreen/ListScreen.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -33,8 +32,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
 
-       //   home: SplashScreen(),
-            home: ListScreen(),
+         home: const SplashScreen(),
+            // home: ListScreen(),
 
         );
       },

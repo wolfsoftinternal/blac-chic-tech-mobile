@@ -1,12 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Screens/Home/CreatePost/view/multi_assets_page.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Utils/CommonWidget.dart';
-import 'package:blackchecktech/Utils/picker_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -52,7 +49,7 @@ class _PostGalleryPickerState extends State<PostGalleryPicker> {
                       textAlign: TextAlign.left),
                   Stack(children: [
                     Positioned(top: 4, child: Icon(Icons.expand_more_rounded)),
-                    Container(height: 30, width: 30, child: MultiAssetsPage()),
+                    SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
                   ]),
                   Spacer(),
                   Container(
@@ -64,7 +61,7 @@ class _PostGalleryPickerState extends State<PostGalleryPicker> {
                           left: 16, right: 16, top: 8, bottom: 8),
                       child: Text('NEXT',
                           style: const TextStyle(
-                              color: const Color(0xffffffff),
+                              color: Color(0xffffffff),
                               fontWeight: FontWeight.w900,
                               fontFamily: helveticaNeueNeue_medium,
                               fontStyle: FontStyle.normal,

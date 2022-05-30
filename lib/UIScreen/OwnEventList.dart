@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,7 +44,7 @@ class _OwnEventListState extends State<OwnEventList> {
                   child: Row(
                     children: [
                       BackLayout(),
-                      Container(
+                      SizedBox(
                         height: 48.h,
                         width: 48.w,
                       ),
@@ -128,7 +127,7 @@ class _OwnEventListState extends State<OwnEventList> {
                           padding: EdgeInsets.only(bottom: 32.h),
                           child: Stack(
                             children: [
-                              Container(
+                              SizedBox(
                                   width: double.infinity,
                                   height: 207.h,
                                   child: ClipRRect(
@@ -156,14 +155,14 @@ class _OwnEventListState extends State<OwnEventList> {
                                             horizontal: 15.w),
                                         height: 25.h,
                                         decoration: BoxDecoration(
-                                          color: Color(0xe6ff881a),
+                                          color: const Color(0xe6ff881a),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(25.r)),
                                         ),
                                         child: Center(
                                           child: Text(
                                             eventList[i].tvPaymentType,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 12,
                                                 color: Colors.white,
                                                 fontFamily: roboto_bold),
@@ -174,7 +173,7 @@ class _OwnEventListState extends State<OwnEventList> {
                                           height: 29.h,
                                           width: 133.w,
                                           decoration: BoxDecoration(
-                                            gradient: LinearGradient(colors: [
+                                            gradient: const LinearGradient(colors: [
                                               Color(0xff1c2535),
                                               Color(0xff04080f)
                                             ]),
@@ -186,7 +185,7 @@ class _OwnEventListState extends State<OwnEventList> {
                                               Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 6.0.w, right: 6.0.w),
-                                                child: Icon(
+                                                child: const Icon(
                                                   Icons.person,
                                                   size: 17,
                                                   color: grey_aaaaaa,

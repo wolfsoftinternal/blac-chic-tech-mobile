@@ -1,16 +1,6 @@
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,7 +41,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
                                   color: Color(0xffc4c4c4),
@@ -121,10 +111,10 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Color(0x80f5f5f5),
+                                    color: const Color(0x80f5f5f5),
                                     border: Border.all(
                                       width: 1,
-                                      color: Color(0xfff5f5f5)
+                                      color: const Color(0xfff5f5f5)
                                     )
                                   ),
                                   child: Padding(
@@ -160,7 +150,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
 
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
@@ -201,7 +191,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                 Container(
                     width: double.infinity,
                     height: 1,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color:  view_line_f4f6f6
                     )
                 ),
@@ -220,7 +210,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                           Container(
                             width: 42.w,
                             height: 42.h,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Color(0xfff5f5f5),
                                 shape: BoxShape.circle
                             ),
@@ -282,8 +272,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                     FlutterSwitch(
                                       width: 40.0,
                                       height: 20.0,
-                                      activeColor: Color(0xff38bf49),
-                                      inactiveColor: Color(0xffe9ecec),
+                                      activeColor: const Color(0xff38bf49),
+                                      inactiveColor: const Color(0xffe9ecec),
                                       valueFontSize: 0.0,
                                       toggleSize: 15.0,
                                       value: status,
@@ -304,7 +294,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 Container(
                                     width: double.infinity,
                                     height: 1,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color:  view_line_f4f6f6
                                     )
                                 ),
@@ -324,7 +314,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                           Container(
                             width: 42.w,
                             height: 42.h,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Color(0xfff5f5f5),
                                 shape: BoxShape.circle
                             ),
@@ -373,7 +363,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 Container(
                                     width: double.infinity,
                                     height: 1,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color:  view_line_f4f6f6
                                     )
                                 ),
@@ -391,7 +381,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                           Container(
                             width: 42.w,
                             height: 42.h,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Color(0xfff5f5f5),
                                 shape: BoxShape.circle
                             ),
@@ -430,7 +420,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                   Container(
                                       width: double.infinity,
                                       height: 1,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color:  view_line_f4f6f6
                                       )
                                   ),
@@ -449,7 +439,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                           Container(
                             width: 42.w,
                             height: 42.h,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Color(0xfff5f5f5),
                                 shape: BoxShape.circle
                             ),
@@ -488,7 +478,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                   Container(
                                       width: double.infinity,
                                       height: 1,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color:  view_line_f4f6f6
                                       )
                                   ),
@@ -507,7 +497,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                           Container(
                             width: 42.w,
                             height: 42.h,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Color(0xfff5f5f5),
                                 shape: BoxShape.circle
                             ),
@@ -546,7 +536,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                   Container(
                                       width: double.infinity,
                                       height: 1,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color:  view_line_f4f6f6
                                       )
                                   ),

@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoTab extends StatefulWidget {
-  VideoTab({Key? key}) : super(key: key);
+  const VideoTab({Key? key}) : super(key: key);
 
   @override
   State<VideoTab> createState() => _VideoTabState();
@@ -26,7 +26,7 @@ class _VideoTabState extends State<VideoTab> {
       body:
         Obx(
           () => controller.videoList.isEmpty
-          ? Container(
+          ? SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,7 +41,7 @@ class _VideoTabState extends State<VideoTab> {
               padding: const EdgeInsets.only(left: 24.0, right: 24.0),
               child: StaggeredGridView.countBuilder(
                 crossAxisCount: 4,
-                itemCount: controller.videoList.length == 0 ? 0 : controller.videoList.length,
+                itemCount: controller.videoList.isEmpty ? 0 : controller.videoList.length,
                 shrinkWrap: true,
                 primary: false,
                 itemBuilder: (BuildContext context, int index) {
@@ -51,7 +51,7 @@ class _VideoTabState extends State<VideoTab> {
                     },
                     child: Stack(
                       children: [
-                        Container(
+                        SizedBox(
                           height: 220,
                           child: FutureBuilder(
                             future: controller.initializeVideoPlayerFutureList[index],
@@ -137,7 +137,7 @@ class _VideoTabState extends State<VideoTab> {
                   );
                 },
                 staggeredTileBuilder: (int index) =>
-                    new StaggeredTile.count(2, index.isEven ? 2.6 : 2),
+                    StaggeredTile.count(2, index.isEven ? 2.6 : 2),
                 mainAxisSpacing: 8.0,
                 crossAxisSpacing: 8.0,
               )),

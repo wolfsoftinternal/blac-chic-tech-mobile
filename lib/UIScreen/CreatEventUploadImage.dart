@@ -1,16 +1,9 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -48,11 +41,11 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
         context: context,
         builder: (ctx) {
           return Container(
-            decoration: new BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: new BorderRadius.only(
-                    topLeft: const Radius.circular(30.0),
-                    topRight: const Radius.circular(30.0))),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0))),
             child: SingleChildScrollView(
               child: Wrap(
                 children: [
@@ -64,7 +57,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
 
@@ -76,10 +69,10 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                     child: Container(
                                         width: 48,
                                         height: 4,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(4)),
-                                            color: const Color(
+                                            color: Color(
                                                 0xff96a6a3))),
                                   ),
                                 ),
@@ -94,12 +87,12 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                 Padding(
                                   padding: const EdgeInsets.only(right: 15),
                                   child: Stack(
-                                    children: [
+                                    children: const [
                                       Center(
                                         child: Text(
                                             "SPEAKERS",
-                                            style: const TextStyle(
-                                                color:  const Color(0xff121212),
+                                            style: TextStyle(
+                                                color:  Color(0xff121212),
                                                 fontWeight: FontWeight.w900,
                                                 fontFamily: "NeueHelvetica",
                                                 fontStyle:  FontStyle.normal,
@@ -113,8 +106,8 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                         alignment: Alignment.topRight,
                                         child: Text(
                                             "+ADD",
-                                            style: const TextStyle(
-                                                color:  const Color(0xffff8819),
+                                            style: TextStyle(
+                                                color:  Color(0xffff8819),
                                                 fontFamily: "Roboto",
                                                 fontStyle:  FontStyle.normal,
                                                 fontSize: 14.0
@@ -129,7 +122,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                   height: 24.h,
                                 ),
 
-                                Divider(
+                                const Divider(
                                   thickness: 1,
                                   height: 1,
                                   color: Color(0xfff4f6f6),
@@ -157,7 +150,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                       ListView.builder(
                                         primary: false,
                                         shrinkWrap: true,
-                                        padding: EdgeInsets.all(0),
+                                        padding: const EdgeInsets.all(0),
                                         itemCount: onDealsModel.length,
                                         itemBuilder: (context, i) => GestureDetector(
                                           onTap: () {
@@ -255,11 +248,11 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
         context: context,
         builder: (ctx) {
           return Container(
-            decoration: new BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: new BorderRadius.only(
-                    topLeft: const Radius.circular(30.0),
-                    topRight: const Radius.circular(30.0))),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0))),
             child: SingleChildScrollView(
               child: Wrap(
                 children: [
@@ -271,7 +264,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
 
@@ -283,10 +276,10 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                     child: Container(
                                         width: 48,
                                         height: 4,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(4)),
-                                            color: const Color(
+                                            color: Color(
                                                 0xff96a6a3))),
                                   ),
                                 ),
@@ -298,11 +291,11 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
 
 
                                 // SPEAKERS
-                                Center(
+                                const Center(
                                   child: Text(
                                       "HOST",
-                                      style: const TextStyle(
-                                          color:  const Color(0xff121212),
+                                      style: TextStyle(
+                                          color:  Color(0xff121212),
                                           fontWeight: FontWeight.w900,
                                           fontFamily: "NeueHelvetica",
                                           fontStyle:  FontStyle.normal,
@@ -315,7 +308,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                   height: 24.h,
                                 ),
 
-                                Divider(
+                                const Divider(
                                   thickness: 1,
                                   height: 1,
                                   color: Color(0xfff4f6f6),
@@ -342,7 +335,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                       ListView.builder(
                                         primary: false,
                                         shrinkWrap: true,
-                                        padding: EdgeInsets.all(0),
+                                        padding: const EdgeInsets.all(0),
                                         itemCount: onDealsModel.length,
                                         itemBuilder: (context, i) => GestureDetector(
                                           onTap: () {
@@ -470,10 +463,10 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.r),
-                            color: Color(0xfff5f5f5),
+                            color: const Color(0xfff5f5f5),
                             border: Border.all(
                               width: 1,
-                              color: Color(0x66f5f5f5)
+                              color: const Color(0x66f5f5f5)
                             ),
                           ),
                           child: Padding(
@@ -486,7 +479,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                 Text(
                                     "Upload image poster",
                                     style:  TextStyle(
-                                        color:   Color(0xff273433),
+                                        color:   const Color(0xff273433),
                                         fontWeight: FontWeight.w900,
                                         fontFamily: "NeueHelvetica",
                                         fontStyle:  FontStyle.normal,
@@ -499,7 +492,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                 Text(
                                     "Max image size is 5 Mb",
                                     style:  TextStyle(
-                                        color:   Color(0xff96a6a3),
+                                        color:   const Color(0xff96a6a3),
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "Roboto",
                                         fontStyle:  FontStyle.normal,
@@ -514,10 +507,10 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                         ),
                         SizedBox(height: 16.h,),
                         // Add more photos
-                        Text(
+                        const Text(
                             "+ Add more photos",
-                            style: const TextStyle(
-                                color:  const Color(0xffff881a),
+                            style: TextStyle(
+                                color:  Color(0xffff881a),
                                 fontFamily: "NeueHelvetica",
                                 fontStyle:  FontStyle.normal,
                                 fontSize: 14.0
@@ -553,7 +546,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                     ),
                                     textAlign: TextAlign.left
                                 ),
-                                Icon(Icons.add,size: 15,color: orange_ff881a,)
+                                const Icon(Icons.add,size: 15,color: orange_ff881a,)
                               ],
                             ),
                           ),
@@ -566,7 +559,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(40),
-                            color: Color(0xffebebeb),
+                            color: const Color(0xffebebeb),
                           ),
                           child: // Frame 8618
 
@@ -594,7 +587,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                     textAlign: TextAlign.left
                                 ),
                                 SizedBox(width: 5.w,),
-                                Icon
+                                const Icon
                                   (Icons.cancel_outlined,size: 12,)
                               ],
                             ),
@@ -629,7 +622,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                     ),
                                     textAlign: TextAlign.left
                                 ),
-                                Icon(Icons.add,size: 15,color: orange_ff881a,)
+                                const Icon(Icons.add,size: 15,color: orange_ff881a,)
                               ],
                             ),
                           ),
@@ -642,7 +635,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(40),
-                            color: Color(0xffebebeb),
+                            color: const Color(0xffebebeb),
                           ),
                           child: // Frame 8618
 
@@ -670,7 +663,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                     textAlign: TextAlign.left
                                 ),
                                 SizedBox(width: 5.w,),
-                                Icon
+                                const Icon
                                   (Icons.cancel_outlined,size: 12,)
                               ],
                             ),

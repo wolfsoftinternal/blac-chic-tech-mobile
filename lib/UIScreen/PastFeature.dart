@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,7 +27,7 @@ class _PastFeatureState extends State<PastFeature> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 height: 500.h,
                 child: Stack(
                   children: [
@@ -84,7 +83,7 @@ class _PastFeatureState extends State<PastFeature> {
                       padding: EdgeInsets.symmetric(horizontal: 17.w),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.r),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [

@@ -1,17 +1,9 @@
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 
 class PostLocation extends StatefulWidget {
@@ -48,14 +40,14 @@ class _PostLocationState extends State<PostLocation> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  SearchBarTag(placeholder: "Search locations"),
+                  const SearchBarTag(placeholder: "Search locations"),
 
                   SizedBox(height: 32.h,),
 
                   ListView.builder(
                     primary: false,
                     shrinkWrap: true,
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     itemCount: onTagPeopleModel.length,
                     itemBuilder: (context, i) => Column(
                       mainAxisAlignment: MainAxisAlignment.start,

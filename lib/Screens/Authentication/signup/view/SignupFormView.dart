@@ -1,14 +1,10 @@
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/SignupController.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
-import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
-import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -216,7 +212,7 @@ class _SignupDetailState extends State<SignupFormView> {
 }
 
 class DialogUtils {
-  static DialogUtils _instance = DialogUtils.internal();
+  static final DialogUtils _instance = DialogUtils.internal();
 
   DialogUtils.internal();
 

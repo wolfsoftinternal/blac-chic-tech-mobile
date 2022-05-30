@@ -1,21 +1,17 @@
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
-import 'package:blackchecktech/Screens/Home/Profile/view/EventDetail.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventListDetail.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
-import 'package:blackchecktech/Utils/internet_connection.dart';
-import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class EventTab extends StatefulWidget {
-  EventTab({Key? key}) : super(key: key);
+  const EventTab({Key? key}) : super(key: key);
 
   @override
   State<EventTab> createState() => _EventTabState();
@@ -30,7 +26,7 @@ class _EventTabState extends State<EventTab> {
       backgroundColor: white_ffffff,
       body: Obx(
         () => controller.eventList.isEmpty
-            ? Container(
+            ? SizedBox(
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,12 +49,12 @@ class _EventTabState extends State<EventTab> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 32,
                       ),
                       setHelceticaBold('Upcomming Events', 14, black_121212,
                           FontWeight.w500, FontStyle.normal, -0.56),
-                      SizedBox(
+                      const SizedBox(
                         height: 32,
                       ),
                       ListView.builder(
@@ -76,15 +72,15 @@ class _EventTabState extends State<EventTab> {
                                 padding: const EdgeInsets.only(bottom: 32.0),
                                 child: Stack(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: MediaQuery.of(context).size.width,
                                       height: 207.h,
                                       child: controller
                                                   .eventList[index].poster ==
                                               null
                                           ? ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  const Radius.circular(5)),
+                                              borderRadius: const BorderRadius.all(
+                                                  Radius.circular(5)),
                                               child: SvgPicture.asset(
                                                 placeholder,
                                                 fit: BoxFit.cover,
@@ -93,8 +89,8 @@ class _EventTabState extends State<EventTab> {
                                               ),
                                             )
                                           : ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  const Radius.circular(5)),
+                                              borderRadius: const BorderRadius.all(
+                                                  Radius.circular(5)),
                                               child: CachedNetworkImage(
                                                 imageUrl: controller
                                                     .eventList[index].poster!,
@@ -127,10 +123,10 @@ class _EventTabState extends State<EventTab> {
                                           padding: const EdgeInsets.only(
                                               top: 8.0, left: 8.0),
                                           child: Container(
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: orange,
                                                 borderRadius: BorderRadius.all(
-                                                    const Radius.circular(40)),
+                                                    Radius.circular(40)),
                                               ),
                                               child: Padding(
                                                 padding:
@@ -152,19 +148,19 @@ class _EventTabState extends State<EventTab> {
                                         child: Container(
                                             height: 35,
                                             width: 133,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               gradient: LinearGradient(colors: [
                                                 Color(0xff1c2535),
                                                 Color(0xff04080f)
                                               ]),
                                               borderRadius: BorderRadius.all(
-                                                  const Radius.circular(4)),
+                                                  Radius.circular(4)),
                                             ),
                                             child: Row(
                                               children: [
-                                                Padding(
+                                                const Padding(
                                                   padding:
-                                                      const EdgeInsets.only(
+                                                      EdgeInsets.only(
                                                           left: 6.0,
                                                           right: 6.0),
                                                   child: Icon(

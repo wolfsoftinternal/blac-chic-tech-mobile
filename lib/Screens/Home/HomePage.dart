@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                       return GestureDetector(
                         onTap: () {
                           if (index == 0) {
-                            Get.to(AdmireProfile());
+                            Get.to(const AdmireProfile());
                           }
                           if(index == 6){
                           Get.to(EventList());

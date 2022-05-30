@@ -1,28 +1,14 @@
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/InputTextLayout.dart';
 import 'package:blackchecktech/Layout/InputTextStatic.dart';
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
-import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:iconly/iconly.dart';
 
 import '../Model/FollowFriendModel.dart';
-import '../Styles/my_strings.dart';
 
 
 class BcConnect extends StatefulWidget {
@@ -45,7 +31,7 @@ class _BcConnectState extends State<BcConnect> {
     FollowFriendModel('assets/images/grid_img_one.png', 'Jessica J'),
   ];
 
-  var _firstnameController = TextEditingController();
+  final _firstnameController = TextEditingController();
 
   bool isFollow = true;
   bool isFollowed = false;
@@ -53,7 +39,7 @@ class _BcConnectState extends State<BcConnect> {
   @override
   Widget build(BuildContext context) {
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarColor:  Colors.white, // navigation bar color
       statusBarColor:  Colors.white, // status bar color
       statusBarIconBrightness: Brightness.dark, // status bar icons' color
@@ -150,7 +136,7 @@ class _BcConnectState extends State<BcConnect> {
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(4.r)
                                 ),
-                                boxShadow: [BoxShadow(
+                                boxShadow: const [BoxShadow(
                                     color:  Color(0x19121212),
                                     offset: Offset(0,30),
                                     blurRadius: 60,
@@ -179,7 +165,7 @@ class _BcConnectState extends State<BcConnect> {
                                         Container(
                                             width: double.infinity,
                                             height: 134.h,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               gradient: LinearGradient(
                                                   begin: Alignment.topCenter,
                                                   end: Alignment.bottomCenter,
@@ -287,16 +273,16 @@ class _BcConnectState extends State<BcConnect> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50.r),
-                                            gradient: LinearGradient(
+                                            gradient: const LinearGradient(
                                                 begin: Alignment.bottomCenter,
                                                 end: Alignment.topCenter,
                                                 colors: [Color(0xff1c2535), Color(0xff04080f)]),
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Color(0x26121212).withOpacity(0.2),
+                                                color: const Color(0x26121212).withOpacity(0.2),
                                                 spreadRadius: 5,
                                                 blurRadius: 7,
-                                                offset: Offset(0, 3), // changes position of shadow
+                                                offset: const Offset(0, 3), // changes position of shadow
                                               ),
                                             ],
                                           ),
@@ -341,7 +327,7 @@ class _BcConnectState extends State<BcConnect> {
                                           borderRadius: BorderRadius.circular(40.r),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Color(0x194343b2).withOpacity(0.15),
+                                              color: const Color(0x194343b2).withOpacity(0.15),
                                               offset: const Offset(
                                                 5.0,
                                                 5.0,

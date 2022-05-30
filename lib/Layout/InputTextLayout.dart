@@ -3,7 +3,6 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:get/get.dart';
 
 class InputTextLayout extends StatefulWidget {
   final String hintData;

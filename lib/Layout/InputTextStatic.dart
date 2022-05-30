@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 import '../Styles/my_icons.dart';
@@ -48,7 +47,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
 
   _InputTextStaicState(String hintData,TextEditingController controller,bool numKeypad,TextInputAction textInputAction,
       TextInputType inputType,){
-    this.hint = hintData;
+    hint = hintData;
     this.controller = controller;
     this.numKeypad = numKeypad;
     this.textInputAction = textInputAction;
@@ -70,7 +69,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
               light_grey_f2f2f2:
               light_grey_f2f2f2,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
             color: checkFillColor == false
                 ? checkColor == true
                 ? Colors.white
@@ -96,7 +95,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
                   ),
 
                   child: TextFormField(
-                    style:  TextStyle(
+                    style:  const TextStyle(
                         color: black_121212,
                         fontFamily: helveticaNeueNeue_medium,
                         fontSize: 14.0
@@ -107,13 +106,13 @@ class _InputTextStaicState extends State<InputTextStaic> {
                       numKeypad== true ? LengthLimitingTextInputFormatter(10) : LengthLimitingTextInputFormatter(200),
                     ],
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                       isDense: true,
                       // you can change this with the top text like you want
                       // labelText: hint,
                       // labelStyle: TextStyle(color: grey_aaaaaa,fontFamily: helveticaNeueNeue_medium,fontSize: 14),
                       hintText: hint,
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                           color: grey_aaaaaa, fontFamily: helveticaNeueNeue_medium,fontSize: 14),
                       border: InputBorder.none,
                       filled: false,
@@ -180,7 +179,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
                         spreadRadius: 6,
                         blurRadius: 10,
                         offset:
-                        Offset(1, 4), // changes position of shadow
+                        const Offset(1, 4), // changes position of shadow
                       ),
                     ],
                   ),
@@ -238,7 +237,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
                     Expanded(
                       flex: 1,
                       child: Container(
-                        padding: EdgeInsets.only(left: 16, right: 10),
+                        padding: const EdgeInsets.only(left: 16, right: 10),
                         decoration: BoxDecoration(
                           color: grey_f5f5f5,
                           borderRadius: BorderRadius.circular(4),
@@ -246,7 +245,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
-                            hint: new Text(
+                            hint: const Text(
                               "Role",
                               style: TextStyle(
                                   color: Colors.black,
@@ -300,7 +299,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
                     Expanded(
                       flex: 1,
                       child: Container(
-                        padding: EdgeInsets.only(left: 16, right: 10),
+                        padding: const EdgeInsets.only(left: 16, right: 10),
                         decoration: BoxDecoration(
                           color: grey_f5f5f5,
                           borderRadius: BorderRadius.circular(4),
@@ -308,7 +307,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
-                            hint: new Text(
+                            hint: const Text(
                               "Industry",
                               style: TextStyle(
                                   color: Colors.black,
@@ -360,8 +359,8 @@ class _InputTextStaicState extends State<InputTextStaic> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: 16, right: 10),
-                margin: EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.only(left: 16, right: 10),
+                margin: const EdgeInsets.only(top: 8),
                 decoration: BoxDecoration(
                   color: grey_f5f5f5,
                   borderRadius: BorderRadius.circular(4),
@@ -369,7 +368,7 @@ class _InputTextStaicState extends State<InputTextStaic> {
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
-                    hint: new Text(
+                    hint: const Text(
                       "Country",
                       style: TextStyle(
                           color: Colors.black,

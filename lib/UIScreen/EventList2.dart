@@ -1,13 +1,8 @@
 import 'package:blackchecktech/Model/EventList2Model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:iconly/iconly.dart';
 
-import '../Layout/BlackButton.dart';
 import '../Layout/InputTextStaticFilter.dart';
 import '../Layout/ToolbarWithHeaderCenterTitle.dart';
 import '../Styles/my_colors.dart';
@@ -32,7 +27,7 @@ class _EventList2State extends State<EventList2> {
 
 
   bool isLayoutFirst = false;
-  var _firstnameController = TextEditingController();
+  final _firstnameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +108,7 @@ class _EventList2State extends State<EventList2> {
                           padding: EdgeInsets.only(bottom: 32.h),
                           child: Stack(
                             children: [
-                              Container(
+                              SizedBox(
                                   width: double.infinity,
                                   height: 207.h,
                                   child: ClipRRect(
@@ -141,14 +136,14 @@ class _EventList2State extends State<EventList2> {
                                             horizontal: 15.w),
                                         height: 26.h,
                                         decoration: BoxDecoration(
-                                          color: Color(0xe6ff881a),
+                                          color: const Color(0xe6ff881a),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(25.r)),
                                         ),
                                         child: Center(
                                           child: Text(
                                             eventList[i].tvPaymentType,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 12,
                                                 color: Colors.white,
                                                 fontFamily: roboto_bold),
@@ -159,7 +154,7 @@ class _EventList2State extends State<EventList2> {
                                         padding: EdgeInsets.only(right: 6.w),
                                           height: 29.h,
                                           decoration: BoxDecoration(
-                                            gradient: LinearGradient(colors: [
+                                            gradient: const LinearGradient(colors: [
                                               Color(0xff1c2535),
                                               Color(0xff04080f)
                                             ]),
@@ -171,7 +166,7 @@ class _EventList2State extends State<EventList2> {
                                               Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 6.0.w, right: 6.0.w),
-                                                child: Icon(
+                                                child: const Icon(
                                                   Icons.person,
                                                   size: 17,
                                                   color: grey_aaaaaa,

@@ -1,7 +1,6 @@
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/CreateEvent.dart';
 import 'package:blackchecktech/Screens/Home/CreatePost/view/CreatPost.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/view/UploadVideoDetail.dart';
-import 'package:blackchecktech/Screens/Home/CreateVideo/view/UploadVideos.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -57,7 +56,7 @@ createBottomSheet(context) {
                             child: InkWell(
                               onTap: () {
                                 Get.back();
-                                Get.to(CreatPost())!.then((value) => {
+                                Get.to(const CreatPost())!.then((value) => {
                                       checkNet(context).then((value) {
                                         controller.postListAPI(context, null);
                                       })
@@ -81,7 +80,7 @@ createBottomSheet(context) {
                             child: InkWell(
                               onTap: () {
                                 Get.back();
-                                Get.to(UploadVideoDetail())!.then((value) => {
+                                Get.to(const UploadVideoDetail())!.then((value) => {
                                       checkNet(context).then((value) {
                                         controller.videoListAPI(context, null);
                                       })
@@ -106,7 +105,7 @@ createBottomSheet(context) {
                             child: InkWell(
                               onTap: () {
                                 Get.back();
-                                Get.to(CreateEvent())!.then((value) => {
+                                Get.to(const CreateEvent())!.then((value) => {
                                       checkNet(context).then((value) {
                                         controller.eventListAPI(context, null);
                                       })

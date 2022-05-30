@@ -1,22 +1,18 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
-import 'package:blackchecktech/Screens/Home/CreateEvent/view/EventLocation.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_height.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utilities/TextfieldUtility.dart';
 import 'package:blackchecktech/Utilities/Validator.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class ConfirmLocation extends StatefulWidget {
-  ConfirmLocation({Key? key}) : super(key: key);
+  const ConfirmLocation({Key? key}) : super(key: key);
 
   @override
   State<ConfirmLocation> createState() => _ConfirmLocationState();
@@ -38,7 +34,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 60,),
+            const SizedBox(height: 60,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -60,7 +56,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                             color: Colors.grey.withOpacity(0.1),
                             spreadRadius: 6,
                             blurRadius: 10,
-                            offset: Offset(1, 4), // changes position of shadow
+                            offset: const Offset(1, 4), // changes position of shadow
                           ),
                         ],
                       ),
@@ -71,8 +67,8 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                     ),
                   ),
                 ),
-                Spacer(),
-                Text('Event Venue Address',
+                const Spacer(),
+                const Text('Event Venue Address',
                     style: TextStyle(
                         color: black_121212,
                         fontWeight: FontWeight.w500,
@@ -80,8 +76,8 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                         fontStyle: FontStyle.normal,
                         fontSize: 16),
                     textAlign: TextAlign.center),
-                    Spacer(),
-                   Container(height: 46, width: 46,)
+                    const Spacer(),
+                   const SizedBox(height: 46, width: 46,)
               ],
             ),
 
@@ -193,7 +189,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                                 ],
                               ),
                             ),
-                            SizedBox(width: 10,),
+                            const SizedBox(width: 10,),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

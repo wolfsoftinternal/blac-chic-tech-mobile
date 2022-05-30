@@ -49,7 +49,7 @@ class _EducationState extends State<EducationInfoFormView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    cards.forEach((element) {
+    for (var element in cards) {
       var university = TextEditingController(text: element);
       var startyear = TextEditingController(text: element);
       var endyear = TextEditingController(text: element);
@@ -57,7 +57,7 @@ class _EducationState extends State<EducationInfoFormView> {
       universityController.add(university);
       startyearController.add(startyear);
       endyearController.add(endyear);
-    });
+    }
   }
 
   @override
@@ -91,9 +91,9 @@ class _EducationState extends State<EducationInfoFormView> {
                     }
                   }
                   if (questionsInfo != "Done") {
-                    Get.offAll(AdditionalQueFormView());
+                    Get.offAll(const AdditionalQueFormView());
                   } else if (lastQuestionsInfo != "Done") {
-                    Get.offAll(AdditionalLastQueView());
+                    Get.offAll(const AdditionalLastQueView());
                   } else {
                     Get.offAll(BottomNavigation());
                   }
@@ -224,7 +224,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                             DateTime?
                                                                 tempPickedDate =
                                                                 DateTime.now();
-                                                            return Container(
+                                                            return SizedBox(
                                                               height: 250.h,
                                                               child: Column(
                                                                 children: <
@@ -242,7 +242,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                           child:
                                                                               CupertinoButton(
                                                                             child:
-                                                                                Text(
+                                                                                const Text(
                                                                               'Cancel',
                                                                               style: TextStyle(color: orange_ff881a),
                                                                             ),
@@ -258,7 +258,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                           child:
                                                                               CupertinoButton(
                                                                             child:
-                                                                                Text('Done', style: TextStyle(color: orange_ff881a)),
+                                                                                const Text('Done', style: TextStyle(color: orange_ff881a)),
                                                                             onPressed:
                                                                                 () {
                                                                               Navigator.of(context).pop(tempPickedDate);
@@ -268,7 +268,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                       ],
                                                                     ),
                                                                   ),
-                                                                  Divider(
+                                                                  const Divider(
                                                                     height: 0,
                                                                     thickness:
                                                                         1,
@@ -373,7 +373,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                   tempPickedDate =
                                                                   DateTime
                                                                       .now();
-                                                              return Container(
+                                                              return SizedBox(
                                                                 height: 250.h,
                                                                 child: Column(
                                                                   children: <
@@ -390,7 +390,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                                 EdgeInsets.only(left: 5.w),
                                                                             child:
                                                                                 CupertinoButton(
-                                                                              child: Text(
+                                                                              child: const Text(
                                                                                 'Cancel',
                                                                                 style: TextStyle(color: orange_ff881a),
                                                                               ),
@@ -404,7 +404,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                                 EdgeInsets.only(right: 5.w),
                                                                             child:
                                                                                 CupertinoButton(
-                                                                              child: Text('Done', style: TextStyle(color: orange_ff881a)),
+                                                                              child: const Text('Done', style: TextStyle(color: orange_ff881a)),
                                                                               onPressed: () {
                                                                                 Navigator.of(context).pop(tempPickedDate);
                                                                               },
@@ -413,7 +413,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                         ],
                                                                       ),
                                                                     ),
-                                                                    Divider(
+                                                                    const Divider(
                                                                       height: 0,
                                                                       thickness:
                                                                           1,
@@ -506,7 +506,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                     child: Center(
                                       child: Text("Delete Last",
                                           style: TextStyle(
-                                              color: Color(0xff121212),
+                                              color: const Color(0xff121212),
                                               fontWeight: FontWeight.w500,
                                               fontFamily: "NeueHelvetica",
                                               fontStyle: FontStyle.normal,
@@ -526,7 +526,7 @@ class _EducationState extends State<EducationInfoFormView> {
                           onTap: () {
                             setState(() {
                               isDeleteLast = true;
-                              cards.forEach((element) {
+                              for (var element in cards) {
                                 var university =
                                     TextEditingController(text: element);
                                 var startyear =
@@ -537,7 +537,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                 universityController.add(university);
                                 startyearController.add(startyear);
                                 endyearController.add(endyear);
-                              });
+                              }
 
                               cards.add("");
                             });
@@ -554,7 +554,7 @@ class _EducationState extends State<EducationInfoFormView> {
                               child: Center(
                                 child: Text("+ Add More",
                                     style: TextStyle(
-                                        color: Color(0xff121212),
+                                        color: const Color(0xff121212),
                                         fontFamily: helvetica_neu_bold,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 12.sp),
