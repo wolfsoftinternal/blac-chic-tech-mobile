@@ -26,6 +26,7 @@ class _DemoState extends State<Demo> {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Stack(
+            alignment: Alignment.bottomCenter,
             children: [
               Container(
                 height: 500,
@@ -64,9 +65,10 @@ class _DemoState extends State<Demo> {
                 ),
               ),
 
-
               Container(
-                margin: EdgeInsets.only(top: 488.h),
+                // margin: EdgeInsets.only(top: 488.h),
+                // transform: Matrix4.translationValues(0,225, 0),
+
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +76,7 @@ class _DemoState extends State<Demo> {
 
                     Container(
                       margin: EdgeInsets.only(right: 24,left: 24),
-                      transform: Matrix4.translationValues(0, -5, 0),
+                      // transform: Matrix4.translationValues(0, -5, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -156,8 +158,6 @@ class _DemoState extends State<Demo> {
                   ],
                 ),
               )
-
-
             ],
           ),
         ),
