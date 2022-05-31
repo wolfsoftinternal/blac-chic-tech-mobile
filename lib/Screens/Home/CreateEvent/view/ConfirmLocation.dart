@@ -31,10 +31,11 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
     return WillPopScope(
       onWillPop: () => _onWillPop(),
       child: Scaffold(
+        backgroundColor: white_ffffff,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 60,),
+             SizedBox(height: 60.h,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -46,8 +47,8 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                       Get.back();
                     },
                     child: Container(
-                      width: 48.r,
-                      height: 48.r,
+                      width: 48.w,
+                      height: 48.h,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10.r),
@@ -77,25 +78,25 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                         fontSize: 16),
                     textAlign: TextAlign.center),
                     const Spacer(),
-                   const SizedBox(height: 46, width: 46,)
+                    SizedBox(height: 46.h, width: 46.w,)
               ],
             ),
 
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                  padding:  EdgeInsets.only(left: 24.w, right: 24.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
+                        padding:  EdgeInsets.only(top: 40.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             setRoboto('LANDMARK', 12.sp, grey_aaaaaa, FontWeight.w900),
                             Padding(
-                              padding: const EdgeInsets.only(top: 14.0),
+                              padding:  EdgeInsets.only(top: 9.h),
                               child: setTextFieldHelveticaMediumOrangeBorder(
                                 controller.landmarkController.value,
                                 "Landmark",
@@ -113,13 +114,13 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
+                        padding:  EdgeInsets.only(top: 16.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             setRoboto('ADDRESS', 12.sp, grey_aaaaaa, FontWeight.w900),
                             Padding(
-                              padding: const EdgeInsets.only(top: 14.0),
+                              padding:  EdgeInsets.only(top: 9.h),
                               child: setTextFieldHelveticaMediumOrangeBorder(
                                 controller.street1Controller.value,
                                 "Address",
@@ -137,13 +138,13 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
+                        padding:  EdgeInsets.only(top: 16.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             setRoboto('ADDRESS 2', 12.sp, grey_aaaaaa, FontWeight.w900),
                             Padding(
-                              padding: const EdgeInsets.only(top: 14.0),
+                              padding:  EdgeInsets.only(top: 9.h),
                               child: setTextFieldHelveticaMediumOrangeBorder(
                                 controller.street2Controller.value,
                                 "Address 2",
@@ -161,7 +162,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
+                        padding:  EdgeInsets.only(top: 16.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,7 +173,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                                 children: [
                                   setRoboto('CITY', 12.sp, grey_aaaaaa, FontWeight.w900),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 14.0),
+                                    padding:  EdgeInsets.only(top: 9.h),
                                     child: setTextFieldHelveticaMediumOrangeBorder(
                                       controller.cityController.value,
                                       "City",
@@ -189,14 +190,14 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                                 ],
                               ),
                             ),
-                            const SizedBox(width: 10,),
+                             SizedBox(width: 16.w,),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   setRoboto('COUNTRY', 12.sp, grey_aaaaaa, FontWeight.w900),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 14.0),
+                                    padding:  EdgeInsets.only(top: 9.h),
                                     child: setTextFieldHelveticaMediumOrangeBorder(
                                       controller.countryController.value,
                                       "Country",
@@ -222,7 +223,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding:  EdgeInsets.all(24.r),
               child: BlackButton(
                 "Save Address",
                 Colors.white,

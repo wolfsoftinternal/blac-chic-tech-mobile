@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,6 +17,9 @@ class PastFeature extends StatefulWidget {
 }
 
 class _PastFeatureState extends State<PastFeature> {
+
+  // Updated
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,12 +27,11 @@ class _PastFeatureState extends State<PastFeature> {
       home: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child:Stack(
+
             children: [
-              SizedBox(
-                height: 500.h,
+              Container(
+                height: 500,
                 child: Stack(
                   children: [
                     ImageFiltered(
@@ -64,88 +67,101 @@ class _PastFeatureState extends State<PastFeature> {
                 ),
               ),
 
-              Container(
-                margin: EdgeInsets.only(right: 24.w,left: 24.w),
-                transform: Matrix4.translationValues(0, -5, 0),
 
-                child: Row(
+              Container(
+                // margin: EdgeInsets.only(top: 488.h),
+                transform: Matrix4.translationValues(0,475, 0),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Text("FADE",style: TextStyle(
-                        fontFamily: helvetica_neu_bold,fontSize: 100.sp,
-                        color: orange_ff881a,letterSpacing: -10,
-                      ),),
-                    ),
+
                     Container(
-                      transform: Matrix4.translationValues(0, -30, 0),
-                      height: 115.h,
-                      padding: EdgeInsets.symmetric(horizontal: 17.w),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r),
-                        gradient: const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color(0x331c2535),
-                            Color(0x4d04080f)
-                          ],
-                          stops: [5.0, 5.0],
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      margin: EdgeInsets.only(right: 24,left: 24),
+                      transform: Matrix4.translationValues(0, -5, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Image.asset(iconly_light_heart,width: 25.w,height: 25.h,),
-                          SizedBox(height: 25.h,),
-                          SvgPicture.asset(icon_share,width: 25.w,height: 25.h,),
+                          Expanded(
+                            child: Text("FADE",style: TextStyle(
+                              fontFamily: helvetica_neu_bold,fontSize: 100.sp,
+                              color: orange_ff881a,letterSpacing: -10,
+                            ),),
+                          ),
+                          Container(
+                            transform: Matrix4.translationValues(0, -30, 0),
+                            height: 115.h,
+                            padding: EdgeInsets.symmetric(horizontal: 17.w),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Color(0x331c2535),
+                                  Color(0x4d04080f)
+                                ],
+                                stops: [5.0, 5.0],
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(iconly_light_heart,width: 25,height: 25,),
+                                SizedBox(height: 25.h,),
+                                SvgPicture.asset(icon_share,width: 25,height: 25,),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
+
+                    Container(
+                      margin: EdgeInsets.only(top: 10.h,left: 24.w,right: 24.w),
+                      child: Text("On Growth Hacking Life , Love & Bookings Africa",style: TextStyle(
+                          fontFamily: helvetica_neu_bold,fontSize: 24.sp,
+                          color: black_121212
+                      ),),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 12.h,left: 24.w,right: 24.w),
+                      child: Text("123 Fade Ogunro - CEO Bookings Africa",style: TextStyle(
+                          fontFamily: poppins_BoldItalic,fontSize: 12.sp,
+                          fontWeight: FontWeight.w700,
+                          fontStyle: FontStyle.italic,
+                          color: orange_ff881a
+                      ),),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w),
+                      child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies ",
+                        style: TextStyle(
+                            height: 1.3,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: roboto_medium,fontSize: 12.sp,
+                            color:opcity_black_B3121212
+                        ),),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 24.w,top: 15.h,bottom: 10.h),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text("See full article",
+                            style: TextStyle(
+                                fontFamily: helvetica_neu_bold,fontSize: 12.sp,
+                                color:black_121212
+                            ),),
+                          SizedBox(width: 6.w,),
+                          SvgPicture.asset(icon_next_arrow,color: black_121212,)
+                        ],),
+                    ),
                   ],
                 ),
-              ),
+              )
 
-              Container(
-                margin: EdgeInsets.only(top: 2.h,left: 24.w,right: 24.w),
-                child: Text("On Growth Hacking Life , Love & Bookings Africa",style: TextStyle(
-                    fontFamily: helvetica_neu_bold,fontSize: 24.sp,
-                    color: black_121212
-                ),),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 12.h,left: 24.w,right: 24.w),
-                child: Text("Fade Ogunro - CEO Bookings Africa",style: TextStyle(
-                    fontFamily: poppins_BoldItalic,fontSize: 12.sp,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.italic,
-                    color: orange_ff881a
-                ),),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w),
-                child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies ",
-                  style: TextStyle(
-                      height: 1.3.h,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: roboto_medium,fontSize: 12.sp,
-                      color:opcity_black_B3121212
-                  ),),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 24.w,top: 10.h,bottom: 10.h),
-                child: Row(mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text("See full article",
-                      style: TextStyle(
-                          fontFamily: helvetica_neu_bold,fontSize: 12.sp,
-                          color:black_121212
-                      ),),
-                    SizedBox(width: 6.w,),
-                    SvgPicture.asset(icon_next_arrow,color: black_121212,)
-                  ],),
-              ),
+
             ],
           ),
         ),

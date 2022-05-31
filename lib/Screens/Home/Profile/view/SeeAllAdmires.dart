@@ -44,8 +44,8 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
       backgroundColor: white_ffffff,
       body: Column(
         children: [
-          const SizedBox(
-            height: 60,
+           SizedBox(
+            height: 60.h,
           ),
           Container(
             child: Row(
@@ -61,7 +61,7 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
                         fontSize: 16.sp),
                     textAlign: TextAlign.center),
                 Padding(
-                    padding: const EdgeInsets.only(right: 24.0),
+                    padding:  EdgeInsets.only(right: 6.w),
                     child: widget.type == 'user'
                         ? InkWell(
                             onTap: () {
@@ -94,7 +94,7 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
             flex: 1,
             child: SingleChildScrollView(
               child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding:  EdgeInsets.all(24.r),
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       if (constraints.maxWidth < 310) {

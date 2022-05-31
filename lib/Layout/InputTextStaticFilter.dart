@@ -273,7 +273,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                         children: [
                           Container(
                             padding: EdgeInsets.only(right: 14.w, left: 35.w),
-                            margin: EdgeInsets.only(left: 0.w, right: 8.w),
+                            margin: EdgeInsets.only(left: 0.w, right: 3.5.w),
                             decoration: BoxDecoration(
                               color: grey_f5f5f5,
                               borderRadius: BorderRadius.circular(4.r),
@@ -334,7 +334,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                       child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: 14.h, horizontal: 15.w),
-                          margin: EdgeInsets.only(left: 8.w, right: 0.w),
+                          margin: EdgeInsets.only(left: 3.5.w, right: 0.w),
                           decoration: BoxDecoration(
                             color: grey_f5f5f5,
                             borderRadius: BorderRadius.circular(4.r),
@@ -394,7 +394,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                   ],
                 ),
                 SizedBox(
-                  height: 12.h,
+                  height: 8.h,
                 ),
                 Stack(
                   children: [
