@@ -54,12 +54,12 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
       mainAxisSpacing: 0,
       crossAxisCount: widget.crossAxisCount,
       childAspectRatio: widget.crossAxisCount == 3
-          ? 0.85
+          ? 0.85.w
           : widget.crossAxisCount == 4
-              ? 0.6
+              ? 0.6.w
               : widget.crossAxisCount == 5
-                  ? 0.75
-                  : 0.9,
+                  ? 0.75.w
+                  : 0.9.w,
       children: widget.type == 'user'
           ? controller.admireList.map((e) => buildItem(e)).toList()
           : controller.otherAdmireList.map((e) => buildItem(e)).toList(),
