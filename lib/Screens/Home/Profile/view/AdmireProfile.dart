@@ -168,69 +168,70 @@ class _AdmireProfileState extends State<AdmireProfile> {
                   ),
                   Padding(
                     padding:
-                         EdgeInsets.only(left: 24.w, right: 24.w, top: 16.h),
+                         EdgeInsets.only( top: 16.h),
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.10,
                       width: double.infinity,
-                      child: ListView.builder(
+                      child: ListView.separated(
                         primary: false,
                         shrinkWrap: true,
+                        separatorBuilder: (context, index) => SizedBox(
+                          width: 16.w,
+                        ),
+                        padding: EdgeInsets.only(left: 24.w, right: 24.w,),
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.admireList.length,
                         itemBuilder: ((context, index) {
-                          return Padding(
-                            padding:  EdgeInsets.only(right: 16.w),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(50),
-                                  child: controller.admireList[index]
-                                              .admireDetails!.image ==
-                                          null
-                                      ? SvgPicture.asset(
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: controller.admireList[index]
+                                            .admireDetails!.image ==
+                                        null
+                                    ? SvgPicture.asset(
+                                        placeholder,
+                                        height: 48.h,
+                                        width: 48.w,
+                                      )
+                                    : CachedNetworkImage(
+                                        imageUrl: controller
+                                            .admireList[index]
+                                            .admireDetails!
+                                            .image!,
+                                  height: 48.h,
+                                  width: 48.w,
+                                        fit: BoxFit.cover,
+                                        progressIndicatorBuilder: (context,
+                                                url, downloadProgress) =>
+                                            SvgPicture.asset(
                                           placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
-                                        )
-                                      : CachedNetworkImage(
-                                          imageUrl: controller
-                                              .admireList[index]
-                                              .admireDetails!
-                                              .image!,
-                                    height: 48.h,
-                                    width: 48.w,
-                                          fit: BoxFit.cover,
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              SvgPicture.asset(
-                                            placeholder,
-                                                height: 48.h,
-                                                width: 48.w,
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              SvgPicture.asset(
-                                            placeholder,
-                                                height: 48.h,
-                                                width: 48.w,
-                                          ),
+                                              height: 48.h,
+                                              width: 48.w,
                                         ),
-                                ),
-                                 SizedBox(
-                                  height: 4.h,
-                                ),
-                                setHelveticaMedium(
-                                    controller.admireList[index]
-                                            .admireDetails!.firstName ??
-                                        "",
-                                    12.sp,
-                                    black_121212,
-                                    FontWeight.w500,
-                                    FontStyle.normal,
-                                    -0.24),
-                              ],
-                            ),
+                                        errorWidget: (context, url, error) =>
+                                            SvgPicture.asset(
+                                          placeholder,
+                                              height: 48.h,
+                                              width: 48.w,
+                                        ),
+                                      ),
+                              ),
+                               SizedBox(
+                                height: 4.h,
+                              ),
+                              setHelveticaMedium(
+                                  controller.admireList[index]
+                                          .admireDetails!.firstName ??
+                                      "",
+                                  12.sp,
+                                  black_121212,
+                                  FontWeight.w500,
+                                  FontStyle.normal,
+                                  -0.24),
+                            ],
                           );
                         }),
                       ),
