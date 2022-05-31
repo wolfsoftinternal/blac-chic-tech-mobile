@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "371494067851",
+    "project_id": "blacktichcheck",
+    "storage_bucket": "blacktichcheck.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371494067851:android:42ee0595dc1ee0cf5bbe8e",
+        "android_client_info": {
+          "package_name": "com.example.blackchecktech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371494067851-mai02lk03pt23137rv244e93uo72922a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ4xZDdJB-VPKo11E4bqVxdIz_TGn8omQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371494067851-mai02lk03pt23137rv244e93uo72922a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
