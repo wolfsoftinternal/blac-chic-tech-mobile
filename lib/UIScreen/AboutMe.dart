@@ -73,7 +73,7 @@ class _AboutMeState extends State<AboutMe> {
                                         _firstnameController,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text
+                                        TextInputType.text, false
                                     )),
                                 SizedBox(
                                   width: 15.w,
@@ -84,7 +84,7 @@ class _AboutMeState extends State<AboutMe> {
                                         _lastnameController,
                                         false,
                                         TextInputAction.done,
-                                        TextInputType.text)),
+                                        TextInputType.text, false)),
                               ],
                             ),
 
@@ -258,7 +258,7 @@ class _AboutMeState extends State<AboutMe> {
                                         _JobfirstnameController,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text
+                                        TextInputType.text, false
                                     )),
                                 SizedBox(
                                   width: 15.w,
@@ -269,7 +269,7 @@ class _AboutMeState extends State<AboutMe> {
                                         _JoblastnameController,
                                         false,
                                         TextInputAction.done,
-                                        TextInputType.text)),
+                                        TextInputType.text, false)),
                               ],
                             ),
 
@@ -463,7 +463,7 @@ class _AboutMeState extends State<AboutMe> {
                                 _SchoolController,
                                 false,
                                 TextInputAction.next,
-                                TextInputType.text
+                                TextInputType.text, false
                             ),
 
                             SizedBox(height: 16.h,),

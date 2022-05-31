@@ -3,6 +3,7 @@
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -140,7 +141,9 @@ class _VideoDetailState extends State<VideoDetail> {
                     ? Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(ProfileSetting());
+                          },
                           child: Container(
                             width: 55.w,
                             height: 55.h,
