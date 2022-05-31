@@ -565,7 +565,7 @@ class _EventDetailState extends State<EventDetail> {
                                     ),
                                     Padding(
                                       padding:
-                                      EdgeInsets.only(right: 8.w),
+                                      EdgeInsets.only(right: 12.w),
                                       child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius:
@@ -640,7 +640,7 @@ class _EventDetailState extends State<EventDetail> {
                                     ),
                                     Padding(
                                       padding:
-                                       EdgeInsets.only(right: 8.w),
+                                       EdgeInsets.only(right: 12.w),
                                       child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius:
@@ -693,8 +693,8 @@ class _EventDetailState extends State<EventDetail> {
                                           if (eventController
                                               .selectedList.isNotEmpty)
                                             SizedBox(
-                                              height: 20.h,
-                                              width: 20.w,
+                                              height: 36.h,
+                                              width: 36.w,
                                               child:
                                               CircularProfileAvatar(
                                                 '',
@@ -725,8 +725,8 @@ class _EventDetailState extends State<EventDetail> {
                                             Positioned(
                                               left: 10.0,
                                               child: SizedBox(
-                                                height: 21,
-                                                width: 21,
+                                                height: 36,
+                                                width: 36,
                                                 child:
                                                 CircularProfileAvatar(
                                                   '',
@@ -760,8 +760,8 @@ class _EventDetailState extends State<EventDetail> {
                                               left: 20.0,
                                               child: SvgPicture.asset(
                                                 black_more_dot_icon,
-                                                width: 23,
-                                                height: 23,
+                                                width: 36,
+                                                height: 36,
                                               ),
                                             )
                                         ],
@@ -776,8 +776,8 @@ class _EventDetailState extends State<EventDetail> {
                                               .toString() +
                                               " People Invited",
                                           14.sp,
-                                          black_121212,
-                                          FontWeight.w900),
+                                          Color(0xff04080f),
+                                          FontWeight.w700),
                                     ),
                                     const Spacer(),
                                     InkWell(
@@ -795,7 +795,7 @@ class _EventDetailState extends State<EventDetail> {
                                             "VIEW",
                                             12.sp,
                                             orange_ff881a,
-                                            FontWeight.w900),
+                                            FontWeight.w700),
                                       ),
                                     ),
                                   ],
@@ -825,7 +825,7 @@ class _EventDetailState extends State<EventDetail> {
                                         child: Text("+ Invite People",
                                             style: TextStyle(
                                                 color: Color(0xff2030be),
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w700,
                                                 fontFamily: roboto_bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 14.sp),
