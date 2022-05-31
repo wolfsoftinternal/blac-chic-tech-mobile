@@ -1,14 +1,10 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Layout/SearchBar.dart';
-import '../Layout/ToolbarBackOnly.dart';
 import '../Model/EventSearchModel.dart';
 import '../Utilities/TextUtilities.dart';
 
@@ -62,7 +58,7 @@ class _EventSearchState extends State<EventSearch> {
                                 color: Colors.grey.withOpacity(0.1),
                                 spreadRadius: 6,
                                 blurRadius: 10,
-                                offset: Offset(1, 4), // changes position of shadow
+                                offset: const Offset(1, 4), // changes position of shadow
                               ),
                             ],
                           ),
@@ -73,13 +69,13 @@ class _EventSearchState extends State<EventSearch> {
                         ),
                       ),
                     ),
-                    Padding(
+                    const Padding(
                       padding:  EdgeInsets.only(top: 15),
                       child: Center(child: // TOPICS
                       Text(
                           "SEARCH",
-                          style: const TextStyle(
-                              color:  const Color(0xff121212),
+                          style: TextStyle(
+                              color:  Color(0xff121212),
                               fontWeight: FontWeight.w900,
                               fontFamily: "NeueHelvetica",
                               fontStyle:  FontStyle.normal,
@@ -107,7 +103,7 @@ class _EventSearchState extends State<EventSearch> {
                           padding: EdgeInsets.only(bottom: 16.h),
                           child: Stack(
                             children: [
-                              Container(
+                              SizedBox(
                                   width: double.infinity,
                                   height: 207.h,
                                   child: ClipRRect(
@@ -128,7 +124,7 @@ class _EventSearchState extends State<EventSearch> {
                                       height: 29.h,
                                       width: 138.w,
                                       decoration: BoxDecoration(
-                                        gradient: LinearGradient(colors: [
+                                        gradient: const LinearGradient(colors: [
                                           Color(0xff1c2535),
                                           Color(0xff04080f)
                                         ]),
@@ -140,7 +136,7 @@ class _EventSearchState extends State<EventSearch> {
                                           Padding(
                                             padding: EdgeInsets.only(
                                                 left: 6.0.w, right: 6.0.w),
-                                            child: Icon(
+                                            child: const Icon(
                                               Icons.person,
                                               size: 17,
                                               color: grey_aaaaaa,

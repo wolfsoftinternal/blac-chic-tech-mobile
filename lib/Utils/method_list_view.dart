@@ -84,7 +84,7 @@ class _MethodListViewState extends State<MethodListView> {
       ).copyWith(bottom: 10.0),
       child: Scrollbar(
         controller: _controller,
-        thumbVisibility: true,
+        // thumbVisibility: true,
         radius: const Radius.circular(999),
         child: ListView.builder(
           controller: _controller,

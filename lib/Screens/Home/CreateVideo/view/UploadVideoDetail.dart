@@ -1,23 +1,15 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/Chip.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
-import 'package:blackchecktech/Layout/ToolbarLocation.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextfieldUtility.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
 import 'package:blackchecktech/Widget/SpinnerDecorationBorder.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -53,11 +45,11 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
         context: context,
         builder: (ctx) {
           return Container(
-            decoration: new BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: new BorderRadius.only(
-                    topLeft: const Radius.circular(30.0),
-                    topRight: const Radius.circular(30.0))),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0))),
             child: SingleChildScrollView(
               child: Wrap(
                 children: [
@@ -69,7 +61,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
 
@@ -81,10 +73,10 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 child: Container(
                                     width: 48,
                                     height: 4,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(4)),
-                                        color: const Color(0xff96a6a3))),
+                                        color: Color(0xff96a6a3))),
                               ),
                             ),
 
@@ -93,10 +85,10 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                             ),
 
                             // SPEAKERS
-                            Center(
+                            const Center(
                               child: Text("SPEAKERS",
-                                  style: const TextStyle(
-                                      color: const Color(0xff121212),
+                                  style: TextStyle(
+                                      color: Color(0xff121212),
                                       fontWeight: FontWeight.w900,
                                       fontFamily: "NeueHelvetica",
                                       fontStyle: FontStyle.normal,
@@ -107,7 +99,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                               height: 24.h,
                             ),
 
-                            Divider(
+                            const Divider(
                               thickness: 1,
                               height: 1,
                               color: Color(0xfff4f6f6),
@@ -138,7 +130,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   ListView.builder(
                                     primary: false,
                                     shrinkWrap: true,
-                                    padding: EdgeInsets.all(0),
+                                    padding: const EdgeInsets.all(0),
                                     itemCount: controller.userList.length,
                                     itemBuilder: (context, i) =>
                                         GestureDetector(
@@ -314,7 +306,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                 Expanded(
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 60,
                       ),
                       ToolbarWithHeaderCenterTitle("UPLOAD VIDEO"),
@@ -380,7 +372,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   decoration: SpinnerDecorationBorder,
                                   child: DropdownButtonHideUnderline(
                                     child: Padding(
-                                      padding: EdgeInsets.only(
+                                      padding: const EdgeInsets.only(
                                         left: 10,
                                         right: 10,
                                       ),
@@ -436,7 +428,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   child: DropdownButtonHideUnderline(
                                     child: Padding(
                                       padding:
-                                          EdgeInsets.only(left: 10, right: 10),
+                                          const EdgeInsets.only(left: 10, right: 10),
                                       child: DropdownButton(
                                           //  validator: (value) => value == null ? "Select a country" : null,
                                           dropdownColor: Colors.white,
@@ -641,12 +633,12 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                       length: controller.tagValues.length,
                                       hasAddButton: true,
                                       resetTextOnSubmitted: true,
-                                      delimiters: [',', ' '],
+                                      delimiters: const [',', ' '],
                                       inputFormatters: <TextInputFormatter>[
                                         FilteringTextInputFormatter.allow(
                                             RegExp(r'^[a-z A-Z]+$')),
                                       ],
-                                      inputDecoration: InputDecoration(
+                                      inputDecoration: const InputDecoration(
                                         border: InputBorder.none,
                                         hintText: 'Tag name',
                                       ),
@@ -713,7 +705,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 12.sp),
                                             textAlign: TextAlign.left),
-                                        Icon(
+                                        const Icon(
                                           Icons.add,
                                           size: 15,
                                           color: orange_ff881a,
@@ -731,7 +723,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
 
                                 controller.selectedList.isEmpty
                                     ? Container()
-                                    : Container(
+                                    : SizedBox(
                                         height: 37.h,
                                         width:
                                             MediaQuery.of(context).size.width,
@@ -854,7 +846,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                                               }
                                                             }
                                                           },
-                                                          child: Icon(
+                                                          child: const Icon(
                                                             Icons
                                                                 .cancel_outlined,
                                                             size: 12,

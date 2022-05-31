@@ -9,11 +9,9 @@ import 'package:http/http.dart' as http;
 
 import '../../../../Model/BaseModel.dart';
 import '../../../../Utils/CommonWidget.dart';
-import '../../../../Utils/GeneralFunctions.dart';
 import '../../../../Utils/preference_utils.dart';
 import '../../../../Utils/share_predata.dart';
 import '../../../Networks/api_endpoint.dart';
-import '../../../Networks/api_response.dart';
 import '../../login/model/SignupModel.dart';
 
 class SignupController extends GetxController {
@@ -52,7 +50,7 @@ class SignupController extends GetxController {
 
           await preferences.setString(SharePreData.keytoken, signUp.data!.token.toString());
 
-          Get.off(PersonalInfoFormView());
+          Get.off(const PersonalInfoFormView());
         }
         else if(model.statusCode==101){
           snackBar(context, model.message!);

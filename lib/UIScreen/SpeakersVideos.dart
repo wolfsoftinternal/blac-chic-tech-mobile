@@ -1,8 +1,6 @@
 import 'package:blackchecktech/Model/SpeakersVideoModel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../Layout/SearchBarWithRightIcon.dart';
 import '../Layout/ToolbarWithHeaderCenterTitle.dart';
@@ -53,7 +51,7 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                           margin: EdgeInsets.only(top: 15.h),
                           child: ToolbarWithHeaderCenterTitle("CLAIRE ROMAN")),
 
-                      SearchBarWithRightIcon(),
+                      const SearchBarWithRightIcon(),
 
                       Container(
                         margin: EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
@@ -65,7 +63,7 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                             itemBuilder: (context, i) {
                               return Padding(
                                 padding: EdgeInsets.only(bottom: 16.h),
-                                child: Container(
+                                child: SizedBox(
                                     width: double.infinity,
                                     child:Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -83,7 +81,7 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                               padding: EdgeInsets.symmetric(vertical: 1.5.h,horizontal: 6.w),
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(4),
-                                                gradient: LinearGradient(
+                                                gradient: const LinearGradient(
                                                   begin: Alignment.topCenter,
                                                   end: Alignment.bottomCenter,
                                                   colors: [
@@ -107,16 +105,16 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                           children: [
                                             SizedBox(height: 3.h,),
 
-                                            Text(speakerVideoList[i].tvHeading,style: TextStyle(
+                                            Text(speakerVideoList[i].tvHeading,style: const TextStyle(
                                                 fontFamily: helvetica_neu_bold,color: black_121212,
                                                 fontSize: 14
                                             ),),
                                             SizedBox(height: 8.h,),
-                                            Text(speakerVideoList[i].tvTitle,style: TextStyle(
+                                            Text(speakerVideoList[i].tvTitle,style: const TextStyle(
                                                 fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
                                                 fontSize: 10),),
                                             SizedBox(height: 2.h,),
-                                            Text(speakerVideoList[i].tvDate,style: TextStyle(
+                                            Text(speakerVideoList[i].tvDate,style: const TextStyle(
                                                 fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
                                                 fontSize: 8),),
 

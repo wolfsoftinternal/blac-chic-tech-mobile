@@ -1,21 +1,14 @@
-import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:get/get.dart';
 
 import 'Layout/BlackNextButton.dart';
 import 'Screens/Authentication/login/view/LoginView.dart';
 import 'Styles/my_strings.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);

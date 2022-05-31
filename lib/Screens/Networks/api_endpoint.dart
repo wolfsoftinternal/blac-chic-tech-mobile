@@ -7,6 +7,7 @@ const urlSignup = '/mobile/register';
 const urlCountryList = '/country-list';
 const urlStateList = '/state-list';
 const urlCityList = '/city-list';
+const urlCityListAll = '/city-list-all';
 const urlPersonalInfo = '/mobile/edit-profile';
 const urlExperienceInfo = '/mobile/experience-edit';
 const urlCompanyList = '/mobile/company-list';
@@ -38,6 +39,8 @@ const urlEventList = '/mobile/event-list';
 const urlEventDetail = '/mobile/event-details';
 const urlCreateEvent = '/mobile/event-create';
 const urlDeleteEvent = '/mobile/event-delete';
+const urlallEventList = '/mobile/home/event-list';
+const urlallEventDetail = '/mobile/home/event-details';
 
 //language
 const urlLanguageList = '/mobile/langauge-list';

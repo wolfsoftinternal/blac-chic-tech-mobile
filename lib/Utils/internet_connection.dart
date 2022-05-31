@@ -10,11 +10,11 @@ Future<bool> checkNet(BuildContext context) async {
       connectivityResult == ConnectivityResult.wifi) {
     // I am connected to a mobile network.
     return true;
-  } else
-    // // I am connected to a wifi network.
+  } else {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text("Check Your Internet Connection"),
     ));
+  }
 
   return false;
 }

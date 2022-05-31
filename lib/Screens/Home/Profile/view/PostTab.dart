@@ -10,7 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class PostTab extends StatefulWidget {
-  PostTab({Key? key}) : super(key: key);
+  const PostTab({Key? key}) : super(key: key);
 
   @override
   State<PostTab> createState() => _PostTabState();
@@ -24,7 +24,7 @@ class _PostTabState extends State<PostTab> {
       backgroundColor: white_ffffff,
       body: Obx(
         () => controller.postList.isEmpty
-        ? Container(
+        ? SizedBox(
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,7 +52,7 @@ class _PostTabState extends State<PostTab> {
                     Container(
                       child: controller.postList[index].image == null
                       ? ClipRRect(
-                        borderRadius: BorderRadius.all(const Radius.circular(5)),
+                        borderRadius: const BorderRadius.all(Radius.circular(5)),
                         child: SvgPicture.asset(
                             placeholder,
                              fit: BoxFit.cover,
@@ -60,7 +60,7 @@ class _PostTabState extends State<PostTab> {
                           ),
                       )
                       : ClipRRect(
-                          borderRadius: BorderRadius.all(const Radius.circular(5)),
+                          borderRadius: const BorderRadius.all(Radius.circular(5)),
                         child: CachedNetworkImage(
                             imageUrl: controller.postList[index].image!,
                             fit: BoxFit.cover,
@@ -92,7 +92,7 @@ class _PostTabState extends State<PostTab> {
                 ),
               ),
               staggeredTileBuilder: (int index) =>
-                  new StaggeredTile.count(2, index.isEven ? 2.6 : 2),
+                  StaggeredTile.count(2, index.isEven ? 2.6 : 2),
               mainAxisSpacing: 8.0,
               crossAxisSpacing: 8.0,
             )

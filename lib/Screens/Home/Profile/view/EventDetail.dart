@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Layout/BlackButton.dart';
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
@@ -23,7 +24,8 @@ import 'package:location/location.dart';
 import 'package:readmore/readmore.dart';
 
 class EventDetail extends StatefulWidget {
-  EventDetail({Key? key}) : super(key: key);
+  final isFrom;
+  const EventDetail({Key? key, this.isFrom}) : super(key: key);
 
   @override
   State<EventDetail> createState() => _EventDetailState();
@@ -109,6 +111,139 @@ class _EventDetailState extends State<EventDetail> {
     });
   }
 
+  displayBottomSheet(category, price){
+    controller.total.value = int.parse(price);
+    showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (ctx) {
+        return Container(
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0))),
+            child: SingleChildScrollView(
+              child: Wrap(
+                children: [
+                  StatefulBuilder(builder: (context, setState) {
+                    return Obx(
+                      () => Column(
+                        children: [
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: 50,
+                                height: 3,
+                                decoration: BoxDecoration(
+                                    color: grey_3f3f3f.withOpacity(0.4),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(50),
+                                    )),
+                              )),
+                          const SizedBox(
+                            height: 23.5,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                            child: setRoboto("CONFIRMATION", 16, black_121212,
+                                FontWeight.w500),
+                          ),
+                          const SizedBox(
+                            height: 23.5,
+                          ),
+                          const Divider(),
+                          const SizedBox(
+                            height: 23.5,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                            child: Column(
+                              children: [
+                                setRoboto("Ticket ${controller.eventDetails.value.title!}", 16, black_121212,
+                                    FontWeight.w900),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: grey_f5f5f5,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 20.0, bottom: 20.0, left: 16.0, right: 16.0),
+                                    child: Row(
+                                      children: [
+                                        setRoboto("$category \$${controller.total.value}", 12, black_121212, FontWeight.w900),
+                                        const Spacer(),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: white_ffffff,
+                                            borderRadius: BorderRadius.circular(5),
+                                          ),                                        
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    setState((){
+                                                      if(controller.count.value != 1){
+                                                        controller.count--;
+                                                      }
+                                                      controller.total.value = controller.count.value * int.parse(price);
+                                                    });
+                                                  },
+                                                  child: const Icon(Icons.remove, color: grey_3f3f3f, size: 12,)
+                                                ),
+                                                const SizedBox(width: 20,),
+                                                setRoboto(controller.count.value.toString(), 12, black_121212, FontWeight.w900),
+                                                const SizedBox(width: 20,),
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    setState((){
+                                                      controller.count++;
+                                                      controller.total.value = controller.count.value * int.parse(price);
+                                                    });
+                                                  },
+                                                  child: const Icon(Icons.add, color: grey_3f3f3f, size: 12,)
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                BlackButton('PAY \$${controller.total.value}', white_ffffff, (){
+                                  checkNet(context).then((value){
+                                    controller.chargeCardAndMakePayment(context);
+                                  });
+                                }),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ));
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,7 +268,7 @@ class _EventDetailState extends State<EventDetail> {
                             alignment: Alignment.topRight,
                             child: PopupMenuButton(
                                 // padding: EdgeInsets.only(bottom: 20),
-                                position: PopupMenuPosition.under,
+                                // position: PopupMenuPosition.under,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
                                 icon: const Icon(Icons.more_horiz,
@@ -185,7 +320,7 @@ class _EventDetailState extends State<EventDetail> {
                   child: controller.eventDetails.value.poster == null
                       ? ClipRRect(
                           borderRadius:
-                              BorderRadius.all(const Radius.circular(5)),
+                              const BorderRadius.all(Radius.circular(5)),
                           child: SvgPicture.asset(
                             placeholder,
                             fit: BoxFit.cover,
@@ -193,7 +328,7 @@ class _EventDetailState extends State<EventDetail> {
                         )
                       : ClipRRect(
                           borderRadius:
-                              BorderRadius.all(const Radius.circular(5)),
+                              const BorderRadius.all(Radius.circular(5)),
                           child: CachedNetworkImage(
                             imageUrl: controller.eventDetails.value.poster!,
                             fit: BoxFit.cover,
@@ -230,11 +365,11 @@ class _EventDetailState extends State<EventDetail> {
                                     black_121212,
                                     FontWeight.w500,
                                     FontStyle.normal),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
-                                Container(
-                                  height: 100,
+                                SizedBox(
+                                  height: 110.h,
                                   width:
                                       MediaQuery.of(context).size.width * 0.60,
                                   child: ListView.builder(
@@ -249,17 +384,16 @@ class _EventDetailState extends State<EventDetail> {
                                           padding:
                                               const EdgeInsets.only(right: 8.0),
                                           child: Container(
-                                            height: 100.h,
-                                            width: 120.w,
+                                            padding: widget.isFrom == 'event' ? const EdgeInsets.only(top: 8, bottom: 8, left: 12, right: 12) : const EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 10.0),
                                             decoration: BoxDecoration(
-                                              color: white_ffffff,
-                                              borderRadius: BorderRadius.circular(8 ),
+                                              color: widget.isFrom == 'event' ? black_121212 : white_ffffff,
+                                              borderRadius: BorderRadius.circular(8),
                                               boxShadow: [
                                               BoxShadow(
                                                 color: black_121212.withOpacity(0.07),
                                                 spreadRadius: 2,
                                                 blurRadius: 10,
-                                                offset: Offset(0, 10),
+                                                offset: const Offset(0, 10),
                                               )]
                                             ),
                                             child: Column(
@@ -274,16 +408,42 @@ class _EventDetailState extends State<EventDetail> {
                                                         .value
                                                         .admissionData![index]
                                                         .category!,
-                                                    18,
-                                                    black_121212,
+                                                    16,
+                                                    widget.isFrom == 'event' ? white_ffffff : black_121212,
                                                     FontWeight.w500,
                                                     FontStyle.normal),
                                                 setHelveticaMedium(
                                                     "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
-                                                    22,
-                                                    orange_ff881a,
+                                                    16,
+                                                    widget.isFrom == 'event' ? white_ffffff : orange_ff881a,
                                                     FontWeight.w500,
                                                     FontStyle.normal),
+                                                widget.isFrom == 'event' ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(top: 8.0),
+                                                  child: GestureDetector(
+                                                    onTap: (){
+                                                      displayBottomSheet(controller.eventDetails.value.admissionData![index].category, controller.eventDetails.value.admissionData![index].price);
+                                                    },
+                                                    child: Container(
+                                                      height: 35.h,
+                                                      width: 90.w,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.circular(4),
+                                                        color: orange_ff881a,
+                                                      ),
+                                                      child: Center(
+                                                        child: setHelveticaMedium(
+                                                            'Buy',
+                                                            16,
+                                                            white_ffffff,
+                                                            FontWeight.w500,
+                                                            FontStyle.normal),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ) : Container(),
                                               ],
                                             ),
                                           ),
@@ -298,10 +458,10 @@ class _EventDetailState extends State<EventDetail> {
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4),
-                                    gradient: LinearGradient(
+                                    gradient: const LinearGradient(
                                         colors: [
-                                          const Color(0xFF1c2535),
-                                          const Color(0xFF04080f),
+                                          Color(0xFF1c2535),
+                                          Color(0xFF04080f),
                                         ],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
@@ -350,10 +510,10 @@ class _EventDetailState extends State<EventDetail> {
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4),
-                                    gradient: LinearGradient(
+                                    gradient: const LinearGradient(
                                         colors: [
-                                          const Color(0xFF1c2535),
-                                          const Color(0xFF04080f),
+                                          Color(0xFF1c2535),
+                                          Color(0xFF04080f),
                                         ],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
@@ -399,6 +559,7 @@ class _EventDetailState extends State<EventDetail> {
                                   )),
                     ),
                     controller.eventDetails.value.type == 'invite_only'
+                      ? widget.isFrom != 'event'
                         ? Column(
                             children: [
                               eventController.selectedList.isNotEmpty
@@ -406,7 +567,7 @@ class _EventDetailState extends State<EventDetail> {
                                       padding: const EdgeInsets.only(top: 24.0),
                                       child: Row(
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             width: eventController
                                                         .selectedList.length ==
                                                     1
@@ -421,8 +582,7 @@ class _EventDetailState extends State<EventDetail> {
                                               alignment: Alignment.centerLeft,
                                               children: <Widget>[
                                                 if (eventController
-                                                        .selectedList.length >=
-                                                    1)
+                                                        .selectedList.isNotEmpty)
                                                   SizedBox(
                                                     height: 20.h,
                                                     width: 20.w,
@@ -510,10 +670,10 @@ class _EventDetailState extends State<EventDetail> {
                                                 black_121212,
                                                 FontWeight.w900),
                                           ),
-                                          Spacer(),
+                                          const Spacer(),
                                           InkWell(
                                             onTap: () {
-                                              Get.to(InvitePeople(
+                                              Get.to(const InvitePeople(
                                                 fromView: true,
                                               ))!
                                                   .then((value) =>
@@ -537,7 +697,7 @@ class _EventDetailState extends State<EventDetail> {
                                 padding: const EdgeInsets.only(top: 24.0),
                                 child: InkWell(
                                   onTap: () {
-                                    Get.to(InvitePeople(
+                                    Get.to(const InvitePeople(
                                       fromView: false,
                                     ))!
                                         .then((value) => setState(() {}));
@@ -567,7 +727,7 @@ class _EventDetailState extends State<EventDetail> {
                                 ),
                               ),
                             ],
-                          )
+                          ) : Container()
                         : Container(),
                     Padding(
                       padding: const EdgeInsets.only(top: 12.0),
@@ -628,7 +788,7 @@ class _EventDetailState extends State<EventDetail> {
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: controller
                                             .eventDetails.value.hosts!.length ==
                                         1
@@ -643,8 +803,7 @@ class _EventDetailState extends State<EventDetail> {
                                   alignment: Alignment.centerLeft,
                                   children: <Widget>[
                                     if (controller
-                                            .eventDetails.value.hosts!.length >=
-                                        1)
+                                            .eventDetails.value.hosts!.isNotEmpty)
                                       SizedBox(
                                         height: 20,
                                         width: 20,
@@ -718,7 +877,7 @@ class _EventDetailState extends State<EventDetail> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 2),
-                                child: Container(
+                                child: SizedBox(
                                   height: 20,
                                   width:
                                       MediaQuery.of(context).size.width * 0.50,
@@ -771,7 +930,7 @@ class _EventDetailState extends State<EventDetail> {
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: controller.eventDetails.value.speakers!
                                             .length ==
                                         1
@@ -785,9 +944,7 @@ class _EventDetailState extends State<EventDetail> {
                                 child: Stack(
                                   alignment: Alignment.centerLeft,
                                   children: <Widget>[
-                                    if (controller.eventDetails.value.speakers!
-                                            .length >=
-                                        1)
+                                    if (controller.eventDetails.value.speakers!.isNotEmpty)
                                       SizedBox(
                                         height: 20,
                                         width: 20,
@@ -864,7 +1021,7 @@ class _EventDetailState extends State<EventDetail> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 2),
-                                child: Container(
+                                child: SizedBox(
                                   height: 20,
                                   width:
                                       MediaQuery.of(context).size.width * 0.50,
@@ -882,8 +1039,8 @@ class _EventDetailState extends State<EventDetail> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            setHelceticaBold(
-                                                "@${controller.eventDetails.value.speakers![index].userName!}",
+                                            setHelceticaBold(controller.eventDetails.value.speakers![index].userName != null
+                                                ? "@${controller.eventDetails.value.speakers![index].userName!}" : "@${controller.eventDetails.value.speakers![index].firstName!}",
                                                 14,
                                                 black_121212,
                                                 FontWeight.w500,
@@ -911,8 +1068,8 @@ class _EventDetailState extends State<EventDetail> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
+              const Padding(
+                padding: EdgeInsets.only(left: 15, right: 15),
                 child: Divider(
                   color: grey_aaaaaa,
                 ),
@@ -952,8 +1109,8 @@ class _EventDetailState extends State<EventDetail> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25, left: 15, right: 15),
+              const Padding(
+                padding: EdgeInsets.only(top: 25, left: 15, right: 15),
                 child: Divider(
                   color: grey_aaaaaa,
                 ),
@@ -973,7 +1130,7 @@ class _EventDetailState extends State<EventDetail> {
                   trimCollapsedText: '  Read More',
                   trimExpandedText: '  Read Less',
                   delimiter: '',
-                  style: TextStyle(
+                  style: const TextStyle(
                       height: 1.5,
                       fontFamily: helveticaNeueNeue_medium,
                       fontSize: 16,
@@ -989,8 +1146,8 @@ class _EventDetailState extends State<EventDetail> {
                 padding: const EdgeInsets.only(top: 15.0, left: 24, right: 24),
                 child: Container(
                   height: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(30)),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
                   ),
                   child: GoogleMap(
                     initialCameraPosition:
@@ -1016,10 +1173,10 @@ class _EventDetailState extends State<EventDetail> {
                         width: MediaQuery.of(context).size.width,
                         decoration:
                           BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                                         colors: [
-                                          const Color(0xFF1c2535),
-                                          const Color(0xFF04080f),
+                                          Color(0xFF1c2535),
+                                          Color(0xFF04080f),
                                         ],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
@@ -1032,7 +1189,7 @@ class _EventDetailState extends State<EventDetail> {
                                 color: black_121212.withOpacity(0.07),
                                 spreadRadius: 8,
                                 blurRadius: 10,
-                                offset: Offset(-2, 8),
+                                offset: const Offset(-2, 8),
                               )
                             ]
                           ),

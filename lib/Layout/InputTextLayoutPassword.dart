@@ -95,6 +95,7 @@ class _TextInputState extends State<InputTextLayoutPassword> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (v) {
             widget.validator != null ? widget.validator(v) : print(v);
+            return null;
           },
           textInputAction: widget.textInputAction,
           controller: widget.inputData,

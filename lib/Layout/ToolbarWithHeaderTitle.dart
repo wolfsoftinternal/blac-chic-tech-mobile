@@ -2,8 +2,6 @@ import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class ToolbarWithHeaderTitle extends StatelessWidget {
   String? title;
@@ -22,7 +20,7 @@ class ToolbarWithHeaderTitle extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(title!,
-                style: TextStyle(
+                style: const TextStyle(
                     color: black_121212,
                     fontWeight: FontWeight.w500,
                     fontFamily: helvetica_neu_bold,

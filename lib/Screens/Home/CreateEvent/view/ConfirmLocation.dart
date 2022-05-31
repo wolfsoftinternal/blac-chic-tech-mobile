@@ -1,22 +1,18 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
-import 'package:blackchecktech/Screens/Home/CreateEvent/view/EventLocation.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_height.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utilities/TextfieldUtility.dart';
 import 'package:blackchecktech/Utilities/Validator.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class ConfirmLocation extends StatefulWidget {
-  ConfirmLocation({Key? key}) : super(key: key);
+  const ConfirmLocation({Key? key}) : super(key: key);
 
   @override
   State<ConfirmLocation> createState() => _ConfirmLocationState();
@@ -35,10 +31,11 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
     return WillPopScope(
       onWillPop: () => _onWillPop(),
       child: Scaffold(
+        backgroundColor: white_ffffff,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 60,),
+             SizedBox(height: 60.h,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -50,8 +47,8 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                       Get.back();
                     },
                     child: Container(
-                      width: 48.r,
-                      height: 48.r,
+                      width: 48.w,
+                      height: 48.h,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10.r),
@@ -60,7 +57,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                             color: Colors.grey.withOpacity(0.1),
                             spreadRadius: 6,
                             blurRadius: 10,
-                            offset: Offset(1, 4), // changes position of shadow
+                            offset: const Offset(1, 4), // changes position of shadow
                           ),
                         ],
                       ),
@@ -71,8 +68,8 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                     ),
                   ),
                 ),
-                Spacer(),
-                Text('Event Venue Address',
+                const Spacer(),
+                const Text('Event Venue Address',
                     style: TextStyle(
                         color: black_121212,
                         fontWeight: FontWeight.w500,
@@ -80,26 +77,26 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                         fontStyle: FontStyle.normal,
                         fontSize: 16),
                     textAlign: TextAlign.center),
-                    Spacer(),
-                   Container(height: 46, width: 46,)
+                    const Spacer(),
+                    SizedBox(height: 46.h, width: 46.w,)
               ],
             ),
 
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                  padding:  EdgeInsets.only(left: 24.w, right: 24.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
+                        padding:  EdgeInsets.only(top: 40.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             setRoboto('LANDMARK', 12.sp, grey_aaaaaa, FontWeight.w900),
                             Padding(
-                              padding: const EdgeInsets.only(top: 14.0),
+                              padding:  EdgeInsets.only(top: 9.h),
                               child: setTextFieldHelveticaMediumOrangeBorder(
                                 controller.landmarkController.value,
                                 "Landmark",
@@ -117,13 +114,13 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
+                        padding:  EdgeInsets.only(top: 16.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             setRoboto('ADDRESS', 12.sp, grey_aaaaaa, FontWeight.w900),
                             Padding(
-                              padding: const EdgeInsets.only(top: 14.0),
+                              padding:  EdgeInsets.only(top: 9.h),
                               child: setTextFieldHelveticaMediumOrangeBorder(
                                 controller.street1Controller.value,
                                 "Address",
@@ -141,13 +138,13 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
+                        padding:  EdgeInsets.only(top: 16.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             setRoboto('ADDRESS 2', 12.sp, grey_aaaaaa, FontWeight.w900),
                             Padding(
-                              padding: const EdgeInsets.only(top: 14.0),
+                              padding:  EdgeInsets.only(top: 9.h),
                               child: setTextFieldHelveticaMediumOrangeBorder(
                                 controller.street2Controller.value,
                                 "Address 2",
@@ -165,7 +162,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
+                        padding:  EdgeInsets.only(top: 16.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +173,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                                 children: [
                                   setRoboto('CITY', 12.sp, grey_aaaaaa, FontWeight.w900),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 14.0),
+                                    padding:  EdgeInsets.only(top: 9.h),
                                     child: setTextFieldHelveticaMediumOrangeBorder(
                                       controller.cityController.value,
                                       "City",
@@ -193,14 +190,14 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                                 ],
                               ),
                             ),
-                            SizedBox(width: 10,),
+                             SizedBox(width: 16.w,),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   setRoboto('COUNTRY', 12.sp, grey_aaaaaa, FontWeight.w900),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 14.0),
+                                    padding:  EdgeInsets.only(top: 9.h),
                                     child: setTextFieldHelveticaMediumOrangeBorder(
                                       controller.countryController.value,
                                       "Country",
@@ -226,7 +223,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding:  EdgeInsets.all(24.r),
               child: BlackButton(
                 "Save Address",
                 Colors.white,

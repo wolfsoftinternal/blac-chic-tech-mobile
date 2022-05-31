@@ -1,8 +1,6 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:iconly/iconly.dart';
 
 class SearchBarTag extends StatelessWidget {

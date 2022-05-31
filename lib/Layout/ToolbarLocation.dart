@@ -1,18 +1,16 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'ToolbarBackOnly.dart';
 
 
 
 ToolbarLocation(BuildContext context,String title,String subtitle){
   return PreferredSize(
-      preferredSize: Size.fromHeight(60.0),
+      preferredSize: const Size.fromHeight(60.0),
       child: Padding(
         padding: const EdgeInsets.only(left: 16,right: 22),
         child: Container(
@@ -60,7 +58,7 @@ ToolbarLocation(BuildContext context,String title,String subtitle){
 
               Text(
                  title,
-                  style:  TextStyle(
+                  style:  const TextStyle(
                       color: black_121212,
                     /*  fontWeight: FontWeight.w700,*//*akib changes*/
                       fontFamily: helvetica_neu_bold,/*akib changes*/

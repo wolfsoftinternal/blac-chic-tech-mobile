@@ -1,9 +1,7 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
-import 'package:blackchecktech/Screens/Authentication/login/view/LoginView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
-import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -14,10 +12,8 @@ import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../Layout/BlackButtonDialog.dart';
 import '../../../../Styles/my_strings.dart';
 import '../../../../Widget/EditTextDecoration.dart';
-import 'AdditionalQueFormView.dart';
 
 class AdditionalLastQueView extends StatefulWidget {
   const AdditionalLastQueView({Key? key}) : super(key: key);
@@ -141,7 +137,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                                 // Minimal in 10 word
                                 Text("Minimal in 10 word",
                                     style:  TextStyle(
-                                        color:  Color(0xff121212),
+                                        color:  const Color(0xff121212),
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "NeueHelvetica",
                                         fontStyle: FontStyle.normal,

@@ -25,7 +25,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class CreateEvent extends StatefulWidget {
-  CreateEvent({Key? key}) : super(key: key);
+  const CreateEvent({Key? key}) : super(key: key);
 
   @override
   State<CreateEvent> createState() => _CreateEventState();
@@ -93,7 +93,7 @@ class _CreateEventState extends State<CreateEvent> {
     categoryController.add("Premium");
     List<TextEditingController> beneController = [];
     benefitController.add(beneController);
-    cardsTicketPrice.forEach((element) {
+    for (var element in cardsTicketPrice) {
       var ticketCategoryController = element;
       var ticketAmountController = TextEditingController(text: element);
       var ticketBeneController = TextEditingController(text: element);
@@ -106,7 +106,7 @@ class _CreateEventState extends State<CreateEvent> {
         var benefitsController = TextEditingController(text: element);
         benefitController[0][0] = benefitsController;
       }
-    });
+    }
     checkNet(context).then((value) {
       videoController.userListAPI(context, '');
     });
@@ -115,6 +115,7 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: white_ffffff,
       body: Obx(
         () => Stack(
           alignment: Alignment.bottomCenter,
@@ -125,7 +126,7 @@ class _CreateEventState extends State<CreateEvent> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 60,
+                        height: 60.h,
                       ),
                       ToolbarWithHeaderCenterTitle('CREATE EVENT'),
                       Expanded(
@@ -139,12 +140,12 @@ class _CreateEventState extends State<CreateEvent> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 40.0),
+                                    padding:  EdgeInsets.only(top: 40.h),
                                     child: setRoboto('EVENT TITLE', 12.sp,
                                         grey_aaaaaa, FontWeight.w900),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 14.0),
+                                    padding:  EdgeInsets.only(top: 14.h),
                                     child:
                                         setTextFieldHelveticaMediumOrangeBorder(
                                             controller.titleController.value,
@@ -159,7 +160,7 @@ class _CreateEventState extends State<CreateEvent> {
                                             false),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 24.0),
+                                    padding:  EdgeInsets.only(top: 16.h),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -174,8 +175,8 @@ class _CreateEventState extends State<CreateEvent> {
                                               setRoboto('START DATE', 12.sp,
                                                   grey_aaaaaa, FontWeight.w900),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 14.0),
+                                                padding:  EdgeInsets.only(
+                                                    top: 8.h),
                                                 child:
                                                     setTextFieldHelveticaMediumOrangeBorder(
                                                         controller
@@ -197,7 +198,7 @@ class _CreateEventState extends State<CreateEvent> {
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 10,
+                                          width: 16.w,
                                         ),
                                         Expanded(
                                           child: Column(
@@ -207,8 +208,8 @@ class _CreateEventState extends State<CreateEvent> {
                                               setRoboto('END DATE', 12.sp,
                                                   grey_aaaaaa, FontWeight.w900),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 14.0),
+                                                padding:  EdgeInsets.only(
+                                                    top: 8.h),
                                                 child:
                                                     setTextFieldHelveticaMediumOrangeBorder(
                                                         controller
@@ -233,12 +234,12 @@ class _CreateEventState extends State<CreateEvent> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 24.0),
+                                    padding:  EdgeInsets.only(top: 16.h),
                                     child: setRoboto('START TIME', 12.sp,
                                         grey_aaaaaa, FontWeight.w900),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 14.0),
+                                    padding:  EdgeInsets.only(top: 8.h),
                                     child:
                                         setTextFieldHelveticaMediumOrangeBorder(
                                             controller
@@ -265,12 +266,12 @@ class _CreateEventState extends State<CreateEvent> {
                                     }),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 24.0),
+                                    padding: EdgeInsets.only(top: 16.h),
                                     child: setRoboto('VENUE', 12.sp,
                                         grey_aaaaaa, FontWeight.w900),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 14.0),
+                                    padding:  EdgeInsets.only(top: 8.h),
                                     child:
                                         setTextFieldHelveticaMediumOrangeBorder(
                                       controller.venueController.value,
@@ -286,12 +287,12 @@ class _CreateEventState extends State<CreateEvent> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 24.0),
+                                    padding:  EdgeInsets.only(top: 16.h),
                                     child: setRoboto('ADDRESS', 12.sp,
                                         grey_aaaaaa, FontWeight.w900),
                                   ),
                                   Padding(
-                                      padding: const EdgeInsets.only(top: 14.0),
+                                      padding:  EdgeInsets.only(top: 8.h),
                                       child: TextFormField(
                                         controller:
                                             controller.addressController.value,
@@ -351,7 +352,7 @@ class _CreateEventState extends State<CreateEvent> {
                                         },
                                       )),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 24.0),
+                                    padding:  EdgeInsets.only(top: 16.h),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -366,8 +367,8 @@ class _CreateEventState extends State<CreateEvent> {
                                               setRoboto('CITY', 12.sp,
                                                   grey_aaaaaa, FontWeight.w900),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 14.0),
+                                                padding:  EdgeInsets.only(
+                                                    top: 8.h),
                                                 child:
                                                     setTextFieldHelveticaMediumOrangeBorder(
                                                   controller
@@ -387,7 +388,7 @@ class _CreateEventState extends State<CreateEvent> {
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 10,
+                                          width: 16.w,
                                         ),
                                         Expanded(
                                           child: Column(
@@ -397,8 +398,8 @@ class _CreateEventState extends State<CreateEvent> {
                                               setRoboto('COUNTRY', 12.sp,
                                                   grey_aaaaaa, FontWeight.w900),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 14.0),
+                                                padding:  EdgeInsets.only(
+                                                    top: 8.h),
                                                 child:
                                                     setTextFieldHelveticaMediumOrangeBorder(
                                                         controller
@@ -421,12 +422,12 @@ class _CreateEventState extends State<CreateEvent> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 24.0),
+                                    padding:  EdgeInsets.only(top: 16.h),
                                     child: setRoboto('ADMISSION OPTIONS', 12.sp,
                                         grey_aaaaaa, FontWeight.w900),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 14.0),
+                                    padding:  EdgeInsets.only(top: 18.h),
                                     child: Row(
                                       children: [
                                         InkWell(
@@ -444,8 +445,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   beneController = [];
                                               benefitController
                                                   .add(beneController);
-                                              cardsTicketPrice
-                                                  .forEach((element) {
+                                              for (var element in cardsTicketPrice) {
                                                 var ticketCategoryController =
                                                     element;
                                                 var ticketAmountController =
@@ -469,7 +469,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   benefitController[0][0] =
                                                       benefitsController;
                                                 }
-                                              });
+                                              }
                                             });
                                           },
                                           child: Container(
@@ -510,7 +510,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                       color: Colors.white,
                                                     )),
                                         ),
-                                        SizedBox(width: 8.0),
+                                        SizedBox(width: 8.w),
                                         setRoboto(
                                             'Ticket Price',
                                             12.sp,
@@ -532,8 +532,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   beneController = [];
                                               benefitController
                                                   .add(beneController);
-                                              cardsTicketPrice
-                                                  .forEach((element) {
+                                              for (var element in cardsTicketPrice) {
                                                 var ticketBeneController =
                                                     TextEditingController(
                                                         text: element);
@@ -547,7 +546,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   benefitController[0][0] =
                                                       benefitsController;
                                                 }
-                                              });
+                                              }
                                             });
                                           },
                                           child: Container(
@@ -610,8 +609,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   beneController = [];
                                               benefitController
                                                   .add(beneController);
-                                              cardsTicketPrice
-                                                  .forEach((element) {
+                                              for (var element in cardsTicketPrice) {
                                                 var ticketBeneController =
                                                     TextEditingController(
                                                         text: element);
@@ -625,7 +623,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                   benefitController[0][0] =
                                                       benefitsController;
                                                 }
-                                              });
+                                              }
                                             });
                                           },
                                           child: Container(
@@ -701,8 +699,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                     0
                                                 ? Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            top: 24.0),
+                                                         EdgeInsets.only(
+                                                            top: 24.h),
                                                     child: Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -715,9 +713,9 @@ class _CreateEventState extends State<CreateEvent> {
                                                             FontWeight.w900),
                                                         Padding(
                                                           padding:
-                                                              const EdgeInsets
+                                                               EdgeInsets
                                                                       .only(
-                                                                  top: 14.0),
+                                                                  top: 14.h),
                                                           child: Container(
                                                             height: 48.h,
                                                             width:
@@ -730,8 +728,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                                 padding:
                                                                     EdgeInsets
                                                                         .only(
-                                                                  left: 10,
-                                                                  right: 10,
+                                                                  left: 10.w,
+                                                                  right: 10.w,
                                                                 ),
                                                                 child: DropdownButton<
                                                                         String>(
@@ -779,7 +777,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 24,
+                                                          height: 24.h,
                                                         ),
                                                         setRoboto(
                                                             'AMOUNT',
@@ -798,8 +796,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   .start,
                                                           children: [
                                                             Container(
-                                                              width: 48.w,
-                                                              height: 48.h,
+                                                              width: 49.w,
+                                                              height: 49.h,
                                                               decoration:
                                                                   BoxDecoration(
                                                                 color:
@@ -941,7 +939,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                           24.0),
                                                                   child: Row(
                                                                     children: [
-                                                                      Container(
+                                                                      SizedBox(
                                                                         width: controller.selectedList.length ==
                                                                                 1
                                                                             ? 25
@@ -956,8 +954,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                               Alignment.centerLeft,
                                                                           children: <
                                                                               Widget>[
-                                                                            if (controller.selectedList.length >=
-                                                                                1)
+                                                                            if (controller.selectedList.isNotEmpty)
                                                                               SizedBox(
                                                                                 height: 20.h,
                                                                                 width: 20.w,
@@ -1339,8 +1336,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                       text: ''));
                                               benefitController
                                                   .add(beneController);
-                                              cardsTicketPrice
-                                                  .forEach((element) {
+                                              for (var element in cardsTicketPrice) {
                                                 var ticketCategoryController =
                                                     element;
                                                 var ticketAmountController =
@@ -1372,7 +1368,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                         benefitsController);
                                                   }
                                                 }
-                                              });
+                                              }
                                               cardsTicketPrice.add("");
                                             });
                                           },
@@ -1476,7 +1472,7 @@ class _CreateEventState extends State<CreateEvent> {
       context: context,
       builder: (context) {
         DateTime? tempPickedDate = DateTime.now();
-        return Container(
+        return SizedBox(
           height: 250.h,
           child: Column(
             children: <Widget>[
@@ -1543,7 +1539,7 @@ class _CreateEventState extends State<CreateEvent> {
       context: context,
       builder: (context) {
         DateTime? tempPickedDate = DateTime.now();
-        return Container(
+        return SizedBox(
           height: 250.h,
           child: Column(
             children: <Widget>[

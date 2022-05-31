@@ -4,7 +4,6 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class ToolbarWithHeaderAction extends StatelessWidget {
   String? title;
@@ -46,7 +45,7 @@ class ToolbarWithHeaderAction extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.1),
                     spreadRadius: 6,
                     blurRadius: 10,
-                    offset: Offset(1, 4), // changes position of shadow
+                    offset: const Offset(1, 4), // changes position of shadow
                   ),
                 ],
               ),

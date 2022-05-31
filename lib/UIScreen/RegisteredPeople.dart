@@ -1,19 +1,9 @@
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 
 class RegisteredPeople extends StatefulWidget {
@@ -60,10 +50,10 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4.r),
-                            color: Color(0xfff5f5f5)
+                            color: const Color(0xfff5f5f5)
                           ),
                           child: Padding(
-                            padding:  EdgeInsets.all(14.0),
+                            padding:  const EdgeInsets.all(14.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +77,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                     Text(
                                         "\$15",
                                         style:  TextStyle(
-                                            color:   Color(0xffaaaaaa),
+                                            color:   const Color(0xffaaaaaa),
                                             fontWeight: FontWeight.w400,
                                             fontFamily: "Roboto",
                                             fontStyle:  FontStyle.normal,
@@ -102,7 +92,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                 Text(
                                     "111 Sold",
                                     style:  TextStyle(
-                                        color:   Color(0xff0a84ff),
+                                        color:   const Color(0xff0a84ff),
                                         fontWeight: FontWeight.w600,
                                         fontFamily: "Roboto",
                                         fontStyle:  FontStyle.normal,
@@ -133,10 +123,10 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.r),
-                              color: Color(0xfff5f5f5)
+                              color: const Color(0xfff5f5f5)
                           ),
                           child: Padding(
-                            padding:  EdgeInsets.all(14.0),
+                            padding:  const EdgeInsets.all(14.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +150,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                     Text(
                                         "\$15",
                                         style:  TextStyle(
-                                            color:   Color(0xffaaaaaa),
+                                            color:   const Color(0xffaaaaaa),
                                             fontWeight: FontWeight.w400,
                                             fontFamily: "Roboto",
                                             fontStyle:  FontStyle.normal,
@@ -175,7 +165,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                 Text(
                                     "111 Sold",
                                     style:  TextStyle(
-                                        color:   Color(0xff0a84ff),
+                                        color:   const Color(0xff0a84ff),
                                         fontWeight: FontWeight.w600,
                                         fontFamily: "Roboto",
                                         fontStyle:  FontStyle.normal,
@@ -213,10 +203,10 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.r),
-                              color: Color(0xfff5f5f5)
+                              color: const Color(0xfff5f5f5)
                           ),
                           child: Padding(
-                            padding:  EdgeInsets.all(14.0),
+                            padding:  const EdgeInsets.all(14.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,7 +230,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                     Text(
                                         "\$15",
                                         style:  TextStyle(
-                                            color:   Color(0xffaaaaaa),
+                                            color:   const Color(0xffaaaaaa),
                                             fontWeight: FontWeight.w400,
                                             fontFamily: "Roboto",
                                             fontStyle:  FontStyle.normal,
@@ -255,7 +245,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                 Text(
                                     "111 Sold",
                                     style:  TextStyle(
-                                        color:   Color(0xff0a84ff),
+                                        color:   const Color(0xff0a84ff),
                                         fontWeight: FontWeight.w600,
                                         fontFamily: "Roboto",
                                         fontStyle:  FontStyle.normal,
@@ -320,7 +310,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                   ListView.builder(
                     primary: false,
                     shrinkWrap: true,
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     itemCount: onTagPeopleModel.length,
                     itemBuilder: (context, i) => Padding(
                       padding:  EdgeInsets.only(bottom: 16.h),
@@ -368,10 +358,10 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                   ),
                                   SizedBox(height: 2.h,),
                                   // 12 Jun 2020, 110:00 AM
-                                  Text(
+                                  const Text(
                                       "12 Jun 2020, 110:00 AM",
-                                      style: const TextStyle(
-                                          color:  const Color(0xffaaaaaa),
+                                      style: TextStyle(
+                                          color:  Color(0xffaaaaaa),
                                           fontWeight: FontWeight.w400,
                                           fontFamily: "Roboto",
                                           fontStyle:  FontStyle.normal,

@@ -43,7 +43,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    cards.forEach((element) {
+    for (var element in cards) {
       var titleController = TextEditingController(text: element);
       var nameController = TextEditingController(text: element);
       var websiteController = TextEditingController(text: element);
@@ -51,7 +51,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
       pastCompanyTitleController.add(titleController);
       pastCompanyNameController.add(nameController);
       pastCompanyWebsiteController.add(websiteController);
-    });
+    }
   }
 
   @override
@@ -86,7 +86,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                       }
                     }
                     if (lastQuestionsInfo != "Done") {
-                      Get.to(AdditionalLastQueView());
+                      Get.to(const AdditionalLastQueView());
                     } else {
                       Get.offAll(BottomNavigation());
                     }
@@ -204,7 +204,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                       padding: EdgeInsets.all(5.r),
                                       child: GestureDetector(
                                           onTap: () {
-                                            Get.to(CompanyList());
+                                            Get.to(const CompanyList());
                                           },
                                           child: Text(
                                             controller.companyName.value,
@@ -249,7 +249,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         height: 16.h,
                       ),
 
-                      Container(
+                      SizedBox(
                         height: HeightData.fifty_seven,
                         width: MediaQuery.of(context).size.width,
                         child: Center(
@@ -286,7 +286,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                       // you can add more then one.
                       Text("you can add more then one.",
                           style: TextStyle(
-                              color: Color(0xffaaaaaa),
+                              color: const Color(0xffaaaaaa),
                               fontWeight: FontWeight.w500,
                               fontFamily: "NeueHelvetica",
                               fontStyle: FontStyle.normal,
@@ -394,7 +394,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                       child: Center(
                                         child: Text("Delete Last",
                                             style: TextStyle(
-                                                color: Color(0xff121212),
+                                                color: const Color(0xff121212),
                                                 fontWeight: FontWeight.w500,
                                                 fontFamily: "NeueHelvetica",
                                                 fontStyle: FontStyle.normal,
@@ -414,7 +414,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                             onTap: () {
                               setState(() {
                                 isDeleteLast = true;
-                                cards.forEach((element) {
+                                for (var element in cards) {
                                   var titleController =
                                       TextEditingController(text: element);
                                   var nameController =
@@ -431,7 +431,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                   if (element.toString() == "") {
                                     pastCompanyTitleController.remove(element);
                                   }
-                                });
+                                }
                                 cards.add("");
                               });
                             },
@@ -447,7 +447,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                 child: Center(
                                   child: Text("+ Add More",
                                       style: TextStyle(
-                                          color: Color(0xff121212),
+                                          color: const Color(0xff121212),
                                           fontWeight: FontWeight.w500,
                                           fontFamily: "NeueHelvetica",
                                           fontStyle: FontStyle.normal,

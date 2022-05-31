@@ -1,20 +1,16 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:blackchecktech/Model/BaseModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
-import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Networks/api_endpoint.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
-import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../Networks/api_response.dart';
 
 class PostController extends GetxController {
   Rx<TextEditingController> captionController = TextEditingController().obs;

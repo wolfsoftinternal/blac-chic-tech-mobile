@@ -1,16 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:async';
 import 'dart:io';
 
 import 'package:blackchecktech/Layout/BlackButton.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/AddSpeaker.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/CreateEventDetail.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
-import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -401,7 +398,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                           Center(
                             child: Text("HOST",
                                 style: const TextStyle(
-                                    color: const Color(0xff121212),
+                                    color: Color(0xff121212),
                                     fontWeight: FontWeight.w900,
                                     fontFamily: "NeueHelvetica",
                                     fontStyle: FontStyle.normal,
@@ -665,7 +662,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                           selectPhoto();
                                         });
                                       },
-                                      child: Container(
+                                      child: SizedBox(
                                         height: 276.h,
                                         width: 327.w,
                                         child: ClipRRect(
@@ -778,7 +775,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
 
                             controller.selectedSpeaker.isEmpty
                                 ? Container()
-                                : Container(
+                                : SizedBox(
                                     height: 37.h,
                                     width: MediaQuery.of(context).size.width,
                                     child: ListView.builder(

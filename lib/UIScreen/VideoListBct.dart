@@ -1,17 +1,6 @@
-import 'package:blackchecktech/Layout/BackCircle.dart';
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
-import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,38 +38,38 @@ class _VideoListBctState extends State<VideoListBct> {
 
   List<DropdownMenuItem<String>> get dropdownItems{
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("Technology",style: TextStyle(
+      const DropdownMenuItem(child: Text("Technology",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "USA"),
-      DropdownMenuItem(child: Text("Entertainment",style: TextStyle(
+      const DropdownMenuItem(child: Text("Entertainment",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Canada"),
-      DropdownMenuItem(child: Text("Design",style: TextStyle(
+      const DropdownMenuItem(child: Text("Design",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Brazil"),
-      DropdownMenuItem(child: Text("Business",style: TextStyle(
+      const DropdownMenuItem(child: Text("Business",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "England"),
     ];
     return menuItems;
   }
 
-  String? selectedValue = null;
+  String? selectedValue;
 
 
   /*Language Spinner Code is here*/
 
   List<DropdownMenuItem<String>> get dropdownItemslang{
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("English",style: TextStyle(
+      const DropdownMenuItem(child: Text("English",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "English"),
-      DropdownMenuItem(child: Text("Hindi",style: TextStyle(
+      const DropdownMenuItem(child: Text("Hindi",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Hindi"),
-      DropdownMenuItem(child: Text("Gujarati",style: TextStyle(
+      const DropdownMenuItem(child: Text("Gujarati",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Gujarati"),
-      DropdownMenuItem(child: Text("Marathi",style: TextStyle(
+      const DropdownMenuItem(child: Text("Marathi",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Marathi"),
     ];
     return menuItems;
   }
 
-  String? selectedValuelang = null;
+  String? selectedValuelang;
 
   bool isLayoutFirst = false;
   bool isTextChange = false;
@@ -119,7 +108,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                        color: Colors.grey.withOpacity(0.1),
                                        spreadRadius: 6,
                                        blurRadius: 10,
-                                       offset: Offset(1, 4), // changes position of shadow
+                                       offset: const Offset(1, 4), // changes position of shadow
                                      ),
                                    ],
                                  ),
@@ -172,7 +161,7 @@ class _VideoListBctState extends State<VideoListBct> {
                          mainAxisAlignment: MainAxisAlignment.start,
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
-                           SearchBarDemo(
+                           const SearchBarDemo(
                              placeholder: "Search Talks...",
                              fillcolor: white_ffffff,
                            ),
@@ -182,10 +171,10 @@ class _VideoListBctState extends State<VideoListBct> {
                              decoration: BoxDecoration(
                                  boxShadow: [
                                    BoxShadow(
-                                     color: Color(0x17747796).withOpacity(0.07),
+                                     color: const Color(0x17747796).withOpacity(0.07),
                                      spreadRadius: 10,
                                      blurRadius: 5,
-                                     offset: Offset(0, 10), // changes position of shadow
+                                     offset: const Offset(0, 10), // changes position of shadow
                                    ),
                                  ]
                              ),
@@ -195,7 +184,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                child: Container(
                                  decoration: BoxDecoration(
                                    borderRadius: BorderRadius.circular(4.0),
-                                   gradient: LinearGradient(
+                                   gradient: const LinearGradient(
                                      begin: Alignment.topCenter,
                                      end: Alignment.bottomCenter,
                                      colors: [ Color(0xff1c2535),  Color(0xff04080f)],
@@ -242,10 +231,10 @@ class _VideoListBctState extends State<VideoListBct> {
                                        shadowColor: Colors.transparent,
                                        elevation: 0,
                                        padding:
-                                       EdgeInsets.symmetric(horizontal: 0, vertical: 18),
+                                       const EdgeInsets.symmetric(horizontal: 0, vertical: 18),
                                        shape: RoundedRectangleBorder(
                                          borderRadius: BorderRadius.circular(4),
-                                         side: BorderSide(color: black_121212, width: 0),
+                                         side: const BorderSide(color: black_121212, width: 0),
                                        ),
                                      )),
                                ),
@@ -265,7 +254,7 @@ class _VideoListBctState extends State<VideoListBct> {
                 Container(
                     width: double.infinity,
                     height: 1,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color:  Color(0xffebebeb)
                     )
                 ),
@@ -309,7 +298,7 @@ class _VideoListBctState extends State<VideoListBct> {
                         Container(
                             width: 1,
                             height: 48.h,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color:  Color(0xffebebeb)
                             )
                         ),
@@ -336,7 +325,7 @@ class _VideoListBctState extends State<VideoListBct> {
                     Container(
                         width: double.infinity,
                         height: 1,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color:  Color(0xffebebeb)
                         ),
 
@@ -355,7 +344,7 @@ class _VideoListBctState extends State<VideoListBct> {
                               decoration: SpinnerDecorationBorder,
                               child: DropdownButtonHideUnderline(
                                 child: Padding(
-                                  padding:  EdgeInsets.only(left: 10,right: 10),
+                                  padding:  const EdgeInsets.only(left: 10,right: 10),
                                   child: DropdownButton(
                                     //  validator: (value) => value == null ? "Select a country" : null,
                                       dropdownColor: Colors.white,
@@ -390,7 +379,7 @@ class _VideoListBctState extends State<VideoListBct> {
                               decoration: SpinnerDecorationBorder,
                               child: DropdownButtonHideUnderline(
                                 child: Padding(
-                                  padding:  EdgeInsets.only(left: 10,right: 10),
+                                  padding:  const EdgeInsets.only(left: 10,right: 10),
                                   child: DropdownButton(
                                     //  validator: (value) => value == null ? "Select a country" : null,
                                       dropdownColor: Colors.white,
@@ -450,7 +439,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                   child: Container(
                                     height: 50.h,
                                     decoration: BoxDecoration(
-                                      color: Color(0xfff5f5f5),
+                                      color: const Color(0xfff5f5f5),
                                       borderRadius: BorderRadius.circular(4.r),
                                     ),
                                     child: Center(
@@ -487,7 +476,7 @@ class _VideoListBctState extends State<VideoListBct> {
                           itemBuilder: (context, i) {
                             return Padding(
                               padding: EdgeInsets.only(bottom: 20.h),
-                              child: Container(
+                              child: SizedBox(
                                   width: double.infinity,
                                   child:Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -505,7 +494,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                             padding: EdgeInsets.symmetric(vertical: 1.5.h,horizontal: 6.w),
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(4),
-                                              gradient: LinearGradient(
+                                              gradient: const LinearGradient(
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter,
                                                 colors: [
@@ -531,16 +520,16 @@ class _VideoListBctState extends State<VideoListBct> {
                                             children: [
                                               SizedBox(height: 3.h,),
 
-                                              Text(speakerVideoList[i].tvHeading,style: TextStyle(
+                                              Text(speakerVideoList[i].tvHeading,style: const TextStyle(
                                                   fontFamily: helvetica_neu_bold,color: black_121212,
                                                   fontSize: 14
                                               ),),
                                               SizedBox(height: 8.h,),
-                                              Text(speakerVideoList[i].tvTitle,style: TextStyle(
+                                              Text(speakerVideoList[i].tvTitle,style: const TextStyle(
                                                   fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
                                                   fontSize: 10),),
                                               SizedBox(height: 2.h,),
-                                              Text(speakerVideoList[i].tvDate,style: TextStyle(
+                                              Text(speakerVideoList[i].tvDate,style: const TextStyle(
                                                   fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
                                                   fontSize: 8),),
 

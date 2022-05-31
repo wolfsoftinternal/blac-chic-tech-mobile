@@ -1,9 +1,6 @@
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -26,7 +23,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       body: _children[_currentIndex],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Color.fromARGB(255, 27, 25, 35),
+          canvasColor: const Color.fromARGB(255, 27, 25, 35),
         ), //
         child: Padding(
           padding: const EdgeInsets.only(left: 17.0, right: 17.0, bottom: 30),
@@ -41,7 +38,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                       color: Colors.grey.withOpacity(0.1),
                       spreadRadius: 5,
                       blurRadius: 2,
-                      offset: Offset(1, 5), // changes position of shadow
+                      offset: const Offset(1, 5), // changes position of shadow
                     ),
                   ],),
             child: ClipRRect(
@@ -54,7 +51,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 type: BottomNavigationBarType.fixed,
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
-                backgroundColor: Color.fromARGB(255, 27, 25, 35),
+                backgroundColor: const Color.fromARGB(255, 27, 25, 35),
                 onTap: onTabTapped,
                 currentIndex: _currentIndex,
                 items: [

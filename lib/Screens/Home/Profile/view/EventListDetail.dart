@@ -1,10 +1,8 @@
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
-import 'package:blackchecktech/Layout/ToolbarWithHeaderTitle.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
@@ -56,14 +54,14 @@ class _EventListDetailState extends State<EventListDetail> {
       backgroundColor: white_ffffff,
       body: Obx(
         () => Column(children: [
-          SizedBox(
+          const SizedBox(
             height: 60,
           ),
           Container(
             child: Row(
               children: [
                 BackLayout(),
-                Container(
+                const SizedBox(
                   height: 48,
                   width: 48,
                 ),
@@ -130,7 +128,7 @@ class _EventListDetailState extends State<EventListDetail> {
                           ),
                         ),
                       )
-                    : Container(
+                    : SizedBox(
                         width: 48.w,
                         height: 48.h,
                       ),
@@ -161,17 +159,17 @@ class _EventListDetailState extends State<EventListDetail> {
                           onTap: () {
                             displayBottomSheet(context);
                           },
-                          child: Container(
+                          child: SizedBox(
                             width: 55.w,
                             height: 55.h,
-                            child: Icon(Icons.more_horiz, color: black_121212),
+                            child: const Icon(Icons.more_horiz, color: black_121212),
                           ),
                         ),
                       )
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
@@ -194,14 +192,14 @@ class _EventListDetailState extends State<EventListDetail> {
                         padding: const EdgeInsets.only(bottom: 32.0),
                         child: Stack(
                           children: [
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: 207.h,
                               child: controller.eventDetailList[index].poster ==
                                       null
                                   ? ClipRRect(
-                                      borderRadius: BorderRadius.all(
-                                          const Radius.circular(5)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(5)),
                                       child: SvgPicture.asset(
                                         placeholder,
                                         fit: BoxFit.cover,
@@ -211,8 +209,8 @@ class _EventListDetailState extends State<EventListDetail> {
                                       ),
                                     )
                                   : ClipRRect(
-                                      borderRadius: BorderRadius.all(
-                                          const Radius.circular(5)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(5)),
                                       child: CachedNetworkImage(
                                         imageUrl: controller
                                             .eventDetailList[index].poster!,
@@ -246,10 +244,10 @@ class _EventListDetailState extends State<EventListDetail> {
                                   padding: const EdgeInsets.only(
                                       top: 8.0, left: 8.0),
                                   child: Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: orange,
                                         borderRadius: BorderRadius.all(
-                                            const Radius.circular(40)),
+                                            Radius.circular(40)),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10.0),
@@ -270,18 +268,18 @@ class _EventListDetailState extends State<EventListDetail> {
                                 child: Container(
                                     height: 29,
                                     width: 133,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       gradient: LinearGradient(colors: [
                                         Color(0xff1c2535),
                                         Color(0xff04080f)
                                       ]),
                                       borderRadius: BorderRadius.all(
-                                          const Radius.circular(4)),
+                                          Radius.circular(4)),
                                     ),
                                     child: Row(
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
+                                        const Padding(
+                                          padding: EdgeInsets.only(
                                               left: 6.0, right: 6.0),
                                           child: Icon(
                                             Icons.person,

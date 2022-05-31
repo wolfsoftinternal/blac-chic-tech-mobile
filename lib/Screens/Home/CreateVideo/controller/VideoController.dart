@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:blackchecktech/Model/BaseModel.dart';
-import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/TopicListModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Networks/api_endpoint.dart';
@@ -88,11 +86,11 @@ class VideoController extends GetxController {
   List<DropdownMenuItem<String>> getDropDownTopicItems() {
     List<DropdownMenuItem<String>> items = [];
     for (var topicName in topicNameList) {
-      items.add(new DropdownMenuItem(
+      items.add(DropdownMenuItem(
           value: topicName,
-          child: new Text(
+          child: Text(
             topicName,
-            style: TextStyle(
+            style: const TextStyle(
                 color: black_121212,
                 fontWeight: FontWeight.w500,
                 fontFamily: "SFProDisplay",
@@ -149,11 +147,11 @@ class VideoController extends GetxController {
   List<DropdownMenuItem<String>> getDropDownLanguageItems() {
     List<DropdownMenuItem<String>> items = [];
     for (var languageName in languageNameList) {
-      items.add(new DropdownMenuItem(
+      items.add(DropdownMenuItem(
           value: languageName,
-          child: new Text(
+          child: Text(
             languageName,
-            style: TextStyle(
+            style: const TextStyle(
                 color: black_121212,
                 fontWeight: FontWeight.w500,
                 fontFamily: "SFProDisplay",

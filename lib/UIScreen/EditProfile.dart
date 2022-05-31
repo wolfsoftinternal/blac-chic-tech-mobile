@@ -1,17 +1,9 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/InputTextLayoutDemo.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,10 +20,10 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
 
-  var _firstnameController = TextEditingController();
-  var _lastnameController = TextEditingController();
-  var _usernameController = TextEditingController();
-  var _emailController = TextEditingController();
+  final _firstnameController = TextEditingController();
+  final _lastnameController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
 
   String? dropdownValue;
 
@@ -62,7 +54,7 @@ class _EditProfileState extends State<EditProfile> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(
                                             color: Color(0xffc4c4c4),
@@ -126,7 +118,7 @@ class _EditProfileState extends State<EditProfile> {
                                 flex: 1,
                                 child: Container(
                                   height: 60.h,
-                                  padding: EdgeInsets.only(left: 16, right: 10),
+                                  padding: const EdgeInsets.only(left: 16, right: 10),
                                   decoration: BoxDecoration(
                                     color: light_grey_f2f2f2,
                                     borderRadius: BorderRadius.circular(4),
@@ -134,7 +126,7 @@ class _EditProfileState extends State<EditProfile> {
                                   ),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton<String>(
-                                      hint: new Text(
+                                      hint: const Text(
                                         "Role",
                                         style: TextStyle(
                                             color: Colors.black,
@@ -189,7 +181,7 @@ class _EditProfileState extends State<EditProfile> {
                                 flex: 1,
                                 child: Container(
                                   height: 60.h,
-                                  padding: EdgeInsets.only(left: 16, right: 10),
+                                  padding: const EdgeInsets.only(left: 16, right: 10),
                                   decoration: BoxDecoration(
                                     color: light_grey_f2f2f2,
                                     borderRadius: BorderRadius.circular(4),
@@ -197,7 +189,7 @@ class _EditProfileState extends State<EditProfile> {
                                   ),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton<String>(
-                                      hint: new Text(
+                                      hint: const Text(
                                         "Industry",
                                         style: TextStyle(
                                             color: Colors.black,
@@ -256,7 +248,7 @@ class _EditProfileState extends State<EditProfile> {
                               flex: 1,
                               child: Container(
                                 height: 60.h,
-                                padding: EdgeInsets.only(left: 16, right: 10),
+                                padding: const EdgeInsets.only(left: 16, right: 10),
                                 decoration: BoxDecoration(
                                   color: light_grey_f2f2f2,
                                   borderRadius: BorderRadius.circular(4),
@@ -264,7 +256,7 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<String>(
-                                    hint: new Text(
+                                    hint: const Text(
                                       "Role",
                                       style: TextStyle(
                                           color: Colors.black,
@@ -335,7 +327,7 @@ class _EditProfileState extends State<EditProfile> {
                               child: Container(
                                 width: double.infinity,
                                 height: 1,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     color:  view_line_f4f6f6
                                 )
                             ),),
@@ -358,7 +350,7 @@ class _EditProfileState extends State<EditProfile> {
                               child: Container(
                                   width: double.infinity,
                                   height: 1,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       color:  view_line_f4f6f6
                                   )
                               ),)
@@ -373,7 +365,7 @@ class _EditProfileState extends State<EditProfile> {
                               color: white_ffffff,
                               border: Border.all(
                                   width: 1,
-                                  color: Color(0xfff2f2f2)
+                                  color: const Color(0xfff2f2f2)
                               )
                           ),
                           child: Padding(
@@ -413,7 +405,7 @@ class _EditProfileState extends State<EditProfile> {
                             color: white_ffffff,
                             border: Border.all(
                               width: 1,
-                              color: Color(0xfff2f2f2)
+                              color: const Color(0xfff2f2f2)
                             )
                           ),
                           child: Padding(
@@ -453,7 +445,7 @@ class _EditProfileState extends State<EditProfile> {
                               color: white_ffffff,
                               border: Border.all(
                                   width: 1,
-                                  color: Color(0xfff2f2f2)
+                                  color: const Color(0xfff2f2f2)
                               )
                           ),
                           child: Padding(
