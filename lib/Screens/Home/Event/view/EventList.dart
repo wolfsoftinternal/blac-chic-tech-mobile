@@ -41,68 +41,78 @@ class _EventListState extends State<EventList> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Obx(
-            () => Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 60,
-                ),
-                Container(child: ToolbarWithHeaderCenterTitle("EVENTS")),
+        body: Obx(
+          () => Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+               SizedBox(
+                height: 60.h,
+              ),
+              Container(child: ToolbarWithHeaderCenterTitle("EVENTS")),
 
-                Padding(
-                  padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 32.h),
-                  child: InputTextStaicFilter(
-                      "Search by event name, venue, speakers ...",
-                      controller.searchController.value,
-                      false,
-                      TextInputAction.next,
-                      TextInputType.text),
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                      left: 16.w, right: 10.w, bottom: 10.h, top: 10.h),
-                  margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 15.h),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: blue_0a84ff, width: 1.w),
-                      borderRadius: BorderRadius.all(Radius.circular(4.r)),
-                      color: Colors.white),
-                  child: Row(
+              SizedBox(
+                height: 20.h,
+              ),
+
+              Expanded(
+                flex: 1,
+                child: SingleChildScrollView(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SvgPicture.asset(
-                        icon_ticket,
-                        height: 15.h,
-                        width: 15.w,
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 12.h),
+                        child: InputTextStaicFilter(
+                            "Search by event name, venue, speakers ...",
+                            controller.searchController.value,
+                            false,
+                            TextInputAction.next,
+                            TextInputType.text),
                       ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      Expanded(
-                        child: Text(
-                          "My Event",
-                          style: TextStyle(
-                              fontFamily: helveticaNeueNeue_medium,
-                              fontSize: 15.sp,
-                              color: black_121212),
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: 16.w, right: 10.w, bottom: 10.h, top: 10.h),
+                        margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 15.h),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: blue_0a84ff, width: 1.w),
+                            borderRadius: BorderRadius.all(Radius.circular(4.r)),
+                            color: Colors.white),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            SvgPicture.asset(
+                              icon_ticket,
+                              height: 15.h,
+                              width: 15.w,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Expanded(
+                              child: Text(
+                                "My Event",
+                                style: TextStyle(
+                                    fontFamily: helveticaNeueNeue_medium,
+                                    fontSize: 15.sp,
+                                    color: black_121212),
+                              ),
+                            ),
+                            SvgPicture.asset(
+                              icon_right_forward_arrow,
+                              height: 16.h,
+                              width: 16.w,
+                            )
+                          ],
                         ),
                       ),
-                      SvgPicture.asset(
-                        icon_right_forward_arrow,
-                        height: 16.h,
-                        width: 16.w,
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                controller.eventList.isEmpty
-                    ? SizedBox(
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                      controller.eventList.isEmpty
+                          ? SizedBox(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.50,
                         child: Column(
@@ -119,7 +129,7 @@ class _EventListState extends State<EventList> {
                           ],
                         ),
                       )
-                    : Container(
+                          : Container(
                         margin: EdgeInsets.only(left: 16.w, right: 16.w),
                         child: ListView.builder(
                             shrinkWrap: true,
@@ -135,18 +145,41 @@ class _EventListState extends State<EventList> {
                                   });
                                 },
                                 child: Padding(
-                                  padding: EdgeInsets.only(bottom: 32.h),
+                                  padding: EdgeInsets.only(bottom: 16.h),
                                   child: Stack(
                                     children: [
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width,
                                         height: 207.h,
                                         child: controller.eventList[i].poster ==
-                                                null
+                                            null
                                             ? ClipRRect(
-                                                borderRadius: const BorderRadius.all(
-                                                    Radius.circular(5)),
-                                                child: SvgPicture.asset(
+                                          borderRadius:  BorderRadius.all(
+                                              Radius.circular(5.r)),
+                                          child: SvgPicture.asset(
+                                            placeholder,
+                                            fit: BoxFit.cover,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 207.h,
+                                          ),
+                                        )
+                                            : ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(5)),
+                                          child: CachedNetworkImage(
+                                            imageUrl:
+                                            controller.eventList[i].poster!,
+                                            fit: BoxFit.cover,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 207.h,
+                                            progressIndicatorBuilder:
+                                                (context, url,
+                                                downloadProgress) =>
+                                                SvgPicture.asset(
                                                   placeholder,
                                                   fit: BoxFit.cover,
                                                   width: MediaQuery.of(context)
@@ -154,42 +187,32 @@ class _EventListState extends State<EventList> {
                                                       .width,
                                                   height: 207.h,
                                                 ),
-                                              )
-                                            : ClipRRect(
-                                                borderRadius: const BorderRadius.all(
-                                                    Radius.circular(5)),
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      controller.eventList[i].poster!,
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                SvgPicture.asset(
+                                                  placeholder,
                                                   fit: BoxFit.cover,
                                                   width: MediaQuery.of(context)
                                                       .size
                                                       .width,
                                                   height: 207.h,
-                                                  progressIndicatorBuilder:
-                                                      (context, url,
-                                                              downloadProgress) =>
-                                                          SvgPicture.asset(
-                                                    placeholder,
-                                                    fit: BoxFit.cover,
-                                                    width: MediaQuery.of(context)
-                                                        .size
-                                                        .width,
-                                                    height: 207.h,
-                                                  ),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          SvgPicture.asset(
-                                                    placeholder,
-                                                    fit: BoxFit.cover,
-                                                    width: MediaQuery.of(context)
-                                                        .size
-                                                        .width,
-                                                    height: 207.h,
-                                                  ),
                                                 ),
-                                              ),
+                                          ),
+                                        ),
                                       ),
+                                      Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        height: 207.h,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5.r),
+                                            gradient: LinearGradient(
+                                                begin: Alignment.topCenter,
+                                                end:Alignment.bottomCenter,
+                                                colors: [ Color(0x00121212),  Color(0xff121212)])
+
+                                        ),
+                                      ),
+
                                       Align(
                                         alignment: Alignment.topRight,
                                         child: Container(
@@ -197,7 +220,7 @@ class _EventListState extends State<EventList> {
                                               top: 8.h, left: 8.w, right: 8.w),
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Container(
@@ -221,7 +244,7 @@ class _EventListState extends State<EventList> {
                                               ),
                                               Container(
                                                   padding:
-                                                      EdgeInsets.only(right: 6.w),
+                                                  EdgeInsets.only(right: 6.w),
                                                   height: 29.h,
                                                   decoration: BoxDecoration(
                                                     gradient: const LinearGradient(
@@ -230,8 +253,8 @@ class _EventListState extends State<EventList> {
                                                           Color(0xff04080f)
                                                         ]),
                                                     borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(4.r)),
+                                                    BorderRadius.all(
+                                                        Radius.circular(4.r)),
                                                   ),
                                                   child: Row(
                                                     children: [
@@ -257,8 +280,8 @@ class _EventListState extends State<EventList> {
                                                       ),
                                                       setHelceticaBold(
                                                           controller.eventList[i]
-                                                                  .hosts![0]
-                                                                  .firstName! +
+                                                              .hosts![0]
+                                                              .firstName! +
                                                               controller.eventList[i]
                                                                   .hosts![0]
                                                                   .lastName!,
@@ -277,7 +300,7 @@ class _EventListState extends State<EventList> {
                                           bottom: 19,
                                           child: Padding(
                                             padding:
-                                                const EdgeInsets.only(left: 16.0),
+                                            const EdgeInsets.only(left: 16.0),
                                             child: Row(
                                               children: [
                                                 SvgPicture.asset(
@@ -304,7 +327,7 @@ class _EventListState extends State<EventList> {
                                           right: 16,
                                           child: Padding(
                                             padding:
-                                                const EdgeInsets.only(left: 16.0),
+                                            const EdgeInsets.only(left: 16.0),
                                             child: Row(
                                               children: [
                                                 Padding(
@@ -330,7 +353,7 @@ class _EventListState extends State<EventList> {
                                           bottom: 40,
                                           child: Padding(
                                             padding:
-                                                const EdgeInsets.only(left: 16.0),
+                                            const EdgeInsets.only(left: 16.0),
                                             child: setHelceticaBold(
                                                 controller.eventList[i].title!,
                                                 22,
@@ -345,17 +368,22 @@ class _EventListState extends State<EventList> {
                               );
                             }),
                       ),
+                    ],
+                  ),
+                ),
+              )
 
-                // Container(
-                //   margin: EdgeInsets.only(bottom: 25.h),
-                //   child: Center(
-                //     child: Text(
-                //       "Load More", style: TextStyle(fontFamily: roboto_bold,
-                //         fontSize: 14.sp, color: blue_0a84ff),),
-                //   ),
-                // )
-              ],
-            ),
+
+
+              // Container(
+              //   margin: EdgeInsets.only(bottom: 25.h),
+              //   child: Center(
+              //     child: Text(
+              //       "Load More", style: TextStyle(fontFamily: roboto_bold,
+              //         fontSize: 14.sp, color: blue_0a84ff),),
+              //   ),
+              // )
+            ],
           ),
         ),
       ),
