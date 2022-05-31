@@ -81,7 +81,7 @@ class _EditProfileState extends State<EditProfile> {
                                     _firstnameController,
                                     false,
                                     TextInputAction.next,
-                                    TextInputType.text
+                                    TextInputType.text, false
                                 )),
                             SizedBox(
                               width: 8.w,
@@ -92,7 +92,7 @@ class _EditProfileState extends State<EditProfile> {
                                     _lastnameController,
                                     false,
                                     TextInputAction.next,
-                                    TextInputType.text)),
+                                    TextInputType.text, false)),
                           ],
                         ),
                         SizedBox(height: 16.h,),
@@ -101,14 +101,14 @@ class _EditProfileState extends State<EditProfile> {
                             _usernameController,
                             false,
                             TextInputAction.next,
-                            TextInputType.text),
+                            TextInputType.text, false),
                         SizedBox(height: 16.h,),
                         InputTextLayoutDemo(
                             str_email,
                             _emailController,
                             false,
                             TextInputAction.next,
-                            TextInputType.emailAddress),
+                            TextInputType.emailAddress, false),
                         SizedBox(height: 16.h,),
                          Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -314,7 +314,7 @@ class _EditProfileState extends State<EditProfile> {
                                     _lastnameController,
                                     false,
                                     TextInputAction.next,
-                                    TextInputType.text)),
+                                    TextInputType.text, false)),
                           ],
                         ),
 
