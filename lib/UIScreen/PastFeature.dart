@@ -28,6 +28,7 @@ class _PastFeatureState extends State<PastFeature> {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child:Stack(
+
             children: [
               Container(
                 height: 500,
@@ -68,7 +69,8 @@ class _PastFeatureState extends State<PastFeature> {
 
 
               Container(
-                margin: EdgeInsets.only(top: 488.h),
+                // margin: EdgeInsets.only(top: 488.h),
+                transform: Matrix4.translationValues(0,475, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
