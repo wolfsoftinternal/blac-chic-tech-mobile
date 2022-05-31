@@ -58,9 +58,9 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
                 _setProgressAnim(maxWidth, i + 1);
               },
               children: const <Widget>[
-               Test(),
                 PastFeature(),
-                Test(),
+                PastFeature(),
+                PastFeature(),
               ],
             ),
           ),
