@@ -534,9 +534,12 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
               padding:  EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
                 FocusScope.of(context).unfocus();
+                if(imagePath.path.isNotEmpty){
+                  controller.imagePath.value = imagePath.path.toString();
+                }
                 if (controller.checkPersonalValidation(context)) {
                   checkNet(context).then((value) {
-                    controller.personalInfoAPI(context, imagePath.path.toString());
+                    controller.personalInfoAPI(context, 'personal_info');
                   });
                 }
               }),

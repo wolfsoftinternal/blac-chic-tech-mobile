@@ -7,6 +7,7 @@ import 'package:blackchecktech/Screens/Home/Profile/view/PostTab.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/ProfileTab.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/SeeAllAdmires.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/VideoTab.dart';
+import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -166,7 +167,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                       ? Padding(
                           padding: const EdgeInsets.only(right: 10.0),
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Get.to(ProfileSetting());
+                            },
                             child: Container(
                               width: 48.w,
                               height: 48.h,

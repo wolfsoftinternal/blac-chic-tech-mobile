@@ -16,7 +16,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class CompanyList extends StatefulWidget {
-  const CompanyList({Key? key}) : super(key: key);
+  final isFrom;
+  const CompanyList({Key? key, this.isFrom}) : super(key: key);
 
   @override
   _CompanyListState createState() => _CompanyListState();
@@ -84,8 +85,13 @@ class _CompanyListState extends State<CompanyList> {
                       padding:  EdgeInsets.only(left: 24.w, right: 24.w, bottom: 24.h),
                       child: InkWell(
                         onTap: () {
-                          controller.companyName.value =
+                          if(widget.isFrom == 'past_job'){
+                            controller.pastJobName.value.text = controller.companyList[index]['name'];
+                            controller.pastJobImage.value = controller.companyList[index]['logo'];
+                          }else{
+                            controller.companyName.value =
                               controller.companyList[index]['name'];
+                          }
                           Get.back();
                         },
                         child: Row(

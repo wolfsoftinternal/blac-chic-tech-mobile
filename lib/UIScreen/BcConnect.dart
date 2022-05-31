@@ -46,7 +46,7 @@ class _BcConnectState extends State<BcConnect> {
       systemNavigationBarIconBrightness:
       Brightness.light, //navigation bar icons' color
     ));
-    
+
 
     return SafeArea(
         child: Scaffold(

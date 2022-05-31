@@ -11,9 +11,11 @@ class InputTextLayoutDemo extends StatefulWidget {
   bool numKeypad = false;
   TextInputType inputType;
   TextInputAction textInputAction;
+  bool readonly=false;
+  dynamic suffix;
   // Function validator;
 
-  InputTextLayoutDemo(this.hintData,this.inputData,this.numKeypad,this.textInputAction,this.inputType);
+  InputTextLayoutDemo(this.hintData,this.inputData,this.numKeypad,this.textInputAction,this.inputType, this.readonly, [this.suffix]);
 
   @override
   _TextInputState createState() => _TextInputState(hintData,inputData,numKeypad,textInputAction,inputType);
@@ -74,6 +76,7 @@ class _TextInputState extends State<InputTextLayoutDemo> {
               fontSize: 14.0
           ),
           keyboardType: inputType ,
+          readOnly: widget.readonly,
           inputFormatters: [
             numKeypad== true ? FilteringTextInputFormatter.digitsOnly : FilteringTextInputFormatter.singleLineFormatter ,
             numKeypad== true ? LengthLimitingTextInputFormatter(10) : LengthLimitingTextInputFormatter(200),
@@ -88,6 +91,7 @@ class _TextInputState extends State<InputTextLayoutDemo> {
                 color: black_121212, fontFamily: helveticaNeueNeue_medium,fontSize: 14),
             border: InputBorder.none,
             filled: false,
+            suffix: widget.suffix, 
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           // validator: (value) => validator(value),

@@ -10,6 +10,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueF
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/Settings/controller/SettingsController.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class StepsController extends GetxController {
   RxString strCountryId = "".obs;
   RxString strStateId = "".obs;
   RxString strCityId = "".obs;
+  RxString imagePath = "".obs;
 
   Rx<TextEditingController> currentTitleController =
       TextEditingController().obs;
@@ -71,6 +73,10 @@ class StepsController extends GetxController {
 
   RxList questions = [].obs;
 
+  SettingsController settingsController = Get.put(SettingsController());
+  Rx<TextEditingController> pastJobName = TextEditingController().obs;
+  RxString pastJobImage = ''.obs;
+
   countryListApi() async {
     String url = urlBase + urlCountryList;
 
@@ -78,7 +84,7 @@ class StepsController extends GetxController {
 
     await apiReq.postAPIwithoutBearer(url, null).then((value) async {
       http.StreamedResponse res = value;
-
+      countrylist.clear();
       if (res.statusCode == 200) {
         await res.stream.bytesToString().then((value) async {
           String strData = value;
@@ -115,7 +121,6 @@ class StepsController extends GetxController {
 
     await apiReq.postAPIwithoutBearer(url, body).then((value) async {
       http.StreamedResponse res = value;
-
       if (res.statusCode == 200) {
         await res.stream.bytesToString().then((value) async {
           String strData = value;
@@ -166,7 +171,7 @@ class StepsController extends GetxController {
     });
   }
 
-  Future<void> personalInfoAPI(BuildContext context, String imagePath) async {
+  Future<void> personalInfoAPI(BuildContext context, isFrom, [visibility]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -174,19 +179,35 @@ class StepsController extends GetxController {
     var request =
         http.MultipartRequest('POST', Uri.parse(urlBase + urlPersonalInfo));
 
-    if (imagePath != "") {
-      request.files.add(await http.MultipartFile.fromPath('image', imagePath));
+    if (visibility != null) {
+      request.fields.addAll({
+        'is_visible': visibility.toString(),
+      });
+    } else if (isFrom == 'about_us'){
+      request.fields.addAll({
+        'current_job_title': currentTitleController.value.text,
+        'current_job_company_name': companyName.value,
+        'current_job_website': currentCompanyWebsiteController.value.text,
+        'past_jobs': pastCompanyDetails.toJson().toString(),
+        'education': educationalDetails.toJson().toString(),
+        'questions': questions.toJson().toString(),
+      });
+    } else {
+      if (imagePath != "") {
+        request.files.add(await http.MultipartFile.fromPath(
+            'image', imagePath.value.toString()));
+      }
+      request.fields.addAll({
+        'country_id': strCountryId.value.toString(),
+        'state_id': strStateId.value.toString(),
+        'city_id': strCityId.value.toString(),
+        'birthdate': dobController.value.text,
+        'about_us': aboutController.value.text,
+        'linkedin_url': linkedinController.value.text,
+        'instagram_url': instagramController.value.text,
+        'twitter_url': twitterController.value.text,
+      });
     }
-    request.fields.addAll({
-      'country_id': strCountryId.value.toString(),
-      'state_id': strStateId.value.toString(),
-      'city_id': strCityId.value.toString(),
-      'birthdate': dobController.value.text,
-      'about_us': aboutController.value.text,
-      'linkedin_url': linkedinController.value.text,
-      'instagram_url': instagramController.value.text,
-      'twitter_url': twitterController.value.text,
-    });
 
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
@@ -207,7 +228,21 @@ class StepsController extends GetxController {
 
           var preferences = MySharedPref();
           await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
-          Get.to(const ExperienceInfoFormView());
+
+          if(visibility != null){
+            settingsController.visible.value = signUp.data!.isVisible!;
+          }else{
+            if(isFrom == 'edit_profile'){
+              Get.back();
+              snackBar(context, 'Profile edited successfully');
+            }else if(isFrom == 'about_us'){
+              Get.back();
+              snackBar(context, 'Profile edited successfully');
+            }else{
+              Get.to(const ExperienceInfoFormView());
+            }
+          }
+          
         } else {
           Navigator.pop(context); //pop
           snackBar(context, model.message!);
@@ -480,7 +515,10 @@ class StepsController extends GetxController {
   }
 
   bool checkPersonalValidation(context) {
-    if (strCountryId.value.isEmpty) {
+    if (imagePath.value.isEmpty) {
+      snackBar(context, "Upload Image");
+      return false;
+    } else if (strCountryId.value.isEmpty) {
       snackBar(context, "Enter Country");
       return false;
     } else if (strStateId.value.isEmpty) {
