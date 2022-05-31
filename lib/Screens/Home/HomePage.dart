@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Event/view/EventList.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
@@ -7,7 +8,13 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Utils/preference_utils.dart';
+import '../../Utils/share_predata.dart';
+import 'chat_module/my_db.dart';
+
 class HomePage extends StatefulWidget {
+
+
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -24,6 +31,23 @@ class _HomePageState extends State<HomePage> {
     "FEATURE",
     "EVENTS"
   ];
+  SignupModel signupModel = SignupModel();
+
+  @override
+  void initState() {
+
+    super.initState();
+    init();
+
+  }
+
+
+  init() async{
+    var preferences = MySharedPref();
+    SignupModel signupModel =
+    (await preferences.getSignupModel(SharePreData.keySignupModel))!;
+    MyDB().createCurrentUserDoc(signupModel.data!);
+  }
 
   @override
   Widget build(BuildContext context) {

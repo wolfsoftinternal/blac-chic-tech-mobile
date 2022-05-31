@@ -1,23 +1,63 @@
+
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
+import 'package:blackchecktech/Screens/Home/chat_module/friend_list.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../Utils/preference_utils.dart';
+import '../../Utils/share_predata.dart';
+
 class BottomNavigation extends StatefulWidget {
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }
 
+
+
 class _BottomNavigationState extends State<BottomNavigation> {
   int _currentIndex = 0;
+
+
+
+
   final List<Widget> _children = [
     const HomePage(),
-    const HomePage(),
+     FriendListScreen(),
     const HomePage(),
     const HomePage(),
   ];
+
+
+  @override
+  void initState() {
+    init();
+
+    super.initState();
+  }
+
+
+
+
+  init() async {
+
+
+    // if (widget.mixId != null) {
+    //   initDB(); // initializing all the firebase methods when direct pin share
+    // } else {
+    //   // checking for room existence
+    //   MyDB()
+    //       .findCommonChatroom(widget.receiver["id"], widget.userObj)
+    //       .then((value) {
+    //     roomId = value;
+    //     if (roomId.isNotEmpty) initDB();
+    //   });
+    //   // Only if room is available then initiolizing firebase
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {

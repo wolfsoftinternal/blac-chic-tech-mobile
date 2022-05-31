@@ -174,20 +174,21 @@ class _BcConnectState extends State<BcConnect> {
                           child: Stack(
                             //    alignment: Alignment.center,
                             children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Stack(
-                                    alignment: Alignment.bottomCenter,
-                                    children: [
-                                      ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(4.r),
-                                              topRight: Radius.circular(4.r)),
-                                          child: GestureDetector(onTap: (){
-                                            Get.to(AdmireProfile());
-                                          },
+                              GestureDetector(
+                                onTap: (){
+                                  Get.to(AdmireProfile());
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Stack(
+                                      alignment: Alignment.bottomCenter,
+                                      children: [
+                                        ClipRRect(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(4.r),
+                                                topRight: Radius.circular(4.r)),
                                             child: bcConnectController
                                                         .userList[i].image !=
                                                     null
@@ -203,51 +204,33 @@ class _BcConnectState extends State<BcConnect> {
                                                     height: 134.h,
                                                     width: double.infinity,
                                                     fit: BoxFit.cover,
-                                                  ),
-                                          )),
+                                                  )),
 
-                                      // unsplash:27xbM3bF9_s
-                                      Container(
-                                          width: double.infinity,
-                                          height: 134.h,
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                                begin: Alignment.topCenter,
-                                                end: Alignment.bottomCenter,
-                                                colors: [
-                                                  Color(0x00121212),
-                                                  Color(0xff121212)
-                                                ]),
-                                          )),
+                                        // unsplash:27xbM3bF9_s
+                                        Container(
+                                            width: double.infinity,
+                                            height: 134.h,
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                  begin: Alignment.topCenter,
+                                                  end: Alignment.bottomCenter,
+                                                  colors: [
+                                                    Color(0x00121212),
+                                                    Color(0xff121212)
+                                                  ]),
+                                            )),
 
-                                      // Jessie J
-                                      Center(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsets.only(bottom: 25.h),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                  bcConnectController
-                                                          .userList[i]
-                                                          .userName ??
-                                                      "",
-                                                  style: TextStyle(
-                                                      color: white_ffffff,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily:
-                                                          "NeueHelvetica",
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 12.sp),
-                                                  textAlign: TextAlign.left),
-                                              Opacity(
-                                                opacity: 0.699999988079071,
-                                                child: Text(
+                                        // Jessie J
+                                        Center(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 25.h),
+                                            child: Column(
+                                              children: [
+                                                Text(
                                                     bcConnectController
                                                             .userList[i]
-                                                            .firstName ??
+                                                            .userName ??
                                                         "",
                                                     style: TextStyle(
                                                         color: white_ffffff,
@@ -257,57 +240,75 @@ class _BcConnectState extends State<BcConnect> {
                                                             "NeueHelvetica",
                                                         fontStyle:
                                                             FontStyle.normal,
-                                                        fontSize: 8.sp),
-                                                    textAlign:
-                                                        TextAlign.center),
-                                              )
-                                            ],
+                                                        fontSize: 12.sp),
+                                                    textAlign: TextAlign.left),
+                                                Opacity(
+                                                  opacity: 0.699999988079071,
+                                                  child: Text(
+                                                      bcConnectController
+                                                              .userList[i]
+                                                              .firstName ??
+                                                          "",
+                                                      style: TextStyle(
+                                                          color: white_ffffff,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontFamily:
+                                                              "NeueHelvetica",
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontSize: 8.sp),
+                                                      textAlign:
+                                                          TextAlign.center),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
 
-                                      // Product manager and brand strategist @capitalone
-                                    ],
-                                  ),
-
-                                  // Come to me for
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 16.w,
-                                        top: 25.h,
-                                        right: 16.w,
-                                        bottom: 16.h),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text("Come to me for",
-                                            style: TextStyle(
-                                                color: grey_aaaaaa,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "NeueHelvetica",
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 8.sp),
-                                            textAlign: TextAlign.left),
-                                        SizedBox(
-                                          height: 2.h,
-                                        ),
-                                        // UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk
-                                        Text(
-                                            "UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk",
-                                            style: TextStyle(
-                                                color: black_121212,
-                                                fontWeight: FontWeight.w700,
-                                                fontFamily: "NeueHelvetica",
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 10.sp),
-                                            textAlign: TextAlign.left)
+                                        // Product manager and brand strategist @capitalone
                                       ],
                                     ),
-                                  )
-                                ],
+
+                                    // Come to me for
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 16.w,
+                                          top: 25.h,
+                                          right: 16.w,
+                                          bottom: 16.h),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text("Come to me for",
+                                              style: TextStyle(
+                                                  color: grey_aaaaaa,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "NeueHelvetica",
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 8.sp),
+                                              textAlign: TextAlign.left),
+                                          SizedBox(
+                                            height: 2.h,
+                                          ),
+                                          // UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk
+                                          Text(
+                                              "UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk",
+                                              style: TextStyle(
+                                                  color: black_121212,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: "NeueHelvetica",
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 10.sp),
+                                              textAlign: TextAlign.left)
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                               Positioned(
                                 top: 115.h,
