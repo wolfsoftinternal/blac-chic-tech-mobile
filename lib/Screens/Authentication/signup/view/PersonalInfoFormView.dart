@@ -1,27 +1,22 @@
 import 'dart:io';
 
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/InputTextLayout.dart';
-import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/CityListModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/CountryListModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/StateListModel.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../Styles/my_height.dart';
@@ -379,7 +374,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                 fontFamily: helveticaNeueNeue_medium,
                                 fontSize: 14.sp),
                             decoration:  InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(
+                              contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 0, vertical: 0),
                               isDense: true,
                               // you can change this with the top text like you want
@@ -539,9 +534,12 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
               padding:  EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
                 FocusScope.of(context).unfocus();
+                if(imagePath.path.isNotEmpty){
+                  controller.imagePath.value = imagePath.path.toString();
+                }
                 if (controller.checkPersonalValidation(context)) {
                   checkNet(context).then((value) {
-                    controller.personalInfoAPI(context, imagePath.path.toString());
+                    controller.personalInfoAPI(context, 'personal_info');
                   });
                 }
               }),
@@ -557,7 +555,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
       context: context,
       builder: (context) {
         DateTime? tempPickedDate = DateTime.now();
-        return Container(
+        return SizedBox(
           height: 250.h,
           child: Column(
             children: <Widget>[
@@ -650,13 +648,13 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                 CropAspectRatioPreset.ratio7x5,
                 CropAspectRatioPreset.ratio16x9
               ],
-        androidUiSettings: AndroidUiSettings(
+        androidUiSettings: const AndroidUiSettings(
             toolbarTitle: '',
             toolbarColor: Colors.black,
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false),
-        iosUiSettings: IOSUiSettings(
+        iosUiSettings: const IOSUiSettings(
           title: '',
         ));
     if (croppedFile != null) {

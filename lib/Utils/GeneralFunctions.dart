@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 void printData(String str, String val) {
   print(str + " :::  " + val);

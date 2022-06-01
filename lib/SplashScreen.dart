@@ -3,7 +3,6 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueF
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -16,7 +15,7 @@ import 'package:get/get.dart';
 import 'Screens/Authentication/login/model/SignupModel.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -27,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 2), () async {
+    Future.delayed(const Duration(seconds: 2), () async {
       var preferences = MySharedPref();
       SignupModel? myModel =
           await preferences.getSignupModel(SharePreData.keySignupModel);
@@ -78,9 +77,9 @@ class _SplashScreenState extends State<SplashScreen> {
           }
         }
         if (questionsInfo != "Done") {
-          Get.offAll(AdditionalQueFormView());
+          Get.offAll(const AdditionalQueFormView());
         } else if (lastQuestionsInfo != "Done") {
-          Get.offAll(AdditionalLastQueView());
+          Get.offAll(const AdditionalLastQueView());
         } else {
           Get.offAll(BottomNavigation());
         }

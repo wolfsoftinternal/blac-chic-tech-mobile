@@ -1,16 +1,7 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -64,10 +55,10 @@ class _UploadVideosState extends State<UploadVideos> {
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.r),
-                            color: Color(0xfff5f5f5),
+                            color: const Color(0xfff5f5f5),
                             border: Border.all(
                               width: 1,
-                              color: Color(0x66f5f5f5)
+                              color: const Color(0x66f5f5f5)
                             ),
                           ),
                           child: Padding(
@@ -80,7 +71,7 @@ class _UploadVideosState extends State<UploadVideos> {
                                 Text(
                                     "Upload Video",
                                     style:  TextStyle(
-                                        color:   Color(0xff273433),
+                                        color:   const Color(0xff273433),
                                         fontWeight: FontWeight.w900,
                                         fontFamily: "NeueHelvetica",
                                         fontStyle:  FontStyle.normal,
@@ -93,7 +84,7 @@ class _UploadVideosState extends State<UploadVideos> {
                                 Text(
                                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae facilisis sit nunc lorem. Morbi orci, risus,",
                                     style:  TextStyle(
-                                        color:   Color(0xff96a6a3),
+                                        color:   const Color(0xff96a6a3),
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "Roboto",
                                         fontStyle:  FontStyle.normal,

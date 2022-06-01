@@ -13,7 +13,7 @@ snackBar(BuildContext context, String message) {
     SnackBar(
       behavior: SnackBarBehavior.floating,
       content: Text(message),
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     ),
   );
 }
@@ -27,7 +27,7 @@ void onLoading(BuildContext context, String msg) {
         child: Container(
             width: 50,
             height: 50,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white,
             ),

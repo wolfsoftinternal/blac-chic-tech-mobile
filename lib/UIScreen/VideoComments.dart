@@ -1,5 +1,4 @@
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -144,7 +143,7 @@ class _VideoCommentsState extends State<VideoComments> {
                                   color: black_121212,
                                   fontFamily: roboto_medium,
                                   fontSize: 14.0.sp),
-                              decoration: new InputDecoration(
+                              decoration: InputDecoration(
                                 isDense: true,
                                 hintText: "Write Comment...",
                                 hintStyle: TextStyle(

@@ -30,7 +30,7 @@ class TokenUpdateRequest {
     print(headers);
     return http
         .post(Uri.parse(url), headers: headers, body: body)
-        .timeout(Duration(minutes: 5));
+        .timeout(const Duration(minutes: 5));
   }
 
   Future<String> updateToken(){

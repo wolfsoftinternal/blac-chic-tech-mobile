@@ -1,23 +1,15 @@
-import 'dart:io';
 
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
-import 'package:blackchecktech/Screens/Home/CreateEvent/view/CreateEventDetail.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_height.dart';
-import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Utils/CommonWidget.dart';
-import 'package:blackchecktech/Utils/internet_connection.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class AddSpeaker extends StatefulWidget {
-  AddSpeaker({Key? key}) : super(key: key);
+  const AddSpeaker({Key? key}) : super(key: key);
 
   @override
   State<AddSpeaker> createState() => _AddSpeakerState();
@@ -77,7 +69,7 @@ class _AddSpeakerState extends State<AddSpeaker> {
                         key: speakerKey,
                         child: Column(
                           children: [
-                            Divider(),
+                            const Divider(),
                             Container(
                               margin: const EdgeInsets.only(left: 23, right: 23),
                               height: HeightData.fifty_three,
@@ -95,6 +87,7 @@ class _AddSpeakerState extends State<AddSpeaker> {
                                     if (value == "") {
                                       return 'Enter speaker name';
                                     }
+                                    return null;
                                   },
                                   decoration: const InputDecoration(
                                     hintText: 'Please type here...',

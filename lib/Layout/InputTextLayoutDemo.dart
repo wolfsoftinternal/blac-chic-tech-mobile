@@ -2,7 +2,6 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 
 class InputTextLayoutDemo extends StatefulWidget {
@@ -12,9 +11,11 @@ class InputTextLayoutDemo extends StatefulWidget {
   bool numKeypad = false;
   TextInputType inputType;
   TextInputAction textInputAction;
+  bool readonly=false;
+  dynamic suffix;
   // Function validator;
 
-  InputTextLayoutDemo(this.hintData,this.inputData,this.numKeypad,this.textInputAction,this.inputType);
+  InputTextLayoutDemo(this.hintData,this.inputData,this.numKeypad,this.textInputAction,this.inputType, this.readonly, [this.suffix]);
 
   @override
   _TextInputState createState() => _TextInputState(hintData,inputData,numKeypad,textInputAction,inputType);
@@ -36,7 +37,7 @@ class _TextInputState extends State<InputTextLayoutDemo> {
 
   _TextInputState(String hintData,TextEditingController controller,bool numKeypad,TextInputAction textInputAction,
       TextInputType inputType,){
-    this.hint = hintData;
+    hint = hintData;
     this.controller = controller;
     this.numKeypad = numKeypad;
     this.textInputAction = textInputAction;
@@ -54,7 +55,7 @@ class _TextInputState extends State<InputTextLayoutDemo> {
           light_grey_f2f2f2:
           light_grey_f2f2f2,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
         color: checkFillColor == false
             ? checkColor == true
             ? Colors.white
@@ -69,26 +70,28 @@ class _TextInputState extends State<InputTextLayoutDemo> {
             bottom: 12
         ),
         child: TextFormField(
-          style:  TextStyle(
+          style:  const TextStyle(
               color: black_121212,
               fontFamily: helveticaNeueNeue_medium,
               fontSize: 14.0
           ),
           keyboardType: inputType ,
+          readOnly: widget.readonly,
           inputFormatters: [
             numKeypad== true ? FilteringTextInputFormatter.digitsOnly : FilteringTextInputFormatter.singleLineFormatter ,
             numKeypad== true ? LengthLimitingTextInputFormatter(10) : LengthLimitingTextInputFormatter(200),
           ],
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             isDense: true,
             // you can change this with the top text like you want
             labelText: hint,
-            labelStyle: TextStyle(color: grey_aaaaaa,fontFamily: helveticaNeueNeue_medium,fontSize: 14),
-            hintStyle: TextStyle(
+            labelStyle: const TextStyle(color: grey_aaaaaa,fontFamily: helveticaNeueNeue_medium,fontSize: 14),
+            hintStyle: const TextStyle(
                 color: black_121212, fontFamily: helveticaNeueNeue_medium,fontSize: 14),
             border: InputBorder.none,
             filled: false,
+            suffix: widget.suffix, 
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           // validator: (value) => validator(value),

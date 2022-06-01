@@ -1,24 +1,11 @@
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
-import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/UIScreen/Featured.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
-import '../Layout/ToolbarBackOnly.dart';
 import '../Model/SpeakersVideoModel.dart';
 import 'DetailTab.dart';
 import 'RelatedTags.dart';
@@ -82,7 +69,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
           Container(
               width: double.infinity,
               height: 1,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color:  view_line_f4f6f6
               )
           ),
@@ -101,10 +88,10 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                   ),
 
                   Container(
-                    margin: EdgeInsets.all(24),
+                    margin: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.r),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
@@ -151,7 +138,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                 icon_heart,
                                 width: 18.w,
                                 height: 18.h,
-                                color: isHeart ? white_ffffff : Color(0xffff1f1f),
+                                color: isHeart ? white_ffffff : const Color(0xffff1f1f),
                               )),
                           SizedBox(
                             width: 4.w,
@@ -193,13 +180,13 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                   Container(
                       width: double.infinity,
                       height: 1,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color:  view_line_f4f6f6
                       )
                   ),
 
                   Padding(
-                    padding:  EdgeInsets.all(24.0),
+                    padding:  const EdgeInsets.all(24.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,7 +250,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                 Text(
                                     "Product manager and brand strategist \n@capitalone",
                                     style:  TextStyle(
-                                        color:   Color(0xff3f3f3f),
+                                        color:   const Color(0xff3f3f3f),
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "NeueHelvetica",
                                         fontStyle:  FontStyle.normal,
@@ -282,7 +269,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                   Container(
                       width: double.infinity,
                       height: 1,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color:  view_line_f4f6f6
                       )
                   ),
@@ -307,7 +294,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                   Container(
                       width: double.infinity,
                       height: 1,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color:  view_line_f4f6f6
                       )
                   ),
@@ -317,10 +304,10 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                     margin: EdgeInsets.only(left: 24.w,right: 24.w,top: 16.h,bottom: 16.h),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.r),
-                      color: Color(0x80f2f2f2),
+                      color: const Color(0x80f2f2f2),
                       border: Border.all(
                         width: 1,
-                        color: Color(0x4caaaaaa)
+                        color: const Color(0x4caaaaaa)
                       )
                     ),
                     child: DefaultTabController(
@@ -328,31 +315,30 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                         child: Scaffold(
 
                           appBar: AppBar(
-                            actions: <Widget>[],
+                            actions: const <Widget>[],
                             titleSpacing: 0,
                             elevation: 0,
                             shadowColor: grey_aaaaaa,
-                            automaticallyImplyLeading: false,
-                            backgroundColor: Color(0x80f2f2f2),
-                            bottom: new PreferredSize(
-                              preferredSize: new Size(0, -2),
-                              child: new Container(
-                                child: new TabBar(
+                            backgroundColor: const Color(0x80f2f2f2),
+                            bottom: PreferredSize(
+                              preferredSize: const Size(0, -3),
+                              child: Container(
+                                child: TabBar(
 
                                   isScrollable: true,
-                                  //indicatorSize: TabBarIndicatorSize.label,
                                   indicatorColor: orange_ff881a,
                                   indicatorWeight: 3,
+
                                   indicatorSize: TabBarIndicatorSize.label,
                                   labelColor: black_121212,
                                   unselectedLabelColor: grey_aaaaaa,
-                                  labelPadding: EdgeInsets.symmetric(horizontal:22.0),
+                                  labelPadding: const EdgeInsets.symmetric(horizontal:22.0),
 
                                   tabs: <Widget>[
-                                    Container(
+                                    SizedBox(
                                       height: 50.0,
                                       child:
-                                      new Tab(
+                                      Tab(
                                         child: // DETAILS
                                         Text(
                                             "DETAILS",
@@ -366,7 +352,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                         ),
                                       ),
                                     ),
-                                    new Tab(
+                                    Tab(
                                       child: // RELATED TAGS
                                       Text(
                                           "RELATED TAGS",
@@ -391,13 +377,13 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
 
 
                           ),
-                          body: new TabBarView(
+                          body: TabBarView(
                             children: <Widget>[
-                              new Container(
-                                child: DetailTab(),
+                              Container(
+                                child: const DetailTab(),
                               ),
-                              new Container(
-                                child: RelatedTags(),
+                              Container(
+                                child: const RelatedTags(),
                               ),
                             ],
                           ),
@@ -407,13 +393,13 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                   Container(
                       width: double.infinity,
                       height: 1,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color:  view_line_f4f6f6
                       )
                   ),
 
                   Padding(
-                    padding:  EdgeInsets.all(24.0),
+                    padding:  const EdgeInsets.all(24.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -441,7 +427,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                             itemBuilder: (context, i) {
                               return Padding(
                                 padding: EdgeInsets.only(bottom: 20.h),
-                                child: Container(
+                                child: SizedBox(
                                     width: double.infinity,
                                     child:Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -459,7 +445,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                               padding: EdgeInsets.symmetric(vertical: 1.5.h,horizontal: 6.w),
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(4),
-                                                gradient: LinearGradient(
+                                                gradient: const LinearGradient(
                                                   begin: Alignment.topCenter,
                                                   end: Alignment.bottomCenter,
                                                   colors: [
@@ -485,16 +471,16 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                               children: [
                                                 SizedBox(height: 3.h,),
 
-                                                Text(speakerVideoList[i].tvHeading,style: TextStyle(
+                                                Text(speakerVideoList[i].tvHeading,style: const TextStyle(
                                                     fontFamily: helvetica_neu_bold,color: black_121212,
                                                     fontSize: 14
                                                 ),),
                                                 SizedBox(height: 8.h,),
-                                                Text(speakerVideoList[i].tvTitle,style: TextStyle(
+                                                Text(speakerVideoList[i].tvTitle,style: const TextStyle(
                                                     fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
                                                     fontSize: 10),),
                                                 SizedBox(height: 2.h,),
-                                                Text(speakerVideoList[i].tvDate,style: TextStyle(
+                                                Text(speakerVideoList[i].tvDate,style: const TextStyle(
                                                     fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
                                                     fontSize: 8),),
 

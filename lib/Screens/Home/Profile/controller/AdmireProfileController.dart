@@ -1,8 +1,7 @@
-import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
-import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventDetailModel.dart';
@@ -15,6 +14,7 @@ import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
@@ -42,15 +42,20 @@ class AdmireProfileController extends GetxController {
   late List initializeVideoPlayerFuture = [];
   late List initializeVideoPlayerFutureList = [];
   List video = [];
-  Rx<Duration> position = Duration().obs;
-  Rx<Duration> duration = Duration().obs;
+  Rx<Duration> position = const Duration().obs;
+  Rx<Duration> duration = const Duration().obs;
   RxBool isRearrange = false.obs;
   RxList<UserList> selectedList = <UserList>[].obs;
   RxList<UserList> searchList = <UserList>[].obs;
   Rx<TextEditingController> searchController = TextEditingController().obs;
   RxInt selectedIndex = 1.obs;
   RxString admire = ''.obs;
-  // EventController controller = Get.put(EventController());
+  RxInt count = 1.obs;
+  RxInt total =  0.obs;
+  CheckoutResponse? checkoutResponse;
+  PaystackPlugin paystack = PaystackPlugin();
+  static const String PAYSTACK_KEY =
+      "pk_test_c343f7fa48c5e5368ab068b511d9d8aa2977a231";
 
   admireListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
@@ -147,7 +152,7 @@ class AdmireProfileController extends GetxController {
             SignupModel admireListModel = SignupModel.fromJson(userModel);
 
             details.value = admireListModel.data!;
-            Get.to(Profile());
+            Get.to(const Profile());
           }
         });
       } else {
@@ -186,7 +191,7 @@ class AdmireProfileController extends GetxController {
 
             details.value = admireListModel;
             print(details);
-            Get.to(Profile());
+            Get.to(const Profile());
           }
         });
       } else {
@@ -325,7 +330,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  eventDetailAPI(BuildContext context, id) async {
+  eventDetailAPI(BuildContext context, id, [isFrom]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -353,7 +358,12 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             EventDetailModel detail = EventDetailModel.fromJson(userModel);
             eventDetails.value = detail.data!;
-            Get.to(EventDetail());
+            if(isFrom != null){
+              Get.to(const EventDetail(isFrom: 'event'));
+            }else{
+              Get.to(const EventDetail());
+            }
+            
           }
         });
       } else {
@@ -509,6 +519,60 @@ class AdmireProfileController extends GetxController {
         });
       } else {
         print(res.reasonPhrase);
+      }
+    });
+  }
+
+  String _getReference() {
+    String platform;
+    if (Platform.isIOS) {
+      platform = 'iOS';
+    } else {
+      platform = 'Android';
+    }
+    return '${DateTime.now().millisecondsSinceEpoch}';
+
+    return 'ChargedFrom${platform}_${DateTime.now().millisecondsSinceEpoch}';
+  }
+
+  //GetUi
+  PaymentCard _getCardUI() {
+    return PaymentCard(number: "4084084084084081", cvc: "408", expiryMonth: 02, expiryYear: 23);
+  }
+
+  Future initializePlugin() async {
+    print("PAYSTACK_KEY-> "+PAYSTACK_KEY);
+    await paystack.initialize(publicKey: PAYSTACK_KEY);
+  }
+
+  //Method Charging card
+  chargeCardAndMakePayment(BuildContext context) async {
+    var preferences = MySharedPref();
+    SignupModel? modelM = await preferences.getSignupModel(SharePreData.keySignupModel);
+    var userEmail = modelM!.data!.email;
+    initializePlugin().then((_) async {
+      Charge charge = Charge()
+        ..amount = total.value * 100
+        ..email = userEmail
+
+        ..reference = _getReference()
+        ..card = _getCardUI();
+
+       checkoutResponse = await paystack.checkout(
+        context,
+        charge: charge,
+        method: CheckoutMethod.card,
+        fullscreen: false,
+      );
+
+      print("Response $checkoutResponse");
+
+      if (checkoutResponse!.status == true) {
+        print("Transaction successful");
+        // callTopupApi(context, 'success', checkoutResponse.reference);
+      } else {
+        print("Transaction failed");
+        // callTopupApi(context, checkoutResponse.message, "0");
       }
     });
   }

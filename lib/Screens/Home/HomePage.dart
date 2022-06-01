@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> {
                       return GestureDetector(
                         onTap: () {
                           if (index == 0) {
+
                             Get.to(AdmireProfile());
                           }else if(index == 3){
                             Get.to(BcConnect());

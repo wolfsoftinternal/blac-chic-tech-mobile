@@ -197,11 +197,11 @@ displayBottomSheet(context) {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           BlackButton('Report', white_ffffff, () {}),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                         ],

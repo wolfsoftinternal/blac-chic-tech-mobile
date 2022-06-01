@@ -1,19 +1,8 @@
 import 'dart:math';
 
-import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
-import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/UIScreen/FeaturedScreenSecond.dart';
-import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,13 +19,13 @@ class Featured extends StatefulWidget {
 
 class _FeaturedState extends State<Featured> {
 
-  List<Widget> _samplePages = [
-    FeaturedScreenOne(),
-    FeaturedScreenSecond(),
-    Center(child: Text('Page 3'))
+  final List<Widget> _samplePages = [
+    const FeaturedScreenOne(),
+    const FeaturedScreenSecond(),
+    const Center(child: Text('Page 3'))
   ];
-  final _controller = new PageController();
-  static const _kDuration = const Duration(milliseconds: 300);
+  final _controller = PageController();
+  static const _kDuration = Duration(milliseconds: 300);
   static const _kCurve = Curves.ease;
 
 

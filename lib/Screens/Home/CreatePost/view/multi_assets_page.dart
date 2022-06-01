@@ -5,7 +5,6 @@
 import 'package:blackchecktech/Utils/page_mixin.dart';
 import 'package:blackchecktech/Utils/picker_method.dart';
 import 'package:flutter/material.dart';
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class MultiAssetsPage extends StatefulWidget {
   // const MultiAssetsPage({super.key});

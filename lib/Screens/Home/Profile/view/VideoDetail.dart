@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
-import 'package:blackchecktech/Layout/ToolbarWithHeaderTitle.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -66,7 +66,7 @@ class _VideoDetailState extends State<VideoDetail> {
             child: Row(
               children: [
                 BackLayout(),
-                Container(
+                SizedBox(
                   height: 48,
                   width: 48,
                 ),
@@ -133,7 +133,7 @@ class _VideoDetailState extends State<VideoDetail> {
                           ),
                         ),
                       )
-                    : Container(
+                    : SizedBox(
                         width: 48.w,
                         height: 48.h,
                       ),
@@ -141,7 +141,9 @@ class _VideoDetailState extends State<VideoDetail> {
                     ? Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(ProfileSetting());
+                          },
                           child: Container(
                             width: 55.w,
                             height: 55.h,
@@ -164,7 +166,7 @@ class _VideoDetailState extends State<VideoDetail> {
                           onTap: () {
                             displayBottomSheet(context);
                           },
-                          child: Container(
+                          child: SizedBox(
                             width: 55.w,
                             height: 55.h,
                             child: Icon(Icons.more_horiz, color: black_121212),
@@ -208,7 +210,7 @@ class _VideoDetailState extends State<VideoDetail> {
                           children: [
                             Stack(
                               children: [
-                                Container(
+                                SizedBox(
                                   height: 300,
                                   width: MediaQuery.of(context).size.width,
                                   child: FutureBuilder(
@@ -304,7 +306,7 @@ class _VideoDetailState extends State<VideoDetail> {
                                     height: 40,
                                     width: 120,
                                     decoration: BoxDecoration(
-                                      gradient: LinearGradient(colors: [
+                                      gradient: LinearGradient(colors: const [
                                         Color(0xff1c2535),
                                         Color(0xff04080f)
                                       ]),

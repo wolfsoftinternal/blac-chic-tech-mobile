@@ -4,7 +4,6 @@
 
 import 'package:blackchecktech/Utils/page_mixin.dart';
 import 'package:flutter/material.dart';
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import '../Utils/picker_method.dart';
 

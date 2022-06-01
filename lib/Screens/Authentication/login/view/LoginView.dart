@@ -1,6 +1,5 @@
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:get/get.dart';
@@ -198,7 +197,7 @@ class _LoginState extends State<LoginView> {
                   text:  TextSpan(children: [
                 TextSpan(
                     style: TextStyle(
-                        color: Color(0xffaaaaaa),
+                        color: const Color(0xffaaaaaa),
                         fontWeight: FontWeight.w500,
                         fontFamily: "NeueHelvetica",
                         fontStyle: FontStyle.normal,
@@ -206,7 +205,7 @@ class _LoginState extends State<LoginView> {
                     text: "Dont have an account yet? "),
                 TextSpan(
                   style: TextStyle(
-                      color: Color(0xffff881a),
+                      color: const Color(0xffff881a),
                       fontWeight: FontWeight.w700,
                       fontFamily: "NeueHelvetica",
                       fontStyle: FontStyle.normal,

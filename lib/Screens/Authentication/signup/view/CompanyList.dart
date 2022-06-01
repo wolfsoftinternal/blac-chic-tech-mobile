@@ -1,27 +1,23 @@
 import 'dart:io';
 
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderAction.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AddCompany.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_height.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/SearchBar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class CompanyList extends StatefulWidget {
-  const CompanyList({Key? key}) : super(key: key);
+  final isFrom;
+  const CompanyList({Key? key, this.isFrom}) : super(key: key);
 
   @override
   _CompanyListState createState() => _CompanyListState();
@@ -60,7 +56,7 @@ class _CompanyListState extends State<CompanyList> {
                       context: context,
                       pageBuilder: (BuildContext buildContext,
                           Animation animation, Animation secondaryAnimation) {
-                        return AddComapny();
+                        return const AddComapny();
                       });
                   });
                   
@@ -89,8 +85,13 @@ class _CompanyListState extends State<CompanyList> {
                       padding:  EdgeInsets.only(left: 24.w, right: 24.w, bottom: 24.h),
                       child: InkWell(
                         onTap: () {
-                          controller.companyName.value =
+                          if(widget.isFrom == 'past_job'){
+                            controller.pastJobName.value.text = controller.companyList[index]['name'];
+                            controller.pastJobImage.value = controller.companyList[index]['logo'];
+                          }else{
+                            controller.companyName.value =
                               controller.companyList[index]['name'];
+                          }
                           Get.back();
                         },
                         child: Row(

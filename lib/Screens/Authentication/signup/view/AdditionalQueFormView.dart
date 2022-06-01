@@ -1,12 +1,10 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/Chip.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
-import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
@@ -14,17 +12,10 @@ import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/QuestionsDialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:material_tag_editor/tag_editor.dart';
 
-import '../../../../Layout/BlackButtonDialog.dart';
-import '../../../../Layout/InputTextLayout.dart';
-import '../../../../Styles/my_height.dart';
 import '../../../../Styles/my_strings.dart';
-import '../../../../Utilities/TextfieldUtility.dart';
 import '../../../../Widget/EditTextDecoration.dart';
 
 class AdditionalQueFormView extends StatefulWidget {
@@ -36,7 +27,7 @@ class AdditionalQueFormView extends StatefulWidget {
 
 class _AdditionalQueState extends State<AdditionalQueFormView> {
   StepsController controller = Get.put(StepsController());
-  List<String> _values = [];
+  final List<String> _values = [];
   _onDelete(index) {
     setState(() {
       _values.removeAt(index);
@@ -69,7 +60,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       }
                     }
                     if (lastQuestionsInfo != "Done") {
-                      Get.to(AdditionalLastQueView());
+                      Get.to(const AdditionalLastQueView());
                     } else {
                       Get.offAll(BottomNavigation());
                     }

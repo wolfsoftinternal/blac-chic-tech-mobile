@@ -1,22 +1,13 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
-import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Layout/InputTextLayoutDemo.dart';
-import '../Styles/my_strings.dart';
 
 
 class AboutMe extends StatefulWidget {
@@ -28,11 +19,11 @@ class AboutMe extends StatefulWidget {
 
 class _AboutMeState extends State<AboutMe> {
 
-  var _firstnameController = TextEditingController();
-  var _lastnameController = TextEditingController();
-  var _JobfirstnameController = TextEditingController();
-  var _JoblastnameController = TextEditingController();
-  var _SchoolController = TextEditingController();
+  final _firstnameController = TextEditingController();
+  final _lastnameController = TextEditingController();
+  final _JobfirstnameController = TextEditingController();
+  final _JoblastnameController = TextEditingController();
+  final _SchoolController = TextEditingController();
 
   String? dropdownValue;
 
@@ -82,7 +73,7 @@ class _AboutMeState extends State<AboutMe> {
                                         _firstnameController,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text
+                                        TextInputType.text, false
                                     )),
                                 SizedBox(
                                   width: 15.w,
@@ -93,7 +84,7 @@ class _AboutMeState extends State<AboutMe> {
                                         _lastnameController,
                                         false,
                                         TextInputAction.done,
-                                        TextInputType.text)),
+                                        TextInputType.text, false)),
                               ],
                             ),
 
@@ -148,7 +139,7 @@ class _AboutMeState extends State<AboutMe> {
                       Container(
                           width: double.infinity,
                           height: 1,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color:  view_line_f4f6f6
                           ),
                       ),
@@ -234,17 +225,17 @@ class _AboutMeState extends State<AboutMe> {
                                 borderRadius: BorderRadius.circular(4.r),
                               ),
                               child: Padding(
-                                padding:  EdgeInsets.all(10.0),
+                                padding:  const EdgeInsets.all(10.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SvgPicture.asset(icon_add_black,width: 16.w,height: 16.h,),
                                     SizedBox(width: 10.w,),
                                     // Add More
-                                    Text(
+                                    const Text(
                                         "Add More",
-                                        style: const TextStyle(
-                                            color:  const Color(0xff121212),
+                                        style: TextStyle(
+                                            color:  Color(0xff121212),
                                             fontWeight: FontWeight.w700,
                                             fontFamily: "NeueHelvetica",
                                             fontStyle:  FontStyle.normal,
@@ -267,7 +258,7 @@ class _AboutMeState extends State<AboutMe> {
                                         _JobfirstnameController,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text
+                                        TextInputType.text, false
                                     )),
                                 SizedBox(
                                   width: 15.w,
@@ -278,7 +269,7 @@ class _AboutMeState extends State<AboutMe> {
                                         _JoblastnameController,
                                         false,
                                         TextInputAction.done,
-                                        TextInputType.text)),
+                                        TextInputType.text, false)),
                               ],
                             ),
 
@@ -349,7 +340,7 @@ class _AboutMeState extends State<AboutMe> {
                       Container(
                         width: double.infinity,
                         height: 1,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color:  view_line_f4f6f6
                         ),
                       ),
@@ -442,17 +433,17 @@ class _AboutMeState extends State<AboutMe> {
                                 borderRadius: BorderRadius.circular(4.r),
                               ),
                               child: Padding(
-                                padding:  EdgeInsets.all(10.0),
+                                padding:  const EdgeInsets.all(10.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SvgPicture.asset(icon_add_black,width: 16.w,height: 16.h,),
                                     SizedBox(width: 10.w,),
                                     // Add More
-                                    Text(
+                                    const Text(
                                         "Add More",
-                                        style: const TextStyle(
-                                            color:  const Color(0xff121212),
+                                        style: TextStyle(
+                                            color:  Color(0xff121212),
                                             fontWeight: FontWeight.w700,
                                             fontFamily: "NeueHelvetica",
                                             fontStyle:  FontStyle.normal,
@@ -472,7 +463,7 @@ class _AboutMeState extends State<AboutMe> {
                                 _SchoolController,
                                 false,
                                 TextInputAction.next,
-                                TextInputType.text
+                                TextInputType.text, false
                             ),
 
                             SizedBox(height: 16.h,),
@@ -484,7 +475,7 @@ class _AboutMeState extends State<AboutMe> {
                                   flex: 1,
                                   child: Container(
                                     height: 60.h,
-                                    padding: EdgeInsets.only(left: 16, right: 10),
+                                    padding: const EdgeInsets.only(left: 16, right: 10),
                                     decoration: BoxDecoration(
                                       color: light_grey_f2f2f2,
                                       borderRadius: BorderRadius.circular(4),
@@ -492,7 +483,7 @@ class _AboutMeState extends State<AboutMe> {
                                     ),
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
-                                        hint: new Text(
+                                        hint: const Text(
                                           "Role",
                                           style: TextStyle(
                                               color: Colors.black,
@@ -547,7 +538,7 @@ class _AboutMeState extends State<AboutMe> {
                                   flex: 1,
                                   child: Container(
                                     height: 60.h,
-                                    padding: EdgeInsets.only(left: 16, right: 10),
+                                    padding: const EdgeInsets.only(left: 16, right: 10),
                                     decoration: BoxDecoration(
                                       color: light_grey_f2f2f2,
                                       borderRadius: BorderRadius.circular(4),
@@ -555,7 +546,7 @@ class _AboutMeState extends State<AboutMe> {
                                     ),
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
-                                        hint: new Text(
+                                        hint: const Text(
                                           "Industry",
                                           style: TextStyle(
                                               color: Colors.black,
@@ -673,7 +664,7 @@ class _AboutMeState extends State<AboutMe> {
                       Container(
                         width: double.infinity,
                         height: 1,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color:  view_line_f4f6f6
                         ),
                       ),

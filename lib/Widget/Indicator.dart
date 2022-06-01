@@ -2,13 +2,12 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:flutter/material.dart';
 
 class Indicator extends StatelessWidget {
-  Indicator({
+  const Indicator({
     Key? key,
     required this.controller,
     required this.indicatorColors,
-    this.itemCount: 0,
-  })  : assert(controller != null),
-        super(key: key);
+    this.itemCount = 0,
+  })  : super(key: key);
 
   /// PageView Controller
   final PageController controller;
@@ -37,16 +36,16 @@ class Indicator extends StatelessWidget {
     bool isCurrentPageSelected = index ==
         (controller.page != null ? controller.page!.round() % pageCount : 0);
 
-    return new Container(
+    return SizedBox(
       height: size,
       width: 30 + (2 * spacing),
-      child: new Center(
-        child: new Material(
+      child: Center(
+        child: Material(
           borderRadius: BorderRadius.circular(10),
           // color: isCurrentPageSelected ? selectedColor : normalColor,
           color: indicatorColors[index],
           //  type: MaterialType.circle,
-          child: new Container(
+          child: SizedBox(
             width: 30,
             height: dotSize,
           ),
@@ -57,9 +56,9 @@ class Indicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: new List<Widget>.generate(itemCount, (int index) {
+      children: List<Widget>.generate(itemCount, (int index) {
         return _buildIndicator(index, itemCount, size, spacing);
       }),
     );

@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 
 class InvitePeople extends StatefulWidget {
   final fromView;
-  InvitePeople({Key? key, this.fromView}) : super(key: key);
+  const InvitePeople({Key? key, this.fromView}) : super(key: key);
 
   @override
   State<InvitePeople> createState() => _InvitePeopleState();
@@ -42,7 +42,7 @@ class _InvitePeopleState extends State<InvitePeople> {
       body: Obx(
         () => Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             ToolbarWithHeaderCenterTitle('Invite People'),
@@ -78,7 +78,7 @@ class _InvitePeopleState extends State<InvitePeople> {
                             widget.fromView == true
                             ? setHelveticaLight(controller.searchList.length.toString() + " Users Selected", 16.sp, grey_aaaaaa, FontWeight.w900, FontStyle.normal)
                             : setHelveticaLight(videoController.userList.length.toString() + " Users", 16.sp, grey_aaaaaa, FontWeight.w900, FontStyle.normal),
-                            Spacer(),
+                            const Spacer(),
                             InkWell(
                               onTap: (){
                                 setState(() {
@@ -108,7 +108,7 @@ class _InvitePeopleState extends State<InvitePeople> {
                       ListView.builder(
                         primary: false,
                         shrinkWrap: true,
-                        padding: EdgeInsets.all(0),
+                        padding: const EdgeInsets.all(0),
                         itemCount: widget.fromView == true ? controller.searchList.length : videoController.userList.length,
                         itemBuilder: (context, i) => GestureDetector(
                           onTap: () {

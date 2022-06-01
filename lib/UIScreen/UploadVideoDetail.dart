@@ -1,18 +1,11 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/BlackNextButton.dart';
-import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextfieldUtility.dart';
-import 'package:blackchecktech/Widget/AddLocationView.dart';
-import 'package:blackchecktech/Widget/EditTextDecoration.dart';
-import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
 import 'package:blackchecktech/Widget/SpinnerDecorationBorder.dart';
-import 'package:blackchecktech/Widget/search_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,37 +24,37 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
 
   List<DropdownMenuItem<String>> get dropdownItems{
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("USA",style: TextStyle(
+      const DropdownMenuItem(child: Text("USA",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "USA"),
-      DropdownMenuItem(child: Text("Canada",style: TextStyle(
+      const DropdownMenuItem(child: Text("Canada",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Canada"),
-      DropdownMenuItem(child: Text("Brazil",style: TextStyle(
+      const DropdownMenuItem(child: Text("Brazil",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Brazil"),
-      DropdownMenuItem(child: Text("England",style: TextStyle(
+      const DropdownMenuItem(child: Text("England",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "England"),
     ];
     return menuItems;
   }
 
-  String? selectedValue = null;
+  String? selectedValue;
 
   /*Language Spinner Code is here*/
 
   List<DropdownMenuItem<String>> get dropdownItemslang{
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("English",style: TextStyle(
+      const DropdownMenuItem(child: Text("English",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "English"),
-      DropdownMenuItem(child: Text("Hindi",style: TextStyle(
+      const DropdownMenuItem(child: Text("Hindi",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Hindi"),
-      DropdownMenuItem(child: Text("Gujarati",style: TextStyle(
+      const DropdownMenuItem(child: Text("Gujarati",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Gujarati"),
-      DropdownMenuItem(child: Text("Marathi",style: TextStyle(
+      const DropdownMenuItem(child: Text("Marathi",style: TextStyle(
           fontSize: 14,fontFamily: helveticaNeueNeue_medium,color: black_121212)),value: "Marathi"),
     ];
     return menuItems;
   }
 
-  String? selectedValuelang = null;
+  String? selectedValuelang;
 
   List<TagPeopleModel> onDealsModel = [];
   List<TagPeopleModel> selectedList = [];
@@ -85,11 +78,11 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
         context: context,
         builder: (ctx) {
           return Container(
-            decoration: new BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: new BorderRadius.only(
-                    topLeft: const Radius.circular(30.0),
-                    topRight: const Radius.circular(30.0))),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0))),
             child: SingleChildScrollView(
               child: Wrap(
                 children: [
@@ -101,7 +94,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
 
@@ -113,10 +106,10 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                         child: Container(
                                             width: 48,
                                             height: 4,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(4)),
-                                                color: const Color(
+                                                color: Color(
                                                     0xff96a6a3))),
                                       ),
                                     ),
@@ -128,11 +121,11 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
 
 
                                     // SPEAKERS
-                                    Center(
+                                    const Center(
                                       child: Text(
                                           "SPEAKERS",
-                                          style: const TextStyle(
-                                              color:  const Color(0xff121212),
+                                          style: TextStyle(
+                                              color:  Color(0xff121212),
                                               fontWeight: FontWeight.w900,
                                               fontFamily: "NeueHelvetica",
                                               fontStyle:  FontStyle.normal,
@@ -145,7 +138,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                       height: 24.h,
                                     ),
 
-                                    Divider(
+                                    const Divider(
                                       thickness: 1,
                                       height: 1,
                                       color: Color(0xfff4f6f6),
@@ -170,7 +163,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                           ListView.builder(
                                             primary: false,
                                             shrinkWrap: true,
-                                            padding: EdgeInsets.all(0),
+                                            padding: const EdgeInsets.all(0),
                                             itemCount: onDealsModel.length,
                                             itemBuilder: (context, i) => GestureDetector(
                                               onTap: () {
@@ -335,7 +328,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                       decoration: SpinnerDecorationBorder,
                       child: DropdownButtonHideUnderline(
                         child: Padding(
-                          padding:  EdgeInsets.only(left: 10,right: 10),
+                          padding:  const EdgeInsets.only(left: 10,right: 10),
                           child: DropdownButton(
                             //  validator: (value) => value == null ? "Select a country" : null,
                               dropdownColor: Colors.white,
@@ -389,7 +382,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                       decoration: SpinnerDecorationBorder,
                       child: DropdownButtonHideUnderline(
                         child: Padding(
-                          padding:  EdgeInsets.only(left: 10,right: 10),
+                          padding:  const EdgeInsets.only(left: 10,right: 10),
                           child: DropdownButton(
                             //  validator: (value) => value == null ? "Select a country" : null,
                               dropdownColor: Colors.white,
@@ -439,7 +432,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
 
                     Container(
                       decoration: BoxDecoration(
-                        color: Color(0x66f5f5f5),
+                        color: const Color(0x66f5f5f5),
                         borderRadius: BorderRadius.circular(4),
                         border: Border.all(
                           width: 1,
@@ -447,12 +440,12 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                         ),
                       ),
                       child: // <iframe width="560" height="315" src="https://www.youtube.com/embed/yfwNi4aK1_w" title="YouTube vide
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
                         child: Text(
                             "<iframe width=560 height=315 src=https:www.youtube.com/embed/yfwNi4aK1_w title=YouTube video player frameborder=0 allow=accelerometer autoplay clipboard-write encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>",
-                        style: const TextStyle(
-                        color:  const Color(0xff121212),
+                        style: TextStyle(
+                        color:  Color(0xff121212),
                           fontWeight: FontWeight.w500,
                           fontFamily: "NeueHelvetica",
                           fontStyle:  FontStyle.normal,
@@ -565,7 +558,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(40),
-                                color: Color(0xffebebeb),
+                                color: const Color(0xffebebeb),
                               ),
                               child: // Frame 8618
 
@@ -574,7 +567,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 child: Text(
                                     "Tag name",
                                     style:  TextStyle(
-                                        color:   Color(0xff3f3f3f),
+                                        color:   const Color(0xff3f3f3f),
                                         fontWeight: FontWeight.w700,
                                         fontFamily: "Inter",
                                         fontStyle:  FontStyle.normal,
@@ -590,7 +583,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                             Text(
                                 "ADD TAG",
                                 style:  TextStyle(
-                                    color:   Color(0xffff8819),
+                                    color:   const Color(0xffff8819),
                                     fontWeight: FontWeight.w500,
                                     fontFamily: "Inter",
                                     fontStyle:  FontStyle.normal,
@@ -631,7 +624,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
                                 textAlign: TextAlign.left
                             ),
-                            Icon(Icons.add,size: 15,color: orange_ff881a,)
+                            const Icon(Icons.add,size: 15,color: orange_ff881a,)
                           ],
                         ),
                       ),
@@ -644,7 +637,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(40),
-                        color: Color(0xffebebeb),
+                        color: const Color(0xffebebeb),
                       ),
                       child: // Frame 8618
 
@@ -672,7 +665,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 textAlign: TextAlign.left
                             ),
                             SizedBox(width: 5.w,),
-                            Icon
+                            const Icon
                               (Icons.cancel_outlined,size: 12,)
                           ],
                         ),

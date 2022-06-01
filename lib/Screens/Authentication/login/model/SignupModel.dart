@@ -154,7 +154,7 @@ class UserDetails {
         deletedAt: json["deleted_at"],
         currentJobs: json["current_jobs"] != null ? CurrentJobs.fromJson(json["current_jobs"]) : null,
         pastJobs: json["past_jobs"] == null ? null : List<CurrentJobs>.from(json["past_jobs"].map((x) => CurrentJobs.fromJson(x))),
-        token: json["token"] != null ? json["token"] : null,
+        token: json["token"],
         educations: json["educations"] != null ? List<Education>.from(json["educations"].map((x) => Education.fromJson(x))) : null,
         images: json["images"] != null ? List<dynamic>.from(json["images"].map((x) => x)) : null,
         questions: json["questions"] != null ? List<Question>.from(json["questions"].map((x) => Question.fromJson(x))) : null,
@@ -231,8 +231,8 @@ class Details {
 
     factory Details.fromJson(Map<String, dynamic> json) => Details(
         id: json["id"],
-        countryId: json["country_id"] == null ? null : json["country_id"],
-        stateId: json["state_id"] == null ? null : json["state_id"],
+        countryId: json["country_id"],
+        stateId: json["state_id"],
         name: json["name"],
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
@@ -242,8 +242,8 @@ class Details {
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "country_id": countryId == null ? null : countryId,
-        "state_id": stateId == null ? null : stateId,
+        "country_id": countryId,
+        "state_id": stateId,
         "name": name,
         "status": status,
         "created_at": createdAt!.toIso8601String(),

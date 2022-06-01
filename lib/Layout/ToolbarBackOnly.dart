@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../Styles/my_icons.dart';
 
@@ -28,7 +26,7 @@ class BackLayout extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 6,
                 blurRadius: 10,
-                offset: Offset(1, 4), // changes position of shadow
+                offset: const Offset(1, 4), // changes position of shadow
               ),
             ],
           ),

@@ -1,5 +1,4 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
-import 'package:blackchecktech/Layout/ToolbarLocation.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
@@ -29,7 +28,7 @@ class _CreateEventDetailState extends State<CreateEventDetail> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
                 height: 60,
               ),
           ToolbarWithHeaderCenterTitle('Create Event'),

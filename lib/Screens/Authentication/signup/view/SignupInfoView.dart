@@ -121,7 +121,7 @@ class SignupInfoView extends StatelessWidget {
                         }else if (flag == "3") {
                           Get.to(const AdditionalQueFormView());
                         }else if(flag == "4"){
-                          Get.to(AdditionalLastQueView());
+                          Get.to(const AdditionalLastQueView());
                         }else{
                           Get.to(const PersonalInfoFormView());
                         }
