@@ -1,5 +1,10 @@
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:readmore/readmore.dart';
+
 
 import '../Styles/my_colors.dart';
 
@@ -79,9 +84,26 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
         },
         children: <Widget>[
           Container(
-            color: Colors.greenAccent,
-            child: Center(
-              child: Text("Page 1"),
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+              ReadMoreText(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies',
+              style: TextStyle(
+                fontSize: 15.sp,color:opcity_black_B3121212,fontFamily: roboto_medium
+              ),
+              trimLines: 3,
+              // trimLength: 10,
+              // colorClickableText: Colors.pink,
+              trimMode: TrimMode.Line,
+              trimCollapsedText: 'See full article',
+              trimExpandedText: 'See less article',
+              moreStyle: TextStyle(fontSize: 12.sp,color: black_121212,fontFamily: helvetica_neu_bold),
+              lessStyle : TextStyle(fontSize: 12.sp,color: black_121212,fontFamily: helvetica_neu_bold),
+            )
+              ],
             ),
           ),
           Container(
