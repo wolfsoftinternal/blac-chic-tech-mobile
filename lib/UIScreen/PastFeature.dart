@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:readmore/readmore.dart';
 
 class PastFeature extends StatefulWidget {
   const PastFeature({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class _PastFeatureState extends State<PastFeature> {
 
               Container(
                 // margin: EdgeInsets.only(top: 488.h),
-                transform: Matrix4.translationValues(0,475, 0),
+                transform: Matrix4.translationValues(0,495, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,6 +158,7 @@ class _PastFeatureState extends State<PastFeature> {
                           SvgPicture.asset(icon_next_arrow,color: black_121212,)
                         ],),
                     ),
+
                   ],
                 ),
               )
