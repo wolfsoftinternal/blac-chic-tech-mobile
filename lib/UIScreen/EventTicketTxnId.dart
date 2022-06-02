@@ -452,7 +452,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                     child: Opacity(
                                       opacity: 0.699999988079071,
                                       child: Text(
-                                          "Trxn ID 12321312112113",
+                                          "Trxn ID " + widget.orderDetails.data!.transaction_id!,
                                           style: TextStyle(
                                               color: Color(0xff121212),
                                               fontWeight:
