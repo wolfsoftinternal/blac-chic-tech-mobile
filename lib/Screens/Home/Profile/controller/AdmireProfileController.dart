@@ -20,16 +20,19 @@ import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
 
 import '../../../../Model/BaseModel.dart';
+import '../../../../UIScreen/EventTicketTxnId.dart';
 import '../../../../Utils/CommonWidget.dart';
 import '../../../../Utils/preference_utils.dart';
 import '../../../../Utils/share_predata.dart';
 import '../../../Networks/api_endpoint.dart';
 import '../../../Networks/api_response.dart';
+import '../../Event/model/OrderListModel.dart';
 
 class AdmireProfileController extends GetxController {
   RxList<AdmireList> admireList = <AdmireList>[].obs;
   RxList<AdmireList> otherAdmireList = <AdmireList>[].obs;
   Rx<UserDetails> details = UserDetails().obs;
+  Rx<UserDetails> selectedUserDetails = UserDetails().obs;
   RxList<PostList> postList = <PostList>[].obs;
   RxList<PostList> postDetailList = <PostList>[].obs;
   RxList<VideoList> videoList = <VideoList>[].obs;
@@ -51,7 +54,7 @@ class AdmireProfileController extends GetxController {
   RxInt selectedIndex = 1.obs;
   RxString admire = ''.obs;
   RxInt count = 1.obs;
-  RxInt total =  0.obs;
+  RxInt total = 0.obs;
   CheckoutResponse? checkoutResponse;
   PaystackPlugin paystack = PaystackPlugin();
   static const String PAYSTACK_KEY =
@@ -200,6 +203,43 @@ class AdmireProfileController extends GetxController {
     });
   }
 
+  SelectedUserProfileAPI(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlOtherProfile;
+    final apiReq = Request();
+
+    dynamic body = {
+      'user_id': id.toString(),
+    };
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            SelectedUserProfileAPI(context, id);
+          } else if (model.statusCode == 200) {
+            UserDetails userDetailsModel =
+            UserDetails.fromJson(userModel['data']);
+
+            selectedUserDetails.value = userDetailsModel;
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
   postListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
@@ -321,6 +361,9 @@ class AdmireProfileController extends GetxController {
               eventList.value = detail.data!;
             } else {
               eventDetailList.value = detail.data!;
+
+
+
             }
           }
         });
@@ -331,6 +374,8 @@ class AdmireProfileController extends GetxController {
   }
 
   eventDetailAPI(BuildContext context, id, [isFrom]) async {
+    print('Event detail api call');
+
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -358,12 +403,12 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             EventDetailModel detail = EventDetailModel.fromJson(userModel);
             eventDetails.value = detail.data!;
-            if(isFrom != null){
+
+            if (isFrom != null) {
               Get.to(const EventDetail(isFrom: 'event'));
-            }else{
+            } else {
               Get.to(const EventDetail());
             }
-            
           }
         });
       } else {
@@ -438,9 +483,9 @@ class AdmireProfileController extends GetxController {
 
             replaceAdmireAPI(context, id, newId, body);
           } else if (model.statusCode == 200) {
-            if(userID == null){
+            if (userID == null) {
               admireListAPI(context, null);
-            }else{
+            } else {
               admireListAPI(context, userID);
             }
             Get.back();
@@ -537,42 +582,136 @@ class AdmireProfileController extends GetxController {
 
   //GetUi
   PaymentCard _getCardUI() {
-    return PaymentCard(number: "4084084084084081", cvc: "408", expiryMonth: 02, expiryYear: 23);
+    return PaymentCard(
+        number: "4084084084084081",
+        cvc: "408",
+        expiryMonth: 02,
+        expiryYear: 23);
   }
 
   Future initializePlugin() async {
-    print("PAYSTACK_KEY-> "+PAYSTACK_KEY);
+    print("PAYSTACK_KEY-> " + PAYSTACK_KEY);
     await paystack.initialize(publicKey: PAYSTACK_KEY);
   }
 
   //Method Charging card
-  chargeCardAndMakePayment(BuildContext context) async {
+  chargeCardAndMakePayment(BuildContext context,selectedPositionOfAdmission, OrderListModel orderDetail) async {
     var preferences = MySharedPref();
-    SignupModel? modelM = await preferences.getSignupModel(SharePreData.keySignupModel);
+    SignupModel? modelM =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
     var userEmail = modelM!.data!.email;
     initializePlugin().then((_) async {
       Charge charge = Charge()
         ..amount = total.value * 100
         ..email = userEmail
-
         ..reference = _getReference()
         ..card = _getCardUI();
 
-       checkoutResponse = await paystack.checkout(
+      checkoutResponse = await paystack.checkout(
         context,
         charge: charge,
         method: CheckoutMethod.card,
         fullscreen: false,
       );
-
-      print("Response $checkoutResponse");
+      
 
       if (checkoutResponse!.status == true) {
-        print("Transaction successful");
+        dynamic bodyForOrderUpdate = {
+          'transaction_id': orderDetail.data!.id!.toString(),
+          'payment_transaction_id': checkoutResponse!.reference!,
+          'status': "1",
+        };
+
+        OrderUpdateAPI(context, bodyForOrderUpdate, selectedPositionOfAdmission);
+        
+
+        print("Transaction successful message " +
+            checkoutResponse!.message.toString());
+        print("Transaction successful obs " + checkoutResponse.obs.string);
         // callTopupApi(context, 'success', checkoutResponse.reference);
       } else {
         print("Transaction failed");
         // callTopupApi(context, checkoutResponse.message, "0");
+      }
+    });
+  }
+
+
+  OrderCreateAPI(BuildContext context, body,selectedPositionOfAdmission) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlCreateOrder;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+
+          print('strData order' + strData);
+
+          Map<String, dynamic> orderModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(orderModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            OrderCreateAPI(context, body,selectedPositionOfAdmission);
+          } else if (model.statusCode == 200) {
+
+            OrderListModel detail = OrderListModel.fromJson(orderModel);
+
+            print('orderDetails  id ' + detail.data!.id!.toString());
+            print('orderDetails  total_price ' + detail.data!.total_price.toString());
+
+            chargeCardAndMakePayment(context,selectedPositionOfAdmission, detail);
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+
+  OrderUpdateAPI(BuildContext context, body,selectedPositionOfAdmission) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlOrderUpdate;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> orderModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(orderModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            OrderCreateAPI(context, body,selectedPositionOfAdmission);
+          } else if (model.statusCode == 200) {
+            OrderListModel detail = OrderListModel.fromJson(orderModel);
+
+            Get.to(EventTicketTxnId(eventDetails: eventDetails.value,
+              selectedAdmissionPosition: selectedPositionOfAdmission,
+              orderDetails: detail,
+            ));
+
+          //  chargeCardAndMakePayment(context,selectedPositionOfAdmission, orderListModel);
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
       }
     });
   }
