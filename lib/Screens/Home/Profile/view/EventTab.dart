@@ -16,7 +16,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class EventTab extends StatefulWidget {
-  EventTab({Key? key}) : super(key: key);
+  final id;
+  EventTab({Key? key, this.id}) : super(key: key);
 
   @override
   State<EventTab> createState() => _EventTabState();
@@ -74,7 +75,7 @@ class _EventTabState extends State<EventTab> {
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
-                                  Get.to(EventListDetail(
+                                  Get.to(EventListDetail(userId: widget.id,
                                       id: controller.eventList[index].id));
                                 },
                                 child: Padding(

@@ -19,7 +19,8 @@ import 'package:get/get.dart';
 
 class PostDetail extends StatefulWidget {
   final id;
-  const PostDetail({Key? key, this.id}) : super(key: key);
+  final userId;
+  const PostDetail({Key? key, this.id, this.userId}) : super(key: key);
 
   @override
   State<PostDetail> createState() => _PostDetailState();
@@ -34,10 +35,11 @@ class _PostDetailState extends State<PostDetail> {
     // TODO: implement initState
     super.initState();
     dynamic body = {
+      'user_id': widget.userId.toString(),
       'post_id': widget.id.toString(),
     };
     checkNet(context).then((value) {
-      controller.postListAPI(context, body);
+      controller.postListAPI(context, body, 'detail');
     });
     init();
   }
@@ -110,7 +112,7 @@ class _PostDetailState extends State<PostDetail> {
                 userId == controller.details.value.id
                 ? GestureDetector(
                   onTap: () {
-                    createBottomSheet(context);
+                    createBottomSheet(context, widget.userId);
                   },
                   child: Container(
                     width: 48.w,

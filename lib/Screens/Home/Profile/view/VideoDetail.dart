@@ -23,7 +23,8 @@ import '../../../../Widget/ReportBottomSheet.dart';
 
 class VideoDetail extends StatefulWidget {
   final id;
-  const VideoDetail({Key? key, this.id}) : super(key: key);
+  final userId;
+  const VideoDetail({Key? key, this.userId, this.id}) : super(key: key);
 
   @override
   State<VideoDetail> createState() => _VideoDetailState();
@@ -39,9 +40,10 @@ class _VideoDetailState extends State<VideoDetail> {
     super.initState();
     dynamic body = {
       'video_id': widget.id.toString(),
+      'user_id': userId.toString(),
     };
     checkNet(context).then((value) {
-      controller.videoListAPI(context, body);
+      controller.videoListAPI(context, body, 'detail');
     });
     init();
   }
@@ -114,7 +116,7 @@ class _VideoDetailState extends State<VideoDetail> {
                 userId == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
-                          createBottomSheet(context);
+                          createBottomSheet(context, widget.userId);
                         },
                         child: Container(
                           width: 48.w,

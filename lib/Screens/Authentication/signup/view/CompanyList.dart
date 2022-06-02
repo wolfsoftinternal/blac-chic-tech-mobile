@@ -8,6 +8,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:blackchecktech/Widget/SearchBar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,11 @@ class _CompanyListState extends State<CompanyList> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    checkNet(context).then((value) => controller.companyListAPI(context, null));
+    controller.initScrolling(context);
+    dynamic body = {
+      'page': controller.pageNumber.toString()
+    };
+    checkNet(context).then((value) => controller.companyListAPI(context, body)).then((value) => setState((){}));
   }
 
   @override
@@ -71,59 +76,71 @@ class _CompanyListState extends State<CompanyList> {
                 onSubmit: (v) {
                   var body = {
                     'search': controller.searchCompanyController.value.text,
+                    'page': controller.pageNumber.toString(),
                   };
                   controller.companyListAPI(context, body);
                 },
               ),
             ),
             Expanded(
-              flex: 1,
-              child: ListView.builder(
-                  itemCount: controller.companyList.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding:  EdgeInsets.only(left: 24.w, right: 24.w, bottom: 24.h),
-                      child: InkWell(
-                        onTap: () {
-                          if(widget.isFrom == 'past_job'){
-                            controller.pastJobName.value.text = controller.companyList[index]['name'];
-                            controller.pastJobImage.value = controller.companyList[index]['logo'];
-                          }else{
-                            controller.companyName.value =
-                              controller.companyList[index]['name'];
-                          }
-                          Get.back();
-                        },
-                        child: Row(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(3.r),
-                              child: CachedNetworkImage(
-                                imageUrl: controller.companyList[index]['logo'],
-                                height: 50.r, width: 50.r,
-                                fit: BoxFit.cover,
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        SvgPicture.asset(placeholder, height: 50.r, width: 50.r,),
-                                errorWidget: (context, url, error) => SvgPicture.asset(placeholder, height: 50.r, width: 50.r,),
+              child: SingleChildScrollView(
+                controller: controller.scrollController,
+                child: Column(
+                  children: [
+                    ListView.builder(
+                        physics: ClampingScrollPhysics(),
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: controller.companyList.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding:  EdgeInsets.only(left: 24.w, right: 24.w, bottom: 24.h),
+                            child: InkWell(
+                              onTap: () {
+                                if(widget.isFrom == 'past_job'){
+                                  controller.pastJobName.value.text = controller.companyList[index]['name'];
+                                  controller.pastJobImage.value = controller.companyList[index]['logo'];
+                                }else{
+                                  controller.companyName.value =
+                                    controller.companyList[index]['name'];
+                                }
+                                Get.back();
+                              },
+                              child: Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(3.r),
+                                    child: CachedNetworkImage(
+                                      imageUrl: controller.companyList[index]['logo'],
+                                      height: 50.r, width: 50.r,
+                                      fit: BoxFit.cover,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              SvgPicture.asset(placeholder, height: 50.r, width: 50.r,),
+                                      errorWidget: (context, url, error) => SvgPicture.asset(placeholder, height: 50.r, width: 50.r,),
+                                    ),
+                                  ),
+                                   SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Text(
+                                    controller.companyList[index]['name'],
+                                    style:  TextStyle(
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        color: black_121212,
+                                        fontSize: 14.sp),
+                                  ),
+                                ],
                               ),
                             ),
-                             SizedBox(
-                              width: 10.w,
-                            ),
-                            Text(
-                              controller.companyList[index]['name'],
-                              style:  TextStyle(
-                                  fontFamily: helveticaNeueNeue_medium,
-                                  color: black_121212,
-                                  fontSize: 14.sp),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
+                          );
+                        }),
+                  ],
+                ),
+              ),
             ),
+            if (controller.isPaginationLoading.value == true)
+                PaginationUtils().loader(),
           ],
         ),
       ),
