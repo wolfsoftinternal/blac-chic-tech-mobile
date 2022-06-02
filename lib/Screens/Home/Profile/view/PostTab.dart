@@ -10,7 +10,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class PostTab extends StatefulWidget {
-  const PostTab({Key? key}) : super(key: key);
+  final id;
+  const PostTab({this.id, Key? key}) : super(key: key);
 
   @override
   State<PostTab> createState() => _PostTabState();
@@ -45,7 +46,8 @@ class _PostTabState extends State<PostTab> {
               itemBuilder: (BuildContext context, int index) => 
               GestureDetector(
                 onTap: (){
-                  Get.to(PostDetail(id: controller.postList[index].id));
+                  Get.to(PostDetail(userId: widget.id,
+                    id: controller.postList[index].id));
                 },
                 child: Stack(
                   children: [

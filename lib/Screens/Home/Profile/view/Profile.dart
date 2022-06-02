@@ -47,9 +47,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     });
 
     checkNet(context).then((value) {
-      controller.postListAPI(context, null);
-      controller.videoListAPI(context, null);
-      controller.eventListAPI(context, null);
+      dynamic body = {
+        'user_id': controller.details.value.id.toString(),
+      };
+      controller.postListAPI(context, body);
+      controller.videoListAPI(context, body);
+      controller.eventListAPI(context, body);
     });
 
     init();
@@ -141,7 +144,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   userId == controller.details.value.id
                       ? GestureDetector(
                           onTap: () {
-                            createBottomSheet(context);
+                            createBottomSheet(context, controller.details.value.id);
                           },
                           child: Container(
                             width: 48.w,
@@ -649,9 +652,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     controller: tabController,
                     children: [
                       ProfileTab(),
-                      PostTab(),
-                      VideoTab(),
-                      EventTab(),
+                      PostTab(id: controller.details.value.id),
+                      VideoTab(id: controller.details.value.id),
+                      EventTab(id: controller.details.value.id),
                     ],
                   ),
                 ),

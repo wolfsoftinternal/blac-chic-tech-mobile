@@ -10,7 +10,8 @@ import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoTab extends StatefulWidget {
-  const VideoTab({Key? key}) : super(key: key);
+  final id;
+  const VideoTab({Key? key, this.id}) : super(key: key);
 
   @override
   State<VideoTab> createState() => _VideoTabState();
@@ -91,7 +92,8 @@ class _VideoTabState extends State<VideoTab> {
                         Center(
                             child: InkWell(
                           onTap: () {
-                            Get.to(VideoDetail(id: controller.videoList[index].id));
+                            Get.to(VideoDetail(userId: widget.id,
+                              id: controller.videoList[index].id));
                             // if (controller.videoController[index].value.isPlaying) {
                             //   setState(() {
                             //     controller.videoController[index].pause();

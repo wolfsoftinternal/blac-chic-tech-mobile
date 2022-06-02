@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-createBottomSheet(context) {
+createBottomSheet(context, userId) {
   AdmireProfileController controller = Get.put(AdmireProfileController());
 
   showModalBottomSheet(
@@ -58,7 +58,10 @@ createBottomSheet(context) {
                                 Get.back();
                                 Get.to(const CreatPost())!.then((value) => {
                                       checkNet(context).then((value) {
-                                        controller.postListAPI(context, null);
+                                        dynamic body = {
+                                          'user_id': userId.toString()
+                                        };
+                                        controller.postListAPI(context, body);
                                       })
                                     });
                                     setState((){});
@@ -82,7 +85,10 @@ createBottomSheet(context) {
                                 Get.back();
                                 Get.to(const UploadVideoDetail())!.then((value) => {
                                       checkNet(context).then((value) {
-                                        controller.videoListAPI(context, null);
+                                        dynamic body = {
+                                          'user_id': userId.toString()
+                                        };
+                                        controller.videoListAPI(context, body);
                                       })
                                     });
                                     setState((){});
@@ -107,7 +113,10 @@ createBottomSheet(context) {
                                 Get.back();
                                 Get.to(const CreateEvent())!.then((value) => {
                                       checkNet(context).then((value) {
-                                        controller.eventListAPI(context, null);
+                                        dynamic body = {
+                                          'user_id': userId.toString()
+                                        };
+                                        controller.eventListAPI(context, body);
                                       })
                                     });
                                 setState((){});

@@ -21,7 +21,8 @@ import '../../../../Utilities/Constant.dart';
 
 class EventListDetail extends StatefulWidget {
   final id;
-  const EventListDetail({Key? key, this.id}) : super(key: key);
+  final userId;
+  const EventListDetail({Key? key, this.userId, this.id}) : super(key: key);
 
   @override
   State<EventListDetail> createState() => _EventListDetailState();
@@ -37,10 +38,12 @@ class _EventListDetailState extends State<EventListDetail> {
     super.initState();
     dynamic body = {
       'event_id': widget.id.toString(),
+      'user_id': widget.userId.toString(),
     };
     checkNet(context).then((value) {
-      controller.eventListAPI(context, body);
+      controller.eventListAPI(context, body, 'detail');
     });
+
     init();
   }
 
@@ -112,7 +115,7 @@ class _EventListDetailState extends State<EventListDetail> {
                 userId == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
-                          createBottomSheet(context);
+                          createBottomSheet(context, widget.userId);
                         },
                         child: Container(
                           width: 48.w,

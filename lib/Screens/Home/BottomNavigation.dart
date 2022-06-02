@@ -23,7 +23,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   final List<Widget> _children = [
     const HomePage(),
-     FriendListScreen(),
+    FriendListScreen(),
     const HomePage(),
     const HomePage(),
   ];

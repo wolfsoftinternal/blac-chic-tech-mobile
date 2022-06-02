@@ -608,8 +608,7 @@ class _ChatPageState extends State<ChatPage> {
                                             image: NetworkImage(
                                                 "https://madhouse-app.s3.amazonaws.com/mixes/" +
                                                         snapshot.data[
-                                                            "mix_image"] ??
-                                                    ""),
+                                                            "mix_image"]),
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -652,8 +651,7 @@ class _ChatPageState extends State<ChatPage> {
                                                 Text(
                                                   // artistName = value['artist_details']['full_name'],
 
-                                                  "by ${snapshot.data['artist_details']['full_name']}" ??
-                                                      "",
+                                                  "by ${snapshot.data['artist_details']['full_name']}",
                                                   //  snapshot.data["mix_file"]??"",
                                                   softWrap: true,
                                                   style: TextStyle(

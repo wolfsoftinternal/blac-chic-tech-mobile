@@ -2,12 +2,13 @@ const urlBase = 'http://54.92.129.168/blac-chic-tech/api';
 
 //Authentication APIs
 const urlAutoLogin = '';
-const urlGetLogin = '/login';
+const urlGetLogin = '/mobile/login';
+const urlLogout = '/mobile/logout';
 const urlSignup = '/mobile/register';
-const urlCountryList = '/country-list';
-const urlStateList = '/state-list';
-const urlCityList = '/city-list';
-const urlCityListAll = '/city-list-all';
+const urlCountryList = '/mobile/country-list';
+const urlStateList = '/mobile/state-list';
+const urlCityList = '/mobile/city-list';
+const urlCityListAll = '/mobile/city-list-all';
 const urlPersonalInfo = '/mobile/edit-profile';
 const urlExperienceInfo = '/mobile/experience-edit';
 const urlCompanyList = '/mobile/company-list';
