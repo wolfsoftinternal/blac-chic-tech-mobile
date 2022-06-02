@@ -137,7 +137,7 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                   widget.userDetails.id == controller.details.value.id
                       ? GestureDetector(
                           onTap: () {
-                            createBottomSheet(context);
+                            createBottomSheet(context,widget.userDetails.id);
                           },
                           child: Container(
                             width: 48.w,

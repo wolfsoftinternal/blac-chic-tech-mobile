@@ -10,7 +10,6 @@ import '../Utilities/Constant.dart';
 import '../Utilities/TextUtilities.dart';
 
 class MyPurchasedEvent extends StatefulWidget {
-  const MyPurchasedEvent({Key? key}) : super(key: key);
 
   @override
   _MyPurchasedEventState createState() => _MyPurchasedEventState();

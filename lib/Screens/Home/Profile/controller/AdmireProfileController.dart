@@ -203,6 +203,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
+
   SelectedUserProfileAPI(BuildContext context, id) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
@@ -240,7 +241,8 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  postListAPI(BuildContext context, body) async {
+  postListAPI(BuildContext context, body, [isFrom]) async {
+
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -260,11 +262,11 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            postListAPI(context, body);
+            postListAPI(context, body, [isFrom]);
           } else if (model.statusCode == 200) {
             PostListModel detail = PostListModel.fromJson(userModel);
 
-            if (body == null) {
+            if (isFrom == null) {
               postList.value = detail.data!;
             } else {
               postDetailList.value = detail.data!;
@@ -277,7 +279,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  videoListAPI(BuildContext context, body) async {
+  videoListAPI(BuildContext context, body, [isFrom]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -301,7 +303,7 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             VideoListModel detail = VideoListModel.fromJson(userModel);
 
-            if (body == null) {
+            if (isFrom == null) {
               videoList.value = detail.data!;
               for (int i = 0; i < videoList.length; i++) {
                 if (videoList[i].file == null) {
@@ -333,7 +335,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  eventListAPI(BuildContext context, body) async {
+  eventListAPI(BuildContext context, body, [isFrom]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -357,7 +359,7 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             EventListModel detail = EventListModel.fromJson(userModel);
 
-            if (body == null) {
+            if (isFrom == null) {
               eventList.value = detail.data!;
             } else {
               eventDetailList.value = detail.data!;

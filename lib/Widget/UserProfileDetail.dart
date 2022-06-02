@@ -95,7 +95,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
               const Spacer(),
               GestureDetector(
                   onTap: () {
-                    createBottomSheet(context);
+                    createBottomSheet(context, widget.userDetails.id);
                   },
                   child: 
                   // userId == widget.admireList.admireDetails!.id ?
