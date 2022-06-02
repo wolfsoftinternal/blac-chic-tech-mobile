@@ -56,7 +56,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
       childAspectRatio: widget.crossAxisCount == 3
           ? 0.85.w
           : widget.crossAxisCount == 4
-              ? 0.6.w
+              ? 0.65.w
               : widget.crossAxisCount == 5
                   ? 0.75.w
                   : 0.9.w,

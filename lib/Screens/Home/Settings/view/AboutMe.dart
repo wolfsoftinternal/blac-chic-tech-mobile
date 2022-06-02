@@ -558,88 +558,138 @@ class _AboutMeState extends State<AboutMe> {
                                                       SizedBox(
                                                         width: 15.w,
                                                       ),
+                                                      // Expanded(
+                                                      //     child: InkWell(
+                                                      //   onTap: () {
+                                                      //     Get.to(const CompanyList(
+                                                      //             isFrom:
+                                                      //                 'past_job'))!
+                                                      //         .then((value) {
+                                                      //       pastCompanyNameController[
+                                                      //               index] =
+                                                      //           stepsController
+                                                      //               .pastJobName
+                                                      //               .value;
+                                                      //       pastJobImage[
+                                                      //               index] =
+                                                      //           stepsController
+                                                      //               .pastJobImage
+                                                      //               .value;
+                                                      //       setState(() {});
+                                                      //     });
+                                                      //   },
+                                                      //   child:
+                                                      //       InputTextLayoutDemo(
+                                                      //     "Company name",
+                                                      //     pastCompanyNameController[
+                                                      //         index],
+                                                      //     false,
+                                                      //     TextInputAction.done,
+                                                      //     TextInputType.text,
+                                                      //     true,
+                                                      //     Container(
+                                                      //       // padding: const EdgeInsets.all(8.0),
+                                                      //       child: pastJobImage[
+                                                      //                   index]
+                                                      //               .isEmpty
+                                                      //           ? SvgPicture
+                                                      //               .asset(
+                                                      //               placeholder,
+                                                      //               width: 15.w,
+                                                      //               height:
+                                                      //                   15.h,
+                                                      //               fit: BoxFit
+                                                      //                   .cover,
+                                                      //             )
+                                                      //           : CachedNetworkImage(
+                                                      //               imageUrl:
+                                                      //                   pastJobImage[
+                                                      //                       index],
+                                                      //               width: 15.w,
+                                                      //               height:
+                                                      //                   15.h,
+                                                      //               fit: BoxFit
+                                                      //                   .cover,
+                                                      //               progressIndicatorBuilder: (context,
+                                                      //                       url,
+                                                      //                       downloadProgress) =>
+                                                      //                   SvgPicture
+                                                      //                       .asset(
+                                                      //                 placeholder,
+                                                      //                 width:
+                                                      //                     15.w,
+                                                      //                 height:
+                                                      //                     15.h,
+                                                      //                 fit: BoxFit
+                                                      //                     .cover,
+                                                      //               ),
+                                                      //               errorWidget: (context,
+                                                      //                       url,
+                                                      //                       error) =>
+                                                      //                   SvgPicture
+                                                      //                       .asset(
+                                                      //                 placeholder,
+                                                      //                 width:
+                                                      //                     15.w,
+                                                      //                 height:
+                                                      //                     15.h,
+                                                      //                 fit: BoxFit
+                                                      //                     .cover,
+                                                      //               ),
+                                                      //             ),
+                                                      //     ),
+                                                      //   ),
+                                                      // )),
+
                                                       Expanded(
-                                                          child: InkWell(
-                                                        onTap: () {
-                                                          Get.to(const CompanyList(
-                                                                  isFrom:
-                                                                      'past_job'))!
-                                                              .then((value) {
-                                                            pastCompanyNameController[
-                                                                    index] =
-                                                                stepsController
-                                                                    .pastJobName
-                                                                    .value;
-                                                            pastJobImage[
-                                                                    index] =
-                                                                stepsController
-                                                                    .pastJobImage
-                                                                    .value;
-                                                            setState(() {});
-                                                          });
-                                                        },
-                                                        child:
-                                                            InputTextLayoutDemo(
-                                                          "Company name",
-                                                          pastCompanyNameController[
-                                                              index],
-                                                          false,
-                                                          TextInputAction.done,
-                                                          TextInputType.text,
-                                                          true,
-                                                          Container(
-                                                            // padding: const EdgeInsets.all(8.0),
-                                                            child: pastJobImage[
-                                                                        index]
-                                                                    .isEmpty
-                                                                ? SvgPicture
-                                                                    .asset(
-                                                                    placeholder,
-                                                                    width: 15.w,
-                                                                    height:
-                                                                        15.h,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  )
-                                                                : CachedNetworkImage(
-                                                                    imageUrl:
-                                                                        pastJobImage[
-                                                                            index],
-                                                                    width: 15.w,
-                                                                    height:
-                                                                        15.h,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    progressIndicatorBuilder: (context,
-                                                                            url,
-                                                                            downloadProgress) =>
-                                                                        SvgPicture
-                                                                            .asset(
-                                                                      placeholder,
-                                                                      width:
-                                                                          15.w,
-                                                                      height:
-                                                                          15.h,
-                                                                      fit: BoxFit
-                                                                          .cover,
+                                                        flex:1,
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            color: light_grey_f2f2f2,
+                                                            borderRadius: BorderRadius.circular(4.r)
+                                                          ),
+                                                          child: Padding(
+                                                             padding:  EdgeInsets.only(left: 16.w, right: 16.w, top: 13.h, bottom: 13.h),
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                              children: [
+                                                                Column(
+                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                  children: [
+                                                                    // Company name
+                                                                    Text(
+                                                                        "Company name",
+                                                                        style:  TextStyle(
+                                                                            color: grey_aaaaaa,
+                                                                            fontWeight: FontWeight.w500,
+                                                                            fontFamily: helveticaNeueNeue_medium,
+                                                                            fontStyle:  FontStyle.normal,
+                                                                            fontSize: 10.sp
+                                                                        ),
+                                                                        textAlign: TextAlign.left
                                                                     ),
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        SvgPicture
-                                                                            .asset(
-                                                                      placeholder,
-                                                                      width:
-                                                                          15.w,
-                                                                      height:
-                                                                          15.h,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    ),
-                                                                  ),
+                                                                    SizedBox(height: 5.h,),
+                                                                    // Netflix
+                                                                    Text(
+                                                                        "Netflix",
+                                                                        style:  TextStyle(
+                                                                            color:  black_121212,
+
+                                                                            fontFamily: helveticaNeueNeue_medium,
+                                                                            fontStyle:  FontStyle.normal,
+                                                                            fontSize: 14.sp
+                                                                        ),
+                                                                        textAlign: TextAlign.left
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                SvgPicture.asset(placeholder,width: 19.w,height: 19.h,)
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      )),
+                                                      )
                                                     ],
                                                   ),
                                                   SizedBox(
