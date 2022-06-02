@@ -3,6 +3,7 @@ import 'package:blackchecktech/Screens/Home/Profile/view/EventDetail.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventListDetail.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
@@ -77,7 +78,7 @@ class _EventTabState extends State<EventTab> {
                                       id: controller.eventList[index].id));
                                 },
                                 child: Padding(
-                                  padding:  EdgeInsets.only(bottom: 32.h),
+                                  padding:  EdgeInsets.only(bottom: 16.h),
                                   child: Stack(
                                     children: [
                                       Container(
@@ -125,9 +126,25 @@ class _EventTabState extends State<EventTab> {
                                           ),
                                         ),
                                       ),
-                                      Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Padding(
+                                      Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        height: 207.h,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5.r),
+                                            gradient: LinearGradient(
+                                                begin: Alignment.topCenter,
+                                                end:Alignment.bottomCenter,
+                                                colors: [ Color(0x00121212),
+                                                  Color(0xff121212)])
+
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
                                             padding:  EdgeInsets.only(
                                                 top: 8.h, left: 8.w),
                                             child: Container(
@@ -138,63 +155,78 @@ class _EventTabState extends State<EventTab> {
                                                 ),
                                                 child: Padding(
                                                   padding:
-                                                  const EdgeInsets.all(10.0),
-                                                  child: setHelveticaMedium(
+                                                   EdgeInsets.only(left: 14.w,right: 14.w,top: 7.h,bottom: 7.h),
+                                                  child:// Paid
+                                                  Text(
                                                       controller
                                                           .eventList[index].type!,
-                                                      12.sp,
-                                                      white_ffffff,
-                                                      FontWeight.w500,
-                                                      FontStyle.normal),
-                                                )),
-                                          )),
-                                      Align(
-                                        alignment: Alignment.topRight,
-                                        child: Padding(
-                                          padding:  EdgeInsets.only(
-                                              top: 8.h, right: 8.w),
-                                          child: Container(
-                                              height: 35.h,
-                                              width: 133.w,
-                                              decoration: BoxDecoration(
-                                                gradient: LinearGradient(colors: [
-                                                  Color(0xff1c2535),
-                                                  Color(0xff04080f)
-                                                ]),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4.r)),
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                    EdgeInsets.only(
-                                                        left: 6.w,
-                                                        right: 6.w),
-                                                    child: Icon(
-                                                      Icons.person,
-                                                      size: 17,
-                                                      color: grey_aaaaaa,
-                                                    ),
+                                                      style:  TextStyle(
+                                                          color:  Colors.white,
+                                                          fontWeight: FontWeight.w700,
+                                                          fontFamily: roboto_bold,
+                                                          fontStyle:  FontStyle.normal,
+                                                          fontSize: 12.sp
+                                                      ),
+                                                      textAlign: TextAlign.center
                                                   ),
-                                                  setHelceticaBold(
-                                                      controller
-                                                          .eventList[index]
-                                                          .hosts![0]
-                                                          .firstName! +
-                                                          controller
-                                                              .eventList[index]
-                                                              .hosts![0]
-                                                              .lastName!,
-                                                      11.sp,
-                                                      white_ffffff,
-                                                      FontWeight.w500,
-                                                      FontStyle.normal,
-                                                      -0.22),
-                                                ],
-                                              )),
-                                        ),
+                                                  // setHelveticaMedium(
+                                                  //     controller
+                                                  //         .eventList[index].type!,
+                                                  //     12.sp,
+                                                  //     white_ffffff,
+                                                  //     FontWeight.w500,
+                                                  //     FontStyle.normal),
+                                                )),
+                                          ),
+                                          Padding(
+                                            padding:  EdgeInsets.only(
+                                                top: 8.h, right: 8.w),
+                                            child: Container(
+                                                height: 29.h,
+
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(colors: [
+                                                    Color(0xff1c2535),
+                                                    Color(0xff04080f)
+                                                  ]),
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(4.r)),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                      EdgeInsets.only(
+                                                          left: 6.w,
+                                                          right: 6.w),
+                                                      child: Icon(
+                                                        Icons.person,
+                                                        size: 15.r,
+                                                        color: grey_aaaaaa,
+                                                      ),
+                                                    ),
+                                                    setHelceticaBold(
+                                                        controller
+                                                            .eventList[index]
+                                                            .hosts![0]
+                                                            .firstName! +
+                                                            controller
+                                                                .eventList[index]
+                                                                .hosts![0]
+                                                                .lastName!,
+                                                        11.sp,
+                                                        white_ffffff,
+                                                        FontWeight.w500,
+                                                        FontStyle.normal,
+                                                        -0.22),
+
+                                                    SizedBox(width: 6.w,)
+                                                  ],
+                                                )),
+                                          ),
+                                        ],
                                       ),
+
                                       Positioned(
                                           bottom: 19.h,
                                           child: Padding(
@@ -210,11 +242,11 @@ class _EventTabState extends State<EventTab> {
                                                 Padding(
                                                   padding:  EdgeInsets.only(
                                                       left: 4.w),
-                                                  child: setHelceticaBold(
+                                                  child: setHelveticaMedium(
                                                       '${DateFormat("MMM dd, yyyy").format(controller.eventList[index].startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventList[index].startDateTime!)}',
                                                       10.sp,
                                                       white_ffffff,
-                                                      FontWeight.w500,
+                                                      FontWeight.w100,
                                                       FontStyle.normal,
                                                       -0.4),
                                                 ),
@@ -232,12 +264,12 @@ class _EventTabState extends State<EventTab> {
                                                 Padding(
                                                   padding:  EdgeInsets.only(
                                                       right: 4.w),
-                                                  child: setHelceticaBold(
+                                                  child: setHelveticaMedium(
                                                       controller.eventList[index]
                                                           .venue!,
                                                       10.sp,
                                                       white_ffffff,
-                                                      FontWeight.w500,
+                                                      FontWeight.w100,
                                                       FontStyle.normal,
                                                       -0.4),
                                                 ),

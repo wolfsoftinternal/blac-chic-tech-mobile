@@ -14,6 +14,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../Layout/ToolbarBackOnly.dart';
+
 class EventList extends StatefulWidget {
   @override
   _EventListState createState() => _EventListState();
@@ -37,9 +39,7 @@ class _EventListState extends State<EventList> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return  Scaffold(
         backgroundColor: Colors.white,
         body: Obx(
           () => Column(
@@ -49,7 +49,9 @@ class _EventListState extends State<EventList> {
                SizedBox(
                 height: 60.h,
               ),
-              Container(child: ToolbarWithHeaderCenterTitle("EVENTS")),
+
+
+              ToolbarWithHeaderCenterTitle("EVENTS"),
 
               SizedBox(
                 height: 20.h,
@@ -124,7 +126,7 @@ class _EventListState extends State<EventList> {
                               height: 80,
                               width: 80,
                             ),
-                            setHelceticaBold("NO EVENTS YET", 16, grey_aaaaaa,
+                            setHelceticaBold("NO EVENTS YET", 16.sp, grey_aaaaaa,
                                 FontWeight.w500, FontStyle.normal, 0.5)
                           ],
                         ),
@@ -208,7 +210,8 @@ class _EventListState extends State<EventList> {
                                             gradient: LinearGradient(
                                                 begin: Alignment.topCenter,
                                                 end:Alignment.bottomCenter,
-                                                colors: [ Color(0x00121212),  Color(0xff121212)])
+                                                colors: [ Color(0x00121212),
+                                                  Color(0xff121212)])
 
                                         ),
                                       ),
@@ -228,15 +231,15 @@ class _EventListState extends State<EventList> {
                                                     horizontal: 15.w),
                                                 height: 26.h,
                                                 decoration: BoxDecoration(
-                                                  color: const Color(0xe6ff881a),
+                                                  color: orange.withOpacity(0.7),
                                                   borderRadius: BorderRadius.all(
                                                       Radius.circular(25.r)),
                                                 ),
                                                 child: Center(
                                                   child: Text(
                                                     controller.eventList[i].type!,
-                                                    style: const TextStyle(
-                                                        fontSize: 12,
+                                                    style:  TextStyle(
+                                                        fontSize: 12.sp,
                                                         color: Colors.white,
                                                         fontFamily: roboto_bold),
                                                   ),
@@ -262,15 +265,15 @@ class _EventListState extends State<EventList> {
                                                         padding: EdgeInsets.only(
                                                             left: 6.0.w,
                                                             right: 6.0.w),
-                                                        child: const Icon(
+                                                        child:  Icon(
                                                           Icons.person,
-                                                          size: 17,
+                                                          size: 15.r,
                                                           color: grey_aaaaaa,
                                                         ),
                                                       ),
                                                       setHelveticaMedium(
                                                           "Hosted by",
-                                                          11,
+                                                          11.sp,
                                                           gray_b3ffffff,
                                                           FontWeight.w500,
                                                           FontStyle.normal,
@@ -285,7 +288,7 @@ class _EventListState extends State<EventList> {
                                                               controller.eventList[i]
                                                                   .hosts![0]
                                                                   .lastName!,
-                                                          11,
+                                                          11.sp,
                                                           white_ffffff,
                                                           FontWeight.w500,
                                                           FontStyle.normal,
@@ -297,25 +300,25 @@ class _EventListState extends State<EventList> {
                                         ),
                                       ),
                                       Positioned(
-                                          bottom: 19,
+                                          bottom: 19.h,
                                           child: Padding(
                                             padding:
-                                            const EdgeInsets.only(left: 16.0),
+                                             EdgeInsets.only(left: 16.w),
                                             child: Row(
                                               children: [
                                                 SvgPicture.asset(
                                                   calendar_icon,
-                                                  height: 12,
-                                                  width: 12,
+                                                  height: 12.h,
+                                                  width: 12.w,
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 4.0),
-                                                  child: setHelceticaBold(
+                                                  padding:  EdgeInsets.only(
+                                                      left: 4.w),
+                                                  child: setHelveticaMedium(
                                                       '${DateFormat("MMM dd, yyyy").format(controller.eventList[i].startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventList[i].startDateTime!)}',
-                                                      10,
+                                                      10.sp,
                                                       white_ffffff,
-                                                      FontWeight.w500,
+                                                      FontWeight.w100,
                                                       FontStyle.normal,
                                                       -0.4),
                                                 ),
@@ -323,40 +326,40 @@ class _EventListState extends State<EventList> {
                                             ),
                                           )),
                                       Positioned(
-                                          bottom: 19,
-                                          right: 16,
+                                          bottom: 19.h,
+                                          right: 16.w,
                                           child: Padding(
                                             padding:
-                                            const EdgeInsets.only(left: 16.0),
+                                             EdgeInsets.only(left: 16.w),
                                             child: Row(
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      right: 4.0),
-                                                  child: setHelceticaBold(
+                                                  padding:  EdgeInsets.only(
+                                                      right: 4.w),
+                                                  child: setHelveticaMedium(
                                                       controller.eventList[i].venue!,
-                                                      10,
+                                                      10.sp,
                                                       white_ffffff,
-                                                      FontWeight.w500,
+                                                      FontWeight.w100,
                                                       FontStyle.normal,
                                                       -0.4),
                                                 ),
                                                 SvgPicture.asset(
                                                   icon_location,
-                                                  height: 12,
-                                                  width: 12,
+                                                  height: 12.h,
+                                                  width: 12.w,
                                                 ),
                                               ],
                                             ),
                                           )),
                                       Positioned(
-                                          bottom: 40,
+                                          bottom: 40.h,
                                           child: Padding(
                                             padding:
-                                            const EdgeInsets.only(left: 16.0),
+                                             EdgeInsets.only(left: 16.w),
                                             child: setHelceticaBold(
                                                 controller.eventList[i].title!,
-                                                22,
+                                                22.sp,
                                                 white_ffffff,
                                                 FontWeight.w500,
                                                 FontStyle.normal,
@@ -386,7 +389,7 @@ class _EventListState extends State<EventList> {
             ],
           ),
         ),
-      ),
-    );
+      );
+
   }
 }

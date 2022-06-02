@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
 import 'package:blackchecktech/Layout/InputTextLayoutDemo.dart';
+import 'package:blackchecktech/Layout/InputTextLayoutDemoIcon.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
@@ -245,7 +246,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 ),
                                               ),
                                               SizedBox(
-                                                height: 2.h,
+                                                height: 4.h,
                                               ),
                                               GestureDetector(
                                                   onTap: () {
@@ -254,25 +255,24 @@ class _AboutMeState extends State<AboutMe> {
                                                   child: Align(
                                                     alignment:
                                                         Alignment.centerLeft,
-                                                    child: FittedBox(
-                                                      child: Text(
-                                                        stepsController
-                                                            .companyName.value,
-                                                        style: TextStyle(
-                                                            color: stepsController
-                                                                        .companyName
-                                                                        .value ==
-                                                                    'Company Name'
-                                                                ? grey_aaaaaa
-                                                                : black_121212,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontFamily:
-                                                                helveticaNeueNeue_medium,
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                            fontSize: 15.sp),
-                                                      ),
+                                                    child: Text(
+                                                      stepsController
+                                                          .companyName.value,
+                                                      style: TextStyle(
+                                                          color: stepsController
+                                                                      .companyName
+                                                                      .value ==
+                                                                  'Company Name'
+                                                              ? grey_aaaaaa
+                                                              : black_121212,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontFamily:
+                                                              helveticaNeueNeue_medium,
+                                                          fontStyle: FontStyle
+                                                              .normal,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          fontSize: 14.sp),
                                                     ),
                                                   )),
                                             ],
