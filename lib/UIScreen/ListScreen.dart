@@ -402,11 +402,11 @@ class ListScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EventTicketTxnId(),
-                        ));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => EventTicketTxnId(EventList),
+                    //     ));
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),

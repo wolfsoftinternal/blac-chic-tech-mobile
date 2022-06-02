@@ -16,8 +16,6 @@ class EventTicketTxnId extends StatefulWidget {
 
 class _EventTicketTxnIdState extends State<EventTicketTxnId> {
 
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
