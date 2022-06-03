@@ -33,6 +33,7 @@ const urlCreatePost = '/mobile/post-create';
 //video
 const urlVideoList = '/mobile/video-list';
 const urlVideoCreate = '/mobile/video-create';
+const urlVideoDetails = '/mobile/video-details';
 
 //event
 const urlEventList = '/mobile/event-list';
@@ -50,3 +51,5 @@ const urlTopicList = '/mobile/topic-list';
 
 //user List
 const urlUserList = '/mobile/user/list';
+
+const urlMyPlayList = "/mobile/my-playlist";

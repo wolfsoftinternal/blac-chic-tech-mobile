@@ -66,6 +66,7 @@ class LoginController extends GetxController {
 
           if (model.statusCode == 200) {
             SignupModel loginInModel = SignupModel.fromJson(userModel);
+            print("Login Token :: " + loginInModel.data.toString());
 
             var preferences = MySharedPref();
 

@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Screens/Home/Event/view/EventList.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
+import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoListBct.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -52,11 +53,14 @@ class _HomePageState extends State<HomePage> {
                       return GestureDetector(
                         onTap: () {
                           if (index == 0) {
-                            Get.to( AdmireProfile());
+                            Get.to(AdmireProfile());
                           }
-                          if(index == 6){
-                          Get.to(EventList());
-                        }
+                          if (index == 4) {
+                            Get.to(VideoListBct());
+                          }
+                          if (index == 6) {
+                            Get.to(EventList());
+                          }
                         },
                         child: Container(
                           height: 68,
@@ -84,9 +88,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                onTap: () {
-
-                                },
+                                onTap: () {},
                               ),
                               const Padding(
                                 padding: EdgeInsets.only(right: 12.0),
