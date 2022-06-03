@@ -31,6 +31,11 @@ const urlOtherProfile = '/mobile/other-user-profile';
 const urlPostList = '/mobile/post-list';
 const urlCreatePost = '/mobile/post-create';
 
+// Create Order
+const urlCreateOrder = "/mobile/transaction/order/create";
+const urlOrderDetail = "/mobile/transaction/details";
+const urlOrderUpdate = "/mobile/transaction/order/update";
+
 //video
 const urlVideoList = '/mobile/video-list';
 const urlVideoCreate = '/mobile/video-create';

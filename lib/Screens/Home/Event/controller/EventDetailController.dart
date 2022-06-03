@@ -8,8 +8,12 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../Model/BaseModel.dart';
+import '../../../../Utils/preference_utils.dart';
+import '../../../../Utils/share_predata.dart';
 import '../../../Networks/api_endpoint.dart';
 import '../../../Networks/api_response.dart';
+import '../../../Networks/token_update_request.dart';
+import '../../Profile/model/VideoListModel.dart';
 
 class EventDetailController extends GetxController {
   Rx<TextEditingController> searchController = TextEditingController().obs;
@@ -55,6 +59,9 @@ class EventDetailController extends GetxController {
       if (res.statusCode == 200) {
         await res.stream.bytesToString().then((value) async {
           String strData = value;
+
+          print('strData order' + strData);
+
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
@@ -99,4 +106,8 @@ class EventDetailController extends GetxController {
   //     }
   //   });
   // }
+
+
+
+
 }
