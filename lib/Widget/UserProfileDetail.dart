@@ -46,7 +46,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        widget.userDetails!.image == null
+        widget.userDetails.image == null
             ? SvgPicture.asset(
                 placeholder,
                 height: MediaQuery.of(context).size.height * .83,
@@ -152,7 +152,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                       //     ? "@" + widget.admireList.admireDetails!.userName!
                       //     : "@" + widget.admireList.admireDetails!.firstName!,
                       widget.userDetails.userName != null
-                          ? "@" + widget.userDetails!.userName!
+                          ? "@" + widget.userDetails.userName!
                           : "@" + widget.userDetails.firstName!,
                       20.sp,
                       white_ffffff,

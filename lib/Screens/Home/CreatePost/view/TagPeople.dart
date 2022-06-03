@@ -25,19 +25,6 @@ class _TagPeopleState extends State<TagPeople> {
   VideoController videoController = Get.put(VideoController());
   PostController controller = Get.put(PostController());
 
-  // List<TagPeopleModel> onDealsModel = [];
-  // List<TagPeopleModel> selectedList = [];
-
-  // @override
-  // void initState() {
-  //   onDealsModel.clear();
-  //   onDealsModel.add( TagPeopleModel( "assets/images/img_girl.png","claireroman"));
-  //   onDealsModel.add( TagPeopleModel( "assets/images/img_girl.png","tokyoguinere"));
-  //   onDealsModel.add( TagPeopleModel(  "assets/images/img_girl.png","naidafortes"));
-  //   onDealsModel.add( TagPeopleModel( "assets/images/img_girl.png","tokyoguinere"));
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,6 +179,7 @@ class _TagPeopleState extends State<TagPeople> {
                   }
                 },
                 controller: controller.searchController.value,
+                autoFocus: false,
               ),
             ),
             Expanded(

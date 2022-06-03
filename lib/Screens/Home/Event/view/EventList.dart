@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Layout/InputTextStaticFilter.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Home/Event/controller/EventDetailController.dart';
+import 'package:blackchecktech/Screens/Home/Event/view/EventList2.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -73,41 +74,46 @@ class _EventListState extends State<EventList> {
                             TextInputAction.next,
                             TextInputType.text),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 16.w, right: 10.w, bottom: 10.h, top: 10.h),
-                        margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 15.h),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: blue_0a84ff, width: 1.w),
-                            borderRadius: BorderRadius.all(Radius.circular(4.r)),
-                            color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            SvgPicture.asset(
-                              icon_ticket,
-                              height: 15.h,
-                              width: 15.w,
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: Text(
-                                "My Event",
-                                style: TextStyle(
-                                    fontFamily: helveticaNeueNeue_medium,
-                                    fontSize: 15.sp,
-                                    color: black_121212),
+                      InkWell(
+                        onTap: (){
+                          Get.to(EventList2());
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 16.w, right: 10.w, bottom: 10.h, top: 10.h),
+                          margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 15.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: blue_0a84ff, width: 1.w),
+                              borderRadius: BorderRadius.all(Radius.circular(4.r)),
+                              color: Colors.white),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              SvgPicture.asset(
+                                icon_ticket,
+                                height: 15.h,
+                                width: 15.w,
                               ),
-                            ),
-                            SvgPicture.asset(
-                              icon_right_forward_arrow,
-                              height: 16.h,
-                              width: 16.w,
-                            )
-                          ],
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  "My Event",
+                                  style: TextStyle(
+                                      fontFamily: helveticaNeueNeue_medium,
+                                      fontSize: 15.sp,
+                                      color: black_121212),
+                                ),
+                              ),
+                              SvgPicture.asset(
+                                icon_right_forward_arrow,
+                                height: 16.h,
+                                width: 16.w,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(

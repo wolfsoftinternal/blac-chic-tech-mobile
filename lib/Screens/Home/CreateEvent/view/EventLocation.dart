@@ -1,17 +1,19 @@
-
 import 'package:blackchecktech/Layout/BlackButton.dart';
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventController.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/ConfirmLocation.dart';
+import 'package:blackchecktech/Screens/Home/CreatePost/controller/PostController.dart';
+import 'package:blackchecktech/Screens/Home/CreatePost/view/PostLocation.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Styles/my_strings.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geocode/geocode.dart';
+import 'package:geocoding/geocoding.dart' as geo;
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -26,6 +28,7 @@ class EventLocation extends StatefulWidget {
 class _EventLocationState extends State<EventLocation> {
   EventController controller = Get.put(EventController());
   StepsController stepsController = Get.put(StepsController());
+  PostController postController = Get.put(PostController());
 
   final List<Marker> _markers = [];
 
@@ -47,6 +50,14 @@ class _EventLocationState extends State<EventLocation> {
     );
 
     _markers.add(marker);
+
+    if(controller.latitude.value != 0.0 && controller.latitude.value != 0.0){
+      _controller.moveCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: LatLng(lat, lng), zoom: 18),
+        ),
+      );
+    }
   }
 
   @override
@@ -172,14 +183,15 @@ class _EventLocationState extends State<EventLocation> {
                   // ),
                   Padding(
                     padding: const EdgeInsets.only(top: 50.0),
-                    child: 
-                    Align(
+                    child: Align(
                         //search input bar
                         alignment: Alignment.topCenter,
                         child: Row(
                           children: [
                             BackLayout(),
-                            const SizedBox(width: 20,),
+                            const SizedBox(
+                              width: 20,
+                            ),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.70,
                               height: 52.r,
@@ -191,47 +203,78 @@ class _EventLocationState extends State<EventLocation> {
                                     color: Colors.grey.withOpacity(0.1),
                                     spreadRadius: 6,
                                     blurRadius: 10,
-                                    offset: const Offset(1, 4), // changes position of shadow
+                                    offset: const Offset(
+                                        1, 4), // changes position of shadow
                                   ),
                                 ],
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 12.0),
                                 child: SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.6,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.6,
                                   child: TextField(
-                                    controller: search,
+                                    controller: postController.searchLocationController.value,
+                                    readOnly: true,
                                     decoration: InputDecoration(
                                       border: UnderlineInputBorder(
                                         borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(width: 0,color: Colors.transparent),
+                                        borderSide: const BorderSide(
+                                            width: 0,
+                                            color: Colors.transparent),
                                       ),
                                       disabledBorder: UnderlineInputBorder(
                                         borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(width: 0,color: Colors.transparent),
+                                        borderSide: const BorderSide(
+                                            width: 0,
+                                            color: Colors.transparent),
                                       ),
                                       enabledBorder: UnderlineInputBorder(
                                         borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(width: 0,color: Colors.transparent),
+                                        borderSide: const BorderSide(
+                                            width: 0,
+                                            color: Colors.transparent),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(width: 0,color: Colors.transparent),
+                                        borderSide: const BorderSide(
+                                            width: 0,
+                                            color: Colors.transparent),
                                       ),
-
                                       hintText: "Search Location",
                                       hintStyle: const TextStyle(
-                                        fontFamily: helvetica_neu_bold,
-                                        fontSize: 16,
-                                        color: grey_3f3f3f),
+                                          fontFamily: helvetica_neu_bold,
+                                          fontSize: 16,
+                                          color: grey_3f3f3f),
                                     ),
                                     style: const TextStyle(
                                         fontFamily: helvetica_neu_bold,
                                         fontSize: 16,
                                         color: black_121212),
                                     cursorColor: orange_ff881a,
-                                    onTap: (){
-                                      //on search
+                                    onTap: () {
+                                      setState(() {
+                                        Get.to(PostLocation())!
+                                            .then((value) async {
+                                          _address =
+                                              postController.address.value;
+                                          List<geo.Location> locations =
+                                              await geo.locationFromAddress(
+                                                  _address);
+                                          getAddress(locations[0].latitude,
+                                              locations[0].longitude);
+
+                                          _controller.moveCamera(
+                                            CameraUpdate.newCameraPosition(
+                                              CameraPosition(
+                                                  target: LatLng(
+                                                      locations[0].latitude,
+                                                      locations[0].longitude),
+                                                  zoom: 18),
+                                            ),
+                                          );
+                                        });
+                                      });
                                     },
                                   ),
                                 ),
@@ -330,7 +373,9 @@ class _EventLocationState extends State<EventLocation> {
                               BlackButton(
                                 "Confirm Location",
                                 Colors.white,
-                                () {saveAddress(context);},
+                                () {
+                                  saveAddress(context);
+                                },
                               ),
                               const SizedBox(
                                 height: 17,
@@ -350,66 +395,123 @@ class _EventLocationState extends State<EventLocation> {
     );
   }
 
-  void getAddress(double lat, double lng) {
-    GeoCode geoCode = GeoCode();
-    geoCode.reverseGeocoding(latitude: lat, longitude: lng).then((value) =>
-        // print("Geocode" + value.streetAddress.toString())
+  Future<void> getAddress(double lat, double lng) async {
+    // GeoCode geoCode = GeoCode();
+    // geoCode.reverseGeocoding(latitude: lat, longitude: lng).then((value) =>
+    // print("Geocode" + value.streetAddress.toString())
+    List<geo.Placemark> placemarks =
+        await geo.placemarkFromCoordinates(lat, lng);
 
-        setState(() {
-          _isLoading = false;
-          if (value.streetNumber == null) {
-            _address = "${value.streetAddress} ${value.postal} ${value.city}";
+    _isLoading = false;
+    if (placemarks[0].name == null) {
+      _address =
+          "${placemarks[0].street}  ${placemarks[0].subLocality} ${placemarks[0].postalCode} ${placemarks[0].country}";
+      print("My address 1 :: " + _address.toString());
+    } else if (placemarks[0].street == null) {
+      _address =
+          "${placemarks[0].name} ${placemarks[0].subLocality} ${placemarks[0].postalCode} ${placemarks[0].country}";
+      print("My address 2 :: " + _address.toString());
+    } else if (placemarks[0].street == null && placemarks[0].name == null) {
+      _address =
+          "${placemarks[0].subLocality} ${placemarks[0].postalCode} ${placemarks[0].country}";
+      print("My address 3 :: " + _address);
+    } else {
+      _address =
+          "${placemarks[0].street} ${placemarks[0].name} ${placemarks[0].subLocality} ${placemarks[0].postalCode} ${placemarks[0].country}";
 
-            print("My address 1 :: " + _address.toString());
-          } else if (value.streetAddress == null) {
-            _address = "${value.streetNumber} ${value.postal} ${value.city}";
+      print("My address 4 :: " + _address);
+      controller.street1Controller.value.text = placemarks[0].street.toString();
+      controller.street2Controller.value.text = placemarks[0].name.toString();
+      controller.cityController.value.text =
+          placemarks[0].subAdministrativeArea.toString();
+      controller.countryController.value.text =
+          placemarks[0].country.toString();
+      controller.landmarkController.value.text =
+          placemarks[0].subLocality.toString();
+      controller.addressController.value.text = _address;
+      controller.latitude.value = lat;
+      controller.longitude.value = lng;
+    }
 
-            print("My address 2 :: " + _address.toString());
-          } else if (value.streetNumber == null &&
-              value.streetAddress == null) {
-            _address = "${value.region}${value.postal} ${value.city}";
+    for (var item in stepsController.countrylist) {
+      if (item.name == placemarks[0].country!) {
+        controller.countryId.value = item.id!;
+      }
+    }
+    if(controller.countryId.value != 0){
+        checkNet(context).then((value) => stepsController.stateListApi(controller.countryId.value.toString()));
+      }
+    for (var item in stepsController.stateList) {
+      if (item.name == placemarks[0].administrativeArea!) {
+        controller.stateId.value = item.id!;
+      }
+    }
+    if(controller.stateId.value != 0){
+      checkNet(context).then((value) => stepsController.cityListApi(controller.countryId.value.toString(), controller.stateId.value.toString()));
+    }
+    for (var item in stepsController.cityList) {
+      if (item.name == placemarks[0].subAdministrativeArea!) {
+        controller.cityId.value = item.id!;
+      }
+    }
+    setState(() {});
 
-            print("My address 3 :: " + _address);
-          } else {
-            _address =
-                "${value.streetNumber} ${value.streetAddress} ${value.postal} ${value.city}";
+    // setState(() {
+    //   _isLoading = false;
+    //   if (value.streetNumber == null) {
+    //     _address = "${value.streetAddress} ${value.postal} ${value.city}";
 
-            print("My address 4 :: " + _address);
+    //     print("My address 1 :: " + _address.toString());
+    //   } else if (value.streetAddress == null) {
+    //     _address = "${value.streetNumber} ${value.postal} ${value.city}";
 
-            controller.street1Controller.value.text = value.streetNumber.toString();
-            controller.street2Controller.value.text = value.streetAddress.toString();
-            controller.cityController.value.text = value.city.toString();
-            controller.countryController.value.text = value.countryName.toString();
-            controller.landmarkController.value.text = value.region.toString();
-            controller.addressController.value.text = _address;
-            controller.latitude.value = lat;
-            controller.longitude.value = lng;
+    //     print("My address 2 :: " + _address.toString());
+    //   } else if (value.streetNumber == null &&
+    //       value.streetAddress == null) {
+    //     _address = "${value.region}${value.postal} ${value.city}";
 
-            for (var item in stepsController.countrylist) {
-              if (item.name == value.countryName!) {
-                controller.countryId.value = item.id!;
-              }
-              if(controller.countryId.value != 0){
-                checkNet(context).then((value) => stepsController.stateListApi(controller.countryId.value.toString()));
-              }
-            }
+    //     print("My address 3 :: " + _address);
+    //   } else {
+    //     _address =
+    //         "${value.streetNumber} ${value.streetAddress} ${value.postal} ${value.city}";
 
-            for (var item in stepsController.stateList) {
-              if (item.name == value.region!.split(', ')[1]) {
-                controller.stateId.value = item.id!;
-              }
-              if(controller.stateId.value != 0){
-                checkNet(context).then((value) => stepsController.cityListApi(controller.countryId.value.toString(), controller.stateId.value.toString()));
-              }
-            }
+    //     print("My address 4 :: " + _address);
 
-            for (var item in stepsController.cityList) {
-              if (item.name == value.city!) {
-                controller.cityId.value = item.id!;
-              }
-            }
-          }
-        }));
+    //     controller.street1Controller.value.text = value.streetNumber.toString();
+    //     controller.street2Controller.value.text = value.streetAddress.toString();
+    //     controller.cityController.value.text = value.city.toString();
+    //     controller.countryController.value.text = value.countryName.toString();
+    //     controller.landmarkController.value.text = value.region.toString();
+    //     controller.addressController.value.text = _address;
+    //     controller.latitude.value = lat;
+    //     controller.longitude.value = lng;
+
+    //     for (var item in stepsController.countrylist) {
+    //       if (item.name == value.countryName!) {
+    //         controller.countryId.value = item.id!;
+    //       }
+    //       if(controller.countryId.value != 0){
+    //         checkNet(context).then((value) => stepsController.stateListApi(controller.countryId.value.toString()));
+    //       }
+    //     }
+
+    //     for (var item in stepsController.stateList) {
+    //       if (item.name == value.region!.split(', ')[1]) {
+    //         controller.stateId.value = item.id!;
+    //       }
+    //       if(controller.stateId.value != 0){
+    //         checkNet(context).then((value) => stepsController.cityListApi(controller.countryId.value.toString(), controller.stateId.value.toString()));
+    //       }
+    //     }
+
+    //     for (var item in stepsController.cityList) {
+    //       if (item.name == value.city!) {
+    //         controller.cityId.value = item.id!;
+    //       }
+    //     }
+    //   }
+    // })
+    // );
   }
 
   saveAddress(BuildContext context) async {
@@ -452,17 +554,25 @@ class _EventLocationState extends State<EventLocation> {
       if (!value) return;
     });
 
-    _currentPosition = await _location.getLocation();
+    if(controller.latitude.value == 0.0 && controller.longitude.value == 0.0){
+      _currentPosition = await _location.getLocation();
+      controller.latitude.value = _currentPosition.latitude!;
+      controller.longitude.value = _currentPosition.longitude!;
 
-    lat = _currentPosition.latitude!;
-    lng = _currentPosition.longitude!;
+      lat = controller.latitude.value.toDouble();
+      lng = controller.longitude.value.toDouble();
 
-    _controller.moveCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(lat, lng), zoom: 18),
-      ),
-    );
-
+      _controller.moveCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: LatLng(lat, lng), zoom: 18),
+        ),
+      );
+    }else{
+      lat = controller.latitude.value.toDouble();
+      lng = controller.longitude.value.toDouble();
+      _onMapCreated;
+    }
+  
     getAddress(lat, lng);
   }
 }

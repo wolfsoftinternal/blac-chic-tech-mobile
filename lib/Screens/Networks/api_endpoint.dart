@@ -47,6 +47,7 @@ const urlCreateEvent = '/mobile/event-create';
 const urlDeleteEvent = '/mobile/event-delete';
 const urlallEventList = '/mobile/home/event-list';
 const urlallEventDetail = '/mobile/home/event-details';
+const urlRegisteredUser = '/mobile/registered-users';
 
 //language
 const urlLanguageList = '/mobile/langauge-list';

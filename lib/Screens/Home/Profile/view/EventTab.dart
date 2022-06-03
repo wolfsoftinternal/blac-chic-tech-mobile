@@ -70,7 +70,7 @@ class _EventTabState extends State<EventTab> {
                         ListView.builder(
                             shrinkWrap: true,
                             primary: false,
-                            itemCount: controller.eventList.length,
+                            itemCount: controller.eventList.length >= 10 ? 10 : controller.eventList.length,
                             padding: EdgeInsets.zero,
                             itemBuilder: (context, index) {
                               return GestureDetector(

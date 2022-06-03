@@ -46,13 +46,28 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       activeIndex = tabController!.index;
     });
 
+    controller.initScrolling(context, controller.details.value.id.toString());
+    controller.initVideoScrolling(context, controller.details.value.id.toString());
+    controller.initEventScrolling(context, controller.details.value.id.toString());
+    dynamic postBody = {
+      'user_id': controller.details.value.id.toString(),
+      'page': controller.postPageNumber.toString()
+    };
+
+    dynamic videoBody = {
+      'user_id': controller.details.value.id.toString(),
+      'page': controller.videoPageNumber.toString()
+    };
+
+    dynamic eventBody = {
+      'user_id': controller.details.value.id.toString(),
+      'page': controller.eventPageNumber.toString()
+    };
+
     checkNet(context).then((value) {
-      dynamic body = {
-        'user_id': controller.details.value.id.toString(),
-      };
-      controller.postListAPI(context, body);
-      controller.videoListAPI(context, body);
-      controller.eventListAPI(context, body);
+      controller.postListAPI(context, postBody);
+      controller.videoListAPI(context, videoBody);
+      controller.eventListAPI(context, eventBody);
     });
 
     init();

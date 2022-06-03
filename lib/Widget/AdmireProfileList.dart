@@ -43,9 +43,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
     userId = myModel!.data!.id!.toInt();
     setState(() {});
   }
-
   
-
   @override
   Widget build(BuildContext context) {
     return Stack(
