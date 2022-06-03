@@ -692,6 +692,7 @@ class _AboutMeState extends State<AboutMe> {
                                                       )
                                                     ],
                                                   ),
+
                                                   SizedBox(
                                                     height: 16.h,
                                                   ),
