@@ -56,6 +56,109 @@ class AdmireProfileController extends GetxController {
   PaystackPlugin paystack = PaystackPlugin();
   static const String PAYSTACK_KEY =
       "pk_test_c343f7fa48c5e5368ab068b511d9d8aa2977a231";
+  ScrollController postScrollController = ScrollController();
+  RxInt postPageNumber = 1.obs;
+  RxBool isPostPaginationLoading = false.obs;
+  ScrollController videoScrollController = ScrollController();
+  RxInt videoPageNumber = 1.obs;
+  RxBool isVideoPaginationLoading = false.obs;
+  ScrollController eventScrollController = ScrollController();
+  RxInt eventPageNumber = 1.obs;
+  RxBool isEventPaginationLoading = false.obs;
+
+  initScrolling(BuildContext context, userId, [postId]) {
+    postScrollController.addListener(() async {
+      if (postScrollController.position.maxScrollExtent ==
+          postScrollController.position.pixels) {
+        _scrollDown();
+        isPostPaginationLoading.value = true;
+        postPageNumber = postPageNumber + 1;
+
+        if(postId == null){
+          dynamic body = {
+            'user_id': userId.toString(),
+            'page': postPageNumber.toString()
+          };
+          await postListAPI(context, body);
+        }else{
+          dynamic body = {
+            'user_id': userId.toString(),
+            'post_id': postId.toString(),
+            'page': postPageNumber.toString(),
+          };
+          await postListAPI(context, body, 'detail');
+        }
+        isPostPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _scrollDown() {
+    postScrollController.jumpTo(postScrollController.position.maxScrollExtent);
+  }
+
+  initVideoScrolling(BuildContext context, userId, [videoId]) {
+    videoScrollController.addListener(() async {
+      if (videoScrollController.position.maxScrollExtent ==
+          videoScrollController.position.pixels) {
+        _videoScrollDown();
+        isVideoPaginationLoading.value = true;
+        videoPageNumber = videoPageNumber + 1;
+
+        if(videoId == null){
+          dynamic body = {
+            'user_id': userId.toString(),
+            'page': videoPageNumber.toString()
+          };
+          await videoListAPI(context, body);
+        }else{
+          dynamic body = {
+            'user_id': userId.toString(),
+            'video_id': videoId.toString(),
+            'page': videoPageNumber.toString(),
+          };
+          await videoListAPI(context, body, 'detail');
+        }
+        isVideoPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _videoScrollDown() {
+    videoScrollController.jumpTo(videoScrollController.position.maxScrollExtent);
+  }
+
+  initEventScrolling(BuildContext context, userId, [eventId]) {
+    eventScrollController.addListener(() async {
+      if (eventScrollController.position.maxScrollExtent ==
+          eventScrollController.position.pixels) {
+        _eventScrollDown();
+        isEventPaginationLoading.value = true;
+        eventPageNumber = eventPageNumber + 1;
+
+        if(eventId == null){
+          dynamic body = {
+            'user_id': userId.toString(),
+            'page': eventPageNumber.toString()
+          };
+          await eventListAPI(context, body);
+        }else{
+          dynamic body = {
+            'user_id': userId.toString(),
+            'event_id': eventId.toString(),
+            'page': eventPageNumber.toString(),
+          };
+          await eventListAPI(context, body, 'detail');
+        }
+       
+        isEventPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _eventScrollDown() {
+    eventScrollController.jumpTo(eventScrollController.position.maxScrollExtent);
+  }
 
   admireListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
@@ -208,6 +311,13 @@ class AdmireProfileController extends GetxController {
     final apiReq = Request();
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(postPageNumber == 1){
+        if(isFrom == null){
+          postList.clear();
+        }else{
+          postDetailList.clear();
+        }
+      }
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -225,9 +335,9 @@ class AdmireProfileController extends GetxController {
             PostListModel detail = PostListModel.fromJson(userModel);
 
             if (isFrom == null) {
-              postList.value = detail.data!;
+              postList.addAll(detail.data!);
             } else {
-              postDetailList.value = detail.data!;
+              postDetailList.addAll(detail.data!);
             }
           }
         });
@@ -245,6 +355,13 @@ class AdmireProfileController extends GetxController {
     final apiReq = Request();
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(videoPageNumber == 1){
+        if(isFrom == null){
+          videoList.clear();
+        }else{
+          videoDetailList.clear();
+        }
+      }
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -262,7 +379,7 @@ class AdmireProfileController extends GetxController {
             VideoListModel detail = VideoListModel.fromJson(userModel);
 
             if (isFrom == null) {
-              videoList.value = detail.data!;
+              videoList.addAll(detail.data!);
               for (int i = 0; i < videoList.length; i++) {
                 if (videoList[i].file == null) {
                   videoList.remove(videoList[i]);
@@ -273,7 +390,7 @@ class AdmireProfileController extends GetxController {
                     .add(videoControllerList[i].initialize());
               }
             } else {
-              videoDetailList.value = detail.data!;
+              videoDetailList.addAll(detail.data!);
               videoController.clear();
               for (int i = 0; i < videoDetailList.length; i++) {
                 if (videoDetailList[i].file == null) {
@@ -294,6 +411,13 @@ class AdmireProfileController extends GetxController {
   }
 
   eventListAPI(BuildContext context, body, [isFrom]) async {
+    if(eventPageNumber == 1){
+        // if(isFrom == null){
+          eventList.clear();
+        // }else{
+        //   eventDetailList.clear();
+        // }
+      }
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -317,11 +441,13 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             EventListModel detail = EventListModel.fromJson(userModel);
 
-            if (isFrom == null) {
-              eventList.value = detail.data!;
-            } else {
-              eventDetailList.value = detail.data!;
-            }
+            // if (isFrom == null) {
+              eventList.addAll(detail.data!);
+              print(eventList.length);
+            // } else {
+            //   eventDetailList.addAll(detail.data!);
+            //   print(eventDetailList.length);
+            // }
           }
         });
       } else {
@@ -576,4 +702,36 @@ class AdmireProfileController extends GetxController {
       }
     });
   }
+
+  registeredUser(BuildContext context, body) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlRegisteredUser;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            registeredUser(context, body);
+          } else if (model.statusCode == 200) {
+            
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
 }
