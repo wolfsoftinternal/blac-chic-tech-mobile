@@ -32,7 +32,6 @@ class AdmireProfileController extends GetxController {
   RxList<AdmireList> admireList = <AdmireList>[].obs;
   RxList<AdmireList> otherAdmireList = <AdmireList>[].obs;
   Rx<UserDetails> details = UserDetails().obs;
-  Rx<UserDetails> selectedUserDetails = UserDetails().obs;
   RxList<PostList> postList = <PostList>[].obs;
   RxList<PostList> postDetailList = <PostList>[].obs;
   RxList<VideoList> videoList = <VideoList>[].obs;
@@ -188,8 +187,13 @@ class AdmireProfileController extends GetxController {
 
             if (body == null) {
               admireList.value = detail.data!;
+
+              print('admire list '+ admireList.value.toString());
+
             } else {
               otherAdmireList.value = detail.data!;
+
+              print('admire list '+ otherAdmireList.value[0].admireDetails!.firstName!);
             }
           }
         });
@@ -335,7 +339,9 @@ class AdmireProfileController extends GetxController {
             UserDetails userDetailsModel =
             UserDetails.fromJson(userModel['data']);
 
-            selectedUserDetails.value = userDetailsModel;
+            details.value = userDetailsModel;
+
+            print('details name ' + details.value.firstName!);
           }
         });
       } else {
