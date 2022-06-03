@@ -42,6 +42,7 @@ class _VideoTabState extends State<VideoTab> {
               padding: const EdgeInsets.only(left: 24.0, right: 24.0),
               child: StaggeredGridView.countBuilder(
                 crossAxisCount: 4,
+              //  physics : NeverScrollableScrollPhysics(),
                 itemCount: controller.videoList.isEmpty ? 0 : controller.videoList.length,
                 shrinkWrap: true,
                 primary: false,
@@ -138,9 +139,11 @@ class _VideoTabState extends State<VideoTab> {
                     ),
                   );
                 },
+
                 staggeredTileBuilder: (int index) =>
                     StaggeredTile.count(2, index.isEven ? 2.6 : 2),
                 mainAxisSpacing: 8.0,
+
                 crossAxisSpacing: 8.0,
               )),
           )
