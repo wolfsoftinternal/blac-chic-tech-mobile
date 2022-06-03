@@ -5,6 +5,7 @@ import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventControll
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/InvitePeople.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/RegisteredPeople.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -459,7 +460,7 @@ class _EventDetailState extends State<EventDetail> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       // Admission
-                                      Text("Admission",
+                                      Text("Admission Fees",
                                           style: TextStyle(
                                               color: black_121212,
                                               fontWeight: FontWeight.w800,
@@ -1548,27 +1549,32 @@ class _EventDetailState extends State<EventDetail> {
                                             fontStyle: FontStyle.normal,
                                             fontSize: 16.sp),
                                         textAlign: TextAlign.left),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
-                                        color: orange_ff881a,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 8.0,
-                                            bottom: 8.0,
-                                            left: 16.0,
-                                            right: 16.0),
-                                        child:
-                                            // View
-                                            Text("View",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w800,
-                                                    fontFamily: roboto_bold,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 16.sp),
-                                                textAlign: TextAlign.left),
+                                    GestureDetector(
+                                      onTap: (){
+                                        Get.to(RegisteredPeople(id: controller.eventDetails.value.id.toString()));
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(4),
+                                          color: orange_ff881a,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 8.0,
+                                              bottom: 8.0,
+                                              left: 16.0,
+                                              right: 16.0),
+                                          child:
+                                              // View
+                                              Text("View",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.w800,
+                                                      fontFamily: roboto_bold,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontSize: 16.sp),
+                                                  textAlign: TextAlign.left),
+                                        ),
                                       ),
                                     ),
                                   ],

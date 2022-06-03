@@ -183,7 +183,7 @@ class _PostDetailState extends State<PostDetail> {
             child: ListView.builder(
                 shrinkWrap: true,
                 primary: false,
-                itemCount: controller.postDetailList.length,
+                itemCount: controller.postList.length,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding:
@@ -212,7 +212,7 @@ class _PostDetailState extends State<PostDetail> {
                                   height: 300.h,
                                   width: MediaQuery.of(context).size.width,
                                   child: controller
-                                              .postDetailList[index].image ==
+                                              .postList[index].image ==
                                           null
                                       ? ClipRRect(
                                           borderRadius: BorderRadius.all(
@@ -227,7 +227,7 @@ class _PostDetailState extends State<PostDetail> {
                                               Radius.circular(4.r)),
                                           child: CachedNetworkImage(
                                             imageUrl: controller
-                                                .postDetailList[index].image!,
+                                                .postList[index].image!,
                                             fit: BoxFit.fill,
                                             progressIndicatorBuilder: (context,
                                                     url, downloadProgress) =>
@@ -239,34 +239,6 @@ class _PostDetailState extends State<PostDetail> {
                                 ),
                                 const SizedBox(
                                   height: 15,
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text:
-                                              "@${controller.postDetailList[index].address!} ",
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                            fontFamily: helvetica_neu_bold,
-                                            fontWeight: FontWeight.w600,
-                                            color: black_121212,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                            text: controller
-                                                .postDetailList[index].caption!,
-                                            style: const TextStyle(
-                                                fontSize: 14,
-                                                fontFamily:
-                                                    helveticaNeueNeue_medium,
-                                                fontWeight: FontWeight.w400,
-                                                color: black_121212)),
-                                      ],
-                                    ),
-                                  ),
                                 ),
                                 Positioned(
                                   bottom: 15.h,
@@ -319,7 +291,7 @@ class _PostDetailState extends State<PostDetail> {
                                   children: [
                                     TextSpan(
                                       text:
-                                          "@${controller.postDetailList[index].address!} ",
+                                          "@${controller.postList[index].address!} ",
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         fontFamily: helvetica_neu_bold,
@@ -329,7 +301,7 @@ class _PostDetailState extends State<PostDetail> {
                                     ),
                                     TextSpan(
                                         text: controller
-                                            .postDetailList[index].caption!,
+                                            .postList[index].caption!,
                                         style: TextStyle(
                                             fontSize: 12.sp,
                                             fontFamily:

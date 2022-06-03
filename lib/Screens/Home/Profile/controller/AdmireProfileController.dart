@@ -7,6 +7,7 @@ import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventDetailModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/PostListModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/model/RegisteredUserModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/VideoListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventDetail.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventListDetail.dart';
@@ -67,6 +68,11 @@ class AdmireProfileController extends GetxController {
   ScrollController eventScrollController = ScrollController();
   RxInt eventPageNumber = 1.obs;
   RxBool isEventPaginationLoading = false.obs;
+  ScrollController registerScrollController = ScrollController();
+  RxInt registerPageNumber = 1.obs;
+  RxBool isRegisterPaginationLoading = false.obs;
+  Rx<TextEditingController> registeredUserSearch = TextEditingController().obs;
+  RxList<RegisterUser> registerList = <RegisterUser>[].obs;
 
   initScrolling(BuildContext context, userId, [postId]) {
     postScrollController.addListener(() async {
@@ -160,6 +166,29 @@ class AdmireProfileController extends GetxController {
 
   void _eventScrollDown() {
     eventScrollController.jumpTo(eventScrollController.position.maxScrollExtent);
+  }
+
+  initRegisterScrolling(BuildContext context, id) {
+    registerScrollController.addListener(() async {
+      if (registerScrollController.position.maxScrollExtent ==
+          registerScrollController.position.pixels) {
+        _scrollDown();
+        isRegisterPaginationLoading.value = true;
+        registerPageNumber = registerPageNumber + 1;
+
+          dynamic body = {
+            'event_id': id.toString(),
+            'page': registerPageNumber.toString()
+          };
+          await postListAPI(context, body);
+       
+        isRegisterPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _registerScrollDown() {
+    registerScrollController.jumpTo(registerScrollController.position.maxScrollExtent);
   }
 
   admireListAPI(BuildContext context, body) async {
@@ -360,11 +389,11 @@ class AdmireProfileController extends GetxController {
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       if(postPageNumber == 1){
-        if(isFrom == null){
+        // if(isFrom == null){
           postList.clear();
-        }else{
-          postDetailList.clear();
-        }
+        // }else{
+        //   postDetailList.clear();
+        // }
       }
       http.StreamedResponse res = value;
 
@@ -382,11 +411,11 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             PostListModel detail = PostListModel.fromJson(userModel);
 
-            if (isFrom == null) {
+            // if (isFrom == null) {
               postList.addAll(detail.data!);
-            } else {
-              postDetailList.addAll(detail.data!);
-            }
+            // } else {
+            //   postDetailList.addAll(detail.data!);
+            // }
           }
         });
       } else {
@@ -836,6 +865,45 @@ class AdmireProfileController extends GetxController {
             ));
 
           //  chargeCardAndMakePayment(context,selectedPositionOfAdmission, orderListModel);
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  registeredUserApi(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlRegisteredUser;
+    final apiReq = Request();
+
+    dynamic body = {
+      'event_id': id.toString(),
+      'search': registeredUserSearch.value.text,
+    };
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(registerPageNumber == 1){
+          registerList.clear();
+      }
+      http.StreamedResponse res = value;
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            registeredUserApi(context, id);
+          } else if (model.statusCode == 200) {
+            RegisterUser detail = RegisterUser.fromJson(userModel);
+            registerList.add(detail);
           }
         });
       } else {

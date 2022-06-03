@@ -47,7 +47,7 @@ class _PostTabState extends State<PostTab> {
                 child: StaggeredGridView.countBuilder(
                   crossAxisCount: 4,
 
-                  itemCount: controller.postList.length,
+                  itemCount: controller.postList.length >= 10 ? 10 : controller.postList.length,
                   shrinkWrap: true,
                   primary: false,
                   itemBuilder: (BuildContext context, int index) =>
