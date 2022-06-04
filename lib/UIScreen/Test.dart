@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:readmore/readmore.dart';
 
 import '../Styles/my_colors.dart';
+import '../Styles/my_strings.dart';
 import '../Utilities/Constant.dart';
 
 class Test extends StatefulWidget {
@@ -143,7 +144,7 @@ class _TestState extends State<Test> {
                       margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w),
 
                       child: ReadMoreText(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies',
+                        str_long_description,
                         style: TextStyle(
                             fontSize: 12.sp,color:opcity_black_B3121212,fontFamily: roboto_medium
                         ),
