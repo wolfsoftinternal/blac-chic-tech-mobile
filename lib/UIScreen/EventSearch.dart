@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Layout/SearchBar.dart';
 import '../Model/EventSearchModel.dart';
+import '../Utilities/Constant.dart';
 import '../Utilities/TextUtilities.dart';
 
 class EventSearch extends StatefulWidget {
@@ -31,6 +32,7 @@ class _EventSearchState extends State<EventSearch> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
+          backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -75,10 +77,8 @@ class _EventSearchState extends State<EventSearch> {
                       Text(
                           "SEARCH",
                           style: TextStyle(
-                              color:  Color(0xff121212),
-                              fontWeight: FontWeight.w900,
-                              fontFamily: "NeueHelvetica",
-                              fontStyle:  FontStyle.normal,
+                              color: black_121212,
+                              fontFamily: helvetica_neu_bold,
                               fontSize: 16.0
                           ),
                           textAlign: TextAlign.left

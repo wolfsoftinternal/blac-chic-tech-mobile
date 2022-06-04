@@ -63,6 +63,7 @@ dependencies:
   cloud_firestore: ^1.0.7
   google_place: ^0.4.7
 
+
   wechat_assets_picker:
 #    path: ../
   wechat_camera_picker: ^3.2.0
