@@ -46,66 +46,78 @@ class _CreatPostState extends State<CreatPost> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 50,
+                height: 50.h,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                child: Row(
+                padding:  EdgeInsets.only(left: 12.w, right: 12.w),
+                child: Stack(
                   children: [
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Icon(
-                        Icons.close,
-                        size: 24,
-                      ),
-                    ),
-                    Spacer(),
-                    Text('ALL PHOTOS',
-                        style: TextStyle(
-                            color: black_121212,
-                            fontFamily: helvetica_neu_bold,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 16),
-                        textAlign: TextAlign.left),
-                    Stack(children: [
-                      Positioned(top: 4, child: Icon(Icons.expand_more_rounded)),
-                      SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
-                    ]),
-                    Spacer(),
-                    InkWell(
-                      onTap: () {
-                        if (controller.captionController.value.text.isEmpty) {
-                          snackBar(context, 'Enter Caption');
-                        } else {
-                          checkNet(context).then((value) {
-                            controller.createPostAPI(context);
-                          });
-                        }
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: orange_ff881a),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 16, top: 8, bottom: 8),
-                          child: Text('POST',
-                              style: const TextStyle(
-                                  color: Color(0xffffffff),
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: helveticaNeueNeue_medium,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12.0),
-                              textAlign: TextAlign.left),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Icon(
+                            Icons.close,
+                            size: 24.r,
+                          ),
                         ),
+
+                        InkWell(
+                          onTap: () {
+                            if (controller.captionController.value.text.isEmpty) {
+                              snackBar(context, 'Enter Caption');
+                            } else {
+                              checkNet(context).then((value) {
+                                controller.createPostAPI(context);
+                              });
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4.r),
+                                color: orange_ff881a),
+                            child: Padding(
+                              padding:  EdgeInsets.only(
+                                  left: 16.w, right: 16.w, top: 8.h, bottom: 8.h),
+                              child: Text('POST',
+                                  style:  TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontFamily: helveticaNeueNeue_medium,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 12.sp),
+                                  textAlign: TextAlign.left),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('ALL PHOTOS',
+                              style: TextStyle(
+                                  color: black_121212,
+                                  fontFamily: helvetica_neu_bold,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16.sp),
+                              textAlign: TextAlign.left),
+                          Stack(children: [
+                            Positioned(top: 4, child: Icon(Icons.expand_more_rounded)),
+                            SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
+                          ]),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Stack(
                 alignment: Alignment.bottomLeft,
                 children: [
@@ -123,7 +135,7 @@ class _CreatPostState extends State<CreatPost> {
                       padding: EdgeInsets.all(24.r),
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(4.r),
                           gradient: LinearGradient(
                               colors: const [
                                 Color(0xFF1c2535),
@@ -149,12 +161,12 @@ class _CreatPostState extends State<CreatPost> {
                               ),
                               // Tag People
                               Text("Tag People",
-                                  style: const TextStyle(
-                                      color: Color(0xffffffff),
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: "NeueHelvetica",
+                                  style:  TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: helvetica_neu_bold,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 12.0),
+                                      fontSize: 12.sp),
                                   textAlign: TextAlign.left)
                             ],
                           ),
@@ -165,7 +177,7 @@ class _CreatPostState extends State<CreatPost> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.all(24.0),
+                padding: EdgeInsets.all(24.r),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,9 +187,10 @@ class _CreatPostState extends State<CreatPost> {
                         style: TextStyle(
                             color: black_121212,
                             fontWeight: FontWeight.w900,
-                            fontFamily: "NeueHelvetica",
+                            fontFamily: helvetica_neu_bold,
                             fontStyle: FontStyle.normal,
-                            fontSize: 12.0),
+                            letterSpacing: 0.7,
+                            fontSize: 12.sp),
                         textAlign: TextAlign.left),
 
                     SizedBox(
@@ -230,7 +243,7 @@ class _CreatPostState extends State<CreatPost> {
                     ),
 
                     SizedBox(
-                      height: 16.h,
+                      height: 26.h,
                     ),
 
                     GestureDetector(
@@ -244,9 +257,10 @@ class _CreatPostState extends State<CreatPost> {
                               style: TextStyle(
                                   color: black_121212,
                                   fontWeight: FontWeight.w900,
-                                  fontFamily: "NeueHelvetica",
+                                  fontFamily: helvetica_neu_bold,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 12.0),
+                                  letterSpacing: 0.7,
+                                  fontSize: 12.sp),
                               textAlign: TextAlign.left),
                           RotatedBox(
                               quarterTurns: 90,

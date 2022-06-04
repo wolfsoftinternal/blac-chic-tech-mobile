@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:ui';
+
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Home/CreatePost/controller/PostController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
@@ -33,131 +35,125 @@ class _TagPeopleState extends State<TagPeople> {
         () => Column(
           children: [
             SizedBox(
-              height: 50,
+              height: 50.h,
             ),
-            Container(
-              color: Colors.white,
-              height: 60,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BackLayout(),
-                  Text('TAG PEOPLE',
-                      style: TextStyle(
-                          color: black_121212,
-                          /*  fontWeight: FontWeight.w700,*/ /*akib changes*/
-                          fontFamily: helvetica_neu_bold,
-                          /*akib changes*/
-                          fontStyle: FontStyle.normal,
-                          fontSize: 16 /*akib changes*/
-                          ),
-                      textAlign: TextAlign.left),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 24.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: orange_ff881a),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 16, top: 8, bottom: 8),
-                          child: Text('Done',
-                              style: const TextStyle(
-                                  color: Color(0xffffffff),
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: helveticaNeueNeue_medium,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12.0),
-                              textAlign: TextAlign.left),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BackLayout(),
+                Text('TAG PEOPLE',
+                    style: TextStyle(
+                        color: black_121212,
+                        /*  fontWeight: FontWeight.w700,*/ /*akib changes*/
+                        fontFamily: helvetica_neu_bold,
+                        /*akib changes*/
+                        fontStyle: FontStyle.normal,
+                        fontSize: 16.sp /*akib changes*/
                         ),
+                    textAlign: TextAlign.left),
+                Padding(
+                  padding:  EdgeInsets.only(right: 24.w),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4.r),
+                          color: orange_ff881a),
+                      child: Padding(
+                        padding:  EdgeInsets.only(
+                            left: 16.w, right: 16.w, top: 8.h, bottom: 8.h),
+                        child: Text('Done',
+                            style:  TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 12.sp),
+                            textAlign: TextAlign.left),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Container(
-                  child: Stack(
-                    alignment: Alignment.bottomLeft,
-                    children: [
-                      Image.asset(
-                        img_girl,
-                        height: 375.h,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(
-                        height: 50,
-                        child: ListView.builder(
-                            primary: false,
-                            shrinkWrap: true,
-                            padding: EdgeInsets.all(0),
-                            itemCount: controller.selectedList.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, i) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    gradient: LinearGradient(
-                                        colors: const [
-                                          Color(0xFFFFFFFF),
-                                          Color(0xFFaaaaaa),
-                                          Color(0xFF3f3f3f),
-                                        ],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                            controller.selectedList[i]
-                                                        .userName !=
-                                                    null
-                                                ? controller
-                                                    .selectedList[i].userName!
-                                                : controller
-                                                    .selectedList[i].firstName!,
-                                            style: const TextStyle(
-                                                color: Color(0xffffffff),
-                                                fontWeight: FontWeight.w900,
-                                                fontFamily: "NeueHelvetica",
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 12.0),
-                                            textAlign: TextAlign.left),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        GestureDetector(
-                                            onTap: () {
-                                              controller.selectedList.remove(
-                                                  videoController.userList[i]);
-                                            },
-                                            child: Icon(
-                                              Icons.close,
-                                              size: 15,
-                                              color: white_ffffff,
-                                            ))
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
-                    ],
                   ),
+                )
+              ],
+            ),
+            Padding(
+              padding:  EdgeInsets.only(top: 20.h),
+              child: Container(
+                child: Stack(
+                  alignment: Alignment.bottomLeft,
+                  children: [
+                    Image.asset(
+                      img_girl,
+                      height: 375.h,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(
+                      height: 50.h,
+                      child: ListView.separated(
+                          primary: false,
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) => SizedBox(
+                            width: 8.w,
+                          ),
+                          padding: EdgeInsets.only(left: 16.w,right: 16.w,bottom: 16),
+                          itemCount: controller.selectedList.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, i) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4.r),
+                                gradient: LinearGradient(
+                                    colors:  [
+                                      Color(0xFF1c2535).withOpacity(0.5),
+
+                                      Color(0xFF04080f).withOpacity(0.5),
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                        controller.selectedList[i]
+                                                    .userName !=
+                                                null
+                                            ? controller
+                                                .selectedList[i].userName!
+                                            : controller
+                                                .selectedList[i].firstName!,
+                                        style:  TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: helvetica_neu_bold,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.sp),
+                                        textAlign: TextAlign.left),
+                                    SizedBox(
+                                      width: 5.w,
+                                    ),
+                                    GestureDetector(
+                                        onTap: () {
+                                          controller.selectedList.remove(
+                                              videoController.userList[i]);
+                                        },
+                                        child: Icon(
+                                          Icons.close,
+                                          size: 15,
+                                          color: white_ffffff,
+                                        ))
+                                  ],
+                                ),
+                              ),
+                            );
+                          }),
+                    ),
+                  ],
                 ),
               ),
             ),
