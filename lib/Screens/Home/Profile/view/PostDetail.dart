@@ -7,6 +7,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
@@ -19,7 +20,8 @@ import 'package:get/get.dart';
 
 class PostDetail extends StatefulWidget {
   final id;
-  const PostDetail({Key? key, this.id}) : super(key: key);
+  final userId;
+  const PostDetail({Key? key, this.id, this.userId}) : super(key: key);
 
   @override
   State<PostDetail> createState() => _PostDetailState();
@@ -33,11 +35,14 @@ class _PostDetailState extends State<PostDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller.initScrolling(context, widget.userId, widget.id);
     dynamic body = {
+      'user_id': widget.userId.toString(),
       'post_id': widget.id.toString(),
+      'page': controller.postPageNumber.toString()
     };
     checkNet(context).then((value) {
-      controller.postListAPI(context, body);
+      controller.postListAPI(context, body, 'detail');
     });
     init();
   }
@@ -55,21 +60,21 @@ class _PostDetailState extends State<PostDetail> {
       backgroundColor: white_ffffff,
       body: Obx(
         () => Column(children: [
-          const SizedBox(
-            height: 60,
+          SizedBox(
+            height: 60.h,
           ),
           Container(
             child: Row(
               children: [
                 BackLayout(),
-                const SizedBox(
-                  height: 48,
-                  width: 48,
+                SizedBox(
+                  height: 48.h,
+                  width: 48.w,
                 ),
                 const Spacer(),
                 Center(
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.back();
                       Get.back();
                     },
@@ -78,28 +83,28 @@ class _PostDetailState extends State<PostDetail> {
                       child: controller.details.value.image == null
                           ? SvgPicture.asset(
                               placeholder,
-                              height: 48,
-                              width: 48,
+                              height: 48.h,
+                              width: 48.w,
                               fit: BoxFit.cover,
                             )
                           : CachedNetworkImage(
                               imageUrl: controller.details.value.image!,
-                              height: 48,
-                              width: 48,
+                              height: 48.h,
+                              width: 48.w,
                               fit: BoxFit.cover,
                               progressIndicatorBuilder:
                                   (context, url, downloadProgress) =>
                                       SvgPicture.asset(
                                 placeholder,
-                                height: 48,
-                                width: 48,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                               ),
                               errorWidget: (context, url, error) =>
                                   SvgPicture.asset(
                                 placeholder,
-                                height: 48,
-                                width: 48,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -108,78 +113,81 @@ class _PostDetailState extends State<PostDetail> {
                 ),
                 const Spacer(),
                 userId == controller.details.value.id
-                ? GestureDetector(
-                  onTap: () {
-                    createBottomSheet(context);
-                  },
-                  child: Container(
-                    width: 48.w,
-                    height: 48.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset(
-                        add_icon,
-                        width: 24,
-                        height: 24,
-                      ),
-                    ),
-                  ),
-                ) : SizedBox(
-                   width: 48.w,
-                   height: 48.h,
-                ),
-                userId == controller.details.value.id
-                ? Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.to(ProfileSetting());
-                    },
-                    child: Container(
-                      width: 55.w,
-                      height: 55.h,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: SvgPicture.asset(
-                        settings_icon,
-                        width: 40,
-                        height: 40,
-                        color: black_121212,
-                      ),
-                    ),
-                  ),
-                ) : Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              displayBottomSheet(context);
-                            },
-                            child: SizedBox(
-                              width: 55.w,
-                              height: 55.h,
-                              child:
-                                  const Icon(Icons.more_horiz, color: black_121212),
+                    ? GestureDetector(
+                        onTap: () {
+                          createBottomSheet(context, widget.userId);
+                        },
+                        child: Container(
+                          width: 48.w,
+                          height: 48.h,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(8.r),
+                            child: SvgPicture.asset(
+                              add_icon,
+                              width: 24.w,
+                              height: 24.h,
                             ),
                           ),
-                        )
+                        ),
+                      )
+                    : SizedBox(
+                        width: 48.w,
+                        height: 48.h,
+                      ),
+                userId == controller.details.value.id
+                    ? Padding(
+                        padding: EdgeInsets.only(right: 10.w),
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(ProfileSetting());
+                          },
+                          child: Container(
+                            width: 55.w,
+                            height: 55.h,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            child: SvgPicture.asset(
+                              settings_icon,
+                              width: 40.w,
+                              height: 40.h,
+                              color: black_121212,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Padding(
+                        padding: EdgeInsets.only(right: 5.w),
+                        child: GestureDetector(
+                          onTap: () {
+                            displayBottomSheet(context);
+                          },
+                          child: SizedBox(
+                            width: 55.w,
+                            height: 55.h,
+                            child: Icon(Icons.more_horiz, color: black_121212),
+                          ),
+                        ),
+                      )
               ],
             ),
           ),
           Expanded(
+            child: SingleChildScrollView(
+              controller: controller.postScrollController,
             child: ListView.builder(
                 shrinkWrap: true,
                 primary: false,
-                itemCount: controller.postDetailList.length,
+                itemCount: controller.postList.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.only(
-                        left: 24.0, right: 24.0, bottom: 24.0),
+                    padding:
+                        EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h),
                     child: Container(
                       decoration: BoxDecoration(
                         color: white_ffffff,
@@ -188,35 +196,38 @@ class _PostDetailState extends State<PostDetail> {
                             color: const Color(0x17747796).withOpacity(0.07),
                             spreadRadius: 10,
                             blurRadius: 5,
-                            offset: const Offset(0, 10), // changes position of shadow
+                            offset: const Offset(
+                                0, 10), // changes position of shadow
                           ),
                         ],
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
+                        borderRadius: BorderRadius.all(Radius.circular(4.r)),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: EdgeInsets.all(20.r),
                         child: Column(
                           children: [
                             Stack(
                               children: [
                                 SizedBox(
-                                  height: 300,
+                                  height: 300.h,
                                   width: MediaQuery.of(context).size.width,
-                                  child: controller.postDetailList[index].image == null
+                                  child: controller
+                                              .postList[index].image ==
+                                          null
                                       ? ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(5)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(4.r)),
                                           child: SvgPicture.asset(
                                             placeholder,
                                             fit: BoxFit.fill,
                                           ),
                                         )
                                       : ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(5)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(4.r)),
                                           child: CachedNetworkImage(
-                                            imageUrl:
-                                                controller.postDetailList[index].image!,
+                                            imageUrl: controller
+                                                .postList[index].image!,
                                             fit: BoxFit.fill,
                                             progressIndicatorBuilder: (context,
                                                     url, downloadProgress) =>
@@ -224,35 +235,45 @@ class _PostDetailState extends State<PostDetail> {
                                               placeholder,
                                               fit: BoxFit.fill,
                                             ),
-                                            errorWidget: (context, url, error) =>
-                                                SvgPicture.asset(
-                                              placeholder,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                        ),
+                                          )),
+                                ),
+                                const SizedBox(
+                                  height: 15,
                                 ),
                                 Positioned(
-                                  bottom: 15,
-                                  left: 15,
+                                  bottom: 15.h,
+                                  left: 15.w,
                                   child: Container(
-                                    height: 40,
-                                    width: 120,
-                                    decoration: const BoxDecoration(
+                                    height: 37.h,
+                                    width: 110.w,
+                                    decoration: BoxDecoration(
                                       gradient: LinearGradient(colors: [
                                         Color(0xff1c2535),
                                         Color(0xff04080f)
                                       ]),
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(40)),
+                                          Radius.circular(40.r)),
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                                    child: Center(
                                       child: Row(
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          GestureDetector(child: const Icon(Icons.image, color: Colors.red,)),
-                                          const SizedBox(width: 8,),
-                                          setHelceticaBold("1,2k liked", 14, white_ffffff, FontWeight.w500, FontStyle.normal)
+                                          GestureDetector(
+                                              child: SvgPicture.asset(
+                                            icon_heart,
+                                            width: 17.w,
+                                            height: 17.h,
+                                            color: Colors.red,
+                                          )),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          setHelceticaBold(
+                                              "1,2k liked",
+                                              14.sp,
+                                              white_ffffff,
+                                              FontWeight.w500,
+                                              FontStyle.normal)
                                         ],
                                       ),
                                     ),
@@ -260,8 +281,8 @@ class _PostDetailState extends State<PostDetail> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 15,
+                            SizedBox(
+                              height: 16.h,
                             ),
                             Align(
                               alignment: Alignment.topLeft,
@@ -270,27 +291,27 @@ class _PostDetailState extends State<PostDetail> {
                                   children: [
                                     TextSpan(
                                       text:
-                                          "@${controller.postDetailList[index].address!} ",
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: helvetica_neu_bold,
-                                          fontWeight: FontWeight.w600,
-                                          color: black_121212,
+                                          "@${controller.postList[index].address!} ",
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontFamily: helvetica_neu_bold,
+                                        fontWeight: FontWeight.w600,
+                                        color: black_121212,
                                       ),
                                     ),
                                     TextSpan(
-                                      text: controller.postDetailList[index].caption!,
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: helveticaNeueNeue_medium,
-                                          fontWeight: FontWeight.w400,
-                                          color: black_121212
-                                      )
-                                    ),
+                                        text: controller
+                                            .postList[index].caption!,
+                                        style: TextStyle(
+                                            fontSize: 12.sp,
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
+                                            fontWeight: FontWeight.w400,
+                                            color: black_121212)),
                                   ],
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -298,6 +319,9 @@ class _PostDetailState extends State<PostDetail> {
                   );
                 }),
           ),
+          ),
+          if (controller.isPostPaginationLoading.value == true)
+                PaginationUtils().loader(),
         ]),
       ),
     );

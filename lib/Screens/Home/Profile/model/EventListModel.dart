@@ -148,10 +148,10 @@ class EventList {
             List<UserList>.from(json["hosts"].map((x) => UserList.fromJson(x))),
         speakers: List<UserList>.from(
             json["speakers"].map((x) => UserList.fromJson(x))),
-        // benefits: json["benefits"] != null
-        //     ? List<Benefit>.from(
-        //         json["benefits"].map((x) => Benefit.fromJson(x)))
-        //     : null,
+        benefits: json["benefits"] != null
+            ? List<Benefit>.from(
+                json["benefits"].map((x) => Benefit.fromJson(x)))
+            : null,
         invitedUsers: List<UserList>.from(
             json["invited_users"].map((x) => UserList.fromJson(x))),
       );
@@ -188,7 +188,7 @@ class EventList {
         "city_details": cityDetails!.toJson(),
         "hosts": List<dynamic>.from(hosts!.map((x) => x.toJson())),
         "speakers": List<dynamic>.from(speakers!.map((x) => x.toJson())),
-        // "benefits": List<dynamic>.from(benefits!.map((x) => x.toJson())),
+        "benefits": List<dynamic>.from(benefits!.map((x) => x.toJson())),
         "invited_users":
             List<dynamic>.from(invitedUsers!.map((x) => x.toJson())),
       };

@@ -2,12 +2,13 @@ const urlBase = 'http://54.92.129.168/blac-chic-tech/api';
 
 //Authentication APIs
 const urlAutoLogin = '';
-const urlGetLogin = '/login';
+const urlGetLogin = '/mobile/login';
+const urlLogout = '/mobile/logout';
 const urlSignup = '/mobile/register';
-const urlCountryList = '/country-list';
-const urlStateList = '/state-list';
-const urlCityList = '/city-list';
-const urlCityListAll = '/city-list-all';
+const urlCountryList = '/mobile/country-list';
+const urlStateList = '/mobile/state-list';
+const urlCityList = '/mobile/city-list';
+const urlCityListAll = '/mobile/city-list-all';
 const urlPersonalInfo = '/mobile/edit-profile';
 const urlExperienceInfo = '/mobile/experience-edit';
 const urlCompanyList = '/mobile/company-list';
@@ -30,6 +31,11 @@ const urlOtherProfile = '/mobile/other-user-profile';
 const urlPostList = '/mobile/post-list';
 const urlCreatePost = '/mobile/post-create';
 
+// Create Order
+const urlCreateOrder = "/mobile/transaction/order/create";
+const urlOrderDetail = "/mobile/transaction/details";
+const urlOrderUpdate = "/mobile/transaction/order/update";
+
 //video
 const urlVideoList = '/mobile/video-list';
 const urlVideoCreate = '/mobile/video-create';
@@ -41,6 +47,7 @@ const urlCreateEvent = '/mobile/event-create';
 const urlDeleteEvent = '/mobile/event-delete';
 const urlallEventList = '/mobile/home/event-list';
 const urlallEventDetail = '/mobile/home/event-details';
+const urlRegisteredUser = '/mobile/registered-users';
 
 //language
 const urlLanguageList = '/mobile/langauge-list';

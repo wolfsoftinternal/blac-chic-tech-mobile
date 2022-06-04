@@ -8,6 +8,7 @@ import 'package:blackchecktech/Layout/ToolbarLocation.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Screens/Home/BCConnect/controller/BCConnectController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/UserProfile.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -176,7 +177,7 @@ class _BcConnectState extends State<BcConnect> {
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Get.to(AdmireProfile());
+                                  Get.to(UserProfile(selectedUserId: bcConnectController.userList[i].id.toString()));
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,

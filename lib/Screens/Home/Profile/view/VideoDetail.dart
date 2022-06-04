@@ -9,6 +9,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
@@ -23,7 +24,8 @@ import '../../../../Widget/ReportBottomSheet.dart';
 
 class VideoDetail extends StatefulWidget {
   final id;
-  const VideoDetail({Key? key, this.id}) : super(key: key);
+  final userId;
+  const VideoDetail({Key? key, this.userId, this.id}) : super(key: key);
 
   @override
   State<VideoDetail> createState() => _VideoDetailState();
@@ -37,11 +39,14 @@ class _VideoDetailState extends State<VideoDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller.initVideoScrolling(context, widget.userId, widget.id);
     dynamic body = {
       'video_id': widget.id.toString(),
+      'user_id': userId.toString(),
+      'page': controller.videoPageNumber.toString()
     };
     checkNet(context).then((value) {
-      controller.videoListAPI(context, body);
+      controller.videoListAPI(context, body, 'detail');
     });
     init();
   }
@@ -114,7 +119,7 @@ class _VideoDetailState extends State<VideoDetail> {
                 userId == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
-                          createBottomSheet(context);
+                          createBottomSheet(context, widget.userId);
                         },
                         child: Container(
                           width: 48.w,
@@ -177,207 +182,212 @@ class _VideoDetailState extends State<VideoDetail> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: controller.videoDetailList.length,
-                itemBuilder: (context, index) {
-                  controller.position.value =
-                      controller.videoController[index].value.position;
-                  controller.duration.value =
-                      controller.videoController[index].value.duration;
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                        left: 24.0, right: 24.0, bottom: 24.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: white_ffffff,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x17747796).withOpacity(0.07),
-                            spreadRadius: 10,
-                            blurRadius: 5,
-                            offset:
-                                Offset(0, -10), // changes position of shadow
-                          ),
-                        ],
-                        borderRadius:
-                            BorderRadius.all(const Radius.circular(5)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          children: [
-                            Stack(
-                              children: [
-                                SizedBox(
-                                  height: 300,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: FutureBuilder(
-                                    future: controller
-                                        .initializeVideoPlayerFuture[index],
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        return ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              const Radius.circular(5)),
-                                          child: AspectRatio(
-                                            aspectRatio: controller
-                                                .videoController[index]
-                                                .value
-                                                .aspectRatio,
-                                            child: VideoPlayer(controller
-                                                .videoController[index]),
-                                          ),
-                                        );
-                                      } else {
-                                        return Container();
-                                      }
-                                    },
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 15,
-                                  right: 15,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      height: 32,
-                                      width: 47,
-                                      child: Center(
-                                        child: setHelceticaBold(
-                                            controller.videoDetailList[index]
-                                                    .duration ??
-                                                "00:00",
-                                            12.0,
-                                            white_ffffff,
-                                            FontWeight.w500,
-                                            FontStyle.normal),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                    top: 130,
-                                    left: 130,
-                                    child: InkWell(
-                                        onTap: () {
-                                          if (controller.videoController[index]
-                                              .value.isPlaying) {
-                                            setState(() {
-                                              controller.videoController[index]
-                                                  .pause();
-                                            });
-                                          } else {
-                                            setState(() {
-                                              controller.videoController[index]
-                                                  .play();
-                                            });
-                                          }
-                                        },
-                                        child: controller.videoController[index]
-                                                .value.isPlaying
-                                            ? Container(
-                                                height: 40,
-                                                width: 40,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                child: Icon(
-                                                  Icons.pause,
-                                                  color: white_ffffff,
-                                                  size: 20,
-                                                ))
-                                            // : Container()
-                                            : controller.position.value ==
-                                                    controller.duration.value
-                                                ? SvgPicture.asset(icon_play)
-                                                : SvgPicture.asset(icon_play))),
-                                Positioned(
-                                  bottom: 15,
-                                  left: 15,
-                                  child: Container(
-                                    height: 40,
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(colors: const [
-                                        Color(0xff1c2535),
-                                        Color(0xff04080f)
-                                      ]),
-                                      borderRadius: BorderRadius.all(
-                                          const Radius.circular(40)),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 8.0, right: 8.0),
-                                      child: Row(
-                                        children: [
-                                          GestureDetector(
-                                              child: Icon(
-                                            Icons.image,
-                                            color: Colors.red,
-                                          )),
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                          setHelceticaBold(
-                                              "1,2k liked",
-                                              14,
-                                              white_ffffff,
-                                              FontWeight.w500,
-                                              FontStyle.normal)
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text.rich(
-                                TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text:
-                                          "@${controller.videoDetailList[index].eventSpoken ?? ""} ",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: helvetica_neu_bold,
-                                        fontWeight: FontWeight.w600,
-                                        color: black_121212,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                        text: controller.videoDetailList[index]
-                                                .caption ??
-                                            "",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontWeight: FontWeight.w400,
-                                            color: black_121212)),
-                                  ],
-                                ),
-                              ),
+            child: SingleChildScrollView(
+              controller: controller.videoScrollController,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: controller.videoDetailList.length,
+                  itemBuilder: (context, index) {
+                    controller.position.value =
+                        controller.videoController[index].value.position;
+                    controller.duration.value =
+                        controller.videoController[index].value.duration;
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                          left: 24.0, right: 24.0, bottom: 24.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: white_ffffff,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0x17747796).withOpacity(0.07),
+                              spreadRadius: 10,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, -10), // changes position of shadow
                             ),
                           ],
+                          borderRadius:
+                              BorderRadius.all(const Radius.circular(5)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            children: [
+                              Stack(
+                                children: [
+                                  SizedBox(
+                                    height: 300,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: FutureBuilder(
+                                      future: controller
+                                          .initializeVideoPlayerFuture[index],
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          return ClipRRect(
+                                            borderRadius: BorderRadius.all(
+                                                const Radius.circular(5)),
+                                            child: AspectRatio(
+                                              aspectRatio: controller
+                                                  .videoController[index]
+                                                  .value
+                                                  .aspectRatio,
+                                              child: VideoPlayer(controller
+                                                  .videoController[index]),
+                                            ),
+                                          );
+                                        } else {
+                                          return Container();
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 15,
+                                    right: 15,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        height: 32,
+                                        width: 47,
+                                        child: Center(
+                                          child: setHelceticaBold(
+                                              controller.videoDetailList[index]
+                                                      .duration ??
+                                                  "00:00",
+                                              12.0,
+                                              white_ffffff,
+                                              FontWeight.w500,
+                                              FontStyle.normal),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                      top: 130,
+                                      left: 130,
+                                      child: InkWell(
+                                          onTap: () {
+                                            if (controller.videoController[index]
+                                                .value.isPlaying) {
+                                              setState(() {
+                                                controller.videoController[index]
+                                                    .pause();
+                                              });
+                                            } else {
+                                              setState(() {
+                                                controller.videoController[index]
+                                                    .play();
+                                              });
+                                            }
+                                          },
+                                          child: controller.videoController[index]
+                                                  .value.isPlaying
+                                              ? Container(
+                                                  height: 40,
+                                                  width: 40,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50.0),
+                                                  ),
+                                                  child: Icon(
+                                                    Icons.pause,
+                                                    color: white_ffffff,
+                                                    size: 20,
+                                                  ))
+                                              // : Container()
+                                              : controller.position.value ==
+                                                      controller.duration.value
+                                                  ? SvgPicture.asset(icon_play)
+                                                  : SvgPicture.asset(icon_play))),
+                                  Positioned(
+                                    bottom: 15,
+                                    left: 15,
+                                    child: Container(
+                                      height: 40,
+                                      width: 120,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(colors: const [
+                                          Color(0xff1c2535),
+                                          Color(0xff04080f)
+                                        ]),
+                                        borderRadius: BorderRadius.all(
+                                            const Radius.circular(40)),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 8.0),
+                                        child: Row(
+                                          children: [
+                                            GestureDetector(
+                                                child: Icon(
+                                              Icons.image,
+                                              color: Colors.red,
+                                            )),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            setHelceticaBold(
+                                                "1,2k liked",
+                                                14,
+                                                white_ffffff,
+                                                FontWeight.w500,
+                                                FontStyle.normal)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            "@${controller.videoDetailList[index].eventSpoken ?? ""} ",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: helvetica_neu_bold,
+                                          fontWeight: FontWeight.w600,
+                                          color: black_121212,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                          text: controller.videoDetailList[index]
+                                                  .caption ??
+                                              "",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
+                                              fontWeight: FontWeight.w400,
+                                              color: black_121212)),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+            ),
           ),
+          if (controller.isVideoPaginationLoading.value == true)
+                PaginationUtils().loader(),
         ]),
       ),
     );

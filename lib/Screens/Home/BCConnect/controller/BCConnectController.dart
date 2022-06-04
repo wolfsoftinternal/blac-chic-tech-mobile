@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:blackchecktech/Model/BaseModel.dart';
@@ -29,6 +30,8 @@ class BCConnectController extends GetxController {
   Rx<TextEditingController> searchController = TextEditingController().obs;
   List<String> tagValues = [];
 
+  RxBool isFollowUnfollowChanged = false.obs;
+
   RxList<TopicList> topicList = <TopicList>[].obs;
   List topicNameList = [].obs;
   RxString topicName = "Select Topic".obs;
@@ -38,6 +41,8 @@ class BCConnectController extends GetxController {
   List languageNameList = [].obs;
   RxString languageName = "Select Language".obs;
   List<DropdownMenuItem<String>>? dropDownLanguageItems;
+
+
 
   RxList<UserList> userList = <UserList>[].obs;
   RxList<UserList> selectedList = <UserList>[].obs;
@@ -167,6 +172,9 @@ class BCConnectController extends GetxController {
 
   // Create admire
   createAdmireAPI(BuildContext context, id, position) async {
+
+    isFollowUnfollowChanged.value = false;
+
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -195,6 +203,8 @@ class BCConnectController extends GetxController {
             snackBar(context, model.message!);
 
             userList[position].isAdmire = 1;
+            userList.refresh();
+
             update();
           }
         });
@@ -205,6 +215,7 @@ class BCConnectController extends GetxController {
   }
 
   admireDeleteAPI(BuildContext context, id, position) async {
+    isFollowUnfollowChanged.value = false;
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -232,6 +243,7 @@ class BCConnectController extends GetxController {
             snackBar(context, model.message!);
 
             userList[position].isAdmire = 0;
+            userList.refresh();
             update();
           }
         });

@@ -36,13 +36,14 @@ class LoginController extends GetxController {
 
   checker() async {
     var preferences = MySharedPref();
+    var rememberMe = await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
+    
+    if(rememberMe == null){
+      await preferences.setBool(SharePreData.keyRememberedUserInfo, false);
+    }
+    boolRemember.value = await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
 
-    bool isExist =
-        await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
-
-    boolRemember.value = isExist;
-
-    if (isExist == true) {
+    if (boolRemember.value == true) {
       getStoredUserDetails();
     }
   }
@@ -80,6 +81,9 @@ class LoginController extends GetxController {
                   SharePreData.keyRememberedUserInfo, true);
               await preferences.setString(SharePreData.keyRememberPassword,
                   pswdText.value.text.toString());
+            }else{
+              await preferences.setBool(
+                  SharePreData.keyRememberedUserInfo, false);
             }
 
             SignupModel? myModel =

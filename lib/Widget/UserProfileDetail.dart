@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/SelectedUserProfile.dart';
 import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -15,19 +16,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class AdmireProfileList extends StatefulWidget {
-  // final AdmireList admireList;
-  const AdmireProfileList({Key? key})
+class UserProfileDetails extends StatefulWidget {
+  final UserDetails userDetails;
+  const UserProfileDetails({Key? key, required this.userDetails})
       : super(key: key);
 
   @override
-  State<AdmireProfileList> createState() => _AdmireProfileListState();
+  State<UserProfileDetails> createState() => _UserProfileDetailsState();
 }
 
-class _AdmireProfileListState extends State<AdmireProfileList> {
+class _UserProfileDetailsState extends State<UserProfileDetails> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
-  int userId = 0;
-  SignupModel? myModel;
+
 
   @override
   void initState() {
@@ -37,18 +37,16 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
   }
 
   init() async {
-    var preferences = MySharedPref();
-    myModel =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
-    userId = myModel!.data!.id!.toInt();
     setState(() {});
   }
+
   
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        myModel!.data!.image == null
+        widget.userDetails.image == null
             ? SvgPicture.asset(
                 placeholder,
                 height: MediaQuery.of(context).size.height * .83,
@@ -56,7 +54,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 fit: BoxFit.cover,
               )
             : CachedNetworkImage(
-                imageUrl: myModel!.data!.image!,
+                imageUrl: widget.userDetails.image!,
                 // widget.admireList.admireDetails!.image!,
                 height: MediaQuery.of(context).size.height * .83,
                 width: double.infinity,
@@ -97,7 +95,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
               const Spacer(),
               GestureDetector(
                   onTap: () {
-                    createBottomSheet(context, myModel!.data!.id!);
+                    createBottomSheet(context, widget.userDetails.id);
                   },
                   child: 
                   // userId == widget.admireList.admireDetails!.id ?
@@ -117,7 +115,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
 
               GestureDetector(
                 onTap: () {
-                  Get.to(ProfileSetting());
+                  // Get.to(ProfileSetting());
                 },
                 child: 
                 // userId == widget.admireList.admireDetails!.id ?
@@ -153,9 +151,9 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                       // widget.admireList.admireDetails!.userName != null
                       //     ? "@" + widget.admireList.admireDetails!.userName!
                       //     : "@" + widget.admireList.admireDetails!.firstName!,
-                      myModel!.data!.userName != null
-                          ? "@" + myModel!.data!.userName!
-                          : "@" + myModel!.data!.firstName!,
+                      widget.userDetails.userName != null
+                          ? "@" + widget.userDetails.userName!
+                          : "@" + widget.userDetails.firstName!,
                       20.sp,
                       white_ffffff,
                       FontWeight.w600,
@@ -183,10 +181,9 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                           //     ? widget.admireList.admireDetails!.fullName!
                           //         .toUpperCase()
                           //     : "",
-                          myModel!.data!.fullName != null
-                          ? myModel!.data!.fullName!
+                          widget.userDetails.fullName??""
                               .toUpperCase()
-                          : "",
+                         ,
                           40.sp,
                           white_ffffff,
                           FontWeight.w600,
@@ -213,11 +210,11 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                       //             .companyName!
                       //             .toUpperCase()
                       //     : "",
-                      myModel!.data!.currentJobs != null
-                          ? myModel!.data!.currentJobs!.title!
+                      widget.userDetails.currentJobs != null
+                          ? widget.userDetails.currentJobs!.title!
                                   .toUpperCase() +
                               ' - ' +
-                              myModel!.data!.currentJobs!
+                          widget.userDetails.currentJobs!
                                   .companyName!
                                   .toUpperCase()
                           : "",
@@ -252,7 +249,10 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   //     await preferences.getSignupModel(SharePreData.keySignupModel);
 
                   // if (modelM!.data!.id == widget.admireList.admireId) {
-                    controller.userProfileAPI(context);
+                  //   controller.userProfileAPI(context);
+
+                  Get.to(SelectedUserProfile(userDetails: widget.userDetails));
+
                   // }
                   //  else {
                     // controller.admireProfileAPI(
@@ -296,7 +296,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // widget.admireList.admireDetails!.cityDetails != null
-                  myModel!.data!.cityDetails != null
+                  widget.userDetails.cityDetails != null
                       ? const Icon(
                           Icons.location_on,
                           size: 12,
@@ -313,12 +313,12 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                     //         widget
                     //             .admireList.admireDetails!.countryDetails!.name!
                     //     : "",
-                    myModel!.data!.cityDetails != null
-                        ? myModel!.data!.cityDetails!.name! +
+                    widget.userDetails.cityDetails != null
+                        ? widget.userDetails.cityDetails!.name! +
                             ', ' +
-                            myModel!.data!.stateDetails!.name! +
+                            widget.userDetails.stateDetails!.name! +
                             ', ' +
-                            myModel!.data!.countryDetails!.name!
+                            widget.userDetails.countryDetails!.name!
                         : "",
                     10.sp,
                     Colors.white70,

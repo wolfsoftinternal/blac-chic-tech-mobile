@@ -77,6 +77,34 @@ class StepsController extends GetxController {
   Rx<TextEditingController> pastJobName = TextEditingController().obs;
   RxString pastJobImage = ''.obs;
 
+  ScrollController scrollController = ScrollController();
+  RxInt pageNumber = 1.obs;
+  RxBool isPaginationLoading = false.obs;
+
+  initScrolling(BuildContext context) {
+    scrollController.addListener(() async {
+      print("Scrolling");
+
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) {
+        _scrollDown();
+        isPaginationLoading.value = true;
+        pageNumber = pageNumber + 1;
+        print("pageNumber $pageNumber");
+        dynamic body = {
+          'page': pageNumber.toString()
+        };
+        await companyListAPI(context, body);
+        isPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _scrollDown() {
+    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  }
+
+
   countryListApi() async {
     String url = urlBase + urlCountryList;
 
@@ -261,6 +289,9 @@ class StepsController extends GetxController {
     String url = urlBase + urlCompanyList;
     final apiReq = Request();
     await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(pageNumber==1){
+        companyList.clear();
+      }
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -275,7 +306,7 @@ class StepsController extends GetxController {
 
             companyListAPI(context, body);
           } else if (model.statusCode == 200) {
-            companyList.value = userModel['data'];
+            companyList.addAll(userModel['data']);
           }
         });
       } else {

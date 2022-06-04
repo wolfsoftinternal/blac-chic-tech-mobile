@@ -6,6 +6,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
@@ -17,9 +18,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../Utilities/Constant.dart';
+
 class EventListDetail extends StatefulWidget {
   final id;
-  const EventListDetail({Key? key, this.id}) : super(key: key);
+  final userId;
+  const EventListDetail({Key? key, this.userId, this.id}) : super(key: key);
 
   @override
   State<EventListDetail> createState() => _EventListDetailState();
@@ -33,12 +37,16 @@ class _EventListDetailState extends State<EventListDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller.initEventScrolling(context, widget.userId, widget.id);
     dynamic body = {
       'event_id': widget.id.toString(),
+      'user_id': widget.userId.toString(),
+      'page': controller.eventPageNumber.toString()
     };
     checkNet(context).then((value) {
-      controller.eventListAPI(context, body);
+      controller.eventListAPI(context, body, 'detail');
     });
+
     init();
   }
 
@@ -55,16 +63,16 @@ class _EventListDetailState extends State<EventListDetail> {
       backgroundColor: white_ffffff,
       body: Obx(
         () => Column(children: [
-          const SizedBox(
-            height: 60,
+          SizedBox(
+            height: 60.h,
           ),
           Container(
             child: Row(
               children: [
                 BackLayout(),
-                const SizedBox(
-                  height: 48,
-                  width: 48,
+                SizedBox(
+                  height: 48.h,
+                  width: 48.w,
                 ),
                 const Spacer(),
                 Center(
@@ -78,28 +86,28 @@ class _EventListDetailState extends State<EventListDetail> {
                       child: controller.details.value.image == null
                           ? SvgPicture.asset(
                               placeholder,
-                              height: 48,
-                              width: 48,
+                              height: 48.h,
+                              width: 48.w,
                               fit: BoxFit.cover,
                             )
                           : CachedNetworkImage(
                               imageUrl: controller.details.value.image!,
-                              height: 48,
-                              width: 48,
+                              height: 48.h,
+                              width: 48.w,
                               fit: BoxFit.cover,
                               progressIndicatorBuilder:
                                   (context, url, downloadProgress) =>
                                       SvgPicture.asset(
                                 placeholder,
-                                height: 48,
-                                width: 48,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                               ),
                               errorWidget: (context, url, error) =>
                                   SvgPicture.asset(
                                 placeholder,
-                                height: 48,
-                                width: 48,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -110,7 +118,7 @@ class _EventListDetailState extends State<EventListDetail> {
                 userId == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
-                          createBottomSheet(context);
+                          createBottomSheet(context, widget.userId);
                         },
                         child: Container(
                           width: 48.w,
@@ -123,8 +131,8 @@ class _EventListDetailState extends State<EventListDetail> {
                             padding: const EdgeInsets.all(8.0),
                             child: SvgPicture.asset(
                               add_icon,
-                              width: 24,
-                              height: 24,
+                              width: 24.w,
+                              height: 24.h,
                             ),
                           ),
                         ),
@@ -145,19 +153,19 @@ class _EventListDetailState extends State<EventListDetail> {
                             height: 55.h,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                             ),
                             child: SvgPicture.asset(
                               settings_icon,
-                              width: 40,
-                              height: 40,
+                              width: 40.w,
+                              height: 40.h,
                               color: black_121212,
                             ),
                           ),
                         ),
                       )
                     : Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
+                        padding: EdgeInsets.only(right: 10.w),
                         child: GestureDetector(
                           onTap: () {
                             displayBottomSheet(context);
@@ -165,218 +173,258 @@ class _EventListDetailState extends State<EventListDetail> {
                           child: SizedBox(
                             width: 55.w,
                             height: 55.h,
-                            child: const Icon(Icons.more_horiz, color: black_121212),
+                            child: const Icon(Icons.more_horiz,
+                                color: black_121212),
                           ),
                         ),
                       )
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
+          SizedBox(
+            height: 20.h,
           ),
           Expanded(
-            child: ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: controller.eventDetailList.length,
-                padding: EdgeInsets.zero,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        checkNet(context).then((value) {
-                          controller.eventDetailAPI(
-                              context, controller.eventDetailList[index].id);
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 32.0),
-                        child: Stack(
-                          children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              height: 207.h,
-                              child: controller.eventDetailList[index].poster ==
-                                      null
-                                  ? ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(5)),
-                                      child: SvgPicture.asset(
-                                        placeholder,
-                                        fit: BoxFit.cover,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 207.h,
-                                      ),
-                                    )
-                                  : ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(5)),
-                                      child: CachedNetworkImage(
-                                        imageUrl: controller
-                                            .eventDetailList[index].poster!,
-                                        fit: BoxFit.cover,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 207.h,
-                                        progressIndicatorBuilder:
-                                            (context, url, downloadProgress) =>
-                                                SvgPicture.asset(
-                                          placeholder,
-                                          fit: BoxFit.cover,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 207.h,
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            SvgPicture.asset(
-                                          placeholder,
-                                          fit: BoxFit.cover,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 207.h,
-                                        ),
-                                      ),
-                                    ),
-                            ),
-                            Align(
-                                alignment: Alignment.topLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 8.0, left: 8.0),
-                                  child: Container(
-                                      decoration: const BoxDecoration(
-                                        color: orange,
+            child: SingleChildScrollView(
+              controller: controller.eventScrollController,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: controller.eventList.length,
+                  padding: EdgeInsets.zero,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          checkNet(context).then((value) {
+                            controller.eventDetailAPI(
+                                context, controller.eventList[index].id);
+                          });
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 16.h),
+                          child: Stack(
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 207.h,
+                                child: controller
+                                            .eventList[index].poster ==
+                                        null
+                                    ? ClipRRect(
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(40)),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: setHelveticaMedium(
-                                            controller
-                                                .eventDetailList[index].type!,
-                                            12,
-                                            white_ffffff,
-                                            FontWeight.w500,
-                                            FontStyle.normal),
-                                      )),
-                                )),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 8.0, right: 8.0),
-                                child: Container(
-                                    height: 29,
-                                    width: 133,
-                                    decoration: const BoxDecoration(
-                                      gradient: LinearGradient(colors: [
-                                        Color(0xff1c2535),
-                                        Color(0xff04080f)
-                                      ]),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(4)),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 6.0, right: 6.0),
-                                          child: Icon(
-                                            Icons.person,
-                                            size: 17,
-                                            color: grey_aaaaaa,
+                                            Radius.circular(5.r)),
+                                        child: SvgPicture.asset(
+                                          placeholder,
+                                          fit: BoxFit.cover,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 207.h,
+                                        ),
+                                      )
+                                    : ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5.r)),
+                                        child: CachedNetworkImage(
+                                          imageUrl: controller
+                                              .eventList[index].poster!,
+                                          fit: BoxFit.cover,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 207.h,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              SvgPicture.asset(
+                                            placeholder,
+                                            fit: BoxFit.cover,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 207.h,
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              SvgPicture.asset(
+                                            placeholder,
+                                            fit: BoxFit.cover,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 207.h,
                                           ),
                                         ),
-                                        setHelceticaBold(
-                                            controller.eventDetailList[index]
-                                                    .hosts![0].firstName! +
-                                                controller
-                                                    .eventDetailList[index]
-                                                    .hosts![0]
-                                                    .lastName!,
-                                            11,
-                                            white_ffffff,
-                                            FontWeight.w500,
-                                            FontStyle.normal,
-                                            -0.22),
-                                      ],
-                                    )),
+                                      ),
                               ),
-                            ),
-                            Positioned(
-                                bottom: 19,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 16.0),
-                                  child: Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        calendar_icon,
-                                        height: 12,
-                                        width: 12,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 4.0),
-                                        child: setHelceticaBold(
-                                            '${DateFormat("MMM dd, yyyy").format(controller.eventDetailList[index].startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventDetailList[index].startDateTime!)}',
-                                            10,
-                                            white_ffffff,
-                                            FontWeight.w500,
-                                            FontStyle.normal,
-                                            -0.4),
-                                      ),
-                                    ],
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 207.h,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.r),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Color(0x00121212),
+                                          Color(0xff121212)
+                                        ])),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 8.h, left: 8.w),
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                          color: orange.withOpacity(0.7),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(40.r)),
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 14.w,
+                                              right: 14.w,
+                                              top: 7.h,
+                                              bottom: 7.h),
+                                          child: Text(
+                                              controller.eventList[index].type!,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: roboto_bold,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 12.sp),
+                                              textAlign: TextAlign.center),
+                                          // setHelveticaMedium(
+                                          //     controller
+                                          //         .eventList[index].type!,
+                                          //     12,
+                                          //     white_ffffff,
+                                          //     FontWeight.w500,
+                                          //     FontStyle.normal),
+                                        )),
                                   ),
-                                )),
-                            Positioned(
-                                bottom: 19,
-                                right: 16,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 16.0),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 4.0),
-                                        child: setHelceticaBold(
-                                            controller
-                                                .eventDetailList[index].venue!,
-                                            10,
-                                            white_ffffff,
-                                            FontWeight.w500,
-                                            FontStyle.normal,
-                                            -0.4),
-                                      ),
-                                      SvgPicture.asset(
-                                        icon_location,
-                                        height: 12,
-                                        width: 12,
-                                      ),
-                                    ],
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 8.h, right: 8.w),
+                                    child: Container(
+                                        height: 29.h,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(colors: [
+                                            Color(0xff1c2535),
+                                            Color(0xff04080f)
+                                          ]),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(4.r)),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 6.w, right: 6.w),
+                                              child: Icon(
+                                                Icons.person,
+                                                size: 15.r,
+                                                color: grey_aaaaaa,
+                                              ),
+                                            ),
+                                            setHelceticaBold(
+                                                controller
+                                                        .eventList[index]
+                                                        .hosts![0]
+                                                        .firstName! +
+                                                    controller
+                                                        .eventList[index]
+                                                        .hosts![0]
+                                                        .lastName!,
+                                                11.sp,
+                                                white_ffffff,
+                                                FontWeight.w500,
+                                                FontStyle.normal,
+                                                -0.22),
+                                            SizedBox(
+                                              width: 6.w,
+                                            )
+                                          ],
+                                        )),
                                   ),
-                                )),
-                            Positioned(
-                                bottom: 40,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 16.0),
-                                  child: setHelceticaBold(
-                                      controller.eventDetailList[index].title!,
-                                      22,
-                                      white_ffffff,
-                                      FontWeight.w500,
-                                      FontStyle.normal,
-                                      -0.88),
-                                )),
-                          ],
+                                ],
+                              ),
+                              Positioned(
+                                  bottom: 19.h,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 16.w),
+                                    child: Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          calendar_icon,
+                                          height: 12.h,
+                                          width: 12.w,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 4.w),
+                                          child: setHelveticaMedium(
+                                              '${DateFormat("MMM dd, yyyy").format(controller.eventList[index].startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventList[index].startDateTime!)}',
+                                              10.sp,
+                                              white_ffffff,
+                                              FontWeight.w500,
+                                              FontStyle.normal,
+                                              -0.4),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                              Positioned(
+                                  bottom: 19.h,
+                                  right: 16.w,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 16.w),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 4.w),
+                                          child: setHelveticaMedium(
+                                              controller.eventList[index]
+                                                  .venue!,
+                                              10.sp,
+                                              white_ffffff,
+                                              FontWeight.w100,
+                                              FontStyle.normal,
+                                              -0.4),
+                                        ),
+                                        SvgPicture.asset(
+                                          icon_location,
+                                          height: 12.h,
+                                          width: 12.w,
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                              Positioned(
+                                  bottom: 40.h,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 16.w),
+                                    child: setHelceticaBold(
+                                        controller
+                                            .eventList[index].title!,
+                                        22.sp,
+                                        white_ffffff,
+                                        FontWeight.w500,
+                                        FontStyle.normal,
+                                        -0.88),
+                                  )),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+            ),
           ),
+          if (controller.isEventPaginationLoading.value == true)
+            PaginationUtils().loader(),
         ]),
       ),
     );

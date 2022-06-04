@@ -50,6 +50,12 @@ class MySharedPref {
     return boolVal;
   }
 
+  setRememberModel(SignupModel model, String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("Value set model ::::::" + model.data!.id.toString());
+    prefs.setString(key, json.encode(model.toJson()));
+  }
+
   // It clears preference data by unique key name
   Future<void> clearData(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

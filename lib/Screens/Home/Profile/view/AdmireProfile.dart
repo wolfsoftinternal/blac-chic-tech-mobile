@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/SeeAllAdmires.dart';
@@ -5,6 +6,8 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/preference_utils.dart';
+import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/AdmireProfileList.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +29,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
   PageController pageController = PageController();
   List<Widget>? list;
   bool hadReachedEnd = false;
+  SignupModel? myModel;
 
   @override
   void initState() {
@@ -39,43 +43,54 @@ class _AdmireProfileState extends State<AdmireProfile> {
       },
     );
     controller.addListener(() {});
+    init();
   }
 
+  init() async {
+    var preferences = MySharedPref();
+    myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white_ffffff,
       body: Obx(
-        () => controller.admireList.isEmpty
-            ? Center(
-                child: Container(
-                    width: 80.w,
-                    height: 80.h,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: Image.asset(loader, height: 20.h, width: 20.w)),
-              )
-            : Column(
+        () => 
+        // controller.admireList.isEmpty
+        //     ? Center(
+        //         child: Container(
+        //             width: 80.w,
+        //             height: 80.h,
+        //             decoration: const BoxDecoration(
+        //               shape: BoxShape.circle,
+        //               color: Colors.white,
+        //             ),
+        //             child: Image.asset(loader, height: 20.h, width: 20.w)),
+        //       )
+        //     : 
+            Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  myModel == null ? Container() :
                   Expanded(
                     child: Stack(
                       children: [
                         PageView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             controller: pageController,
-                            itemCount: controller.admireList.length,
-                            onPageChanged: (v) {
-                              if (v == controller.admireList.length - 1) {
-                                hadReachedEnd = true;
-                              }
-                            },
+                            itemCount: controller.admireList.isEmpty ? 1 : controller.admireList.length,
+                            // onPageChanged: (v) {
+                            //   if (v == controller.admireList.length - 1) {
+                            //     hadReachedEnd = true;
+                            //   }
+                            // },
                             itemBuilder: (BuildContext context, int index) {
                               return AdmireProfileList(
-                                  admireList: controller.admireList[index]);
+                                  // admireList: controller.admireList[index]
+                                  );
                             }),
                         // Padding(
                         //   padding:
@@ -141,7 +156,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                     child: Row(
                       children: [
                         setHelceticaBold(
-                            '${controller.admireList[0].admireDetails!.firstName.toString().capitalizeFirst} Admires',
+                            '${myModel!.data!.firstName.toString().capitalizeFirst} Admires',
                             14.sp,
                             black_121212,
                             FontWeight.w500,

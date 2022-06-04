@@ -26,6 +26,7 @@ import 'package:blackchecktech/UIScreen/ProgressBarStep.dart';
 import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
 import 'package:blackchecktech/UIScreen/SpeakersVideos.dart';
 import 'package:blackchecktech/UIScreen/TagPeople.dart';
+import 'package:blackchecktech/UIScreen/TestSecond.dart';
 import 'package:blackchecktech/UIScreen/TransactionsPayoutsTabs.dart';
 import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
 import 'package:blackchecktech/UIScreen/UploadVideos.dart';
@@ -68,6 +69,25 @@ class ListScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       "FoureStep Screen",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TestSecond(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      "TestSecond Screen",
                       style: TextStyle(
                           color: Colors.black87,
                           fontFamily: helveticaNeueNeue_medium,
@@ -382,11 +402,11 @@ class ListScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EventTicketTxnId(),
-                        ));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => EventTicketTxnId(EventList),
+                    //     ));
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),

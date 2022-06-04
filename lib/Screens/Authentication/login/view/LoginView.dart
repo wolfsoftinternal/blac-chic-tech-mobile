@@ -25,201 +25,203 @@ class _LoginState extends State<LoginView> {
   LoginController controller = Get.put(LoginController());
   final formKey = GlobalKey<FormState>();
 
-  bool selectedsecond = false;
+  // bool selectedsecond = false;
   final loginKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  Stack(
-                    children: [
-                      BackLayout(),
+    return Obx(
+      () => Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 60,
+                    ),
+                    Stack(
+                      children: [
+                        BackLayout(),
 
-                      // LOGIN
-                       Padding(
-                        padding: EdgeInsets.only(top: 15.h),
-                        child: Center(
-                          child: Text("LOGIN",
-                              style: TextStyle(
-                                  fontFamily: helvetica_neu_bold,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16.0.sp),
-                              textAlign: TextAlign.center),
-                        ),
-                      )
-                    ],
-                  ),
-                   SizedBox(
-                    height: 51.h,
-                  ),
-                  Image.asset(
-                    img_logo,
-                    width: 94.r,
-                    height: 94.r,
-                  ),
-                   SizedBox(
-                    height: 57.h,
-                  ),
-                  Form(
-                    key: formKey,
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 24.w),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          InputTextLayout(
-                              str_username,
-                              controller.inputText.value,
-                              false,
-                              TextInputAction.next,
-                              TextInputType.text, (v) {}),
-                           SizedBox(
-                            height: 16.h,
+                        // LOGIN
+                         Padding(
+                          padding: EdgeInsets.only(top: 15.h),
+                          child: Center(
+                            child: Text("LOGIN",
+                                style: TextStyle(
+                                    fontFamily: helvetica_neu_bold,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16.0.sp),
+                                textAlign: TextAlign.center),
                           ),
-                          InputTextLayoutPassword(
-                              str_pwd,
-                              controller.pswdText.value,
-                              false,
-                              TextInputAction.next,
-                              TextInputType.text, (v) {}),
-                           SizedBox(
-                            height: 20.h,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    selectedsecond = !selectedsecond;
-                                    controller.boolRemember.value =
-                                        selectedsecond;
-                                  });
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        height: 20.h,
-                                        width: 20.w,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                 BorderRadius.all(
-                                                    Radius.circular(3.r)),
-                                            border: Border.all(
-                                                color: selectedsecond
-                                                    ? orange_ff881a
-                                                    : const Color(0xffdbdbdb),
-                                                width: 1),
-                                            color: selectedsecond
-                                                ? orange_ff881a
-                                                : const Color(0xffffffff)),
-                                        child: selectedsecond
-                                            ?  Icon(
-                                                Icons.check,
-                                                size: 18.0.r,
-                                                color: Colors.white,
-                                              )
-                                            :  Icon(
-                                                Icons.check,
-                                                size: 18.0.r,
-                                                color: Colors.white,
-                                              )),
-                                     SizedBox(
-                                      width: 11.7.w,
-                                    ),
-                                    // Save password
-                                     Text("Remember me",
-                                        style: TextStyle(
-                                            color: grey_aaaaaa,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 12.0.sp),
-                                        textAlign: TextAlign.left)
-                                  ],
+                        )
+                      ],
+                    ),
+                     SizedBox(
+                      height: 51.h,
+                    ),
+                    Image.asset(
+                      img_logo,
+                      width: 94.r,
+                      height: 94.r,
+                    ),
+                     SizedBox(
+                      height: 57.h,
+                    ),
+                    Form(
+                      key: formKey,
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 24.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            InputTextLayout(
+                                str_username,
+                                controller.inputText.value,
+                                false,
+                                TextInputAction.next,
+                                TextInputType.text, (v) {}),
+                             SizedBox(
+                              height: 16.h,
+                            ),
+                            InputTextLayoutPassword(
+                                str_pwd,
+                                controller.pswdText.value,
+                                false,
+                                TextInputAction.next,
+                                TextInputType.text, (v) {}),
+                             SizedBox(
+                              height: 20.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      // selectedsecond = !selectedsecond;
+                                      controller.boolRemember.value = !controller.boolRemember.value;
+                                          // selectedsecond;
+                                    });
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                          height: 20.h,
+                                          width: 20.w,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                   BorderRadius.all(
+                                                      Radius.circular(3.r)),
+                                              border: Border.all(
+                                                  color: controller.boolRemember.value
+                                                      ? orange_ff881a
+                                                      : const Color(0xffdbdbdb),
+                                                  width: 1),
+                                              color: controller.boolRemember.value
+                                                  ? orange_ff881a
+                                                  : const Color(0xffffffff)),
+                                          child: controller.boolRemember.value
+                                              ?  Icon(
+                                                  Icons.check,
+                                                  size: 18.0.r,
+                                                  color: Colors.white,
+                                                )
+                                              :  Icon(
+                                                  Icons.check,
+                                                  size: 18.0.r,
+                                                  color: Colors.white,
+                                                )),
+                                       SizedBox(
+                                        width: 11.7.w,
+                                      ),
+                                      // Save password
+                                       Text("Remember me",
+                                          style: TextStyle(
+                                              color: grey_aaaaaa,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 12.0.sp),
+                                          textAlign: TextAlign.left)
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              // Forgot password
-                               Text("Forgot password?",
-                                  style: TextStyle(
-                                      color: grey_aaaaaa,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: helveticaNeueNeue_medium,
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 12.0.sp),
-                                  textAlign: TextAlign.right)
-                            ],
-                          ),
-                           SizedBox(
-                            height: 40.h,
-                          ),
-                          BlackNextButton(str_login, white_ffffff, () {
-                            // if (formKey.currentState!.validate()) {}
-                            FocusScope.of(context).unfocus();
+                                // Forgot password
+                                 Text("Forgot password?",
+                                    style: TextStyle(
+                                        color: grey_aaaaaa,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.0.sp),
+                                    textAlign: TextAlign.right)
+                              ],
+                            ),
+                             SizedBox(
+                              height: 40.h,
+                            ),
+                            BlackNextButton(str_login, white_ffffff, () {
+                              // if (formKey.currentState!.validate()) {}
+                              FocusScope.of(context).unfocus();
 
-                            if (controller.checkValidation(context)) {
-                              checkNet(context).then((value) {
-                                controller.callLoginApi(context);
-                              });
-                            }
-                          }),
-                        ],
+                              if (controller.checkValidation(context)) {
+                                checkNet(context).then((value) {
+                                  controller.callLoginApi(context);
+                                });
+                              }
+                            }),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
 
-          // Text
-          Padding(
-            padding:  EdgeInsets.all(12.0.r),
-            child: GestureDetector(
-              onTap: () {
-                Get.to(const SignupFormView());
-              },
-              child: RichText(
-                  text:  TextSpan(children: [
-                TextSpan(
+            // Text
+            Padding(
+              padding:  EdgeInsets.all(12.0.r),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(const SignupFormView());
+                },
+                child: RichText(
+                    text:  TextSpan(children: [
+                  TextSpan(
+                      style: TextStyle(
+                          color: const Color(0xffaaaaaa),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "NeueHelvetica",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 14.0.sp),
+                      text: "Dont have an account yet? "),
+                  TextSpan(
                     style: TextStyle(
-                        color: const Color(0xffaaaaaa),
-                        fontWeight: FontWeight.w500,
+                        color: const Color(0xffff881a),
+                        fontWeight: FontWeight.w700,
                         fontFamily: "NeueHelvetica",
                         fontStyle: FontStyle.normal,
                         fontSize: 14.0.sp),
-                    text: "Dont have an account yet? "),
-                TextSpan(
-                  style: TextStyle(
-                      color: const Color(0xffff881a),
-                      fontWeight: FontWeight.w700,
-                      fontFamily: "NeueHelvetica",
-                      fontStyle: FontStyle.normal,
-                      fontSize: 14.0.sp),
-                  text: "Create Account",
-                  // recognizer: TapGestureRecognizer()
-                  //   ..onTap = () {
-                  //     Get.to(const SignupFormView());
-                  //   },
-                )
-              ])),
-            ),
-          )
-        ],
+                    text: "Create Account",
+                    // recognizer: TapGestureRecognizer()
+                    //   ..onTap = () {
+                    //     Get.to(const SignupFormView());
+                    //   },
+                  )
+                ])),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
