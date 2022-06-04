@@ -209,7 +209,7 @@ class _PostDetailState extends State<PostDetail> {
                             Stack(
                               children: [
                                 SizedBox(
-                                  height: 300.h,
+                                  height: 270.h,
                                   width: MediaQuery.of(context).size.width,
                                   child: controller
                                               .postList[index].image ==

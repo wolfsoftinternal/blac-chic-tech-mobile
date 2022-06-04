@@ -52,7 +52,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 child: Expanded(
                   flex: 1,
                   child: ListView(
-                    physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
+                    physics: ScrollPhysics(), // <-- this will disable scroll
                     shrinkWrap: true,
                     padding: EdgeInsets.all(0),
                     children: [
