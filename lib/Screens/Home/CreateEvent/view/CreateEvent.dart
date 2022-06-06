@@ -134,8 +134,8 @@ class _CreateEventState extends State<CreateEvent> {
                           child: Form(
                             key: eventKey,
                             child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 24.0, right: 24.0),
+                              padding:  EdgeInsets.only(
+                                  left: 24.w, right: 24.w),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

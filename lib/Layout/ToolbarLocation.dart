@@ -68,7 +68,7 @@ ToolbarLocation(BuildContext context,String title,String subtitle){
                   textAlign: TextAlign.left
               ),
 
-              Image.asset(subtitle,width: 30.w,height: 30.h,fit: BoxFit.cover,),
+              SvgPicture.asset(icon_plus_chat_white),
             ],
           ),
         ),

@@ -1,9 +1,11 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
 import 'package:blackchecktech/Styles/font.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/common_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -188,7 +190,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
       "No data available",
       softWrap: true,
       style: TextStyle(
-          fontSize: 15.0,
+          fontSize: 15.sp,
           fontFamily: AppFont.mediumFont,
           fontWeight: FontWeight.normal,
           color: Colors.white,
@@ -205,31 +207,56 @@ class _FriendListScreenState extends State<FriendListScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 24,
+           SizedBox(
+            height: 24.h,
           ), // Conversations
 
-          const Text(
-            "Chats",
-            style: TextStyle(
-              color: black,
-              fontWeight: FontWeight.w900,
-              fontFamily: AppFont.boldFont,
-              fontStyle: FontStyle.normal,
-              fontSize: 22.0,
-            ),
-            textAlign: TextAlign.left,
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             children: [
+               Text(
+                "Chats",
+                style: TextStyle(
+                  color: black,
+                  fontWeight: FontWeight.w900,
+                  fontFamily: helvetica_neu_bold,
+                  fontStyle: FontStyle.normal,
+                  fontSize: 22.sp,
+                ),
+                textAlign: TextAlign.left,
           ),
+               Container(
+                 width: 48.w,
+                 height: 48.h,
+                 decoration: BoxDecoration(
+                   color: Colors.white,
+                   shape: BoxShape.circle,
+                   boxShadow: [
+                     BoxShadow(
+                       color: Color(0x14121212),
+                       spreadRadius: 3,
+                       blurRadius: 10,
+                       offset:  Offset(0, 4), // changes position of shadow
+                     ),
+                   ],
+                 ),
+                 child: Padding(
+                   padding:  EdgeInsets.all(10.r),
+                   child: SvgPicture.asset(icon_plus_chat),
+                 ),
+               )
+             ],
+           ),
 
-          const SizedBox(
-            height: 20,
+           SizedBox(
+            height: 20.h,
           ),
           // Rectangle 1775
 
           searchBox(),
 
-          const SizedBox(
-            height: 20,
+           SizedBox(
+            height: 20.h,
           ),
         ],
       ),
@@ -360,53 +387,53 @@ class _FriendListScreenState extends State<FriendListScreen> {
 
   Widget searchBox() {
     return Container(
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(6.7)),
+      decoration:  BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(6.7.r)),
           color: light_grey_f2f2f2),
       child: Row(
         children: [
           SizedBox(
-            width: 10,
+            width: 10.w,
           ),
           SvgPicture.asset(
             light_search_icon,
-            width: 15,
-            height: 15,
-            color: EdTxtBg,
+            width: 15.w,
+            height: 15.h,
+            color: grey_aaaaaa,
           ),
           SizedBox(
-            width: 5,
+            width: 5.w,
           ),
           Expanded(
             flex: 1,
             child: Padding(
-              padding: EdgeInsets.all(6),
+              padding: EdgeInsets.all(6.r),
               child: TextField(
                 style: TextStyle(
                   color: txt_color,
                   fontWeight: FontWeight.w500,
-                  fontFamily: AppFont.mediumFont,
+                  fontFamily: helveticaNeueNeue_medium,
                   fontStyle: FontStyle.normal,
-                  fontSize: 16.0,
+                  fontSize: 14.sp,
                 ),
                 decoration: InputDecoration(
                   isDense: true,
                   // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                   hintText: "Search Chat",
                   hintStyle: TextStyle(
-                    color: EdTxtBg,
+                    color: grey_aaaaaa,
                     fontWeight: FontWeight.w500,
-                    fontFamily: AppFont.circularBookFont,
+                    fontFamily: helveticaNeueNeue_medium,
                     fontStyle: FontStyle.normal,
-                    fontSize: 16.0,
+                    fontSize: 14.sp,
                   ),
                   border: InputBorder.none,
                   labelStyle: TextStyle(
                     color: txt_color,
                     fontWeight: FontWeight.w500,
-                    fontFamily: AppFont.circularBookFont,
+                    fontFamily: helveticaNeueNeue_medium,
                     fontStyle: FontStyle.normal,
-                    fontSize: 16.0,
+                    fontSize: 14.sp,
                   ),
                 ),
                 keyboardType: TextInputType.text,
@@ -463,38 +490,38 @@ class _FriendListScreenState extends State<FriendListScreen> {
         });
       },
       child: Container(
-          margin: EdgeInsets.only(bottom: 16, left: 24, right: 24),
-          padding: EdgeInsets.symmetric(vertical: 18, horizontal: 0),
+          margin: EdgeInsets.only(bottom: 16.h, left: 24.w, right: 24.w),
+          padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 0),
           decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                  color: Color(0x144343b2),
-                  offset: Offset(0, 0),
-                  blurRadius: 20,
-                  spreadRadius: 2)
-            ],
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8.r),
+            // boxShadow: [
+            //   BoxShadow(
+            //       color: Color(0x144343b2),
+            //       offset: Offset(0, 0),
+            //       blurRadius: 20,
+            //       spreadRadius: 2)
+            // ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
               CircleAvatar(
-                radius: 26.0,
+                radius: 26.r,
                 backgroundImage: _isImageAvailable
                     ? NetworkImage(user["image"] ?? "")
                     : null,
-                backgroundColor: Colors.transparent,
+                backgroundColor: grey_f4f6f6,
                 child: _isImageAvailable
                     ? Container()
                     : Icon(
                         Icons.person,
-                        size: 30,
+                        size: 30.r,
                       ),
               ),
               SizedBox(
-                width: 16,
+                width: 16.w,
               ),
               Expanded(
                 child: Column(
@@ -504,15 +531,15 @@ class _FriendListScreenState extends State<FriendListScreen> {
                     Text(
                       user["name"] ?? "",
                       maxLines: 1,
-                      style: const TextStyle(
+                      style:  TextStyle(
                           color: txt_color,
                           fontWeight: FontWeight.w600,
-                          fontFamily: AppFont.sfProfBoldFont,
+                          fontFamily: helveticaNeueNeue_medium,
                           fontStyle: FontStyle.normal,
-                          fontSize: 13.5),
+                          fontSize: 13.sp),
                     ),
                     SizedBox(
-                      height: 6,
+                      height: 6.h,
                     ),
                     if (lastMessageType == "0" || lastMessageType == "1" || lastMessageType == "2")
                       Text(
@@ -521,9 +548,9 @@ class _FriendListScreenState extends State<FriendListScreen> {
                         style: TextStyle(
                           overflow: TextOverflow.ellipsis,
                           color: EdTxtBg,
-                          fontSize: 12,
-                          fontFamily: AppFont.regularFont,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 11.sp,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     // if (lastMessageType == "1" || lastMessageType == "2")
@@ -561,29 +588,29 @@ class _FriendListScreenState extends State<FriendListScreen> {
                 ),
                 flex: 1,
               ),
-              SizedBox(width: 10),
+
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     user["timeStamp"] ?? "",
                     style: TextStyle(
-                      fontFamily: AppFont.sfProRegularFont,
-                      fontSize: 11,
-                      color: EdTxtBg,
+                      fontFamily: helveticaNeueNeue_medium,
+                      fontSize: 11.sp,
+                      color: grey_aaaaaa,
                       fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.normal,
                     ),
                   ),
                   SizedBox(
-                    height: 6,
+                    height: 6.h,
                   ),
                   user["unread_message_count"]!.isEmpty ||
                           user["unread_message_count"].toString() == "0"
                       ? Container()
                       : Container(
-                          height: 21,
-                          width: 21,
+                          height: 21.h,
+                          width: 21.w,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.green,
@@ -595,8 +622,8 @@ class _FriendListScreenState extends State<FriendListScreen> {
                             child: Text(
                               user["unread_message_count"] ?? "",
                               style: TextStyle(
-                                  fontSize: 11,
-                                  fontFamily: AppFont.mediumFont,
+                                  fontSize: 11.sp,
+                                  fontFamily:helveticaNeueNeue_medium,
                                   fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.normal,
                                   color: Colors.white),

@@ -50,8 +50,8 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(30.0),
-                    topRight: const Radius.circular(30.0))),
+                    topLeft:  Radius.circular(30.r),
+                    topRight:  Radius.circular(30.r))),
             child: SingleChildScrollView(
               child: Wrap(
                 children: [
@@ -64,7 +64,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(
-                              height: 15,
+                              height: 15.h,
                             ),
 
                             // Rectangle 1329
@@ -73,11 +73,11 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                               child: Opacity(
                                 opacity: 0.4000000059604645,
                                 child: Container(
-                                    width: 48,
-                                    height: 4,
+                                    width: 48.w,
+                                    height: 4.h,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(4)),
+                                            Radius.circular(4.r)),
                                         color: const Color(0xff96a6a3))),
                               ),
                             ),
@@ -617,7 +617,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
         () => Column(
           children: [
             SizedBox(
-              height: 60,
+              height: 60.h,
             ),
             ToolbarWithHeaderCenterTitle('CREATE EVENT'),
             Expanded(
@@ -637,8 +637,8 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                             Text("UPLOAD POSTER",
                                 style: TextStyle(
                                     color: grey_aaaaaa,
-                                    fontWeight: FontWeight.w900,
-                                    fontFamily: "Roboto",
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: helvetica_neu_bold,
                                     fontStyle: FontStyle.normal,
                                     fontSize: 12.sp),
                                 textAlign: TextAlign.left),
@@ -751,9 +751,9 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                   children: [
                                     Text("TAG SPEAKERS",
                                         style: TextStyle(
-                                            color: black_121212,
-                                            fontWeight: FontWeight.w900,
-                                            fontFamily: "Roboto",
+                                            color: grey_aaaaaa,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: helvetica_neu_bold,
                                             fontStyle: FontStyle.normal,
                                             fontSize: 12.sp),
                                         textAlign: TextAlign.left),
@@ -931,9 +931,9 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                   children: [
                                     Text("TAG HOST",
                                         style: TextStyle(
-                                            color: black_121212,
-                                            fontWeight: FontWeight.w900,
-                                            fontFamily: "Roboto",
+                                            color: grey_aaaaaa,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: helvetica_neu_bold,
                                             fontStyle: FontStyle.normal,
                                             fontSize: 12.sp),
                                         textAlign: TextAlign.left),

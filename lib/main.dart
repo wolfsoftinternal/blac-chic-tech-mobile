@@ -13,7 +13,7 @@ const Color themeColor = Color(0xff00bc56);
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
 
-          home: SplashScreen(),
-        //  home: ListScreen(),
+          home: ListScreen(),
+          //  home: ListScreen(),
 
         );
       },

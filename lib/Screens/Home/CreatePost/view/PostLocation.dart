@@ -4,6 +4,7 @@ import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventControll
 import 'package:blackchecktech/Screens/Home/CreatePost/controller/PostController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_strings.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -108,16 +109,16 @@ class _PostLocationState extends State<PostLocation> {
                       Text(name[i],
                           style: TextStyle(
                               color: black_121212,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NeueHelvetica",
+
+                              fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
                               fontSize: 14.sp),
                           textAlign: TextAlign.left),
+                      SizedBox(height: 2.h,),
                       Text(predictions[i].description!,
                           style: TextStyle(
                               color: grey_aaaaaa,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helveticaNeueNeue_medium,
                               fontStyle: FontStyle.normal,
                               fontSize: 14.sp),
                           textAlign: TextAlign.left),
