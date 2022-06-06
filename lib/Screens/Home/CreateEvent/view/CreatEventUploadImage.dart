@@ -149,6 +149,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
 
                                   SearchBarTag(
                                     placeholder: "Search people",
+                                    autoFocus: false,
                                     onSubmit: (value) {
                                       checkNet(context).then((value) {
                                         videoController.userListAPI(
@@ -427,6 +428,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
 
                                 SearchBarTag(
                                   placeholder: "Search people",
+                                  autoFocus: false,
                                   onSubmit: (value) {
                                     checkNet(context).then((value) {
                                       videoController.userListAPI(

@@ -1,13 +1,14 @@
 import 'package:blackchecktech/Layout/InputTextStaticFilter.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Home/Event/controller/EventDetailController.dart';
-import 'package:blackchecktech/Screens/Home/Event/view/EventList2.dart';
+import 'package:blackchecktech/Screens/Home/Event/view/MyPurchasedEvent.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,8 +33,13 @@ class _EventListState extends State<EventList> {
   @override
   void initState() {
     super.initState();
+    controller.pageNumber = controller.pageNumber + 1;
+    dynamic body = {
+      'page' : controller.pageNumber.toString(),
+    };
+    controller.initScrolling(context, body);
     checkNet(context).then((value) {
-      controller.allEventListApi(null);
+      controller.allEventListApi(body);
       controller.cityListApi();
     });
   }
@@ -61,6 +67,7 @@ class _EventListState extends State<EventList> {
               Expanded(
                 flex: 1,
                 child: SingleChildScrollView(
+                  controller: controller.scrollController,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +83,7 @@ class _EventListState extends State<EventList> {
                       ),
                       InkWell(
                         onTap: (){
-                          Get.to(EventList2());
+                          Get.to(MyPurchasedEvent());
                         },
                         child: Container(
                           padding: EdgeInsets.only(
@@ -380,8 +387,9 @@ class _EventListState extends State<EventList> {
                     ],
                   ),
                 ),
-              )
-
+              ),
+              if (controller.isPaginationLoading.value == true)
+                PaginationUtils().loader(),
 
 
               // Container(
