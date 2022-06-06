@@ -91,9 +91,8 @@ class _PastFeature2State extends State<PastFeature2> {
                           Expanded(
                             child: Text("JENNIFER",style: TextStyle(
                               fontFamily: helvetica_neu_bold,fontSize: 90.sp,
-                              color: Colors.white,letterSpacing:0,
+                              color: Colors.white,letterSpacing: -10,
                               height: 0.8,
-                              wordSpacing:0
                             ),),
                           ),
                           Container(

@@ -81,7 +81,7 @@ class _PastFeature1State extends State<PastFeature1> {
               ),
 
               Container(
-                transform: Matrix4.translationValues(0,-35, 0),
+                transform: Matrix4.translationValues(0,-15, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,10 +95,11 @@ class _PastFeature1State extends State<PastFeature1> {
                             child: Text("FADE",style: TextStyle(
                               fontFamily: helvetica_neu_bold,fontSize: 100.sp,
                               color: orange_ff881a,letterSpacing: -10,
+                              height: 0.8,
                             ),),
                           ),
                           Container(
-                            transform: Matrix4.translationValues(0, -30, 0),
+                            transform: Matrix4.translationValues(0, -40, 0),
                             height: 115.h,
                             padding: EdgeInsets.symmetric(horizontal: 17.w),
                             decoration: BoxDecoration(
