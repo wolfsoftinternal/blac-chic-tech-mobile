@@ -12,14 +12,14 @@ import 'package:readmore/readmore.dart';
 
 import '../Styles/my_strings.dart';
 
-class PastFeature extends StatefulWidget {
-  const PastFeature({Key? key}) : super(key: key);
+class PastFeature1 extends StatefulWidget {
+  const PastFeature1({Key? key}) : super(key: key);
 
   @override
-  _PastFeatureState createState() => _PastFeatureState();
+  _PastFeature1State createState() => _PastFeature1State();
 }
 
-class _PastFeatureState extends State<PastFeature> {
+class _PastFeature1State extends State<PastFeature1> {
 
   // Updated
 
@@ -86,10 +86,8 @@ class _PastFeatureState extends State<PastFeature> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Container(
                       margin: EdgeInsets.only(right: 24.w,left: 24.w),
-
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -112,7 +110,6 @@ class _PastFeatureState extends State<PastFeature> {
                                   Color(0x331c2535),
                                   Color(0x4d04080f)
                                 ],
-                                stops: [5.0, 5.0],
                               ),
                             ),
                             child: Column(

@@ -56,4 +56,5 @@ const goLiveColor = Color(0xff88888a);
 // const premimumLockColor = Color(0xff33B18A);
 // const genereColor = Color(0xff332c25);
 const borderColor = Color(0xff363636);
+const black_bg_1c2535 = Color(0xff1c2535);
 
