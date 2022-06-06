@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/UIScreen/PastFeature1.dart';
+import 'package:blackchecktech/UIScreen/PastFeature2.dart';
 import 'package:flutter/material.dart';
 import 'Test.dart';
 
@@ -63,16 +64,18 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
                 // PastFeature(),
 
                 Container(
-                  color: Colors.green,
-                  child: Center(
-                    child: Text("page 1"),
-                  ),
+                  // color: Colors.green,
+                  // child: Center(
+                  //   child: Text("page 1"),
+                  // ),
+                  child: PastFeature1(),
                 ),
                 Container(
-                  color: Colors.yellow,
-                  child: Center(
-                    child: Text("page 2"),
-                  ),
+                  child: PastFeature2(),
+                  // color: Colors.yellow,
+                  // child: Center(
+                  //   child: Text("page 2"),
+                  // ),
                 ),
                 Container(
                   color: Colors.red,
