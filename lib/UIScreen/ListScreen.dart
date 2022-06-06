@@ -246,25 +246,25 @@ class ListScreen extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VideoComments(),
-                    ));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  "VideoComments Screen",
-                  style: TextStyle(
-                      color: Colors.black87,
-                      fontFamily: helveticaNeueNeue_medium,
-                      fontSize: 16),
-                ),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => VideoComments(),
+            //         ));
+            //   },
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(12.0),
+            //     child: Text(
+            //       "VideoComments Screen",
+            //       style: TextStyle(
+            //           color: Colors.black87,
+            //           fontFamily: helveticaNeueNeue_medium,
+            //           fontSize: 16),
+            //     ),
+            //   ),
+            // ),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -284,25 +284,25 @@ class ListScreen extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SpeakersVideos(),
-                    ));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  "SpeakersVideos Screen",
-                  style: TextStyle(
-                      color: Colors.black87,
-                      fontFamily: helveticaNeueNeue_medium,
-                      fontSize: 16),
-                ),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => SpeakersVideos(),
+            //         ));
+            //   },
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(12.0),
+            //     child: Text(
+            //       "SpeakersVideos Screen",
+            //       style: TextStyle(
+            //           color: Colors.black87,
+            //           fontFamily: helveticaNeueNeue_medium,
+            //           fontSize: 16),
+            //     ),
+            //   ),
+            // ),
             GestureDetector(
               onTap: () {
                 Navigator.push(

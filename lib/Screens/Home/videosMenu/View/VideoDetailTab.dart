@@ -34,7 +34,7 @@ class VideoDetailTab extends StatefulWidget {
 class _VideoDetailTabState extends State<VideoDetailTab> {
   VideoMenuController controller = Get.find<VideoMenuController>();
   bool? button1, button2;
-  bool isHeart = false;
+
   VideoList? videoListDetails;
   List<SpeakersVideoModel> speakerVideoList = [
     SpeakersVideoModel(
@@ -135,9 +135,14 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                             height: 315,
                             width: 560,
                             child: Center(
-                                child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  Color(0xff04080f)),
+                                child: SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Color(0xff04080f)),
+                              ),
                             )),
                           )
                         : Html(
@@ -178,36 +183,76 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                               flex: 1,
                               child: Opacity(
                                 opacity: 0.699999988079071,
-                                child: Text("Add to list",
-                                    style: TextStyle(
-                                        color: white_ffffff,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: "NeueHelvetica",
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 14.sp),
-                                    textAlign: TextAlign.left),
+                                child: controller.isLoadingButton.value == true
+                                    ? const Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(left: 8),
+                                          child: SizedBox(
+                                              width: 15,
+                                              height: 15,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.white),
+                                              )),
+                                        ),
+                                      )
+                                    : InkWell(
+                                        onTap: () {
+                                          controller.addToPlatList(
+                                              context: context,
+                                              videoId: controller
+                                                  .videoDetail.value.id);
+                                        },
+                                        child: Text("Add to list",
+                                            style: TextStyle(
+                                                color: white_ffffff,
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: "NeueHelvetica",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 14.sp),
+                                            textAlign: TextAlign.left),
+                                      ),
                               ),
                             ),
 
                             GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    isHeart = !isHeart;
-                                  });
+                                  if (controller.isHeart.value) {
+                                    controller.videoUnLike(
+                                        context: context,
+                                        videoId:
+                                            controller.videoDetail.value.id);
+                                  } else {
+                                    controller.videoLike(
+                                        context: context,
+                                        videoId:
+                                            controller.videoDetail.value.id);
+                                  }
+                                  // setState(() {
+                                  //   controller.isHeart.value =
+                                  //       !controller.isHeart.value;
+                                  // });
                                 },
                                 child: SvgPicture.asset(
                                   icon_heart,
                                   width: 18.w,
                                   height: 18.h,
-                                  color: isHeart
-                                      ? white_ffffff
-                                      : const Color(0xffff1f1f),
+                                  color: controller.isHeart.value
+                                      ? const Color(0xffff1f1f)
+                                      : white_ffffff,
                                 )),
                             SizedBox(
                               width: 4.w,
                             ),
                             // 1,2k
-                            Text("1,2k",
+                            Text(
+                                controller.videoDetail.value.likeCount == null
+                                    ? ""
+                                    : controller.videoDetail.value.likeCount
+                                        .toString(),
                                 style: TextStyle(
                                     color: white_ffffff,
                                     fontWeight: FontWeight.w700,
@@ -222,7 +267,8 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
 
                             InkWell(
                               onTap: () {
-                                Get.to(VideoComments());
+                                Get.to(VideoComments(
+                                    videoId: controller.videoDetail.value.id!));
                               },
                               child: SvgPicture.asset(
                                 icon_message,

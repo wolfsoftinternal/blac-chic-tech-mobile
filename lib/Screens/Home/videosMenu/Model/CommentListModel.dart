@@ -1,17 +1,17 @@
 // To parse this JSON data, do
 //
-//     final myPlayListModel = myPlayListModelFromJson(jsonString);
+//     final commentListModel = commentListModelFromJson(jsonString);
 
 import 'dart:convert';
 
-MyPlayListModel myPlayListModelFromJson(String str) =>
-    MyPlayListModel.fromJson(json.decode(str));
+CommentListModel commentListModelFromJson(String str) =>
+    CommentListModel.fromJson(json.decode(str));
 
-String myPlayListModelToJson(MyPlayListModel data) =>
+String commentListModelToJson(CommentListModel data) =>
     json.encode(data.toJson());
 
-class MyPlayListModel {
-  MyPlayListModel({
+class CommentListModel {
+  CommentListModel({
     this.success,
     this.statusCode,
     this.message,
@@ -21,17 +21,17 @@ class MyPlayListModel {
   bool? success;
   int? statusCode;
   String? message;
-  List<MyPlayModel>? data;
+  List<CommentModel>? data;
 
-  factory MyPlayListModel.fromJson(Map<String, dynamic> json) =>
-      MyPlayListModel(
+  factory CommentListModel.fromJson(Map<String, dynamic> json) =>
+      CommentListModel(
         success: json["success"] == null ? null : json["success"],
         statusCode: json["status_code"] == null ? null : json["status_code"],
         message: json["message"] == null ? null : json["message"],
         data: json["data"] == null
             ? null
-            : List<MyPlayModel>.from(
-                json["data"].map((x) => MyPlayModel.fromJson(x))),
+            : List<CommentModel>.from(
+                json["data"].map((x) => CommentModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,19 +44,12 @@ class MyPlayListModel {
       };
 }
 
-class MyPlayModel {
-  MyPlayModel({
+class CommentModel {
+  CommentModel({
     this.id,
+    this.videoId,
     this.userId,
-    this.title,
-    this.topic,
-    this.language,
-    this.file,
-    this.embededCode,
-    this.tags,
-    this.speakers,
-    this.status,
-    this.description,
+    this.comment,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
@@ -64,33 +57,19 @@ class MyPlayModel {
   });
 
   int? id;
+  int? videoId;
   int? userId;
-  String? title;
-  String? topic;
-  String? language;
-  dynamic file;
-  String? embededCode;
-  String? tags;
-  String? speakers;
-  int? status;
-  String? description;
+  String? comment;
   DateTime? createdAt;
   DateTime? updatedAt;
   dynamic deletedAt;
   UserDetails? userDetails;
 
-  factory MyPlayModel.fromJson(Map<String, dynamic> json) => MyPlayModel(
+  factory CommentModel.fromJson(Map<String, dynamic> json) => CommentModel(
         id: json["id"] == null ? null : json["id"],
+        videoId: json["video_id"] == null ? null : json["video_id"],
         userId: json["user_id"] == null ? null : json["user_id"],
-        title: json["title"] == null ? null : json["title"],
-        topic: json["topic"] == null ? null : json["topic"],
-        language: json["language"] == null ? null : json["language"],
-        file: json["file"],
-        embededCode: json["embeded_code"] == null ? null : json["embeded_code"],
-        tags: json["tags"] == null ? null : json["tags"],
-        speakers: json["speakers"] == null ? null : json["speakers"],
-        status: json["status"] == null ? null : json["status"],
-        description: json["description"] == null ? null : json["description"],
+        comment: json["comment"] == null ? null : json["comment"],
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),
@@ -105,16 +84,9 @@ class MyPlayModel {
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
+        "video_id": videoId == null ? null : videoId,
         "user_id": userId == null ? null : userId,
-        "title": title == null ? null : title,
-        "topic": topic == null ? null : topic,
-        "language": language == null ? null : language,
-        "file": file,
-        "embeded_code": embededCode == null ? null : embededCode,
-        "tags": tags == null ? null : tags,
-        "speakers": speakers == null ? null : speakers,
-        "status": status == null ? null : status,
-        "description": description == null ? null : description,
+        "comment": comment == null ? null : comment,
         "created_at": createdAt == null ? null : createdAt!.toIso8601String(),
         "updated_at": updatedAt == null ? null : updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
@@ -166,14 +138,14 @@ class UserDetails {
   String? userName;
   String? email;
   String? password;
-  DateTime? dateOfBirth;
+  dynamic dateOfBirth;
   int? countryId;
   int? stateId;
   int? cityId;
   String? image;
-  String? linkedinUrl;
-  String? instagramUrl;
-  String? twitterUrl;
+  dynamic linkedinUrl;
+  dynamic instagramUrl;
+  dynamic twitterUrl;
   dynamic socialType;
   dynamic socialId;
   String? aboutUs;
@@ -201,17 +173,14 @@ class UserDetails {
         userName: json["user_name"] == null ? null : json["user_name"],
         email: json["email"] == null ? null : json["email"],
         password: json["password"] == null ? null : json["password"],
-        dateOfBirth: json["date_of_birth"] == null
-            ? null
-            : DateTime.parse(json["date_of_birth"]),
+        dateOfBirth: json["date_of_birth"],
         countryId: json["country_id"] == null ? null : json["country_id"],
         stateId: json["state_id"] == null ? null : json["state_id"],
         cityId: json["city_id"] == null ? null : json["city_id"],
         image: json["image"] == null ? null : json["image"],
-        linkedinUrl: json["linkedin_url"] == null ? null : json["linkedin_url"],
-        instagramUrl:
-            json["instagram_url"] == null ? null : json["instagram_url"],
-        twitterUrl: json["twitter_url"] == null ? null : json["twitter_url"],
+        linkedinUrl: json["linkedin_url"],
+        instagramUrl: json["instagram_url"],
+        twitterUrl: json["twitter_url"],
         socialType: json["social_type"],
         socialId: json["social_id"],
         aboutUs: json["about_us"] == null ? null : json["about_us"],
@@ -244,16 +213,14 @@ class UserDetails {
         "user_name": userName == null ? null : userName,
         "email": email == null ? null : email,
         "password": password == null ? null : password,
-        "date_of_birth": dateOfBirth == null
-            ? null
-            : "${dateOfBirth!.year.toString().padLeft(4, '0')}-${dateOfBirth!.month.toString().padLeft(2, '0')}-${dateOfBirth!.day.toString().padLeft(2, '0')}",
+        "date_of_birth": dateOfBirth,
         "country_id": countryId == null ? null : countryId,
         "state_id": stateId == null ? null : stateId,
         "city_id": cityId == null ? null : cityId,
         "image": image == null ? null : image,
-        "linkedin_url": linkedinUrl == null ? null : linkedinUrl,
-        "instagram_url": instagramUrl == null ? null : instagramUrl,
-        "twitter_url": twitterUrl == null ? null : twitterUrl,
+        "linkedin_url": linkedinUrl,
+        "instagram_url": instagramUrl,
+        "twitter_url": twitterUrl,
         "social_type": socialType,
         "social_id": socialId,
         "about_us": aboutUs == null ? null : aboutUs,

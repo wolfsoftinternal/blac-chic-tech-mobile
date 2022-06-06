@@ -678,9 +678,13 @@ class _VideoListBctState extends State<VideoListBct> {
                               width: double.infinity,
                               height: 100,
                               child: Center(
-                                  child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Color(0xff04080f)),
+                                  child: SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Color(0xff04080f))),
                               )))
                           : controller.videoList.length == 0
                               ? SizedBox(

@@ -42,7 +42,11 @@ class _MyPlayListState extends State<MyPlayList> {
                       Container(
                           margin: EdgeInsets.only(top: 15.h),
                           child: ToolbarWithHeaderCenterTitle("MY PLAY LIST")),
-                      const SearchBarWithRightIcon(),
+                      SearchBarWithRightIcon(
+                        onSearch: (value) {
+                          controller.myPlayListAPI(search: value);
+                        },
+                      ),
                       Obx(
                         () => Container(
                           margin: EdgeInsets.only(
@@ -52,9 +56,14 @@ class _MyPlayListState extends State<MyPlayList> {
                                   width: double.infinity,
                                   height: 100,
                                   child: Center(
-                                      child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Color(0xff04080f)),
+                                      child: SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Color(0xff04080f)),
+                                    ),
                                   )))
                               : controller.myPlayList.length == 0
                                   ? SizedBox(
@@ -188,9 +197,17 @@ class _MyPlayListState extends State<MyPlayList> {
                                                           ),
                                                           Text(
                                                             controller
-                                                                .myPlayList[i]
-                                                                .topic
-                                                                .toString(),
+                                                                        .myPlayList[
+                                                                            i]
+                                                                        .userDetails ==
+                                                                    null
+                                                                ? ""
+                                                                : controller
+                                                                    .myPlayList[
+                                                                        i]
+                                                                    .userDetails!
+                                                                    .fullName
+                                                                    .toString(),
                                                             style: const TextStyle(
                                                                 fontFamily:
                                                                     helveticaNeueNeue_medium,
@@ -223,6 +240,17 @@ class _MyPlayListState extends State<MyPlayList> {
                                                     ),
                                                   ),
                                                   PopupMenuButton(
+                                                      onSelected: (value) {
+                                                        controller
+                                                            .removeFromPlaylist(
+                                                                context:
+                                                                    context,
+                                                                videoId: controller
+                                                                    .myPlayList[
+                                                                        i]
+                                                                    .id,
+                                                                index: i);
+                                                      },
                                                       itemBuilder: (context) =>
                                                           [
                                                             const PopupMenuItem(
