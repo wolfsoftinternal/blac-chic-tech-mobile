@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +37,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
 
-          home: ListScreen(),
-          //  home: ListScreen(),
+        //  home: ListScreen(),
+            home: SplashScreen(),
 
         );
       },
