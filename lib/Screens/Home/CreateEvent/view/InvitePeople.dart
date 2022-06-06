@@ -55,6 +55,7 @@ class _InvitePeopleState extends State<InvitePeople> {
                     children: [
                       SearchBarTag(
                         placeholder: "Search people",
+                        autoFocus: false,
                         onSubmit: (value){
                           checkNet(context).then((value) {
                             videoController.userListAPI(context, controller.searchController.value.text);

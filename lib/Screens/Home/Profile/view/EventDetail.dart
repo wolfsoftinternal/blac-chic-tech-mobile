@@ -450,6 +450,95 @@ class _EventDetailState extends State<EventDetail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
+                                    padding:  EdgeInsets.only(left: 24.w,right: 24.w, top: 16.h),
+                                    child: Container(
+                                        height: 61.h,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          gradient: const LinearGradient(
+                                              colors: [
+                                                Color(0xFF1c2535),
+                                                Color(0xFF04080f),
+                                              ],
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              //    stops: [0.0, 1.0],
+                                              tileMode: TileMode.clamp),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0x26121212),
+                                              offset: Offset(
+                                                0.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 7.0,
+                                              spreadRadius: 2.0,
+                                            ), //BoxShadow
+                                          ],
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 24.w),
+                                              child: // Admission
+
+                                                  Text("Admission",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontFamily:
+                                                              helvetica_neu_bold,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontSize: 16.sp),
+                                                      textAlign:
+                                                          TextAlign.left),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 12.w),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.r),
+                                                  color: orange_ff881a,
+                                                ),
+                                                child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 14.w,
+                                                        right: 14.w,
+                                                        top: 9.h,
+                                                        bottom: 9.h),
+                                                    child: // Invite Only
+                                                        Text("VIEW",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                fontFamily:
+                                                                    roboto_bold,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                                fontSize:
+                                                                    16.sp),
+                                                            textAlign: TextAlign
+                                                                .left)),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                  ),
+                        Padding(
                           padding: EdgeInsets.only(top: 16.h),
                           child: controller.eventDetails.value.type ==
                                   'ticket_price'
@@ -460,7 +549,7 @@ class _EventDetailState extends State<EventDetail> {
                                     // Admission
                                     Padding(
                                       padding:  EdgeInsets.only(left: 24.w),
-                                      child: Text("Admission Fees",
+                                      child: Text("Admission Tickets",
                                           style: TextStyle(
                                               color: black_121212,
                                               fontWeight: FontWeight.w800,

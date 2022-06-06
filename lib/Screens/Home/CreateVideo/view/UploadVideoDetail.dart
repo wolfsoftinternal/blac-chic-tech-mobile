@@ -113,6 +113,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 children: [
                                   SearchBarTag(
                                     placeholder: "Search people",
+                                    autoFocus: false,
                                     onSubmit: (value) {
                                       checkNet(context).then((value) {
                                         controller.userListAPI(

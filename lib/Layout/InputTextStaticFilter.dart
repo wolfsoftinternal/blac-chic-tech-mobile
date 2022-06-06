@@ -15,9 +15,7 @@ import 'package:intl/intl.dart';
 import '../Styles/my_icons.dart';
 import 'BlackButton.dart';
 
-
 class InputTextStaicFilter extends StatefulWidget {
-
   final String hintData;
   TextEditingController inputData;
   bool numKeypad = false;
@@ -26,19 +24,20 @@ class InputTextStaicFilter extends StatefulWidget {
 
   // Function validator;
 
-  InputTextStaicFilter(this.hintData,this.inputData,this.numKeypad,this.textInputAction,this.inputType);
+  InputTextStaicFilter(this.hintData, this.inputData, this.numKeypad,
+      this.textInputAction, this.inputType);
 
   @override
-  _InputTextStaicFilterState createState() => _InputTextStaicFilterState(hintData,inputData,numKeypad,textInputAction,inputType);
-
+  _InputTextStaicFilterState createState() => _InputTextStaicFilterState(
+      hintData, inputData, numKeypad, textInputAction, inputType);
 }
 
 class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
-  EventDetailController eventDetailController = Get.put(EventDetailController());
+  EventDetailController eventDetailController =
+      Get.put(EventDetailController());
   String? strCityName;
   String? strType;
 
-  
   bool checkColor = false;
   bool checkFillColor = true;
   bool _hasBeenPressednBidNow = false;
@@ -47,14 +46,19 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
   // Function validator;
 
   String hint = " ";
-  late TextEditingController controller ;
+  late TextEditingController controller;
   late TextInputAction textInputAction;
   late TextInputType inputType;
   bool numKeypad = false;
   bool isLayoutFirst = false;
 
-  _InputTextStaicFilterState(String hintData,TextEditingController controller,bool numKeypad,TextInputAction textInputAction,
-      TextInputType inputType,){
+  _InputTextStaicFilterState(
+    String hintData,
+    TextEditingController controller,
+    bool numKeypad,
+    TextInputAction textInputAction,
+    TextInputType inputType,
+  ) {
     hint = hintData;
     this.controller = controller;
     this.numKeypad = numKeypad;
@@ -72,22 +76,24 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
           Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: checkFillColor == false?
-                checkColor == true?
-                orange_ff881a:
-                light_grey_f2f2f2:
-                light_grey_f2f2f2,
+                color: checkFillColor == false
+                    ? checkColor == true
+                        ? orange_ff881a
+                        : light_grey_f2f2f2
+                    : light_grey_f2f2f2,
               ),
               borderRadius: const BorderRadius.all(Radius.circular(4)),
               color: checkFillColor == false
                   ? checkColor == true
-                  ? Colors.white
-                  : light_grey_f2f2f2
+                      ? Colors.white
+                      : light_grey_f2f2f2
                   : light_grey_f2f2f2,
             ),
             child: Row(
               children: [
-                SizedBox(width: 8.w,),
+                SizedBox(
+                  width: 8.w,
+                ),
                 Icon(
                   IconlyLight.search,
                   color: grey_aaaaaa,
@@ -96,33 +102,34 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                 Expanded(
                   flex: 1,
                   child: Padding(
-                    padding:  EdgeInsets.only(
-                        left: 10.w,
-                        right: 10.w,
-                        top: 16.h,
-                        bottom: 16.h
-                    ),
-
+                    padding: EdgeInsets.only(
+                        left: 10.w, right: 10.w, top: 16.h, bottom: 16.h),
                     child: TextFormField(
-                      style:  const TextStyle(
+                      style: const TextStyle(
                           color: black_121212,
                           fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 14.0
-                      ),
-                      keyboardType: inputType ,
+                          fontSize: 14.0),
+                      keyboardType: inputType,
                       inputFormatters: [
-                        numKeypad== true ? FilteringTextInputFormatter.digitsOnly : FilteringTextInputFormatter.singleLineFormatter ,
-                        numKeypad== true ? LengthLimitingTextInputFormatter(10) : LengthLimitingTextInputFormatter(200),
+                        numKeypad == true
+                            ? FilteringTextInputFormatter.digitsOnly
+                            : FilteringTextInputFormatter.singleLineFormatter,
+                        numKeypad == true
+                            ? LengthLimitingTextInputFormatter(10)
+                            : LengthLimitingTextInputFormatter(200),
                       ],
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 0),
                         isDense: true,
                         // you can change this with the top text like you want
                         // labelText: hint,
                         // labelStyle: TextStyle(color: grey_aaaaaa,fontFamily: helveticaNeueNeue_medium,fontSize: 14),
                         hintText: hint,
                         hintStyle: const TextStyle(
-                            color: grey_aaaaaa, fontFamily: helveticaNeueNeue_medium,fontSize: 14),
+                            color: grey_aaaaaa,
+                            fontFamily: helveticaNeueNeue_medium,
+                            fontSize: 14),
                         border: InputBorder.none,
                         filled: false,
                       ),
@@ -131,7 +138,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                       textInputAction: textInputAction,
                       controller: controller,
                       cursorColor: black_121212,
-                      onEditingComplete: (){
+                      onEditingComplete: () {
                         FocusScope.of(context).unfocus();
                         FocusScope.of(context).nextFocus();
                       },
@@ -141,40 +148,36 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                             checkFillColor = false;
                             checkColor = true;
                           });
-                        }
-                        else {
+                        } else {
                           setState(() {
                             checkFillColor = true;
                           });
                         }
                       },
-                      onFieldSubmitted : (String value) {
-                        if(value.isNotEmpty){
+                      onFieldSubmitted: (String value) {
+                        if (value.isNotEmpty) {
                           setState(() {
                             checkFillColor = false;
                             checkColor = false;
                           });
-                        }
-                        else{
+                        } else {
                           setState(() {
                             checkFillColor = true;
                           });
                         }
                       },
-
                     ),
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
-                      if(_hasBeenPressednBidNow = !_hasBeenPressednBidNow){
-                        isLayoutFirst=true;
-                      }else {
-                        isLayoutFirst=false;
+                      if (_hasBeenPressednBidNow = !_hasBeenPressednBidNow) {
+                        isLayoutFirst = true;
+                      } else {
+                        isLayoutFirst = false;
                       }
-                    }
-                    );
+                    });
                   },
                   child: Container(
                     width: 32.r,
@@ -188,7 +191,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                           spreadRadius: 6,
                           blurRadius: 10,
                           offset:
-                          const Offset(1, 4), // changes position of shadow
+                              const Offset(1, 4), // changes position of shadow
                         ),
                       ],
                     ),
@@ -196,18 +199,21 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                       padding: EdgeInsets.all(10.r),
                       child: SvgPicture.asset(
                         filter,
-                        color: _hasBeenPressednBidNow ? orange_ff881a:black_121212,
+                        color: _hasBeenPressednBidNow
+                            ? orange_ff881a
+                            : black_121212,
                         width: 16.w,
                         height: 16.w,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(width: 10.w,)
+                SizedBox(
+                  width: 10.w,
+                )
               ],
             ),
           ),
-
           Visibility(
             visible: isLayoutFirst,
             child: Column(
@@ -228,25 +234,42 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                             fontFamily: helvetica_neu_bold),
                       ),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           setState(() {
                             strCityName = null;
                             eventDetailController.strCityId.value = '';
-                            eventDetailController.dateController.value.text = '';
+                            eventDetailController.dateController.value.text =
+                                '';
                             strType = null;
-                            if(eventDetailController.searchController.value.text == ''){
+                            if (eventDetailController
+                                    .searchController.value.text ==
+                                '') {
                               checkNet(context).then((value) {
-                                eventDetailController.allEventListApi(null);
+                                eventDetailController.pageNumber =
+                                    eventDetailController.pageNumber + 1;
+                                dynamic body = {
+                                  'page': eventDetailController.pageNumber
+                                      .toString(),
+                                };
+                                eventDetailController.initScrolling(
+                                    context, body);
+                                eventDetailController.allEventListApi(body);
                               });
-                            }else{
+                            } else {
+                              eventDetailController.pageNumber =
+                                  eventDetailController.pageNumber + 1;
                               dynamic body = {
-                                'name': eventDetailController.searchController.value.text
+                                'page':
+                                    eventDetailController.pageNumber.toString(),
+                                'name': eventDetailController
+                                    .searchController.value.text
                               };
+                              eventDetailController.initScrolling(
+                                  context, body);
                               checkNet(context).then((value) {
                                 eventDetailController.allEventListApi(body);
                               });
                             }
-                            
                           });
                         },
                         child: Text(
@@ -307,10 +330,12 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                 onChanged: (String? newValue) {
                                   setState(() {
                                     strCityName = newValue!;
-                                    eventDetailController.strCityId.value = newValue;
+                                    eventDetailController.strCityId.value =
+                                        newValue;
                                   });
                                 },
-                                items: eventDetailController.cityList.map((CityDatum value) {
+                                items: eventDetailController.cityList
+                                    .map((CityDatum value) {
                                   return DropdownMenuItem<String>(
                                     value: value.id.toString(),
                                     child: Text(value.name.toString()),
@@ -355,22 +380,24 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                               Expanded(
                                 flex: 1,
                                 child: TextField(
-                                  controller: eventDetailController.dateController.value,
+                                    controller: eventDetailController
+                                        .dateController.value,
                                     focusNode: AlwaysDisabledFocusNode(),
                                     decoration: InputDecoration(
                                       isDense: true,
-                                      contentPadding: const EdgeInsets.symmetric(
-                                          horizontal: 0, vertical: 0),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 0, vertical: 0),
                                       hintText: 'Date',
                                       hintStyle: Theme.of(context)
                                           .textTheme
                                           .caption
                                           ?.copyWith(
-                                        fontSize: 15,
-                                        fontFamily:
-                                        helveticaNeueNeue_medium,
-                                        color: Colors.black,
-                                      ),
+                                            fontSize: 15,
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
+                                            color: Colors.black,
+                                          ),
                                       border: InputBorder.none,
                                       focusedBorder: InputBorder.none,
                                     ),
@@ -459,13 +486,22 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                   margin: EdgeInsets.only(top: 16.h),
                   child: BlackButton("Apply Filter", Colors.white, () {
                     checkNet(context).then((value) {
-                      if(eventDetailController.dateController.value.text.isNotEmpty || strCityName != '' || strType != ''){
+                      if (eventDetailController
+                              .dateController.value.text.isNotEmpty ||
+                          strCityName != '' ||
+                          strType != '') {
+                        eventDetailController.pageNumber =
+                            eventDetailController.pageNumber + 1;
                         dynamic body = {
-                          'name': eventDetailController.searchController.value.text,
+                          'page': eventDetailController.pageNumber.toString(),
+                          'name':
+                              eventDetailController.searchController.value.text,
                           'city': eventDetailController.strCityId.value,
-                          'date': eventDetailController.dateController.value.text,
+                          'date':
+                              eventDetailController.dateController.value.text,
                           'type': strType.toString()
                         };
+                        eventDetailController.initScrolling(context, body);
                         eventDetailController.allEventListApi(body);
                       }
                     });
@@ -477,10 +513,9 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
         ],
       ),
     );
-
   }
 
-    selectDate() async {
+  selectDate() async {
     DateTime? pickedDate = await showModalBottomSheet<DateTime>(
       context: context,
       builder: (context) {
@@ -494,7 +529,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Padding(
-                      padding:  EdgeInsets.only(left: 5.w),
+                      padding: EdgeInsets.only(left: 5.w),
                       child: CupertinoButton(
                         child: const Text(
                           'Cancel',
@@ -506,7 +541,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                       ),
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(right: 5.w),
+                      padding: EdgeInsets.only(right: 5.w),
                       child: CupertinoButton(
                         child: const Text('Done',
                             style: TextStyle(color: orange_ff881a)),
@@ -550,10 +585,8 @@ class AlwaysDisabledFocusNode extends FocusNode {
   bool get hasFocus => false;
 }
 
-
-myFunc(Function myVal){
+myFunc(Function myVal) {
   return TextFormField(
     validator: (v) => myVal(v),
   );
-
 }
