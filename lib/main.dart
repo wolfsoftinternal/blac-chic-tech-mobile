@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
 
-        //  home: ListScreen(),
-            home: SplashScreen(),
+          home: ListScreen(),
+         //   home: SplashScreen(),
 
         );
       },
