@@ -28,7 +28,7 @@ class _FindSpeakerState extends State<FindSpeaker> {
     // TODO: implement initState
     super.initState();
     if (mounted) {
-      controller.isLoading.value = false;
+      controller.isLoading.value = true;
       controller.isLoadingButton.value = false;
     }
   }
@@ -250,7 +250,11 @@ class _FindSpeakerState extends State<FindSpeaker> {
                                                   false
                                               ? const SizedBox()
                                               : InkWell(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    controller.findSpeakerPage
+                                                        .value++;
+                                                    controller.pageAdd();
+                                                  },
                                                   child: Container(
                                                     margin: EdgeInsets.only(
                                                         bottom: 25.h),

@@ -16,17 +16,26 @@ class SpeakersVideos extends StatefulWidget {
 }
 
 class _SpeakersVideosState extends State<SpeakersVideos> {
-
-
   List<SpeakersVideoModel> speakerVideoList = [
-    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly — and \nsupporting criminal justice...",
-        "Steve Roshein","Posted Dec 2021"),
-    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly — and \nsupporting criminal justice...",
-        "Steve Roshein","Posted Dec 2021"),
-    SpeakersVideoModel(photo_user, '3:56', "4 steps to hiring fairly — and \nsupporting criminal justice...",
-        "Steve Roshein","Posted Dec 2021"),
+    SpeakersVideoModel(
+        photo_user,
+        '3:56',
+        "4 steps to hiring fairly — and \nsupporting criminal justice...",
+        "Steve Roshein",
+        "Posted Dec 2021"),
+    SpeakersVideoModel(
+        photo_user,
+        '3:56',
+        "4 steps to hiring fairly — and \nsupporting criminal justice...",
+        "Steve Roshein",
+        "Posted Dec 2021"),
+    SpeakersVideoModel(
+        photo_user,
+        '3:56',
+        "4 steps to hiring fairly — and \nsupporting criminal justice...",
+        "Steve Roshein",
+        "Posted Dec 2021"),
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,22 +46,19 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Container(
                         margin: EdgeInsets.only(top: 15.h),
                         child: ToolbarWithHeaderCenterTitle("CLAIRE ROMAN")),
-
                     const SearchBarWithRightIcon(),
-
                     Container(
-                      margin: EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
+                      margin:
+                          EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
                       child: ListView.builder(
                           shrinkWrap: true,
                           primary: false,
@@ -63,22 +69,33 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                               padding: EdgeInsets.only(bottom: 16.h),
                               child: SizedBox(
                                   width: double.infinity,
-                                  child:Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Stack(
                                         alignment: Alignment.bottomRight,
                                         children: [
                                           ClipRRect(
-                                            borderRadius: BorderRadius.circular(4.r),
-                                            child: Image.asset(speakerVideoList[i].imgVideo,height: 56.h,width:100.w,fit: BoxFit.fill,),
+                                            borderRadius:
+                                                BorderRadius.circular(4.r),
+                                            child: Image.asset(
+                                              speakerVideoList[i].imgVideo,
+                                              height: 56.h,
+                                              width: 100.w,
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                           Container(
-                                            margin: EdgeInsets.only(right: 6.w,bottom: 6.h),
-                                            padding: EdgeInsets.symmetric(vertical: 1.5.h,horizontal: 6.w),
+                                            margin: EdgeInsets.only(
+                                                right: 6.w, bottom: 6.h),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 1.5.h,
+                                                horizontal: 6.w),
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(4),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
                                               gradient: const LinearGradient(
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter,
@@ -89,33 +106,58 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                                 stops: [0.0, 5.0],
                                               ),
                                             ),
-                                            child:Text(speakerVideoList[i].tvTime,style: TextStyle(
-                                                fontSize: 11.sp,color: Colors.white,fontFamily: helveticaNeueNeue_medium),) ,
+                                            child: Text(
+                                              speakerVideoList[i].tvTime,
+                                              style: TextStyle(
+                                                  fontSize: 11.sp,
+                                                  color: Colors.white,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium),
+                                            ),
                                           ),
-
                                         ],
                                       ),
-
-                                      SizedBox(width: 16.w,),
+                                      SizedBox(
+                                        width: 16.w,
+                                      ),
                                       Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          SizedBox(height: 3.h,),
-
-                                          Text(speakerVideoList[i].tvHeading,style: const TextStyle(
-                                              fontFamily: helvetica_neu_bold,color: black_121212,
-                                              fontSize: 14
-                                          ),),
-                                          SizedBox(height: 8.h,),
-                                          Text(speakerVideoList[i].tvTitle,style: const TextStyle(
-                                              fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
-                                              fontSize: 10),),
-                                          SizedBox(height: 2.h,),
-                                          Text(speakerVideoList[i].tvDate,style: const TextStyle(
-                                              fontFamily: helveticaNeueNeue_medium,color: opcity_black_121212,
-                                              fontSize: 8),),
-
+                                          SizedBox(
+                                            height: 3.h,
+                                          ),
+                                          Text(
+                                            speakerVideoList[i].tvHeading,
+                                            style: const TextStyle(
+                                                fontFamily: helvetica_neu_bold,
+                                                color: black_121212,
+                                                fontSize: 14),
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            speakerVideoList[i].tvTitle,
+                                            style: const TextStyle(
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                color: opcity_black_121212,
+                                                fontSize: 10),
+                                          ),
+                                          SizedBox(
+                                            height: 2.h,
+                                          ),
+                                          Text(
+                                            speakerVideoList[i].tvDate,
+                                            style: const TextStyle(
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                color: opcity_black_121212,
+                                                fontSize: 8),
+                                          ),
                                         ],
                                       )
                                     ],
@@ -127,7 +169,6 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                 ),
               ),
             ),
-
             Container(
               margin: EdgeInsets.only(bottom: 25.h),
               child: Center(

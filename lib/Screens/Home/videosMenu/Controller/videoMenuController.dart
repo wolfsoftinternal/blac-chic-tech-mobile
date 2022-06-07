@@ -22,6 +22,7 @@ class VideoMenuController extends GetxController {
   RxBool isLoadingButton = false.obs;
   RxList<VideoList> videoList = <VideoList>[].obs;
   RxList<VideoList> videoAllList = <VideoList>[].obs;
+
   var topicList = <TopicListModel>[].obs;
   var topicListAll = <TopicListModel>[].obs;
   Rx<TopicListModel> selectedTopic = TopicListModel(id: -1).obs;
@@ -42,14 +43,22 @@ class VideoMenuController extends GetxController {
 
   RxList<String> result = <String>[].obs;
   RxList<MyPlayModel> myPlayList = <MyPlayModel>[].obs;
+  Rx<MyPlayListModel> myPlayListModel = MyPlayListModel().obs;
+  Rx<int> myPlayListPage = 1.obs;
 
   RxList<CommentModel> commentModelList = <CommentModel>[].obs;
   Rx<TextEditingController> commentTxt = TextEditingController().obs;
 
   RxList<FindSpeaker> findSpeakerList = <FindSpeaker>[].obs;
   RxBool hasMore = false.obs;
-  RxList<VideoList> SpeakerList = <VideoList>[].obs;
+  Rx<SpeakerVideoModel> speakerVideoList = SpeakerVideoModel().obs;
+  RxList<VideoList> speakerList = <VideoList>[].obs;
+  RxInt speakerListPage = 1.obs;
   Rx<ScrollController> scrollController = ScrollController().obs;
+  Rx<int> findSpeakerPage = 1.obs;
+  Rx<FindSpeakerModel> findspeakerVideoList = FindSpeakerModel().obs;
+  Rx<SpeakerVideoModel> videoMenuModelList = SpeakerVideoModel().obs;
+  Rx<int> videoMenuPage = 1.obs;
   @override
   void onInit() {
     print("controller.selectedTopic.value ::" +
@@ -59,8 +68,6 @@ class VideoMenuController extends GetxController {
     languageListAPI();
     filtterListMethod("");
     videoListSearchAPI(topicFilter: "");
-    myPlayListAPI();
-    findSpeakerApi(search: "");
 
     super.onInit();
   }
@@ -94,39 +101,17 @@ class VideoMenuController extends GetxController {
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
           print(value.toString());
-          SpeakerVideoModel speakerVideoList = speakerVideoModelFromJson(value);
+          videoMenuModelList.value = speakerVideoModelFromJson(value);
 
-          if (speakerVideoList.statusCode == 500) {
+          if (videoMenuModelList.value.statusCode == 500) {
             isLoading.value = false;
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             videoListAPI();
-          } else if (speakerVideoList.statusCode == 200) {
+          } else if (videoMenuModelList.value.statusCode == 200) {
             isLoading.value = false;
-            speakerVideoList.data!.forEach((element) {
-              String dataVideos =
-                  element.embededCode.toString().replaceAll("560", "130");
-              String videoData = dataVideos.replaceAll("315", "60");
-              videoList.add(VideoList(
-                  id: element.id,
-                  userId: element.userId,
-                  title: element.title,
-                  topic: element.topic,
-                  language: element.language,
-                  file: element.file,
-                  embededCode: videoData,
-                  tags: element.tags,
-                  speakers: element.speakers,
-                  status: element.status,
-                  description: element.description,
-                  deletedAt: element.deletedAt,
-                  speakerList: element.speakerList,
-                  isFocus: element.isFocus,
-                  userDetails: element.userDetails,
-                  createdAt: element.createdAt,
-                  updatedAt: element.updatedAt));
-            });
+            videoMenuPageMethod();
           } else {
             isLoading.value = false;
           }
@@ -136,6 +121,44 @@ class VideoMenuController extends GetxController {
         print(res.reasonPhrase);
       }
     });
+  }
+
+  videoMenuPageMethod() {
+    int total = 6;
+    var list = <VideoList>[];
+    videoMenuModelList.value.data!.forEach((element) {
+      String dataVideos =
+          element.embededCode.toString().replaceAll("560", "130");
+      String videoData = dataVideos.replaceAll("315", "60");
+      list.add(VideoList(
+          id: element.id,
+          userId: element.userId,
+          title: element.title,
+          topic: element.topic,
+          language: element.language,
+          file: element.file,
+          embededCode: videoData,
+          tags: element.tags,
+          speakers: element.speakers,
+          status: element.status,
+          description: element.description,
+          deletedAt: element.deletedAt,
+          speakerList: element.speakerList,
+          isFocus: element.isFocus,
+          userDetails: element.userDetails,
+          createdAt: element.createdAt,
+          updatedAt: element.updatedAt));
+    });
+    if (list.length > videoMenuPage.value * total) {
+      hasMore.value = true;
+    } else {
+      hasMore.value = false;
+    }
+    videoList.value = List.generate(
+        list.length > videoMenuPage.value * total
+            ? videoMenuPage.value * total
+            : list.length,
+        (index) => list[index]);
   }
 
   videoListSearchAPI({String? topicFilter}) async {
@@ -370,38 +393,15 @@ class VideoMenuController extends GetxController {
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
           print(value.toString());
-          MyPlayListModel myPlayListModel = myPlayListModelFromJson(value);
+          myPlayListModel.value = myPlayListModelFromJson(value);
 
-          if (myPlayListModel.statusCode == 500) {
+          if (myPlayListModel.value.statusCode == 500) {
             isLoading.value = false;
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
-          } else if (myPlayListModel.statusCode == 200) {
+          } else if (myPlayListModel.value.statusCode == 200) {
             isLoading.value = false;
-            myPlayListModel.data!.forEach((element) {
-              String dataVideos =
-                  element.embededCode.toString().replaceAll("560", "130");
-              String videoData = dataVideos.replaceAll("315", "60");
-              myPlayList.add(MyPlayModel(
-                  id: element.id,
-                  userId: element.userId,
-                  title: element.title,
-                  topic: element.topic,
-                  language: element.language,
-                  file: element.file,
-                  embededCode: videoData,
-                  tags: element.tags,
-                  speakers: element.speakers,
-                  status: element.status,
-                  description: element.description,
-                  deletedAt: element.deletedAt,
-                  userDetails: element.userDetails,
-                  // speakerList: element.speakerList,
-                  // isFocus: element.isFocus,
-                  // userDetails: element.userDetails,
-                  createdAt: element.createdAt,
-                  updatedAt: element.updatedAt));
-            });
+            pageMyPlayListAdd();
           } else {
             isLoading.value = false;
           }
@@ -411,6 +411,47 @@ class VideoMenuController extends GetxController {
         print(res.reasonPhrase);
       }
     });
+  }
+
+  pageMyPlayListAdd() {
+    int total = 6;
+    var list = <MyPlayModel>[];
+
+    myPlayListModel.value.data!.forEach((element) {
+      String dataVideos =
+          element.embededCode.toString().replaceAll("560", "130");
+      String videoData = dataVideos.replaceAll("315", "60");
+      list.add(MyPlayModel(
+          id: element.id,
+          userId: element.userId,
+          title: element.title,
+          topic: element.topic,
+          language: element.language,
+          file: element.file,
+          embededCode: videoData,
+          tags: element.tags,
+          speakers: element.speakers,
+          status: element.status,
+          description: element.description,
+          deletedAt: element.deletedAt,
+          userDetails: element.userDetails,
+          // speakerList: element.speakerList,
+          // isFocus: element.isFocus,
+          // userDetails: element.userDetails,
+          createdAt: element.createdAt,
+          updatedAt: element.updatedAt));
+    });
+    if (list.length > myPlayListPage.value * total) {
+      hasMore.value = true;
+    } else {
+      hasMore.value = false;
+    }
+    myPlayList.value = List.generate(
+        list.length > myPlayListPage.value * total
+            ? myPlayListPage.value * total
+            : list.length,
+        (index) => list[index]);
+    print("myPlayList.value :: " + myPlayList.length.toString());
   }
 
   videoComments(int videoid) async {
@@ -640,23 +681,13 @@ class VideoMenuController extends GetxController {
         if (res.statusCode == 200) {
           res.stream.bytesToString().then((value) async {
             print(value.toString());
-            FindSpeakerModel speakerVideoList = findSpeakerModelFromJson(value);
+            findspeakerVideoList.value = findSpeakerModelFromJson(value);
 
-            if (speakerVideoList.statusCode == 500) {
+            if (findspeakerVideoList.value.statusCode == 500) {
               final tokenUpdate = TokenUpdateRequest();
               await tokenUpdate.updateToken();
-            } else if (speakerVideoList.statusCode == 200) {
-              findSpeakerList.value = speakerVideoList.data!;
-              findSpeakerList.value = List.generate(
-                  speakerVideoList.data!.length > 15
-                      ? 15
-                      : speakerVideoList.data!.length,
-                  (index) => speakerVideoList.data![index]);
-              if (findSpeakerList.value.length > 15) {
-                hasMore.value = true;
-              } else {
-                hasMore.value = false;
-              }
+            } else if (findspeakerVideoList.value.statusCode == 200) {
+              pageAdd();
             }
           });
         } else {
@@ -667,6 +698,21 @@ class VideoMenuController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  pageAdd() {
+    int total = 12;
+    if (findspeakerVideoList.value.data!.length >
+        findSpeakerPage.value * total) {
+      hasMore.value = true;
+    } else {
+      hasMore.value = false;
+    }
+    findSpeakerList.value = List.generate(
+        findspeakerVideoList.value.data!.length > findSpeakerPage.value * total
+            ? findSpeakerPage.value * total
+            : findspeakerVideoList.value.data!.length,
+        (index) => findspeakerVideoList.value.data![index]);
   }
 
   speakerDataVideoAPI({String? search, int? videoId}) async {
@@ -684,40 +730,18 @@ class VideoMenuController extends GetxController {
     final apiReq = Request();
     await apiReq.postAPIWithBearer(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
-      SpeakerList.clear();
+      speakerList.clear();
 
       if (res.statusCode == 200) {
         isLoading.value = false;
         res.stream.bytesToString().then((value) async {
-          SpeakerVideoModel speakerVideoList = speakerVideoModelFromJson(value);
+          speakerVideoList.value = speakerVideoModelFromJson(value);
 
-          if (speakerVideoList.statusCode == 500) {
+          if (speakerVideoList.value.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
-          } else if (speakerVideoList.statusCode == 200) {
-            speakerVideoList.data!.forEach((element) {
-              String dataVideos =
-                  element.embededCode.toString().replaceAll("560", "130");
-              String videoData = dataVideos.replaceAll("315", "60");
-              SpeakerList.add(VideoList(
-                  id: element.id,
-                  userId: element.userId,
-                  title: element.title,
-                  topic: element.topic,
-                  language: element.language,
-                  file: element.file,
-                  embededCode: videoData,
-                  tags: element.tags,
-                  speakers: element.speakers,
-                  status: element.status,
-                  description: element.description,
-                  deletedAt: element.deletedAt,
-                  speakerList: element.speakerList,
-                  isFocus: element.isFocus,
-                  userDetails: element.userDetails,
-                  createdAt: element.createdAt,
-                  updatedAt: element.updatedAt));
-            });
+          } else if (speakerVideoList.value.statusCode == 200) {
+            speakerDataVideoPageAdd();
           }
         });
       } else {
@@ -725,5 +749,43 @@ class VideoMenuController extends GetxController {
         print(res.reasonPhrase);
       }
     });
+  }
+
+  speakerDataVideoPageAdd() {
+    int total = 6;
+    var list = <VideoList>[];
+    speakerVideoList.value.data!.forEach((element) {
+      String dataVideos =
+          element.embededCode.toString().replaceAll("560", "130");
+      String videoData = dataVideos.replaceAll("315", "60");
+      list.add(VideoList(
+          id: element.id,
+          userId: element.userId,
+          title: element.title,
+          topic: element.topic,
+          language: element.language,
+          file: element.file,
+          embededCode: videoData,
+          tags: element.tags,
+          speakers: element.speakers,
+          status: element.status,
+          description: element.description,
+          deletedAt: element.deletedAt,
+          speakerList: element.speakerList,
+          isFocus: element.isFocus,
+          userDetails: element.userDetails,
+          createdAt: element.createdAt,
+          updatedAt: element.updatedAt));
+    });
+    if (list.length > speakerListPage.value * total) {
+      hasMore.value = true;
+    } else {
+      hasMore.value = false;
+    }
+    speakerList.value = List.generate(
+        list.length > speakerListPage.value * total
+            ? speakerListPage.value * total
+            : list.length,
+        (index) => list[index]);
   }
 }
