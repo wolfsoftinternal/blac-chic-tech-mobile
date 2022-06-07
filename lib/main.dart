@@ -1,4 +1,6 @@
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/SplashScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,7 +12,9 @@ GetIt getIt = GetIt.instance;
 
 const Color themeColor = Color(0xff00bc56);
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -32,8 +36,14 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
 
+<<<<<<< HEAD
           home: SplashScreen(),
           //  home: ListScreen(),
+=======
+        //  home: ListScreen(),
+            home: SplashScreen(),
+
+>>>>>>> 239b05fdca5f747294cbf57fd8334bad3a56fa12
         );
       },
     );

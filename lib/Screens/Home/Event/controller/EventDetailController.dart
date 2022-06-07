@@ -8,8 +8,12 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../Model/BaseModel.dart';
+import '../../../../Utils/preference_utils.dart';
+import '../../../../Utils/share_predata.dart';
 import '../../../Networks/api_endpoint.dart';
 import '../../../Networks/api_response.dart';
+import '../../../Networks/token_update_request.dart';
+import '../../Profile/model/VideoListModel.dart';
 
 class EventDetailController extends GetxController {
   Rx<TextEditingController> searchController = TextEditingController().obs;
@@ -17,7 +21,29 @@ class EventDetailController extends GetxController {
   RxString strCityId = "".obs;
   Rx<TextEditingController> dateController = TextEditingController().obs;
   RxList<EventList> eventList = <EventList>[].obs;
+  RxList<EventList> upcomingEventList = <EventList>[].obs;
+  RxList<EventList> pastEventList = <EventList>[].obs;
   Rx<EventList> eventDetails = EventList().obs;
+  ScrollController scrollController = ScrollController();
+  RxInt pageNumber = 1.obs;
+  RxBool isPaginationLoading = false.obs;
+
+  initScrolling(BuildContext context, body) {
+    scrollController.addListener(() async {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) {
+        _scrollDown();
+        isPaginationLoading.value = true;
+        // pageNumber = pageNumber + 1;
+        await allEventListApi(body);
+        isPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _scrollDown() {
+    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  }
 
 
   cityListApi() async {
@@ -50,17 +76,33 @@ class EventDetailController extends GetxController {
     final apiReq = Request();
 
     await apiReq.postAPIwithoutBearer(url, body).then((value) async {
+      if(pageNumber == 1){
+        eventList.clear();
+        upcomingEventList.clear();
+        pastEventList.clear();
+      }
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
         await res.stream.bytesToString().then((value) async {
           String strData = value;
+
+          print('strData order' + strData);
+
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 200) {
             EventListModel detail = EventListModel.fromJson(userModel);
             eventList.value = detail.data!;
+
+            for(var item in eventList){
+              if(item.event_type == 'past'){
+                pastEventList.add(item);
+              }else{
+                upcomingEventList.add(item);
+              }
+            }
           } else if(model.statusCode == 101){
             eventList.clear();
           }else {
@@ -99,4 +141,8 @@ class EventDetailController extends GetxController {
   //     }
   //   });
   // }
+
+
+
+
 }

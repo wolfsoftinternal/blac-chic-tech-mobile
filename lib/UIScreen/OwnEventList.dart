@@ -88,7 +88,9 @@ class _OwnEventListState extends State<OwnEventList> {
                       Padding(
                         padding: EdgeInsets.only(right: 10.w),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            
+                          },
                           child: Container(
                             width: 55.w,
                             height: 55.h,

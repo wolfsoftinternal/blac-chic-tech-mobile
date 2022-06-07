@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
+import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -15,8 +16,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class AdmireProfileList extends StatefulWidget {
-  final AdmireList admireList;
-  const AdmireProfileList({Key? key, required this.admireList})
+  // final AdmireList admireList;
+  const AdmireProfileList({Key? key})
       : super(key: key);
 
   @override
@@ -42,14 +43,12 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
     userId = myModel!.data!.id!.toInt();
     setState(() {});
   }
-
   
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        widget.admireList.admireDetails!.image == null
+        myModel!.data!.image == null
             ? SvgPicture.asset(
                 placeholder,
                 height: MediaQuery.of(context).size.height * .83,
@@ -98,7 +97,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
               const Spacer(),
               GestureDetector(
                   onTap: () {
-                    createBottomSheet(context);
+                    createBottomSheet(context, myModel!.data!.id!);
                   },
                   child: 
                   // userId == widget.admireList.admireDetails!.id ?
@@ -117,7 +116,9 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
               ),
 
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.to(ProfileSetting());
+                },
                 child: 
                 // userId == widget.admireList.admireDetails!.id ?
                     SvgPicture.asset(
