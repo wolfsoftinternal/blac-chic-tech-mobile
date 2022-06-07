@@ -754,10 +754,19 @@ class _VideoListBctState extends State<VideoListBct> {
                                                       SizedBox(
                                                           height: 80.h,
                                                           width: 120.w,
-                                                          child: Html(
-                                                              data: controller
-                                                                  .videoList[i]
-                                                                  .embededCode)),
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    Radius
+                                                                        .circular(
+                                                                            35)),
+                                                            child: Html(
+                                                                data: controller
+                                                                    .videoList[
+                                                                        i]
+                                                                    .embededCode),
+                                                          )),
                                                       Positioned(
                                                         bottom: 2,
                                                         right: 3,

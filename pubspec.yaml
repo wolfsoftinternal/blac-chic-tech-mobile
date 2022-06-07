@@ -64,6 +64,7 @@ dependencies:
   cloud_firestore: ^1.0.7
   google_place: ^0.4.7
   flutter_html: ^2.2.1
+  
 
 
   wechat_assets_picker:
