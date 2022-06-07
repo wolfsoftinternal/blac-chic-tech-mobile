@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utils/GeneralFunctions.dart';
 import 'package:flutter/material.dart';
 
@@ -60,6 +61,7 @@ class PaginationUtils {
             color: Colors.transparent,
             child: CircularProgressIndicator(
               strokeWidth: 2,
+              color: black_121212,
             )));
   }
 }
