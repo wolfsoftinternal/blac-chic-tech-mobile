@@ -28,6 +28,26 @@ class _SearchVideoListState extends State<SearchVideoList> {
   var list;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (mounted) {
+      controller.isLoading.value = false;
+      controller.isLoadingButton.value = false;
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (mounted) {
+      controller.isLoading.value = false;
+      controller.isLoadingButton.value = false;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(

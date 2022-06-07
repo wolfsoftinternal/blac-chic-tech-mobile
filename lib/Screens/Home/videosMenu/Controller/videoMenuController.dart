@@ -47,6 +47,7 @@ class VideoMenuController extends GetxController {
   Rx<TextEditingController> commentTxt = TextEditingController().obs;
 
   RxList<FindSpeaker> findSpeakerList = <FindSpeaker>[].obs;
+  RxBool hasMore = false.obs;
   RxList<VideoList> SpeakerList = <VideoList>[].obs;
 
   @override
@@ -621,6 +622,7 @@ class VideoMenuController extends GetxController {
       await apiReq.postAPIWithBearer(url, body, token.toString()).then((value) {
         http.StreamedResponse res = value;
         findSpeakerList.clear();
+        isLoading.value = false;
 
         if (res.statusCode == 200) {
           res.stream.bytesToString().then((value) async {
@@ -632,7 +634,16 @@ class VideoMenuController extends GetxController {
               await tokenUpdate.updateToken();
             } else if (speakerVideoList.statusCode == 200) {
               findSpeakerList.value = speakerVideoList.data!;
-              isLoading.value = false;
+              findSpeakerList.value = List.generate(
+                  speakerVideoList.data!.length > 15
+                      ? 15
+                      : speakerVideoList.data!.length,
+                  (index) => speakerVideoList.data![index]);
+              if (findSpeakerList.value.length > 15) {
+                hasMore.value = true;
+              } else {
+                hasMore.value = false;
+              }
             }
           });
         } else {

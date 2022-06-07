@@ -36,55 +36,31 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
   bool? button1, button2;
 
   VideoList? videoListDetails;
-  List<SpeakersVideoModel> speakerVideoList = [
-    SpeakersVideoModel(
-        photo_user,
-        '3:56',
-        "4 steps to hiring fairly and supporting criminal justice...",
-        "Steve Roshein",
-        "Posted Dec 2021"),
-    SpeakersVideoModel(
-        photo_user,
-        '3:56',
-        "4 steps to hiring fairly and supporting criminal justice...",
-        "Steve Roshein",
-        "Posted Dec 2021"),
-    SpeakersVideoModel(
-        photo_user,
-        '3:56',
-        "4 steps to hiring fairly and supporting criminal justice...",
-        "Steve Roshein",
-        "Posted Dec 2021"),
-    SpeakersVideoModel(
-        photo_user,
-        '3:56',
-        "4 steps to hiring fairly and supporting criminal justice...",
-        "Steve Roshein",
-        "Posted Dec 2021"),
-    SpeakersVideoModel(
-        photo_user,
-        '3:56',
-        "4 steps to hiring fairly and supporting criminal justice...",
-        "Steve Roshein",
-        "Posted Dec 2021"),
-    SpeakersVideoModel(
-        photo_user,
-        '3:56',
-        "4 steps to hiring fairly and supporting criminal justice...",
-        "Steve Roshein",
-        "Posted Dec 2021"),
-  ];
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    videoListDetails = widget.videoList;
-    // String dataVideos =
-    //     widget.videoList.embededCode.toString().replaceAll("130", "560");
-    // String videoData = dataVideos.replaceAll("60", "315");
-    // videoListDetails!.embededCode = videoData;
-    controller.videoDetailsAPI(id: widget.videoList.id);
+    if (mounted) {
+      videoListDetails = widget.videoList;
+      // String dataVideos =
+      //     widget.videoList.embededCode.toString().replaceAll("130", "560");
+      // String videoData = dataVideos.replaceAll("60", "315");
+      // videoListDetails!.embededCode = videoData;
+      controller.isLoading.value = false;
+      controller.videoDetailsAPI(id: widget.videoList.id);
+
+      controller.isLoadingButton.value = false;
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (mounted) {
+      controller.isLoading.value = false;
+      controller.isLoadingButton.value = false;
+    }
   }
 
   @override

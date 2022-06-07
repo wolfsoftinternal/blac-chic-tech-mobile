@@ -26,8 +26,23 @@ class _VideoCommentsState extends State<VideoComments> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    myFocusNode = FocusNode();
-    controller.videoComments(widget.videoId);
+    if (mounted) {
+      myFocusNode = FocusNode();
+      controller.isLoading.value = false;
+      controller.videoComments(widget.videoId);
+
+      controller.isLoadingButton.value = false;
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (mounted) {
+      controller.isLoading.value = false;
+      controller.isLoadingButton.value = false;
+    }
   }
 
   @override

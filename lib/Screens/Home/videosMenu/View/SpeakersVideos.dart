@@ -30,6 +30,25 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
   //   super.initState();
   //   controller.speakerDataVideoAPI(search: "", videoId: widget.id);
   // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (mounted) {
+      controller.isLoading.value = false;
+      controller.isLoadingButton.value = false;
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (mounted) {
+      controller.isLoading.value = false;
+      controller.isLoadingButton.value = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
