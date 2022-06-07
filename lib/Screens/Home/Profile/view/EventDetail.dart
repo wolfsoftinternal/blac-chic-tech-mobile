@@ -46,6 +46,7 @@ class _EventDetailState extends State<EventDetail> {
   BitmapDescriptor sourceIcon = BitmapDescriptor.defaultMarker;
   late LocationData _currentPosition;
   Location location = Location();
+  bool isUseWallet = false;
 
   @override
   void initState() {
@@ -71,6 +72,9 @@ class _EventDetailState extends State<EventDetail> {
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel?.data!.id;
+
+    controller.userProfileAPI(context);
+
   }
 
   void _onMapCreated(GoogleMapController _cntlr) {
@@ -115,6 +119,8 @@ class _EventDetailState extends State<EventDetail> {
 
   displayBottomSheet(category, price, selectedPositionOfAdmission) {
     controller.total.value = int.parse(price);
+    controller.count.value = 1;
+    setFinalValue();
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -220,6 +226,10 @@ class _EventDetailState extends State<EventDetail> {
                                                                       .value *
                                                                   int.parse(
                                                                       price);
+
+
+                                                          setFinalValue();
+
                                                         });
                                                       },
                                                       child: const Icon(
@@ -249,6 +259,9 @@ class _EventDetailState extends State<EventDetail> {
                                                                       .value *
                                                                   int.parse(
                                                                       price);
+
+                                                          setFinalValue();
+
                                                         });
                                                       },
                                                       child: const Icon(
@@ -267,17 +280,70 @@ class _EventDetailState extends State<EventDetail> {
                                   const SizedBox(
                                     height: 24,
                                   ),
+
+                                  Visibility(
+                                    visible: controller.details.value.wallet != null && (int.parse(controller.details.value.wallet??"0") > 0),
+                                    child: Column(
+                                      children: [  Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: setRoboto("Wallet", 16, Colors.black,
+                                            FontWeight.w800),
+                                      ),
+                                        const SizedBox(
+                                          height: 6,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                setRoboto("Use Wallet Balance", 14,
+                                                    Colors.black, FontWeight.w500),
+
+                                                SizedBox(height: 4,),
+
+                                                setRoboto(
+                                                    SharePreData.strDollar + (controller.details.value.wallet??"0"),
+                                                    14,
+                                                    Colors.black,
+                                                    FontWeight.w500),
+                                              ],
+                                            ),
+
+                                            Spacer(flex: 1,),
+
+                                            Expanded(
+                                              flex: 1,
+                                              child: Checkbox(
+                                                value: controller.isWallet.value,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    controller.isWallet.value = value ?? false;
+                                                    setFinalValue();
+                                                  });
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 24,
+                                        ),],
+                                    ),
+                                  ),
+
+
+
+
+
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         left: 24.0, right: 24.0),
                                     child: setRoboto("PAYMENT METHOD", 16,
                                         Colors.grey, FontWeight.w500),
                                   ),
-
                                   const SizedBox(
                                     height: 12,
                                   ),
-
                                   Container(
                                     decoration: BoxDecoration(
                                       color: grey_f5f5f5,
@@ -301,17 +367,22 @@ class _EventDetailState extends State<EventDetail> {
                                   const SizedBox(
                                     height: 24,
                                   ),
-                                  BlackButton('PAY \$${controller.total.value}',
+                                  BlackButton('PAY \$${controller.finalTotal.value}',
                                       white_ffffff, () {
                                     checkNet(context).then((value) {
+                                      String eventId = controller
+                                          .eventDetails.value.id
+                                          .toString();
+                                      String admission_type = controller
+                                              .eventDetails
+                                              .value
+                                              .admissionData?[
+                                                  selectedPositionOfAdmission]
+                                              .category ??
+                                          "";
 
-                                      String eventId = controller.eventDetails.value.id.toString();
-                                      String admission_type = controller.eventDetails.value
-                                          .admissionData?[
-                                      selectedPositionOfAdmission]
-                                          .category??"";
-
-                                      String total_tickets = controller.count.toString();
+                                      String total_tickets =
+                                          controller.count.toString();
                                       String status = "0";
 
                                       dynamic body = {
@@ -1584,5 +1655,17 @@ class _EventDetailState extends State<EventDetail> {
         ),
       ),
     );
+  }
+
+  void setFinalValue() {
+    if(controller.isWallet.value){
+      if(int.parse(controller.details.value.wallet??"0") < controller.total.value){
+        controller.finalTotal.value = controller.total.value - int.parse(controller.details.value.wallet??"0");
+      }else{
+        controller.finalTotal.value = 0;
+      }
+    }else{
+      controller.finalTotal.value = controller.total.value;
+    }
   }
 }

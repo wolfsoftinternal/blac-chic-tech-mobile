@@ -18,6 +18,17 @@ snackBar(BuildContext context, String message) {
   );
 }
 
+String validateAccountNumber(String value) {
+  String pattern = '[0-9]{9,18}';
+  RegExp regExp = new RegExp(pattern);
+  if (value.length == 0) {
+    return 'Please Enter Account Number';
+  } else if (!regExp.hasMatch(value)) {
+    return 'Please Enter Valid Account Number';
+  }
+  return "";
+}
+
 void onLoading(BuildContext context, String msg) {
   showDialog(
     context: context,

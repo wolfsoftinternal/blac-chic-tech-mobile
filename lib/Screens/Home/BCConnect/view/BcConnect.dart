@@ -5,6 +5,7 @@ import 'package:blackchecktech/Layout/InputTextStatic.dart';
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
+import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Screens/Home/BCConnect/controller/BCConnectController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
@@ -85,25 +86,8 @@ class _BcConnectState extends State<BcConnect> {
           SizedBox(
             height: 6.h,
           ),
-          Stack(
-            children: [
-              BackLayout(),
-              // BC-CONNECT
-              Padding(
-                padding: EdgeInsets.only(top: 14.h),
-                child: Center(
-                  child: Text("BC-CONNECT",
-                      style: TextStyle(
-                          color: black_121212,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: "NeueHelvetica",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 16.sp),
-                      textAlign: TextAlign.right),
-                ),
-              )
-            ],
-          ),
+
+          ToolbarWithHeaderCenterTitle('BC-CONNECT'),
           SizedBox(
             height: 32.h,
           ),

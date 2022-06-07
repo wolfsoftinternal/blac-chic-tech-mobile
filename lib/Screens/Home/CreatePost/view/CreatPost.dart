@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:blackchecktech/Screens/Home/CreatePost/controller/PostController.dart';
 import 'package:blackchecktech/Screens/Home/CreatePost/view/PostLocation.dart';
 import 'package:blackchecktech/Screens/Home/CreatePost/view/TagPeople.dart';
@@ -12,6 +14,7 @@ import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/AddLocationView.dart';
 import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -116,10 +119,19 @@ class _CreatPostState extends State<CreatPost> {
             Stack(
               alignment: Alignment.bottomLeft,
               children: [
-                Image.asset(
-                  img_girl,
-                  height: 375.h,
+                // Image.asset(
+                //   img_girl,
+                //   height: 375.h,
+                //   width: double.infinity,
+                //   fit: BoxFit.cover,
+                // ),
+
+                Image.file(
+                  File((image?[0].relativePath ?? "") +
+                      "/" +
+                      (image?[0].title ?? "")),
                   width: double.infinity,
+                  height: 375.h,
                   fit: BoxFit.cover,
                 ),
                 GestureDetector(

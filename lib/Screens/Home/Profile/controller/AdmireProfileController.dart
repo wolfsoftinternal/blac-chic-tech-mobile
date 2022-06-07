@@ -54,6 +54,8 @@ class AdmireProfileController extends GetxController {
   RxString admire = ''.obs;
   RxInt count = 1.obs;
   RxInt total = 0.obs;
+  RxInt finalTotal = 0.obs;
+  RxBool isWallet = false.obs;
   CheckoutResponse? checkoutResponse;
   PaystackPlugin paystack = PaystackPlugin();
   static const String PAYSTACK_KEY =
@@ -85,12 +87,12 @@ class AdmireProfileController extends GetxController {
             if (body == null) {
               admireList.value = detail.data!;
 
-              print('admire list '+ admireList.value.toString());
-
+              print('admire list ' + admireList.value.toString());
             } else {
               otherAdmireList.value = detail.data!;
 
-              print('admire list '+ otherAdmireList.value[0].admireDetails!.firstName!);
+              print('admire list ' +
+                  otherAdmireList.value[0].admireDetails!.firstName!);
             }
           }
         });
@@ -147,6 +149,9 @@ class AdmireProfileController extends GetxController {
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
           String strData = value;
+
+          print('strData userdetails get ' + strData);
+
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
@@ -207,7 +212,6 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-
   SelectedUserProfileAPI(BuildContext context, id) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
@@ -234,7 +238,7 @@ class AdmireProfileController extends GetxController {
             SelectedUserProfileAPI(context, id);
           } else if (model.statusCode == 200) {
             UserDetails userDetailsModel =
-            UserDetails.fromJson(userModel['data']);
+                UserDetails.fromJson(userModel['data']);
 
             details.value = userDetailsModel;
 
@@ -248,7 +252,6 @@ class AdmireProfileController extends GetxController {
   }
 
   postListAPI(BuildContext context, body, [isFrom]) async {
-
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -369,9 +372,6 @@ class AdmireProfileController extends GetxController {
               eventList.value = detail.data!;
             } else {
               eventDetailList.value = detail.data!;
-
-
-
             }
           }
         });
@@ -603,14 +603,15 @@ class AdmireProfileController extends GetxController {
   }
 
   //Method Charging card
-  chargeCardAndMakePayment(BuildContext context,selectedPositionOfAdmission, OrderListModel orderDetail) async {
+  chargeCardAndMakePayment(BuildContext context, selectedPositionOfAdmission,
+      OrderListModel orderDetail, int debitedFromWallet) async {
     var preferences = MySharedPref();
     SignupModel? modelM =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     var userEmail = modelM!.data!.email;
     initializePlugin().then((_) async {
       Charge charge = Charge()
-        ..amount = total.value * 100
+        ..amount = finalTotal.value * 100
         ..email = userEmail
         ..reference = _getReference()
         ..card = _getCardUI();
@@ -621,17 +622,30 @@ class AdmireProfileController extends GetxController {
         method: CheckoutMethod.card,
         fullscreen: false,
       );
-      
 
       if (checkoutResponse!.status == true) {
-        dynamic bodyForOrderUpdate = {
-          'transaction_id': orderDetail.data!.id!.toString(),
-          'payment_transaction_id': checkoutResponse!.reference!,
-          'status': "1",
-        };
+        dynamic bodyForOrderUpdate;
+        if (isWallet.value) {
+          bodyForOrderUpdate = {
+            'transaction_id': orderDetail.data!.id!.toString(),
+            'payment_transaction_id': checkoutResponse!.reference!,
+            'status': "1",
+            'is_wallet': "true",
+            'wallet_amount': debitedFromWallet.toString(),
+            'trans_amount': finalTotal.value.toString(),
+          };
+        } else {
+          bodyForOrderUpdate = {
+            'transaction_id': orderDetail.data!.id!.toString(),
+            'payment_transaction_id': checkoutResponse!.reference!,
+            'status': "1",
+            'wallet_amount': debitedFromWallet.toString(),
+            'trans_amount': finalTotal.value.toString(),
+          };
+        }
 
-        OrderUpdateAPI(context, bodyForOrderUpdate, selectedPositionOfAdmission);
-        
+        OrderUpdateAPI(
+            context, bodyForOrderUpdate, selectedPositionOfAdmission);
 
         print("Transaction successful message " +
             checkoutResponse!.message.toString());
@@ -644,8 +658,8 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-
-  OrderCreateAPI(BuildContext context, body,selectedPositionOfAdmission) async {
+  OrderCreateAPI(
+      BuildContext context, body, selectedPositionOfAdmission) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -668,15 +682,60 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            OrderCreateAPI(context, body,selectedPositionOfAdmission);
+            OrderCreateAPI(context, body, selectedPositionOfAdmission);
           } else if (model.statusCode == 200) {
-
             OrderListModel detail = OrderListModel.fromJson(orderModel);
 
             print('orderDetails  id ' + detail.data!.id!.toString());
-            print('orderDetails  total_price ' + detail.data!.total_price.toString());
+            print('orderDetails  total_price ' +
+                detail.data!.total_price.toString());
 
-            chargeCardAndMakePayment(context,selectedPositionOfAdmission, detail);
+            var debitedFromWallet = 0;
+            if(isWallet.value) {
+              if (finalTotal.value > 0) {
+                debitedFromWallet = int.parse(details.value.wallet ?? "0");
+              } else {
+                debitedFromWallet = total.value - finalTotal.value;
+              }
+            }
+
+            if(finalTotal.value > 0){
+              chargeCardAndMakePayment(
+                  context, selectedPositionOfAdmission, detail, debitedFromWallet);
+            }else{
+
+              // Here if user check the wallet
+              // If ticket value is less than wallet balance, that time final value will be 0.
+              // So direct order api will be call
+
+
+              dynamic bodyForOrderUpdate;
+
+              if(isWallet.value){
+                bodyForOrderUpdate = {
+                  'transaction_id': detail.data!.id!.toString(),
+                  'payment_transaction_id': "wallet",
+                  'status': "1",
+                  'is_wallet': "true",
+                  'wallet_amount': debitedFromWallet.toString(),
+                  'trans_amount': finalTotal.value.toString(),
+                };
+
+              }else{
+                bodyForOrderUpdate = {
+                  'transaction_id': detail.data!.id!.toString(),
+                  'payment_transaction_id': "wallet",
+                  'status': "1",
+                  'wallet_amount': debitedFromWallet.toString(),
+                  'trans_amount': finalTotal.value.toString(),
+                };
+              }
+
+              OrderUpdateAPI(
+                  context, bodyForOrderUpdate, selectedPositionOfAdmission);
+            }
+
+
           }
         });
       } else {
@@ -685,8 +744,8 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-
-  OrderUpdateAPI(BuildContext context, body,selectedPositionOfAdmission) async {
+  OrderUpdateAPI(
+      BuildContext context, body, selectedPositionOfAdmission) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -706,16 +765,31 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            OrderCreateAPI(context, body,selectedPositionOfAdmission);
+            OrderCreateAPI(context, body, selectedPositionOfAdmission);
           } else if (model.statusCode == 200) {
             OrderListModel detail = OrderListModel.fromJson(orderModel);
 
-            Get.to(EventTicketTxnId(eventDetails: eventDetails.value,
+            var debitedFromWallet = 0;
+
+            if(isWallet.value){
+              if(finalTotal.value > 0){
+                debitedFromWallet = int.parse(details.value.wallet??"0");
+              }else{
+                debitedFromWallet = total.value - finalTotal.value;
+              }
+            }
+
+            Navigator.pop(context);
+
+            Get.off(() => EventTicketTxnId(
+              eventDetails: eventDetails.value,
               selectedAdmissionPosition: selectedPositionOfAdmission,
               orderDetails: detail,
+              debitedFromWallet: debitedFromWallet,
+              debitedFromPayStack: finalTotal.value,
             ));
 
-          //  chargeCardAndMakePayment(context,selectedPositionOfAdmission, orderListModel);
+            //  chargeCardAndMakePayment(context,selectedPositionOfAdmission, orderListModel);
           }
         });
       } else {

@@ -4,6 +4,7 @@ import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Screens/Home/BCConnect/view/BcConnect.dart';
+import 'package:blackchecktech/Screens/Home/transactions/view/TransactionsPayoutsTabs.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,8 @@ class _HomePageState extends State<HomePage> {
     "BC-CONNECT",
     "VIDEOS",
     "FEATURE",
-    "EVENTS"
+    "EVENTS",
+    "TRXNS & PAYOUTS"
   ];
   SignupModel signupModel = SignupModel();
 
@@ -81,10 +83,12 @@ class _HomePageState extends State<HomePage> {
                             Get.to(AdmireProfile());
                           }else if(index == 3){
                             Get.to(BcConnect());
-                          }
-                          if(index == 6){
+                          } else if(index == 6){
                           Get.to(EventList());
                         }
+                          else if(index == 7){
+                            Get.to(TransactionsPayoutsTabs());
+                          }
                         },
                         child: Container(
                           height: 68,

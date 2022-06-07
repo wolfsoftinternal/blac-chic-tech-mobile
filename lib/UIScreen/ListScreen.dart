@@ -27,7 +27,7 @@ import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
 import 'package:blackchecktech/UIScreen/SpeakersVideos.dart';
 import 'package:blackchecktech/UIScreen/TagPeople.dart';
 import 'package:blackchecktech/UIScreen/TestSecond.dart';
-import 'package:blackchecktech/UIScreen/TransactionsPayoutsTabs.dart';
+import 'package:blackchecktech/Screens/Home/transactions/view/TransactionsPayoutsTabs.dart';
 import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
 import 'package:blackchecktech/UIScreen/UploadVideos.dart';
 import 'package:blackchecktech/UIScreen/VideoComments.dart';

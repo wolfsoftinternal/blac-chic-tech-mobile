@@ -18,6 +18,7 @@ class PostController extends GetxController {
   RxList<UserList> selectedList = <UserList>[].obs;
   RxList<UserList> searchList = <UserList>[].obs;
 
+
   createPostAPI(BuildContext context) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);

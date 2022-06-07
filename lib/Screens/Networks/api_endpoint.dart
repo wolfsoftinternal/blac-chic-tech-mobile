@@ -48,6 +48,13 @@ const urlDeleteEvent = '/mobile/event-delete';
 const urlallEventList = '/mobile/home/event-list';
 const urlallEventDetail = '/mobile/home/event-details';
 
+// Transactions
+const urlAllTransactions = '/mobile/transaction/list';
+const urlAllPayouts = '/mobile/payouts/list';
+const urlAddAccount = '/mobile/bank/create-details';
+const urlBankAccountList = '/mobile/bank/list';
+const urlSendWithdrawRequest = '/mobile/payouts/send-request';
+
 //language
 const urlLanguageList = '/mobile/langauge-list';
 
