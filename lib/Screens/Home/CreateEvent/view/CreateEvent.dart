@@ -116,6 +116,7 @@ class _CreateEventState extends State<CreateEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white_ffffff,
+      resizeToAvoidBottomInset: false,
       body: Obx(
         () => Stack(
           alignment: Alignment.bottomCenter,
