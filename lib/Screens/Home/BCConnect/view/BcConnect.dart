@@ -118,6 +118,7 @@ class _BcConnectState extends State<BcConnect> {
                     padding: EdgeInsets.only(left: 16.w, right: 16.w),
                     child: SearchBarTag(
                       placeholder: "Search people",
+                      autoFocus: false,
                       onSubmit: (value) {
                         checkNet(context).then((value) {
                           bcConnectController.userListAPI(context,

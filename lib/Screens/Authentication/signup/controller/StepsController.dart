@@ -9,7 +9,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLast
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
-import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Screens/Home/Settings/controller/SettingsController.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:flutter/cupertino.dart';
@@ -219,8 +219,27 @@ class StepsController extends GetxController {
         'past_jobs': pastCompanyDetails.toJson().toString(),
         'education': educationalDetails.toJson().toString(),
         'questions': questions.toJson().toString(),
+        'about_us': aboutController.value.text,
       });
-    } else {
+    } else if(isFrom == 'edit_profile'){
+      if (imagePath != "") {
+        request.files.add(await http.MultipartFile.fromPath(
+            'image', imagePath.value.toString()));
+      }
+      request.fields.addAll({
+        'first_name': settingsController.firstnameController.value.text,
+        'last_name': settingsController.lastnameController.value.text,
+        'user_name': settingsController.usernameController.value.text,
+        'email': settingsController.emailController.value.text,
+        'country_id': strCountryId.value.toString(),
+        'state_id': strStateId.value.toString(),
+        'city_id': strCityId.value.toString(),
+        'birthdate': dobController.value.text,
+        'linkedin_url': linkedinController.value.text,
+        'instagram_url': instagramController.value.text,
+        'twitter_url': twitterController.value.text,
+      });
+    }else {
       if (imagePath != "") {
         request.files.add(await http.MultipartFile.fromPath(
             'image', imagePath.value.toString()));
@@ -408,10 +427,10 @@ class StepsController extends GetxController {
               if (lastQuestionsInfo != "Done") {
                 Get.to(const AdditionalLastQueView());
               } else {
-                Get.offAll(BottomNavigation());
+                Get.offAll(HomePage());
               }
             } else {
-              Get.offAll(BottomNavigation());
+              Get.offAll(HomePage());
             }
           }
         });
@@ -467,10 +486,10 @@ class StepsController extends GetxController {
               if (lastQuestionsInfo != "Done") {
                 Get.to(const AdditionalLastQueView());
               } else {
-                Get.offAll(BottomNavigation());
+                Get.offAll(HomePage());
               }
             } else {
-              Get.offAll(BottomNavigation());
+              Get.offAll(HomePage());
             }
           }
         });
@@ -532,10 +551,10 @@ class StepsController extends GetxController {
               } else if (lastQuestionsInfo != "Done") {
                 Get.offAll(const AdditionalLastQueView());
               } else {
-                Get.offAll(BottomNavigation());
+                Get.offAll(HomePage());
               }
             } else {
-              Get.offAll(BottomNavigation());
+              Get.offAll(HomePage());
             }
           }
         });

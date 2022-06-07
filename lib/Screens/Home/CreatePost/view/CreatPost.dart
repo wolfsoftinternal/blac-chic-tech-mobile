@@ -246,7 +246,7 @@ class _CreatPostState extends State<CreatPost> {
                       height: 26.h,
                     ),
 
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.to(PostLocation());
                       },
