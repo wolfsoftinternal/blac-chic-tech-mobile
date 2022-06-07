@@ -1,6 +1,8 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
 import 'package:blackchecktech/Screens/Home/Event/view/EventList.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
+import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoListBct.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Screens/Home/BCConnect/view/BcConnect.dart';
@@ -14,8 +16,6 @@ import '../../Utils/share_predata.dart';
 import 'chat_module/my_db.dart';
 
 class HomePage extends StatefulWidget {
-
-
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -37,17 +37,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-
     super.initState();
     init();
-
   }
 
-
-  init() async{
+  init() async {
     var preferences = MySharedPref();
     SignupModel signupModel =
-    (await preferences.getSignupModel(SharePreData.keySignupModel))!;
+        (await preferences.getSignupModel(SharePreData.keySignupModel))!;
     MyDB().createCurrentUserDoc(signupModel.data!);
   }
 
@@ -79,8 +76,8 @@ class _HomePageState extends State<HomePage> {
                       return GestureDetector(
                         onTap: () {
                           if (index == 0) {
-
                             Get.to(AdmireProfile());
+
                           }else if(index == 3){
                             Get.to(BcConnect());
                           } else if(index == 6){
@@ -88,6 +85,10 @@ class _HomePageState extends State<HomePage> {
                         }
                           else if(index == 7){
                             Get.to(TransactionsPayoutsTabs());
+
+                          }
+                          if (index == 4) {
+                            Get.to(VideoListBct());
                           }
                         },
                         child: Container(
@@ -127,6 +128,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     })),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: BottomNavigation(
+                selectedIndex: 0,
               ),
             ),
           ],

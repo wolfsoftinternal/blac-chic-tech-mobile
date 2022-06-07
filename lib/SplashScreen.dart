@@ -3,7 +3,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueF
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
-import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
@@ -81,10 +81,10 @@ class _SplashScreenState extends State<SplashScreen> {
         } else if (lastQuestionsInfo != "Done") {
           Get.offAll(const AdditionalLastQueView());
         } else {
-          Get.offAll(BottomNavigation());
+          Get.offAll(HomePage());
         }
       } else {
-        Get.offAll(BottomNavigation());
+        Get.offAll(HomePage());
       }
     });
   }

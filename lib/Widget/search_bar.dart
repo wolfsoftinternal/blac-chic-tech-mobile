@@ -5,16 +5,18 @@ import 'package:iconly/iconly.dart';
 
 class SearchBarTag extends StatelessWidget {
   const SearchBarTag(
-      {Key? key, required this.placeholder, this.onSubmit, this.controller})
+      {Key? key, required this.placeholder, this.onSubmit, this.controller, this.autoFocus})
       : super(key: key);
   final Function(String)? onSubmit;
   final TextEditingController? controller;
   final String placeholder;
+  final autoFocus;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      autofocus: autoFocus,
       decoration: InputDecoration(
         filled: true,
         hintText: placeholder,

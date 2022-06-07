@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,12 +20,12 @@ class AddLocationView extends StatelessWidget {
         color: const Color(0xfff5f5f5),
       ),
       child: Text(title,
-          style: const TextStyle(
+          style:  TextStyle(
               color: black_121212,
               fontWeight: FontWeight.w500,
-              fontFamily: "NeueHelvetica",
+              fontFamily: helveticaNeueNeue_medium,
               fontStyle: FontStyle.normal,
-              fontSize: 12.0),
+              fontSize: 12.sp),
           textAlign: TextAlign.left),
     );
   }

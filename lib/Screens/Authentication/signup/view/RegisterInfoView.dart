@@ -6,7 +6,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoF
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
-import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
@@ -110,10 +110,10 @@ class RegisterInfoView extends StatelessWidget {
                           if (lastQuestionsInfo != "Done") {
                             Get.to(const AdditionalLastQueView());
                           } else {
-                            Get.offAll(BottomNavigation());
+                            Get.offAll(HomePage());
                           }
                         } else {
-                          Get.offAll(BottomNavigation());
+                          Get.offAll(HomePage());
                         }
                       }),
                        SizedBox(

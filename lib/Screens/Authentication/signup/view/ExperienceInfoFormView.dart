@@ -5,7 +5,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsCon
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/CompanyList.dart';
-import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
@@ -88,10 +88,10 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                     if (lastQuestionsInfo != "Done") {
                       Get.to(const AdditionalLastQueView());
                     } else {
-                      Get.offAll(BottomNavigation());
+                      Get.offAll(HomePage());
                     }
                   } else {
-                    Get.offAll(BottomNavigation());
+                    Get.offAll(HomePage());
                   }
                 }),
             Expanded(

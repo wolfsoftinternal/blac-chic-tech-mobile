@@ -46,8 +46,7 @@ class _PostTabState extends State<PostTab> {
                 padding:  EdgeInsets.only(left: 24.w, right: 24.w),
                 child: StaggeredGridView.countBuilder(
                   crossAxisCount: 4,
-
-                  itemCount: controller.postList.length,
+                  itemCount: controller.postList.length >= 10 ? 10 : controller.postList.length,
                   shrinkWrap: true,
                   primary: false,
                   itemBuilder: (BuildContext context, int index) =>
@@ -90,11 +89,27 @@ class _PostTabState extends State<PostTab> {
                                 ),
                               ),
                             ),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 220.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end:Alignment.bottomCenter,
+                                      colors: [
+                                        Color(0x00121212),
+                                        Color(0xff121212)
+                                      ]
+                                  )
+
+                              ),
+                            ),
                             Padding(
-                              padding:  EdgeInsets.only(bottom: 15.h),
+                              padding:  EdgeInsets.only(bottom: 12.h,left: 12.w,right: 12.w),
                               child: Align(
                                   alignment: Alignment.bottomCenter,
-                                  child: setHelceticaBold(controller.postList[index].caption!, 12.sp, white_ffffff, FontWeight.w500, FontStyle.normal)
+                                  child: setHelceticaBold(controller.postList[index].caption!, 12.sp, white_ffffff, FontWeight.w600, FontStyle.normal)
                               ),
                             ),
                           ],

@@ -40,6 +40,31 @@ class VideoController extends GetxController {
   RxList<UserList> userList = <UserList>[].obs;
   RxList<UserList> selectedList = <UserList>[].obs;
 
+  ScrollController scrollController = ScrollController();
+  RxInt PageNumber = 1.obs;
+  RxBool isPaginationLoading = false.obs;
+
+  initScrolling(BuildContext context, userId, [postId]) {
+    scrollController.addListener(() async {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) {
+        _scrollDown();
+        isPaginationLoading.value = true;
+        PageNumber = PageNumber + 1;
+
+          dynamic body = {
+            'page': PageNumber.toString()
+          };
+          await userListAPI(context, body);
+        isPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _scrollDown() {
+    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  }
+
   topicListAPI(BuildContext context) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
@@ -174,6 +199,9 @@ class VideoController extends GetxController {
     String url = urlBase + urlUserList;
     final apiReq = Request();
     await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(PageNumber == 1){
+        userList.clear();
+    }
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -191,7 +219,7 @@ class VideoController extends GetxController {
             UserListModel detail =
             UserListModel.fromJson(userModel);
 
-            userList.value = detail.data!;
+            userList.addAll(detail.data!);
             print(userList.length);
           }
         });

@@ -100,13 +100,13 @@ class _EditProfileState extends State<EditProfile> {
             SizedBox(
               height: 60.h,
             ),
-            ToolbarWithHeaderCenterTitle('Edit Profile'),
+            ToolbarWithHeaderCenterTitle('EDIT PROFILE'),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.only(
-                      left: 24.w, right: 24.w, top: 40.h, bottom: 24.h),
+                      left: 24.w, right: 24.w, top: 30.h, bottom: 24.h),
                   child: myModel == null
                       ? Container()
                       : Column(
@@ -119,7 +119,7 @@ class _EditProfileState extends State<EditProfile> {
                                 children: [
                                   SizedBox(
                                     child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding:  EdgeInsets.all(8.r),
                                       child: Container(
                                         decoration: const BoxDecoration(
                                           boxShadow: [
@@ -133,7 +133,7 @@ class _EditProfileState extends State<EditProfile> {
                                         ),
                                         child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(5),
+                                                BorderRadius.circular(5.r),
                                             child: profileImage.toString() !=
                                                     "File: ''"
                                                 ? Image.file(
@@ -194,9 +194,9 @@ class _EditProfileState extends State<EditProfile> {
                                         controller.firstnameController.value,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text, true)),
+                                        TextInputType.text, false)),
                                 SizedBox(
-                                  width: 8.w,
+                                  width: 16.w,
                                 ),
                                 Expanded(
                                     child: InputTextLayoutDemo(
@@ -204,7 +204,7 @@ class _EditProfileState extends State<EditProfile> {
                                         controller.lastnameController.value,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text, true)),
+                                        TextInputType.text, false)),
                               ],
                             ),
                             SizedBox(
@@ -215,7 +215,7 @@ class _EditProfileState extends State<EditProfile> {
                                 controller.usernameController.value,
                                 false,
                                 TextInputAction.next,
-                                TextInputType.text, true),
+                                TextInputType.text, false),
                             SizedBox(
                               height: 16.h,
                             ),
@@ -224,7 +224,7 @@ class _EditProfileState extends State<EditProfile> {
                                 controller.emailController.value,
                                 false,
                                 TextInputAction.next,
-                                TextInputType.emailAddress, true),
+                                TextInputType.emailAddress, false),
                             SizedBox(
                               height: 16.h,
                             ),
@@ -236,79 +236,18 @@ class _EditProfileState extends State<EditProfile> {
                                   flex: 1,
                                   child: Container(
                                     height: 60.h,
-                                    padding: const EdgeInsets.only(
-                                        left: 16, right: 10),
+                                    padding:  EdgeInsets.only(
+                                        left: 16.w, right: 16.w),
                                     decoration: BoxDecoration(
                                       color: light_grey_f2f2f2,
-                                      borderRadius: BorderRadius.circular(4),
+                                      borderRadius: BorderRadius.circular(4.r),
                                       // border: Border.all(color: Colors.black,width: 4)
                                     ),
                                     child: DropdownButtonHideUnderline(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 10.w, right: 10.w),
-                                        child: DropdownButton(
-                                            dropdownColor: Colors.white,
-                                            value: strCountryName,
-                                            hint: Text("Country",
-                                                style: TextStyle(
-                                                    color: grey_aaaaaa,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily:
-                                                        helveticaNeueNeue_medium,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 14.sp),
-                                                textAlign: TextAlign.left),
-                                            icon: SvgPicture.asset(
-                                              icon_down_arrow_spinner,
-                                              width: 12.r,
-                                              height: 12.r,
-                                            ),
-                                            onChanged: (String? value) {
-                                              setState(() {
-                                                stepsController
-                                                    .strCountryId.value = value!;
-                                                strCountryName = value;
-                                                strStateName = null;
-                                                strCityName = null;
-                                                stepsController
-                                                    .stateListApi(value);
-                                              });
-                                            },
-                                            items: stepsController.countrylist
-                                                .map((CountryDatum value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value.id.toString(),
-                                                child:
-                                                    Text(value.name.toString()),
-                                              );
-                                            }).toList()),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    height: 60.h,
-                                    padding: const EdgeInsets.only(
-                                        left: 16, right: 10),
-                                    decoration: BoxDecoration(
-                                      color: light_grey_f2f2f2,
-                                      borderRadius: BorderRadius.circular(4),
-                                      // border: Border.all(color: Colors.black,width: 4)
-                                    ),
-                                    child: DropdownButtonHideUnderline(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 10.w, right: 10.w),
-                                        child: DropdownButton(
+                                      child: DropdownButton(
                                           dropdownColor: Colors.white,
-                                          value: strStateName,
-                                          hint: Text("State",
+                                          value: strCountryName,
+                                          hint: Text("Country",
                                               style: TextStyle(
                                                   color: grey_aaaaaa,
                                                   fontWeight: FontWeight.w500,
@@ -324,25 +263,78 @@ class _EditProfileState extends State<EditProfile> {
                                           ),
                                           onChanged: (String? value) {
                                             setState(() {
-                                              strStateName = value;
-                                              stepsController.strStateId.value =
-                                                  value!;
+                                              stepsController
+                                                  .strCountryId.value = value!;
+                                              strCountryName = value;
+                                              strStateName = null;
                                               strCityName = null;
-                                              stepsController.cityListApi(
-                                                  stepsController
-                                                      .strCountryId.value,
-                                                  stepsController
-                                                      .strStateId.value);
+                                              stepsController
+                                                  .stateListApi(value);
                                             });
                                           },
-                                          items: stepsController.stateList
-                                              .map((StateDatum value) {
+                                          items: stepsController.countrylist
+                                              .map((CountryDatum value) {
                                             return DropdownMenuItem<String>(
                                               value: value.id.toString(),
-                                              child: Text(value.name.toString()),
+                                              child:
+                                                  Text(value.name.toString()),
                                             );
-                                          }).toList(),
+                                          }).toList()),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 16.w,
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    height: 60.h,
+                                    padding:  EdgeInsets.only(
+                                        left: 16.w, right: 16.w),
+                                    decoration: BoxDecoration(
+                                      color: light_grey_f2f2f2,
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      // border: Border.all(color: Colors.black,width: 4)
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton(
+                                        dropdownColor: Colors.white,
+                                        value: strStateName,
+                                        hint: Text("State",
+                                            style: TextStyle(
+                                                color: grey_aaaaaa,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 14.sp),
+                                            textAlign: TextAlign.left),
+                                        icon: SvgPicture.asset(
+                                          icon_down_arrow_spinner,
+                                          width: 12.r,
+                                          height: 12.r,
                                         ),
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            strStateName = value;
+                                            stepsController.strStateId.value =
+                                                value!;
+                                            strCityName = null;
+                                            stepsController.cityListApi(
+                                                stepsController
+                                                    .strCountryId.value,
+                                                stepsController
+                                                    .strStateId.value);
+                                          });
+                                        },
+                                        items: stepsController.stateList
+                                            .map((StateDatum value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value.id.toString(),
+                                            child: Text(value.name.toString()),
+                                          );
+                                        }).toList(),
                                       ),
                                     ),
                                   ),
@@ -360,55 +352,51 @@ class _EditProfileState extends State<EditProfile> {
                                   flex: 1,
                                   child: Container(
                                     height: 60.h,
-                                    padding: const EdgeInsets.only(
-                                        left: 16, right: 10),
+                                    padding:  EdgeInsets.only(
+                                        left: 16.w, right: 16.w),
                                     decoration: BoxDecoration(
                                       color: light_grey_f2f2f2,
-                                      borderRadius: BorderRadius.circular(4),
+                                      borderRadius: BorderRadius.circular(4.r),
                                       // border: Border.all(color: Colors.black,width: 4)
                                     ),
                                     child: DropdownButtonHideUnderline(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 10.w, right: 10.w),
-                                        child: DropdownButton(
-                                          dropdownColor: Colors.white,
-                                          value: strCityName,
-                                          hint: Text("City",
-                                              style: TextStyle(
-                                                  color: grey_aaaaaa,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily:
-                                                      helveticaNeueNeue_medium,
-                                                  fontStyle: FontStyle.normal,
-                                                  fontSize: 14.sp),
-                                              textAlign: TextAlign.left),
-                                          icon: SvgPicture.asset(
-                                            icon_down_arrow_spinner,
-                                            width: 12.r,
-                                            height: 12.r,
-                                          ),
-                                          onChanged: (String? value) {
-                                            setState(() {
-                                              strCityName = value;
-                                              stepsController.strCityId.value =
-                                                  value!;
-                                            });
-                                          },
-                                          items: stepsController.cityList
-                                              .map((CityDatum value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value.id.toString(),
-                                              child: Text(value.name.toString()),
-                                            );
-                                          }).toList(),
+                                      child: DropdownButton(
+                                        dropdownColor: Colors.white,
+                                        value: strCityName,
+                                        hint: Text("City",
+                                            style: TextStyle(
+                                                color: grey_aaaaaa,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 14.sp),
+                                            textAlign: TextAlign.left),
+                                        icon: SvgPicture.asset(
+                                          icon_down_arrow_spinner,
+                                          width: 12.r,
+                                          height: 12.r,
                                         ),
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            strCityName = value;
+                                            stepsController.strCityId.value =
+                                                value!;
+                                          });
+                                        },
+                                        items: stepsController.cityList
+                                            .map((CityDatum value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value.id.toString(),
+                                            child: Text(value.name.toString()),
+                                          );
+                                        }).toList(),
                                       ),
                                     ),
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 8.w,
+                                  width: 16.w,
                                 ),
                                 Expanded(
                                   child: Container(
@@ -426,7 +414,7 @@ class _EditProfileState extends State<EditProfile> {
                                           Expanded(
                                             flex: 1,
                                             child: Padding(
-                                              padding: EdgeInsets.all(5.r),
+                                              padding: EdgeInsets.all(4.r),
                                               child: setDobTextFieldNext(
                                                 stepsController
                                                     .dobController.value,
@@ -462,7 +450,7 @@ class _EditProfileState extends State<EditProfile> {
                                   flex: 1,
                                   child: Container(
                                       width: double.infinity,
-                                      height: 1,
+                                      height: 1.3.h,
                                       decoration: const BoxDecoration(
                                           color: view_line_f4f6f6)),
                                 ),
@@ -485,7 +473,7 @@ class _EditProfileState extends State<EditProfile> {
                                   flex: 1,
                                   child: Container(
                                       width: double.infinity,
-                                      height: 1,
+                                      height: 1.3.h,
                                       decoration: const BoxDecoration(
                                           color: view_line_f4f6f6)),
                                 )
@@ -495,16 +483,14 @@ class _EditProfileState extends State<EditProfile> {
                               height: 24.h,
                             ),
                             Container(
+                              height: 54.h,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4.r),
                                   border: Border.all(
                                       width: 1.w, color: light_grey_f2f2f2)),
                               child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: 17.5.w,
-                                      right: 17.5.w,
-                                      top: 13.5.h,
-                                      bottom: 13.5.h),
+                                      left: 16.w,),
                                   child: TextField(
                                     controller:
                                         stepsController.linkedinController.value,
@@ -556,16 +542,14 @@ class _EditProfileState extends State<EditProfile> {
                               height: 16.h,
                             ),
                             Container(
+                              height: 54.h,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4.r),
                                   border: Border.all(
                                       width: 1.w, color: light_grey_f2f2f2)),
                               child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: 17.5.w,
-                                      right: 17.5.w,
-                                      top: 13.5.h,
-                                      bottom: 13.5.h),
+                                      left: 16.w,),
                                   child: TextField(
                                     controller:
                                         stepsController.twitterController.value,
@@ -617,16 +601,14 @@ class _EditProfileState extends State<EditProfile> {
                               height: 16.h,
                             ),
                             Container(
+                              height: 54.h,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4.r),
                                   border: Border.all(
                                       width: 1.w, color: light_grey_f2f2f2)),
                               child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: 17.5.w,
-                                      right: 17.5.w,
-                                      top: 13.5.h,
-                                      bottom: 13.5.h),
+                                      left: 16.w,),
                                   child: TextField(
                                     controller:
                                         stepsController.instagramController.value,
@@ -683,10 +665,14 @@ class _EditProfileState extends State<EditProfile> {
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: BlackButton("Save Profile", Colors.white, () {
-                if(imagePath.path.isNotEmpty){
-                  stepsController.imagePath.value = imagePath.path.toString();
+                if (controller.checkValidation(context)) {
+                  if(imagePath.path.isNotEmpty){
+                    stepsController.imagePath.value = imagePath.path.toString();
+                  }
+                  checkNet(context).then((value) {
+                    stepsController.personalInfoAPI(context, 'edit_profile');
+                  });
                 }
-                stepsController.personalInfoAPI(context, 'edit_profile');
               }),
             )
           ],

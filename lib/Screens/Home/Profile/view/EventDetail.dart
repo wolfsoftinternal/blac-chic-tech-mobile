@@ -5,6 +5,7 @@ import 'package:blackchecktech/Screens/Home/CreateEvent/controller/EventControll
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/InvitePeople.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/RegisteredPeople.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -427,56 +428,56 @@ class _EventDetailState extends State<EventDetail> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BackLayout(),
-                Padding(
-                  padding: EdgeInsets.only(right: 24.w),
-                  child: controller.eventDetails.value.userId != userId
-                      ? Container()
-                      : Align(
-                          alignment: Alignment.topRight,
-                          child: PopupMenuButton(
-                              // padding: EdgeInsets.only(bottom: 20),
-                              // position: PopupMenuPosition.under,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.r)),
-                              icon: const Icon(Icons.more_horiz,
-                                  color: Colors.black),
-                              onSelected: (index) {
-                                if (index == 1) {
-                                } else if (index == 2) {
-                                  checkNet(context).then((value) => {
-                                        controller.eventDeleteAPI(context,
-                                            controller.eventDetails.value.id)
-                                      });
-                                }
-                              },
-                              itemBuilder: (context) => [
-                                    PopupMenuItem(
-                                      height: 35.h,
-                                      child: Text(
-                                        "Edit",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontSize: 14.sp),
-                                      ),
-                                      value: 1,
-                                    ),
-                                    PopupMenuItem(
-                                      height: 35.h,
-                                      child: Text(
-                                        "Delete",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontSize: 14.sp),
-                                      ),
-                                      value: 2,
-                                    ),
-                                  ]),
-                        ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.only(right: 24.w),
+                //   child: controller.eventDetails.value.userId != userId
+                //       ? Container()
+                //       : Align(
+                //           alignment: Alignment.topRight,
+                //           child: PopupMenuButton(
+                //               // padding: EdgeInsets.only(bottom: 20),
+                //               // position: PopupMenuPosition.under,
+                //               shape: RoundedRectangleBorder(
+                //                   borderRadius: BorderRadius.circular(10.r)),
+                //               icon: const Icon(Icons.more_horiz,
+                //                   color: Colors.black),
+                //               onSelected: (index) {
+                //                 if (index == 1) {
+                //                 } else if (index == 2) {
+                //                   checkNet(context).then((value) => {
+                //                         controller.eventDeleteAPI(context,
+                //                             controller.eventDetails.value.id)
+                //                       });
+                //                 }
+                //               },
+                //               itemBuilder: (context) => [
+                //                     PopupMenuItem(
+                //                       height: 35.h,
+                //                       child: Text(
+                //                         "Edit",
+                //                         style: TextStyle(
+                //                             color: Colors.black,
+                //                             fontFamily:
+                //                                 helveticaNeueNeue_medium,
+                //                             fontSize: 14.sp),
+                //                       ),
+                //                       value: 1,
+                //                     ),
+                //                     PopupMenuItem(
+                //                       height: 35.h,
+                //                       child: Text(
+                //                         "Delete",
+                //                         style: TextStyle(
+                //                             color: Colors.black,
+                //                             fontFamily:
+                //                                 helveticaNeueNeue_medium,
+                //                             fontSize: 14.sp),
+                //                       ),
+                //                       value: 2,
+                //                     ),
+                //                   ]),
+                //         ),
+                // ),
               ],
             ),
             SizedBox(
@@ -516,21 +517,110 @@ class _EventDetailState extends State<EventDetail> {
                               ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 24.w, right: 24.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 16.h),
-                            child: controller.eventDetails.value.type ==
-                                    'ticket_price'
-                                ? Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      // Admission
-                                      Text("Admission",
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                                    padding:  EdgeInsets.only(left: 24.w,right: 24.w, top: 16.h),
+                                    child: Container(
+                                        height: 61.h,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          gradient: const LinearGradient(
+                                              colors: [
+                                                Color(0xFF1c2535),
+                                                Color(0xFF04080f),
+                                              ],
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              //    stops: [0.0, 1.0],
+                                              tileMode: TileMode.clamp),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0x26121212),
+                                              offset: Offset(
+                                                0.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 7.0,
+                                              spreadRadius: 2.0,
+                                            ), //BoxShadow
+                                          ],
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 24.w),
+                                              child: // Admission
+
+                                                  Text("Admission",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontFamily:
+                                                              helvetica_neu_bold,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontSize: 16.sp),
+                                                      textAlign:
+                                                          TextAlign.left),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 12.w),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.r),
+                                                  color: orange_ff881a,
+                                                ),
+                                                child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 14.w,
+                                                        right: 14.w,
+                                                        top: 9.h,
+                                                        bottom: 9.h),
+                                                    child: // Invite Only
+                                                        Text("VIEW",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                fontFamily:
+                                                                    roboto_bold,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                                fontSize:
+                                                                    16.sp),
+                                                            textAlign: TextAlign
+                                                                .left)),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                  ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 16.h),
+                          child: controller.eventDetails.value.type ==
+                                  'ticket_price'
+                              ? Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    // Admission
+                                    Padding(
+                                      padding:  EdgeInsets.only(left: 24.w),
+                                      child: Text("Admission Tickets",
                                           style: TextStyle(
                                               color: black_121212,
                                               fontWeight: FontWeight.w800,
@@ -538,196 +628,201 @@ class _EventDetailState extends State<EventDetail> {
                                               fontStyle: FontStyle.normal,
                                               fontSize: 14.sp),
                                           textAlign: TextAlign.left),
-                                      // setHelceticaBold(
-                                      //     "Admission Fees",
-                                      //     14.sp,
-                                      //     black_121212,
-                                      //     FontWeight.w500,
-                                      //     FontStyle.normal),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      SizedBox(
-                                        height: 100.h,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.60,
-                                        child: ListView.separated(
-                                            primary: false,
-                                            shrinkWrap: true,
-                                            separatorBuilder:
-                                                (context, index) => SizedBox(
-                                                      width: 10.w,
-                                                    ),
-                                            //   padding: EdgeInsets.only(left: 24.w,right: 24.w),
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: controller.eventDetails
-                                                .value.admissionData!.length,
-                                            itemBuilder: (context, index) {
-                                              return Container(
-                                                padding:
-                                                    widget.isFrom == 'event'
-                                                        ? const EdgeInsets.only(
-                                                            top: 8,
-                                                            bottom: 8,
-                                                            left: 12,
-                                                            right: 12)
-                                                        : const EdgeInsets.only(
-                                                            left: 25,
-                                                            right: 25,
-                                                            top: 10,
-                                                            bottom: 10.0),
-                                                decoration: BoxDecoration(
-                                                    color:
-                                                        widget.isFrom == 'event'
-                                                            ? black_121212
-                                                            : white_ffffff,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: black_121212
-                                                            .withOpacity(0.07),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 10,
-                                                        offset:
-                                                            const Offset(0, 10),
-                                                      )
-                                                    ]),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    // Bronze
-                                                    Text(
-                                                        controller
-                                                            .eventDetails
-                                                            .value
-                                                            .admissionData![
-                                                                index]
-                                                            .category!,
-                                                        style: TextStyle(
-                                                            color: widget
-                                                                        .isFrom ==
-                                                                    'event'
-                                                                ? white_ffffff
-                                                                : black_121212,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontFamily:
-                                                                roboto_regular,
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                            fontSize: 16.sp),
-                                                        textAlign:
-                                                            TextAlign.center),
-                                                    // setHelveticaMedium(
-                                                    //     controller
-                                                    //         .eventDetails
-                                                    //         .value
-                                                    //         .admissionData![index]
-                                                    //         .category!,
-                                                    //     16,
-                                                    //     widget.isFrom == 'event' ? white_ffffff : black_121212,
-                                                    //     FontWeight.w500,
-                                                    //     FontStyle.normal),
+                                    ),
+                                    // setHelceticaBold(
+                                    //     "Admission Fees",
+                                    //     14.sp,
+                                    //     black_121212,
+                                    //     FontWeight.w500,
+                                    //     FontStyle.normal),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    SizedBox(
+                                      height: 128.h,
+                                      // width: MediaQuery.of(context).size.width,
+                                      child: ListView.separated(
+                                          primary: false,
+                                          shrinkWrap: true,
+                                          padding: EdgeInsets.only(left: 24.w,right: 24.w,bottom: 18.h),
+                                          separatorBuilder:
+                                              (context, index) => SizedBox(
+                                                    width: 10.w,
+                                                  ),
+                                          //   padding: EdgeInsets.only(left: 24.w,right: 24.w),
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: controller.eventDetails
+                                              .value.admissionData!.length,
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              width: 120.w,
+                                            //  height: 100.h,
+                                       //       margin: EdgeInsets.only(bottom: 18,top: 10),
+                                              padding:
+                                                  widget.isFrom == 'event'
+                                                      ?  EdgeInsets.only(
+                                                          top: 8.h,
+                                                          bottom: 8.h,
+                                                          left: 12.w,
+                                                          right: 12.w)
+                                                      :  EdgeInsets.only(
+                                                          left: 25.w,
+                                                          right: 25.w,
+                                                          top: 10.h,
+                                                          bottom: 10.h),
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                      widget.isFrom == 'event'
+                                                          ? black_121212
+                                                          : white_ffffff,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: black_121212
+                                                          .withOpacity(0.05),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 12,
+                                                      offset:
+                                                           Offset(0, 10),
+                                                    )
+                                                  ]),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  // Bronze
+                                                  Text(
+                                                      controller
+                                                          .eventDetails
+                                                          .value
+                                                          .admissionData![
+                                                              index]
+                                                          .category!,
+                                                      style: TextStyle(
+                                                          color: widget
+                                                                      .isFrom ==
+                                                                  'event'
+                                                              ? white_ffffff
+                                                              : black_121212,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily:
+                                                              roboto_regular,
+                                                          fontStyle: FontStyle
+                                                              .normal,
+                                                          fontSize: 16.sp),
+                                                      textAlign:
+                                                          TextAlign.center),
+                                                  // setHelveticaMedium(
+                                                  //     controller
+                                                  //         .eventDetails
+                                                  //         .value
+                                                  //         .admissionData![index]
+                                                  //         .category!,
+                                                  //     16,
+                                                  //     widget.isFrom == 'event' ? white_ffffff : black_121212,
+                                                  //     FontWeight.w500,
+                                                  //     FontStyle.normal),
 
-                                                    // $15
-                                                    Text(
-                                                        "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
-                                                        style: TextStyle(
-                                                            color: widget.isFrom ==
-                                                                    'event'
-                                                                ? white_ffffff
-                                                                : orange_ff881a,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontFamily:
-                                                                roboto_bold,
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                            fontSize: 16.sp),
-                                                        textAlign:
-                                                            TextAlign.left),
+                                                  // $15
+                                                  Text(
+                                                      "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
+                                                      style: TextStyle(
+                                                          color: widget.isFrom ==
+                                                                  'event'
+                                                              ? white_ffffff
+                                                              : orange_ff881a,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontFamily:
+                                                              roboto_bold,
+                                                          fontStyle: FontStyle
+                                                              .normal,
+                                                          fontSize: 16.sp),
+                                                      textAlign:
+                                                          TextAlign.left),
 
-                                                    // setHelveticaMedium(
-                                                    //     "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
-                                                    //     16,
-                                                    //     widget.isFrom == 'event' ? white_ffffff : orange_ff881a,
-                                                    //     FontWeight.w500,
-                                                    //     FontStyle.normal),
+                                                  // setHelveticaMedium(
+                                                  //     "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
+                                                  //     16,
+                                                  //     widget.isFrom == 'event' ? white_ffffff : orange_ff881a,
+                                                  //     FontWeight.w500,
+                                                  //     FontStyle.normal),
 
-                                                    widget.isFrom == 'event'
-                                                        ? Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 8.h),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () {
-                                                                displayBottomSheet(
-                                                                    controller
-                                                                        .eventDetails
-                                                                        .value
-                                                                        .admissionData![
-                                                                            index]
-                                                                        .category,
-                                                                    controller
-                                                                        .eventDetails
-                                                                        .value
-                                                                        .admissionData![
-                                                                            index]
-                                                                        .price,
-                                                                    index);
-                                                              },
-                                                              child: Container(
-                                                                height: 31.h,
-                                                                width: 90.w,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  color:
-                                                                      orange_ff881a,
-                                                                ),
-                                                                child: Center(
-                                                                  child:
-                                                                      // Buy
-                                                                      Text(
-                                                                          "Buy",
-                                                                          style: TextStyle(
-                                                                              color: Colors.white,
-                                                                              fontWeight: FontWeight.w600,
-                                                                              fontFamily: roboto_bold,
-                                                                              fontStyle: FontStyle.normal,
-                                                                              fontSize: 14.sp),
-                                                                          textAlign: TextAlign.center),
+                                                  widget.isFrom == 'event'
+                                                      ? Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 8.h),
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              displayBottomSheet(
+                                                                  controller
+                                                                      .eventDetails
+                                                                      .value
+                                                                      .admissionData![
+                                                                          index]
+                                                                      .category,
+                                                                  controller
+                                                                      .eventDetails
+                                                                      .value
+                                                                      .admissionData![
+                                                                          index]
+                                                                      .price,
+                                                                  index);
+                                                            },
+                                                            child: Container(
+                                                              height: 31.h,
+                                                              width: 90.w,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                color:
+                                                                    orange_ff881a,
+                                                              ),
+                                                              child: Center(
+                                                                child:
+                                                                    // Buy
+                                                                    Text(
+                                                                        "Buy",
+                                                                        style: TextStyle(
+                                                                            color: Colors.white,
+                                                                            fontWeight: FontWeight.w600,
+                                                                            fontFamily: roboto_bold,
+                                                                            fontStyle: FontStyle.normal,
+                                                                            fontSize: 14.sp),
+                                                                        textAlign: TextAlign.center),
 
-                                                                  // setHelveticaMedium(
-                                                                  //     'Buy',
-                                                                  //     16,
-                                                                  //     white_ffffff,
-                                                                  //     FontWeight.w500,
-                                                                  //     FontStyle.normal),
-                                                                ),
+                                                                // setHelveticaMedium(
+                                                                //     'Buy',
+                                                                //     16,
+                                                                //     white_ffffff,
+                                                                //     FontWeight.w500,
+                                                                //     FontStyle.normal),
                                                               ),
                                                             ),
-                                                          )
-                                                        : Container(),
-                                                  ],
-                                                ),
-                                              );
-                                            }),
-                                      ),
-                                    ],
-                                  )
-                                : controller.eventDetails.value.type == 'free'
-                                    ? Container(
+                                                          ),
+                                                        )
+                                                      : Container(),
+                                                ],
+                                              ),
+                                            );
+                                          }),
+                                    ),
+                                  ],
+                                )
+                              : controller.eventDetails.value.type == 'free'
+                                  ? Padding(
+                                    padding:  EdgeInsets.only(left: 24.w,right: 24.w),
+                                    child: Container(
                                         height: 61.h,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
@@ -812,8 +907,11 @@ class _EventDetailState extends State<EventDetail> {
                                               ),
                                             ),
                                           ],
-                                        ))
-                                    : Container(
+                                        )),
+                                  )
+                                  : Padding(
+                                     padding:  EdgeInsets.only(left: 24.w,right: 24.w),
+                                    child: Container(
                                         height: 61.h,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
@@ -896,48 +994,85 @@ class _EventDetailState extends State<EventDetail> {
                                             ),
                                           ],
                                         )),
-                          ),
-                          controller.eventDetails.value.type == 'invite_only'
-                              ? widget.isFrom != 'event'
-                                  ? Column(
-                                      children: [
-                                        eventController.selectedList.isNotEmpty
-                                            ? Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 24.0),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: eventController
-                                                                  .selectedList
-                                                                  .length ==
-                                                              1
-                                                          ? 25
-                                                          : eventController
-                                                                      .selectedList
-                                                                      .length ==
-                                                                  2
-                                                              ? 35
-                                                              : 55,
-                                                      height: 25.h,
-                                                      child: Stack(
-                                                        alignment: Alignment
-                                                            .centerLeft,
-                                                        children: <Widget>[
-                                                          if (eventController
-                                                              .selectedList
-                                                              .isNotEmpty)
-                                                            SizedBox(
-                                                              height: 36.h,
-                                                              width: 36.w,
+                                  ),
+                        ),
+                        controller.eventDetails.value.type == 'invite_only'
+                            ? widget.isFrom != 'event'
+                                ? Column(
+                                    children: [
+                                      eventController.selectedList.isNotEmpty
+                                          ? Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 24.h),
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: eventController
+                                                                .selectedList
+                                                                .length ==
+                                                            1
+                                                        ? 25
+                                                        : eventController
+                                                                    .selectedList
+                                                                    .length ==
+                                                                2
+                                                            ? 35
+                                                            : 55,
+                                                    height: 25.h,
+                                                    child: Stack(
+                                                      alignment: Alignment
+                                                          .centerLeft,
+                                                      children: <Widget>[
+                                                        if (eventController
+                                                            .selectedList
+                                                            .isNotEmpty)
+                                                          SizedBox(
+                                                            height: 36.h,
+                                                            width: 36.w,
+                                                            child:
+                                                                CircularProfileAvatar(
+                                                              '',
+                                                              imageFit:
+                                                                  BoxFit.fill,
+                                                              child: eventController
+                                                                          .selectedList[
+                                                                              0]
+                                                                          .image ==
+                                                                      null
+                                                                  ? SvgPicture
+                                                                      .asset(
+                                                                          placeholder)
+                                                                  : Image
+                                                                      .network(
+                                                                      eventController
+                                                                          .selectedList[0]
+                                                                          .image!,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
+                                                              borderColor:
+                                                                  Colors
+                                                                      .white,
+                                                              borderWidth: 1,
+                                                              elevation: 2,
+                                                              radius: 50,
+                                                            ),
+                                                          ),
+                                                        if (eventController
+                                                                .selectedList
+                                                                .length >=
+                                                            2)
+                                                          Positioned(
+                                                            left: 10.0,
+                                                            child: SizedBox(
+                                                              height: 36,
+                                                              width: 36,
                                                               child:
                                                                   CircularProfileAvatar(
                                                                 '',
-                                                                imageFit:
-                                                                    BoxFit.fill,
                                                                 child: eventController
                                                                             .selectedList[
-                                                                                0]
+                                                                                1]
                                                                             .image ==
                                                                         null
                                                                     ? SvgPicture
@@ -946,7 +1081,7 @@ class _EventDetailState extends State<EventDetail> {
                                                                     : Image
                                                                         .network(
                                                                         eventController
-                                                                            .selectedList[0]
+                                                                            .selectedList[1]
                                                                             .image!,
                                                                         fit: BoxFit
                                                                             .cover,
@@ -954,523 +1089,494 @@ class _EventDetailState extends State<EventDetail> {
                                                                 borderColor:
                                                                     Colors
                                                                         .white,
-                                                                borderWidth: 1,
+                                                                borderWidth:
+                                                                    1,
                                                                 elevation: 2,
                                                                 radius: 50,
                                                               ),
                                                             ),
-                                                          if (eventController
-                                                                  .selectedList
-                                                                  .length >=
-                                                              2)
-                                                            Positioned(
-                                                              left: 10.0,
-                                                              child: SizedBox(
-                                                                height: 36,
-                                                                width: 36,
-                                                                child:
-                                                                    CircularProfileAvatar(
-                                                                  '',
-                                                                  child: eventController
-                                                                              .selectedList[
-                                                                                  1]
-                                                                              .image ==
-                                                                          null
-                                                                      ? SvgPicture
-                                                                          .asset(
-                                                                              placeholder)
-                                                                      : Image
-                                                                          .network(
-                                                                          eventController
-                                                                              .selectedList[1]
-                                                                              .image!,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        ),
-                                                                  borderColor:
-                                                                      Colors
-                                                                          .white,
-                                                                  borderWidth:
-                                                                      1,
-                                                                  elevation: 2,
-                                                                  radius: 50,
-                                                                ),
-                                                              ),
+                                                          ),
+                                                        if (eventController
+                                                                .selectedList
+                                                                .length >
+                                                            2)
+                                                          Positioned(
+                                                            left: 20.0,
+                                                            child: SvgPicture
+                                                                .asset(
+                                                              black_more_dot_icon,
+                                                              width: 36,
+                                                              height: 36,
                                                             ),
-                                                          if (eventController
-                                                                  .selectedList
-                                                                  .length >
-                                                              2)
-                                                            Positioned(
-                                                              left: 20.0,
-                                                              child: SvgPicture
-                                                                  .asset(
-                                                                black_more_dot_icon,
-                                                                width: 36,
-                                                                height: 36,
-                                                              ),
-                                                            )
-                                                        ],
-                                                      ),
+                                                          )
+                                                      ],
                                                     ),
-                                                    Padding(
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 2,
+                                                            left: 5.0),
+                                                    child: setRoboto(
+                                                        eventController
+                                                                .selectedList
+                                                                .length
+                                                                .toString() +
+                                                            " People Invited",
+                                                        14.sp,
+                                                        Color(0xff04080f),
+                                                        FontWeight.w700),
+                                                  ),
+                                                  const Spacer(),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.to(
+                                                              const InvitePeople(
+                                                        fromView: true,
+                                                      ))!
+                                                          .then((value) =>
+                                                              setState(
+                                                                  () {}));
+                                                    },
+                                                    child: Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              top: 2,
-                                                              left: 5.0),
+                                                          EdgeInsets.only(
+                                                              top: 2.h),
                                                       child: setRoboto(
-                                                          eventController
-                                                                  .selectedList
-                                                                  .length
-                                                                  .toString() +
-                                                              " People Invited",
-                                                          14.sp,
-                                                          Color(0xff04080f),
+                                                          "VIEW",
+                                                          12.sp,
+                                                          orange_ff881a,
                                                           FontWeight.w700),
                                                     ),
-                                                    const Spacer(),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Get.to(
-                                                                const InvitePeople(
-                                                          fromView: true,
-                                                        ))!
-                                                            .then((value) =>
-                                                                setState(
-                                                                    () {}));
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 2.h),
-                                                        child: setRoboto(
-                                                            "VIEW",
-                                                            12.sp,
-                                                            orange_ff881a,
-                                                            FontWeight.w700),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            : Container(),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 20.h),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Get.to(const InvitePeople(
-                                                fromView: false,
-                                              ))!
-                                                  .then((value) =>
-                                                      setState(() {}));
-                                            },
-                                            child: Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.r),
-                                                  // color: grey_f5f5f5
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color:
-                                                          Color(0xff2030be))),
-                                              child: Padding(
-                                                padding: EdgeInsets.all(16.r),
-                                                child: Center(
-                                                  child: Text("+ Invite People",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xff2030be),
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontFamily:
-                                                              roboto_bold,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 14.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : Container(),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 20.h),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Get.to(const InvitePeople(
+                                              fromView: false,
+                                            ))!
+                                                .then((value) =>
+                                                    setState(() {}));
+                                          },
+                                          child: Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        4.r),
+                                                // color: grey_f5f5f5
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color:
+                                                        Color(0xff2030be))),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(16.r),
+                                              child: Center(
+                                                child: Text("+ Invite People",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xff2030be),
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontFamily:
+                                                            roboto_bold,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 14.sp),
+                                                    textAlign:
+                                                        TextAlign.left),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    )
-                                  : Container()
-                              : Container(),
-                          SizedBox(
-                            height: 16.h,
-                          ),
-                          Divider(
-                            color: view_line_f4f6f6,
-                            thickness: 1,
-                            height: 1,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 24.0),
-                            child: setHelveticaMedium(
-                                controller.eventDetails.value.title!,
-                                25.sp,
-                                black_121212,
-                                FontWeight.w900,
-                                FontStyle.normal),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 16.h),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  calendar_icon,
-                                  height: 15.h,
-                                  width: 15.w,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 4.0),
-                                  child: setHelveticaMedium(
-                                      '${DateFormat("MMM dd, yyyy").format(controller.eventDetails.value.startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventDetails.value.startDateTime!)}',
-                                      12.sp,
-                                      grey_aaaaaa,
-                                      FontWeight.w500,
-                                      FontStyle.normal,
-                                      -0.4),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.h),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  icon_location,
-                                  height: 15.h,
-                                  width: 15.w,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 4.0),
-                                  child: setHelveticaMedium(
-                                      controller.eventDetails.value.venue!,
-                                      12.sp,
-                                      grey_aaaaaa,
-                                      FontWeight.w500,
-                                      FontStyle.normal,
-                                      -0.4),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 24.h),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: grey_f4f6f6,
-                                  borderRadius: BorderRadius.circular(4.r)),
-                              height: 30.h,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                                      ),
+                                    ],
+                                  )
+                                : Container()
+                            : Container(),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        // Divider(
+                        //   color: view_line_f4f6f6,
+                        //   thickness: 1,
+                        //   height: 1,
+                        // ),
+                        Padding(
+                          padding:  EdgeInsets.only(left: 24.w,right: 24.w),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              setHelveticaMedium(
+                                  controller.eventDetails.value.title!,
+                                  25.sp,
+                                  black_121212,
+                                  FontWeight.w900,
+                                  FontStyle.normal),
+
+                              Padding(
+                                padding: EdgeInsets.only(top: 16.h),
                                 child: Row(
-                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    SizedBox(
-                                      width: controller.eventDetails.value
-                                                  .hosts!.length ==
+                                    SvgPicture.asset(
+                                      calendar_icon,
+                                      height: 15.h,
+                                      width: 15.w,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 4.0),
+                                      child: setHelveticaMedium(
+                                          '${DateFormat("MMM dd, yyyy").format(controller.eventDetails.value.startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventDetails.value.startDateTime!)}',
+                                          12.sp,
+                                          grey_aaaaaa,
+                                          FontWeight.w500,
+                                          FontStyle.normal,
+                                          -0.4),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 8.h),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      icon_location,
+                                      height: 15.h,
+                                      width: 15.w,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 4.0),
+                                      child: setHelveticaMedium(
+                                          controller.eventDetails.value.venue!,
+                                          12.sp,
+                                          grey_aaaaaa,
+                                          FontWeight.w500,
+                                          FontStyle.normal,
+                                          -0.4),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 24.h),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: grey_f4f6f6,
+                                      borderRadius: BorderRadius.circular(4.r)),
+                                  height: 30.h,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SizedBox(
+                                          width: controller.eventDetails.value
+                                              .hosts!.length ==
                                               1
-                                          ? 25
-                                          : controller.eventDetails.value.hosts!
-                                                      .length ==
-                                                  2
+                                              ? 25
+                                              : controller.eventDetails.value.hosts!
+                                              .length ==
+                                              2
                                               ? 35
                                               : 55,
-                                      height: 30,
-                                      child: Stack(
-                                        alignment: Alignment.centerLeft,
-                                        children: <Widget>[
-                                          if (controller.eventDetails.value
-                                              .hosts!.isNotEmpty)
-                                            SizedBox(
-                                              height: 17.h,
-                                              width: 17.w,
-                                              child: CircularProfileAvatar(
-                                                '',
-                                                imageFit: BoxFit.fill,
-                                                child: controller
-                                                            .eventDetails
-                                                            .value
-                                                            .hosts![0]
-                                                            .image ==
+                                          height: 30,
+                                          child: Stack(
+                                            alignment: Alignment.centerLeft,
+                                            children: <Widget>[
+                                              if (controller.eventDetails.value
+                                                  .hosts!.isNotEmpty)
+                                                SizedBox(
+                                                  height: 17.h,
+                                                  width: 17.w,
+                                                  child: CircularProfileAvatar(
+                                                    '',
+                                                    imageFit: BoxFit.fill,
+                                                    child: controller
+                                                        .eventDetails
+                                                        .value
+                                                        .hosts![0]
+                                                        .image ==
                                                         null
-                                                    ? SvgPicture.asset(
+                                                        ? SvgPicture.asset(
                                                         placeholder)
-                                                    : Image.network(
-                                                        controller
-                                                            .eventDetails
-                                                            .value
-                                                            .hosts![0]
-                                                            .image!,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                borderColor: Colors.white,
-                                                borderWidth: 1,
-                                                elevation: 2,
-                                                radius: 50,
-                                              ),
-                                            ),
-                                          if (controller.eventDetails.value
+                                                        : Image.network(
+                                                      controller
+                                                          .eventDetails
+                                                          .value
+                                                          .hosts![0]
+                                                          .image!,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                    borderColor: Colors.white,
+                                                    borderWidth: 1,
+                                                    elevation: 2,
+                                                    radius: 50,
+                                                  ),
+                                                ),
+                                              if (controller.eventDetails.value
                                                   .hosts!.length >=
-                                              2)
-                                            Positioned(
-                                              left: 10.w,
-                                              child: SizedBox(
-                                                height: 17.h,
-                                                width: 17.w,
-                                                child: CircularProfileAvatar(
-                                                  '',
-                                                  child: controller
-                                                              .eventDetails
-                                                              .value
-                                                              .hosts![1]
-                                                              .image ==
+                                                  2)
+                                                Positioned(
+                                                  left: 10.w,
+                                                  child: SizedBox(
+                                                    height: 17.h,
+                                                    width: 17.w,
+                                                    child: CircularProfileAvatar(
+                                                      '',
+                                                      child: controller
+                                                          .eventDetails
+                                                          .value
+                                                          .hosts![1]
+                                                          .image ==
                                                           null
-                                                      ? SvgPicture.asset(
+                                                          ? SvgPicture.asset(
                                                           placeholder)
-                                                      : Image.network(
-                                                          controller
-                                                              .eventDetails
-                                                              .value
-                                                              .hosts![1]
-                                                              .image!,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                  borderColor: Colors.white,
-                                                  borderWidth: 1,
-                                                  elevation: 2,
-                                                  radius: 50,
-                                                ),
-                                              ),
-                                            ),
-                                          if (controller.eventDetails.value
-                                                  .hosts!.length >
-                                              2)
-                                            Positioned(
-                                              left: 20.0,
-                                              child: SvgPicture.asset(
-                                                black_more_dot_icon,
-                                                width: 17.w,
-                                                height: 17.h,
-                                              ),
-                                            )
-                                        ],
-                                      ),
-                                    ),
-                                    setHelveticaMedium(
-                                        "Hosted by ",
-                                        11.sp,
-                                        grey_3f3f3f,
-                                        FontWeight.w500,
-                                        FontStyle.normal),
-                                    SizedBox(
-                                      height: 20,
-                                      child: ListView.builder(
-                                          primary: false,
-                                          shrinkWrap: true,
-                                          padding: EdgeInsets.zero,
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: controller
-                                              .eventDetails.value.hosts!.length,
-                                          itemBuilder: (context, index) {
-                                            return Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                setHelceticaBold(
-                                                    "@${controller.eventDetails.value.hosts![index].userName!}",
-                                                    11.sp,
-                                                    black_121212,
-                                                    FontWeight.w500,
-                                                    FontStyle.normal),
-                                                controller.eventDetails.value
-                                                            .hosts!.length ==
-                                                        (index + 1)
-                                                    ? Container()
-                                                    : setHelceticaBold(
-                                                        ", ",
-                                                        11.sp,
-                                                        black_121212,
-                                                        FontWeight.w500,
-                                                        FontStyle.normal),
-                                              ],
-                                            );
-                                          }),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.h, bottom: 25.h),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: grey_f4f6f6,
-                                  borderRadius: BorderRadius.circular(4.r)),
-                              height: 29.h,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 8.w, right: 8.w),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    SizedBox(
-                                      width: controller.eventDetails.value
-                                                  .speakers!.length ==
-                                              1
-                                          ? 25
-                                          : controller.eventDetails.value
-                                                      .speakers!.length ==
-                                                  2
-                                              ? 35
-                                              : 55,
-                                      height: 30.h,
-                                      child: Stack(
-                                        alignment: Alignment.centerLeft,
-                                        children: <Widget>[
-                                          if (controller.eventDetails.value
-                                              .speakers!.isNotEmpty)
-                                            SizedBox(
-                                              height: 17.h,
-                                              width: 17.w,
-                                              child: CircularProfileAvatar(
-                                                '',
-                                                imageFit: BoxFit.fill,
-                                                child: controller
-                                                            .eventDetails
-                                                            .value
-                                                            .speakers![0]
-                                                            .image ==
-                                                        null
-                                                    ? SvgPicture.asset(
-                                                        placeholder)
-                                                    : Image.network(
+                                                          : Image.network(
                                                         controller
                                                             .eventDetails
                                                             .value
-                                                            .speakers![0]
+                                                            .hosts![1]
                                                             .image!,
                                                         fit: BoxFit.cover,
                                                       ),
-                                                borderColor: Colors.white,
-                                                borderWidth: 1,
-                                                elevation: 2,
-                                                radius: 50,
-                                              ),
-                                            ),
-                                          if (controller.eventDetails.value
-                                                  .speakers!.length >=
-                                              2)
-                                            Positioned(
-                                              left: 10.w,
-                                              child: SizedBox(
-                                                height: 17.h,
-                                                width: 17.w,
-                                                child: CircularProfileAvatar(
-                                                  '',
-                                                  child: controller
-                                                              .eventDetails
-                                                              .value
-                                                              .speakers![1]
-                                                              .image ==
-                                                          null
-                                                      ? SvgPicture.asset(
-                                                          placeholder)
-                                                      : Image.network(
-                                                          controller
-                                                              .eventDetails
-                                                              .value
-                                                              .speakers![1]
-                                                              .image!,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                  borderColor: Colors.white,
-                                                  borderWidth: 1,
-                                                  elevation: 2,
-                                                  radius: 50,
+                                                      borderColor: Colors.white,
+                                                      borderWidth: 1,
+                                                      elevation: 2,
+                                                      radius: 50,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          if (controller.eventDetails.value
-                                                  .speakers!.length >
-                                              2)
-                                            Positioned(
-                                              left: 20.w,
-                                              child: SvgPicture.asset(
-                                                black_more_dot_icon,
-                                                height: 17.h,
-                                                width: 17.w,
-                                              ),
-                                            )
-                                        ],
-                                      ),
-                                    ),
-                                    setHelveticaMedium(
-                                        "Speakers ",
-                                        11.sp,
-                                        grey_3f3f3f,
-                                        FontWeight.w500,
-                                        FontStyle.normal),
-                                    SizedBox(
-                                      height: 20.h,
-                                      child: ListView.builder(
-                                          primary: false,
-                                          shrinkWrap: true,
-                                          padding: EdgeInsets.zero,
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: controller.eventDetails
-                                              .value.speakers!.length,
-                                          itemBuilder: (context, index) {
-                                            return Row(
-                                              mainAxisAlignment:
+                                              if (controller.eventDetails.value
+                                                  .hosts!.length >
+                                                  2)
+                                                Positioned(
+                                                  left: 20.0,
+                                                  child: SvgPicture.asset(
+                                                    black_more_dot_icon,
+                                                    width: 17.w,
+                                                    height: 17.h,
+                                                  ),
+                                                )
+                                            ],
+                                          ),
+                                        ),
+                                        setHelveticaMedium(
+                                            "Hosted by ",
+                                            11.sp,
+                                            grey_3f3f3f,
+                                            FontWeight.w500,
+                                            FontStyle.normal),
+                                        SizedBox(
+                                          height: 20,
+                                          child: ListView.builder(
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              padding: EdgeInsets.zero,
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: controller
+                                                  .eventDetails.value.hosts!.length,
+                                              itemBuilder: (context, index) {
+                                                return Row(
+                                                  mainAxisAlignment:
                                                   MainAxisAlignment.start,
-                                              crossAxisAlignment:
+                                                  crossAxisAlignment:
                                                   CrossAxisAlignment.center,
-                                              children: [
-                                                setHelceticaBold(
-                                                    controller
-                                                                .eventDetails
-                                                                .value
-                                                                .speakers![
-                                                                    index]
-                                                                .userName !=
-                                                            null
-                                                        ? "@${controller.eventDetails.value.speakers![index].userName!}"
-                                                        : "@${controller.eventDetails.value.speakers![index].firstName!}",
-                                                    11.sp,
-                                                    black_121212,
-                                                    FontWeight.w500,
-                                                    FontStyle.normal),
-                                                controller.eventDetails.value
-                                                            .speakers!.length ==
+                                                  children: [
+                                                    setHelceticaBold(
+                                                        "@${controller.eventDetails.value.hosts![index].userName!}",
+                                                        11.sp,
+                                                        black_121212,
+                                                        FontWeight.w500,
+                                                        FontStyle.normal),
+                                                    controller.eventDetails.value
+                                                        .hosts!.length ==
                                                         (index + 1)
-                                                    ? Container()
-                                                    : setHelceticaBold(
+                                                        ? Container()
+                                                        : setHelceticaBold(
                                                         ", ",
                                                         11.sp,
                                                         black_121212,
                                                         FontWeight.w500,
                                                         FontStyle.normal),
-                                              ],
-                                            );
-                                          }),
+                                                  ],
+                                                );
+                                              }),
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 8.h, bottom: 25.h),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: grey_f4f6f6,
+                                      borderRadius: BorderRadius.circular(4.r)),
+                                  height: 29.h,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SizedBox(
+                                          width: controller.eventDetails.value
+                                              .speakers!.length ==
+                                              1
+                                              ? 25
+                                              : controller.eventDetails.value
+                                              .speakers!.length ==
+                                              2
+                                              ? 35
+                                              : 55,
+                                          height: 30.h,
+                                          child: Stack(
+                                            alignment: Alignment.centerLeft,
+                                            children: <Widget>[
+                                              if (controller.eventDetails.value
+                                                  .speakers!.isNotEmpty)
+                                                SizedBox(
+                                                  height: 17.h,
+                                                  width: 17.w,
+                                                  child: CircularProfileAvatar(
+                                                    '',
+                                                    imageFit: BoxFit.fill,
+                                                    child: controller
+                                                        .eventDetails
+                                                        .value
+                                                        .speakers![0]
+                                                        .image ==
+                                                        null
+                                                        ? SvgPicture.asset(
+                                                        placeholder)
+                                                        : Image.network(
+                                                      controller
+                                                          .eventDetails
+                                                          .value
+                                                          .speakers![0]
+                                                          .image!,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                    borderColor: Colors.white,
+                                                    borderWidth: 1,
+                                                    elevation: 2,
+                                                    radius: 50,
+                                                  ),
+                                                ),
+                                              if (controller.eventDetails.value
+                                                  .speakers!.length >=
+                                                  2)
+                                                Positioned(
+                                                  left: 10.w,
+                                                  child: SizedBox(
+                                                    height: 17.h,
+                                                    width: 17.w,
+                                                    child: CircularProfileAvatar(
+                                                      '',
+                                                      child: controller
+                                                          .eventDetails
+                                                          .value
+                                                          .speakers![1]
+                                                          .image ==
+                                                          null
+                                                          ? SvgPicture.asset(
+                                                          placeholder)
+                                                          : Image.network(
+                                                        controller
+                                                            .eventDetails
+                                                            .value
+                                                            .speakers![1]
+                                                            .image!,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                      borderColor: Colors.white,
+                                                      borderWidth: 1,
+                                                      elevation: 2,
+                                                      radius: 50,
+                                                    ),
+                                                  ),
+                                                ),
+                                              if (controller.eventDetails.value
+                                                  .speakers!.length >
+                                                  2)
+                                                Positioned(
+                                                  left: 20.w,
+                                                  child: SvgPicture.asset(
+                                                    black_more_dot_icon,
+                                                    height: 17.h,
+                                                    width: 17.w,
+                                                  ),
+                                                )
+                                            ],
+                                          ),
+                                        ),
+                                        setHelveticaMedium(
+                                            "Speakers ",
+                                            11.sp,
+                                            grey_3f3f3f,
+                                            FontWeight.w500,
+                                            FontStyle.normal),
+                                        SizedBox(
+                                          height: 20.h,
+                                          child: ListView.builder(
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              padding: EdgeInsets.zero,
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: controller.eventDetails
+                                                  .value.speakers!.length,
+                                              itemBuilder: (context, index) {
+                                                return Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                                  children: [
+                                                    setHelceticaBold(
+                                                        controller
+                                                            .eventDetails
+                                                            .value
+                                                            .speakers![
+                                                        index]
+                                                            .userName !=
+                                                            null
+                                                            ? "@${controller.eventDetails.value.speakers![index].userName!}"
+                                                            : "@${controller.eventDetails.value.speakers![index].firstName!}",
+                                                        11.sp,
+                                                        black_121212,
+                                                        FontWeight.w500,
+                                                        FontStyle.normal),
+                                                    controller.eventDetails.value
+                                                        .speakers!.length ==
+                                                        (index + 1)
+                                                        ? Container()
+                                                        : setHelceticaBold(
+                                                        ", ",
+                                                        11.sp,
+                                                        black_121212,
+                                                        FontWeight.w500,
+                                                        FontStyle.normal),
+                                                  ],
+                                                );
+                                              }),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+
+                      ],
                     ),
                     Divider(
                       height: 1.h,
@@ -1619,27 +1725,32 @@ class _EventDetailState extends State<EventDetail> {
                                             fontStyle: FontStyle.normal,
                                             fontSize: 16.sp),
                                         textAlign: TextAlign.left),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
-                                        color: orange_ff881a,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 8.0,
-                                            bottom: 8.0,
-                                            left: 16.0,
-                                            right: 16.0),
-                                        child:
-                                            // View
-                                            Text("View",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w800,
-                                                    fontFamily: roboto_bold,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 16.sp),
-                                                textAlign: TextAlign.left),
+                                    GestureDetector(
+                                      onTap: (){
+                                        Get.to(RegisteredPeople(id: controller.eventDetails.value.id.toString()));
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(4),
+                                          color: orange_ff881a,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 8.0,
+                                              bottom: 8.0,
+                                              left: 16.0,
+                                              right: 16.0),
+                                          child:
+                                              // View
+                                              Text("View",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.w800,
+                                                      fontFamily: roboto_bold,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontSize: 16.sp),
+                                                  textAlign: TextAlign.left),
+                                        ),
                                       ),
                                     ),
                                   ],

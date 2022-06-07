@@ -1,12 +1,14 @@
 import 'package:blackchecktech/Layout/InputTextStaticFilter.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Home/Event/controller/EventDetailController.dart';
+import 'package:blackchecktech/Screens/Home/Event/view/MyPurchasedEvent.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,8 +33,13 @@ class _EventListState extends State<EventList> {
   @override
   void initState() {
     super.initState();
+    controller.pageNumber = controller.pageNumber + 1;
+    dynamic body = {
+      'page' : controller.pageNumber.toString(),
+    };
+    controller.initScrolling(context, body);
     checkNet(context).then((value) {
-      controller.allEventListApi(null);
+      controller.allEventListApi(body);
       controller.cityListApi();
     });
   }
@@ -60,6 +67,7 @@ class _EventListState extends State<EventList> {
               Expanded(
                 flex: 1,
                 child: SingleChildScrollView(
+                  controller: controller.scrollController,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,41 +81,46 @@ class _EventListState extends State<EventList> {
                             TextInputAction.next,
                             TextInputType.text),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 16.w, right: 10.w, bottom: 10.h, top: 10.h),
-                        margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 15.h),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: blue_0a84ff, width: 1.w),
-                            borderRadius: BorderRadius.all(Radius.circular(4.r)),
-                            color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            SvgPicture.asset(
-                              icon_ticket,
-                              height: 15.h,
-                              width: 15.w,
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: Text(
-                                "My Event",
-                                style: TextStyle(
-                                    fontFamily: helveticaNeueNeue_medium,
-                                    fontSize: 15.sp,
-                                    color: black_121212),
+                      InkWell(
+                        onTap: (){
+                          Get.to(MyPurchasedEvent());
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 16.w, right: 10.w, bottom: 10.h, top: 10.h),
+                          margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 15.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: blue_0a84ff, width: 1.w),
+                              borderRadius: BorderRadius.all(Radius.circular(4.r)),
+                              color: Colors.white),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              SvgPicture.asset(
+                                icon_ticket,
+                                height: 15.h,
+                                width: 15.w,
                               ),
-                            ),
-                            SvgPicture.asset(
-                              icon_right_forward_arrow,
-                              height: 16.h,
-                              width: 16.w,
-                            )
-                          ],
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  "My Event",
+                                  style: TextStyle(
+                                      fontFamily: helveticaNeueNeue_medium,
+                                      fontSize: 15.sp,
+                                      color: black_121212),
+                                ),
+                              ),
+                              SvgPicture.asset(
+                                icon_right_forward_arrow,
+                                height: 16.h,
+                                width: 16.w,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -265,11 +278,47 @@ class _EventListState extends State<EventList> {
                                                         padding: EdgeInsets.only(
                                                             left: 6.0.w,
                                                             right: 6.0.w),
-                                                        child:  Icon(
-                                                          Icons.person,
-                                                          size: 15.r,
-                                                          color: grey_aaaaaa,
-                                                        ),
+                                                        child:  ClipRRect(
+                                                        borderRadius: BorderRadius.circular(50),
+                                                        child: controller.eventList[i].hosts == null
+                                                            ? Icon(
+                                                                Icons.person,
+                                                                size: 15.r,
+                                                                color:
+                                                                    grey_aaaaaa,
+                                                              )
+                                                            : controller.eventList[i].hosts!.first.image.toString() == ''
+                                                                ? Icon(
+                                                                    Icons.person,
+                                                                    size: 15.r,
+                                                                    color:
+                                                                        grey_aaaaaa,
+                                                                  )
+                                                                : CachedNetworkImage(
+                                                                    imageUrl: controller
+                                                                        .eventList[i]
+                                                                        .hosts!.first
+                                                                        .image ?? "",
+                                                                    height: 15.h,
+                                                                    width: 15.w,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    progressIndicatorBuilder:
+                                                                        (context,url,downloadProgress) =>
+                                                                          Icon(
+                                                                            Icons.person,
+                                                                            size: 15.r,
+                                                                            color: grey_aaaaaa,
+                                                                          ),
+                                                                    errorWidget:
+                                                                        (context, url, error) =>
+                                                                          Icon(
+                                                                            Icons.person,
+                                                                            size: 15.r,
+                                                                            color: grey_aaaaaa,
+                                                                          ),
+                                                                  ),
+                                                      ),
                                                       ),
                                                       setHelveticaMedium(
                                                           "Hosted by",
@@ -374,8 +423,9 @@ class _EventListState extends State<EventList> {
                     ],
                   ),
                 ),
-              )
-
+              ),
+              if (controller.isPaginationLoading.value == true)
+                PaginationUtils().loader(),
 
 
               // Container(

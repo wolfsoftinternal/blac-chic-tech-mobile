@@ -7,6 +7,7 @@ import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventDetailModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/PostListModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/model/RegisteredUserModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/VideoListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventDetail.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventListDetail.dart';
@@ -60,6 +61,137 @@ class AdmireProfileController extends GetxController {
   PaystackPlugin paystack = PaystackPlugin();
   static const String PAYSTACK_KEY =
       "pk_test_c343f7fa48c5e5368ab068b511d9d8aa2977a231";
+  ScrollController postScrollController = ScrollController();
+  RxInt postPageNumber = 1.obs;
+  RxBool isPostPaginationLoading = false.obs;
+  ScrollController videoScrollController = ScrollController();
+  RxInt videoPageNumber = 1.obs;
+  RxBool isVideoPaginationLoading = false.obs;
+  ScrollController eventScrollController = ScrollController();
+  RxInt eventPageNumber = 1.obs;
+  RxBool isEventPaginationLoading = false.obs;
+  ScrollController registerScrollController = ScrollController();
+  RxInt registerPageNumber = 1.obs;
+  RxBool isRegisterPaginationLoading = false.obs;
+  Rx<TextEditingController> registeredUserSearch = TextEditingController().obs;
+  RxList<RegisterUser> registerList = <RegisterUser>[].obs;
+
+  initScrolling(BuildContext context, userId, [postId]) {
+    postScrollController.addListener(() async {
+      if (postScrollController.position.maxScrollExtent ==
+          postScrollController.position.pixels) {
+        _scrollDown();
+        isPostPaginationLoading.value = true;
+        postPageNumber = postPageNumber + 1;
+
+        if(postId == null){
+          dynamic body = {
+            'user_id': userId.toString(),
+            'page': postPageNumber.toString()
+          };
+          await postListAPI(context, body);
+        }else{
+          dynamic body = {
+            'user_id': userId.toString(),
+            'post_id': postId.toString(),
+            'page': postPageNumber.toString(),
+          };
+          await postListAPI(context, body, 'detail');
+        }
+        isPostPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _scrollDown() {
+    postScrollController.jumpTo(postScrollController.position.maxScrollExtent);
+  }
+
+  initVideoScrolling(BuildContext context, userId, [videoId]) {
+    videoScrollController.addListener(() async {
+      if (videoScrollController.position.maxScrollExtent ==
+          videoScrollController.position.pixels) {
+        _videoScrollDown();
+        isVideoPaginationLoading.value = true;
+        videoPageNumber = videoPageNumber + 1;
+
+        if(videoId == null){
+          dynamic body = {
+            'user_id': userId.toString(),
+            'page': videoPageNumber.toString()
+          };
+          await videoListAPI(context, body);
+        }else{
+          dynamic body = {
+            'user_id': userId.toString(),
+            'video_id': videoId.toString(),
+            'page': videoPageNumber.toString(),
+          };
+          await videoListAPI(context, body, 'detail');
+        }
+        isVideoPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _videoScrollDown() {
+    videoScrollController.jumpTo(videoScrollController.position.maxScrollExtent);
+  }
+
+  initEventScrolling(BuildContext context, userId, [eventId]) {
+    eventScrollController.addListener(() async {
+      if (eventScrollController.position.maxScrollExtent ==
+          eventScrollController.position.pixels) {
+        _eventScrollDown();
+        isEventPaginationLoading.value = true;
+        eventPageNumber = eventPageNumber + 1;
+
+        if(eventId == null){
+          dynamic body = {
+            'user_id': userId.toString(),
+            'page': eventPageNumber.toString()
+          };
+          await eventListAPI(context, body);
+        }else{
+          dynamic body = {
+            'user_id': userId.toString(),
+            'event_id': eventId.toString(),
+            'page': eventPageNumber.toString(),
+          };
+          await eventListAPI(context, body, 'detail');
+        }
+       
+        isEventPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _eventScrollDown() {
+    eventScrollController.jumpTo(eventScrollController.position.maxScrollExtent);
+  }
+
+  initRegisterScrolling(BuildContext context, id) {
+    registerScrollController.addListener(() async {
+      if (registerScrollController.position.maxScrollExtent ==
+          registerScrollController.position.pixels) {
+        _scrollDown();
+        isRegisterPaginationLoading.value = true;
+        registerPageNumber = registerPageNumber + 1;
+
+          dynamic body = {
+            'event_id': id.toString(),
+            'page': registerPageNumber.toString()
+          };
+          await postListAPI(context, body);
+       
+        isRegisterPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _registerScrollDown() {
+    registerScrollController.jumpTo(registerScrollController.position.maxScrollExtent);
+  }
 
   admireListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
@@ -259,6 +391,13 @@ class AdmireProfileController extends GetxController {
     final apiReq = Request();
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(postPageNumber == 1){
+        // if(isFrom == null){
+          postList.clear();
+        // }else{
+        //   postDetailList.clear();
+        // }
+      }
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -275,11 +414,11 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             PostListModel detail = PostListModel.fromJson(userModel);
 
-            if (isFrom == null) {
-              postList.value = detail.data!;
-            } else {
-              postDetailList.value = detail.data!;
-            }
+            // if (isFrom == null) {
+              postList.addAll(detail.data!);
+            // } else {
+            //   postDetailList.addAll(detail.data!);
+            // }
           }
         });
       } else {
@@ -296,6 +435,13 @@ class AdmireProfileController extends GetxController {
     final apiReq = Request();
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(videoPageNumber == 1){
+        if(isFrom == null){
+          videoList.clear();
+        }else{
+          videoDetailList.clear();
+        }
+      }
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -313,7 +459,7 @@ class AdmireProfileController extends GetxController {
             VideoListModel detail = VideoListModel.fromJson(userModel);
 
             if (isFrom == null) {
-              videoList.value = detail.data!;
+              videoList.addAll(detail.data!);
               for (int i = 0; i < videoList.length; i++) {
                 if (videoList[i].file == null) {
                   videoList.remove(videoList[i]);
@@ -324,7 +470,7 @@ class AdmireProfileController extends GetxController {
                     .add(videoControllerList[i].initialize());
               }
             } else {
-              videoDetailList.value = detail.data!;
+              videoDetailList.addAll(detail.data!);
               videoController.clear();
               for (int i = 0; i < videoDetailList.length; i++) {
                 if (videoDetailList[i].file == null) {
@@ -345,6 +491,13 @@ class AdmireProfileController extends GetxController {
   }
 
   eventListAPI(BuildContext context, body, [isFrom]) async {
+    if(eventPageNumber == 1){
+      // if(isFrom == null){
+      eventList.clear();
+      // }else{
+      //   eventDetailList.clear();
+      // }
+    }
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -367,12 +520,13 @@ class AdmireProfileController extends GetxController {
             eventListAPI(context, body);
           } else if (model.statusCode == 200) {
             EventListModel detail = EventListModel.fromJson(userModel);
-
-            if (isFrom == null) {
-              eventList.value = detail.data!;
-            } else {
-              eventDetailList.value = detail.data!;
-            }
+            // if (isFrom == null) {
+            eventList.addAll(detail.data!);
+            print(eventList.length);
+            // } else {
+            //   eventDetailList.addAll(detail.data!);
+            //   print(eventDetailList.length);
+            // }
           }
         });
       } else {
@@ -658,8 +812,9 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  OrderCreateAPI(
-      BuildContext context, body, selectedPositionOfAdmission) async {
+
+  OrderCreateAPI(BuildContext context, body,selectedPositionOfAdmission) async {
+
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -744,8 +899,8 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  OrderUpdateAPI(
-      BuildContext context, body, selectedPositionOfAdmission) async {
+
+  OrderUpdateAPI(BuildContext context, body,selectedPositionOfAdmission) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -790,6 +945,45 @@ class AdmireProfileController extends GetxController {
             ));
 
             //  chargeCardAndMakePayment(context,selectedPositionOfAdmission, orderListModel);
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  registeredUserApi(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlRegisteredUser;
+    final apiReq = Request();
+
+    dynamic body = {
+      'event_id': id.toString(),
+      'search': registeredUserSearch.value.text,
+    };
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(registerPageNumber == 1){
+          registerList.clear();
+      }
+      http.StreamedResponse res = value;
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            registeredUserApi(context, id);
+          } else if (model.statusCode == 200) {
+            RegisterUser detail = RegisterUser.fromJson(userModel);
+            registerList.add(detail);
           }
         });
       } else {

@@ -1,7 +1,7 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeader.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
-import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -39,7 +39,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
         ToolbarWithHeader(
           step: 4,
           ontap: (){
-            Get.offAll(BottomNavigation());
+            Get.offAll(HomePage());
           }
         ),
         Expanded(

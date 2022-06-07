@@ -7,6 +7,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
@@ -34,9 +35,11 @@ class _PostDetailState extends State<PostDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller.initScrolling(context, widget.userId, widget.id);
     dynamic body = {
       'user_id': widget.userId.toString(),
       'post_id': widget.id.toString(),
+      'page': controller.postPageNumber.toString()
     };
     checkNet(context).then((value) {
       controller.postListAPI(context, body, 'detail');
@@ -57,21 +60,21 @@ class _PostDetailState extends State<PostDetail> {
       backgroundColor: white_ffffff,
       body: Obx(
         () => Column(children: [
-           SizedBox(
+          SizedBox(
             height: 60.h,
           ),
           Container(
             child: Row(
               children: [
                 BackLayout(),
-                 SizedBox(
+                SizedBox(
                   height: 48.h,
                   width: 48.w,
                 ),
                 const Spacer(),
                 Center(
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.back();
                       Get.back();
                     },
@@ -80,28 +83,28 @@ class _PostDetailState extends State<PostDetail> {
                       child: controller.details.value.image == null
                           ? SvgPicture.asset(
                               placeholder,
-                        height: 48.h,
-                        width: 48.w,
+                              height: 48.h,
+                              width: 48.w,
                               fit: BoxFit.cover,
                             )
                           : CachedNetworkImage(
                               imageUrl: controller.details.value.image!,
-                        height: 48.h,
-                        width: 48.w,
+                              height: 48.h,
+                              width: 48.w,
                               fit: BoxFit.cover,
                               progressIndicatorBuilder:
                                   (context, url, downloadProgress) =>
                                       SvgPicture.asset(
                                 placeholder,
-                                        height: 48.h,
-                                        width: 48.w,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                               ),
                               errorWidget: (context, url, error) =>
                                   SvgPicture.asset(
                                 placeholder,
-                                    height: 48.h,
-                                    width: 48.w,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -110,78 +113,81 @@ class _PostDetailState extends State<PostDetail> {
                 ),
                 const Spacer(),
                 userId == controller.details.value.id
-                ? GestureDetector(
-                  onTap: () {
-                    createBottomSheet(context, widget.userId);
-                  },
-                  child: Container(
-                    width: 48.w,
-                    height: 48.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    child: Padding(
-                      padding:  EdgeInsets.all(8.r),
-                      child: SvgPicture.asset(
-                        add_icon,
-                        width: 24.w,
-                        height: 24.h,
-                      ),
-                    ),
-                  ),
-                ) : SizedBox(
-                   width: 48.w,
-                   height: 48.h,
-                ),
-                userId == controller.details.value.id
-                ? Padding(
-                  padding:  EdgeInsets.only(right: 10.w),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.to(ProfileSetting());
-                    },
-                    child: Container(
-                      width: 55.w,
-                      height: 55.h,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: SvgPicture.asset(
-                        settings_icon,
-                        width: 40.w,
-                        height: 40.h,
-                        color: black_121212,
-                      ),
-                    ),
-                  ),
-                ) : Padding(
-                          padding:  EdgeInsets.only(right: 5.w),
-                          child: GestureDetector(
-                            onTap: () {
-                              displayBottomSheet(context);
-                            },
-                            child: SizedBox(
-                              width: 55.w,
-                              height: 55.h,
-                              child:
-                                   Icon(Icons.more_horiz, color: black_121212),
+                    ? GestureDetector(
+                        onTap: () {
+                          createBottomSheet(context, widget.userId);
+                        },
+                        child: Container(
+                          width: 48.w,
+                          height: 48.h,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(8.r),
+                            child: SvgPicture.asset(
+                              add_icon,
+                              width: 24.w,
+                              height: 24.h,
                             ),
                           ),
-                        )
+                        ),
+                      )
+                    : SizedBox(
+                        width: 48.w,
+                        height: 48.h,
+                      ),
+                userId == controller.details.value.id
+                    ? Padding(
+                        padding: EdgeInsets.only(right: 10.w),
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(ProfileSetting());
+                          },
+                          child: Container(
+                            width: 55.w,
+                            height: 55.h,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            child: SvgPicture.asset(
+                              settings_icon,
+                              width: 40.w,
+                              height: 40.h,
+                              color: black_121212,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Padding(
+                        padding: EdgeInsets.only(right: 5.w),
+                        child: GestureDetector(
+                          onTap: () {
+                            displayBottomSheet(context);
+                          },
+                          child: SizedBox(
+                            width: 55.w,
+                            height: 55.h,
+                            child: Icon(Icons.more_horiz, color: black_121212),
+                          ),
+                        ),
+                      )
               ],
             ),
           ),
           Expanded(
+            child: SingleChildScrollView(
+              controller: controller.postScrollController,
             child: ListView.builder(
                 shrinkWrap: true,
                 primary: false,
-                itemCount: controller.postDetailList.length,
+                itemCount: controller.postList.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding:  EdgeInsets.only(
-                        left: 16.w, right: 16.w, bottom: 16.h),
+                    padding:
+                        EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h),
                     child: Container(
                       decoration: BoxDecoration(
                         color: white_ffffff,
@@ -190,23 +196,26 @@ class _PostDetailState extends State<PostDetail> {
                             color: const Color(0x17747796).withOpacity(0.07),
                             spreadRadius: 10,
                             blurRadius: 5,
-                            offset: const Offset(0, 10), // changes position of shadow
+                            offset: const Offset(
+                                0, 10), // changes position of shadow
                           ),
                         ],
-                        borderRadius:  BorderRadius.all(Radius.circular(4.r)),
+                        borderRadius: BorderRadius.all(Radius.circular(4.r)),
                       ),
                       child: Padding(
-                        padding:  EdgeInsets.all(20.r),
+                        padding: EdgeInsets.all(20.r),
                         child: Column(
                           children: [
                             Stack(
                               children: [
                                 SizedBox(
-                                  height: 300.h,
+                                  height: 270.h,
                                   width: MediaQuery.of(context).size.width,
-                                  child: controller.postDetailList[index].image == null
+                                  child: controller
+                                              .postList[index].image ==
+                                          null
                                       ? ClipRRect(
-                                          borderRadius:  BorderRadius.all(
+                                          borderRadius: BorderRadius.all(
                                               Radius.circular(4.r)),
                                           child: SvgPicture.asset(
                                             placeholder,
@@ -214,11 +223,11 @@ class _PostDetailState extends State<PostDetail> {
                                           ),
                                         )
                                       : ClipRRect(
-                                          borderRadius:  BorderRadius.all(
+                                          borderRadius: BorderRadius.all(
                                               Radius.circular(4.r)),
                                           child: CachedNetworkImage(
-                                            imageUrl:
-                                                controller.postDetailList[index].image!,
+                                            imageUrl: controller
+                                                .postList[index].image!,
                                             fit: BoxFit.fill,
                                             progressIndicatorBuilder: (context,
                                                     url, downloadProgress) =>
@@ -226,13 +235,10 @@ class _PostDetailState extends State<PostDetail> {
                                               placeholder,
                                               fit: BoxFit.fill,
                                             ),
-                                            errorWidget: (context, url, error) =>
-                                                SvgPicture.asset(
-                                              placeholder,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                        ),
+                                          )),
+                                ),
+                                const SizedBox(
+                                  height: 15,
                                 ),
                                 Positioned(
                                   bottom: 15.h,
@@ -240,7 +246,7 @@ class _PostDetailState extends State<PostDetail> {
                                   child: Container(
                                     height: 37.h,
                                     width: 110.w,
-                                    decoration:  BoxDecoration(
+                                    decoration: BoxDecoration(
                                       gradient: LinearGradient(colors: [
                                         Color(0xff1c2535),
                                         Color(0xff04080f)
@@ -252,9 +258,22 @@ class _PostDetailState extends State<PostDetail> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          GestureDetector(child: SvgPicture.asset(icon_heart,width: 17.w,height: 17.h,color: Colors.red,)),
-                                           SizedBox(width: 5.w,),
-                                          setHelceticaBold("1,2k liked", 14.sp, white_ffffff, FontWeight.w500, FontStyle.normal)
+                                          GestureDetector(
+                                              child: SvgPicture.asset(
+                                            icon_heart,
+                                            width: 17.w,
+                                            height: 17.h,
+                                            color: Colors.red,
+                                          )),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          setHelceticaBold(
+                                              "1,2k liked",
+                                              14.sp,
+                                              white_ffffff,
+                                              FontWeight.w500,
+                                              FontStyle.normal)
                                         ],
                                       ),
                                     ),
@@ -262,7 +281,7 @@ class _PostDetailState extends State<PostDetail> {
                                 ),
                               ],
                             ),
-                             SizedBox(
+                            SizedBox(
                               height: 16.h,
                             ),
                             Align(
@@ -272,27 +291,27 @@ class _PostDetailState extends State<PostDetail> {
                                   children: [
                                     TextSpan(
                                       text:
-                                          "@${controller.postDetailList[index].address!} ",
-                                      style:  TextStyle(
-                                          fontSize: 12.sp,
-                                          fontFamily: helvetica_neu_bold,
-                                          fontWeight: FontWeight.w600,
-                                          color: black_121212,
+                                          "@${controller.postList[index].address!} ",
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontFamily: helvetica_neu_bold,
+                                        fontWeight: FontWeight.w600,
+                                        color: black_121212,
                                       ),
                                     ),
                                     TextSpan(
-                                      text: controller.postDetailList[index].caption!,
-                                      style:  TextStyle(
-                                          fontSize: 12.sp,
-                                          fontFamily: helveticaNeueNeue_medium,
-                                          fontWeight: FontWeight.w400,
-                                          color: black_121212
-                                      )
-                                    ),
+                                        text: controller
+                                            .postList[index].caption!,
+                                        style: TextStyle(
+                                            fontSize: 12.sp,
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
+                                            fontWeight: FontWeight.w400,
+                                            color: black_121212)),
                                   ],
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -300,6 +319,9 @@ class _PostDetailState extends State<PostDetail> {
                   );
                 }),
           ),
+          ),
+          if (controller.isPostPaginationLoading.value == true)
+                PaginationUtils().loader(),
         ]),
       ),
     );

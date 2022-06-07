@@ -17,6 +17,10 @@ class PostController extends GetxController {
   Rx<TextEditingController> searchController = TextEditingController().obs;
   RxList<UserList> selectedList = <UserList>[].obs;
   RxList<UserList> searchList = <UserList>[].obs;
+  RxList location = [].obs;
+  RxString address = "".obs;
+  Rx<TextEditingController> searchLocationController = TextEditingController().obs;
+
 
 
   createPostAPI(BuildContext context) async {
