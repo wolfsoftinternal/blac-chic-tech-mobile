@@ -14,8 +14,6 @@ import '../../Utils/share_predata.dart';
 import 'chat_module/my_db.dart';
 
 class HomePage extends StatefulWidget {
-
-
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -36,17 +34,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-
     super.initState();
     init();
-
   }
 
-
-  init() async{
+  init() async {
     var preferences = MySharedPref();
     SignupModel signupModel =
-    (await preferences.getSignupModel(SharePreData.keySignupModel))!;
+        (await preferences.getSignupModel(SharePreData.keySignupModel))!;
     MyDB().createCurrentUserDoc(signupModel.data!);
   }
 
@@ -78,7 +73,6 @@ class _HomePageState extends State<HomePage> {
                       return GestureDetector(
                         onTap: () {
                           if (index == 0) {
-<<<<<<< HEAD
                             Get.to(AdmireProfile());
                           }
                           if (index == 4) {
@@ -86,12 +80,6 @@ class _HomePageState extends State<HomePage> {
                           }
                           if (index == 6) {
                             Get.to(EventList());
-=======
-
-                            Get.to(AdmireProfile());
-                          }else if(index == 3){
-                            Get.to(BcConnect());
->>>>>>> 239b05fdca5f747294cbf57fd8334bad3a56fa12
                           }
                         },
                         child: Container(
@@ -118,10 +106,6 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-<<<<<<< HEAD
-                                onTap: () {},
-=======
->>>>>>> 239b05fdca5f747294cbf57fd8334bad3a56fa12
                               ),
                               const Padding(
                                 padding: EdgeInsets.only(right: 12.0),

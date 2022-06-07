@@ -35,6 +35,12 @@ class _VideoCommentsState extends State<VideoComments> {
     }
   }
 
+//
+  // if (scrollController.hasClients) {
+  //     final position = scrollController.position.maxScrollExtent;
+  //     scrollController.jumpTo(position);
+  //   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -59,6 +65,7 @@ class _VideoCommentsState extends State<VideoComments> {
               children: [
                 Expanded(
                   child: SingleChildScrollView(
+                    controller: controller.scrollController.value,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,9 +85,14 @@ class _VideoCommentsState extends State<VideoComments> {
                                   width: double.infinity,
                                   height: 100,
                                   child: Center(
-                                      child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Color(0xff04080f)),
+                                      child: SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                Color(0xff04080f))),
                                   )))
                               : controller.commentModelList.length == 0
                                   ? SizedBox(

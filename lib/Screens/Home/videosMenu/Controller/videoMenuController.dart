@@ -49,7 +49,7 @@ class VideoMenuController extends GetxController {
   RxList<FindSpeaker> findSpeakerList = <FindSpeaker>[].obs;
   RxBool hasMore = false.obs;
   RxList<VideoList> SpeakerList = <VideoList>[].obs;
-
+  Rx<ScrollController> scrollController = ScrollController().obs;
   @override
   void onInit() {
     print("controller.selectedTopic.value ::" +
@@ -435,6 +435,9 @@ class VideoMenuController extends GetxController {
             await tokenUpdate.updateToken();
           } else if (commentsListModel.statusCode == 200) {
             commentModelList.value = commentsListModel.data!;
+            Future.delayed(const Duration(seconds: 1), () {
+              moveDown();
+            });
           }
         });
       } else {
@@ -444,18 +447,28 @@ class VideoMenuController extends GetxController {
     });
   }
 
+  moveDown() {
+    print(":::::::::::::::::::Move JUMP::::::::::::::::::::::::::" +
+        scrollController.value.position.minScrollExtent.toString());
+    scrollController.value.animateTo(
+        scrollController.value.position.maxScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 100));
+  }
+
   dateTOTimeConvert(String date) {
     final birthday = DateTime.parse(date.toString());
     final date2 = DateTime.now();
     final difference = date2.difference(birthday).inDays;
+    print("Difference :: " + difference.toString());
     if (difference == 0) {
-      return "Today";
+      return DateFormat('kk:mm:a').format(birthday);
     } else if (difference == 1) {
       return "Yesterday";
     } else if (difference == 2) {
       return "2 Day";
     } else {
-      return DateFormat.yMMMd().format(date2);
+      return DateFormat.yMMMd().format(birthday);
     }
   }
 

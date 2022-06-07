@@ -27,7 +27,7 @@ class _MyPlayListState extends State<MyPlayList> {
     // TODO: implement initState
     super.initState();
     if (mounted) {
-      controller.isLoading.value = true;
+      controller.isLoading.value = false;
       controller.isLoadingButton.value = false;
     }
   }
