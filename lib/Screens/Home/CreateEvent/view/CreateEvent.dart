@@ -117,6 +117,7 @@ class _CreateEventState extends State<CreateEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white_ffffff,
+      resizeToAvoidBottomInset: false,
       body: Obx(
         () => Stack(
           alignment: Alignment.bottomCenter,
@@ -130,6 +131,9 @@ class _CreateEventState extends State<CreateEvent> {
                         height: 60.h,
                       ),
                       ToolbarWithHeaderCenterTitle('CREATE EVENT'),
+                      SizedBox(
+                        height: 20.h,
+                      ),
                       Expanded(
                         child: SingleChildScrollView(
                           child: Form(
@@ -140,12 +144,12 @@ class _CreateEventState extends State<CreateEvent> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(top: 40.h),
+                                    padding:  EdgeInsets.only(top: 20.h),
                                     child: setRoboto('EVENT TITLE', 12.sp,
-                                        grey_aaaaaa, FontWeight.w900),
+                                        grey_aaaaaa, FontWeight.w800),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(top: 14.h),
+                                    padding:  EdgeInsets.only(top: 8.h),
                                     child:
                                         setTextFieldHelveticaMediumOrangeBorder(
                                             controller.titleController.value,
@@ -173,7 +177,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               setRoboto('START DATE', 12.sp,
-                                                  grey_aaaaaa, FontWeight.w900),
+                                                  grey_aaaaaa, FontWeight.w800),
                                               Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 8.h),
@@ -206,7 +210,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               setRoboto('END DATE', 12.sp,
-                                                  grey_aaaaaa, FontWeight.w900),
+                                                  grey_aaaaaa, FontWeight.w800),
                                               Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 8.h),
@@ -242,7 +246,7 @@ class _CreateEventState extends State<CreateEvent> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               setRoboto('START TIME', 12.sp,
-                                                  grey_aaaaaa, FontWeight.w900),
+                                                  grey_aaaaaa, FontWeight.w800),
                                               Padding(
                                                 padding: EdgeInsets.only(top: 8.h),
                                                 child:
@@ -281,7 +285,7 @@ class _CreateEventState extends State<CreateEvent> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               setRoboto('END TIME', 12.sp,
-                                                  grey_aaaaaa, FontWeight.w900),
+                                                  grey_aaaaaa, FontWeight.w800),
                                               Padding(
                                                 padding: EdgeInsets.only(top: 8.h),
                                                 child:
@@ -318,7 +322,7 @@ class _CreateEventState extends State<CreateEvent> {
                                   Padding(
                                     padding: EdgeInsets.only(top: 16.h),
                                     child: setRoboto('VENUE', 12.sp,
-                                        grey_aaaaaa, FontWeight.w900),
+                                        grey_aaaaaa, FontWeight.w800),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(top: 8.h),
@@ -339,7 +343,7 @@ class _CreateEventState extends State<CreateEvent> {
                                   Padding(
                                     padding: EdgeInsets.only(top: 16.h),
                                     child: setRoboto('ADDRESS', 12.sp,
-                                        grey_aaaaaa, FontWeight.w900),
+                                        grey_aaaaaa, FontWeight.w800),
                                   ),
                                   Padding(
                                       padding: EdgeInsets.only(top: 8.h),
@@ -415,7 +419,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               setRoboto('CITY', 12.sp,
-                                                  grey_aaaaaa, FontWeight.w900),
+                                                  grey_aaaaaa, FontWeight.w800),
                                               Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 8.h),
@@ -446,7 +450,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               setRoboto('COUNTRY', 12.sp,
-                                                  grey_aaaaaa, FontWeight.w900),
+                                                  grey_aaaaaa, FontWeight.w800),
                                               Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 8.h),
@@ -474,7 +478,7 @@ class _CreateEventState extends State<CreateEvent> {
                                   Padding(
                                     padding: EdgeInsets.only(top: 16.h),
                                     child: setRoboto('ADMISSION OPTIONS', 12.sp,
-                                        grey_aaaaaa, FontWeight.w900),
+                                        grey_aaaaaa, FontWeight.w800),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(top: 18.h),
@@ -762,11 +766,11 @@ class _CreateEventState extends State<CreateEvent> {
                                                             "CATEGORY TYPE",
                                                             12.sp,
                                                             grey_aaaaaa,
-                                                            FontWeight.w900),
+                                                            FontWeight.w800),
                                                         Padding(
                                                           padding:
                                                               EdgeInsets.only(
-                                                                  top: 14.h),
+                                                                  top: 8.h),
                                                           child: Container(
                                                             height: 48.h,
                                                             width:
@@ -800,7 +804,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                                 helveticaNeueNeue_medium,
                                                                             fontStyle: FontStyle
                                                                                 .normal,
-                                                                            fontSize: 14
+                                                                            fontSize: 14.sp
                                                                                 .sp),
                                                                         textAlign:
                                                                             TextAlign
@@ -834,9 +838,9 @@ class _CreateEventState extends State<CreateEvent> {
                                                             'AMOUNT',
                                                             12.sp,
                                                             grey_aaaaaa,
-                                                            FontWeight.w900),
+                                                            FontWeight.w800),
                                                         SizedBox(
-                                                          height: 14,
+                                                          height: 8.h,
                                                         ),
                                                         Row(
                                                           mainAxisAlignment:
@@ -984,10 +988,10 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   .selectedList
                                                                   .isNotEmpty
                                                               ? Padding(
-                                                                  padding: const EdgeInsets
+                                                                  padding:  EdgeInsets
                                                                           .only(
                                                                       top:
-                                                                          24.0),
+                                                                          8.h),
                                                                   child: Row(
                                                                     children: [
                                                                       SizedBox(
@@ -1007,8 +1011,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                                               Widget>[
                                                                             if (controller.selectedList.isNotEmpty)
                                                                               SizedBox(
-                                                                                height: 20.h,
-                                                                                width: 20.w,
+                                                                                width: 21.w,
+                                                                                height: 21.h,
                                                                                 child: CircularProfileAvatar(
                                                                                   '',
                                                                                   imageFit: BoxFit.fill,
@@ -1027,10 +1031,10 @@ class _CreateEventState extends State<CreateEvent> {
                                                                             if (controller.selectedList.length >=
                                                                                 2)
                                                                               Positioned(
-                                                                                left: 10.0,
+                                                                                left: 10.w,
                                                                                 child: SizedBox(
-                                                                                  height: 21,
-                                                                                  width: 21,
+                                                                                  width: 21.w,
+                                                                                  height: 21.h,
                                                                                   child: CircularProfileAvatar(
                                                                                     '',
                                                                                     child: controller.selectedList[1].image == null
@@ -1049,28 +1053,28 @@ class _CreateEventState extends State<CreateEvent> {
                                                                             if (controller.selectedList.length >
                                                                                 2)
                                                                               Positioned(
-                                                                                left: 20.0,
+                                                                                left: 20.w,
                                                                                 child: SvgPicture.asset(
                                                                                   black_more_dot_icon,
-                                                                                  width: 17,
-                                                                                  height: 17,
+                                                                                  width: 23.w,
+                                                                                  height: 23.h,
                                                                                 ),
                                                                               )
                                                                           ],
                                                                         ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: const EdgeInsets.only(
+                                                                        padding:  EdgeInsets.only(
                                                                             top:
-                                                                                2,
+                                                                                2.h,
                                                                             left:
-                                                                                5.0),
+                                                                                1.w),
                                                                         child: setRoboto(
                                                                             controller.selectedList.length.toString() +
                                                                                 " People Invited",
                                                                             14.sp,
                                                                             black_121212,
-                                                                            FontWeight.w900),
+                                                                            FontWeight.w600),
                                                                       ),
                                                                       Spacer(),
                                                                       InkWell(
@@ -1090,7 +1094,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                               "VIEW",
                                                                               12.sp,
                                                                               orange_ff881a,
-                                                                              FontWeight.w900),
+                                                                              FontWeight.w600),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -1099,9 +1103,9 @@ class _CreateEventState extends State<CreateEvent> {
                                                               : Container(),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsets
+                                                                 EdgeInsets
                                                                         .only(
-                                                                    top: 24.0),
+                                                                    top: 8.h),
                                                             child: InkWell(
                                                               onTap: () {
                                                                 // if (controller.selectedList.isEmpty){
@@ -1132,7 +1136,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                             width:
                                                                                 1,
                                                                             color:
-                                                                                black_121212)),
+                                                                            Color(0xff3e5edc))),
                                                                 child: Padding(
                                                                   padding:
                                                                       EdgeInsets
@@ -1143,11 +1147,11 @@ class _CreateEventState extends State<CreateEvent> {
                                                                         "+ Invite People",
                                                                         style: TextStyle(
                                                                             color:
-                                                                                black_121212,
+                                                                                Color(0xff3e5edc),
                                                                             fontWeight: FontWeight
                                                                                 .w500,
                                                                             fontFamily:
-                                                                                "NeueHelvetica",
+                                                                                roboto_bold,
                                                                             fontStyle: FontStyle
                                                                                 .normal,
                                                                             fontSize: 14
@@ -1163,8 +1167,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                       )
                                                     : Container(),
                                             Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 24.0),
+                                              padding:  EdgeInsets.only(
+                                                  top: 24.h),
                                               child: setRoboto(
                                                   'BENEFITS',
                                                   12.sp,
@@ -1172,8 +1176,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                   FontWeight.w900),
                                             ),
                                             Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 14.0),
+                                                padding:  EdgeInsets.only(
+                                                    top: 8.h),
                                                 child: Column(
                                                   children: [
                                                     ListView.builder(
@@ -1332,34 +1336,38 @@ class _CreateEventState extends State<CreateEvent> {
                                                                 BorderRadius
                                                                     .circular(
                                                                         4.r),
-                                                            border: Border.all(
-                                                                width: 1.w,
-                                                                color:
-                                                                    black_121212)),
+                                                            color: grey_f5f5f5),
                                                         child: // Add More
                                                             Padding(
                                                           padding:
                                                               EdgeInsets.all(
-                                                                  16.r),
+                                                                  18.r),
                                                           child: Center(
-                                                            child: Text(
-                                                                "+ Add More",
-                                                                style: TextStyle(
-                                                                    color: Color(
-                                                                        0xff121212),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontFamily:
-                                                                        "NeueHelvetica",
-                                                                    fontStyle:
-                                                                        FontStyle
-                                                                            .normal,
-                                                                    fontSize:
-                                                                        12.sp),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left),
+                                                            child: Row(
+                                                              mainAxisSize: MainAxisSize.min,
+                                                              children: [
+                                                                Icon(Icons.add,size: 16,color: orange_ff881a,),
+                                                                Text(
+                                                                    " ADD MORE",
+                                                                    style: TextStyle(
+                                                                        color: Color(
+                                                                            0xff121212),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w600,
+                                                                        fontFamily:
+                                                                            helvetica_neu_bold,
+                                                                        fontStyle:
+                                                                            FontStyle
+                                                                                .normal,
+                                                                        letterSpacing: 0.7,
+                                                                        fontSize:
+                                                                            12.sp),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
                                                       ),

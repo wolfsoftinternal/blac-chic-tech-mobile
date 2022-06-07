@@ -97,8 +97,11 @@ class _PostTabState extends State<PostTab> {
                                   gradient: LinearGradient(
                                       begin: Alignment.topCenter,
                                       end:Alignment.bottomCenter,
-                                      colors: [ Color(0x00121212),
-                                        Color(0xff121212)])
+                                      colors: [
+                                        Color(0x00121212),
+                                        Color(0xff121212)
+                                      ]
+                                  )
 
                               ),
                             ),

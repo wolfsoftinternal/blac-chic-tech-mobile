@@ -91,6 +91,7 @@ Text setRoboto(String text, double size, Color color, FontWeight weight) {
           fontWeight: weight,
           fontFamily: "Roboto",
           fontStyle: FontStyle.normal,
+          letterSpacing: 0.5,
           fontSize: size),
       textAlign: TextAlign.left);
 }
