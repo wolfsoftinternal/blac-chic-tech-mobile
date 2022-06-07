@@ -1,9 +1,13 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/VideoDetail.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -52,96 +56,73 @@ class _VideoTabState extends State<VideoTab> {
                     shrinkWrap: true,
                     primary: false,
                     itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(VideoDetail(id: controller.videoList[index].id));
-                        },
-                        child: Stack(
-                          children: [
-                            SizedBox(
-                              height: 220,
-                              child: FutureBuilder(
-                                future: controller.initializeVideoPlayerFutureList[index],
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    return AspectRatio(
-                                      aspectRatio: controller.videoControllerList[index].value.aspectRatio,
-                                      child: VideoPlayer(controller.videoControllerList[index]),
-                                    );
-                                  } else {
-                                    return Container();
-                                  }
-                                },
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  color: transparent,
-                                  height: 32,
-                                  width: 47,
-                                  child: Center(
-                                    child: setHelceticaBold(
-                                       controller.videoList[index].duration ?? "00:00",
-                                       12.0,
-                                       white_ffffff,
-                                       FontWeight.w500,
-                                       FontStyle.normal
+                      return Stack(
+                        children: [
+                          SizedBox(
+                            height: 220,
+                            width: MediaQuery.of(context).size.width,
+                            child: controller
+                                        .videoList[index].embededCode ==
+                                    null
+                                ? Center(
+                                    child: SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      valueColor:
+                                          AlwaysStoppedAnimation<Color>(
+                                              Color(0xff04080f)),
                                     ),
+                                  ))
+                                : FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Html(
+                                      data: controller
+                                          .videoList[index].embededCode
+                                          .toString()),
+                                ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.to(VideoDetail(id: controller.videoList[index].id));
+                            },
+                            child: Container(
+                              height: 220,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                color: transparent,
+                                height: 32,
+                                width: 47,
+                                child: Center(
+                                  child: setHelceticaBold(
+                                     controller.videoList[index].duration ?? "00:00",
+                                     12.0,
+                                     white_ffffff,
+                                     FontWeight.w500,
+                                     FontStyle.normal
                                   ),
                                 ),
                               ),
                             ),
-                            Center(
-                                child: InkWell(
-                              onTap: () {
-                                Get.to(VideoDetail(userId: widget.id,
-                                  id: controller.videoList[index].id));
-                                // if (controller.videoController[index].value.isPlaying) {
-                                //   setState(() {
-                                //     controller.videoController[index].pause();
-                                //   });
-                                // } else {
-                                //   setState(() {
-                                //     controller.videoController[index].play();
-                                //   });
-                                // }
-                              },
-                              child: 
-                              // controller.videoController[index].value.isPlaying
-                                // ? Container(
-                                //   height: 40,
-                                //   width: 40,
-                                //   decoration: BoxDecoration(
-                                //     color: trans,
-                                //     borderRadius: BorderRadius.circular(50.0),
-                                //   ),
-                                //   child: Icon(
-                                //     Icons.pause, color: white_ffffff,
-                                //     size: 20,
-                                //   )
-                                // )
-                                // ? Container()
-                                // : controller.videoController[index].value.position == controller.videoController[index].value.duration
-                                SvgPicture.asset(icon_play)
-                                // : SvgPicture.asset(icon_play)
-                            )),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15.0),
-                              child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: setHelceticaBold(
-                                      controller.postList[index].caption!,
-                                      12.0,
-                                      white_ffffff,
-                                      FontWeight.w500,
-                                      FontStyle.normal)),
-                            ),
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15.0),
+                            child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: setHelceticaBold(
+                                    controller.videoList[index].caption ?? "",
+                                    12.0,
+                                    white_ffffff,
+                                    FontWeight.w500,
+                                    FontStyle.normal)),
+                          ),
+                        ],
                       );
                     },
 

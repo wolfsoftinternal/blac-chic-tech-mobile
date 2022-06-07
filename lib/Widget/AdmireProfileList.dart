@@ -77,7 +77,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
               ),
         Container(
           color: Colors.black.withOpacity(0.3),
-          height: MediaQuery.of(context).size.height * .83,
+          height: controller.admireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
         ),
         Padding(
           padding:  EdgeInsets.only(left: 24.w,top: 50.h),
