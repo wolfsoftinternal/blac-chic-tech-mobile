@@ -1,7 +1,11 @@
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
+
+import '../Screens/Home/CreatePost/controller/PostController.dart';
 
 Future<AssetEntity?> _pickFromCamera(BuildContext c) {
   return CameraPicker.pickFromCamera(
@@ -12,7 +16,7 @@ Future<AssetEntity?> _pickFromCamera(BuildContext c) {
 
 /// Define a regular pick method.
 class PickMethod {
-  const PickMethod({
+   PickMethod({
     required this.icon,
     required this.name,
     required this.description,
@@ -186,6 +190,7 @@ class PickMethod {
       description: '',
       method: (BuildContext context, List<AssetEntity> assets) async {
         print("click thay che");
+
         var picker = await AssetPicker.pickAssets(
           context,
           pickerConfig: AssetPickerConfig(
@@ -193,9 +198,26 @@ class PickMethod {
             selectedAssets: assets,
           ),
         );
-        print(assets.length);
-        image = assets;
-        print("iejfkdjjfj $image");
+
+        if (picker != null) {
+          assets = List<AssetEntity>.from(picker);
+          print("image assets $assets");
+          print("image full path " + assets[0].relativePath! + "/"+assets[0].title!);
+          image = assets;
+          PostController controller = Get.put(PostController());
+          image = assets;
+
+        }
+
+
+
+        // var imageMy = AssetEntityImageProvider(
+        //   assets.elementAt(0),
+        //   isOriginal: false,
+        // );
+        //
+        //
+        // print("iejfkdjjfj $imageMy");
         // return picker;
       },
     );

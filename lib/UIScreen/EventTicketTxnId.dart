@@ -4,6 +4,7 @@ import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Styles/colors.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -16,12 +17,17 @@ class EventTicketTxnId extends StatefulWidget {
   final EventList eventDetails;
   final int selectedAdmissionPosition;
   final OrderListModel orderDetails;
+  final int debitedFromWallet;
+  final int debitedFromPayStack;
 
   const EventTicketTxnId(
       {Key? key,
       required this.eventDetails,
       required this.selectedAdmissionPosition,
-      required this.orderDetails})
+      required this.orderDetails,
+        required this.debitedFromWallet,
+        required this.debitedFromPayStack,
+      })
       : super(key: key);
 
   @override
@@ -44,10 +50,16 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    icon_cancel,
-                    width: 30.w,
-                    height: 30.h,
+                  GestureDetector(
+                    child: SvgPicture.asset(
+                      icon_cancel,
+                      width: 30.w,
+                      height: 30.h,
+                    ),
+
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
                   ),
                   SizedBox(
                     height: 32.h,
@@ -404,7 +416,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
 
                                     Expanded(
                                       child: Text(
-                                          "5",
+                                         SharePreData.strDollar + widget.debitedFromWallet.toString(),
                                           style: TextStyle(
                                               color:black_121212,
                                               fontWeight: FontWeight.w900,
@@ -440,7 +452,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
 
                                     Expanded(
                                       child: Text(
-                                          "255",
+                                          SharePreData.strDollar + widget.debitedFromPayStack.toString(),
                                           style: TextStyle(
                                               color: black_121212,
                                               fontWeight: FontWeight.w900,
@@ -552,16 +564,6 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
-
-    // Kill all previous screen
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomePage()
-        ),
-        ModalRoute.withName("/Home")
-    );
-
+    // Navigator.pop(context);
   }
 }

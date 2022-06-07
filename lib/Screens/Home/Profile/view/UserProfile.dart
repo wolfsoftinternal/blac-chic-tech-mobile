@@ -290,7 +290,7 @@ class _UserProfileState extends State<UserProfile> {
                                   //   context, widget.admireList.admireDetails!.id
                                   // );
                                   // }
-                                  
+
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,

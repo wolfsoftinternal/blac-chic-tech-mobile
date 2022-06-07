@@ -129,11 +129,18 @@ class _MyPlayListState extends State<MyPlayList> {
                                                         SizedBox(
                                                             height: 80.h,
                                                             width: 120.w,
-                                                            child: Html(
-                                                                data: controller
-                                                                    .myPlayList[
-                                                                        i]
-                                                                    .embededCode)),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          35)),
+                                                              child: Html(
+                                                                  data: controller
+                                                                      .myPlayList[
+                                                                          i]
+                                                                      .embededCode),
+                                                            )),
                                                         Positioned(
                                                           bottom: 2,
                                                           right: 3,

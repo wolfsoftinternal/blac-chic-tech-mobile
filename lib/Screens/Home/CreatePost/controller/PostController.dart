@@ -22,6 +22,7 @@ class PostController extends GetxController {
   Rx<TextEditingController> searchLocationController = TextEditingController().obs;
 
 
+
   createPostAPI(BuildContext context) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);

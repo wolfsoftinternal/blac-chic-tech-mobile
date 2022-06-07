@@ -143,11 +143,16 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                                                         .embededCode ==
                                                                     null
                                                                 ? Text("")
-                                                                : Html(
-                                                                    data: controller
-                                                                        .speakerList[
-                                                                            i]
-                                                                        .embededCode)),
+                                                                : ClipRRect(
+                                                                    borderRadius: const BorderRadius
+                                                                            .all(
+                                                                        Radius.circular(
+                                                                            35)),
+                                                                    child: Html(
+                                                                        data: controller
+                                                                            .speakerList[i]
+                                                                            .embededCode),
+                                                                  )),
                                                         Positioned(
                                                           bottom: 2,
                                                           right: 3,

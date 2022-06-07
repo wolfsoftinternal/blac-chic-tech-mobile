@@ -1,50 +1,42 @@
-// import 'package:blackchecktech/Screens/Authentication/signup/view/FullInformationStepsView.dart';
-// import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
-// import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
-// import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
-// <<<<<<< HEAD
-// import 'package:blackchecktech/Screens/Home/videosMenu/View/SearchVideoList.dart';
-// import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoComments.dart';
-// import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoDetailTab.dart';
-// import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoListBct.dart';
-// =======
-// import 'package:blackchecktech/Screens/Home/BCConnect/view/BcConnect.dart';
-// >>>>>>> 239b05fdca5f747294cbf57fd8334bad3a56fa12
-// import 'package:blackchecktech/Styles/my_colors.dart';
-// import 'package:blackchecktech/UIScreen/AboutMe.dart';
-// import 'package:blackchecktech/UIScreen/AdmireGrid.dart';
-// import 'package:blackchecktech/UIScreen/Connect12.dart';
-// import 'package:blackchecktech/UIScreen/CreatEventUploadImage.dart';
-// import 'package:blackchecktech/UIScreen/CreatPost.dart';
-// import 'package:blackchecktech/UIScreen/CreateEventDetail.dart';
-// import 'package:blackchecktech/UIScreen/EditProfile.dart';
-// import 'package:blackchecktech/UIScreen/EventSearch.dart';
-// import 'package:blackchecktech/UIScreen/EventTicket.dart';
-// import 'package:blackchecktech/UIScreen/Featured.dart';
-// <<<<<<< HEAD
-// import 'package:blackchecktech/Screens/Home/videosMenu/View/FindSpeaker.dart';
-// import 'package:blackchecktech/Screens/Home/videosMenu/View/MyPlayList.dart';
-// =======
-// import 'package:blackchecktech/UIScreen/FilterTopicList.dart';
-// import 'package:blackchecktech/UIScreen/FindSpeaker.dart';
-// import 'package:blackchecktech/UIScreen/GridLayoutTest.dart';
-// import 'package:blackchecktech/UIScreen/MyPlayList.dart';
-// >>>>>>> 239b05fdca5f747294cbf57fd8334bad3a56fa12
-// import 'package:blackchecktech/UIScreen/MyPurchasedEvent.dart';
-// import 'package:blackchecktech/UIScreen/PostGalleryPicker.dart';
-// import 'package:blackchecktech/UIScreen/PostLocation.dart';
-// import 'package:blackchecktech/UIScreen/ProfileSetting.dart';
-// import 'package:blackchecktech/UIScreen/ProgressBarStep.dart';
-// import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
-// import 'package:blackchecktech/Screens/Home/videosMenu/View/SpeakersVideos.dart';
-// import 'package:blackchecktech/UIScreen/TagPeople.dart';
-// import 'package:blackchecktech/UIScreen/TestSecond.dart';
-// import 'package:blackchecktech/UIScreen/TransactionsPayoutsTabs.dart';
-// import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
-// import 'package:blackchecktech/UIScreen/UploadVideos.dart';
-// import 'package:blackchecktech/UIScreen/VideoSearch.dart';
-// import 'package:blackchecktech/Utilities/Constant.dart';
-// import 'package:flutter/material.dart';
+
+import 'package:blackchecktech/Screens/Authentication/signup/view/FullInformationStepsView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/SignupInfoView.dart';
+import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/UIScreen/AboutMe.dart';
+import 'package:blackchecktech/UIScreen/AdmireGrid.dart';
+import 'package:blackchecktech/Screens/Home/BCConnect/view/BcConnect.dart';
+import 'package:blackchecktech/UIScreen/Connect12.dart';
+import 'package:blackchecktech/UIScreen/CreatEventUploadImage.dart';
+import 'package:blackchecktech/UIScreen/CreatPost.dart';
+import 'package:blackchecktech/UIScreen/CreateEventDetail.dart';
+import 'package:blackchecktech/UIScreen/EditProfile.dart';
+import 'package:blackchecktech/UIScreen/EventSearch.dart';
+import 'package:blackchecktech/UIScreen/EventTicket.dart';
+import 'package:blackchecktech/UIScreen/EventTicketTxnId.dart';
+import 'package:blackchecktech/UIScreen/Featured.dart';
+import 'package:blackchecktech/UIScreen/FilterTopicList.dart';
+import 'package:blackchecktech/UIScreen/FindSpeaker.dart';
+import 'package:blackchecktech/UIScreen/MyPlayList.dart';
+import 'package:blackchecktech/UIScreen/MyPurchasedEvent.dart';
+import 'package:blackchecktech/UIScreen/PostGalleryPicker.dart';
+import 'package:blackchecktech/UIScreen/PostLocation.dart';
+import 'package:blackchecktech/UIScreen/ProfileSetting.dart';
+import 'package:blackchecktech/UIScreen/ProgressBarStep.dart';
+import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
+import 'package:blackchecktech/UIScreen/SpeakersVideos.dart';
+import 'package:blackchecktech/UIScreen/TagPeople.dart';
+import 'package:blackchecktech/UIScreen/TestSecond.dart';
+import 'package:blackchecktech/Screens/Home/transactions/view/TransactionsPayoutsTabs.dart';
+import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
+import 'package:blackchecktech/UIScreen/UploadVideos.dart';
+import 'package:blackchecktech/UIScreen/VideoComments.dart';
+import 'package:blackchecktech/UIScreen/VideoListBct.dart';
+import 'package:blackchecktech/UIScreen/VideoSearch.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:flutter/material.dart';
+
 
 // import '../Screens/Authentication/login/view/LoginView.dart';
 // import '../Welcome.dart';

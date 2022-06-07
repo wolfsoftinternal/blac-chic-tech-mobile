@@ -58,6 +58,7 @@ class UserDetails {
         this.website,
         this.otp,
         this.role,
+        this.wallet,
         this.emailVerifiedAt,
         this.isActive,
         this.isConfirm,
@@ -101,6 +102,7 @@ class UserDetails {
     dynamic website;
     dynamic otp;
     int? role;
+    String? wallet;
     dynamic emailVerifiedAt;
     int? isActive;
     int? isConfirm;
@@ -144,6 +146,7 @@ class UserDetails {
         website: json["website"],
         otp: json["otp"],
         role: json["role"],
+        wallet: json["wallet"],
         emailVerifiedAt: json["email_verified_at"],
         isActive: json["is_active"],
         isConfirm: json["is_confirm"],
@@ -188,6 +191,7 @@ class UserDetails {
         "website": website,
         "otp": otp,
         "role": role,
+        "wallet": wallet,
         "email_verified_at": emailVerifiedAt,
         "is_active": isActive,
         "is_confirm": isConfirm,

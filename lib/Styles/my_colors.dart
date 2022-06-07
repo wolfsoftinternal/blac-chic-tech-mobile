@@ -52,9 +52,17 @@ const currentBalColor = Color(0xffcddad6);
 const paymentHistroyColor = Color(0xffb3ffffff);
 const packageColor = Color(0xff87ddc4);
 const goLiveColor = Color(0xff88888a);
-
+const grey_E9ECEC = Color(0xffE9ECEC);
 // const premimumLockColor = Color(0xff33B18A);
 // const genereColor = Color(0xff332c25);
 const borderColor = Color(0xff363636);
+
+const grey_e9ecec = Color(0xffe9ecec);
+const grey_A0B0AD = Color(0xffA0B0AD);
+const grey_96a6a3 = Color(0xff96a6a3);
+const skygreen_24d39e = Color(0xff24d39e);
+const blue_0A84FF = Color(0xff0A84FF);
+const white_ccffffff = Color(0xccffffff);
+
 const black_bg_1c2535 = Color(0xff1c2535);
 
