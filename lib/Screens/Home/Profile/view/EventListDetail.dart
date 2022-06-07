@@ -324,11 +324,47 @@ class _EventListDetailState extends State<EventListDetail> {
                                             Padding(
                                               padding: EdgeInsets.only(
                                                   left: 6.w, right: 6.w),
-                                              child: Icon(
-                                                Icons.person,
-                                                size: 15.r,
-                                                color: grey_aaaaaa,
-                                              ),
+                                              child: ClipRRect(
+                                                        borderRadius: BorderRadius.circular(50),
+                                                        child: controller.eventList[index].hosts == null
+                                                            ? Icon(
+                                                                Icons.person,
+                                                                size: 15.r,
+                                                                color:
+                                                                    grey_aaaaaa,
+                                                              )
+                                                            : controller.eventList[index].hosts!.first.image.toString() == ''
+                                                                ? Icon(
+                                                                    Icons.person,
+                                                                    size: 15.r,
+                                                                    color:
+                                                                        grey_aaaaaa,
+                                                                  )
+                                                                : CachedNetworkImage(
+                                                                    imageUrl: controller
+                                                                        .eventList[index]
+                                                                        .hosts!.first
+                                                                        .image!,
+                                                                    height: 15.h,
+                                                                    width: 15.w,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    progressIndicatorBuilder:
+                                                                        (context,url,downloadProgress) =>
+                                                                          Icon(
+                                                                            Icons.person,
+                                                                            size: 15.r,
+                                                                            color: grey_aaaaaa,
+                                                                          ),
+                                                                    errorWidget:
+                                                                        (context, url, error) =>
+                                                                          Icon(
+                                                                            Icons.person,
+                                                                            size: 15.r,
+                                                                            color: grey_aaaaaa,
+                                                                          ),
+                                                                  ),
+                                                      ),
                                             ),
                                             setHelceticaBold(
                                                 controller

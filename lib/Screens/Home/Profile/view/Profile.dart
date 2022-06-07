@@ -47,8 +47,10 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     });
 
     controller.initScrolling(context, controller.details.value.id.toString());
-    controller.initVideoScrolling(context, controller.details.value.id.toString());
-    controller.initEventScrolling(context, controller.details.value.id.toString());
+    controller.initVideoScrolling(
+        context, controller.details.value.id.toString());
+    controller.initEventScrolling(
+        context, controller.details.value.id.toString());
     dynamic postBody = {
       'user_id': controller.details.value.id.toString(),
       'page': controller.postPageNumber.toString()
@@ -78,7 +80,6 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel!.data!.id!.toInt();
-    setState(() {});
 
     if (userId != controller.details.value.id) {
       dynamic body = {'user_id': controller.details.value.id.toString()};
@@ -94,6 +95,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
         }
       }
     }
+    setState(() {});
   }
 
   @override
@@ -103,7 +105,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       body: Obx(
         () => Column(
           children: [
-             SizedBox(
+            SizedBox(
               height: 60.h,
             ),
             Container(
@@ -114,9 +116,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     height: 48.h,
                     width: 48.w,
                   ),
-
                   const Spacer(),
-
                   Center(
                     child: GestureDetector(
                       onTap: () {
@@ -133,22 +133,22 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                               )
                             : CachedNetworkImage(
                                 imageUrl: controller.details.value.image!,
-                          height: 48.h,
-                          width: 48.w,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) =>
                                         SvgPicture.asset(
                                   placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                   fit: BoxFit.cover,
                                 ),
                                 errorWidget: (context, url, error) =>
                                     SvgPicture.asset(
                                   placeholder,
-                                      height: 48.h,
-                                      width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -159,7 +159,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   userId == controller.details.value.id
                       ? GestureDetector(
                           onTap: () {
-                            createBottomSheet(context, controller.details.value.id);
+                            createBottomSheet(
+                                context, controller.details.value.id);
                           },
                           child: Container(
                             width: 48.w,
@@ -225,445 +226,486 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             Expanded(
               flex: 1,
               child: NestedScrollView(
-               headerSliverBuilder: (context,value)
-                   {
-                     return[
-                       SliverToBoxAdapter(
-                         child: Column(
-                           children: [
-                             Padding(
-                               padding:  EdgeInsets.only(left: 24.w, right: 24.w),
-                               child: Column(
-                                 children: [
-                                   Column(
-                                     mainAxisAlignment: MainAxisAlignment.start,
-                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                     children: [
-                                       controller.details.value.fullName != null ||
-                                           controller.details.value.firstName !=
-                                               null
-                                           ? Padding(
-                                         padding:
-                                         EdgeInsets.only(top: 16.h),
-                                         child: Row(
-                                           mainAxisSize: MainAxisSize.max,
-                                           mainAxisAlignment: MainAxisAlignment.start,
-                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                           children: [
-                                             setHelceticaBold(
-                                                 controller.details.value
-                                                     .fullName ??
-                                                     controller.details.value
-                                                         .firstName ??
-                                                     "",
-                                                 24.sp,
-                                                 black_121212,
-                                                 FontWeight.w500,
-                                                 FontStyle.normal,
-                                                 -0.96),
-                                             Expanded(
-                                                 flex: 1,
-                                                 child: SvgPicture.asset(check_icon,alignment: Alignment.topLeft,)),
-
-                                             controller.details.value.instagramUrl != null &&
-                                                 controller.details.value.twitterUrl !=
-                                                     null &&
-                                                 controller.details.value.linkedinUrl != null
-                                                 ? Row(
-                                               children: [
-                                                 controller.details.value.instagramUrl !=
-                                                     null
-                                                     ? Padding(
-                                                   padding:  EdgeInsets.only(
-                                                       right: 15.w),
-                                                   child: Image.asset(
-                                                     icon_instagram,
-                                                     height: 24.h,
-                                                     width: 24.w,
-                                                   ),
-                                                 )
-                                                     : Container(),
-                                                 controller.details.value.twitterUrl !=
-                                                     null
-                                                     ? Padding(
-                                                   padding:  EdgeInsets.only(
-                                                       right: 15.w),
-                                                   child: Image.asset(
-                                                     icon_twitter,
-                                                     height: 24.h,
-                                                     width: 24.w,
-                                                   ),
-                                                 )
-                                                     : Container(),
-                                                 controller.details.value.linkedinUrl !=
-                                                     null
-                                                     ? Image.asset(
-                                                   icon_linkedin,
-                                                   height: 24.h,
-                                                   width: 24.w,
-                                                 )
-                                                     : Container(),
-                                               ],
-                                             )
-                                                 : Container()
-                                           ],
-                                         ),
-                                       )
-                                           : Container(),
-                                       controller.details.value.currentJobs != null
-                                           ? controller.details.value.currentJobs!
-                                           .title !=
-                                           null
-                                           ? Padding(
-                                         padding:
-                                         EdgeInsets.only(top: 12.h),
-                                         child: Align(
-                                           alignment: Alignment.topLeft,
-                                           child: setHelveticaMedium(
-                                               controller.details.value
-                                                   .currentJobs!.title! +
-                                                   ' @' +
-                                                   controller
-                                                       .details
-                                                       .value
-                                                       .currentJobs!
-                                                       .companyName!,
-                                               16,
-                                               grey_3f3f3f,
-                                               FontWeight.w500,
-                                               FontStyle.normal),
-                                         ),
-                                       )
-                                           : Container()
-                                           : Container(),
-                                       controller.details.value.currentJobs != null
-                                           ? controller.details.value.currentJobs!
-                                           .website !=
-                                           null
-                                           ? Align(
-                                         alignment: Alignment.topLeft,
-                                         child: setHelveticaMedium(
-                                             controller
-                                                 .details
-                                                 .value
-                                                 .currentJobs!
-                                                 .website ??
-                                                 "",
-                                             12.sp,
-                                             blue_0a84ff,
-                                             FontWeight.w500,
-                                             FontStyle.normal),
-                                       )
-                                           : Container()
-                                           : Container(),
-                                       controller.details.value.aboutUs != null
-                                           ? Padding(
-                                         padding:
-                                         EdgeInsets.only(top: 5.h),
-                                         child: Align(
-                                           alignment: Alignment.topLeft,
-                                           child: Container(
-                                             width: MediaQuery.of(context)
-                                                 .size
-                                                 .width *
-                                                 0.85,
-                                             child: setHelveticaMedium(
-                                                 controller
-                                                     .details.value.aboutUs!,
-                                                 12.sp,
-                                                 grey_aaaaaa,
-                                                 FontWeight.w500,
-                                                 FontStyle.normal,
-                                                 0.1,
-                                                 3),
-                                           ),
-                                         ),
-                                       )
-                                           : Container(),
-                                       Container(
-                                         width:
-                                         MediaQuery.of(context).size.width * 0.86,
-                                         child: Row(
-                                           mainAxisAlignment:
-                                           MainAxisAlignment.spaceBetween,
-                                           children: [
-                                             controller.details.value.cityDetails !=
-                                                 null &&
-                                                 controller.details.value
-                                                     .stateDetails !=
-                                                     null &&
-                                                 controller.details.value
-                                                     .countryDetails !=
-                                                     null
-                                                 ? Padding(
-                                               padding:  EdgeInsets.only(
-                                                   top: 18.h),
-                                               child: Row(
-                                                 mainAxisAlignment: MainAxisAlignment.center,
-                                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                                 children: [
-                                                   Icon(
-                                                     Icons.location_on,
-                                                     color: orange_ff881a,
-                                                     size: 12.r,
-                                                   ),
-                                                   SizedBox(width: 2.w,),
-                                                   Align(
-                                                     alignment:
-                                                     Alignment.topLeft,
-                                                     child: setHelveticaMedium(
-                                                         controller
-                                                             .details
-                                                             .value
-                                                             .cityDetails!
-                                                             .name! +
-                                                             "," +
-                                                             controller
-                                                                 .details
-                                                                 .value
-                                                                 .stateDetails!
-                                                                 .name! +
-                                                             "," +
-                                                             controller
-                                                                 .details
-                                                                 .value
-                                                                 .countryDetails!
-                                                                 .name!,
-                                                         10,
-                                                         grey_aaaaaa,
-                                                         FontWeight.w500,
-                                                         FontStyle.normal),
-                                                   ),
-                                                 ],
-                                               ),
-                                             )
-                                                 : Container(),
-                                             userId != controller.details.value.id
-                                                 ? InkWell(
-                                               onTap: () {
-                                                 if (controller.admire.value ==
-                                                     'Admire')
-                                                   checkNet(context)
-                                                       .then((value) {
-                                                     controller.createAdmireAPI(
-                                                         context,
-                                                         controller
-                                                             .details.value.id);
-                                                   });
-                                               },
-                                               child: Padding(
-                                                 padding:  EdgeInsets.only(
-                                                     top: 5.h),
-                                                 child: Container(
-                                                   decoration: BoxDecoration(
-                                                     color: Colors.grey
-                                                         .withOpacity(0.1),
-                                                     borderRadius:
-                                                     BorderRadius.all(
-                                                         Radius
-                                                             .circular(40.r)),
-                                                   ),
-                                                   child: Padding(
-                                                     padding:
-                                                     EdgeInsets.all(
-                                                         12.r),
-                                                     child: Row(children: [
-                                                       Icon(
-                                                         Icons
-                                                             .person_add_alt_sharp,
-                                                         color: orange,
-                                                         size: 12.r,
-                                                       ),
-                                                       SizedBox(width: 6.w),
-                                                       setHelveticaMedium(
-                                                           controller
-                                                               .admire.value,
-                                                           12.sp,
-                                                           black_121212,
-                                                           FontWeight.w500,
-                                                           FontStyle.normal)
-                                                     ]),
-                                                   ),
-                                                 ),
-                                               ),
-                                             )
-                                                 : Container()
-                                           ],
-                                         ),
-                                       ),
-                                     ],
-                                   ),
-                                 ],
-                               ),
-                             ),
-                             SizedBox(
-                               height: 20.h,
-                             ),
-                             const Divider(
-                               color: grey_f4f6f6,
-                               thickness: 1,
-                             ),
-                             userId != controller.details.value.id
-                                 ? controller.otherAdmireList.length >= 1
-                                 ? const SizedBox(
-                               height: 24,
-                             )
-                                 : Container()
-                                 : controller.admireList.length >= 1
-                                 ? const SizedBox(
-                               height: 24,
-                             )
-                                 : Container(),
-                             userId != controller.details.value.id
-                                 ? controller.otherAdmireList.length >= 1
-                                 ? SeeAllAdmiresWidget(userId)
-                                 : Container()
-                                 : controller.admireList.length >= 1
-                                 ? SeeAllAdmiresWidget(userId)
-                                 : Container(),
-                             userId != controller.details.value.id
-                                 ? controller.otherAdmireList.length >= 1
-                                 ? Admires(userId: userId, controller: controller)
-                                 : Container()
-                                 : controller.admireList.length >= 1
-                                 ? Admires(userId: userId, controller: controller)
-                                 : Container(),
-                             userId != controller.details.value.id
-                                 ? controller.otherAdmireList.length >= 1
-                                 ? const Divider(
-                               color: grey_f4f6f6,
-                               thickness: 1,
-                             )
-                                 : Container()
-                                 : controller.admireList.length >= 1
-                                 ? const Divider(
-                               color: grey_f4f6f6,
-                               thickness: 1,
-                               height: 1,
-                             )
-                                 : Container(),
-
-
-                             Padding(
-                               padding:
-                               EdgeInsets.only(left: 16.w, right: 16.w, top: 22.h),
-                               child: Container(
-                                 height: 66.h,
-                                 decoration: BoxDecoration(
-                                   borderRadius: BorderRadius.circular(80.r),
-                                   color: grey_f5f5f5,
-                                 ),
-                                 child: Padding(
-                                   padding:
-                                   EdgeInsets.only(
-                                       left: 8.w, right: 8.w, bottom: 8.h, top: 8.h),
-                                   child: TabBar(
-                                     tabs: [
-                                       Tab(
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.center,
-                                           children: [
-                                             Text(
-                                               'Profile',
-                                               textAlign: TextAlign.left,
-                                               maxLines: 1,
-                                               style: TextStyle(
-                                                 overflow: TextOverflow.ellipsis,
-                                                 fontFamily: helvetica_neu_bold,
-                                                 fontSize: 14.sp,
-                                                 letterSpacing: -0.28,
-                                               ),
-                                             ),
-                                           ],
-                                         ),
-                                       ),
-                                       Tab(
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.center,
-                                           children: [
-                                             Text(
-                                               'Posts',
-                                               textAlign: TextAlign.left,
-                                               maxLines: 1,
-                                               style: TextStyle(
-                                                 overflow: TextOverflow.ellipsis,
-                                                 fontFamily: helvetica_neu_bold,
-                                                 fontSize: 14.sp,
-                                                 letterSpacing: -0.28,
-                                               ),
-                                             ),
-                                           ],
-                                         ),
-                                       ),
-                                       Tab(
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.center,
-                                           children: [
-                                             Text(
-                                               'Videos',
-                                               textAlign: TextAlign.left,
-                                               maxLines: 1,
-                                               style: TextStyle(
-                                                 overflow: TextOverflow.ellipsis,
-                                                 fontFamily: helvetica_neu_bold,
-                                                 fontSize: 14.sp,
-                                                 letterSpacing: -0.28,
-                                               ),
-                                             ),
-                                           ],
-                                         ),
-                                       ),
-                                       Tab(
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.center,
-                                           children: [
-                                             Text(
-                                               'Events',
-                                               textAlign: TextAlign.left,
-                                               maxLines: 1,
-                                               style: TextStyle(
-                                                 overflow: TextOverflow.ellipsis,
-                                                 fontFamily: helvetica_neu_bold,
-                                                 fontSize: 14.sp,
-                                                 letterSpacing: -0.28,
-                                               ),
-                                             ),
-                                           ],
-                                         ),
-                                       ),
-                                     ],
-                                     indicator: BoxDecoration(
-                                       color: Colors.white,
-                                       borderRadius: BorderRadius.circular(80),
-                                       boxShadow: [
-                                         BoxShadow(
-                                           color: Color(0x19121212),
-                                           offset:  Offset(
-                                             0.0,
-                                             5.0,
-                                           ),
-                                           blurRadius: 5.0,
-                                           spreadRadius: 2.0,
-                                         ), //BoxShadow
-
-                                       ],
-                                     ),
-
-                                     unselectedLabelColor: grey_aaaaaa,
-                                     labelColor: black_121212,
-                                     controller: tabController,
-                                   ),
-                                 ),
-                               ),
-                             ),
-
-                           ],
-                         ),
-                       )
-                     ];
-                   },
+                headerSliverBuilder: (context, value) {
+                  return [
+                    SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                            child: Column(
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    controller.details.value.fullName != null ||
+                                            controller
+                                                    .details.value.firstName !=
+                                                null
+                                        ? Padding(
+                                            padding: EdgeInsets.only(top: 16.h),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                setHelceticaBold(
+                                                    controller.details.value
+                                                            .fullName ??
+                                                        controller.details.value
+                                                            .firstName ??
+                                                        "",
+                                                    24.sp,
+                                                    black_121212,
+                                                    FontWeight.w500,
+                                                    FontStyle.normal,
+                                                    -0.96),
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: SvgPicture.asset(
+                                                      check_icon,
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                    )),
+                                                controller.details.value
+                                                                .instagramUrl !=
+                                                            null &&
+                                                        controller.details.value
+                                                                .twitterUrl !=
+                                                            null &&
+                                                        controller.details.value
+                                                                .linkedinUrl !=
+                                                            null
+                                                    ? Row(
+                                                        children: [
+                                                          controller
+                                                                      .details
+                                                                      .value
+                                                                      .instagramUrl !=
+                                                                  null
+                                                              ? Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          right:
+                                                                              15.w),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    icon_instagram,
+                                                                    height:
+                                                                        24.h,
+                                                                    width: 24.w,
+                                                                  ),
+                                                                )
+                                                              : Container(),
+                                                          controller
+                                                                      .details
+                                                                      .value
+                                                                      .twitterUrl !=
+                                                                  null
+                                                              ? Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          right:
+                                                                              15.w),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    icon_twitter,
+                                                                    height:
+                                                                        24.h,
+                                                                    width: 24.w,
+                                                                  ),
+                                                                )
+                                                              : Container(),
+                                                          controller
+                                                                      .details
+                                                                      .value
+                                                                      .linkedinUrl !=
+                                                                  null
+                                                              ? Image.asset(
+                                                                  icon_linkedin,
+                                                                  height: 24.h,
+                                                                  width: 24.w,
+                                                                )
+                                                              : Container(),
+                                                        ],
+                                                      )
+                                                    : Container()
+                                              ],
+                                            ),
+                                          )
+                                        : Container(),
+                                    controller.details.value.currentJobs != null
+                                        ? controller.details.value.currentJobs!
+                                                    .title !=
+                                                null
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 12.h),
+                                                child: Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: setHelveticaMedium(
+                                                      controller
+                                                              .details
+                                                              .value
+                                                              .currentJobs!
+                                                              .title! +
+                                                          ' @' +
+                                                          controller
+                                                              .details
+                                                              .value
+                                                              .currentJobs!
+                                                              .companyName!,
+                                                      16,
+                                                      grey_3f3f3f,
+                                                      FontWeight.w500,
+                                                      FontStyle.normal),
+                                                ),
+                                              )
+                                            : Container()
+                                        : Container(),
+                                    controller.details.value.currentJobs != null
+                                        ? controller.details.value.currentJobs!
+                                                    .website !=
+                                                null
+                                            ? Align(
+                                                alignment: Alignment.topLeft,
+                                                child: setHelveticaMedium(
+                                                    controller
+                                                            .details
+                                                            .value
+                                                            .currentJobs!
+                                                            .website ??
+                                                        "",
+                                                    12.sp,
+                                                    blue_0a84ff,
+                                                    FontWeight.w500,
+                                                    FontStyle.normal),
+                                              )
+                                            : Container()
+                                        : Container(),
+                                    controller.details.value.aboutUs != null
+                                        ? Padding(
+                                            padding: EdgeInsets.only(top: 5.h),
+                                            child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.85,
+                                                child: setHelveticaMedium(
+                                                    controller
+                                                        .details.value.aboutUs!,
+                                                    12.sp,
+                                                    grey_aaaaaa,
+                                                    FontWeight.w500,
+                                                    FontStyle.normal,
+                                                    0.1,
+                                                    3),
+                                              ),
+                                            ),
+                                          )
+                                        : Container(),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.86,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          controller.details.value
+                                                          .cityDetails !=
+                                                      null &&
+                                                  controller.details.value
+                                                          .stateDetails !=
+                                                      null &&
+                                                  controller.details.value
+                                                          .countryDetails !=
+                                                      null
+                                              ? Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 18.h),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.location_on,
+                                                        color: orange_ff881a,
+                                                        size: 12.r,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 2.w,
+                                                      ),
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: setHelveticaMedium(
+                                                            controller
+                                                                    .details
+                                                                    .value
+                                                                    .cityDetails!
+                                                                    .name! +
+                                                                "," +
+                                                                controller
+                                                                    .details
+                                                                    .value
+                                                                    .stateDetails!
+                                                                    .name! +
+                                                                "," +
+                                                                controller
+                                                                    .details
+                                                                    .value
+                                                                    .countryDetails!
+                                                                    .name!,
+                                                            10,
+                                                            grey_aaaaaa,
+                                                            FontWeight.w500,
+                                                            FontStyle.normal),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : Container(),
+                                          userId != controller.details.value.id
+                                              ? InkWell(
+                                                  onTap: () {
+                                                    if (controller
+                                                            .admire.value ==
+                                                        'Admire')
+                                                      checkNet(context)
+                                                          .then((value) {
+                                                        controller
+                                                            .createAdmireAPI(
+                                                                context,
+                                                                controller
+                                                                    .details
+                                                                    .value
+                                                                    .id);
+                                                      });
+                                                  },
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 5.h),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.1),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    40.r)),
+                                                      ),
+                                                      child: Padding(
+                                                        padding: EdgeInsets.all(
+                                                            12.r),
+                                                        child: Row(children: [
+                                                          Icon(
+                                                            Icons
+                                                                .person_add_alt_sharp,
+                                                            color: orange,
+                                                            size: 12.r,
+                                                          ),
+                                                          SizedBox(width: 6.w),
+                                                          setHelveticaMedium(
+                                                              controller
+                                                                  .admire.value,
+                                                              12.sp,
+                                                              black_121212,
+                                                              FontWeight.w500,
+                                                              FontStyle.normal)
+                                                        ]),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : Container()
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          const Divider(
+                            color: grey_f4f6f6,
+                            thickness: 1,
+                          ),
+                          userId != controller.details.value.id
+                              ? controller.otherAdmireList.length >= 1
+                                  ? const SizedBox(
+                                      height: 24,
+                                    )
+                                  : Container()
+                              : controller.admireList.length >= 1
+                                  ? const SizedBox(
+                                      height: 24,
+                                    )
+                                  : Container(),
+                          userId != controller.details.value.id
+                              ? controller.otherAdmireList.length >= 1
+                                  ? SeeAllAdmiresWidget(userId)
+                                  : Container()
+                              : controller.admireList.length >= 1
+                                  ? SeeAllAdmiresWidget(userId)
+                                  : Container(),
+                          userId != controller.details.value.id
+                              ? controller.otherAdmireList.length >= 1
+                                  ? Admires(
+                                      userId: userId, controller: controller)
+                                  : Container()
+                              : controller.admireList.length >= 1
+                                  ? Admires(
+                                      userId: userId, controller: controller)
+                                  : Container(),
+                          userId != controller.details.value.id
+                              ? controller.otherAdmireList.length >= 1
+                                  ? const Divider(
+                                      color: grey_f4f6f6,
+                                      thickness: 1,
+                                    )
+                                  : Container()
+                              : controller.admireList.length >= 1
+                                  ? const Divider(
+                                      color: grey_f4f6f6,
+                                      thickness: 1,
+                                      height: 1,
+                                    )
+                                  : Container(),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 16.w, right: 16.w, top: 22.h),
+                            child: Container(
+                              height: 66.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(80.r),
+                                color: grey_f5f5f5,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 8.w,
+                                    right: 8.w,
+                                    bottom: 8.h,
+                                    top: 8.h),
+                                child: TabBar(
+                                  tabs: [
+                                    Tab(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Profile',
+                                            textAlign: TextAlign.left,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                              fontFamily: helvetica_neu_bold,
+                                              fontSize: 14.sp,
+                                              letterSpacing: -0.28,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Tab(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Posts',
+                                            textAlign: TextAlign.left,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                              fontFamily: helvetica_neu_bold,
+                                              fontSize: 14.sp,
+                                              letterSpacing: -0.28,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Tab(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Videos',
+                                            textAlign: TextAlign.left,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                              fontFamily: helvetica_neu_bold,
+                                              fontSize: 14.sp,
+                                              letterSpacing: -0.28,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Tab(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Events',
+                                            textAlign: TextAlign.left,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                              fontFamily: helvetica_neu_bold,
+                                              fontSize: 14.sp,
+                                              letterSpacing: -0.28,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                  indicator: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(80),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color(0x19121212),
+                                        offset: Offset(
+                                          0.0,
+                                          5.0,
+                                        ),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 2.0,
+                                      ), //BoxShadow
+                                    ],
+                                  ),
+                                  unselectedLabelColor: grey_aaaaaa,
+                                  labelColor: black_121212,
+                                  controller: tabController,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ];
+                },
                 body: Container(
-                  child:TabBarView(
+                  child: TabBarView(
                     controller: tabController,
                     children: [
                       ProfileTab(),
@@ -681,40 +723,41 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     );
   }
 
-  Padding SeeAllAdmiresWidget(userId) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-      child: Row(
-        children: [
-          setHelceticaBold(
-              '${controller.details.value.firstName.toString().capitalizeFirst} Admires',
-              14.sp,
-              black_121212,
-              FontWeight.w500,
-              FontStyle.normal,
-              0.2),
-          const Spacer(),
-          GestureDetector(
-            onTap: () {
-              if(userId == controller.details.value.id){
-                Get.to(SeeAllAdmires(type: 'user'));
-              }else{
-                Get.to(SeeAllAdmires(type: 'other'));
-              }
-              
-            },
-            child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
-                FontWeight.w500, FontStyle.normal, -0.24),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          const Icon(
-            Icons.arrow_forward,
-            color: grey_aaaaaa,
-            size: 12,
-          )
-        ],
+  Obx SeeAllAdmiresWidget(userId) {
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+        child: Row(
+          children: [
+            setHelceticaBold(
+                '${controller.details.value.firstName.toString().capitalizeFirst} Admires',
+                14.sp,
+                black_121212,
+                FontWeight.w500,
+                FontStyle.normal,
+                0.2),
+            const Spacer(),
+            GestureDetector(
+              onTap: () {
+                if (userId == controller.details.value.id) {
+                  Get.to(SeeAllAdmires(type: 'user'));
+                } else {
+                  Get.to(SeeAllAdmires(type: 'other'));
+                }
+              },
+              child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
+                  FontWeight.w500, FontStyle.normal, -0.24),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            const Icon(
+              Icons.arrow_forward,
+              color: grey_aaaaaa,
+              size: 12,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -733,8 +776,7 @@ class Admires extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-           EdgeInsets.only(top: 16.h, bottom: 16.h),
+      padding: EdgeInsets.only(top: 16.h, bottom: 16.h),
       child: Container(
         height: MediaQuery.of(context).size.height * 0.09,
         width: double.infinity,
@@ -744,7 +786,10 @@ class Admires extends StatelessWidget {
           separatorBuilder: (context, index) => SizedBox(
             width: 16.w,
           ),
-          padding: EdgeInsets.only(left: 24.w, right: 24.w,),
+          padding: EdgeInsets.only(
+            left: 24.w,
+            right: 24.w,
+          ),
           scrollDirection: Axis.horizontal,
           itemCount: userId != controller.details.value.id
               ? controller.otherAdmireList.length == 0
@@ -759,8 +804,8 @@ class Admires extends StatelessWidget {
                 userId != controller.details.value.id
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(50),
-                        child: controller.otherAdmireList[index]
-                                    .admireDetails!.image ==
+                        child: controller.otherAdmireList[index].admireDetails!
+                                    .image ==
                                 null
                             ? SvgPicture.asset(
                                 placeholder,
@@ -768,60 +813,58 @@ class Admires extends StatelessWidget {
                                 width: 48.w,
                               )
                             : CachedNetworkImage(
-                                imageUrl: controller
-                                    .otherAdmireList[index]
-                                    .admireDetails!
-                                    .image!,
-                          height: 48.h,
-                          width: 48.w,
+                                imageUrl: controller.otherAdmireList[index]
+                                    .admireDetails!.image!,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) =>
                                         SvgPicture.asset(
                                   placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                 ),
                                 errorWidget: (context, url, error) =>
                                     SvgPicture.asset(
                                   placeholder,
-                                      height: 48.h,
-                                      width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                 ),
                               ),
                       )
                     : ClipRRect(
                         borderRadius: BorderRadius.circular(50),
-                        child: controller.admireList[index].admireDetails!
-                                    .image ==
-                                null
-                            ? SvgPicture.asset(
-                                placeholder,
-                          height: 48.h,
-                          width: 48.w,
-                              )
-                            : CachedNetworkImage(
-                                imageUrl: controller.admireList[index]
-                                    .admireDetails!.image!,
-                          height: 48.h,
-                          width: 48.w,
-                                fit: BoxFit.cover,
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        SvgPicture.asset(
-                                  placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    SvgPicture.asset(
-                                  placeholder,
+                        child:
+                            controller.admireList[index].admireDetails!.image ==
+                                    null
+                                ? SvgPicture.asset(
+                                    placeholder,
+                                    height: 48.h,
+                                    width: 48.w,
+                                  )
+                                : CachedNetworkImage(
+                                    imageUrl: controller.admireList[index]
+                                        .admireDetails!.image!,
+                                    height: 48.h,
+                                    width: 48.w,
+                                    fit: BoxFit.cover,
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            SvgPicture.asset(
+                                      placeholder,
                                       height: 48.h,
                                       width: 48.w,
-                                ),
-                              ),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        SvgPicture.asset(
+                                      placeholder,
+                                      height: 48.h,
+                                      width: 48.w,
+                                    ),
+                                  ),
                       ),
-                 SizedBox(
+                SizedBox(
                   height: 4.h,
                 ),
                 setHelveticaMedium(
@@ -829,8 +872,8 @@ class Admires extends StatelessWidget {
                         ? controller.otherAdmireList[index].admireDetails!
                                 .firstName ??
                             ""
-                        : controller.admireList[index].admireDetails!
-                                .firstName ??
+                        : controller
+                                .admireList[index].admireDetails!.firstName ??
                             "",
                     12.sp,
                     black_121212,

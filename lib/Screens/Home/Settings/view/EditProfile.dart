@@ -194,7 +194,7 @@ class _EditProfileState extends State<EditProfile> {
                                         controller.firstnameController.value,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text, true)),
+                                        TextInputType.text, false)),
                                 SizedBox(
                                   width: 16.w,
                                 ),
@@ -204,7 +204,7 @@ class _EditProfileState extends State<EditProfile> {
                                         controller.lastnameController.value,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text, true)),
+                                        TextInputType.text, false)),
                               ],
                             ),
                             SizedBox(
@@ -215,7 +215,7 @@ class _EditProfileState extends State<EditProfile> {
                                 controller.usernameController.value,
                                 false,
                                 TextInputAction.next,
-                                TextInputType.text, true),
+                                TextInputType.text, false),
                             SizedBox(
                               height: 16.h,
                             ),
@@ -224,7 +224,7 @@ class _EditProfileState extends State<EditProfile> {
                                 controller.emailController.value,
                                 false,
                                 TextInputAction.next,
-                                TextInputType.emailAddress, true),
+                                TextInputType.emailAddress, false),
                             SizedBox(
                               height: 16.h,
                             ),
@@ -665,10 +665,14 @@ class _EditProfileState extends State<EditProfile> {
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: BlackButton("Save Profile", Colors.white, () {
-                if(imagePath.path.isNotEmpty){
-                  stepsController.imagePath.value = imagePath.path.toString();
+                if (controller.checkValidation(context)) {
+                  if(imagePath.path.isNotEmpty){
+                    stepsController.imagePath.value = imagePath.path.toString();
+                  }
+                  checkNet(context).then((value) {
+                    stepsController.personalInfoAPI(context, 'edit_profile');
+                  });
                 }
-                stepsController.personalInfoAPI(context, 'edit_profile');
               }),
             )
           ],

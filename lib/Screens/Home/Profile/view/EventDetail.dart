@@ -357,56 +357,56 @@ class _EventDetailState extends State<EventDetail> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BackLayout(),
-                Padding(
-                  padding: EdgeInsets.only(right: 24.w),
-                  child: controller.eventDetails.value.userId != userId
-                      ? Container()
-                      : Align(
-                          alignment: Alignment.topRight,
-                          child: PopupMenuButton(
-                              // padding: EdgeInsets.only(bottom: 20),
-                              // position: PopupMenuPosition.under,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.r)),
-                              icon: const Icon(Icons.more_horiz,
-                                  color: Colors.black),
-                              onSelected: (index) {
-                                if (index == 1) {
-                                } else if (index == 2) {
-                                  checkNet(context).then((value) => {
-                                        controller.eventDeleteAPI(context,
-                                            controller.eventDetails.value.id)
-                                      });
-                                }
-                              },
-                              itemBuilder: (context) => [
-                                    PopupMenuItem(
-                                      height: 35.h,
-                                      child: Text(
-                                        "Edit",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontSize: 14.sp),
-                                      ),
-                                      value: 1,
-                                    ),
-                                    PopupMenuItem(
-                                      height: 35.h,
-                                      child: Text(
-                                        "Delete",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontSize: 14.sp),
-                                      ),
-                                      value: 2,
-                                    ),
-                                  ]),
-                        ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.only(right: 24.w),
+                //   child: controller.eventDetails.value.userId != userId
+                //       ? Container()
+                //       : Align(
+                //           alignment: Alignment.topRight,
+                //           child: PopupMenuButton(
+                //               // padding: EdgeInsets.only(bottom: 20),
+                //               // position: PopupMenuPosition.under,
+                //               shape: RoundedRectangleBorder(
+                //                   borderRadius: BorderRadius.circular(10.r)),
+                //               icon: const Icon(Icons.more_horiz,
+                //                   color: Colors.black),
+                //               onSelected: (index) {
+                //                 if (index == 1) {
+                //                 } else if (index == 2) {
+                //                   checkNet(context).then((value) => {
+                //                         controller.eventDeleteAPI(context,
+                //                             controller.eventDetails.value.id)
+                //                       });
+                //                 }
+                //               },
+                //               itemBuilder: (context) => [
+                //                     PopupMenuItem(
+                //                       height: 35.h,
+                //                       child: Text(
+                //                         "Edit",
+                //                         style: TextStyle(
+                //                             color: Colors.black,
+                //                             fontFamily:
+                //                                 helveticaNeueNeue_medium,
+                //                             fontSize: 14.sp),
+                //                       ),
+                //                       value: 1,
+                //                     ),
+                //                     PopupMenuItem(
+                //                       height: 35.h,
+                //                       child: Text(
+                //                         "Delete",
+                //                         style: TextStyle(
+                //                             color: Colors.black,
+                //                             fontFamily:
+                //                                 helveticaNeueNeue_medium,
+                //                             fontSize: 14.sp),
+                //                       ),
+                //                       value: 2,
+                //                     ),
+                //                   ]),
+                //         ),
+                // ),
               ],
             ),
             SizedBox(
@@ -569,7 +569,7 @@ class _EventDetailState extends State<EventDetail> {
                                     ),
                                     SizedBox(
                                       height: 128.h,
-                                      width: MediaQuery.of(context).size.width ,
+                                      // width: MediaQuery.of(context).size.width,
                                       child: ListView.separated(
                                           primary: false,
                                           shrinkWrap: true,

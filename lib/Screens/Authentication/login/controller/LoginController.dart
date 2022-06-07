@@ -6,7 +6,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueF
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
-import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -116,10 +116,10 @@ class LoginController extends GetxController {
               } else if (lastQuestionsInfo != "Done") {
                 Get.offAll(const AdditionalLastQueView());
               } else {
-                Get.offAll(BottomNavigation());
+                Get.offAll(HomePage());
               }
             } else {
-              Get.offAll(BottomNavigation());
+              Get.offAll(HomePage());
             }
           } else {
             snackBar(context, model.message!);

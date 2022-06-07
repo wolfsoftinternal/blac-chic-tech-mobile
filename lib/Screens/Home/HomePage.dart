@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
 import 'package:blackchecktech/Screens/Home/Event/view/EventList.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
@@ -123,6 +124,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     })),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: BottomNavigation(
+                selectedIndex: 0,
               ),
             ),
           ],

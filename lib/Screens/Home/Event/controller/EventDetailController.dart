@@ -20,13 +20,17 @@ class EventDetailController extends GetxController {
   var cityList = <CityDatum>[].obs;
   RxString strCityId = "".obs;
   Rx<TextEditingController> dateController = TextEditingController().obs;
-  RxList<EventList> eventList = <EventList>[].obs;
+  RxList<EventList> eventList = <EventList>[].obs;          
   RxList<EventList> upcomingEventList = <EventList>[].obs;
   RxList<EventList> pastEventList = <EventList>[].obs;
   Rx<EventList> eventDetails = EventList().obs;
   ScrollController scrollController = ScrollController();
+  ScrollController pastUpcomingScrollController = ScrollController();
   RxInt pageNumber = 1.obs;
+  RxInt pastUpcomingPageNumber = 1.obs;
   RxBool isPaginationLoading = false.obs;
+  RxBool isPastUpcomingPaginationLoading = false.obs;
+  
 
   initScrolling(BuildContext context, body) {
     scrollController.addListener(() async {
@@ -45,6 +49,25 @@ class EventDetailController extends GetxController {
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
   }
 
+  initPastUpcomingScrolling(BuildContext context) {
+    pastUpcomingScrollController.addListener(() async {
+      if (pastUpcomingScrollController.position.maxScrollExtent ==
+          pastUpcomingScrollController.position.pixels) {
+        _scrollDown();
+        isPastUpcomingPaginationLoading.value = true;
+        pastUpcomingPageNumber = pastUpcomingPageNumber + 1;
+        dynamic body = {
+          'page': pastUpcomingPageNumber.toString(),
+        };
+        await allEventListApi(body);
+        isPastUpcomingPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _pastUpcomingScrollDown() {
+    pastUpcomingScrollController.jumpTo(pastUpcomingScrollController.position.maxScrollExtent);
+  }
 
   cityListApi() async {
     cityList.clear();
@@ -93,18 +116,25 @@ class EventDetailController extends GetxController {
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 200) {
+            List<EventList> upcoming = [];
+            List<EventList> past = [];
+
             EventListModel detail = EventListModel.fromJson(userModel);
             eventList.value = detail.data!;
 
             for(var item in eventList){
               if(item.event_type == 'past'){
-                pastEventList.add(item);
+                past.add(item);
               }else{
-                upcomingEventList.add(item);
+                upcoming.add(item);
               }
             }
+            upcomingEventList.value = upcoming;
+            pastEventList.value = past;
           } else if(model.statusCode == 101){
             eventList.clear();
+            upcomingEventList.clear();
+            pastEventList.clear();
           }else {
             print(res.reasonPhrase);
           }

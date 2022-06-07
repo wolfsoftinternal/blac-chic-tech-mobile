@@ -51,26 +51,26 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
         myModel!.data!.image == null
             ? SvgPicture.asset(
                 placeholder,
-                height: MediaQuery.of(context).size.height * .83,
+                height: controller.admireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
                 width: double.infinity,
                 fit: BoxFit.cover,
               )
             : CachedNetworkImage(
                 imageUrl: myModel!.data!.image!,
                 // widget.admireList.admireDetails!.image!,
-                height: MediaQuery.of(context).size.height * .83,
+                height: controller.admireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     SvgPicture.asset(
                   placeholder,
-                  height: MediaQuery.of(context).size.height * .83,
+                  height: controller.admireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
                 errorWidget: (context, url, error) => SvgPicture.asset(
                   placeholder,
-                  height: MediaQuery.of(context).size.height * .83,
+                  height: controller.admireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),

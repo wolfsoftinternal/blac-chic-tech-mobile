@@ -4,7 +4,7 @@ import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.da
 import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
-import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
+import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -95,10 +95,10 @@ class _EducationState extends State<EducationInfoFormView> {
                   } else if (lastQuestionsInfo != "Done") {
                     Get.offAll(const AdditionalLastQueView());
                   } else {
-                    Get.offAll(BottomNavigation());
+                    Get.offAll(HomePage());
                   }
                 } else {
-                  Get.offAll(BottomNavigation());
+                  Get.offAll(HomePage());
                 }
               }),
           Expanded(

@@ -124,6 +124,7 @@ class _EventLocationState extends State<EventLocation> {
                     alignment: Alignment.bottomCenter,
                     child: GestureDetector(
                         onTap: () async {
+                          _currentPosition = await _location.getLocation();
                           _controller.animateCamera(
                             CameraUpdate.newCameraPosition(
                               CameraPosition(
