@@ -39,6 +39,9 @@ const urlOrderUpdate = "/mobile/transaction/order/update";
 //video
 const urlVideoList = '/mobile/video-list';
 const urlVideoCreate = '/mobile/video-create';
+const urlVideoDetails = '/mobile/video-details';
+const urlVideoLike = "/mobile/video-like";
+const urlVideoDislike = "/mobile/video-dislike";
 
 //event
 const urlEventList = '/mobile/event-list';
@@ -57,3 +60,17 @@ const urlTopicList = '/mobile/topic-list';
 
 //user List
 const urlUserList = '/mobile/user/list';
+
+//my-playlist
+const urlMyPlayList = "/mobile/my-playlist";
+const urlAddToPlayList = '/mobile/add-to-playlist';
+const urlRemoveVideo = "/mobile/remove-from-playlist";
+
+//Comments
+const urlComments = "/mobile/video-comment-list";
+const urlAddComments = "/mobile/video-add-comment";
+
+//Find Speaker
+const urlFindSpeaker = '/mobile/find-speaker';
+
+const urlspeakerVideoList = '/mobile/speaker-videos';

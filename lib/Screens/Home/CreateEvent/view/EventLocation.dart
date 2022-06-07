@@ -10,6 +10,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Styles/my_strings.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -140,7 +141,7 @@ class _EventLocationState extends State<EventLocation> {
                               left: 14, right: 14, top: 6, bottom: 6),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(color: Colors.green),
+                              border: Border.all(color: black_121212),
                               borderRadius: const BorderRadius.all(
                                   Radius.circular(30.0))),
                           child: Row(
@@ -155,12 +156,13 @@ class _EventLocationState extends State<EventLocation> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              const Text("Use current location",
+                               Text("Use current location",
                                   style: TextStyle(
                                     color: black_121212,
-                                    fontFamily: helvetica_neu_bold,
+                                    fontFamily: helveticaNeueNeue_medium,
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.sp,
                                   ),
                                   textAlign: TextAlign.left),
                             ],
@@ -182,15 +184,15 @@ class _EventLocationState extends State<EventLocation> {
                   //   ),
                   // ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 50.0),
+                    padding:  EdgeInsets.only(top: 50.h),
                     child: Align(
                         //search input bar
                         alignment: Alignment.topCenter,
                         child: Row(
                           children: [
                             BackLayout(),
-                            const SizedBox(
-                              width: 20,
+                             SizedBox(
+                              width: 20.w,
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.70,
@@ -208,76 +210,89 @@ class _EventLocationState extends State<EventLocation> {
                                   ),
                                 ],
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 12.0),
-                                child: SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.6,
-                                  child: TextField(
-                                    controller: postController.searchLocationController.value,
-                                    readOnly: true,
-                                    decoration: InputDecoration(
-                                      border: UnderlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            width: 0,
-                                            color: Colors.transparent),
-                                      ),
-                                      disabledBorder: UnderlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            width: 0,
-                                            color: Colors.transparent),
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            width: 0,
-                                            color: Colors.transparent),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            width: 0,
-                                            color: Colors.transparent),
-                                      ),
-                                      hintText: "Search Location",
-                                      hintStyle: const TextStyle(
-                                          fontFamily: helvetica_neu_bold,
-                                          fontSize: 16,
-                                          color: grey_3f3f3f),
-                                    ),
-                                    style: const TextStyle(
-                                        fontFamily: helvetica_neu_bold,
-                                        fontSize: 16,
-                                        color: black_121212),
-                                    cursorColor: orange_ff881a,
-                                    onTap: () {
-                                      setState(() {
-                                        Get.to(PostLocation())!
-                                            .then((value) async {
-                                          _address =
-                                              postController.address.value;
-                                          List<geo.Location> locations =
-                                              await geo.locationFromAddress(
-                                                  _address);
-                                          getAddress(locations[0].latitude,
-                                              locations[0].longitude);
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding:  EdgeInsets.only(left: 12.w),
+                                      child: TextField(
+                                        controller: postController.searchLocationController.value,
+                                        readOnly: true,
+                                        decoration: InputDecoration(
 
-                                          _controller.moveCamera(
-                                            CameraUpdate.newCameraPosition(
-                                              CameraPosition(
-                                                  target: LatLng(
-                                                      locations[0].latitude,
-                                                      locations[0].longitude),
-                                                  zoom: 18),
-                                            ),
-                                          );
-                                        });
-                                      });
-                                    },
+                                          // suffixIcon: Padding(
+                                          //   padding:  EdgeInsets.all(16.0),
+                                          //   child: SvgPicture.asset(light_search_icon,),
+                                          // ),
+                                          border: UnderlineInputBorder(
+                                            borderRadius: BorderRadius.circular(18),
+                                            borderSide: const BorderSide(
+                                                width: 0,
+                                                color: Colors.transparent),
+                                          ),
+                                          disabledBorder: UnderlineInputBorder(
+                                            borderRadius: BorderRadius.circular(18),
+                                            borderSide: const BorderSide(
+                                                width: 0,
+                                                color: Colors.transparent),
+                                          ),
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderRadius: BorderRadius.circular(18),
+                                            borderSide: const BorderSide(
+                                                width: 0,
+                                                color: Colors.transparent),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderRadius: BorderRadius.circular(18),
+                                            borderSide: const BorderSide(
+                                                width: 0,
+                                                color: Colors.transparent),
+                                          ),
+                                          hintText: "Search Location",
+                                          hintStyle:  TextStyle(
+                                              fontFamily: roboto_medium,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w600,
+                                              color: grey_aaaaaa),
+                                        ),
+                                        style:  TextStyle(
+                                            fontFamily: roboto_medium,
+                                            fontSize: 14.sp,
+                                            color: black_121212),
+                                        cursorColor: orange_ff881a,
+                                        onTap: () {
+                                          setState(() {
+                                            Get.to(PostLocation())!
+                                                .then((value) async {
+                                              _address =
+                                                  postController.address.value;
+                                              List<geo.Location> locations =
+                                                  await geo.locationFromAddress(
+                                                      _address);
+                                              getAddress(locations[0].latitude,
+                                                  locations[0].longitude);
+
+                                              _controller.moveCamera(
+                                                CameraUpdate.newCameraPosition(
+                                                  CameraPosition(
+                                                      target: LatLng(
+                                                          locations[0].latitude,
+                                                          locations[0].longitude),
+                                                      zoom: 18),
+                                                ),
+                                              );
+                                            });
+                                          });
+                                        },
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  SvgPicture.asset(light_search_icon,
+                                  width: 18.w,height: 18.h,),
+                                  SizedBox(width: 15.w,)
+                                ],
                               ),
                             ),
                           ],
@@ -334,41 +349,61 @@ class _EventLocationState extends State<EventLocation> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Selected Location',
+
+                              // Rectangle 1329
+                              Center(
+                                child: Opacity(
+                                  opacity : 0.4000000059604645,
+                                  child:   Container(
+                                      width: 48,
+                                      height: 4,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(50)
+                                          ),
+                                          color: const Color(0xff96a6a3)
+                                      )
+                                  ),
+                                ),
+                              ),
+
+                               SizedBox(height: 18.h,),
+
+                               Text(' Location',
                                   style: TextStyle(
-                                      color: grey_3f3f3f,
+                                      color: grey_aaaaaa,
                                       fontWeight: FontWeight.w500,
-                                      fontFamily: helveticaNeueNeue_light,
+                                      fontFamily: helveticaNeueNeue_medium,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 10.0),
+                                      fontSize: 12.sp),
                                   textAlign: TextAlign.left),
                               const SizedBox(
                                 height: 14,
                               ),
                               Row(
                                 children: [
-                                  SvgPicture.asset(location_pin,
-                                      width: 24, height: 24),
-                                  const SizedBox(
-                                    width: 8,
+                                  SvgPicture.asset(icon_location,
+                                      width: 24.w, height: 24.h),
+                                   SizedBox(
+                                    width: 8.w,
                                   ),
                                   SizedBox(
-                                    width: 260,
+                                    width: 260.w,
                                     child: Text(_address,
-                                        style: const TextStyle(
+                                        style:  TextStyle(
                                             color: black_121212,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: helvetica_neu_bold,
                                             fontStyle: FontStyle.normal,
-                                            fontSize: 14),
+                                            fontSize: 14.sp),
                                         textAlign: TextAlign.left),
                                   ),
 
                                   // _buildBody(),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 16,
+                               SizedBox(
+                                height: 16.h,
                               ),
                               BlackButton(
                                 "Confirm Location",

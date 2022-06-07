@@ -632,6 +632,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                          ),
                                        ),
                                      ],
+
                                      indicator: BoxDecoration(
                                        color: Colors.white,
                                        borderRadius: BorderRadius.circular(80),
@@ -645,10 +646,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                            blurRadius: 5.0,
                                            spreadRadius: 2.0,
                                          ), //BoxShadow
-
                                        ],
                                      ),
-
+                                     isScrollable: false,
                                      unselectedLabelColor: grey_aaaaaa,
                                      labelColor: black_121212,
                                      controller: tabController,
@@ -683,7 +683,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
 
   Padding SeeAllAdmiresWidget(userId) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+      padding:  EdgeInsets.only(left: 24.w, right: 24.w),
       child: Row(
         children: [
           setHelceticaBold(

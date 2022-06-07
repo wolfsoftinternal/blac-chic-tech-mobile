@@ -12,7 +12,7 @@ GetIt getIt = GetIt.instance;
 
 const Color themeColor = Color(0xff00bc56);
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
   runApp(const MyApp());
@@ -28,8 +28,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-
-      builder: (BuildContext context,child) { 
+      builder: (BuildContext context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
@@ -37,11 +36,11 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
 
-        //  home: ListScreen(),
-            home: SplashScreen(),
-
+          home: SplashScreen(),
+          //  home: ListScreen(),
         );
       },
     );
   }
+  //
 }

@@ -30,7 +30,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_svg: ^1.0.0
+
+  flutter_svg: ^0.22.0
   intl: ^0.17.0
   get: ^4.6.1
   pageview_widget_indicator: ^0.0.4
@@ -39,7 +40,7 @@ dependencies:
   get_it: ^7.2.0
   connectivity: ^3.0.6
   image_picker: ^0.8.4+4
-  dotted_border: ^2.0.0+2
+  dotted_border: ^2.0.0
   cached_network_image: ^3.2.0
   material_tag_editor: ^0.1.2
   image_cropper: ^1.5.1
@@ -62,12 +63,13 @@ dependencies:
   cloud_functions: ^3.2.10
   cloud_firestore: ^1.0.7
   google_place: ^0.4.7
+  flutter_html: ^2.2.1
 
 
   wechat_assets_picker:
 #    path: ../
   wechat_camera_picker: ^3.2.0
-
+  share_plus: ^4.0.6
   meta: ^1.7.0
   package_info_plus: ^1.4.2
   path: ^1.8.0
