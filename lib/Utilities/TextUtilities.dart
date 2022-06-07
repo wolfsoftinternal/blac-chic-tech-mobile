@@ -36,6 +36,22 @@ Text setHelveticaRegular(String text, double size, Color color,
   );
 }
 
+
+Text setBoldSfProDisplayTextAlign(String text, double size, Color color, FontWeight weight,
+    FontStyle fontStyle,TextAlign textAlign) {
+  return Text(
+    text,
+    softWrap: true,
+    style: TextStyle(
+        fontSize: size,
+        fontFamily: helvetica_neu_bold,
+        fontWeight: weight,
+        color: color,
+        height: 1,
+        fontStyle: fontStyle),
+  );
+}
+
 Text setHelceticaBold(String text, double size, Color color, FontWeight weight,
     FontStyle fontStyle,
     [spacing]) {
@@ -91,6 +107,7 @@ Text setRoboto(String text, double size, Color color, FontWeight weight) {
           fontWeight: weight,
           fontFamily: "Roboto",
           fontStyle: FontStyle.normal,
+          letterSpacing: 0.5,
           fontSize: size),
       textAlign: TextAlign.left);
 }

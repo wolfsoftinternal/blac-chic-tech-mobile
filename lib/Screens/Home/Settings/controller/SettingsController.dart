@@ -76,4 +76,22 @@ class SettingsController extends GetxController {
       }
     });
   }
+
+  bool checkValidation(context) {
+    if (firstnameController.value.text.isEmpty) {
+      snackBar(context, "Enter First Name");
+      return false;
+    } else if (lastnameController.value.text.isEmpty) {
+      snackBar(context, "Enter Last Name");
+      return false;
+    } else if (usernameController.value.text.isEmpty) {
+      snackBar(context, "Enter Username");
+      return false;
+    } else if (!GetUtils.isEmail(emailController.value.text)) {
+      snackBar(context, "Enter valid email");
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

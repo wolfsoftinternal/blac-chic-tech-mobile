@@ -60,33 +60,35 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
                         fontStyle: FontStyle.normal,
                         fontSize: 16.sp),
                     textAlign: TextAlign.center),
-                Padding(
-                    padding:  EdgeInsets.only(right: 6.w),
-                    child: widget.type == 'user'
-                        ? InkWell(
-                            onTap: () {
-                              if (controller.isRearrange.value == false) {
-                                controller.isRearrange.value = true;
-                              } else {
-                                controller.isRearrange.value = false;
-                              }
-                            },
-                            child: Text(
-                                controller.isRearrange.value == false
-                                    ? 'Rearrange'
-                                    : 'Save',
-                                style: TextStyle(
-                                    color: orange_ff881a,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: helvetica_neu_bold,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 16.sp),
-                                textAlign: TextAlign.center),
-                          )
-                        : SizedBox(
-                            width: 48.r,
-                            height: 48.r,
-                          ))
+                Obx(
+                  () => Padding(
+                      padding:  EdgeInsets.only(right: 6.w),
+                      child: widget.type == 'user'
+                          ? InkWell(
+                              onTap: () {
+                                  if (controller.isRearrange.value == false) {
+                                    controller.isRearrange.value = true;
+                                  } else {
+                                    controller.isRearrange.value = false;
+                                  }
+                              },
+                              child: Text(
+                                  controller.isRearrange.value == false
+                                      ? 'Rearrange'
+                                      : 'Save',
+                                  style: TextStyle(
+                                      color: orange_ff881a,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: helvetica_neu_bold,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 16.sp),
+                                  textAlign: TextAlign.center),
+                            )
+                          : SizedBox(
+                              width: 48.r,
+                              height: 48.r,
+                            )),
+                )
               ],
             ),
           ),

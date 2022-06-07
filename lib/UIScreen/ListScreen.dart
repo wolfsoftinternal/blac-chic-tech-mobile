@@ -1,3 +1,4 @@
+
 import 'package:blackchecktech/Screens/Authentication/signup/view/FullInformationStepsView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
@@ -27,7 +28,7 @@ import 'package:blackchecktech/UIScreen/RegisteredPeople.dart';
 import 'package:blackchecktech/UIScreen/SpeakersVideos.dart';
 import 'package:blackchecktech/UIScreen/TagPeople.dart';
 import 'package:blackchecktech/UIScreen/TestSecond.dart';
-import 'package:blackchecktech/UIScreen/TransactionsPayoutsTabs.dart';
+import 'package:blackchecktech/Screens/Home/transactions/view/TransactionsPayoutsTabs.dart';
 import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
 import 'package:blackchecktech/UIScreen/UploadVideos.dart';
 import 'package:blackchecktech/UIScreen/VideoComments.dart';
@@ -36,810 +37,1609 @@ import 'package:blackchecktech/UIScreen/VideoSearch.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 
-import '../Screens/Authentication/login/view/LoginView.dart';
-import '../Welcome.dart';
-import 'Demo.dart';
-import 'EventList2.dart';
-import 'PastFeature.dart';
-import 'Test.dart';
-import 'VideoDetailTab.dart';
 
-class ListScreen extends StatelessWidget {
-  const ListScreen({Key? key}) : super(key: key);
+// import '../Screens/Authentication/login/view/LoginView.dart';
+// import '../Welcome.dart';
+// import 'Demo.dart';
+// import 'EventList2.dart';
+// <<<<<<< HEAD
+// import 'PastFeature.dart';
+// import 'Test.dart';
+// =======
+// import 'PastFeature1.dart';
+// import 'PastFeature2.dart';
+// import 'VideoDetailTab.dart';
+// >>>>>>> 239b05fdca5f747294cbf57fd8334bad3a56fa12
 
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-          backgroundColor: white_ffffff,
-          body: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProgressBarStep(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "FoureStep Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TestSecond(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "TestSecond Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VideoDetailTab(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "VideoDetailTab Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FilterTopicList(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "FilterTopicList Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Demo(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Demo Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Test(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Test Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PastFeature(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "PastFeature Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EventList2(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "EventList2 Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
+// class ListScreen extends StatelessWidget {
+//   const ListScreen({Key? key}) : super(key: key);
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TransactionsPayoutsTabs(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "TransactionsPayoutsTabs Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyPurchasedEvent(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "MyPurchasedEvent Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyPlayList(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "MyPlayList Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VideoComments(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "VideoComments Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VideoSearch(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "VideoSearch Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SpeakersVideos(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "SpeakersVideos Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FindSpeaker(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "FindSpeaker Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EventSearch(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "EventSearch Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VideoListBct(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "VideoListBct Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Featured(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Featured Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => EventTicketTxnId(EventList),
-                    //     ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "EventTicketTxnId Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EventTicket(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "EventTicket Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AboutMe(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "AboutMe Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AdmireGrid(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "AdmireGrid Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditProfile(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "EditProfile Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfileSetting(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "ProfileSetting Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Connect12(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Connect12 Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BcConnect(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "BcConnect Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PostGalleryPicker(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "PostGalleryPicker Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateEventDetail(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "CreateEventDetail Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RegisteredPeople(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "RegisteredPeople Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreatEventUploadImage(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "CreatEventUploadImage Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => UploadVideoDetail(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "UploadVideoDetail Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => UploadVideos(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "UploadVideos Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PostLocation(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "PostLocation Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TagPeople(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "TagPeople Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreatPost(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "CreatPost Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Welcome(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Welcome Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RegisterInfoView(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Register Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignupInfoView(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Signup Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignupFormView(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "SignupDetail Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FullInformationStepsView(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "FullInformationSteps Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginView(),
-                        ));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Login Screen",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SafeArea(
+//         child: Scaffold(
+// <<<<<<< HEAD
+//       backgroundColor: white_ffffff,
+//       body: SingleChildScrollView(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => ProgressBarStep(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "FoureStep Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             // GestureDetector(
+//             //   onTap: () {
+//             //     Navigator.push(
+//             //         context,
+//             //         MaterialPageRoute(
+//             //           builder: (context) => VideoDetailTab(),
+//             //         ));
+//             //   },
+//             //   child: Padding(
+//             //     padding: const EdgeInsets.all(12.0),
+//             //     child: Text(
+//             //       "VideoDetailTab Screen",
+//             //       style: TextStyle(
+//             //           color: Colors.black87,
+//             //           fontFamily: helveticaNeueNeue_medium,
+//             //           fontSize: 16),
+//             //     ),
+//             //   ),
+//             // ),
+//             // GestureDetector(
+//             //   onTap: () {
+//             //     Navigator.push(
+//             //         context,
+//             //         MaterialPageRoute(
+//             //           builder: (context) => FilterTopicList(),
+//             //         ));
+//             //   },
+//             //   child: Padding(
+//             //     padding: const EdgeInsets.all(12.0),
+//             //     child: Text(
+//             //       "FilterTopicList Screen",
+//             //       style: TextStyle(
+//             //           color: Colors.black87,
+//             //           fontFamily: helveticaNeueNeue_medium,
+//             //           fontSize: 16),
+//             //     ),
+//             //   ),
+//             // ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => Demo(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "Demo Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => Test(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "Test Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => PastFeature(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "PastFeature Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => EventList2(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "EventList2 Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => TransactionsPayoutsTabs(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "TransactionsPayoutsTabs Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => MyPurchasedEvent(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "MyPurchasedEvent Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => MyPlayList(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "MyPlayList Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             // GestureDetector(
+//             //   onTap: () {
+//             //     Navigator.push(
+//             //         context,
+//             //         MaterialPageRoute(
+//             //           builder: (context) => VideoComments(),
+//             //         ));
+//             //   },
+//             //   child: Padding(
+//             //     padding: const EdgeInsets.all(12.0),
+//             //     child: Text(
+//             //       "VideoComments Screen",
+//             //       style: TextStyle(
+//             //           color: Colors.black87,
+//             //           fontFamily: helveticaNeueNeue_medium,
+//             //           fontSize: 16),
+//             //     ),
+//             //   ),
+//             // ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => VideoSearch(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "VideoSearch Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             // GestureDetector(
+//             //   onTap: () {
+//             //     Navigator.push(
+//             //         context,
+//             //         MaterialPageRoute(
+//             //           builder: (context) => SpeakersVideos(),
+//             //         ));
+//             //   },
+//             //   child: Padding(
+//             //     padding: const EdgeInsets.all(12.0),
+//             //     child: Text(
+//             //       "SpeakersVideos Screen",
+//             //       style: TextStyle(
+//             //           color: Colors.black87,
+//             //           fontFamily: helveticaNeueNeue_medium,
+//             //           fontSize: 16),
+//             //     ),
+//             //   ),
+//             // ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => FindSpeaker(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "FindSpeaker Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => EventSearch(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "EventSearch Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => VideoListBct(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "VideoListBct Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => Featured(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "Featured Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => EventTicketTxnId(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "EventTicketTxnId Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => EventTicket(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "EventTicket Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => AboutMe(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "AboutMe Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => AdmireGrid(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "AdmireGrid Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => EditProfile(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "EditProfile Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => ProfileSetting(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "ProfileSetting Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => Connect12(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "Connect12 Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => BcConnect(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "BcConnect Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => PostGalleryPicker(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "PostGalleryPicker Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => CreateEventDetail(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "CreateEventDetail Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => RegisteredPeople(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "RegisteredPeople Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => CreatEventUploadImage(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "CreatEventUploadImage Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => UploadVideoDetail(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "UploadVideoDetail Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => UploadVideos(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "UploadVideos Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => PostLocation(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "PostLocation Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => TagPeople(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "TagPeople Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => CreatPost(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "CreatPost Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => Welcome(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "Welcome Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => RegisterInfoView(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "Register Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => SignupInfoView(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "Signup Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => SignupFormView(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "SignupDetail Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => FullInformationStepsView(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "FullInformationSteps Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => LoginView(),
+//                     ));
+//               },
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Text(
+//                   "Login Screen",
+//                   style: TextStyle(
+//                       color: Colors.black87,
+//                       fontFamily: helveticaNeueNeue_medium,
+//                       fontSize: 16),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     ));
+// =======
+//           backgroundColor: white_ffffff,
+//           body: SingleChildScrollView(
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => GridLayoutTest(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "GridLayoutTest Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => ProgressBarStep(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "FoureStep Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => TestSecond(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "TestSecond Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => Demo(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "Demo Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => VideoDetailTab(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "VideoDetailTab Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => FilterTopicList(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "FilterTopicList Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => PastFeature1(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "PastFeature1 Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => PastFeature2(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "PastFeature2 Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => EventList2(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "EventList2 Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => TransactionsPayoutsTabs(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "TransactionsPayoutsTabs Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => MyPurchasedEvent(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "MyPurchasedEvent Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => MyPlayList(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "MyPlayList Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => VideoComments(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "VideoComments Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => VideoSearch(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "VideoSearch Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => SpeakersVideos(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "SpeakersVideos Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => FindSpeaker(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "FindSpeaker Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => EventSearch(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "EventSearch Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => VideoListBct(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "VideoListBct Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => Featured(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "Featured Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     // Navigator.push(
+//                     //     context,
+//                     //     MaterialPageRoute(
+//                     //       builder: (context) => EventTicketTxnId(EventList),
+//                     //     ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "EventTicketTxnId Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => EventTicket(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "EventTicket Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => AboutMe(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "AboutMe Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => AdmireGrid(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "AdmireGrid Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => EditProfile(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "EditProfile Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => ProfileSetting(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "ProfileSetting Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => Connect12(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "Connect12 Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => BcConnect(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "BcConnect Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => PostGalleryPicker(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "PostGalleryPicker Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => CreateEventDetail(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "CreateEventDetail Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => RegisteredPeople(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "RegisteredPeople Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => CreatEventUploadImage(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "CreatEventUploadImage Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => UploadVideoDetail(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "UploadVideoDetail Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => UploadVideos(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "UploadVideos Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => PostLocation(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "PostLocation Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => TagPeople(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "TagPeople Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => CreatPost(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "CreatPost Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => Welcome(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "Welcome Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => RegisterInfoView(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "Register Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => SignupInfoView(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "Signup Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => SignupFormView(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "SignupDetail Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => FullInformationStepsView(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "FullInformationSteps Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//                 GestureDetector(
+//                   onTap: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => LoginView(),
+//                         ));
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.all(12.0),
+//                     child: Text(
+//                       "Login Screen",
+//                       style: TextStyle(
+//                           color: Colors.black87,
+//                           fontFamily: helveticaNeueNeue_medium,
+//                           fontSize: 16),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ));
+// >>>>>>> 239b05fdca5f747294cbf57fd8334bad3a56fa12
+//   }
+// }

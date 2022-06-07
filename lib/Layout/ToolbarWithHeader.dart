@@ -56,20 +56,20 @@ class ToolbarWithHeader extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        step == 0
-            ? Container()
-            : Padding(
-                padding:  EdgeInsets.only(right: 24.r),
-                child: InkWell(
-                    onTap: ontap,
-                    child: const Text(
-                      "Skip",
-                      style: TextStyle(
-                          color: black_121212,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: helveticaNeueNeue_medium),
-                    )),
-              )
+        // step == 0
+        //     ? Container()
+        //     : Padding(
+        //         padding:  EdgeInsets.only(right: 24.r),
+        //         child: InkWell(
+        //             onTap: ontap,
+        //             child: const Text(
+        //               "Skip",
+        //               style: TextStyle(
+        //                   color: black_121212,
+        //                   fontWeight: FontWeight.bold,
+        //                   fontFamily: helveticaNeueNeue_medium),
+        //             )),
+        //       )
       ],
     );
   }

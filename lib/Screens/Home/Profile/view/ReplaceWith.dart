@@ -60,6 +60,7 @@ class _ReplaceWithState extends State<ReplaceWith> {
                     }
                   }
                 },
+                autoFocus: false,
                 controller: controller.searchController.value,
               ),
             ),

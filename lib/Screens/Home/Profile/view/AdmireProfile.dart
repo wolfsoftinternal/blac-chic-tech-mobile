@@ -151,6 +151,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                       ],
                     ),
                   ),
+                  controller.admireList.isEmpty ? Container() :
                   Padding(
                     padding:  EdgeInsets.only(left: 24.w, right: 24.w),
                     child: Row(
@@ -181,6 +182,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                       ],
                     ),
                   ),
+                  controller.admireList.isEmpty ? Container() :
                   Padding(
                     padding:
                          EdgeInsets.only( top: 16.h),

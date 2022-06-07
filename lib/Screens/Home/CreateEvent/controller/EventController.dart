@@ -18,6 +18,7 @@ class EventController extends GetxController {
   Rx<TextEditingController> startDateController = TextEditingController().obs;
   Rx<TextEditingController> endDateController = TextEditingController().obs;
   Rx<TextEditingController> startTimeController = TextEditingController().obs;
+  Rx<TextEditingController> endTimeController = TextEditingController().obs;
   Rx<TextEditingController> venueController = TextEditingController().obs;
   Rx<TextEditingController> addressController = TextEditingController().obs;
   Rx<TextEditingController> cityController = TextEditingController().obs;
@@ -66,8 +67,9 @@ class EventController extends GetxController {
         'start_date': startDateController.value.text,
         'end_date': endDateController.value.text,
         'start_time': startTimeController.value.text,
+        'end_time': endTimeController.value.text,
         'venue': venueController.value.text,
-        'address': 'jkd',
+        'address': addressController.value.text,
         'details': detailController.value.text,
         'latitude': latitude.toString(),
         'longitude': longitude.toString(),
@@ -85,8 +87,9 @@ class EventController extends GetxController {
         'start_date': startDateController.value.text,
         'end_date': endDateController.value.text,
         'start_time': startTimeController.value.text,
+        'end_time': endTimeController.value.text,
         'venue': venueController.value.text,
-        'address': 'awdd',
+        'address': addressController.value.text,
         'details': detailController.value.text,
         'latitude': latitude.toString(),
         'longitude': longitude.toString(),
@@ -105,8 +108,9 @@ class EventController extends GetxController {
         'start_date': startDateController.value.text,
         'end_date': endDateController.value.text,
         'start_time': startTimeController.value.text,
+        'end_time': endTimeController.value.text,
         'venue': venueController.value.text,
-        'address': 'efdfd',
+        'address': addressController.value.text,
         'details': detailController.value.text,
         'latitude': latitude.toString(),
         'longitude': longitude.toString(),

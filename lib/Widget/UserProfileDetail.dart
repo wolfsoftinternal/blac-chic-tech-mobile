@@ -46,7 +46,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        widget.userDetails!.image == null
+        widget.userDetails.image == null
             ? SvgPicture.asset(
                 placeholder,
                 height: MediaQuery.of(context).size.height * .83,
@@ -181,10 +181,9 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                           //     ? widget.admireList.admireDetails!.fullName!
                           //         .toUpperCase()
                           //     : "",
-                          widget.userDetails.fullName != null
-                          ? widget.userDetails.fullName!
+                          widget.userDetails.fullName??""
                               .toUpperCase()
-                          : "",
+                         ,
                           40.sp,
                           white_ffffff,
                           FontWeight.w600,
@@ -252,7 +251,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                   // if (modelM!.data!.id == widget.admireList.admireId) {
                   //   controller.userProfileAPI(context);
 
-                  Get.to(SelectedUserProfile(userDetails: controller.selectedUserDetails.value));
+                  Get.to(SelectedUserProfile(userDetails: widget.userDetails));
 
                   // }
                   //  else {

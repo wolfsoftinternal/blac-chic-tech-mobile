@@ -4,23 +4,30 @@ import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Styles/colors.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Layout/MySeparator.dart';
+import '../Utilities/Constant.dart';
 
 class EventTicketTxnId extends StatefulWidget {
   final EventList eventDetails;
   final int selectedAdmissionPosition;
   final OrderListModel orderDetails;
+  final int debitedFromWallet;
+  final int debitedFromPayStack;
 
   const EventTicketTxnId(
       {Key? key,
       required this.eventDetails,
       required this.selectedAdmissionPosition,
-      required this.orderDetails})
+      required this.orderDetails,
+        required this.debitedFromWallet,
+        required this.debitedFromPayStack,
+      })
       : super(key: key);
 
   @override
@@ -43,10 +50,16 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    icon_cancel,
-                    width: 30.w,
-                    height: 30.h,
+                  GestureDetector(
+                    child: SvgPicture.asset(
+                      icon_cancel,
+                      width: 30.w,
+                      height: 30.h,
+                    ),
+
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
                   ),
                   SizedBox(
                     height: 32.h,
@@ -75,21 +88,27 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                   widget.eventDetails.poster == null
                                       ? SvgPicture.asset(
                                           placeholder,
-                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          height: 203.h,
+                                          fit: BoxFit.fill,
                                         )
                                       : CachedNetworkImage(
                                           imageUrl: widget.eventDetails.poster!,
-                                          fit: BoxFit.cover,
+                                    width: double.infinity,
+                                          height: 203.h,
+                                          fit: BoxFit.fill,
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               SvgPicture.asset(
                                             placeholder,
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.fill,
                                           ),
                                           errorWidget: (context, url, error) =>
                                               SvgPicture.asset(
                                             placeholder,
-                                            fit: BoxFit.cover,
+                                                height: 203.h,
+                                                width: double.infinity,
+                                            fit: BoxFit.fill,
                                           ),
                                         ),
                                   SizedBox(
@@ -101,7 +120,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                       style: TextStyle(
                                           color: black_121212,
                                           fontWeight: FontWeight.w900,
-                                          fontFamily: "NeueHelvetica",
+                                          fontFamily: helvetica_neu_bold,
                                           fontStyle: FontStyle.normal,
                                           fontSize: 18.sp),
                                       textAlign: TextAlign.left),
@@ -131,15 +150,16 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                 Text("NAME",
                                                     style: TextStyle(
                                                         color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w700,
                                                         fontFamily:
-                                                            "NeueHelvetica",
+                                                            helvetica_neu_bold,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 11.sp),
                                                     textAlign: TextAlign.left),
 
+                                                SizedBox(
+                                                  height: 5.h,
+                                                ),
                                                 // Fade Ogunro
                                                 Text(
                                                     widget.eventDetails.venue ??
@@ -152,6 +172,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                             "NeueHelvetica",
                                                         fontStyle:
                                                             FontStyle.normal,
+                                                        overflow: TextOverflow.ellipsis,
                                                         fontSize: 12.sp),
                                                     textAlign: TextAlign.left)
                                               ],
@@ -175,15 +196,16 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                 Text("DATE",
                                                     style: TextStyle(
                                                         color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w700,
                                                         fontFamily:
-                                                            "NeueHelvetica",
+                                                        helvetica_neu_bold,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 11.sp),
                                                     textAlign: TextAlign.left),
 
+                                                SizedBox(
+                                                  height: 5.h,
+                                                ),
                                                 // Fade Ogunro
                                                 Text(
                                                     widget.eventDetails
@@ -220,14 +242,16 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                 Text("START TIME",
                                                     style: TextStyle(
                                                         color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w700,
                                                         fontFamily:
-                                                            "NeueHelvetica",
+                                                        helvetica_neu_bold,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 11.sp),
                                                     textAlign: TextAlign.left),
+
+                                                SizedBox(
+                                                  height: 5.h,
+                                                ),
 
                                                 // Fade Ogunro
                                                 Text(
@@ -283,11 +307,11 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                             .price ??
                                                         ""),
                                                 style: TextStyle(
-                                                    color: Color(0xff121212),
+                                                    color: black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "Roboto",
+                                                    fontFamily: roboto_bold,
                                                     fontStyle: FontStyle.normal,
-                                                    fontSize: 12.0),
+                                                    fontSize: 12.sp),
                                                 textAlign: TextAlign.left),
 
                                             // Trxn ID 12321312112113
@@ -307,13 +331,13 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                               opacity: 0.699999988079071,
                                               child: Text("Qty",
                                                   style: TextStyle(
-                                                      color: Color(0xff121212),
+                                                      color: black_121212,
                                                       fontWeight:
                                                           FontWeight.w400,
-                                                      fontFamily: "Roboto",
+                                                      fontFamily: roboto_regular,
                                                       fontStyle:
                                                           FontStyle.normal,
-                                                      fontSize: 10.0),
+                                                      fontSize: 10.sp),
                                                   textAlign: TextAlign.center),
                                             ),
 
@@ -324,11 +348,11 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                 (widget.orderDetails.data
                                                         ?.total_tickets ??0).toString(),
                                                 style: TextStyle(
-                                                    color: Color(0xff121212),
+                                                    color: black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "Roboto",
+                                                    fontFamily: roboto_bold,
                                                     fontStyle: FontStyle.normal,
-                                                    fontSize: 12.0),
+                                                    fontSize: 12.sp),
                                                 textAlign: TextAlign.left),
 
                                             // Trxn ID 12321312112113
@@ -341,11 +365,11 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                   ?.total_price ??
                                               "",
                                           style: TextStyle(
-                                              color: Color(0xff121212),
+                                              color: black_121212,
                                               fontWeight: FontWeight.w900,
-                                              fontFamily: "Roboto",
+                                              fontFamily: roboto_bold,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12.0),
+                                              fontSize: 12.sp),
                                           textAlign: TextAlign.right),
 
                                       SizedBox(
@@ -355,7 +379,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                   ),
 
                                   SizedBox(
-                                    height: 34.h,
+                                    height: 20.h,
                                   ),
 
 
@@ -364,11 +388,11 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                     child: Text(
                                         "Debited from",
                                         style: TextStyle(
-                                            color: AppColor.grey_acacac,
+                                            color: grey_aaaaaa,
                                             fontWeight: FontWeight.w900,
-                                            fontFamily: "Roboto",
+                                            fontFamily: roboto_bold,
                                             fontStyle: FontStyle.normal,
-                                            fontSize: 12.0),
+                                            fontSize: 12.sp),
                                         textAlign: TextAlign.left),
                                   ),
 
@@ -382,23 +406,23 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                     Text(
                                         "Wallet",
                                         style: TextStyle(
-                                            color: Color(0xff121212),
+                                            color: black_121212,
                                             fontWeight: FontWeight.w900,
-                                            fontFamily: "Roboto",
+                                            fontFamily: roboto_regular,
                                             fontStyle: FontStyle.normal,
-                                            fontSize: 12.0),
+                                            fontSize: 12.sp),
                                         textAlign: TextAlign.right),
 
 
                                     Expanded(
                                       child: Text(
-                                          "5",
+                                         SharePreData.strDollar + widget.debitedFromWallet.toString(),
                                           style: TextStyle(
-                                              color: Color(0xff121212),
+                                              color:black_121212,
                                               fontWeight: FontWeight.w900,
-                                              fontFamily: "Roboto",
+                                              fontFamily: roboto_bold,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12.0),
+                                              fontSize: 12.sp),
                                           textAlign: TextAlign.right),
                                     ),
 
@@ -418,34 +442,34 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                     Text(
                                         "****7657689",
                                         style: TextStyle(
-                                            color: Color(0xff121212),
+                                            color: black_121212,
                                             fontWeight: FontWeight.w900,
-                                            fontFamily: "Roboto",
+                                            fontFamily: roboto_regular,
                                             fontStyle: FontStyle.normal,
-                                            fontSize: 12.0),
+                                            fontSize: 12.sp),
                                         textAlign: TextAlign.right),
 
 
                                     Expanded(
                                       child: Text(
-                                          "255",
+                                          SharePreData.strDollar + widget.debitedFromPayStack.toString(),
                                           style: TextStyle(
-                                              color: Color(0xff121212),
+                                              color: black_121212,
                                               fontWeight: FontWeight.w900,
-                                              fontFamily: "Roboto",
+                                              fontFamily: roboto_regular,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12.0),
+                                              fontSize: 12.sp),
                                           textAlign: TextAlign.right),
                                     ),
 
                                     SizedBox(
-                                      width: 40.w,
+                                      width: 20.w,
                                     )
 
                                   ],),
 
                                   SizedBox(
-                                    height: 20.w,
+                                    height: 14.w,
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
@@ -457,10 +481,10 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                               color: Color(0xff121212),
                                               fontWeight:
                                               FontWeight.w400,
-                                              fontFamily: "Roboto",
+                                              fontFamily: roboto_regular,
                                               fontStyle:
                                               FontStyle.normal,
-                                              fontSize: 10.0),
+                                              fontSize: 11.sp),
                                           textAlign: TextAlign.center),
                                     ),
                                   ),
@@ -540,16 +564,6 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
-
-    // Kill all previous screen
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomePage()
-        ),
-        ModalRoute.withName("/Home")
-    );
-
+    // Navigator.pop(context);
   }
 }

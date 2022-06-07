@@ -1,5 +1,9 @@
+import 'package:blackchecktech/Layout/ToolbarWithTitle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../Layout/ToolbarBackOnly.dart';
+import '../Styles/my_colors.dart';
 
 class TestSecond extends StatefulWidget {
   const TestSecond({Key? key}) : super(key: key);
@@ -8,7 +12,7 @@ class TestSecond extends StatefulWidget {
   State<TestSecond> createState() => _TestSecondState();
 }
 
-class _TestSecondState extends State<TestSecond>  with TickerProviderStateMixin{
+class _TestSecondState extends State<TestSecond> with TickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -58,7 +62,35 @@ class _TestSecondState extends State<TestSecond>  with TickerProviderStateMixin{
             controller: tabController,
             children: [
               /// Each content from each tab will have a dynamic height
-              Container(),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
+                      children: [
+                        BackLayout(),
+                        // BC-CONNECT
+                        Padding(
+                          padding: EdgeInsets.only(top: 14.h),
+                          child: Center(
+                            child: Text("title",
+                                style: TextStyle(
+                                    color: black_121212,
+                                    fontFamily: "NeueHelvetica",
+                                    fontSize: 16.sp),
+                                textAlign: TextAlign.right),
+                          ),
+                        )
+                      ],
+                    ),
+
+                    SizedBox(height: 15.h,),
+
+                    ToolbarWithTitle("_title")
+                  ],
+                ),
+              ),
               Container()
             ],
           ),
