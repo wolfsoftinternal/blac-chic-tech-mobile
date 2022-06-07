@@ -36,6 +36,7 @@ class _CreateEventState extends State<CreateEvent> {
   VideoController videoController = Get.put(VideoController());
   final eventKey = GlobalKey<FormState>();
   TimeOfDay? startTime;
+  TimeOfDay? endTime;
   List cards = [""];
   List benefits = [];
   List cardsTicketPrice = [""];
@@ -138,8 +139,7 @@ class _CreateEventState extends State<CreateEvent> {
                           child: Form(
                             key: eventKey,
                             child: Padding(
-                              padding:  EdgeInsets.only(
-                                  left: 24.w, right: 24.w),
+                              padding: EdgeInsets.only(left: 24.w, right: 24.w),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -164,7 +164,7 @@ class _CreateEventState extends State<CreateEvent> {
                                             false),
                                   ),
                                   Padding(
-                                    padding:  EdgeInsets.only(top: 16.h),
+                                    padding: EdgeInsets.only(top: 16.h),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -179,8 +179,8 @@ class _CreateEventState extends State<CreateEvent> {
                                               setRoboto('START DATE', 12.sp,
                                                   grey_aaaaaa, FontWeight.w800),
                                               Padding(
-                                                padding:  EdgeInsets.only(
-                                                    top: 8.h),
+                                                padding:
+                                                    EdgeInsets.only(top: 8.h),
                                                 child:
                                                     setTextFieldHelveticaMediumOrangeBorder(
                                                         controller
@@ -212,8 +212,8 @@ class _CreateEventState extends State<CreateEvent> {
                                               setRoboto('END DATE', 12.sp,
                                                   grey_aaaaaa, FontWeight.w800),
                                               Padding(
-                                                padding:  EdgeInsets.only(
-                                                    top: 8.h),
+                                                padding:
+                                                    EdgeInsets.only(top: 8.h),
                                                 child:
                                                     setTextFieldHelveticaMediumOrangeBorder(
                                                         controller
@@ -238,36 +238,86 @@ class _CreateEventState extends State<CreateEvent> {
                                     ),
                                   ),
                                   Padding(
-                                    padding:  EdgeInsets.only(top: 16.h),
-                                    child: setRoboto('START TIME', 12.sp,
-                                        grey_aaaaaa, FontWeight.w800),
-                                  ),
-                                  Padding(
-                                    padding:  EdgeInsets.only(top: 8.h),
-                                    child:
-                                        setTextFieldHelveticaMediumOrangeBorder(
-                                            controller
-                                                .startTimeController.value,
-                                            "Select start time",
-                                            false,
-                                            TextInputType.text,
-                                            TextInputAction.next,
-                                            () => {
-                                                  // on Chnages
-                                                },
-                                            validateStartTime,
-                                            true, () async {
-                                      startTime = await showTimePicker(
-                                        initialTime: TimeOfDay.now(),
-                                        context: context,
-                                      );
-                                      if (startTime != null) {
-                                        controller.startTimeController.value
-                                                .text =
-                                            startTime!.format(
-                                                context); //set the value of text field.
-                                      }
-                                    }),
+                                    padding: EdgeInsets.only(top: 16.h),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              setRoboto('START TIME', 12.sp,
+                                                  grey_aaaaaa, FontWeight.w800),
+                                              Padding(
+                                                padding: EdgeInsets.only(top: 8.h),
+                                                child:
+                                                    setTextFieldHelveticaMediumOrangeBorder(
+                                                        controller.startTimeController
+                                                            .value,
+                                                        "Select start time",
+                                                        false,
+                                                        TextInputType.text,
+                                                        TextInputAction.next,
+                                                        () => {
+                                                              // on Chnages
+                                                            },
+                                                        null,
+                                                        true, () async {
+                                                  startTime = await showTimePicker(
+                                                    initialTime: TimeOfDay.now(),
+                                                    context: context,
+                                                  );
+                                                  if (startTime != null) {
+                                                    controller.startTimeController
+                                                            .value.text =
+                                                        startTime!.format(
+                                                            context); //set the value of text field.
+                                                  }
+                                                }),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 16.w,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              setRoboto('END TIME', 12.sp,
+                                                  grey_aaaaaa, FontWeight.w800),
+                                              Padding(
+                                                padding: EdgeInsets.only(top: 8.h),
+                                                child:
+                                                    setTextFieldHelveticaMediumOrangeBorder(
+                                                        controller.endTimeController
+                                                            .value,
+                                                        "Select end time",
+                                                        false,
+                                                        TextInputType.text,
+                                                        TextInputAction.next,
+                                                        () => {
+                                                              // on Chnages
+                                                            },
+                                                        null,
+                                                        true, () async {
+                                                  endTime = await showTimePicker(
+                                                    initialTime: TimeOfDay.now(),
+                                                    context: context,
+                                                  );
+                                                  if (endTime != null) {
+                                                    controller.endTimeController
+                                                            .value.text =
+                                                        endTime!.format(
+                                                            context); //set the value of text field.
+                                                  }
+                                                }),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(top: 16.h),
@@ -275,7 +325,7 @@ class _CreateEventState extends State<CreateEvent> {
                                         grey_aaaaaa, FontWeight.w800),
                                   ),
                                   Padding(
-                                    padding:  EdgeInsets.only(top: 8.h),
+                                    padding: EdgeInsets.only(top: 8.h),
                                     child:
                                         setTextFieldHelveticaMediumOrangeBorder(
                                       controller.venueController.value,
@@ -291,12 +341,12 @@ class _CreateEventState extends State<CreateEvent> {
                                     ),
                                   ),
                                   Padding(
-                                    padding:  EdgeInsets.only(top: 16.h),
+                                    padding: EdgeInsets.only(top: 16.h),
                                     child: setRoboto('ADDRESS', 12.sp,
                                         grey_aaaaaa, FontWeight.w800),
                                   ),
                                   Padding(
-                                      padding:  EdgeInsets.only(top: 8.h),
+                                      padding: EdgeInsets.only(top: 8.h),
                                       child: TextFormField(
                                         controller:
                                             controller.addressController.value,
@@ -356,7 +406,7 @@ class _CreateEventState extends State<CreateEvent> {
                                         },
                                       )),
                                   Padding(
-                                    padding:  EdgeInsets.only(top: 16.h),
+                                    padding: EdgeInsets.only(top: 16.h),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -371,8 +421,8 @@ class _CreateEventState extends State<CreateEvent> {
                                               setRoboto('CITY', 12.sp,
                                                   grey_aaaaaa, FontWeight.w800),
                                               Padding(
-                                                padding:  EdgeInsets.only(
-                                                    top: 8.h),
+                                                padding:
+                                                    EdgeInsets.only(top: 8.h),
                                                 child:
                                                     setTextFieldHelveticaMediumOrangeBorder(
                                                   controller
@@ -402,8 +452,8 @@ class _CreateEventState extends State<CreateEvent> {
                                               setRoboto('COUNTRY', 12.sp,
                                                   grey_aaaaaa, FontWeight.w800),
                                               Padding(
-                                                padding:  EdgeInsets.only(
-                                                    top: 8.h),
+                                                padding:
+                                                    EdgeInsets.only(top: 8.h),
                                                 child:
                                                     setTextFieldHelveticaMediumOrangeBorder(
                                                         controller
@@ -426,12 +476,12 @@ class _CreateEventState extends State<CreateEvent> {
                                     ),
                                   ),
                                   Padding(
-                                    padding:  EdgeInsets.only(top: 16.h),
+                                    padding: EdgeInsets.only(top: 16.h),
                                     child: setRoboto('ADMISSION OPTIONS', 12.sp,
                                         grey_aaaaaa, FontWeight.w800),
                                   ),
                                   Padding(
-                                    padding:  EdgeInsets.only(top: 18.h),
+                                    padding: EdgeInsets.only(top: 18.h),
                                     child: Row(
                                       children: [
                                         InkWell(
@@ -449,7 +499,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                   beneController = [];
                                               benefitController
                                                   .add(beneController);
-                                              for (var element in cardsTicketPrice) {
+                                              for (var element
+                                                  in cardsTicketPrice) {
                                                 var ticketCategoryController =
                                                     element;
                                                 var ticketAmountController =
@@ -536,7 +587,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                   beneController = [];
                                               benefitController
                                                   .add(beneController);
-                                              for (var element in cardsTicketPrice) {
+                                              for (var element
+                                                  in cardsTicketPrice) {
                                                 var ticketBeneController =
                                                     TextEditingController(
                                                         text: element);
@@ -613,7 +665,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                   beneController = [];
                                               benefitController
                                                   .add(beneController);
-                                              for (var element in cardsTicketPrice) {
+                                              for (var element
+                                                  in cardsTicketPrice) {
                                                 var ticketBeneController =
                                                     TextEditingController(
                                                         text: element);
@@ -702,9 +755,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                         .value ==
                                                     0
                                                 ? Padding(
-                                                    padding:
-                                                         EdgeInsets.only(
-                                                            top: 24.h),
+                                                    padding: EdgeInsets.only(
+                                                        top: 24.h),
                                                     child: Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -717,8 +769,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                             FontWeight.w800),
                                                         Padding(
                                                           padding:
-                                                               EdgeInsets
-                                                                      .only(
+                                                              EdgeInsets.only(
                                                                   top: 8.h),
                                                           child: Container(
                                                             height: 48.h,
@@ -1344,7 +1395,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                       text: ''));
                                               benefitController
                                                   .add(beneController);
-                                              for (var element in cardsTicketPrice) {
+                                              for (var element
+                                                  in cardsTicketPrice) {
                                                 var ticketCategoryController =
                                                     element;
                                                 var ticketAmountController =
@@ -1415,10 +1467,10 @@ class _CreateEventState extends State<CreateEvent> {
                         benefits.add('"${benefitController[i][j].text}"');
                       }
                       ticketPrice.add({
-                          '"price"': '"${amountController[i].text}"',
-                          '"category"': '"${categoryController[i]}"',
-                          '"benifits"': benefits
-                        });
+                        '"price"': '"${amountController[i].text}"',
+                        '"category"': '"${categoryController[i]}"',
+                        '"benifits"': benefits
+                      });
                     }
 
                     List itemList = [];

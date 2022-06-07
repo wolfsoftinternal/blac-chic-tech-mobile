@@ -36,7 +36,6 @@ class _PostLocationState extends State<PostLocation> {
     if (result != null && result.predictions != null && mounted) {
       setState(() {
         predictions = result.predictions!;
-        name.clear();
         getDetils();
       });
     }
@@ -76,11 +75,13 @@ class _PostLocationState extends State<PostLocation> {
                   onSubmit: (value) {
                     if (value.isNotEmpty) {
                       controller.searchLocationController.value.text = value;
+                      // name = [];
                       autoCompleteSearch(value);
                     } else {
                       if (predictions.length > 0 && mounted) {
                         setState(() {
                           predictions = [];
+                          name = [];
                         });
                       }
                     }
@@ -93,7 +94,7 @@ class _PostLocationState extends State<PostLocation> {
                 primary: false,
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(0),
-                itemCount: name.isEmpty ? 0 : predictions.length,
+                itemCount: predictions.length,
                 itemBuilder: (context, i) => InkWell(
                   onTap: () {
                     debugPrint(predictions[i].description);
@@ -106,7 +107,7 @@ class _PostLocationState extends State<PostLocation> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(name[i],
+                      Text(name[i].toString() == '' ? '' : name[i], 
                           style: TextStyle(
                               color: black_121212,
 

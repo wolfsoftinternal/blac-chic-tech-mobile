@@ -47,8 +47,10 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     });
 
     controller.initScrolling(context, controller.details.value.id.toString());
-    controller.initVideoScrolling(context, controller.details.value.id.toString());
-    controller.initEventScrolling(context, controller.details.value.id.toString());
+    controller.initVideoScrolling(
+        context, controller.details.value.id.toString());
+    controller.initEventScrolling(
+        context, controller.details.value.id.toString());
     dynamic postBody = {
       'user_id': controller.details.value.id.toString(),
       'page': controller.postPageNumber.toString()
@@ -78,7 +80,6 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel!.data!.id!.toInt();
-    setState(() {});
 
     if (userId != controller.details.value.id) {
       dynamic body = {'user_id': controller.details.value.id.toString()};
@@ -94,6 +95,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
         }
       }
     }
+    setState(() {});
   }
 
   @override
@@ -103,7 +105,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       body: Obx(
         () => Column(
           children: [
-             SizedBox(
+            SizedBox(
               height: 60.h,
             ),
             Container(
@@ -114,9 +116,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     height: 48.h,
                     width: 48.w,
                   ),
-
                   const Spacer(),
-
                   Center(
                     child: GestureDetector(
                       onTap: () {
@@ -133,22 +133,22 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                               )
                             : CachedNetworkImage(
                                 imageUrl: controller.details.value.image!,
-                          height: 48.h,
-                          width: 48.w,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) =>
                                         SvgPicture.asset(
                                   placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                   fit: BoxFit.cover,
                                 ),
                                 errorWidget: (context, url, error) =>
                                     SvgPicture.asset(
                                   placeholder,
-                                      height: 48.h,
-                                      width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -159,7 +159,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   userId == controller.details.value.id
                       ? GestureDetector(
                           onTap: () {
-                            createBottomSheet(context, controller.details.value.id);
+                            createBottomSheet(
+                                context, controller.details.value.id);
                           },
                           child: Container(
                             width: 48.w,
@@ -663,7 +664,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                      ];
                    },
                 body: Container(
-                  child:TabBarView(
+                  child: TabBarView(
                     controller: tabController,
                     children: [
                       ProfileTab(),
@@ -681,44 +682,43 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     );
   }
 
-  Padding SeeAllAdmiresWidget(userId) {
-    return Padding(
-      padding:  EdgeInsets.only(left: 24.w, right: 24.w),
-      child: Row(
-        children: [
-          setHelceticaBold(
-              '${controller.details.value.firstName.toString().capitalizeFirst} Admires',
-              14.sp,
-              black_121212,
-              FontWeight.w500,
-              FontStyle.normal,
-              0.2),
-          const Spacer(),
-          GestureDetector(
-            onTap: () {
-              if(userId == controller.details.value.id){
-                Get.to(SeeAllAdmires(type: 'user'));
-              }else{
-                Get.to(SeeAllAdmires(type: 'other'));
-              }
-              
-            },
-            child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
-                FontWeight.w500, FontStyle.normal, -0.24),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          const Icon(
-            Icons.arrow_forward,
-            color: grey_aaaaaa,
-            size: 12,
-          )
-        ],
-      ),
-    );
-  }
-}
+  Obx SeeAllAdmiresWidget(userId) {
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+        child: Row(
+          children: [
+            setHelceticaBold(
+                '${controller.details.value.firstName.toString().capitalizeFirst} Admires',
+                14.sp,
+                black_121212,
+                FontWeight.w500,
+                FontStyle.normal,
+                0.2),
+            const Spacer(),
+            GestureDetector(
+              onTap: () {
+                if (userId == controller.details.value.id) {
+                  Get.to(SeeAllAdmires(type: 'user'));
+                } else {
+                  Get.to(SeeAllAdmires(type: 'other'));
+                }
+              },
+              child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
+                  FontWeight.w500, FontStyle.normal, -0.24),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            const Icon(
+              Icons.arrow_forward,
+              color: grey_aaaaaa,
+              size: 12,
+            )
+          ],
+        ))
+        );
+  }}
 
 class Admires extends StatelessWidget {
   const Admires({
@@ -733,8 +733,7 @@ class Admires extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-           EdgeInsets.only(top: 16.h, bottom: 16.h),
+      padding: EdgeInsets.only(top: 16.h, bottom: 16.h),
       child: Container(
         height: MediaQuery.of(context).size.height * 0.09,
         width: double.infinity,
@@ -744,7 +743,10 @@ class Admires extends StatelessWidget {
           separatorBuilder: (context, index) => SizedBox(
             width: 16.w,
           ),
-          padding: EdgeInsets.only(left: 24.w, right: 24.w,),
+          padding: EdgeInsets.only(
+            left: 24.w,
+            right: 24.w,
+          ),
           scrollDirection: Axis.horizontal,
           itemCount: userId != controller.details.value.id
               ? controller.otherAdmireList.length == 0
@@ -759,8 +761,8 @@ class Admires extends StatelessWidget {
                 userId != controller.details.value.id
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(50),
-                        child: controller.otherAdmireList[index]
-                                    .admireDetails!.image ==
+                        child: controller.otherAdmireList[index].admireDetails!
+                                    .image ==
                                 null
                             ? SvgPicture.asset(
                                 placeholder,
@@ -768,60 +770,58 @@ class Admires extends StatelessWidget {
                                 width: 48.w,
                               )
                             : CachedNetworkImage(
-                                imageUrl: controller
-                                    .otherAdmireList[index]
-                                    .admireDetails!
-                                    .image!,
-                          height: 48.h,
-                          width: 48.w,
+                                imageUrl: controller.otherAdmireList[index]
+                                    .admireDetails!.image!,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) =>
                                         SvgPicture.asset(
                                   placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                 ),
                                 errorWidget: (context, url, error) =>
                                     SvgPicture.asset(
                                   placeholder,
-                                      height: 48.h,
-                                      width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                 ),
                               ),
                       )
                     : ClipRRect(
                         borderRadius: BorderRadius.circular(50),
-                        child: controller.admireList[index].admireDetails!
-                                    .image ==
-                                null
-                            ? SvgPicture.asset(
-                                placeholder,
-                          height: 48.h,
-                          width: 48.w,
-                              )
-                            : CachedNetworkImage(
-                                imageUrl: controller.admireList[index]
-                                    .admireDetails!.image!,
-                          height: 48.h,
-                          width: 48.w,
-                                fit: BoxFit.cover,
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        SvgPicture.asset(
-                                  placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    SvgPicture.asset(
-                                  placeholder,
+                        child:
+                            controller.admireList[index].admireDetails!.image ==
+                                    null
+                                ? SvgPicture.asset(
+                                    placeholder,
+                                    height: 48.h,
+                                    width: 48.w,
+                                  )
+                                : CachedNetworkImage(
+                                    imageUrl: controller.admireList[index]
+                                        .admireDetails!.image!,
+                                    height: 48.h,
+                                    width: 48.w,
+                                    fit: BoxFit.cover,
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            SvgPicture.asset(
+                                      placeholder,
                                       height: 48.h,
                                       width: 48.w,
-                                ),
-                              ),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        SvgPicture.asset(
+                                      placeholder,
+                                      height: 48.h,
+                                      width: 48.w,
+                                    ),
+                                  ),
                       ),
-                 SizedBox(
+                SizedBox(
                   height: 4.h,
                 ),
                 setHelveticaMedium(
@@ -829,8 +829,8 @@ class Admires extends StatelessWidget {
                         ? controller.otherAdmireList[index].admireDetails!
                                 .firstName ??
                             ""
-                        : controller.admireList[index].admireDetails!
-                                .firstName ??
+                        : controller
+                                .admireList[index].admireDetails!.firstName ??
                             "",
                     12.sp,
                     black_121212,

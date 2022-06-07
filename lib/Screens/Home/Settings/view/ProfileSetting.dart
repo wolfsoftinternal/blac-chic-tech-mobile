@@ -248,7 +248,9 @@ class _ProfileSettingState extends State<ProfileSetting> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Get.to(EditProfile());
+                                Get.to(EditProfile())!.then((value) {
+                                  init();
+                                });
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -681,7 +683,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                       ),
                                       Expanded(
                                         flex: 1,
-                                        child: GestureDetector(
+                                        child: InkWell(
                                           onTap: (){
                                             checkNet(context).then((value) {
                                               controller.userLogout(context);
