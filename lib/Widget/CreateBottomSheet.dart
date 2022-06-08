@@ -56,7 +56,7 @@ createBottomSheet(context, userId) {
                             child: InkWell(
                               onTap: () {
                                 Get.back();
-                                Get.to(const CreatPost())!.then((value) => {
+                                Get.to(const CreatePost())!.then((value) => {
                                       checkNet(context).then((value) {
                                         dynamic body = {
                                           'user_id': userId.toString()
