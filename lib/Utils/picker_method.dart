@@ -183,7 +183,6 @@ class PickMethod {
   }
 
   factory PickMethod.common(int maxAssetsCount) {
-    print("click thay che");
     return PickMethod(
       icon: '',
       name: '',
@@ -205,7 +204,8 @@ class PickMethod {
           print("image full path " + assets[0].relativePath! + "/"+assets[0].title!);
           image = assets;
           PostController controller = Get.put(PostController());
-          image = assets;
+          controller.assetImages.value = assets;
+          controller.assetImages.refresh();
 
         }
 
@@ -230,7 +230,7 @@ class PickMethod {
       description: 'Picker will served as 3 items on cross axis. '
           '(pageSize must be a multiple of gridCount)',
       method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
+        var picker = AssetPicker.pickAssets(
           context,
           pickerConfig: AssetPickerConfig(
             gridCount: 3,
@@ -240,6 +240,7 @@ class PickMethod {
             requestType: RequestType.all,
           ),
         );
+
       },
     );
   }

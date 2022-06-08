@@ -21,7 +21,8 @@ import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
 
 import '../../../../Model/BaseModel.dart';
-import '../../../../UIScreen/EventTicketTxnId.dart';
+import '../../../../UIScreen/EventTicket.dart';
+import '../../Event/view/EventTicketForSuccss.dart';
 import '../../../../Utils/CommonWidget.dart';
 import '../../../../Utils/preference_utils.dart';
 import '../../../../Utils/share_predata.dart';
@@ -891,6 +892,9 @@ class AdmireProfileController extends GetxController {
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
           String strData = value;
+
+          print('get success order details ' + strData);
+
           Map<String, dynamic> orderModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(orderModel);
 
@@ -898,7 +902,7 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            OrderCreateAPI(context, body, selectedPositionOfAdmission);
+            OrderUpdateAPI(context, body, selectedPositionOfAdmission);
           } else if (model.statusCode == 200) {
             OrderListModel detail = OrderListModel.fromJson(orderModel);
 
@@ -914,7 +918,12 @@ class AdmireProfileController extends GetxController {
 
             Navigator.pop(context);
 
-            Get.off(() => EventTicketTxnId(
+
+
+            // Get.off(() => EventTicket(
+            // ));
+
+            Get.off(() => EventTicketForSuccess(
               eventDetails: eventDetails.value,
               selectedAdmissionPosition: selectedPositionOfAdmission,
               orderDetails: detail,
