@@ -20,14 +20,14 @@ import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class CreatPost extends StatefulWidget {
-  const CreatPost({Key? key}) : super(key: key);
+class CreatePost extends StatefulWidget {
+  const CreatePost({Key? key}) : super(key: key);
 
   @override
-  _CreatPostState createState() => _CreatPostState();
+  _CreatePostState createState() => _CreatePostState();
 }
 
-class _CreatPostState extends State<CreatPost> {
+class _CreatePostState extends State<CreatePost> {
   VideoController videoController = Get.put(VideoController());
   PostController controller = Get.put(PostController());
   final _Location = [
@@ -48,7 +48,8 @@ class _CreatPostState extends State<CreatPost> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(
+            () => Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -126,14 +127,15 @@ class _CreatPostState extends State<CreatPost> {
                 //   fit: BoxFit.cover,
                 // ),
 
-                Image.file(
-                  File((image?[0].relativePath ?? "") +
+                controller.assetImages.length > 0? Image.file(
+                  File((controller.assetImages.value?[0].relativePath ?? "") +
                       "/" +
-                      (image?[0].title ?? "")),
+                      (controller.assetImages.value?[0].title ?? "")),
                   width: double.infinity,
                   height: 375.h,
                   fit: BoxFit.cover,
-                ),
+                ): SizedBox( width: double.infinity,
+                  height: 375.h,),
                 GestureDetector(
                   onTap: () {
                     Get.to(TagPeople());
@@ -299,6 +301,6 @@ class _CreatPostState extends State<CreatPost> {
           ],
         ),
       ),
-    );
+    ),);
   }
 }

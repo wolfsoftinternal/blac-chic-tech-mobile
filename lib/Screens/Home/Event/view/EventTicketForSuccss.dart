@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Screens/Home/Event/model/OrderListModel.dart';
+import 'package:blackchecktech/Screens/Home/Event/view/AllPurchasedEventTicketList.dart';
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Styles/colors.dart';
@@ -9,32 +10,33 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
-import '../Layout/MySeparator.dart';
-import '../Utilities/Constant.dart';
+import '../../../../Layout/MySeparator.dart';
+import '../../../../Utilities/Constant.dart';
 
-class EventTicketTxnId extends StatefulWidget {
+class EventTicketForSuccess extends StatefulWidget {
   final EventList eventDetails;
   final int selectedAdmissionPosition;
   final OrderListModel orderDetails;
   final int debitedFromWallet;
   final int debitedFromPayStack;
 
-  const EventTicketTxnId(
-      {Key? key,
-      required this.eventDetails,
-      required this.selectedAdmissionPosition,
-      required this.orderDetails,
-        required this.debitedFromWallet,
-        required this.debitedFromPayStack,
-      })
-      : super(key: key);
+  const EventTicketForSuccess({
+    Key? key,
+    required this.eventDetails,
+    required this.selectedAdmissionPosition,
+    required this.orderDetails,
+    required this.debitedFromWallet,
+    required this.debitedFromPayStack,
+  }) : super(key: key);
 
   @override
-  _EventTicketTxnIdState createState() => _EventTicketTxnIdState();
+  _EventTicketForSuccessState createState() => _EventTicketForSuccessState();
 }
 
-class _EventTicketTxnIdState extends State<EventTicketTxnId> {
+class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,11 +58,41 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                       width: 30.w,
                       height: 30.h,
                     ),
-
-                    onTap: (){
+                    onTap: () {
                       Navigator.pop(context);
                     },
                   ),
+
+                  // Your ticket was successfully purchased.
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50, right: 50),
+                    child: Text("Your ticket was successfully purchased.",
+                        style: TextStyle(
+                            color: black_121212,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: "NeueHelvetica",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 20.sp),
+                        textAlign: TextAlign.center),
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+
+                  // Your purchase was successfully processed and has been sent to your email.
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    child: Text(
+                        "Your purchase was successfully processed and has been sent to your email.",
+                        style: TextStyle(
+                            color: const Color(0xff5d5d5d),
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "NeueHelvetica",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 14.sp),
+                        textAlign: TextAlign.center),
+                  ),
+
                   SizedBox(
                     height: 32.h,
                   ),
@@ -94,7 +126,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                         )
                                       : CachedNetworkImage(
                                           imageUrl: widget.eventDetails.poster!,
-                                    width: double.infinity,
+                                          width: double.infinity,
                                           height: 203.h,
                                           fit: BoxFit.fill,
                                           progressIndicatorBuilder: (context,
@@ -106,8 +138,8 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                           errorWidget: (context, url, error) =>
                                               SvgPicture.asset(
                                             placeholder,
-                                                height: 203.h,
-                                                width: double.infinity,
+                                            height: 203.h,
+                                            width: double.infinity,
                                             fit: BoxFit.fill,
                                           ),
                                         ),
@@ -172,7 +204,8 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                             "NeueHelvetica",
                                                         fontStyle:
                                                             FontStyle.normal,
-                                                        overflow: TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         fontSize: 12.sp),
                                                     textAlign: TextAlign.left)
                                               ],
@@ -197,7 +230,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                     style: TextStyle(
                                                         color: grey_aaaaaa,
                                                         fontFamily:
-                                                        helvetica_neu_bold,
+                                                            helvetica_neu_bold,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 11.sp),
@@ -243,7 +276,7 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                     style: TextStyle(
                                                         color: grey_aaaaaa,
                                                         fontFamily:
-                                                        helvetica_neu_bold,
+                                                            helvetica_neu_bold,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 11.sp),
@@ -315,7 +348,6 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                 textAlign: TextAlign.left),
 
                                             // Trxn ID 12321312112113
-
                                           ],
                                         ),
                                       ),
@@ -334,19 +366,24 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                                       color: black_121212,
                                                       fontWeight:
                                                           FontWeight.w400,
-                                                      fontFamily: roboto_regular,
+                                                      fontFamily:
+                                                          roboto_regular,
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 10.sp),
                                                   textAlign: TextAlign.center),
                                             ),
 
-                                            SizedBox(width: 10,),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
 
                                             // GOLD - $50
                                             Text(
                                                 (widget.orderDetails.data
-                                                        ?.total_tickets ??0).toString(),
+                                                            ?.total_tickets ??
+                                                        0)
+                                                    .toString(),
                                                 style: TextStyle(
                                                     color: black_121212,
                                                     fontWeight: FontWeight.w900,
@@ -382,11 +419,9 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                     height: 20.h,
                                   ),
 
-
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
-                                        "Debited from",
+                                    child: Text("Debited from",
                                         style: TextStyle(
                                             color: grey_aaaaaa,
                                             fontWeight: FontWeight.w900,
@@ -396,63 +431,13 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                         textAlign: TextAlign.left),
                                   ),
 
-
                                   SizedBox(
                                     height: 12.h,
                                   ),
 
-                                  
-                                  Row(children: [
-                                    Text(
-                                        "Wallet",
-                                        style: TextStyle(
-                                            color: black_121212,
-                                            fontWeight: FontWeight.w900,
-                                            fontFamily: roboto_regular,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 12.sp),
-                                        textAlign: TextAlign.right),
-
-
-                                    Expanded(
-                                      child: Text(
-                                         SharePreData.strDollar + widget.debitedFromWallet.toString(),
-                                          style: TextStyle(
-                                              color:black_121212,
-                                              fontWeight: FontWeight.w900,
-                                              fontFamily: roboto_bold,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: 12.sp),
-                                          textAlign: TextAlign.right),
-                                    ),
-
-                                    SizedBox(
-                                      width: 20.w,
-                                    )
-
-                                  ],),
-
-
-                                  SizedBox(
-                                    height: 12.h,
-                                  ),
-
-
-                                  Row(children: [
-                                    Text(
-                                        "****7657689",
-                                        style: TextStyle(
-                                            color: black_121212,
-                                            fontWeight: FontWeight.w900,
-                                            fontFamily: roboto_regular,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 12.sp),
-                                        textAlign: TextAlign.right),
-
-
-                                    Expanded(
-                                      child: Text(
-                                          SharePreData.strDollar + widget.debitedFromPayStack.toString(),
+                                  Row(
+                                    children: [
+                                      Text("Wallet",
                                           style: TextStyle(
                                               color: black_121212,
                                               fontWeight: FontWeight.w900,
@@ -460,13 +445,57 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                               fontStyle: FontStyle.normal,
                                               fontSize: 12.sp),
                                           textAlign: TextAlign.right),
-                                    ),
+                                      Expanded(
+                                        child: Text(
+                                            SharePreData.strDollar +
+                                                widget.debitedFromWallet
+                                                    .toString(),
+                                            style: TextStyle(
+                                                color: black_121212,
+                                                fontWeight: FontWeight.w900,
+                                                fontFamily: roboto_bold,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.sp),
+                                            textAlign: TextAlign.right),
+                                      ),
+                                      SizedBox(
+                                        width: 20.w,
+                                      )
+                                    ],
+                                  ),
 
-                                    SizedBox(
-                                      width: 20.w,
-                                    )
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
 
-                                  ],),
+                                  Row(
+                                    children: [
+                                      Text("****7657689",
+                                          style: TextStyle(
+                                              color: black_121212,
+                                              fontWeight: FontWeight.w900,
+                                              fontFamily: roboto_regular,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 12.sp),
+                                          textAlign: TextAlign.right),
+                                      Expanded(
+                                        child: Text(
+                                            SharePreData.strDollar +
+                                                widget.debitedFromPayStack
+                                                    .toString(),
+                                            style: TextStyle(
+                                                color: black_121212,
+                                                fontWeight: FontWeight.w900,
+                                                fontFamily: roboto_regular,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.sp),
+                                            textAlign: TextAlign.right),
+                                      ),
+                                      SizedBox(
+                                        width: 20.w,
+                                      )
+                                    ],
+                                  ),
 
                                   SizedBox(
                                     height: 14.w,
@@ -476,14 +505,14 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                     child: Opacity(
                                       opacity: 0.699999988079071,
                                       child: Text(
-                                          "Trxn ID " + widget.orderDetails.data!.transaction_id!,
+                                          "Trxn ID " +
+                                              widget.orderDetails.data!
+                                                  .transaction_id!,
                                           style: TextStyle(
                                               color: Color(0xff121212),
-                                              fontWeight:
-                                              FontWeight.w400,
+                                              fontWeight: FontWeight.w400,
                                               fontFamily: roboto_regular,
-                                              fontStyle:
-                                              FontStyle.normal,
+                                              fontStyle: FontStyle.normal,
                                               fontSize: 11.sp),
                                           textAlign: TextAlign.center),
                                     ),
@@ -492,9 +521,6 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                   SizedBox(
                                     height: 52.h,
                                   ),
-
-
-
 
                                   // BARCODE TICKET
                                   Text("BARCODE TICKET",
@@ -508,12 +534,21 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
                                   SizedBox(
                                     height: 12.h,
                                   ),
-                                  Image.asset(
-                                    barcode,
-                                    width: double.infinity,
-                                    height: 70.h,
-                                    fit: BoxFit.fill,
-                                  )
+
+                                  Center(
+                                      child: Container(
+                                          width: double.infinity,
+                                          height: 70.h,
+                                          child:SfBarcodeGenerator(value: widget.orderDetails.data?.barcode??"")
+                                      )
+                                  ),
+
+                                  // Image.asset(
+                                  //   barcode,
+                                  //   width: double.infinity,
+                                  //   height: 70.h,
+                                  //   fit: BoxFit.fill,
+                                  // )
                                 ],
                               ),
                             ),
@@ -558,7 +593,6 @@ class _EventTicketTxnIdState extends State<EventTicketTxnId> {
       ),
     ));
   }
-
 
   @override
   void dispose() {

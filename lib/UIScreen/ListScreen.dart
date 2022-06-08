@@ -14,9 +14,8 @@ import 'package:blackchecktech/UIScreen/CreateEventDetail.dart';
 import 'package:blackchecktech/UIScreen/EditProfile.dart';
 import 'package:blackchecktech/UIScreen/EventSearch.dart';
 import 'package:blackchecktech/UIScreen/EventTicket.dart';
-import 'package:blackchecktech/UIScreen/EventTicketTxnId.dart';
+import 'package:blackchecktech/Screens/Home/Event/view/EventTicketForSuccss.dart';
 import 'package:blackchecktech/UIScreen/Featured.dart';
-import 'package:blackchecktech/UIScreen/FilterTopicList.dart';
 import 'package:blackchecktech/UIScreen/FindSpeaker.dart';
 import 'package:blackchecktech/UIScreen/MyPlayList.dart';
 import 'package:blackchecktech/UIScreen/MyPurchasedEvent.dart';
@@ -32,7 +31,6 @@ import 'package:blackchecktech/Screens/Home/transactions/view/TransactionsPayout
 import 'package:blackchecktech/UIScreen/UploadVideoDetail.dart';
 import 'package:blackchecktech/UIScreen/UploadVideos.dart';
 import 'package:blackchecktech/UIScreen/VideoComments.dart';
-import 'package:blackchecktech/UIScreen/VideoListBct.dart';
 import 'package:blackchecktech/UIScreen/VideoSearch.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';

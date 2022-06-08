@@ -44,6 +44,8 @@ class Order {
         this.total_price,
         this.transaction_id,
         this.barcode,
+        this.wallet_amount,
+        this.trans_amount,
         this.status,
         this.createdAt,
         this.updatedAt,
@@ -59,6 +61,8 @@ class Order {
     String? total_price;
     String? transaction_id;
     String? barcode;
+    String? wallet_amount;
+    String? trans_amount;
     int? status;
     DateTime? createdAt;
     DateTime? updatedAt;
@@ -74,6 +78,8 @@ class Order {
         total_price: json["total_price"],
         transaction_id: json["transaction_id"],
         barcode: json["barcode"],
+        wallet_amount: json["wallet_amount"],
+        trans_amount: json["trans_amount"],
         status: json["status"],
         createdAt: json["created_at"] != null ? DateTime.parse(json["created_at"]) : null,
         updatedAt: json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null,
@@ -89,7 +95,9 @@ class Order {
         "total_tickets": total_tickets,
         "total_price": total_price,
         "total_price": transaction_id,
-        "total_price": barcode,
+        "barcode": barcode,
+        "wallet_amount": wallet_amount,
+        "trans_amount": trans_amount,
         "status": status,
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),

@@ -10,7 +10,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:photo_manager/photo_manager.dart';
 
 class PostController extends GetxController {
   Rx<TextEditingController> captionController = TextEditingController().obs;
@@ -19,9 +19,9 @@ class PostController extends GetxController {
   RxList<UserList> searchList = <UserList>[].obs;
   RxList location = [].obs;
   RxString address = "".obs;
-  Rx<TextEditingController> searchLocationController = TextEditingController().obs;
-
-
+  Rx<TextEditingController> searchLocationController =
+      TextEditingController().obs;
+  RxList<AssetEntity> assetImages = <AssetEntity>[].obs;
 
   createPostAPI(BuildContext context) async {
     var preferences = MySharedPref();
@@ -46,6 +46,14 @@ class PostController extends GetxController {
       'longitude': '1.54622',
       'tagged_users': taggedUser.join(',')
     });
+
+    if (assetImages.length > 0) {
+      request.files.add(await http.MultipartFile.fromPath(
+          'image',
+          (assetImages.value?[0].relativePath ?? "") +
+              "/" +
+              (assetImages.value?[0].title ?? "")));
+    }
 
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
