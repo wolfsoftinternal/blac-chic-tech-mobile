@@ -15,6 +15,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -187,12 +188,8 @@ class _VideoDetailState extends State<VideoDetail> {
               child: ListView.builder(
                   shrinkWrap: true,
                   primary: false,
-                  itemCount: controller.videoDetailList.length,
+                  itemCount: controller.videoList.length,
                   itemBuilder: (context, index) {
-                    controller.position.value =
-                        controller.videoController[index].value.position;
-                    controller.duration.value =
-                        controller.videoController[index].value.duration;
                     return Padding(
                       padding: const EdgeInsets.only(
                           left: 24.0, right: 24.0, bottom: 24.0),
@@ -215,136 +212,31 @@ class _VideoDetailState extends State<VideoDetail> {
                           padding: const EdgeInsets.all(20.0),
                           child: Column(
                             children: [
-                              Stack(
-                                children: [
-                                  SizedBox(
-                                    height: 300,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: FutureBuilder(
-                                      future: controller
-                                          .initializeVideoPlayerFuture[index],
-                                      builder: (context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          return ClipRRect(
-                                            borderRadius: BorderRadius.all(
-                                                const Radius.circular(5)),
-                                            child: AspectRatio(
-                                              aspectRatio: controller
-                                                  .videoController[index]
-                                                  .value
-                                                  .aspectRatio,
-                                              child: VideoPlayer(controller
-                                                  .videoController[index]),
+                              SizedBox(
+                                height: 220,
+                                width: MediaQuery.of(context).size.width,
+                                child:
+                                    controller.videoList[index].embededCode ==
+                                            null
+                                        ? Center(
+                                            child: SizedBox(
+                                            height: 20,
+                                            width: 20,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                      Color(0xff04080f)),
                                             ),
-                                          );
-                                        } else {
-                                          return Container();
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 15,
-                                    right: 15,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        height: 32,
-                                        width: 47,
-                                        child: Center(
-                                          child: setHelceticaBold(
-                                              controller.videoDetailList[index]
-                                                      .duration ??
-                                                  "00:00",
-                                              12.0,
-                                              white_ffffff,
-                                              FontWeight.w500,
-                                              FontStyle.normal),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                      top: 130,
-                                      left: 130,
-                                      child: InkWell(
-                                          onTap: () {
-                                            if (controller.videoController[index]
-                                                .value.isPlaying) {
-                                              setState(() {
-                                                controller.videoController[index]
-                                                    .pause();
-                                              });
-                                            } else {
-                                              setState(() {
-                                                controller.videoController[index]
-                                                    .play();
-                                              });
-                                            }
-                                          },
-                                          child: controller.videoController[index]
-                                                  .value.isPlaying
-                                              ? Container(
-                                                  height: 40,
-                                                  width: 40,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.grey
-                                                        .withOpacity(0.5),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50.0),
-                                                  ),
-                                                  child: Icon(
-                                                    Icons.pause,
-                                                    color: white_ffffff,
-                                                    size: 20,
-                                                  ))
-                                              // : Container()
-                                              : controller.position.value ==
-                                                      controller.duration.value
-                                                  ? SvgPicture.asset(icon_play)
-                                                  : SvgPicture.asset(icon_play))),
-                                  Positioned(
-                                    bottom: 15,
-                                    left: 15,
-                                    child: Container(
-                                      height: 40,
-                                      width: 120,
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(colors: const [
-                                          Color(0xff1c2535),
-                                          Color(0xff04080f)
-                                        ]),
-                                        borderRadius: BorderRadius.all(
-                                            const Radius.circular(40)),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 8.0, right: 8.0),
-                                        child: Row(
-                                          children: [
-                                            GestureDetector(
-                                                child: Icon(
-                                              Icons.image,
-                                              color: Colors.red,
-                                            )),
-                                            SizedBox(
-                                              width: 8,
-                                            ),
-                                            setHelceticaBold(
-                                                "1,2k liked",
-                                                14,
-                                                white_ffffff,
-                                                FontWeight.w500,
-                                                FontStyle.normal)
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                          ))
+                                        : FittedBox(
+                                            fit: BoxFit.cover,
+                                            child: Html(
+                                                data: controller
+                                                    .videoList[index]
+                                                    .embededCode
+                                                    .toString()),
+                                          ),
                               ),
                               SizedBox(
                                 height: 15,
@@ -356,7 +248,7 @@ class _VideoDetailState extends State<VideoDetail> {
                                     children: [
                                       TextSpan(
                                         text:
-                                            "@${controller.videoDetailList[index].eventSpoken ?? ""} ",
+                                            "@${controller.videoList[index].eventSpoken ?? ""} ",
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontFamily: helvetica_neu_bold,
@@ -365,8 +257,8 @@ class _VideoDetailState extends State<VideoDetail> {
                                         ),
                                       ),
                                       TextSpan(
-                                          text: controller.videoDetailList[index]
-                                                  .caption ??
+                                          text: controller
+                                                  .videoList[index].caption ??
                                               "",
                                           style: TextStyle(
                                               fontSize: 14,
@@ -387,7 +279,7 @@ class _VideoDetailState extends State<VideoDetail> {
             ),
           ),
           if (controller.isVideoPaginationLoading.value == true)
-                PaginationUtils().loader(),
+            PaginationUtils().loader(),
         ]),
       ),
     );

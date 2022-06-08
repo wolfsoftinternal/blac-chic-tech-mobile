@@ -439,8 +439,6 @@ class AdmireProfileController extends GetxController {
       if(videoPageNumber == 1){
         if(isFrom == null){
           videoList.clear();
-        }else{
-          videoDetailList.clear();
         }
       }
       http.StreamedResponse res = value;
@@ -459,30 +457,10 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             VideoListModel detail = VideoListModel.fromJson(userModel);
 
-            if (isFrom == null) {
+            // if (isFrom == null) {
               videoList.addAll(detail.data!);
-              for (int i = 0; i < videoList.length; i++) {
-                if (videoList[i].file == null) {
-                  videoList.remove(videoList[i]);
-                }
-                videoControllerList
-                    .add(VideoPlayerController.network(videoList[i].file!));
-                initializeVideoPlayerFutureList
-                    .add(videoControllerList[i].initialize());
-              }
-            } else {
-              videoDetailList.addAll(detail.data!);
-              videoController.clear();
-              for (int i = 0; i < videoDetailList.length; i++) {
-                if (videoDetailList[i].file == null) {
-                  videoDetailList.remove(videoDetailList[i]);
-                }
-                videoController.add(
-                    VideoPlayerController.network(videoDetailList[i].file!));
-                initializeVideoPlayerFuture
-                    .add(videoController[i].initialize());
-              }
-            }
+              print(videoList);
+            // }
           }
         });
       } else {
