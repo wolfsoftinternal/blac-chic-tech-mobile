@@ -69,7 +69,6 @@ class _EventTicketState extends State<EventTicket> {
 
                       SizedBox(height: 32.h,),
 
-
                       Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
