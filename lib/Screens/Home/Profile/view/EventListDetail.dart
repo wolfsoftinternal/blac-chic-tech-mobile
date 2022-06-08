@@ -326,14 +326,14 @@ class _EventListDetailState extends State<EventListDetail> {
                                                   left: 6.w, right: 6.w),
                                               child: ClipRRect(
                                                         borderRadius: BorderRadius.circular(50),
-                                                        child: controller.eventList[index].hosts == null
+                                                        child: controller.eventList[index].hosts.toString().isEmpty
                                                             ? Icon(
                                                                 Icons.person,
                                                                 size: 15.r,
                                                                 color:
                                                                     grey_aaaaaa,
                                                               )
-                                                            : controller.eventList[index].hosts!.first.image.toString() == ''
+                                                            : controller.eventList[index].hosts![0].image.toString() == ''
                                                                 ? Icon(
                                                                     Icons.person,
                                                                     size: 15.r,
@@ -343,7 +343,7 @@ class _EventListDetailState extends State<EventListDetail> {
                                                                 : CachedNetworkImage(
                                                                     imageUrl: controller
                                                                         .eventList[index]
-                                                                        .hosts!.first
+                                                                        .hosts![0]
                                                                         .image!,
                                                                     height: 15.h,
                                                                     width: 15.w,

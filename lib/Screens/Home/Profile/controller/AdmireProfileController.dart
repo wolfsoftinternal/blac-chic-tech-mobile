@@ -52,7 +52,7 @@ class AdmireProfileController extends GetxController {
   RxList<UserList> searchList = <UserList>[].obs;
   Rx<TextEditingController> searchController = TextEditingController().obs;
   RxInt selectedIndex = 1.obs;
-  RxString admire = ''.obs;
+  RxString admire = 'Admire'.obs;
   RxInt count = 1.obs;
   RxInt total = 0.obs;
   RxInt finalTotal = 0.obs;
@@ -222,9 +222,6 @@ class AdmireProfileController extends GetxController {
               print('admire list ' + admireList.value.toString());
             } else {
               otherAdmireList.value = detail.data!;
-
-              print('admire list ' +
-                  otherAdmireList.value[0].admireDetails!.firstName!);
             }
           }
         });

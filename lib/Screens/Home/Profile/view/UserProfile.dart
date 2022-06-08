@@ -80,33 +80,33 @@ class _UserProfileState extends State<UserProfile> {
                         controller.details.value.image == null
                             ? SvgPicture.asset(
                           placeholder,
-                          height: MediaQuery.of(context).size.height * .83,
+                          height: controller.otherAdmireList.isEmpty ?  MediaQuery.of(context).size.height :  MediaQuery.of(context).size.height * .83,
                           width: double.infinity,
                           fit: BoxFit.cover,
                         )
                             : CachedNetworkImage(
                           imageUrl: controller.details.value.image??"",
                           // widget.admireList.admireDetails!.image!,
-                          height: MediaQuery.of(context).size.height * .83,
+                          height: controller.otherAdmireList.isEmpty ?  MediaQuery.of(context).size.height :  MediaQuery.of(context).size.height * .83,
                           width: double.infinity,
                           fit: BoxFit.cover,
                           progressIndicatorBuilder: (context, url, downloadProgress) =>
                               SvgPicture.asset(
                                 placeholder,
-                                height: MediaQuery.of(context).size.height * .83,
+                                height: controller.otherAdmireList.isEmpty ?  MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                               ),
                           errorWidget: (context, url, error) => SvgPicture.asset(
                             placeholder,
-                            height: MediaQuery.of(context).size.height * .83,
+                            height: controller.otherAdmireList.isEmpty ?  MediaQuery.of(context).size.height :  MediaQuery.of(context).size.height * .83,
                             width: double.infinity,
                             fit: BoxFit.cover,
                           ),
                         ),
                         Container(
                           color: Colors.black.withOpacity(0.3),
-                          height: MediaQuery.of(context).size.height * .83,
+                          height: controller.otherAdmireList.isEmpty ?  MediaQuery.of(context).size.height :  MediaQuery.of(context).size.height * .83,
                         ),
                         Padding(
                           padding:  EdgeInsets.only(left: 24.w,top: 50.h),
@@ -282,13 +282,13 @@ class _UserProfileState extends State<UserProfile> {
                                   // if (modelM!.data!.id == widget.admireList.admireId) {
                                   //   controller.userProfileAPI(context);
 
-                                  Get.to(SelectedUserProfile(userDetails: controller.details.value));
+                                  // Get.to(SelectedUserProfile(userDetails: controller.details.value));
 
                                   // }
                                   //  else {
-                                  // controller.admireProfileAPI(
-                                  //   context, widget.admireList.admireDetails!.id
-                                  // );
+                                  controller.admireProfileAPI(
+                                    context, controller.details.value.id
+                                  );
                                   // }
 
                                 },
@@ -440,6 +440,7 @@ class _UserProfileState extends State<UserProfile> {
                     //   ],
                     // ),
                   ),
+                  controller.otherAdmireList.isEmpty ?  Container() : 
                   Padding(
                     padding:  EdgeInsets.only(left: 24.w, right: 24.w),
                     child: Row(
@@ -470,6 +471,7 @@ class _UserProfileState extends State<UserProfile> {
                       ],
                     ),
                   ),
+                  controller.otherAdmireList.isEmpty ?  Container() :
                   Padding(
                     padding:
                          EdgeInsets.only( top: 16.h),

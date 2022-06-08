@@ -103,7 +103,7 @@ class EventList {
   Details? stateDetails;
   Details? cityDetails;
   List<UserList>? hosts;
-  List<UserList>? speakers;
+  List<SpeakerElement>? speakers;
   List<Benefit>? benefits;
   List<UserList>? invitedUsers;
   String? event_type;
@@ -148,8 +148,7 @@ class EventList {
             : Details.fromJson(json["city_details"]),
         hosts:
             List<UserList>.from(json["hosts"].map((x) => UserList.fromJson(x))),
-        speakers: List<UserList>.from(
-            json["speakers"].map((x) => UserList.fromJson(x))),
+        speakers: List<SpeakerElement>.from(json["speakers"].map((x) => SpeakerElement.fromJson(x))),
         benefits: json["benefits"] != null
             ? List<Benefit>.from(
                 json["benefits"].map((x) => Benefit.fromJson(x)))
@@ -392,3 +391,28 @@ class Host {
         "deleted_at": deletedAt,
       };
 }
+
+class SpeakerElement {
+    SpeakerElement({
+        this.id,
+        this.fullName,
+        this.image,
+    });
+
+    dynamic id;
+    String? fullName;
+    String? image;
+
+    factory SpeakerElement.fromJson(Map<String, dynamic> json) => SpeakerElement(
+        id: json["image"] == null ? null : json["id"],
+        fullName: json["full_name"],
+        image: json["image"] == null ? null : json["image"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "full_name": fullName,
+        "image": image == null ? null : image,
+    };
+}
+

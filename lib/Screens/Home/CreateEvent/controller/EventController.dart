@@ -49,6 +49,9 @@ class EventController extends GetxController {
   RxInt stateId = 0.obs;
   RxInt cityId = 0.obs;
   RxString admissionType = ''.obs;
+  RxList<dynamic> speakerNameList = <dynamic>[].obs;
+  RxString speakerName = ''.obs;
+
 
   Future<void> createEventAPI(BuildContext context) async {
     var preferences = MySharedPref();
@@ -77,6 +80,7 @@ class EventController extends GetxController {
         'state_id': stateId.toString(),
         'city_id': cityId.toString(),
         'speakers': speakers.value,
+        'speaker_name': speakerName.toString(),
         'hosts': host.value,
         'admission_type': admissionType.value,
         'admission_data': admissionDetails.toJson().toString(),
@@ -97,6 +101,7 @@ class EventController extends GetxController {
         'state_id': stateId.toString(),
         'city_id': cityId.toString(),
         'speakers': speakers.value,
+        'speaker_name': speakerName.toString(),
         'hosts': host.value,
         'admission_type': admissionType.value,
         'invited_users': inviteList.toString(),
@@ -118,6 +123,7 @@ class EventController extends GetxController {
         'state_id': stateId.toString(),
         'city_id': cityId.toString(),
         'speakers': speakers.value,
+        'speaker_name': speakerName.toString(),
         'hosts': host.value,
         'admission_type': admissionType.value,
         'benifits': benefitDetails.toJson().toString(),
