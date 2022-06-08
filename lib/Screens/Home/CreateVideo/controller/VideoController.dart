@@ -41,21 +41,16 @@ class VideoController extends GetxController {
   RxList<UserList> selectedList = <UserList>[].obs;
 
   ScrollController scrollController = ScrollController();
-  RxInt PageNumber = 1.obs;
+  RxInt PageNumber = 0.obs;
   RxBool isPaginationLoading = false.obs;
 
-  initScrolling(BuildContext context, userId, [postId]) {
+  initScrolling(BuildContext context) {
     scrollController.addListener(() async {
       if (scrollController.position.maxScrollExtent ==
           scrollController.position.pixels) {
         _scrollDown();
         isPaginationLoading.value = true;
-        PageNumber = PageNumber + 1;
-
-          dynamic body = {
-            'page': PageNumber.toString()
-          };
-          await userListAPI(context, body);
+        await userListAPI(context, '');
         isPaginationLoading.value = false;
       }
     });
@@ -188,13 +183,23 @@ class VideoController extends GetxController {
   }
 
   //Speaker List / Host List
-  userListAPI(BuildContext context, search) async {
+  userListAPI(BuildContext context, String search) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
+    dynamic body;
 
-    dynamic body = {
-      'search' : search.toString(),
-    };
+    if(search.isEmpty){
+      PageNumber = PageNumber + 1;
+      body = {
+        'page': PageNumber.toString(),
+      };
+    }else{
+      PageNumber.value = 0;
+      body = {
+        'search' : search.toString(),
+        // 'page': PageNumber.toString(),
+      };
+    }
 
     String url = urlBase + urlUserList;
     final apiReq = Request();
@@ -218,6 +223,10 @@ class VideoController extends GetxController {
           }else if(model.statusCode==200){
             UserListModel detail =
             UserListModel.fromJson(userModel);
+
+            if(search.isNotEmpty){
+              userList.clear();
+            }
 
             userList.addAll(detail.data!);
             print(userList.length);

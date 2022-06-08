@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:blackchecktech/Model/BaseModel.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/TopicListModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Networks/api_endpoint.dart';
@@ -46,6 +47,7 @@ class BCConnectController extends GetxController {
 
   RxList<UserList> userList = <UserList>[].obs;
   RxList<UserList> selectedList = <UserList>[].obs;
+  VideoController controller = Get.put(VideoController());
 
   topicListAPI(BuildContext context) async {
     var preferences = MySharedPref();
@@ -202,8 +204,8 @@ class BCConnectController extends GetxController {
           } else if (model.statusCode == 200) {
             snackBar(context, model.message!);
 
-            userList[position].isAdmire = 1;
-            userList.refresh();
+            controller.userList[position].isAdmire = 1;
+            controller.userList.refresh();
 
             update();
           }
@@ -242,8 +244,8 @@ class BCConnectController extends GetxController {
           } else if (model.statusCode == 200) {
             snackBar(context, model.message!);
 
-            userList[position].isAdmire = 0;
-            userList.refresh();
+            controller.userList[position].isAdmire = 0;
+            controller.userList.refresh();
             update();
           }
         });

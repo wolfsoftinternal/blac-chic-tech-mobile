@@ -19,6 +19,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../Widget/ReportBottomSheet.dart';
@@ -35,6 +37,7 @@ class VideoDetail extends StatefulWidget {
 class _VideoDetailState extends State<VideoDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
   int userId = 0;
+  String username = '';
 
   @override
   void initState() {
@@ -57,6 +60,7 @@ class _VideoDetailState extends State<VideoDetail> {
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel!.data!.id!.toInt();
+    username = myModel.data!.userName!;
   }
 
   @override
@@ -212,64 +216,152 @@ class _VideoDetailState extends State<VideoDetail> {
                           padding: const EdgeInsets.all(20.0),
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: 220,
-                                width: MediaQuery.of(context).size.width,
-                                child:
-                                    controller.videoList[index].embededCode ==
-                                            null
-                                        ? Center(
-                                            child: SizedBox(
-                                            height: 20,
-                                            width: 20,
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: 2,
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      Color(0xff04080f)),
-                                            ),
-                                          ))
-                                        : FittedBox(
-                                            fit: BoxFit.cover,
-                                            child: Html(
-                                                data: controller
-                                                    .videoList[index]
-                                                    .embededCode
-                                                    .toString()),
-                                          ),
+                              Stack(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 15.0, bottom: 12.0),
+                                    child: SizedBox(
+                                      height: 220,
+                                      width: MediaQuery.of(context).size.width,
+                                      child:
+                                          controller.videoList[index].embededCode ==
+                                                  null
+                                              ? Center(
+                                                  child: SizedBox(
+                                                  height: 20,
+                                                  width: 20,
+                                                  child: CircularProgressIndicator(
+                                                    strokeWidth: 2,
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<Color>(
+                                                            Color(0xff04080f)),
+                                                  ),
+                                                ))
+                                              : FittedBox(
+                                                  fit: BoxFit.cover,
+                                                  child: Html(
+                                                      data: controller
+                                                          .videoList[index]
+                                                          .embededCode
+                                                          .toString()),
+                                                ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                  height: 15,
+                                ),
+                          //       Positioned(
+                          //         bottom: 15.h,
+                          //         left: 15.w,
+                          //         child: Container(
+                          //           height: 37.h,
+                          //           width: 110.w,
+                          //           decoration: BoxDecoration(
+                          //             gradient: LinearGradient(colors: [
+                          //               Color(0xff1c2535),
+                          //               Color(0xff04080f)
+                          //             ]),
+                          //             borderRadius: BorderRadius.all(
+                          //                 Radius.circular(40.r)),
+                          //           ),
+                          //           child: Center(
+                          //             child: Row(
+                          //               mainAxisSize: MainAxisSize.min,
+                          //               children: [
+                          //                 GestureDetector(
+                          //                     child: SvgPicture.asset(
+                          //                   icon_heart,
+                          //                   width: 17.w,
+                          //                   height: 17.h,
+                          //                   color: Colors.red,
+                          //                 )),
+                          //                 SizedBox(
+                          //                   width: 5.w,
+                          //                 ),
+                          //                 setHelceticaBold(
+                          //                     "1,2k liked",
+                          //                     14.sp,
+                          //                     white_ffffff,
+                          //                     FontWeight.w500,
+                          //                     FontStyle.normal)
+                          //               ],
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ),
+                          //       Positioned(
+                          //         bottom: 10.h,
+                          //         right: 15.w,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.all(8.0),
+                          //     child: Container(
+                          //       color: transparent,
+                          //       height: 32,
+                          //       width: 47,
+                          //       child: Center(
+                          //         child: setHelceticaBold(
+                          //            "00:00",
+                          //            12.0,
+                          //            white_ffffff,
+                          //            FontWeight.w500,
+                          //            FontStyle.normal
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                                ],
                               ),
                               SizedBox(
                                 height: 15,
                               ),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text.rich(
-                                  TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text:
-                                            "@${controller.videoList[index].eventSpoken ?? ""} ",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: helvetica_neu_bold,
-                                          fontWeight: FontWeight.w600,
-                                          color: black_121212,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                          text: controller
-                                                  .videoList[index].caption ??
-                                              "",
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              "@$username ",
                                           style: TextStyle(
-                                              fontSize: 14,
-                                              fontFamily:
-                                                  helveticaNeueNeue_medium,
-                                              fontWeight: FontWeight.w400,
-                                              color: black_121212)),
-                                    ],
+                                            fontSize: 14,
+                                            fontFamily: helvetica_neu_bold,
+                                            fontWeight: FontWeight.w600,
+                                            color: black_121212,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                            text: controller.videoList[index].description ??
+                                                "",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                fontWeight: FontWeight.w400,
+                                                color: black_121212)),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(calendar_icon, color: grey_aaaaaa,),
+                                    SizedBox(width: 8,),
+                                    Text(Jiffy(DateFormat('yyyy-MM-dd').format(controller.videoList[index].createdAt!)).fromNow(),
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                fontWeight: FontWeight.w400,
+                                                color: grey_aaaaaa)),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),
