@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:blackchecktech/Model/BaseModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Screens/Networks/api_endpoint.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
@@ -11,6 +12,10 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+import '../../../Networks/api_response.dart';
+import '../../Event/model/OrderListModel.dart';
+import '../../Profile/model/EventDetailModel.dart';
 
 class EventController extends GetxController {
   AdmireProfileController controller = Get.put(AdmireProfileController());
@@ -29,6 +34,9 @@ class EventController extends GetxController {
   String? categoryNameController;
   Rx<TextEditingController> amountController = TextEditingController().obs;
   Rx<TextEditingController> searchController = TextEditingController().obs;
+
+  Rx<EventList> eventDetailsWithTransactions = EventList().obs;
+
   RxList<UserList> selectedList = <UserList>[].obs;
   RxString inviteList = ''.obs;
   RxList<UserList> searchList = <UserList>[].obs;
@@ -160,4 +168,44 @@ class EventController extends GetxController {
       print(response.reasonPhrase);
     }
   }
+
+  // Get order details as per event id
+    getEventDetailsWithTransactions(body) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlOrderDetail;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+
+          print('event detail with transactions ' + strData);
+
+          Map<String, dynamic> eventDetailWithTransactionModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(eventDetailWithTransactionModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            getEventDetailsWithTransactions(body);
+          } else if (model.statusCode == 200) {
+            EventDetailModel detail = EventDetailModel.fromJson(eventDetailWithTransactionModel);
+            eventDetailsWithTransactions.value = detail.data!;
+
+
+            //  chargeCardAndMakePayment(context,selectedPositionOfAdmission, orderListModel);
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
 }

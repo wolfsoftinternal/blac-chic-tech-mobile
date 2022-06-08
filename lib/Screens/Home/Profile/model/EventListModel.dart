@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
+import 'package:blackchecktech/Screens/Home/Event/model/OrderListModel.dart';
 
 EventListModel eventListModelFromJson(String str) =>
     EventListModel.fromJson(json.decode(str));
@@ -71,6 +72,7 @@ class EventList {
     this.speakers,
     this.benefits,
     this.invitedUsers,
+    this.transactions,
     this.event_type,
   });
 
@@ -106,6 +108,7 @@ class EventList {
   List<SpeakerElement>? speakers;
   List<Benefit>? benefits;
   List<UserList>? invitedUsers;
+  List<Order>? transactions;
   String? event_type;
 
   factory EventList.fromJson(Map<String, dynamic> json) => EventList(
@@ -155,6 +158,14 @@ class EventList {
             : null,
         invitedUsers: List<UserList>.from(
             json["invited_users"].map((x) => UserList.fromJson(x))),
+
+
+    transactions: json["transactions"] != null
+        ? List<Order>.from(
+        json["transactions"].map((x) => Order.fromJson(x)))
+        : null,
+
+
         event_type: json["event_type"],
       );
 
@@ -193,6 +204,7 @@ class EventList {
         "benefits": List<dynamic>.from(benefits!.map((x) => x.toJson())),
         "invited_users":
             List<dynamic>.from(invitedUsers!.map((x) => x.toJson())),
+       "transactions": List<dynamic>.from(transactions!.map((x) => x.toJson())),
         "event_type": event_type,
       };
 }

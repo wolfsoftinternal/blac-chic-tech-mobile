@@ -65,6 +65,7 @@ dependencies:
   google_place: ^0.4.7
   flutter_html: ^2.2.1
   jiffy: ^5.0.0
+  syncfusion_flutter_barcodes: ^20.1.59
 
 
   wechat_assets_picker:
@@ -79,6 +80,7 @@ dependencies:
   # extended_image: ^6.2.0
   photo_manager: ^2.1.1
   reorderable_grid_view: ^2.2.0
+
   flutter_draggable_gridview:
 
   # The following adds the Cupertino Icons font to your application.

@@ -25,6 +25,8 @@ import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../Event/view/AllPurchasedEventTicketList.dart';
+
 class EventDetail extends StatefulWidget {
   final isFrom;
 
@@ -571,39 +573,45 @@ class _EventDetailState extends State<EventDetail> {
                                                       textAlign:
                                                           TextAlign.left),
                                             ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 12.w),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.r),
-                                                  color: orange_ff881a,
+                                            GestureDetector(
+                                              onTap: (){
+                                                Get.to(AllPurchasedEventTicketList(
+                                                    eventId: controller.eventDetails.value.id));
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 12.w),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.r),
+                                                    color: orange_ff881a,
+                                                  ),
+                                                  child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 14.w,
+                                                          right: 14.w,
+                                                          top: 9.h,
+                                                          bottom: 9.h),
+                                                      child: // Invite Only
+                                                          Text("VIEW",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontFamily:
+                                                                      roboto_bold,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .normal,
+                                                                  fontSize:
+                                                                      16.sp),
+                                                              textAlign: TextAlign
+                                                                  .left)),
                                                 ),
-                                                child: Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 14.w,
-                                                        right: 14.w,
-                                                        top: 9.h,
-                                                        bottom: 9.h),
-                                                    child: // Invite Only
-                                                        Text("VIEW",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                fontFamily:
-                                                                    roboto_bold,
-                                                                fontStyle:
-                                                                    FontStyle
-                                                                        .normal,
-                                                                fontSize:
-                                                                    16.sp),
-                                                            textAlign: TextAlign
-                                                                .left)),
                                               ),
                                             ),
                                           ],
