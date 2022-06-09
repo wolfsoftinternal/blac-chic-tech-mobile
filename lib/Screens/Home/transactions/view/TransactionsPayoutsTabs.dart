@@ -124,7 +124,10 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                 height: 3.h,
                               ),
                               Text(
-                                SharePreData.strDollar + (transactionController.userDetails.value.wallet??"0"),
+                                SharePreData.strDollar +
+                                    (transactionController
+                                            .userDetails.value.wallet ??
+                                        "0"),
                                 style: TextStyle(
                                     fontFamily: roboto_bold,
                                     fontSize: 24.sp,
@@ -134,8 +137,12 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: (){
-                            Get.to(WithdrawChooseBankAccount(walletAmount: transactionController.userDetails.value.wallet??"0",));
+                          onTap: () {
+                            Get.to(WithdrawChooseBankAccount(
+                              walletAmount: transactionController
+                                      .userDetails.value.wallet ??
+                                  "0",
+                            ));
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
@@ -286,7 +293,8 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                 child: ListView.builder(
                                     shrinkWrap: true,
                                     primary: false,
-                                    itemCount: transactionController.transactionList.length,
+                                    itemCount: transactionController
+                                        .transactionList.length,
                                     padding: EdgeInsets.zero,
                                     itemBuilder: (context, i) {
                                       return Padding(
@@ -323,8 +331,10 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    transactionController.transactionList[i]
-                                                        .transaction_id??"",
+                                                    transactionController
+                                                            .transactionList[i]
+                                                            .transaction_id ??
+                                                        "",
                                                     style: TextStyle(
                                                         fontFamily:
                                                             roboto_regular,
@@ -332,7 +342,11 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                         color: black_121212),
                                                   ),
                                                   Text(
-                                                    transactionController.transactionList[i].createdAt?.timeZoneName??"",
+                                                    transactionController
+                                                            .transactionList[i]
+                                                            .createdAt
+                                                            ?.timeZoneName ??
+                                                        "",
                                                     style: TextStyle(
                                                         fontFamily:
                                                             roboto_regular,
@@ -371,8 +385,12 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                           height: 5.h,
                                                         ),
                                                         Text(
-                                                          transactionController.transactionList[i]
-                                                              .event_details?.title??"",
+                                                          transactionController
+                                                                  .transactionList[
+                                                                      i]
+                                                                  .event_details
+                                                                  ?.title ??
+                                                              "",
                                                           style: TextStyle(
                                                               fontSize: 16.sp,
                                                               fontFamily:
@@ -384,7 +402,10 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    transactionController.transactionList[i].total_price??"",
+                                                    transactionController
+                                                            .transactionList[i]
+                                                            .total_price ??
+                                                        "",
                                                     style: TextStyle(
                                                         fontSize: 16.sp,
                                                         fontFamily: roboto_bold,
@@ -459,7 +480,8 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                 child: ListView.builder(
                                     shrinkWrap: true,
                                     primary: false,
-                                    itemCount:  transactionController.payoutList.length,
+                                    itemCount:
+                                        transactionController.payoutList.length,
                                     padding: EdgeInsets.zero,
                                     itemBuilder: (context, i) {
                                       return Padding(
@@ -509,7 +531,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                       height: 2.h,
                                                     ),
                                                     Text(
-                                                     "kjgjgjkgkjg",
+                                                      "kjgjgjkgkjg",
                                                       style: TextStyle(
                                                           fontFamily:
                                                               roboto_bold,
@@ -542,7 +564,11 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                       height: 2.h,
                                                     ),
                                                     Text(
-                                                      transactionController.payoutList[i].createdAt.toString()??"",
+                                                      transactionController
+                                                              .payoutList[i]
+                                                              .createdAt
+                                                              .toString() ??
+                                                          "",
                                                       style: TextStyle(
                                                           fontFamily:
                                                               roboto_regular,
@@ -571,7 +597,10 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                     height: 2.h,
                                                   ),
                                                   Text(
-                                                    transactionController.payoutList[i].amount??"",
+                                                    transactionController
+                                                            .payoutList[i]
+                                                            .amount ??
+                                                        "",
                                                     style: TextStyle(
                                                         fontFamily: roboto_bold,
                                                         fontSize: 16.sp,

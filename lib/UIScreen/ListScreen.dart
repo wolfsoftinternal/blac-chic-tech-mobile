@@ -1,4 +1,3 @@
-
 import 'package:blackchecktech/Screens/Authentication/signup/view/FullInformationStepsView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
@@ -15,7 +14,7 @@ import 'package:blackchecktech/UIScreen/EditProfile.dart';
 import 'package:blackchecktech/UIScreen/EventSearch.dart';
 import 'package:blackchecktech/UIScreen/EventTicket.dart';
 import 'package:blackchecktech/Screens/Home/Event/view/EventTicketForSuccss.dart';
-import 'package:blackchecktech/UIScreen/Featured.dart';
+// import 'package:blackchecktech/UIScreen/Featured.dart';
 import 'package:blackchecktech/UIScreen/FindSpeaker.dart';
 import 'package:blackchecktech/UIScreen/MyPlayList.dart';
 import 'package:blackchecktech/UIScreen/MyPurchasedEvent.dart';
