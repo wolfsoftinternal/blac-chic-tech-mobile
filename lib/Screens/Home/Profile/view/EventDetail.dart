@@ -76,7 +76,7 @@ class _EventDetailState extends State<EventDetail> {
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel?.data!.id;
 
-    controller.userProfileAPI(context);
+    // controller.userProfileAPI(context);
 
   }
 
@@ -1553,10 +1553,9 @@ class _EventDetailState extends State<EventDetail> {
                                                             .value
                                                             .speakers![
                                                         index]
-                                                            .userName !=
+                                                            .fullName !=
                                                             null
-                                                            ? "@${controller.eventDetails.value.speakers![index].userName!}"
-                                                            : "@${controller.eventDetails.value.speakers![index].firstName!}",
+                                                            ? "@${controller.eventDetails.value.speakers![index].fullName!}" : '',
                                                         11.sp,
                                                         black_121212,
                                                         FontWeight.w500,

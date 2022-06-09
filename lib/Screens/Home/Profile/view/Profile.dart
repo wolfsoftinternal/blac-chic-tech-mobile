@@ -82,18 +82,18 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     userId = myModel!.data!.id!.toInt();
 
     if (userId != controller.details.value.id) {
-      dynamic body = {'user_id': controller.details.value.id.toString()};
+      // dynamic body = {'user_id': controller.details.value.id.toString()};
       checkNet(context).then((value) async {
-        await controller.admireListAPI(context, body);
+        await controller.admireListAPI(context, null);
       });
 
-      for (var item in controller.otherAdmireList) {
-        if (controller.details.value.id == item.userId) {
+      for (var item in controller.admireList) {
+        if (controller.details.value.id == item.admireId) {
           controller.admire.value = 'Admired';
-        } else {
-          controller.admire.value = 'Admire';
         }
       }
+    }else{
+      controller.admire.value = 'Admire';
     }
     setState(() {});
   }
@@ -443,14 +443,17 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                  ? InkWell(
                                                onTap: () {
                                                  if (controller.admire.value ==
-                                                     'Admire')
-                                                   checkNet(context)
+                                                     'Admire'){
+                                                       controller.admire.value = 'Admired';
+                                                       checkNet(context)
                                                        .then((value) {
                                                      controller.createAdmireAPI(
                                                          context,
                                                          controller
                                                              .details.value.id);
                                                    });
+                                                     }
+                                                   
                                                },
                                                child: Padding(
                                                  padding:  EdgeInsets.only(
