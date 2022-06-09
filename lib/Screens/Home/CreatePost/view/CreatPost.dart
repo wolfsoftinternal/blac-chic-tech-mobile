@@ -30,14 +30,6 @@ class CreatePost extends StatefulWidget {
 class _CreatePostState extends State<CreatePost> {
   VideoController videoController = Get.put(VideoController());
   PostController controller = Get.put(PostController());
-  final _Location = [
-    'Nairobi, Kenya',
-    'Kumasi, Ghana',
-    'Abuja, Nigeria',
-    'Nairobi, Kenya',
-    'Kumasi, Ghana',
-    'Abuja, Nigeria',
-  ];
 
   @override
   void initState() {
@@ -73,13 +65,18 @@ class _CreatePostState extends State<CreatePost> {
                     ),
                   ),
                   Spacer(),
-                  Text('ALL PHOTOS',
-                      style: TextStyle(
-                          color: black_121212,
-                          fontFamily: helvetica_neu_bold,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 16),
-                      textAlign: TextAlign.left),
+                  InkWell(
+                    onTap: (){
+                      MultiAssetsPage();
+                    },  
+                    child: Text('ALL PHOTOS',
+                        style: TextStyle(
+                            color: black_121212,
+                            fontFamily: helvetica_neu_bold,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 16),
+                        textAlign: TextAlign.left),
+                  ),
                   Stack(children: [
                     Positioned(top: 4, child: Icon(Icons.expand_more_rounded)),
                     SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
@@ -89,7 +86,9 @@ class _CreatePostState extends State<CreatePost> {
                     onTap: () {
                       if (controller.captionController.value.text.isEmpty) {
                         snackBar(context, 'Enter Caption');
-                      } else {
+                      } else if(controller.assetImages.isEmpty){
+                        snackBar(context, 'Select image');
+                      }else {
                         checkNet(context).then((value) {
                           controller.createPostAPI(context);
                         });
@@ -128,14 +127,18 @@ class _CreatePostState extends State<CreatePost> {
                 // ),
 
                 controller.assetImages.length > 0? Image.file(
-                  File((controller.assetImages.value?[0].relativePath ?? "") +
+                  File((controller.assetImages.value[0].relativePath ?? "") +
                       "/" +
-                      (controller.assetImages.value?[0].title ?? "")),
+                      (controller.assetImages.value[0].title ?? "")),
                   width: double.infinity,
                   height: 375.h,
                   fit: BoxFit.cover,
-                ): SizedBox( width: double.infinity,
-                  height: 375.h,),
+                ): Image.asset(
+                  img_girl,
+                  height: 375.h,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
                 GestureDetector(
                   onTap: () {
                     Get.to(TagPeople());
@@ -254,7 +257,7 @@ class _CreatePostState extends State<CreatePost> {
                     height: 16.h,
                   ),
 
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.to(PostLocation());
                     },
@@ -282,22 +285,30 @@ class _CreatePostState extends State<CreatePost> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 35.h,
-              child: ListView.separated(
-                separatorBuilder: (context, index) => SizedBox(
-                  width: 8.w,
-                ),
-                itemCount: 6,
-                padding: EdgeInsets.only(top: 0, left: 24.w, right: 24.w),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (_, index) {
-                  return AddLocationView(
-                    title: _Location[index],
-                  );
-                },
-              ),
-            )
+            Padding(
+              padding: const EdgeInsets.only(left: 22.0),
+              child: controller.location.value == '' ? Container() :
+                    AddLocationView(
+                      title: controller.location.value,
+                    ),
+            ),
+            // SizedBox(
+            //   height: 35.h,
+            //   child: ListView.separated(
+            //     separatorBuilder: (context, index) => SizedBox(
+            //       width: 8.w,
+            //     ),
+            //     itemCount: 1,
+            //     padding: EdgeInsets.only(top: 0, left: 24.w, right: 24.w),
+            //     scrollDirection: Axis.horizontal,
+            //     itemBuilder: (_, index) {
+                  // return controller.location.value == '' ? Container() :
+                  // AddLocationView(
+                  //   title: controller.location.value,
+                  // );
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),
