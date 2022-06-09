@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 
 class PostDetail extends StatefulWidget {
   final id;
@@ -30,6 +32,7 @@ class PostDetail extends StatefulWidget {
 class _PostDetailState extends State<PostDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
   int userId = 0;
+  String username = '';
 
   @override
   void initState() {
@@ -52,6 +55,7 @@ class _PostDetailState extends State<PostDetail> {
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel!.data!.id!.toInt();
+    username = myModel.data!.userName!;
   }
 
   @override
@@ -240,45 +244,45 @@ class _PostDetailState extends State<PostDetail> {
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                Positioned(
-                                  bottom: 15.h,
-                                  left: 15.w,
-                                  child: Container(
-                                    height: 37.h,
-                                    width: 110.w,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(colors: [
-                                        Color(0xff1c2535),
-                                        Color(0xff04080f)
-                                      ]),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(40.r)),
-                                    ),
-                                    child: Center(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          GestureDetector(
-                                              child: SvgPicture.asset(
-                                            icon_heart,
-                                            width: 17.w,
-                                            height: 17.h,
-                                            color: Colors.red,
-                                          )),
-                                          SizedBox(
-                                            width: 5.w,
-                                          ),
-                                          setHelceticaBold(
-                                              "1,2k liked",
-                                              14.sp,
-                                              white_ffffff,
-                                              FontWeight.w500,
-                                              FontStyle.normal)
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // Positioned(
+                                //   bottom: 15.h,
+                                //   left: 15.w,
+                                //   child: Container(
+                                //     height: 37.h,
+                                //     width: 110.w,
+                                //     decoration: BoxDecoration(
+                                //       gradient: LinearGradient(colors: [
+                                //         Color(0xff1c2535),
+                                //         Color(0xff04080f)
+                                //       ]),
+                                //       borderRadius: BorderRadius.all(
+                                //           Radius.circular(40.r)),
+                                //     ),
+                                //     child: Center(
+                                //       child: Row(
+                                //         mainAxisSize: MainAxisSize.min,
+                                //         children: [
+                                //           GestureDetector(
+                                //               child: SvgPicture.asset(
+                                //             icon_heart,
+                                //             width: 17.w,
+                                //             height: 17.h,
+                                //             color: Colors.red,
+                                //           )),
+                                //           SizedBox(
+                                //             width: 5.w,
+                                //           ),
+                                //           setHelceticaBold(
+                                //               "1,2k liked",
+                                //               14.sp,
+                                //               white_ffffff,
+                                //               FontWeight.w500,
+                                //               FontStyle.normal)
+                                //         ],
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                             SizedBox(
@@ -291,7 +295,7 @@ class _PostDetailState extends State<PostDetail> {
                                   children: [
                                     TextSpan(
                                       text:
-                                          "@${controller.postList[index].address!} ",
+                                          "@${username } ",
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         fontFamily: helvetica_neu_bold,
@@ -311,7 +315,23 @@ class _PostDetailState extends State<PostDetail> {
                                   ],
                                 ),
                               ),
-                            )
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.only(top: 5.0),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(calendar_icon, color: grey_aaaaaa,),
+                                    SizedBox(width: 8,),
+                                    Text(Jiffy(DateFormat('yyyy-MM-dd').format(controller.postList[index].createdAt!)).fromNow(),
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                fontWeight: FontWeight.w400,
+                                                color: grey_aaaaaa)),
+                                  ],
+                                ),
+                              )
                           ],
                         ),
                       ),

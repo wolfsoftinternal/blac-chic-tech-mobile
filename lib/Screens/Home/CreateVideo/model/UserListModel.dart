@@ -56,7 +56,7 @@ class UserList {
         this.isAdmire,
     });
 
-    int? id;
+    dynamic id;
     String? firstName;
     String? lastName;
     String? image;

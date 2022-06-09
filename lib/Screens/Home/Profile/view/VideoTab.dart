@@ -8,6 +8,7 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -56,73 +57,95 @@ class _VideoTabState extends State<VideoTab> {
                     shrinkWrap: true,
                     primary: false,
                     itemBuilder: (BuildContext context, int index) {
-                      return Stack(
-                        children: [
-                          SizedBox(
-                            height: 220,
-                            width: MediaQuery.of(context).size.width,
-                            child: controller
-                                        .videoList[index].embededCode ==
-                                    null
-                                ? Center(
-                                    child: SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                      valueColor:
-                                          AlwaysStoppedAnimation<Color>(
-                                              Color(0xff04080f)),
-                                    ),
-                                  ))
-                                : FittedBox(
-                                  fit: BoxFit.fill,
-                                  child: Html(
-                                      data: controller
-                                          .videoList[index].embededCode
-                                          .toString()),
-                                ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.to(VideoDetail(id: controller.videoList[index].id));
-                            },
-                            child: Container(
+                      return GridTile(
+                        child: Stack(
+                          children: [
+                            SizedBox(
                               height: 220,
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                color: transparent,
-                                height: 32,
-                                width: 47,
-                                child: Center(
-                                  child: setHelceticaBold(
-                                     controller.videoList[index].duration ?? "00:00",
-                                     12.0,
-                                     white_ffffff,
-                                     FontWeight.w500,
-                                     FontStyle.normal
+                              width: MediaQuery.of(context).size.width,
+                              child: controller
+                                          .videoList[index].embededCode ==
+                                      null
+                                  ? Center(
+                                      child: SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                Color(0xff04080f)),
+                                      ),
+                                    ))
+                                  : FittedBox(
+                                    fit: BoxFit.fill,
+                                    child: Html(
+                                        data: controller
+                                            .videoList[index].embededCode
+                                            .toString()),
                                   ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.to(VideoDetail(id: controller.videoList[index].id));
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 3.0, bottom: 3, left: 3.0, right: 3.0),
+                                child: Container(
+                                  height: 220,
+                                  decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            colors: [
+                                              Color(0x00121212),
+                                              Color(0xff121212)
+                                            ])),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15.0),
-                            child: Align(
+                            // Align(
+                            //   alignment: Alignment.topRight,
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(8.0),
+                            //     child: Container(
+                            //       color: transparent,
+                            //       height: 32,
+                            //       width: 47,
+                            //       child: Center(
+                            //         child: setHelceticaBold(
+                            //            "00:00",
+                            //            12.0,
+                            //            white_ffffff,
+                            //            FontWeight.w500,
+                            //            FontStyle.normal
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            
+                          ],
+                        ),
+                        footer: Padding(
+                              padding: EdgeInsets.only(
+                                  bottom: 12.w, left: 12.w, right: 12.w),
+                              child: Align(
                                 alignment: Alignment.bottomLeft,
-                                child: setHelceticaBold(
-                                    controller.videoList[index].caption ?? "",
-                                    12.0,
-                                    white_ffffff,
-                                    FontWeight.w500,
-                                    FontStyle.normal)),
-                          ),
-                        ],
+                                child: Text(
+                                  controller.videoList[index].description ?? "",
+                                  softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                  style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontFamily: helvetica_neu_bold,
+                                      fontWeight: FontWeight.w600,
+                                      color: white_ffffff,
+                                      fontStyle: FontStyle.normal),
+                                ),
+                              ),
+                            ),
                       );
                     },
 
