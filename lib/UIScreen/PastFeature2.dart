@@ -1,17 +1,22 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:readmore/readmore.dart';
 
+import '../Screens/Home/FeatureMenu/model/FeaturedListModel.dart';
 import '../Styles/my_colors.dart';
 import '../Styles/my_icons.dart';
 import '../Styles/my_strings.dart';
 import '../Utilities/Constant.dart';
 
 class PastFeature2 extends StatefulWidget {
-  const PastFeature2({Key? key}) : super(key: key);
+  final FeaturedList featuredData;
+
+  const PastFeature2({Key? key,
+    required this.featuredData}) : super(key: key);
 
   @override
   _PastFeature2State createState() => _PastFeature2State();
@@ -64,7 +69,28 @@ class _PastFeature2State extends State<PastFeature2> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Image.asset(img_giral_crop,width: 220.w,height: 302.h,fit: BoxFit.fill,),
+                                    CachedNetworkImage(
+                                      imageUrl: widget.featuredData.image??"",
+                                      fit: BoxFit.cover,
+                                      width: 220.w,
+                                      height: 302.h,
+                                      alignment: Alignment.center,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                          SvgPicture.asset(
+                                            placeholder,
+                                            width: 220.w,
+                                            height: 302.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                      errorWidget: (context, url, error) =>
+                                          SvgPicture.asset(
+                                            placeholder,
+                                            width: 220.w,
+                                            height: 302.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                    ),
                                   ],
                                 )),
                           ],
@@ -89,7 +115,7 @@ class _PastFeature2State extends State<PastFeature2> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: Text("JENNIFER",style: TextStyle(
+                            child: Text(widget.featuredData.writer_name??"",style: TextStyle(
                               fontFamily: helvetica_neu_bold,fontSize: 90.sp,
                               color: Colors.white,letterSpacing: -10,
                               height: 0.8,
@@ -125,14 +151,14 @@ class _PastFeature2State extends State<PastFeature2> {
 
                     Container(
                       margin: EdgeInsets.only(top: 2.h,left: 24.w,right: 24.w),
-                      child: Text("Seeing The Cloud is clearer through broken glass ceilings.",style: TextStyle(
+                      child: Text(widget.featuredData.title??"",style: TextStyle(
                           fontFamily: helvetica_neu_bold,fontSize: 24.sp,
                           color: Colors.white
                       ),),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 12.h,left: 24.w,right: 24.w),
-                      child: Text("Jennifer Williams - VP product - DropBox",style: TextStyle(
+                      child: Text(widget.featuredData.sub_text??"",style: TextStyle(
                           fontFamily: poppins_BoldItalic,fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
                           fontStyle: FontStyle.italic,
@@ -143,7 +169,7 @@ class _PastFeature2State extends State<PastFeature2> {
                       margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w,bottom: 15.h),
 
                       child: ReadMoreText(
-                        str_long_description,
+                        widget.featuredData.description??"",
                         style: TextStyle(
                             fontSize: 12.sp,color:Colors.white,fontFamily: roboto_medium
                         ),
