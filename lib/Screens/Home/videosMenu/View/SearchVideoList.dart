@@ -3,8 +3,6 @@ import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuContr
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/A_TopicaList.dart';
-import 'package:blackchecktech/UIScreen/FeaturedScreenOne.dart';
-import 'package:blackchecktech/UIScreen/FeaturedScreenSecond.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Widget/search_bar_demo.dart';
 import 'package:flutter/material.dart';
