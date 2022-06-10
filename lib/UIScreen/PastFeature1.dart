@@ -3,24 +3,33 @@ import 'dart:ui';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:readmore/readmore.dart';
 
+import '../Screens/Home/FeatureMenu/View/SearchFeaturesScreen.dart';
+import '../Screens/Home/FeatureMenu/model/FeaturedListModel.dart';
 import '../Styles/my_strings.dart';
 
 class PastFeature1 extends StatefulWidget {
-  const PastFeature1({Key? key}) : super(key: key);
+  final FeaturedList featuredData;
+  final List<FeaturedList> allFeatures;
+
+  const PastFeature1({Key? key,
+    required this.featuredData,
+    required this.allFeatures}) : super(key: key);
 
   @override
   _PastFeature1State createState() => _PastFeature1State();
 }
 
 class _PastFeature1State extends State<PastFeature1> {
-
   // Updated
 
   @override
@@ -40,7 +49,8 @@ class _PastFeature1State extends State<PastFeature1> {
                   fit: StackFit.expand,
                   children: [
                     Image.asset(img_giral_crop, fit: BoxFit.cover),
-                    ClipRRect( // Clip it cleanly.
+                    ClipRRect(
+                      // Clip it cleanly.
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                         child: Column(
@@ -49,15 +59,41 @@ class _PastFeature1State extends State<PastFeature1> {
                           children: [
                             /*------ Tool bar ------*/
                             Container(
-                              margin: EdgeInsets.only(top: 45.h,left: 24.w,right: 24.w),
+                              margin: EdgeInsets.only(
+                                  top: 45.h, left: 24.w, right: 24.w),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SvgPicture.asset(icon_back_black_arrow,color: Colors.white,height: 24.h,width: 24.h,),
-                                  Text("Past Features",style: TextStyle(
-                                      fontSize: 20.sp,color: Colors.white,fontFamily: helvetica_neu_bold
-                                  ),),
-                                  SvgPicture.asset(search,color: Colors.white,height: 24.h,width: 24.h,),
+                                  GestureDetector(
+                                    child: SvgPicture.asset(
+                                      icon_back_black_arrow,
+                                      color: Colors.white,
+                                      height: 24.h,
+                                      width: 24.h,
+                                    ),
+                                    onTap: (){
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  Text(
+                                    "Past Features",
+                                    style: TextStyle(
+                                        fontSize: 20.sp,
+                                        color: Colors.white,
+                                        fontFamily: helvetica_neu_bold),
+                                  ),
+                                  GestureDetector(
+                                    onTap: (){
+                                      Get.to(() => SearchFeaturesScreen(featureList: widget.allFeatures,));
+                                    },
+                                    child: SvgPicture.asset(
+                                      search,
+                                      color: Colors.white,
+                                      height: 24.h,
+                                      width: 24.h,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -69,7 +105,35 @@ class _PastFeature1State extends State<PastFeature1> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Image.asset(img_giral_crop,width: 220.w,height: 302.h,fit: BoxFit.fill,),
+                                    CachedNetworkImage(
+                                      imageUrl: widget.featuredData.image??"",
+                                      fit: BoxFit.cover,
+                                      width: 220.w,
+                                      height: 302.h,
+                                      alignment: Alignment.center,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                          SvgPicture.asset(
+                                            placeholder,
+                                            width: 220.w,
+                                            height: 302.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                      errorWidget: (context, url, error) =>
+                                          SvgPicture.asset(
+                                            placeholder,
+                                            width: 220.w,
+                                            height: 302.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                    ),
+
+                                    // Image.asset(
+                                    //   img_giral_crop,
+                                    //   width: 220.w,
+                                    //   height: 302.h,
+                                    //   fit: BoxFit.fill,
+                                    // ),
                                   ],
                                 )),
                           ],
@@ -79,24 +143,28 @@ class _PastFeature1State extends State<PastFeature1> {
                   ],
                 ),
               ),
-
               Container(
-                transform: Matrix4.translationValues(0,-15, 0),
+                transform: Matrix4.translationValues(0, -15, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(right: 24.w,left: 24.w),
+                      margin: EdgeInsets.only(right: 24.w, left: 24.w),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: Text("FADE",style: TextStyle(
-                              fontFamily: helvetica_neu_bold,fontSize: 100.sp,
-                              color: orange_ff881a,letterSpacing: -10,
-                              height: 0.8,
-                            ),),
+                            child: Text(
+                              widget.featuredData.writer_name??"",
+                              style: TextStyle(
+                                fontFamily: helvetica_neu_bold,
+                                fontSize: 100.sp,
+                                color: orange_ff881a,
+                                letterSpacing: -10,
+                                height: 0.8,
+                              ),
+                            ),
                           ),
                           Container(
                             transform: Matrix4.translationValues(0, -40, 0),
@@ -107,18 +175,25 @@ class _PastFeature1State extends State<PastFeature1> {
                               gradient: LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
-                                colors: [
-                                  Color(0x331c2535),
-                                  Color(0x4d04080f)
-                                ],
+                                colors: [Color(0x331c2535), Color(0x4d04080f)],
                               ),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(iconly_light_heart,width: 25.w,height: 25.h,),
-                                SizedBox(height: 25.h,),
-                                SvgPicture.asset(icon_share,width: 25.w,height: 25.h,),
+                                Image.asset(
+                                  iconly_light_heart,
+                                  width: 25.w,
+                                  height: 25.h,
+                                ),
+                                SizedBox(
+                                  height: 25.h,
+                                ),
+                                SvgPicture.asset(
+                                  icon_share,
+                                  width: 25.w,
+                                  height: 25.h,
+                                ),
                               ],
                             ),
                           ),
@@ -127,37 +202,52 @@ class _PastFeature1State extends State<PastFeature1> {
                     ),
 
                     Container(
-                      margin: EdgeInsets.only(top: 2.h,left: 24.w,right: 24.w),
-                      child: Text("On Growth Hacking Life , Love & Bookings Africa",style: TextStyle(
-                          fontFamily: helvetica_neu_bold,fontSize: 24.sp,
-                          color: black_121212
-                      ),),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 12.h,left: 24.w,right: 24.w),
-                      child: Text("Fade Ogunro - CEO Bookings Africa",style: TextStyle(
-                          fontFamily: poppins_BoldItalic,fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.italic,
-                          color: orange_ff881a
-                      ),),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w),
-
-                      child: ReadMoreText(
-                        str_long_description,
+                      margin:
+                          EdgeInsets.only(top: 2.h, left: 24.w, right: 24.w),
+                      child: Text(
+                        widget.featuredData.title??"",
                         style: TextStyle(
-                            fontSize: 12.sp,color:opcity_black_B3121212,fontFamily: roboto_medium
-                        ),
+                            fontFamily: helvetica_neu_bold,
+                            fontSize: 24.sp,
+                            color: black_121212),
+                      ),
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 12.h, left: 24.w, right: 24.w),
+                      child: Text(
+                        widget.featuredData.sub_text??"",
+                        style: TextStyle(
+                            fontFamily: poppins_BoldItalic,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.italic,
+                            color: orange_ff881a),
+                      ),
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
+                      child: ReadMoreText(
+                        widget.featuredData.description??"",
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            color: opcity_black_B3121212,
+                            fontFamily: roboto_medium),
                         trimLines: 3,
                         // trimLength: 10,
                         // colorClickableText: Colors.pink,
                         trimMode: TrimMode.Line,
                         trimCollapsedText: 'See full article',
                         trimExpandedText: 'See less article',
-                        moreStyle: TextStyle(fontSize: 12.sp,color: black_121212,fontFamily: helvetica_neu_bold),
-                        lessStyle : TextStyle(fontSize: 12.sp,color: black_121212,fontFamily: helvetica_neu_bold),
+                        moreStyle: TextStyle(
+                            fontSize: 12.sp,
+                            color: black_121212,
+                            fontFamily: helvetica_neu_bold),
+                        lessStyle: TextStyle(
+                            fontSize: 12.sp,
+                            color: black_121212,
+                            fontFamily: helvetica_neu_bold),
                       ),
                     ),
                     // Container(

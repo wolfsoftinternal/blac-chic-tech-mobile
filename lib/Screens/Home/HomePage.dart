@@ -13,6 +13,8 @@ import 'package:get/get.dart';
 
 import '../../Utils/preference_utils.dart';
 import '../../Utils/share_predata.dart';
+import 'FeatureMenu/View/FeaturedMainScreen.dart';
+import 'FeatureMenu/View/PastFeaturesScreen.dart';
 import 'chat_module/my_db.dart';
 
 class HomePage extends StatefulWidget {
@@ -82,7 +84,9 @@ class _HomePageState extends State<HomePage> {
                             Get.to(BcConnect());
                           } else if(index == 6){
                           Get.to(EventList());
-                        }
+                        }else if(index == 5){
+                            Get.to(FeaturedMainScreen());
+                          }
                           else if(index == 7){
                             Get.to(TransactionsPayoutsTabs());
 
