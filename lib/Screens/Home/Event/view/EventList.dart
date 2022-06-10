@@ -167,7 +167,7 @@ class _EventListState extends State<EventList> {
                                         admireProfileController.eventDetailAPI(
                                             context,
                                             controller.eventList[i].id,
-                                            'event', null);
+                                            controller.eventList[i].event_type, 'event');
                                       });
                                     },
                                     child: Padding(
