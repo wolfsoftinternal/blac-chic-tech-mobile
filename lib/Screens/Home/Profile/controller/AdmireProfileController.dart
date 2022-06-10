@@ -415,9 +415,7 @@ class AdmireProfileController extends GetxController {
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       if(videoPageNumber == 1){
-        if(isFrom == null){
           videoList.clear();
-        }
       }
       http.StreamedResponse res = value;
 
@@ -436,8 +434,7 @@ class AdmireProfileController extends GetxController {
             VideoListModel detail = VideoListModel.fromJson(userModel);
 
             // if (isFrom == null) {
-              videoList.addAll(detail.data!);
-              print(videoList);
+              videoList.addAll(detail.data!);              
             // }
           }
         });
@@ -524,7 +521,7 @@ class AdmireProfileController extends GetxController {
             eventDetails.value = detail.data!;
 
             if (isFrom != null) {
-              Get.to(EventDetail(isFrom: 'event', type: type,));
+              Get.to(EventDetail(isFrom: 'event', type: type));
             } else {
               Get.to(const EventDetail());
             }

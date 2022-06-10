@@ -6,6 +6,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+import 'package:http/http.dart';
 
 class VideoTab extends StatefulWidget {
   final id;
@@ -68,7 +70,8 @@ class _VideoTabState extends State<VideoTab> {
                                   SizedBox(
                                     height: 220,
                                     width: MediaQuery.of(context).size.width,
-                                    child: controller
+                                    child: 
+                                    controller
                                                 .videoList[index].embededCode ==
                                             null
                                         ? Center(
@@ -85,9 +88,8 @@ class _VideoTabState extends State<VideoTab> {
                                         : FittedBox(
                                           fit: BoxFit.fill,
                                           child: Html(
-                                              data: controller
-                                                  .videoList[index].embededCode
-                                                  .toString()),
+                                              data: controller.videoList[index].embededCode
+                                          ),
                                         ),
                                   ),
                                   InkWell(
