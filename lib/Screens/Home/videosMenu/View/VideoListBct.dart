@@ -613,6 +613,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                     onTap: () {
                                       controller.selectIdTopic.clear();
                                       controller.selectIdLanguage.clear();
+
                                       if (controller
                                               .selectMutiTopicList.isNotEmpty ||
                                           controller
@@ -666,21 +667,34 @@ class _VideoListBctState extends State<VideoListBct> {
                                 ),
                                 Expanded(
                                   flex: 1,
-                                  child: Container(
-                                    height: 50.h,
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xfff5f5f5),
-                                      borderRadius: BorderRadius.circular(4.r),
-                                    ),
-                                    child: Center(
-                                      child: Text("Clear",
-                                          style: TextStyle(
-                                              color: const Color(0xff121212),
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: "NeueHelvetica",
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: 12.sp),
-                                          textAlign: TextAlign.left),
+                                  child: InkWell(
+                                    onTap: () {
+                                      controller.selectedLanguage.value.id = -1;
+                                      controller.selectedTopic.value.id = -1;
+                                      controller.selectMutiTopicList.clear();
+                                      controller.selectMutiLanguList.clear();
+                                      controller.selectIdTopic.clear();
+                                      controller.selectIdLanguage.clear();
+
+                                      controller.videoListAPI();
+                                    },
+                                    child: Container(
+                                      height: 50.h,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xfff5f5f5),
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                      ),
+                                      child: Center(
+                                        child: Text("Clear",
+                                            style: TextStyle(
+                                                color: const Color(0xff121212),
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: "NeueHelvetica",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.sp),
+                                            textAlign: TextAlign.left),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -693,232 +707,238 @@ class _VideoListBctState extends State<VideoListBct> {
                   ),
                   Obx(
                     () => Container(
-                      margin:
-                          EdgeInsets.only(top: 24.h, left: 12.w, right: 24.w),
-                      child: controller.isLoading.value
-                          ? const SizedBox(
-                              width: double.infinity,
-                              height: 100,
-                              child: Center(
-                                  child: SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Color(0xff04080f))),
-                              )))
-                          : controller.videoList.length == 0
-                              ? SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.5,
-                                  width: double.infinity,
-                                  child: const Center(
-                                      child: Text("No Data Found",
-                                          style: TextStyle(
-                                              color: grey_aaaaaa,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily:
-                                                  helveticaNeueNeue_medium,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: 14))),
-                                )
-                              : ListView.builder(
-                                  shrinkWrap: true,
-                                  primary: false,
-                                  itemCount: controller.videoList.length + 1,
-                                  padding: EdgeInsets.zero,
-                                  itemBuilder: (context, i) {
-                                    if (i < controller.videoList.length) {
-                                      print("::::::::::::UPDATE 00:::::::::::");
-                                      return Padding(
-                                        padding: EdgeInsets.only(bottom: 20.h),
-                                        child: InkWell(
-                                          onTap: () {
-                                            Get.to(VideoDetailTab(
-                                                videoList:
-                                                    controller.videoList[i]));
-                                          },
-                                          child: SizedBox(
-                                              width: double.infinity,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Stack(
-                                                    alignment:
-                                                        Alignment.bottomRight,
-                                                    children: [
-                                                      SizedBox(
-                                                          height: 80.h,
-                                                          width: 120.w,
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                        .all(
-                                                                    Radius
-                                                                        .circular(
-                                                                            35)),
-                                                            child: Html(
-                                                                data: controller
-                                                                    .videoList[
-                                                                        i]
-                                                                    .embededCode),
-                                                          )),
-                                                      Positioned(
-                                                        bottom: 2,
-                                                        right: 3,
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 6.w,
-                                                                  bottom: 6.h),
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  vertical:
-                                                                      1.5.h,
-                                                                  horizontal:
-                                                                      6.w),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4),
-                                                            gradient:
-                                                                const LinearGradient(
-                                                              begin: Alignment
-                                                                  .topCenter,
-                                                              end: Alignment
-                                                                  .bottomCenter,
-                                                              colors: [
-                                                                Color(
-                                                                    0xff1c2535),
-                                                                Color(
-                                                                    0xff04080f)
-                                                              ],
-                                                              stops: [0.0, 5.0],
+                        margin:
+                            EdgeInsets.only(top: 24.h, left: 12.w, right: 24.w),
+                        child: controller.isLoadingBCT.value
+                            ? const SizedBox(
+                                width: double.infinity,
+                                height: 100,
+                                child: Center(
+                                    child: SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Color(0xff04080f))),
+                                )))
+                            : controller.videoList.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    itemCount: controller.videoList.length + 1,
+                                    padding: EdgeInsets.zero,
+                                    itemBuilder: (context, i) {
+                                      if (i < controller.videoList.length) {
+                                        print(
+                                            "::::::::::::UPDATE 00:::::::::::");
+                                        return Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 20.h),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.to(VideoDetailTab(
+                                                  videoList:
+                                                      controller.videoList[i]));
+                                            },
+                                            child: SizedBox(
+                                                width: double.infinity,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Stack(
+                                                      alignment:
+                                                          Alignment.bottomRight,
+                                                      children: [
+                                                        SizedBox(
+                                                            height: 80.h,
+                                                            width: 120.w,
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          35)),
+                                                              child: Html(
+                                                                  data: controller
+                                                                      .videoList[
+                                                                          i]
+                                                                      .embededCode),
+                                                            )),
+                                                        Positioned(
+                                                          bottom: 2,
+                                                          right: 3,
+                                                          child: Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    right: 6.w,
+                                                                    bottom:
+                                                                        6.h),
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        1.5.h,
+                                                                    horizontal:
+                                                                        6.w),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4),
+                                                              gradient:
+                                                                  const LinearGradient(
+                                                                begin: Alignment
+                                                                    .topCenter,
+                                                                end: Alignment
+                                                                    .bottomCenter,
+                                                                colors: [
+                                                                  Color(
+                                                                      0xff1c2535),
+                                                                  Color(
+                                                                      0xff04080f)
+                                                                ],
+                                                                stops: [
+                                                                  0.0,
+                                                                  5.0
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            child: Text(
+                                                              "3.05",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      11.sp,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontFamily:
+                                                                      helveticaNeueNeue_medium),
                                                             ),
                                                           ),
-                                                          child: Text(
-                                                            "3.05",
-                                                            style: TextStyle(
-                                                                fontSize: 11.sp,
-                                                                color: Colors
-                                                                    .white,
-                                                                fontFamily:
-                                                                    helveticaNeueNeue_medium),
-                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 8.w,
+                                                            right: 10.w),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 3.h,
+                                                            ),
+                                                            Text(
+                                                              controller
+                                                                  .videoList[i]
+                                                                  .title
+                                                                  .toString(),
+                                                              softWrap: true,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              maxLines: 2,
+                                                              style: const TextStyle(
+                                                                  fontFamily:
+                                                                      helvetica_neu_bold,
+                                                                  color:
+                                                                      black_121212,
+                                                                  fontSize: 14),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 8.h,
+                                                            ),
+                                                            Text(
+                                                              controller
+                                                                  .videoList[i]
+                                                                  .userDetails
+                                                                  .fullName
+                                                                  .toString(),
+                                                              style: const TextStyle(
+                                                                  fontFamily:
+                                                                      helveticaNeueNeue_medium,
+                                                                  color:
+                                                                      opcity_black_121212,
+                                                                  fontSize: 10),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 2.h,
+                                                            ),
+                                                            Text(
+                                                              "Posted " +
+                                                                  DateFormat
+                                                                          .yMMMM()
+                                                                      .format(DateTime.parse(controller
+                                                                          .videoList[
+                                                                              i]
+                                                                          .createdAt
+                                                                          .toString()))
+                                                                      .toString(),
+                                                              style: const TextStyle(
+                                                                  fontFamily:
+                                                                      helveticaNeueNeue_medium,
+                                                                  color:
+                                                                      opcity_black_121212,
+                                                                  fontSize: 8),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                  Expanded(
-                                                    child: Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 8.w,
-                                                          right: 10.w),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 3.h,
-                                                          ),
-                                                          Text(
-                                                            controller
-                                                                .videoList[i]
-                                                                .title
-                                                                .toString(),
-                                                            softWrap: true,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            maxLines: 2,
-                                                            style: const TextStyle(
-                                                                fontFamily:
-                                                                    helvetica_neu_bold,
-                                                                color:
-                                                                    black_121212,
-                                                                fontSize: 14),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 8.h,
-                                                          ),
-                                                          Text(
-                                                            controller
-                                                                .videoList[i]
-                                                                .userDetails
-                                                                .fullName
-                                                                .toString(),
-                                                            style: const TextStyle(
-                                                                fontFamily:
-                                                                    helveticaNeueNeue_medium,
-                                                                color:
-                                                                    opcity_black_121212,
-                                                                fontSize: 10),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 2.h,
-                                                          ),
-                                                          Text(
-                                                            "Posted " +
-                                                                DateFormat
-                                                                        .yMMMM()
-                                                                    .format(DateTime.parse(controller
-                                                                        .videoList[
-                                                                            i]
-                                                                        .createdAt
-                                                                        .toString()))
-                                                                    .toString(),
-                                                            style: const TextStyle(
-                                                                fontFamily:
-                                                                    helveticaNeueNeue_medium,
-                                                                color:
-                                                                    opcity_black_121212,
-                                                                fontSize: 8),
-                                                          ),
-                                                        ],
-                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              )),
-                                        ),
-                                      );
-                                    } else {
-                                      return controller.hasMore.value == false
-                                          ? const SizedBox()
-                                          : InkWell(
-                                              onTap: () {
-                                                controller
-                                                    .videoMenuPage.value++;
-                                                controller
-                                                    .videoMenuPageMethod();
-                                              },
-                                              child: Container(
+                                                  ],
+                                                )),
+                                          ),
+                                        );
+                                      } else {
+                                        return controller.hasMore.value == false
+                                            ? const SizedBox()
+                                            : Container(
                                                 margin: EdgeInsets.only(
                                                     bottom: 25.h),
                                                 child: Center(
-                                                  child: Text(
-                                                    "Load More",
-                                                    style: TextStyle(
-                                                        fontFamily: roboto_bold,
-                                                        fontSize: 14.sp,
-                                                        color: blue_0a84ff),
+                                                  child: TextButton(
+                                                    onPressed: () {
+                                                      controller.videoMenuPage
+                                                          .value++;
+                                                      controller
+                                                          .videoMenuPageMethod();
+                                                    },
+                                                    child: Text(
+                                                      "Load More",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              roboto_bold,
+                                                          fontSize: 14.sp,
+                                                          color: blue_0a84ff),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            );
-                                    }
-                                  }),
-                    ),
+                                              );
+                                      }
+                                    })
+                                : SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.45,
+                                    width: double.infinity,
+                                    child: const Center(
+                                        child: Text("No Data Found",
+                                            style: TextStyle(
+                                                color: grey_aaaaaa,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 14))),
+                                  )),
                   ),
                 ],
               ),

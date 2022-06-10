@@ -17,7 +17,9 @@ class PostController extends GetxController {
   Rx<TextEditingController> searchController = TextEditingController().obs;
   RxList<UserList> selectedList = <UserList>[].obs;
   RxList<UserList> searchList = <UserList>[].obs;
-  RxList location = [].obs;
+  RxString location = "".obs;
+  RxDouble latitude = 0.0.obs;
+  RxDouble longitude = 0.0.obs;
   RxString address = "".obs;
   Rx<TextEditingController> searchLocationController =
       TextEditingController().obs;
@@ -41,18 +43,18 @@ class PostController extends GetxController {
 
     request.fields.addAll({
       'caption': captionController.value.text,
-      'address': 'ksedfj',
-      'latitude': '0.5625',
-      'longitude': '1.54622',
+      'address': location.toString(),
+      'latitude': latitude.toString(),
+      'longitude': longitude.toString(),
       'tagged_users': taggedUser.join(',')
     });
 
     if (assetImages.length > 0) {
       request.files.add(await http.MultipartFile.fromPath(
           'image',
-          (assetImages.value?[0].relativePath ?? "") +
+          (assetImages.value[0].relativePath ?? "") +
               "/" +
-              (assetImages.value?[0].title ?? "")));
+              (assetImages.value[0].title ?? "")));
     }
 
     request.headers.addAll(headers);

@@ -8,6 +8,7 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
+import 'package:geocoding/geocoding.dart' as geo;
 import 'package:get/get.dart';
 import 'package:google_place/google_place.dart';
 
@@ -23,6 +24,7 @@ class _PostLocationState extends State<PostLocation> {
   GooglePlace? googlePlace;
   List<AutocompletePrediction> predictions = [];
   List name = [];
+  List formattedAddress = [];
 
   @override
   void initState() {
@@ -47,6 +49,7 @@ class _PostLocationState extends State<PostLocation> {
       if (result != null && result.result != null && mounted) {
         setState(() {
           name.add(result.result!.name!);
+          formattedAddress.add(result.result!.formattedAddress);
         });
       }
     }
@@ -82,6 +85,7 @@ class _PostLocationState extends State<PostLocation> {
                         setState(() {
                           predictions = [];
                           name = [];
+                          formattedAddress = [];
                         });
                       }
                     }
@@ -97,11 +101,16 @@ class _PostLocationState extends State<PostLocation> {
                 itemCount: predictions.length,
                 itemBuilder: (context, i) => InkWell(
                   onTap: () {
-                    debugPrint(predictions[i].description);
-                    controller.location.add(name[i]);
-                    controller.address.value = predictions[i].description!;
-                    print(controller.address.value);
-                    Get.back();
+                    setState(() async {
+                      debugPrint(predictions[i].description);
+                      controller.location.value = name[i];
+                      controller.address.value = predictions[i].description!;
+                      List<geo.Location> locations = await geo.locationFromAddress(formattedAddress[i]);
+                      controller.latitude.value = locations[0].latitude;
+                      controller.longitude.value = locations[0].longitude;
+                      print(controller.address.value);
+                      Get.back();
+                    });
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,

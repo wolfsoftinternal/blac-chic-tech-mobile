@@ -1,4 +1,3 @@
-
 import 'package:blackchecktech/Screens/Authentication/signup/view/FullInformationStepsView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
