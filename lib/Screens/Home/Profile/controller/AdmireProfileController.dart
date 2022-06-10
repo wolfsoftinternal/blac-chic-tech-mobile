@@ -12,6 +12,7 @@ import 'package:blackchecktech/Screens/Home/Profile/model/VideoListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventDetail.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventListDetail.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/SeeAllAdmires.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -71,11 +72,10 @@ class AdmireProfileController extends GetxController {
   ScrollController eventScrollController = ScrollController();
   RxInt eventPageNumber = 1.obs;
   RxBool isEventPaginationLoading = false.obs;
-  ScrollController registerScrollController = ScrollController();
-  RxInt registerPageNumber = 1.obs;
-  RxBool isRegisterPaginationLoading = false.obs;
   Rx<TextEditingController> registeredUserSearch = TextEditingController().obs;
-  RxList<RegisterUser> registerList = <RegisterUser>[].obs;
+  Rx<RegisterUserModel> registerList = RegisterUserModel().obs;
+  RxBool isLimitReached = false.obs;
+  RxList<UserList> userList = <UserList>[].obs;
 
   initScrolling(BuildContext context, userId, [postId]) {
     postScrollController.addListener(() async {
@@ -171,29 +171,6 @@ class AdmireProfileController extends GetxController {
     eventScrollController.jumpTo(eventScrollController.position.maxScrollExtent);
   }
 
-  initRegisterScrolling(BuildContext context, id) {
-    registerScrollController.addListener(() async {
-      if (registerScrollController.position.maxScrollExtent ==
-          registerScrollController.position.pixels) {
-        _scrollDown();
-        isRegisterPaginationLoading.value = true;
-        registerPageNumber = registerPageNumber + 1;
-
-          dynamic body = {
-            'event_id': id.toString(),
-            'page': registerPageNumber.toString()
-          };
-          await postListAPI(context, body);
-       
-        isRegisterPaginationLoading.value = false;
-      }
-    });
-  }
-
-  void _registerScrollDown() {
-    registerScrollController.jumpTo(registerScrollController.position.maxScrollExtent);
-  }
-
   admireListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
@@ -232,7 +209,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  admireDeleteAPI(BuildContext context, id) async {
+  admireDeleteAPI(BuildContext context, id, [isFrom]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -257,7 +234,11 @@ class AdmireProfileController extends GetxController {
 
             admireDeleteAPI(context, id);
           } else if (model.statusCode == 200) {
-            admireListAPI(context, null);
+            if(isFrom == 'profile'){
+              snackBar(context, 'Admire Deleted');
+            }else{
+              admireListAPI(context, null); 
+            }
           }
         });
       } else {
@@ -511,7 +492,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  eventDetailAPI(BuildContext context, id, [isFrom]) async {
+  eventDetailAPI(BuildContext context, id, type, [isFrom]) async {
     print('Event detail api call');
 
     var preferences = MySharedPref();
@@ -537,13 +518,13 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            eventDetailAPI(context, id);
+            eventDetailAPI(context, id, type, [isFrom]);
           } else if (model.statusCode == 200) {
             EventDetailModel detail = EventDetailModel.fromJson(userModel);
             eventDetails.value = detail.data!;
 
             if (isFrom != null) {
-              Get.to(const EventDetail(isFrom: 'event'));
+              Get.to(EventDetail(isFrom: 'event', type: type,));
             } else {
               Get.to(const EventDetail());
             }
@@ -579,7 +560,7 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            eventDetailAPI(context, id);
+            eventDetailAPI(context, id, null);
           } else if (model.statusCode == 200) {
             Get.back();
             Get.back();
@@ -621,12 +602,7 @@ class AdmireProfileController extends GetxController {
 
             replaceAdmireAPI(context, id, newId, body);
           } else if (model.statusCode == 200) {
-            if (userID == null) {
-              admireListAPI(context, null);
-            } else {
-              admireListAPI(context, userID);
-            }
-            Get.back();
+            snackBar(context, 'Admire Replaced');
           }
         });
       } else {
@@ -635,13 +611,13 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  rearrangeAdmireAPI(BuildContext context, id, num) async {
+  rearrangeAdmireAPI(BuildContext context, num1, num2) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
     dynamic body = {
-      'admire_id': id.toString(),
-      'admire_number': num.toString()
+      'admire_one_number': num1.toString(),
+      'admire_two_number': num2.toString()
     };
 
     String url = urlBase + urlRearrangeAdmire;
@@ -660,9 +636,46 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            rearrangeAdmireAPI(context, id, num);
+            rearrangeAdmireAPI(context, num1, num2);
           } else if (model.statusCode == 200) {
             admireListAPI(context, null);
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  replaceUserList(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlSystemUser;
+    final apiReq = Request();
+
+    dynamic body = {
+      'search': searchController.value.text,
+    };
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            admireProfileAPI(context, id);
+          } else if (model.statusCode == 200) {
+            UserListModel detail =
+            UserListModel.fromJson(userModel);
+            userList.addAll(detail.data!);
           }
         });
       } else {
@@ -697,7 +710,13 @@ class AdmireProfileController extends GetxController {
 
             createAdmireAPI(context, id);
           } else if (model.statusCode == 200) {
+            admire.value = 'Admired';
             snackBar(context, model.message!);
+          }else if(model.statusCode == 101){
+            if(model.message == 'Admire Limit has been reached'){
+              isLimitReached.value = true;
+              Get.to(SeeAllAdmires(type: 'user', limit: 'completed'));
+            }
           }
         });
       } else {
@@ -943,16 +962,12 @@ class AdmireProfileController extends GetxController {
 
     String url = urlBase + urlRegisteredUser;
     final apiReq = Request();
-
     dynamic body = {
-      'event_id': id.toString(),
-      'search': registeredUserSearch.value.text,
-    };
+        'event_id': id.toString(),
+        'search': registeredUserSearch.value.text,
+      };
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
-      if(registerPageNumber == 1){
-          registerList.clear();
-      }
       http.StreamedResponse res = value;
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
@@ -966,8 +981,8 @@ class AdmireProfileController extends GetxController {
 
             registeredUserApi(context, id);
           } else if (model.statusCode == 200) {
-            RegisterUser detail = RegisterUser.fromJson(userModel);
-            registerList.add(detail);
+            RegisterUserModel detail = RegisterUserModel.fromJson(userModel);
+            registerList.value = detail;
           }
         });
       } else {

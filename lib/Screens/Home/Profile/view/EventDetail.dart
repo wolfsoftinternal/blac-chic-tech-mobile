@@ -29,8 +29,8 @@ import '../../Event/view/AllPurchasedEventTicketList.dart';
 
 class EventDetail extends StatefulWidget {
   final isFrom;
-
-  const EventDetail({Key? key, this.isFrom}) : super(key: key);
+  final type;
+  const EventDetail({Key? key, this.isFrom, this.type}) : super(key: key);
 
   @override
   State<EventDetail> createState() => _EventDetailState();
@@ -522,6 +522,7 @@ class _EventDetailState extends State<EventDetail> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        controller.eventDetails.value.is_purchased == 0 ? Container() :
                         Padding(
                                     padding:  EdgeInsets.only(left: 24.w,right: 24.w, top: 16.h),
                                     child: Container(
@@ -619,8 +620,7 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
                         Padding(
                           padding: EdgeInsets.only(top: 16.h),
-                          child: controller.eventDetails.value.type ==
-                                  'ticket_price'
+                          child: controller.eventDetails.value.type == 'ticket_price' 
                               ? Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.start,
@@ -667,7 +667,7 @@ class _EventDetailState extends State<EventDetail> {
                                             //  height: 100.h,
                                        //       margin: EdgeInsets.only(bottom: 18,top: 10),
                                               padding:
-                                                  widget.isFrom == 'event'
+                                                  widget.isFrom == 'event' && widget.type == 'upcoming'
                                                       ?  EdgeInsets.only(
                                                           top: 8.h,
                                                           bottom: 8.h,
@@ -680,7 +680,7 @@ class _EventDetailState extends State<EventDetail> {
                                                           bottom: 10.h),
                                               decoration: BoxDecoration(
                                                   color:
-                                                      widget.isFrom == 'event'
+                                                      widget.isFrom == 'event' && widget.type == 'upcoming'
                                                           ? black_121212
                                                           : white_ffffff,
                                                   borderRadius:
@@ -713,7 +713,7 @@ class _EventDetailState extends State<EventDetail> {
                                                       style: TextStyle(
                                                           color: widget
                                                                       .isFrom ==
-                                                                  'event'
+                                                                  'event' && widget.type == 'upcoming'
                                                               ? white_ffffff
                                                               : black_121212,
                                                           fontWeight:
@@ -741,7 +741,7 @@ class _EventDetailState extends State<EventDetail> {
                                                       "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
                                                       style: TextStyle(
                                                           color: widget.isFrom ==
-                                                                  'event'
+                                                                  'event' && widget.type == 'upcoming'
                                                               ? white_ffffff
                                                               : orange_ff881a,
                                                           fontWeight:
@@ -761,7 +761,7 @@ class _EventDetailState extends State<EventDetail> {
                                                   //     FontWeight.w500,
                                                   //     FontStyle.normal),
 
-                                                  widget.isFrom == 'event'
+                                                  widget.isFrom == 'event' && widget.type == 'upcoming'
                                                       ? Padding(
                                                           padding:
                                                               EdgeInsets.only(
@@ -1005,13 +1005,13 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
                         ),
                         controller.eventDetails.value.type == 'invite_only'
-                            ? widget.isFrom != 'event'
+                            ? widget.isFrom != 'event' && widget.type != 'upcoming'
                                 ? Column(
                                     children: [
                                       eventController.selectedList.isNotEmpty
                                           ? Padding(
                                               padding:
-                                                  EdgeInsets.only(top: 24.h),
+                                                  EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
                                               child: Row(
                                                 children: [
                                                   SizedBox(
@@ -1162,7 +1162,7 @@ class _EventDetailState extends State<EventDetail> {
                                             )
                                           : Container(),
                                       Padding(
-                                        padding: EdgeInsets.only(top: 20.h),
+                                        padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
                                         child: InkWell(
                                           onTap: () {
                                             Get.to(const InvitePeople(
@@ -1443,7 +1443,7 @@ class _EventDetailState extends State<EventDetail> {
                                               .speakers!.length ==
                                               2
                                               ? 35
-                                              : 55,
+                                              : 45,
                                           height: 30.h,
                                           child: Stack(
                                             alignment: Alignment.centerLeft,
@@ -1531,48 +1531,52 @@ class _EventDetailState extends State<EventDetail> {
                                             grey_3f3f3f,
                                             FontWeight.w500,
                                             FontStyle.normal),
-                                        SizedBox(
-                                          height: 20.h,
-                                          child: ListView.builder(
-                                              primary: false,
-                                              shrinkWrap: true,
-                                              padding: EdgeInsets.zero,
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: controller.eventDetails
-                                                  .value.speakers!.length,
-                                              itemBuilder: (context, index) {
-                                                return Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                                  children: [
-                                                    setHelceticaBold(
-                                                        controller
-                                                            .eventDetails
-                                                            .value
-                                                            .speakers![
-                                                        index]
-                                                            .fullName !=
-                                                            null
-                                                            ? "@${controller.eventDetails.value.speakers![index].fullName!}" : '',
-                                                        11.sp,
-                                                        black_121212,
-                                                        FontWeight.w500,
-                                                        FontStyle.normal),
-                                                    controller.eventDetails.value
-                                                        .speakers!.length ==
-                                                        (index + 1)
-                                                        ? Container()
-                                                        : setHelceticaBold(
-                                                        ", ",
-                                                        11.sp,
-                                                        black_121212,
-                                                        FontWeight.w500,
-                                                        FontStyle.normal),
-                                                  ],
-                                                );
-                                              }),
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 2.0),
+                                          child: SizedBox(
+                                            height: 20.h,
+                                            width: MediaQuery.of(context).size.width * 0.55,
+                                            child: ListView.builder(
+                                                primary: false,
+                                                shrinkWrap: true,
+                                                padding: EdgeInsets.zero,
+                                                scrollDirection: Axis.horizontal,
+                                                itemCount: controller.eventDetails
+                                                    .value.speakers!.length,
+                                                itemBuilder: (context, index) {
+                                                  return Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                    children: [
+                                                      setHelceticaBold(
+                                                          controller
+                                                              .eventDetails
+                                                              .value
+                                                              .speakers![
+                                                          index]
+                                                              .fullName !=
+                                                              null
+                                                              ? "@${controller.eventDetails.value.speakers![index].fullName!}" : '',
+                                                          11.sp,
+                                                          black_121212,
+                                                          FontWeight.w500,
+                                                          FontStyle.normal),
+                                                      controller.eventDetails.value
+                                                          .speakers!.length ==
+                                                          (index + 1)
+                                                          ? Container()
+                                                          : setHelceticaBold(
+                                                          ", ",
+                                                          11.sp,
+                                                          black_121212,
+                                                          FontWeight.w500,
+                                                          FontStyle.normal),
+                                                    ],
+                                                  );
+                                                }),
+                                          ),
                                         ),
                                       ],
                                     ),

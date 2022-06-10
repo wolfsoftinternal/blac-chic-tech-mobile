@@ -8,6 +8,7 @@ import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/AdmireProfileList.dart';
 import 'package:blackchecktech/Widget/UserProfileDetail.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -476,7 +477,7 @@ class _UserProfileState extends State<UserProfile> {
                     padding:
                          EdgeInsets.only( top: 16.h),
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.10,
+                      height: MediaQuery.of(context).size.height * 0.11,
                       width: double.infinity,
                       child: ListView.separated(
                         primary: false,
@@ -492,8 +493,9 @@ class _UserProfileState extends State<UserProfile> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(50),
+                              CircularProfileAvatar(
+                                '',
+                                radius: 24,
                                 child: controller.otherAdmireList[index]
                                             .admireDetails!.image ==
                                         null

@@ -18,6 +18,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:blackchecktech/Widget/ReportBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -100,8 +101,9 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                       onTap: () {
                         Get.back();
                       },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
+                      child:CircularProfileAvatar(
+                                '',
+                                radius: 32,
                         child: controller.details.value.image == null
                             ? SvgPicture.asset(
                                 placeholder,
@@ -742,8 +744,9 @@ class Admires extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 userId != controller.details.value.id
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
+                    ? CircularProfileAvatar(
+                                '',
+                                radius: 32,
                         child: controller.otherAdmireList[index]
                                     .admireDetails!.image ==
                                 null
@@ -775,8 +778,9 @@ class Admires extends StatelessWidget {
                                 ),
                               ),
                       )
-                    : ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
+                    : CircularProfileAvatar(
+                                '',
+                                radius: 24,
                         child: controller.admireList[index].admireDetails!
                                     .image ==
                                 null

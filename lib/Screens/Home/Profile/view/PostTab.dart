@@ -43,110 +43,136 @@ class _PostTabState extends State<PostTab> {
                   ],
                 ),
               )
-            : ListView(
-                physics: ScrollPhysics(), // <-- this will disable scroll
-                shrinkWrap: true,
-                padding: EdgeInsets.all(0),
+            : SingleChildScrollView(
+              child: Column(
                 children: [
-                  Padding(
-                      padding: EdgeInsets.only(left: 24.w, right: 24.w),
-                      child: StaggeredGridView.countBuilder(
-                        crossAxisCount: 4,
-                        itemCount: controller.postList.length >= 10
-                            ? 10
-                            : controller.postList.length,
-                        shrinkWrap: true,
-                        primary: false,
-                        itemBuilder: (BuildContext context, int index) =>
-                            GestureDetector(
-                          onTap: () {
-                            Get.to(PostDetail(
-                                userId: widget.id,
-                                id: controller.postList[index].id));
-                          },
-                          child: GridTile(
-                            child: Stack(
-                              children: [
-                                Container(
-                                  child: controller.postList[index].image ==
-                                          null
-                                      ? ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5.r)),
-                                          child: SvgPicture.asset(
-                                            placeholder,
-                                            fit: BoxFit.cover,
-                                            height: 220.h,
-                                          ),
-                                        )
-                                      : ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5.r)),
-                                          child: CachedNetworkImage(
-                                            imageUrl: controller
-                                                .postList[index].image!,
-                                            fit: BoxFit.cover,
-                                            height: 220.h,
-                                            progressIndicatorBuilder: (context,
-                                                    url, downloadProgress) =>
-                                                SvgPicture.asset(
-                                              placeholder,
-                                              fit: BoxFit.cover,
-                                              height: 220.h,
-                                            ),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    SvgPicture.asset(
-                                              placeholder,
-                                              fit: BoxFit.cover,
-                                              height: 220.h,
-                                            ),
-                                          ),
-                                        ),
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 220.h,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.r),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [
-                                            Color(0x00121212),
-                                            Color(0xff121212)
-                                          ])),
-                                ),
-                              ],
-                            ),
-                            footer: Padding(
-                              padding: EdgeInsets.only(
-                                  bottom: 12.w, left: 12.w, right: 12.w),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(
-                                  controller.postList[index].caption!,
-                                  softWrap: true,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
-                                  style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontFamily: helvetica_neu_bold,
-                                      fontWeight: FontWeight.w600,
-                                      color: white_ffffff,
-                                      fontStyle: FontStyle.normal),
+                  ListView(
+                    primary: false,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.all(0),
+                      children: [
+                        Padding(
+                            padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                            child: StaggeredGridView.countBuilder(
+                              crossAxisCount: 4,
+                              itemCount: controller.postList.length >= 6
+                                  ? 6
+                                  : controller.postList.length,
+                              shrinkWrap: true,
+                              primary: false,
+                              itemBuilder: (BuildContext context, int index) =>
+                                  GestureDetector(
+                                onTap: () {
+                                  Get.to(PostDetail(
+                                      userId: widget.id,
+                                      id: controller.postList[index].id));
+                                },
+                                child: GridTile(
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        child: controller.postList[index].image ==
+                                                null
+                                            ? ClipRRect(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.r)),
+                                                child: SvgPicture.asset(
+                                                  placeholder,
+                                                  fit: BoxFit.cover,
+                                                  height: 220.h,
+                                                ),
+                                              )
+                                            : ClipRRect(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.r)),
+                                                child: CachedNetworkImage(
+                                                  imageUrl: controller
+                                                      .postList[index].image!,
+                                                  fit: BoxFit.cover,
+                                                  height: 220.h,
+                                                  progressIndicatorBuilder: (context,
+                                                          url, downloadProgress) =>
+                                                      SvgPicture.asset(
+                                                    placeholder,
+                                                    fit: BoxFit.cover,
+                                                    height: 220.h,
+                                                  ),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          SvgPicture.asset(
+                                                    placeholder,
+                                                    fit: BoxFit.cover,
+                                                    height: 220.h,
+                                                  ),
+                                                ),
+                                              ),
+                                      ),
+                                      Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        height: 220.h,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5.r),
+                                            gradient: LinearGradient(
+                                                begin: Alignment.topCenter,
+                                                end: Alignment.bottomCenter,
+                                                colors: [
+                                                  Color(0x00121212),
+                                                  Color(0xff121212)
+                                                ])),
+                                      ),
+                                    ],
+                                  ),
+                                  footer: Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom: 12.w, left: 12.w, right: 12.w),
+                                    child: Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Text(
+                                        controller.postList[index].caption!,
+                                        softWrap: true,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 3,
+                                        style: TextStyle(
+                                            fontSize: 12.sp,
+                                            fontFamily: helvetica_neu_bold,
+                                            fontWeight: FontWeight.w600,
+                                            color: white_ffffff,
+                                            fontStyle: FontStyle.normal),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                        staggeredTileBuilder: (int index) =>
-                            StaggeredTile.count(2, index.isEven ? 2.6 : 2),
-                        mainAxisSpacing: 23.h,
-                        crossAxisSpacing: 23.w,
-                      )),
+                              staggeredTileBuilder: (int index) =>
+                                  StaggeredTile.count(2, index.isEven ? 2.6 : 2),
+                              mainAxisSpacing: 23.h,
+                              crossAxisSpacing: 23.w,
+                            )),
+                      ],
+                    ),
+                    controller.postList.length > 6 ?
+                    GestureDetector(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8.0, bottom: 18.0),
+                        child: InkWell(
+                            onTap: () {
+                             Get.to(PostDetail(
+                                  userId: widget.id,
+                                  id: controller.postList[0].id));
+                            },
+                            child: Center(
+                                child: setHelceticaBold(
+                                    'See More',
+                                    16,
+                                    blue_0A84FF,
+                                    FontWeight.w400,
+                                    FontStyle.normal))),
+                      ),
+                    ) : Container()
                 ],
               ),
+            ),
       ),
     );
   }

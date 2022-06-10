@@ -431,43 +431,21 @@ class _EventLocationState extends State<EventLocation> {
     );
   }
 
-  Future<void> getAddress(double lat, double lng) async {
-    // GeoCode geoCode = GeoCode();
-    // geoCode.reverseGeocoding(latitude: lat, longitude: lng).then((value) =>
-    // print("Geocode" + value.streetAddress.toString())
+  Future<void> getAddress(double lat, double lng) async {    
     List<geo.Placemark> placemarks =
         await geo.placemarkFromCoordinates(lat, lng);
 
     _isLoading = false;
-    if (placemarks[0].name == null) {
-      _address =
-          "${placemarks[0].street}  ${placemarks[0].subLocality} ${placemarks[0].postalCode} ${placemarks[0].country}";
-      print("My address 1 :: " + _address.toString());
-    } else if (placemarks[0].street == null) {
-      _address =
-          "${placemarks[0].name} ${placemarks[0].subLocality} ${placemarks[0].postalCode} ${placemarks[0].country}";
-      print("My address 2 :: " + _address.toString());
-    } else if (placemarks[0].street == null && placemarks[0].name == null) {
-      _address =
-          "${placemarks[0].subLocality} ${placemarks[0].postalCode} ${placemarks[0].country}";
-      print("My address 3 :: " + _address);
-    } else {
-      _address =
-          "${placemarks[0].street} ${placemarks[0].name} ${placemarks[0].subLocality} ${placemarks[0].postalCode} ${placemarks[0].country}";
+      _address = "${placemarks[0].street} ${placemarks[0].name} ${placemarks[0].subLocality} ${placemarks[0].locality} ${placemarks[0].postalCode} ${placemarks[0].country}";
 
-      print("My address 4 :: " + _address);
       controller.street1Controller.value.text = placemarks[0].street.toString();
-      controller.street2Controller.value.text = placemarks[0].name.toString();
-      controller.cityController.value.text =
-          placemarks[0].subAdministrativeArea.toString();
-      controller.countryController.value.text =
-          placemarks[0].country.toString();
-      controller.landmarkController.value.text =
-          placemarks[0].subLocality.toString();
+      controller.street2Controller.value.text = placemarks[0].subLocality.toString();
+      controller.cityController.value.text = placemarks[0].subAdministrativeArea.toString();
+      controller.countryController.value.text = placemarks[0].country.toString();
+      controller.landmarkController.value.text = placemarks[0].name.toString();
       controller.addressController.value.text = _address;
       controller.latitude.value = lat;
       controller.longitude.value = lng;
-    }
 
     for (var item in stepsController.countrylist) {
       if (item.name == placemarks[0].country!) {
@@ -491,63 +469,6 @@ class _EventLocationState extends State<EventLocation> {
       }
     }
     setState(() {});
-
-    // setState(() {
-    //   _isLoading = false;
-    //   if (value.streetNumber == null) {
-    //     _address = "${value.streetAddress} ${value.postal} ${value.city}";
-
-    //     print("My address 1 :: " + _address.toString());
-    //   } else if (value.streetAddress == null) {
-    //     _address = "${value.streetNumber} ${value.postal} ${value.city}";
-
-    //     print("My address 2 :: " + _address.toString());
-    //   } else if (value.streetNumber == null &&
-    //       value.streetAddress == null) {
-    //     _address = "${value.region}${value.postal} ${value.city}";
-
-    //     print("My address 3 :: " + _address);
-    //   } else {
-    //     _address =
-    //         "${value.streetNumber} ${value.streetAddress} ${value.postal} ${value.city}";
-
-    //     print("My address 4 :: " + _address);
-
-    //     controller.street1Controller.value.text = value.streetNumber.toString();
-    //     controller.street2Controller.value.text = value.streetAddress.toString();
-    //     controller.cityController.value.text = value.city.toString();
-    //     controller.countryController.value.text = value.countryName.toString();
-    //     controller.landmarkController.value.text = value.region.toString();
-    //     controller.addressController.value.text = _address;
-    //     controller.latitude.value = lat;
-    //     controller.longitude.value = lng;
-
-    //     for (var item in stepsController.countrylist) {
-    //       if (item.name == value.countryName!) {
-    //         controller.countryId.value = item.id!;
-    //       }
-    //       if(controller.countryId.value != 0){
-    //         checkNet(context).then((value) => stepsController.stateListApi(controller.countryId.value.toString()));
-    //       }
-    //     }
-
-    //     for (var item in stepsController.stateList) {
-    //       if (item.name == value.region!.split(', ')[1]) {
-    //         controller.stateId.value = item.id!;
-    //       }
-    //       if(controller.stateId.value != 0){
-    //         checkNet(context).then((value) => stepsController.cityListApi(controller.countryId.value.toString(), controller.stateId.value.toString()));
-    //       }
-    //     }
-
-    //     for (var item in stepsController.cityList) {
-    //       if (item.name == value.city!) {
-    //         controller.cityId.value = item.id!;
-    //       }
-    //     }
-    //   }
-    // })
-    // );
   }
 
   saveAddress(BuildContext context) async {

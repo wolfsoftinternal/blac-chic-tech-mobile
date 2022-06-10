@@ -9,6 +9,7 @@ import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -146,10 +147,10 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                           checkNet(context).then((value) {
                             if (_isFirstLayout == true) {
                               admireProfileController.eventDetailAPI(context,
-                                  controller.upcomingEventList[i].id, 'event');
+                                  controller.upcomingEventList[i].id, 'upcoming', 'event');
                             } else {
                               admireProfileController.eventDetailAPI(context,
-                                  controller.pastEventList[i].id, 'event');
+                                  controller.pastEventList[i].id, 'past', 'event');
                             }
                           });
                         },
@@ -322,9 +323,10 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                               Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 6.0.w, right: 6.0.w),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
+                                                child: CircularProfileAvatar(
+                                                  '',
+                                                  radius: 7.5,
+                                                  borderColor: black,
                                                   child: _isFirstLayout == true
                                                       ? controller
                                                                   .upcomingEventList[
@@ -385,31 +387,53 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                                                         grey_aaaaaa,
                                                                   ),
                                                                 )
-                                                      : controller.pastEventList[i].hosts == null
+                                                      : controller
+                                                                  .pastEventList[
+                                                                      i]
+                                                                  .hosts ==
+                                                              null
                                                           ? Icon(
                                                               Icons.person,
                                                               size: 15.r,
                                                               color:
                                                                   grey_aaaaaa,
                                                             )
-                                                          : controller.pastEventList[i].hosts![0].image.toString() == ''
+                                                          : controller
+                                                                      .pastEventList[
+                                                                          i]
+                                                                      .hosts![0]
+                                                                      .image
+                                                                      .toString() ==
+                                                                  ''
                                                               ? Icon(
                                                                   Icons.person,
                                                                   size: 15.r,
-                                                                  color: grey_aaaaaa,
+                                                                  color:
+                                                                      grey_aaaaaa,
                                                                 )
                                                               : CachedNetworkImage(
-                                                                  imageUrl: controller.pastEventList[i].hosts![0].image ?? "",
+                                                                  imageUrl: controller
+                                                                          .pastEventList[
+                                                                              i]
+                                                                          .hosts![
+                                                                              0]
+                                                                          .image ??
+                                                                      "",
                                                                   height: 15.h,
                                                                   width: 15.w,
                                                                   fit: BoxFit
                                                                       .cover,
                                                                   progressIndicatorBuilder:
-                                                                      (context, url, downloadProgress) =>
-                                                                      Icon(Icons.person,
-                                                                        size: 15.r,
-                                                                        color: grey_aaaaaa,
-                                                                      ),
+                                                                      (context,
+                                                                              url,
+                                                                              downloadProgress) =>
+                                                                          Icon(
+                                                                    Icons
+                                                                        .person,
+                                                                    size: 15.r,
+                                                                    color:
+                                                                        grey_aaaaaa,
+                                                                  ),
                                                                   errorWidget:
                                                                       (context,
                                                                               url,
@@ -546,7 +570,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
             ),
           ),
           if (controller.isPastUpcomingPaginationLoading.value == true)
-                PaginationUtils().loader(),
+            PaginationUtils().loader(),
 
           // /*--------------- Past Tab --------------*/
           // Visibility(

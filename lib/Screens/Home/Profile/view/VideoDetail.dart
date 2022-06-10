@@ -14,6 +14,7 @@ import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +37,6 @@ class VideoDetail extends StatefulWidget {
 
 class _VideoDetailState extends State<VideoDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
-  int userId = 0;
   String username = '';
 
   @override
@@ -46,21 +46,12 @@ class _VideoDetailState extends State<VideoDetail> {
     controller.initVideoScrolling(context, widget.userId, widget.id);
     dynamic body = {
       'video_id': widget.id.toString(),
-      'user_id': userId.toString(),
+      'user_id': widget.userId.toString(),
       'page': controller.videoPageNumber.toString()
     };
     checkNet(context).then((value) {
       controller.videoListAPI(context, body, 'detail');
     });
-    init();
-  }
-
-  init() async {
-    var preferences = MySharedPref();
-    SignupModel? myModel =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
-    userId = myModel!.data!.id!.toInt();
-    username = myModel.data!.userName!;
   }
 
   @override
@@ -87,8 +78,9 @@ class _VideoDetailState extends State<VideoDetail> {
                       Get.back();
                       Get.back();
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
+                    child: CircularProfileAvatar(
+                                '',
+                                radius: 24,
                       child: controller.details.value.image == null
                           ? SvgPicture.asset(
                               placeholder,
@@ -121,7 +113,7 @@ class _VideoDetailState extends State<VideoDetail> {
                   ),
                 ),
                 const Spacer(),
-                userId == controller.details.value.id
+                widget.userId == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
                           createBottomSheet(context, widget.userId);
@@ -147,7 +139,7 @@ class _VideoDetailState extends State<VideoDetail> {
                         width: 48.w,
                         height: 48.h,
                       ),
-                userId == controller.details.value.id
+                widget.userId == controller.details.value.id
                     ? Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: GestureDetector(

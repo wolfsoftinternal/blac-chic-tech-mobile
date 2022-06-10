@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
@@ -9,8 +10,10 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,6 +29,13 @@ class TagPeople extends StatefulWidget {
 class _TagPeopleState extends State<TagPeople> {
   VideoController videoController = Get.put(VideoController());
   PostController controller = Get.put(PostController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    videoController.initScrolling(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +63,7 @@ class _TagPeopleState extends State<TagPeople> {
                         ),
                     textAlign: TextAlign.left),
                 Padding(
-                  padding:  EdgeInsets.only(right: 24.w),
+                  padding: EdgeInsets.only(right: 24.w),
                   child: GestureDetector(
                     onTap: () {
                       Get.back();
@@ -63,10 +73,10 @@ class _TagPeopleState extends State<TagPeople> {
                           borderRadius: BorderRadius.circular(4.r),
                           color: orange_ff881a),
                       child: Padding(
-                        padding:  EdgeInsets.only(
+                        padding: EdgeInsets.only(
                             left: 16.w, right: 16.w, top: 8.h, bottom: 8.h),
                         child: Text('Done',
-                            style:  TextStyle(
+                            style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w900,
                                 fontFamily: helveticaNeueNeue_medium,
@@ -80,26 +90,38 @@ class _TagPeopleState extends State<TagPeople> {
               ],
             ),
             Padding(
-              padding:  EdgeInsets.only(top: 20.h),
+              padding: EdgeInsets.only(top: 20.h),
               child: Container(
                 child: Stack(
                   alignment: Alignment.bottomLeft,
                   children: [
-                    Image.asset(
-                      img_girl,
-                      height: 375.h,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                    controller.assetImages.length > 0
+                        ? Image.file(
+                            File((controller
+                                        .assetImages.value[0].relativePath ??
+                                    "") +
+                                "/" +
+                                (controller.assetImages.value[0].title ?? "")),
+                            width: double.infinity,
+                            height: 375.h,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            img_girl,
+                            height: 375.h,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
                     SizedBox(
                       height: 50.h,
                       child: ListView.separated(
                           primary: false,
                           shrinkWrap: true,
                           separatorBuilder: (context, index) => SizedBox(
-                            width: 8.w,
-                          ),
-                          padding: EdgeInsets.only(left: 16.w,right: 16.w,bottom: 16),
+                                width: 8.w,
+                              ),
+                          padding: EdgeInsets.only(
+                              left: 16.w, right: 16.w, bottom: 16),
                           itemCount: controller.selectedList.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, i) {
@@ -107,9 +129,8 @@ class _TagPeopleState extends State<TagPeople> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4.r),
                                 gradient: LinearGradient(
-                                    colors:  [
+                                    colors: [
                                       Color(0xFF1c2535).withOpacity(0.5),
-
                                       Color(0xFF04080f).withOpacity(0.5),
                                     ],
                                     begin: Alignment.topCenter,
@@ -120,14 +141,13 @@ class _TagPeopleState extends State<TagPeople> {
                                 child: Row(
                                   children: [
                                     Text(
-                                        controller.selectedList[i]
-                                                    .userName !=
+                                        controller.selectedList[i].userName !=
                                                 null
                                             ? controller
                                                 .selectedList[i].userName!
                                             : controller
                                                 .selectedList[i].firstName!,
-                                        style:  TextStyle(
+                                        style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w700,
                                             fontFamily: helvetica_neu_bold,
@@ -181,6 +201,7 @@ class _TagPeopleState extends State<TagPeople> {
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
+                controller: videoController.scrollController,
                 child: Padding(
                   padding:
                       EdgeInsets.only(left: 24.0, bottom: 24.0, right: 24.0),
@@ -223,8 +244,9 @@ class _TagPeopleState extends State<TagPeople> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(50),
+                                      CircularProfileAvatar(
+                                '',
+                                radius: 22,
                                         child:
                                             videoController.userList[i].image ==
                                                     null
@@ -339,6 +361,8 @@ class _TagPeopleState extends State<TagPeople> {
                 ),
               ),
             ),
+            if (videoController.isPaginationLoading.value == true)
+            PaginationUtils().loader(),
           ],
         ),
       ),

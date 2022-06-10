@@ -1,3 +1,4 @@
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -52,8 +53,9 @@ class _OwnEventListState extends State<OwnEventList> {
                       Center(
                         child: GestureDetector(
                           onTap: () {},
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(50.r),
+                          child: CircularProfileAvatar(
+                                '',
+                                radius: 32,
                               child: SvgPicture.asset(
                                 placeholder,
                                 height: 48.h,
