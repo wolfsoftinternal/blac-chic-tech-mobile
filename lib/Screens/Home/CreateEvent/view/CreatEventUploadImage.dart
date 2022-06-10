@@ -14,8 +14,10 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/pagination_utils.dart';
+import 'package:blackchecktech/Widget/SpeakerHostBottomSheet.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -38,7 +40,6 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
   @override
   void initState() {
     super.initState();
-    videoController.initScrolling(context);
   }
 
   /*Speaker bottom sheet*/
@@ -48,315 +49,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
         backgroundColor: Colors.transparent,
         context: context,
         builder: (ctx) {
-          return Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft:  Radius.circular(30.r),
-                    topRight:  Radius.circular(30.r))),
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    controller: videoController.scrollController,
-                    child: Wrap(
-                      children: [
-                        StatefulBuilder(
-                            builder: (BuildContext context, StateSetter setState) {
-                          return Obx(
-                            () => Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 15.h,
-                                  ),
-
-                                  // Rectangle 1329
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Opacity(
-                                      opacity: 0.4000000059604645,
-                                      child: Container(
-                                          width: 48.w,
-                                          height: 4.h,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(4.r)),
-                                              color: const Color(0xff96a6a3))),
-                                    ),
-                                  ),
-
-                                  SizedBox(
-                                    height: 24.h,
-                                  ),
-
-                                  // SPEAKERS
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 15),
-                                    child: Stack(
-                                      children: [
-                                        Center(
-                                          child: Text("SPEAKERS",
-                                              style: TextStyle(
-                                                  color: Color(0xff121212),
-                                                  fontWeight: FontWeight.w900,
-                                                  fontFamily: "NeueHelvetica",
-                                                  fontStyle: FontStyle.normal,
-                                                  fontSize: 16.0),
-                                              textAlign: TextAlign.left),
-                                        ),
-                                        // +ADD
-                                        GestureDetector(
-                                          onTap: (){
-                                            setState(() {
-                                              showGeneralDialog(
-                                                context: context,
-                                                pageBuilder: (BuildContext buildContext,
-                                                    Animation animation, Animation secondaryAnimation) {
-                                                  return AddSpeaker();
-                                                });
-                                            });
-                                          },
-                                          child: Align(
-                                            alignment: Alignment.topRight,
-                                            child: Text("+ADD",
-                                                style: TextStyle(
-                                                    color: Color(0xffff8819),
-                                                    fontFamily: "Roboto",
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 14.0),
-                                                textAlign: TextAlign.left),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 24.h,
-                                  ),
-
-                                  Divider(
-                                    thickness: 1,
-                                    height: 1,
-                                    color: Color(0xfff4f6f6),
-                                  ),
-
-                                  Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        /*--------------Please Uncomment the below search bar--------------*/
-
-                                        //   SearchBarTag(placeholder: "Search people"),
-
-                                        SearchBarTag(
-                                          placeholder: "Search people",
-                                          autoFocus: false,
-                                          onSubmit: (value) {
-                                            checkNet(context).then((value) {
-                                              videoController.userListAPI(
-                                                  context,
-                                                  controller
-                                                      .searchController.value.text);
-                                            });
-                                          },
-                                          controller:
-                                              controller.searchController.value,
-                                        ),
-                                        SizedBox(
-                                          height: 24.h,
-                                        ),
-
-                                        SizedBox(
-                                          height: 24.h,
-                                        ),
-
-                                        ListView.builder(
-                                          primary: false,
-                                          shrinkWrap: true,
-                                          padding: EdgeInsets.all(0),
-                                          itemCount: videoController.userList.length,
-                                          itemBuilder: (context, i) =>
-                                              GestureDetector(
-                                            onTap: () {
-                                              setState(
-                                                () {
-                                                  if (controller.selectedSpeaker
-                                                      .contains(videoController
-                                                          .userList[i])) {
-                                                    controller.selectedSpeaker.remove(
-                                                        videoController.userList[i]);
-                                                  } else {
-                                                    controller.selectedSpeaker.add(
-                                                        videoController.userList[i]);
-                                                  }
-                                                },
-                                              );
-                                            },
-                                            child: Padding(
-                                              padding: EdgeInsets.only(bottom: 16.h),
-                                              child: Container(
-                                                color: Colors.white,
-                                                child: Row(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(50),
-                                                      child: videoController
-                                                              .userList.isNotEmpty
-                                                          ? videoController
-                                                                      .userList[i]
-                                                                      .image ==
-                                                                  null
-                                                              ? SvgPicture.asset(
-                                                                  placeholder,
-                                                                  height: 40.h,
-                                                                  width: 40.w,
-                                                                  fit: BoxFit.cover,
-                                                                )
-                                                              : CachedNetworkImage(
-                                                                  imageUrl:
-                                                                      videoController
-                                                                          .userList[i]
-                                                                          .image!,
-                                                                  height: 40.h,
-                                                                  width: 40.w,
-                                                                  fit: BoxFit.cover,
-                                                                  progressIndicatorBuilder:
-                                                                      (context, url,
-                                                                              downloadProgress) =>
-                                                                          SvgPicture
-                                                                              .asset(
-                                                                    placeholder,
-                                                                    height: 40.h,
-                                                                    width: 40.w,
-                                                                    fit: BoxFit.cover,
-                                                                  ),
-                                                                  errorWidget:
-                                                                      (context, url,
-                                                                              error) =>
-                                                                          SvgPicture
-                                                                              .asset(
-                                                                    placeholder,
-                                                                    height: 40.h,
-                                                                    width: 40.w,
-                                                                    fit: BoxFit.cover,
-                                                                  ),
-                                                                )
-                                                          : SvgPicture.asset(
-                                                              placeholder,
-                                                              height: 40.h,
-                                                              width: 40.w,
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 16.w,
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment.start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment.start,
-                                                        children: [
-                                                          // claireroman
-                                                          Text(
-                                                              videoController
-                                                                          .userList[i]
-                                                                          .userName !=
-                                                                      null
-                                                                  ? videoController
-                                                                      .userList[i]
-                                                                      .userName!
-                                                                  : "",
-                                                              style: TextStyle(
-                                                                  color: grey_aaaaaa,
-                                                                  fontWeight:
-                                                                      FontWeight.w500,
-                                                                  fontFamily:
-                                                                      helveticaNeueNeue_medium,
-                                                                  fontStyle: FontStyle
-                                                                      .normal,
-                                                                  fontSize: 14.sp),
-                                                              textAlign:
-                                                                  TextAlign.left),
-                                                          SizedBox(
-                                                            height: 2.h,
-                                                          ),
-                                                          // Claire Roman
-                                                          Text(
-                                                              videoController
-                                                                          .userList[i]
-                                                                          .firstName !=
-                                                                      null
-                                                                  ? videoController
-                                                                          .userList[i]
-                                                                          .firstName!
-                                                                          .capitalizeFirst! +
-                                                                      " " +
-                                                                      videoController
-                                                                          .userList[i]
-                                                                          .lastName!
-                                                                          .capitalizeFirst!
-                                                                  : "",
-                                                              style: TextStyle(
-                                                                  color: black_121212,
-                                                                  fontWeight:
-                                                                      FontWeight.w700,
-                                                                  fontFamily:
-                                                                      helveticaNeueNeue_medium,
-                                                                  fontStyle: FontStyle
-                                                                      .normal,
-                                                                  fontSize: 14.sp),
-                                                              textAlign:
-                                                                  TextAlign.left)
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    SvgPicture.asset(
-                                                      controller.selectedSpeaker
-                                                              .contains(
-                                                                  videoController
-                                                                      .userList[i])
-                                                          ? orange_tick_icon
-                                                          : icon_next_arrow,
-                                                      width: 25.w,
-                                                      height: 25.h,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        }),
-                      ],
-                    ),
-                  ),
-                ),
-                if (videoController.isPaginationLoading.value == true)
-                    PaginationUtils().loader(),
-              ],
-            ),
-          );
+          return SpeakerHostBottomSheet();
         });
   }
 
@@ -367,257 +60,8 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
         backgroundColor: Colors.transparent,
         context: context,
         builder: (ctx) {
-          return Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(30.0),
-                    topRight: const Radius.circular(30.0))),
-            child: SingleChildScrollView(
-              child: Wrap(
-                children: [
-                  StatefulBuilder(
-                      builder: (BuildContext context, StateSetter setState) {
-                    return Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            height: 15,
-                          ),
-
-                          // Rectangle 1329
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: Opacity(
-                              opacity: 0.4000000059604645,
-                              child: Container(
-                                  width: 48,
-                                  height: 4,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4)),
-                                      color: const Color(0xff96a6a3))),
-                            ),
-                          ),
-
-                          SizedBox(
-                            height: 24.h,
-                          ),
-
-                          // SPEAKERS
-                          Center(
-                            child: Text("HOST",
-                                style: const TextStyle(
-                                    color: Color(0xff121212),
-                                    fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 16.0),
-                                textAlign: TextAlign.left),
-                          ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-
-                          Divider(
-                            thickness: 1,
-                            height: 1,
-                            color: Color(0xfff4f6f6),
-                          ),
-
-                          Padding(
-                            padding: const EdgeInsets.all(24.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                /*--------------Please Uncomment the below search bar--------------*/
-
-                                //   SearchBarTag(placeholder: "Search people"),
-
-                                SearchBarTag(
-                                  placeholder: "Search people",
-                                  autoFocus: false,
-                                  onSubmit: (value) {
-                                    checkNet(context).then((value) {
-                                      videoController.userListAPI(
-                                          context,
-                                          controller
-                                              .searchController.value.text);
-                                    });
-                                  },
-                                  controller: controller.searchController.value,
-                                ),
-                                SizedBox(
-                                  height: 24.h,
-                                ),
-
-                                SizedBox(
-                                  height: 24.h,
-                                ),
-
-                                ListView.builder(
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  padding: EdgeInsets.all(0),
-                                  itemCount: videoController.userList.length,
-                                  itemBuilder: (context, i) => GestureDetector(
-                                    onTap: () {
-                                      setState(
-                                        () {
-                                            controller.selectedHost.clear();
-                                            controller.selectedHost.add(videoController.userList[i]);
-                                        },
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 16.h),
-                                      child: Container(
-                                        color: Colors.white,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                              child: videoController
-                                                      .userList.isNotEmpty
-                                                  ? videoController.userList[i]
-                                                              .image ==
-                                                          null
-                                                      ? SvgPicture.asset(
-                                                          placeholder,
-                                                          height: 40.h,
-                                                          width: 40.w,
-                                                          fit: BoxFit.cover,
-                                                        )
-                                                      : CachedNetworkImage(
-                                                          imageUrl:
-                                                              videoController
-                                                                  .userList[i]
-                                                                  .image!,
-                                                          height: 40.h,
-                                                          width: 40.w,
-                                                          fit: BoxFit.cover,
-                                                          progressIndicatorBuilder:
-                                                              (context, url,
-                                                                      downloadProgress) =>
-                                                                  SvgPicture
-                                                                      .asset(
-                                                            placeholder,
-                                                            height: 40.h,
-                                                            width: 40.w,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              SvgPicture.asset(
-                                                            placeholder,
-                                                            height: 40.h,
-                                                            width: 40.w,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        )
-                                                  : SvgPicture.asset(
-                                                      placeholder,
-                                                      height: 40.h,
-                                                      width: 40.w,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                            ),
-                                            SizedBox(
-                                              width: 16.w,
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  // claireroman
-                                                  Text(
-                                                      videoController
-                                                                  .userList[i]
-                                                                  .userName !=
-                                                              null
-                                                          ? videoController
-                                                              .userList[i]
-                                                              .userName!
-                                                          : "",
-                                                      style: TextStyle(
-                                                          color: grey_aaaaaa,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 14.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                  SizedBox(
-                                                    height: 2.h,
-                                                  ),
-                                                  // Claire Roman
-                                                  Text(
-                                                      videoController
-                                                                  .userList[i]
-                                                                  .firstName !=
-                                                              null
-                                                          ? videoController
-                                                                  .userList[i]
-                                                                  .firstName!
-                                                                  .capitalizeFirst! +
-                                                              " " +
-                                                              videoController
-                                                                  .userList[i]
-                                                                  .lastName!
-                                                                  .capitalizeFirst!
-                                                          : "",
-                                                      style: TextStyle(
-                                                          color: black_121212,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 14.sp),
-                                                      textAlign: TextAlign.left)
-                                                ],
-                                              ),
-                                            ),
-                                            SvgPicture.asset(
-                                              controller.selectedHost.contains(videoController.userList[i])
-                                                  ? orange_tick_icon
-                                                  : icon_next_arrow,
-                                              width: 25.w,
-                                              height: 25.h,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                ],
-              ),
-            ),
+          return SpeakerHostBottomSheet(
+            type: 'host',
           );
         });
   }
@@ -818,34 +262,47 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
                                                   children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              50),
-                                                      child: controller.selectedSpeaker[index].image == null
+                                                    CircularProfileAvatar(
+                                                      '',
+                                                      radius: 32,
+                                                      child: controller
+                                                                  .selectedSpeaker[
+                                                                      index]
+                                                                  .image ==
+                                                              null
                                                           ? Container(
-                                                            height: 17.h,
-                                                            width: 17.w,
-                                                            color: orange,
-                                                            child: ClipRRect(
-                                                            borderRadius: BorderRadius.circular(50.0),
-                                                            child: Center(
-                                                              child: Text(
-                                                                controller.selectedSpeaker[index].userName != null ? controller.selectedSpeaker[index].userName[0].toString().toUpperCase() : controller.selectedSpeaker[index].firstName[0].toString().toUpperCase(),
-                                                                style: TextStyle(
-                                                            color: white_ffffff,
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            fontFamily:
-                                                                "Roboto",
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                            fontSize: 11.sp),
-                                                        textAlign:
-                                                            TextAlign.left)
-                                                            ),
-                                                          ),
-                                                          )
+                                                              height: 17.h,
+                                                              width: 17.w,
+                                                              color: orange,
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            50.0),
+                                                                child: Center(
+                                                                    child: Text(
+                                                                        controller.selectedSpeaker[index].userName != null
+                                                                            ? controller.selectedSpeaker[index].userName[0]
+                                                                                .toString()
+                                                                                .toUpperCase()
+                                                                            : controller.selectedSpeaker[index].firstName[0]
+                                                                                .toString()
+                                                                                .toUpperCase(),
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                white_ffffff,
+                                                                            fontWeight: FontWeight
+                                                                                .w700,
+                                                                            fontFamily:
+                                                                                "Roboto",
+                                                                            fontStyle: FontStyle
+                                                                                .normal,
+                                                                            fontSize: 11
+                                                                                .sp),
+                                                                        textAlign:
+                                                                            TextAlign.left)),
+                                                              ),
+                                                            )
                                                           : CachedNetworkImage(
                                                               imageUrl: controller
                                                                   .selectedSpeaker[
@@ -899,21 +356,44 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                     ),
                                                     GestureDetector(
                                                       onTap: () {
-                                                            if(controller.selectedSpeaker.length == 1){
-                                                              controller.selectedSpeaker.clear();
-                                                            }else {
-                                                              if(controller.selectedSpeaker[index].id == null){
-                                                                controller.selectedSpeaker.remove(controller.selectedSpeaker[index]);
-                                                              }else{
-                                                                var selectedIndex = controller.selectedSpeaker[index].id;
-                                                                for(var item in videoController.userList){
-                                                                  if(selectedIndex == item.id){
-                                                                    controller.selectedSpeaker.remove(item);
-                                                                  }
-                                                                }
+                                                        if (controller
+                                                                .selectedSpeaker
+                                                                .length ==
+                                                            1) {
+                                                          controller
+                                                              .selectedSpeaker
+                                                              .clear();
+                                                        } else {
+                                                          if (controller
+                                                                  .selectedSpeaker[
+                                                                      index]
+                                                                  .id ==
+                                                              null) {
+                                                            controller
+                                                                .selectedSpeaker
+                                                                .remove(controller
+                                                                        .selectedSpeaker[
+                                                                    index]);
+                                                          } else {
+                                                            var selectedIndex =
+                                                                controller
+                                                                    .selectedSpeaker[
+                                                                        index]
+                                                                    .id;
+                                                            for (var item
+                                                                in videoController
+                                                                    .userList) {
+                                                              if (selectedIndex ==
+                                                                  item.id) {
+                                                                controller
+                                                                    .selectedSpeaker
+                                                                    .remove(
+                                                                        item);
                                                               }
                                                             }
-                                                          },
+                                                          }
+                                                        }
+                                                      },
                                                       child: Icon(
                                                         Icons.cancel_outlined,
                                                         size: 12,
@@ -986,9 +466,9 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
+                                          CircularProfileAvatar(
+                                            '',
+                                            radius: 32,
                                             child: controller.selectedHost[0]
                                                         .image ==
                                                     null
@@ -1060,20 +540,22 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                   Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: BlackButton("Next", Colors.white, () {
-                      if(poster.toString() == "File: ''"){
+                      if (poster.toString() == "File: ''") {
                         snackBar(context, 'Please upload poster');
                         return;
                       }
-                      if(controller.selectedSpeaker.toString() == '[]'){
+                      if (controller.selectedSpeaker.toString() == '[]') {
                         snackBar(context, 'Please select speaker');
                         return;
                       }
-                      if(controller.selectedHost.toString() == '[]'){
+                      if (controller.selectedHost.toString() == '[]') {
                         snackBar(context, 'Please select host');
                       }
 
-                      for(var item in controller.selectedSpeaker){
-                        if(item.firstName == null && item.lastName == null && item.image == null){
+                      for (var item in controller.selectedSpeaker) {
+                        if (item.firstName == null &&
+                            item.lastName == null &&
+                            item.image == null) {
                           controller.speakerNameList.add(item.userName);
                           controller.selectedSpeaker.remove(item);
                         }
@@ -1081,19 +563,20 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
 
                       List speakerList = [];
                       speakerList.clear();
-                      for(var item in controller.speakerNameList){
+                      for (var item in controller.speakerNameList) {
                         speakerList.add(item.id);
                       }
                       controller.speakerName.value = speakerList.join(',');
 
                       List list = [];
                       list.clear();
-                      for(var item in controller.selectedSpeaker){
+                      for (var item in controller.selectedSpeaker) {
                         list.add(item.id);
                       }
 
                       controller.speakers.value = list.join(',');
-                      controller.host.value = controller.selectedHost[0].id.toString();
+                      controller.host.value =
+                          controller.selectedHost[0].id.toString();
 
                       print(controller.selectedHost[0].toString());
                       print(controller.selectedSpeaker.join(',').toString());

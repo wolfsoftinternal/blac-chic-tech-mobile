@@ -4,6 +4,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleMode
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -176,8 +177,9 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
-                                                  ClipRRect(
-                                                      borderRadius: BorderRadius.circular(50),
+                                                  CircularProfileAvatar(
+                                '',
+                                radius: 32,
                                                       child: Image.asset(onDealsModel[i].image,width: 40.w,height: 40.h,fit: BoxFit.cover,)),
                                                   SizedBox(width: 16.w,),
                                                   Expanded(
@@ -361,8 +363,9 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
-                                                  ClipRRect(
-                                                      borderRadius: BorderRadius.circular(50),
+                                                  CircularProfileAvatar(
+                                '',
+                                radius: 32,
                                                       child: Image.asset(onDealsModel[i].image,width: 40.w,height: 40.h,fit: BoxFit.cover,)),
                                                   SizedBox(width: 16.w,),
                                                   Expanded(
@@ -570,8 +573,9 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(50),
+                                CircularProfileAvatar(
+                                '',
+                                radius: 32,
                                     child: Image.asset("assets/images/img_girl.png",width: 17.w,height: 17.h,fit: BoxFit.cover,)),
                                 SizedBox(width: 5.w,),
                                 // @HennaBack
@@ -646,8 +650,9 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(50),
+CircularProfileAvatar(
+                                '',
+                                radius: 32,
                                     child: Image.asset("assets/images/img_girl.png",width: 17.w,height: 17.h,fit: BoxFit.cover,)),
                                 SizedBox(width: 5.w,),
                                 // @HennaBack

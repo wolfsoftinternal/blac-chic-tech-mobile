@@ -6,8 +6,10 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,7 +30,6 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
   @override
   void initState() {
     super.initState();
-    controller.initRegisterScrolling(context, widget.id);
     checkNet(context).then((value) {
       controller.registeredUserApi(context, widget.id);
     });
@@ -65,8 +66,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                     childAspectRatio: 1.5.h,
                                     mainAxisSpacing: 12,
                                     crossAxisSpacing: 5),
-                            itemCount: controller
-                                .eventDetails.value.admissionData!.length,
+                            itemCount: controller.registerList.value.data!.transactionHistory!.length,
                             itemBuilder: (context, i) => Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -95,11 +95,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                                 children: [
                                                   // Bronze
                                                   Text(
-                                                      controller
-                                                          .eventDetails
-                                                          .value
-                                                          .admissionData![i]
-                                                          .category!,
+                                                      controller.registerList.value.data!.transactionHistory![i].admissionType!,
                                                       style: TextStyle(
                                                           fontFamily: "Roboto",
                                                           fontStyle:
@@ -111,7 +107,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                                     width: 8.w,
                                                   ),
                                                   //
-                                                  Text("",
+                                                  Text('\$' + double.parse(controller.registerList.value.data!.transactionHistory![i].perTicketPrice!).toInt().toString(),
                                                       style: TextStyle(
                                                           color: const Color(
                                                               0xffaaaaaa),
@@ -128,7 +124,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                                 height: 12.h,
                                               ),
                                               // 111 Sold
-                                              Text("111 Sold",
+                                              Text(controller.registerList.value.data!.transactionHistory![i].totalUsers!.toString() + ' Sold',
                                                   style: TextStyle(
                                                       color:
                                                           const Color(0xff0a84ff),
@@ -138,8 +134,11 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                                       fontSize: 16.sp),
                                                   textAlign: TextAlign.left),
 
-                                              //
-                                              Text("",
+                                              SizedBox(
+                                                height: 12.h,
+                                              ),
+
+                                              Text('\$' + controller.registerList.value.data!.transactionHistory![i].totalPrice!.toString(),
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.w400,
                                                       fontFamily: "Roboto",
@@ -174,7 +173,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                       // 100 Users
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
-                        child: Text(controller.registerList.length.toString() + 'Users',
+                        child: Text(controller.registerList.value.data!.registeredUsers!.length.toString() + ' Users',
                             style: TextStyle(
                                 color: grey_aaaaaa,
                                 fontFamily: "Roboto",
@@ -190,12 +189,11 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
                         child: SingleChildScrollView(
-                          controller: controller.registerScrollController,
                           child: ListView.builder(
                             primary: false,
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(0),
-                            itemCount: controller.registerList.length,
+                            itemCount: controller.registerList.value.data!.registeredUsers!.length,
                             itemBuilder: (context, i) => Padding(
                               padding: EdgeInsets.only(bottom: 16.h),
                               child: Container(
@@ -205,11 +203,11 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(50),
-                                                    child: controller.registerList.isNotEmpty
-                                                        ? controller.registerList[i].image ==
+                                    CircularProfileAvatar(
+                                '',
+                                radius: 20,
+                                                    child: controller.registerList.value.data!.registeredUsers!.isNotEmpty
+                                                        ? controller.registerList.value.data!.registeredUsers![i].image ==
                                                                 null
                                                             ? SvgPicture.asset(
                                                                 placeholder,
@@ -218,7 +216,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                                                 fit: BoxFit.cover,
                                                               )
                                                             : CachedNetworkImage(
-                                                                imageUrl: controller.registerList[i].image!,
+                                                                imageUrl: controller.registerList.value.data!.registeredUsers![i].image!,
                                                                 height: 40.h,
                                                                 width: 40.w,
                                                                 fit: BoxFit.cover,
@@ -261,7 +259,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           // claireroman
-                                          Text(controller.registerList[i].userName ?? controller.registerList[i].fullName ?? "", 
+                                          Text(controller.registerList.value.data!.registeredUsers![i].userName ?? controller.registerList.value.data!.registeredUsers![i].fullName ?? "", 
                                               style: TextStyle(
                                                   color: grey_aaaaaa,
                                                   fontWeight: FontWeight.w500,
@@ -274,7 +272,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                             height: 2.h,
                                           ),
                                           // Claire Roman
-                                          Text(controller.registerList[i].fullName ?? controller.registerList[i].userName ?? "",
+                                          Text(controller.registerList.value.data!.registeredUsers![i].fullName ?? controller.registerList.value.data!.registeredUsers![i].userName ?? "",
                                               style: TextStyle(
                                                   color: black_121212,
                                                   fontWeight: FontWeight.w500,
@@ -287,8 +285,8 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                             height: 2.h,
                                           ),
                                           // 12 Jun 2020, 110:00 AM
-                                          Text(controller.registerList[i].createdAt != null ?
-                                            DateFormat('dd MMM yyyy, hh:mm a').format(controller.registerList[i].createdAt!).toString() : "",
+                                          Text(controller.registerList.value.data!.registeredUsers![i].createdAt != null ?
+                                            DateFormat('dd MMM yyyy, hh:mm a').format(controller.registerList.value.data!.registeredUsers![i].createdAt!).toString() : "",
                                               style: TextStyle(
                                                   color: Color(0xffaaaaaa),
                                                   fontWeight: FontWeight.w400,
@@ -304,7 +302,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                       crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
                                         //
-                                        Text(controller.registerList[i].price ?? "",
+                                        Text(controller.registerList.value.data!.registeredUsers![i].price ?? "",
                                             style: TextStyle(
                                                 color: grey_aaaaaa,
                                                 fontWeight: FontWeight.w500,
@@ -314,7 +312,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                             textAlign: TextAlign.right),
 
                                         // Gold
-                                        Text(controller.registerList[i].category ?? "",
+                                        Text(controller.registerList.value.data!.registeredUsers![i].category ?? "",
                                             style: TextStyle(
                                                 color: orange_ff881a,
                                                 fontFamily: "Roboto",

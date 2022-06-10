@@ -18,6 +18,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:blackchecktech/Widget/ReportBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -92,7 +93,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
           controller.admire.value = 'Admired';
         }
       }
-    }else{
+    } else {
       controller.admire.value = 'Admire';
     }
     setState(() {});
@@ -122,8 +123,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                       onTap: () {
                         Get.back();
                       },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
+                      child: CircularProfileAvatar(
+                        '',
+                        radius: 24,
                         child: controller.details.value.image == null
                             ? SvgPicture.asset(
                                 placeholder,
@@ -223,460 +225,453 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 ],
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: NestedScrollView(
-               headerSliverBuilder: (context,value)
-                   {
-                     return[
-                       SliverToBoxAdapter(
-                         child: Column(
-                           children: [
-                             Padding(
-                               padding:  EdgeInsets.only(left: 24.w, right: 24.w),
-                               child: Column(
-                                 children: [
-                                   Column(
-                                     mainAxisAlignment: MainAxisAlignment.start,
-                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                     children: [
-                                       controller.details.value.fullName != null ||
-                                           controller.details.value.firstName !=
-                                               null
-                                           ? Padding(
-                                         padding:
-                                         EdgeInsets.only(top: 16.h),
-                                         child: Row(
-                                           mainAxisSize: MainAxisSize.max,
-                                           mainAxisAlignment: MainAxisAlignment.start,
-                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                           children: [
-                                             setHelceticaBold(
-                                                 controller.details.value
-                                                     .fullName ??
-                                                     controller.details.value
-                                                         .firstName ??
-                                                     "",
-                                                 24.sp,
-                                                 black_121212,
-                                                 FontWeight.w500,
-                                                 FontStyle.normal,
-                                                 -0.96),
-                                             Expanded(
-                                                 flex: 1,
-                                                 child: SvgPicture.asset(check_icon,alignment: Alignment.topLeft,)),
-
-                                             controller.details.value.instagramUrl != null &&
-                                                 controller.details.value.twitterUrl !=
-                                                     null &&
-                                                 controller.details.value.linkedinUrl != null
-                                                 ? Row(
-                                               children: [
-                                                 controller.details.value.instagramUrl !=
-                                                     null
-                                                     ? Padding(
-                                                   padding:  EdgeInsets.only(
-                                                       right: 15.w),
-                                                   child: Image.asset(
-                                                     icon_instagram,
-                                                     height: 24.h,
-                                                     width: 24.w,
-                                                   ),
-                                                 )
-                                                     : Container(),
-                                                 controller.details.value.twitterUrl !=
-                                                     null
-                                                     ? Padding(
-                                                   padding:  EdgeInsets.only(
-                                                       right: 15.w),
-                                                   child: Image.asset(
-                                                     icon_twitter,
-                                                     height: 24.h,
-                                                     width: 24.w,
-                                                   ),
-                                                 )
-                                                     : Container(),
-                                                 controller.details.value.linkedinUrl !=
-                                                     null
-                                                     ? Image.asset(
-                                                   icon_linkedin,
-                                                   height: 24.h,
-                                                   width: 24.w,
-                                                 )
-                                                     : Container(),
-                                               ],
-                                             )
-                                                 : Container()
-                                           ],
-                                         ),
-                                       )
-                                           : Container(),
-                                       controller.details.value.currentJobs != null
-                                           ? controller.details.value.currentJobs!
-                                           .title !=
-                                           null
-                                           ? Padding(
-                                         padding:
-                                         EdgeInsets.only(top: 12.h),
-                                         child: Align(
-                                           alignment: Alignment.topLeft,
-                                           child: setHelveticaMedium(
-                                               controller.details.value
-                                                   .currentJobs!.title! +
-                                                   ' @' +
-                                                   controller
-                                                       .details
-                                                       .value
-                                                       .currentJobs!
-                                                       .companyName!,
-                                               16,
-                                               grey_3f3f3f,
-                                               FontWeight.w500,
-                                               FontStyle.normal),
-                                         ),
-                                       )
-                                           : Container()
-                                           : Container(),
-                                       controller.details.value.currentJobs != null
-                                           ? controller.details.value.currentJobs!
-                                           .website !=
-                                           null
-                                           ? Align(
-                                         alignment: Alignment.topLeft,
-                                         child: setHelveticaMedium(
-                                             controller
-                                                 .details
-                                                 .value
-                                                 .currentJobs!
-                                                 .website ??
-                                                 "",
-                                             12.sp,
-                                             blue_0a84ff,
-                                             FontWeight.w500,
-                                             FontStyle.normal),
-                                       )
-                                           : Container()
-                                           : Container(),
-                                       controller.details.value.aboutUs != null
-                                           ? Padding(
-                                         padding:
-                                         EdgeInsets.only(top: 5.h),
-                                         child: Align(
-                                           alignment: Alignment.topLeft,
-                                           child: Container(
-                                             width: MediaQuery.of(context)
-                                                 .size
-                                                 .width *
-                                                 0.85,
-                                             child: setHelveticaMedium(
-                                                 controller
-                                                     .details.value.aboutUs!,
-                                                 12.sp,
-                                                 grey_aaaaaa,
-                                                 FontWeight.w500,
-                                                 FontStyle.normal,
-                                                 0.1,
-                                                 3),
-                                           ),
-                                         ),
-                                       )
-                                           : Container(),
-                                       Container(
-                                         width:
-                                         MediaQuery.of(context).size.width * 0.86,
-                                         child: Row(
-                                           mainAxisAlignment:
-                                           MainAxisAlignment.spaceBetween,
-                                           children: [
-                                             controller.details.value.cityDetails !=
-                                                 null &&
-                                                 controller.details.value
-                                                     .stateDetails !=
-                                                     null &&
-                                                 controller.details.value
-                                                     .countryDetails !=
-                                                     null
-                                                 ? Padding(
-                                               padding:  EdgeInsets.only(
-                                                   top: 18.h),
-                                               child: Row(
-                                                 mainAxisAlignment: MainAxisAlignment.center,
-                                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                                 children: [
-                                                   Icon(
-                                                     Icons.location_on,
-                                                     color: orange_ff881a,
-                                                     size: 12.r,
-                                                   ),
-                                                   SizedBox(width: 2.w,),
-                                                   Align(
-                                                     alignment:
-                                                     Alignment.topLeft,
-                                                     child: setHelveticaMedium(
-                                                         controller
-                                                             .details
-                                                             .value
-                                                             .cityDetails!
-                                                             .name! +
-                                                             "," +
-                                                             controller
-                                                                 .details
-                                                                 .value
-                                                                 .stateDetails!
-                                                                 .name! +
-                                                             "," +
-                                                             controller
-                                                                 .details
-                                                                 .value
-                                                                 .countryDetails!
-                                                                 .name!,
-                                                         10,
-                                                         grey_aaaaaa,
-                                                         FontWeight.w500,
-                                                         FontStyle.normal),
-                                                   ),
-                                                 ],
-                                               ),
-                                             )
-                                                 : Container(),
-                                             userId != controller.details.value.id
-                                                 ? InkWell(
-                                               onTap: () {
-                                                 if (controller.admire.value ==
-                                                     'Admire'){
-                                                       controller.admire.value = 'Admired';
-                                                       checkNet(context)
-                                                       .then((value) {
-                                                     controller.createAdmireAPI(
-                                                         context,
-                                                         controller
-                                                             .details.value.id);
-                                                   });
-                                                     }
-                                                   
-                                               },
-                                               child: Padding(
-                                                 padding:  EdgeInsets.only(
-                                                     top: 5.h),
-                                                 child: Container(
-                                                   decoration: BoxDecoration(
-                                                     color: Colors.grey
-                                                         .withOpacity(0.1),
-                                                     borderRadius:
-                                                     BorderRadius.all(
-                                                         Radius
-                                                             .circular(40.r)),
-                                                   ),
-                                                   child: Padding(
-                                                     padding:
-                                                     EdgeInsets.all(
-                                                         12.r),
-                                                     child: Row(children: [
-                                                       Icon(
-                                                         Icons
-                                                             .person_add_alt_sharp,
-                                                         color: orange,
-                                                         size: 12.r,
-                                                       ),
-                                                       SizedBox(width: 6.w),
-                                                       setHelveticaMedium(
-                                                           controller
-                                                               .admire.value,
-                                                           12.sp,
-                                                           black_121212,
-                                                           FontWeight.w500,
-                                                           FontStyle.normal)
-                                                     ]),
-                                                   ),
-                                                 ),
-                                               ),
-                                             )
-                                                 : Container()
-                                           ],
-                                         ),
-                                       ),
-                                     ],
-                                   ),
-                                 ],
-                               ),
-                             ),
-                             SizedBox(
-                               height: 20.h,
-                             ),
-                             const Divider(
-                               color: grey_f4f6f6,
-                               thickness: 1,
-                             ),
-                             userId != controller.details.value.id
-                                 ? controller.otherAdmireList.length >= 1
-                                 ? const SizedBox(
-                               height: 24,
-                             )
-                                 : Container()
-                                 : controller.admireList.length >= 1
-                                 ? const SizedBox(
-                               height: 24,
-                             )
-                                 : Container(),
-                             userId != controller.details.value.id
-                                 ? controller.otherAdmireList.length >= 1
-                                 ? SeeAllAdmiresWidget(userId)
-                                 : Container()
-                                 : controller.admireList.length >= 1
-                                 ? SeeAllAdmiresWidget(userId)
-                                 : Container(),
-                             userId != controller.details.value.id
-                                 ? controller.otherAdmireList.length >= 1
-                                 ? Admires(userId: userId, controller: controller)
-                                 : Container()
-                                 : controller.admireList.length >= 1
-                                 ? Admires(userId: userId, controller: controller)
-                                 : Container(),
-                             userId != controller.details.value.id
-                                 ? controller.otherAdmireList.length >= 1
-                                 ? const Divider(
-                               color: grey_f4f6f6,
-                               thickness: 1,
-                             )
-                                 : Container()
-                                 : controller.admireList.length >= 1
-                                 ? const Divider(
-                               color: grey_f4f6f6,
-                               thickness: 1,
-                               height: 1,
-                             )
-                                 : Container(),
-
-
-                             Padding(
-                               padding:
-                               EdgeInsets.only(left: 16.w, right: 16.w, top: 22.h),
-                               child: Container(
-                                 height: 66.h,
-                                 decoration: BoxDecoration(
-                                   borderRadius: BorderRadius.circular(80.r),
-                                   color: grey_f5f5f5,
-                                 ),
-                                 child: Padding(
-                                   padding:
-                                   EdgeInsets.only(
-                                       left: 8.w, right: 8.w, bottom: 8.h, top: 8.h),
-                                   child: TabBar(
-                                     tabs: [
-                                       Tab(
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.center,
-                                           children: [
-                                             Text(
-                                               'Profile',
-                                               textAlign: TextAlign.left,
-                                               maxLines: 1,
-                                               style: TextStyle(
-                                                 overflow: TextOverflow.ellipsis,
-                                                 fontFamily: helvetica_neu_bold,
-                                                 fontSize: 14.sp,
-                                                 letterSpacing: -0.28,
-                                               ),
-                                             ),
-                                           ],
-                                         ),
-                                       ),
-                                       Tab(
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.center,
-                                           children: [
-                                             Text(
-                                               'Posts',
-                                               textAlign: TextAlign.left,
-                                               maxLines: 1,
-                                               style: TextStyle(
-                                                 overflow: TextOverflow.ellipsis,
-                                                 fontFamily: helvetica_neu_bold,
-                                                 fontSize: 14.sp,
-                                                 letterSpacing: -0.28,
-                                               ),
-                                             ),
-                                           ],
-                                         ),
-                                       ),
-                                       Tab(
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.center,
-                                           children: [
-                                             Text(
-                                               'Videos',
-                                               textAlign: TextAlign.left,
-                                               maxLines: 1,
-                                               style: TextStyle(
-                                                 overflow: TextOverflow.ellipsis,
-                                                 fontFamily: helvetica_neu_bold,
-                                                 fontSize: 14.sp,
-                                                 letterSpacing: -0.28,
-                                               ),
-                                             ),
-                                           ],
-                                         ),
-                                       ),
-                                       Tab(
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.center,
-                                           children: [
-                                             Text(
-                                               'Events',
-                                               textAlign: TextAlign.left,
-                                               maxLines: 1,
-                                               style: TextStyle(
-                                                 overflow: TextOverflow.ellipsis,
-                                                 fontFamily: helvetica_neu_bold,
-                                                 fontSize: 14.sp,
-                                                 letterSpacing: -0.28,
-                                               ),
-                                             ),
-                                           ],
-                                         ),
-                                       ),
-                                     ],
-
-                                     indicator: BoxDecoration(
-                                       color: Colors.white,
-                                       borderRadius: BorderRadius.circular(80),
-                                       boxShadow: [
-                                         BoxShadow(
-                                           color: Color(0x19121212),
-                                           offset:  Offset(
-                                             0.0,
-                                             5.0,
-                                           ),
-                                           blurRadius: 5.0,
-                                           spreadRadius: 2.0,
-                                         ), //BoxShadow
-                                       ],
-                                     ),
-                                     isScrollable: false,
-                                     unselectedLabelColor: grey_aaaaaa,
-                                     labelColor: black_121212,
-                                     controller: tabController,
-                                   ),
-                                 ),
-                               ),
-                             ),
-
-                           ],
-                         ),
-                       )
-                     ];
-                   },
-                body: Container(
-                  child: TabBarView(
-                    controller: tabController,
+            // Expanded(
+            //   flex: 1,
+            // child: NestedScrollView(
+            //   headerSliverBuilder: (context, value) {
+            //     return [
+            // SliverToBoxAdapter(
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                  child: Column(
                     children: [
-                      ProfileTab(),
-                      PostTab(id: controller.details.value.id),
-                      VideoTab(id: controller.details.value.id),
-                      EventTab(id: controller.details.value.id),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          controller.details.value.fullName != null ||
+                                  controller.details.value.firstName != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(top: 16.h),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      setHelceticaBold(
+                                          controller.details.value.fullName ??
+                                              controller
+                                                  .details.value.firstName ??
+                                              "",
+                                          24.sp,
+                                          black_121212,
+                                          FontWeight.w500,
+                                          FontStyle.normal,
+                                          -0.96),
+                                      Expanded(
+                                          flex: 1,
+                                          child: SvgPicture.asset(
+                                            check_icon,
+                                            alignment: Alignment.topLeft,
+                                          )),
+                                      controller.details.value.instagramUrl !=
+                                                  null &&
+                                              controller.details.value
+                                                      .twitterUrl !=
+                                                  null &&
+                                              controller.details.value
+                                                      .linkedinUrl !=
+                                                  null
+                                          ? Row(
+                                              children: [
+                                                controller.details.value
+                                                            .instagramUrl !=
+                                                        null
+                                                    ? Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right: 15.w),
+                                                        child: Image.asset(
+                                                          icon_instagram,
+                                                          height: 24.h,
+                                                          width: 24.w,
+                                                        ),
+                                                      )
+                                                    : Container(),
+                                                controller.details.value
+                                                            .twitterUrl !=
+                                                        null
+                                                    ? Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right: 15.w),
+                                                        child: Image.asset(
+                                                          icon_twitter,
+                                                          height: 24.h,
+                                                          width: 24.w,
+                                                        ),
+                                                      )
+                                                    : Container(),
+                                                controller.details.value
+                                                            .linkedinUrl !=
+                                                        null
+                                                    ? Image.asset(
+                                                        icon_linkedin,
+                                                        height: 24.h,
+                                                        width: 24.w,
+                                                      )
+                                                    : Container(),
+                                              ],
+                                            )
+                                          : Container()
+                                    ],
+                                  ),
+                                )
+                              : Container(),
+                          controller.details.value.currentJobs != null
+                              ? controller.details.value.currentJobs!.title !=
+                                      null
+                                  ? Padding(
+                                      padding: EdgeInsets.only(top: 12.h),
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: setHelveticaMedium(
+                                            controller.details.value
+                                                    .currentJobs!.title! +
+                                                ' @' +
+                                                controller.details.value
+                                                    .currentJobs!.companyName!,
+                                            16,
+                                            grey_3f3f3f,
+                                            FontWeight.w500,
+                                            FontStyle.normal),
+                                      ),
+                                    )
+                                  : Container()
+                              : Container(),
+                          controller.details.value.currentJobs != null
+                              ? controller.details.value.currentJobs!.website !=
+                                      null
+                                  ? Align(
+                                      alignment: Alignment.topLeft,
+                                      child: setHelveticaMedium(
+                                          controller.details.value.currentJobs!
+                                                  .website ??
+                                              "",
+                                          12.sp,
+                                          blue_0a84ff,
+                                          FontWeight.w500,
+                                          FontStyle.normal),
+                                    )
+                                  : Container()
+                              : Container(),
+                          controller.details.value.aboutUs != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(top: 5.h),
+                                  child: Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.85,
+                                      child: setHelveticaMedium(
+                                          controller.details.value.aboutUs!,
+                                          12.sp,
+                                          grey_aaaaaa,
+                                          FontWeight.w500,
+                                          FontStyle.normal,
+                                          0.1,
+                                          3),
+                                    ),
+                                  ),
+                                )
+                              : Container(),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.86,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                controller.details.value.cityDetails != null &&
+                                        controller.details.value.stateDetails !=
+                                            null &&
+                                        controller
+                                                .details.value.countryDetails !=
+                                            null
+                                    ? Padding(
+                                        padding: EdgeInsets.only(top: 18.h),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.location_on,
+                                              color: orange_ff881a,
+                                              size: 12.r,
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: setHelveticaMedium(
+                                                  controller.details.value
+                                                          .cityDetails!.name! +
+                                                      "," +
+                                                      controller.details.value
+                                                          .stateDetails!.name! +
+                                                      "," +
+                                                      controller
+                                                          .details
+                                                          .value
+                                                          .countryDetails!
+                                                          .name!,
+                                                  10,
+                                                  grey_aaaaaa,
+                                                  FontWeight.w500,
+                                                  FontStyle.normal),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : Container(),
+                                userId != controller.details.value.id
+                                    ? InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            if (controller.admire.value == 'Admire') {
+                                                checkNet(context).then((value) async {
+                                                   controller.createAdmireAPI(
+                                                    context,
+                                                    controller .details.value.id
+                                                  );
+                                                });
+                                              } else {
+                                                controller.admire.value =
+                                                    'Admire';
+                                                checkNet(context).then((value) {
+                                                  controller.admireDeleteAPI(
+                                                      context,
+                                                      controller
+                                                          .details.value.id,
+                                                      'profile');
+                                                });
+                                              }
+                                          });
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 5.h),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.1),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(40.r)),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(12.r),
+                                              child: Row(children: [
+                                                Icon(
+                                                  Icons.person_add_alt_sharp,
+                                                  color: orange,
+                                                  size: 12.r,
+                                                ),
+                                                SizedBox(width: 6.w),
+                                                setHelveticaMedium(
+                                                    controller.admire.value,
+                                                    12.sp,
+                                                    black_121212,
+                                                    FontWeight.w500,
+                                                    FontStyle.normal)
+                                              ]),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : Container()
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                const Divider(
+                  color: grey_f4f6f6,
+                  thickness: 1,
+                ),
+                userId != controller.details.value.id
+                    ? controller.otherAdmireList.length >= 1
+                        ? const SizedBox(
+                            height: 24,
+                          )
+                        : Container()
+                    : controller.admireList.length >= 1
+                        ? const SizedBox(
+                            height: 24,
+                          )
+                        : Container(),
+                userId != controller.details.value.id
+                    ? controller.otherAdmireList.length >= 1
+                        ? SeeAllAdmiresWidget(userId)
+                        : Container()
+                    : controller.admireList.length >= 1
+                        ? SeeAllAdmiresWidget(userId)
+                        : Container(),
+                userId != controller.details.value.id
+                    ? controller.otherAdmireList.length >= 1
+                        ? Admires(userId: userId, controller: controller)
+                        : Container()
+                    : controller.admireList.length >= 1
+                        ? Admires(userId: userId, controller: controller)
+                        : Container(),
+                userId != controller.details.value.id
+                    ? controller.otherAdmireList.length >= 1
+                        ? const Divider(
+                            color: grey_f4f6f6,
+                            thickness: 1,
+                          )
+                        : Container()
+                    : controller.admireList.length >= 1
+                        ? const Divider(
+                            color: grey_f4f6f6,
+                            thickness: 1,
+                            height: 1,
+                          )
+                        : Container(),
+                Padding(
+                  padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 22.h),
+                  child: Container(
+                    height: 66.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(80.r),
+                      color: grey_f5f5f5,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: 8.w, right: 8.w, bottom: 8.h, top: 8.h),
+                      child: TabBar(
+                        tabs: [
+                          Tab(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Profile',
+                                  textAlign: TextAlign.left,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontFamily: helvetica_neu_bold,
+                                    fontSize: 14.sp,
+                                    letterSpacing: -0.28,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Tab(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Posts',
+                                  textAlign: TextAlign.left,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontFamily: helvetica_neu_bold,
+                                    fontSize: 14.sp,
+                                    letterSpacing: -0.28,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Tab(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Videos',
+                                  textAlign: TextAlign.left,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontFamily: helvetica_neu_bold,
+                                    fontSize: 14.sp,
+                                    letterSpacing: -0.28,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Tab(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Events',
+                                  textAlign: TextAlign.left,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontFamily: helvetica_neu_bold,
+                                    fontSize: 14.sp,
+                                    letterSpacing: -0.28,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                        indicator: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(80),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0x19121212),
+                              offset: Offset(
+                                0.0,
+                                5.0,
+                              ),
+                              blurRadius: 5.0,
+                              spreadRadius: 2.0,
+                            ), //BoxShadow
+                          ],
+                        ),
+                        isScrollable: false,
+                        unselectedLabelColor: grey_aaaaaa,
+                        labelColor: black_121212,
+                        controller: tabController,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            //     )
+            //   ];
+            // },
+            // body: Container(
+            //   child: TabBarView(
+            //     controller: tabController,
+            //     children: [
+            //       ProfileTab(),
+            //       PostTab(id: controller.details.value.id),
+            //       VideoTab(id: controller.details.value.id),
+            //       EventTab(id: controller.details.value.id),
+            //     ],
+            //   ),
+            // ),
+            // ),
+            // ),
+            Expanded(
+              child: TabBarView(
+                controller: tabController,
+                children: [
+                  ProfileTab(),
+                  PostTab(id: controller.details.value.id),
+                  VideoTab(id: controller.details.value.id),
+                  EventTab(id: controller.details.value.id),
+                ],
               ),
             ),
           ],
@@ -686,8 +681,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
   }
 
   Obx SeeAllAdmiresWidget(userId) {
-    return Obx(
-      () => Padding(
+    return Obx(() => Padding(
         padding: const EdgeInsets.only(left: 24.0, right: 24.0),
         child: Row(
           children: [
@@ -719,9 +713,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               size: 12,
             )
           ],
-        ))
-        );
-  }}
+        )));
+  }
+}
 
 class Admires extends StatelessWidget {
   const Admires({
@@ -762,8 +756,9 @@ class Admires extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 userId != controller.details.value.id
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
+                    ? CircularProfileAvatar(
+                        '',
+                        radius: 24,
                         child: controller.otherAdmireList[index].admireDetails!
                                     .image ==
                                 null
@@ -793,8 +788,9 @@ class Admires extends StatelessWidget {
                                 ),
                               ),
                       )
-                    : ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
+                    : CircularProfileAvatar(
+                        '',
+                        radius: 24,
                         child:
                             controller.admireList[index].admireDetails!.image ==
                                     null

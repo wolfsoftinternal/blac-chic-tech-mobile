@@ -12,6 +12,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:blackchecktech/Widget/ReportBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,7 +32,6 @@ class EventListDetail extends StatefulWidget {
 
 class _EventListDetailState extends State<EventListDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
-  int userId = 0;
 
   @override
   void initState() {
@@ -46,15 +46,6 @@ class _EventListDetailState extends State<EventListDetail> {
     checkNet(context).then((value) {
       controller.eventListAPI(context, body, 'detail');
     });
-
-    init();
-  }
-
-  init() async {
-    var preferences = MySharedPref();
-    SignupModel? myModel =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
-    userId = myModel!.data!.id!.toInt();
   }
 
   @override
@@ -81,8 +72,9 @@ class _EventListDetailState extends State<EventListDetail> {
                       Get.back();
                       Get.back();
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
+                    child: CircularProfileAvatar(
+                                '',
+                                radius: 24,
                       child: controller.details.value.image == null
                           ? SvgPicture.asset(
                               placeholder,
@@ -115,7 +107,7 @@ class _EventListDetailState extends State<EventListDetail> {
                   ),
                 ),
                 const Spacer(),
-                userId == controller.details.value.id
+                widget.userId == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
                           createBottomSheet(context, widget.userId);
@@ -141,7 +133,7 @@ class _EventListDetailState extends State<EventListDetail> {
                         width: 48.w,
                         height: 48.h,
                       ),
-                userId == controller.details.value.id
+                widget.userId == controller.details.value.id
                     ? Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: GestureDetector(
@@ -199,7 +191,7 @@ class _EventListDetailState extends State<EventListDetail> {
                         onTap: () {
                           checkNet(context).then((value) {
                             controller.eventDetailAPI(
-                                context, controller.eventList[index].id);
+                                context, controller.eventList[index].id, null);
                           });
                         },
                         child: Padding(
@@ -209,8 +201,7 @@ class _EventListDetailState extends State<EventListDetail> {
                               SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 height: 207.h,
-                                child: controller
-                                            .eventList[index].poster ==
+                                child: controller.eventList[index].poster ==
                                         null
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.all(
@@ -324,57 +315,66 @@ class _EventListDetailState extends State<EventListDetail> {
                                             Padding(
                                               padding: EdgeInsets.only(
                                                   left: 6.w, right: 6.w),
-                                              child: ClipRRect(
-                                                        borderRadius: BorderRadius.circular(50),
-                                                        child: controller.eventList[index].hosts.toString().isEmpty
-                                                            ? Icon(
-                                                                Icons.person,
-                                                                size: 15.r,
-                                                                color:
-                                                                    grey_aaaaaa,
-                                                              )
-                                                            : controller.eventList[index].hosts![0].image.toString() == ''
-                                                                ? Icon(
-                                                                    Icons.person,
-                                                                    size: 15.r,
-                                                                    color:
-                                                                        grey_aaaaaa,
-                                                                  )
-                                                                : CachedNetworkImage(
-                                                                    imageUrl: controller
-                                                                        .eventList[index]
-                                                                        .hosts![0]
-                                                                        .image!,
-                                                                    height: 15.h,
-                                                                    width: 15.w,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    progressIndicatorBuilder:
-                                                                        (context,url,downloadProgress) =>
-                                                                          Icon(
-                                                                            Icons.person,
-                                                                            size: 15.r,
-                                                                            color: grey_aaaaaa,
-                                                                          ),
-                                                                    errorWidget:
-                                                                        (context, url, error) =>
-                                                                          Icon(
-                                                                            Icons.person,
-                                                                            size: 15.r,
-                                                                            color: grey_aaaaaa,
-                                                                          ),
-                                                                  ),
-                                                      ),
+                                              child: CircularProfileAvatar(
+                                                '',
+                                                radius: 7.5,
+                                                borderColor: Colors.black,
+                                                child: controller
+                                                        .eventList[index].hosts
+                                                        .toString()
+                                                        .isEmpty
+                                                    ? Icon(
+                                                        Icons.person,
+                                                        size: 15.r,
+                                                        color: grey_aaaaaa,
+                                                      )
+                                                    : controller
+                                                                .eventList[
+                                                                    index]
+                                                                .hosts![0]
+                                                                .image
+                                                                .toString() ==
+                                                            ''
+                                                        ? Icon(
+                                                            Icons.person,
+                                                            size: 15.r,
+                                                            color: grey_aaaaaa,
+                                                          )
+                                                        : CachedNetworkImage(
+                                                            imageUrl: controller
+                                                                .eventList[
+                                                                    index]
+                                                                .hosts![0]
+                                                                .image!,
+                                                            height: 15.h,
+                                                            width: 15.w,
+                                                            fit: BoxFit.cover,
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    Icon(
+                                                              Icons.person,
+                                                              size: 15.r,
+                                                              color:
+                                                                  grey_aaaaaa,
+                                                            ),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Icon(
+                                                              Icons.person,
+                                                              size: 15.r,
+                                                              color:
+                                                                  grey_aaaaaa,
+                                                            ),
+                                                          ),
+                                              ),
                                             ),
                                             setHelceticaBold(
-                                                controller
-                                                        .eventList[index]
-                                                        .hosts![0]
-                                                        .firstName! +
-                                                    controller
-                                                        .eventList[index]
-                                                        .hosts![0]
-                                                        .lastName!,
+                                                controller.eventList[index]
+                                                        .hosts![0].firstName! +
+                                                    controller.eventList[index]
+                                                        .hosts![0].lastName!,
                                                 11.sp,
                                                 white_ffffff,
                                                 FontWeight.w500,
@@ -422,8 +422,8 @@ class _EventListDetailState extends State<EventListDetail> {
                                         Padding(
                                           padding: EdgeInsets.only(right: 4.w),
                                           child: setHelveticaMedium(
-                                              controller.eventList[index]
-                                                  .venue!,
+                                              controller
+                                                  .eventList[index].venue!,
                                               10.sp,
                                               white_ffffff,
                                               FontWeight.w100,
@@ -443,8 +443,7 @@ class _EventListDetailState extends State<EventListDetail> {
                                   child: Padding(
                                     padding: EdgeInsets.only(left: 16.w),
                                     child: setHelceticaBold(
-                                        controller
-                                            .eventList[index].title!,
+                                        controller.eventList[index].title!,
                                         22.sp,
                                         white_ffffff,
                                         FontWeight.w500,

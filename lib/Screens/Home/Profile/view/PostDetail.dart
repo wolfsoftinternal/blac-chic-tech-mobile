@@ -13,6 +13,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:blackchecktech/Widget/ReportBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,7 +32,6 @@ class PostDetail extends StatefulWidget {
 
 class _PostDetailState extends State<PostDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
-  int userId = 0;
   String username = '';
 
   @override
@@ -47,15 +47,6 @@ class _PostDetailState extends State<PostDetail> {
     checkNet(context).then((value) {
       controller.postListAPI(context, body, 'detail');
     });
-    init();
-  }
-
-  init() async {
-    var preferences = MySharedPref();
-    SignupModel? myModel =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
-    userId = myModel!.data!.id!.toInt();
-    username = myModel.data!.userName!;
   }
 
   @override
@@ -82,8 +73,9 @@ class _PostDetailState extends State<PostDetail> {
                       Get.back();
                       Get.back();
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
+                    child: CircularProfileAvatar(
+                                '',
+                                radius: 24,
                       child: controller.details.value.image == null
                           ? SvgPicture.asset(
                               placeholder,
@@ -116,7 +108,7 @@ class _PostDetailState extends State<PostDetail> {
                   ),
                 ),
                 const Spacer(),
-                userId == controller.details.value.id
+                widget.userId == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
                           createBottomSheet(context, widget.userId);
@@ -142,7 +134,7 @@ class _PostDetailState extends State<PostDetail> {
                         width: 48.w,
                         height: 48.h,
                       ),
-                userId == controller.details.value.id
+                widget.userId == controller.details.value.id
                     ? Padding(
                         padding: EdgeInsets.only(right: 10.w),
                         child: GestureDetector(
