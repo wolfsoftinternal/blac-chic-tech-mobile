@@ -9,16 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:readmore/readmore.dart';
 
+import '../Screens/Home/FeatureMenu/View/SearchFeaturesScreen.dart';
 import '../Screens/Home/FeatureMenu/model/FeaturedListModel.dart';
 import '../Styles/my_strings.dart';
 
 class PastFeature1 extends StatefulWidget {
   final FeaturedList featuredData;
+  final List<FeaturedList> allFeatures;
 
   const PastFeature1({Key? key,
-    required this.featuredData}) : super(key: key);
+    required this.featuredData,
+    required this.allFeatures}) : super(key: key);
 
   @override
   _PastFeature1State createState() => _PastFeature1State();
@@ -78,11 +83,16 @@ class _PastFeature1State extends State<PastFeature1> {
                                         color: Colors.white,
                                         fontFamily: helvetica_neu_bold),
                                   ),
-                                  SvgPicture.asset(
-                                    search,
-                                    color: Colors.white,
-                                    height: 24.h,
-                                    width: 24.h,
+                                  GestureDetector(
+                                    onTap: (){
+                                      Get.to(() => SearchFeaturesScreen(featureList: widget.allFeatures,));
+                                    },
+                                    child: SvgPicture.asset(
+                                      search,
+                                      color: Colors.white,
+                                      height: 24.h,
+                                      width: 24.h,
+                                    ),
                                   ),
                                 ],
                               ),

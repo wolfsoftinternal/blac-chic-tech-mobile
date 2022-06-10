@@ -37,7 +37,8 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
         child: Scaffold(
       backgroundColor: Colors.white,
       body: Obx(
-        () => featuredController.featuredList.length > 0?Stack(
+        () => featuredController.isDataFetched ==true ?
+        featuredController.featuredList.length > 0?Stack(
           alignment: Alignment.bottomCenter,
           children: [
             Flexible(
@@ -141,7 +142,7 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        Get.to(PastFeaturesScreen(featureList: featuredController.featuredList.value,));
+                        Get.to(PastFeaturesScreen(featureList: featuredController.featuredList.value,selectedPosition: 1,));
 
                         // _controller.previousPage(
                         //     duration: _kDuration, curve: _kCurve);
@@ -221,7 +222,8 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
               ),
             ),
           ],
-        ):Text('No Data Found'),
+        ):
+        Text('No Data Found'):const Center(child: CircularProgressIndicator()),
       ),
     ));
   }

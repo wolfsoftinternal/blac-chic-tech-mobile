@@ -14,6 +14,7 @@ import 'package:blackchecktech/Screens/Home/Profile/view/UserProfile.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:blackchecktech/Widget/AddLocationView.dart';
@@ -32,6 +33,7 @@ import 'package:iconly/iconly.dart';
 import '../../../../Model/FollowFriendModel.dart';
 import '../../../../Styles/my_strings.dart';
 import '../../Profile/view/AdmireProfile.dart';
+import 'PastFeaturesScreen.dart';
 
 class SearchFeaturesScreen extends StatefulWidget {
   final List<FeaturedList> featureList;
@@ -138,6 +140,8 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
                     InkWell(
                       onTap: () {
 
+                        Get.to(PastFeaturesScreen(featureList: widget.featureList,selectedPosition: i,));
+
                       },
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 16.h, top: 16),
@@ -174,11 +178,28 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
                                   alignment: Alignment.centerLeft,
                                   child: Column(
                                     children: [
-                                      Text(searchableFeatureList[i].writer_name??""),
+
+                                      Align(
+                                    alignment: Alignment.centerLeft
+                                    ,child: setHelveticaMedium(
+                                            searchableFeatureList[i].writer_name??"",
+                                            18.sp,
+                                            black_121212,
+                                            FontWeight.w900,
+                                            FontStyle.normal),
+                                      ),
 
                                       SizedBox(height: 4,),
 
-                                      Text(searchableFeatureList[i].title??"")
+                                      Align(
+                                        alignment: Alignment.centerLeft
+                                        ,child: setHelveticaRegular(
+                                          searchableFeatureList[i].title??"",
+                                          15.sp,
+                                          black_121212,
+                                          FontWeight.w900,
+                                          FontStyle.normal),
+                                      ),
                                     ],
                                   ),
                                 ),

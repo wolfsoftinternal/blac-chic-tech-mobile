@@ -20,6 +20,7 @@ import '../../../Networks/api_response.dart';
 class FeaturedController extends GetxController {
 
   RxList<FeaturedList> featuredList = <FeaturedList>[].obs;
+  RxBool isDataFetched = false.obs;
 
   // Get all featured list
   allFeaturedListApi() async {
@@ -38,6 +39,8 @@ class FeaturedController extends GetxController {
 
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
+
+          isDataFetched.value = true;
 
          if (model.statusCode == 200) {
             FeaturedListModel featuredListModel = FeaturedListModel.fromJson(userModel);
