@@ -584,6 +584,7 @@ packages:
       name: material_color_utilities
       url: "https://pub.dartlang.org"
     source: hosted
+    version: "0.1.4"
     version: "0.1.3"
   material_tag_editor:
     dependency: "direct main"
@@ -682,6 +683,7 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
+    version: "1.8.1"
     version: "1.8.0"
   path_drawing:
     dependency: transitive
@@ -939,7 +941,10 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
+    version: "1.8.2"
+
     version: "1.8.1"
+
   sqflite:
     dependency: transitive
     description:

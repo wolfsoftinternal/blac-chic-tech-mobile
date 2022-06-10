@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Screens/Home/FeatureMenu/model/FeaturedListModel.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/UIScreen/PastFeature1.dart';
 import 'package:blackchecktech/UIScreen/PastFeature2.dart';
@@ -68,10 +69,11 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
                   // child: Center(
                   //   child: Text("page 1"),
                   // ),
-                  child: PastFeature1(),
+                  child: PastFeature1(featuredData: FeaturedList(),
+                  allFeatures: [],),
                 ),
                 Container(
-                  child: PastFeature2(),
+                  child: PastFeature2(featuredData: FeaturedList(),allFeatures: [],),
                   // color: Colors.yellow,
                   // child: Center(
                   //   child: Text("page 2"),

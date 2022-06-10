@@ -26,6 +26,10 @@ class VideoMenuController extends GetxController {
   Rx<SpeakerVideoModel> speakerVideoModel = SpeakerVideoModel().obs;
   RxInt searchVideoPage = 1.obs;
 
+  Rx<SpeakerVideoModel> detailsVideoModel = SpeakerVideoModel().obs;
+  RxList<VideoList> videoDetailsList = <VideoList>[].obs;
+  RxInt detailsVideoPage = 1.obs;
+
   var topicList = <TopicListModel>[].obs;
   var topicListAll = <TopicListModel>[].obs;
   Rx<TopicListModel> selectedTopic = TopicListModel(id: -1).obs;
@@ -233,6 +237,82 @@ class VideoMenuController extends GetxController {
     videoAllList.value = List.generate(
         list.length > searchVideoPage.value * total
             ? searchVideoPage.value * total
+            : list.length,
+        (index) => list[index]);
+    isLoading.value = false;
+  }
+
+  videoListDetailsAPI({VideoList? videoListData}) async {
+    isLoading.value = true;
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    // dynamic body = {'search': topicFilter.toString()};
+    //FormData formData = new FormData.fromMap(body);
+
+    String url = urlBase + urlVideoList;
+    final apiReq = Request();
+    await apiReq.postAPIWithBearer(url, null, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+      videoDetailsList.clear();
+
+      print("Stutus :: " + res.statusCode.toString());
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          print(value.toString());
+          detailsVideoModel.value = speakerVideoModelFromJson(value);
+
+          if (detailsVideoModel.value.statusCode == 500) {
+            isLoading.value = false;
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+          } else if (detailsVideoModel.value.statusCode == 200) {
+            videoDetailsListMethod(videoListData: videoListData);
+          }
+        });
+      } else {
+        isLoading.value = false;
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  videoDetailsListMethod({VideoList? videoListData}) {
+    int total = 6;
+    var list = <VideoList>[];
+    detailsVideoModel.value.data!.forEach((element) {
+      if (videoListData!.id != element.id) {
+        String dataVideos =
+            element.embededCode.toString().replaceAll("560", "130");
+        String videoData = dataVideos.replaceAll("315", "60");
+        list.add(VideoList(
+            id: element.id,
+            userId: element.userId,
+            title: element.title,
+            topic: element.topic,
+            language: element.language,
+            file: element.file,
+            embededCode: videoData,
+            tags: element.tags,
+            speakers: element.speakers,
+            status: element.status,
+            description: element.description,
+            deletedAt: element.deletedAt,
+            speakerList: element.speakerList,
+            isFocus: element.isFocus,
+            userDetails: element.userDetails,
+            createdAt: element.createdAt,
+            updatedAt: element.updatedAt));
+      }
+    });
+    if (list.length > detailsVideoPage.value * total) {
+      hasMore.value = true;
+    } else {
+      hasMore.value = false;
+    }
+    videoDetailsList.value = List.generate(
+        list.length > detailsVideoPage.value * total
+            ? detailsVideoPage.value * total
             : list.length,
         (index) => list[index]);
     isLoading.value = false;

@@ -60,6 +60,9 @@ const urlAddAccount = '/mobile/bank/create-details';
 const urlBankAccountList = '/mobile/bank/list';
 const urlSendWithdrawRequest = '/mobile/payouts/send-request';
 
+// Featured
+const urlAllFeatures = '/mobile/home/feature-list';
+
 //language
 const urlLanguageList = '/mobile/langauge-list';
 
