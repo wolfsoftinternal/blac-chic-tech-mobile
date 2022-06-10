@@ -249,16 +249,17 @@ class _FindSpeakerState extends State<FindSpeaker> {
                                           return controller.hasMore.value ==
                                                   false
                                               ? const SizedBox()
-                                              : InkWell(
-                                                  onTap: () {
-                                                    controller.findSpeakerPage
-                                                        .value++;
-                                                    controller.pageAdd();
-                                                  },
-                                                  child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 25.h),
-                                                    child: Center(
+                                              : Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 25.h),
+                                                  child: Center(
+                                                    child: TextButton(
+                                                      onPressed: () {
+                                                        controller
+                                                            .findSpeakerPage
+                                                            .value++;
+                                                        controller.pageAdd();
+                                                      },
                                                       child: Text(
                                                         "Load More",
                                                         style: TextStyle(
