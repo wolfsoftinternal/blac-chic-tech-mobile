@@ -156,7 +156,7 @@ class EventController extends GetxController {
         } else if (model.statusCode == 200) {
           var id = userModel['data']['id'];
           checkNet(context)
-              .then((value) => controller.eventDetailAPI(context, id)).then((value) {
+              .then((value) => controller.eventDetailAPI(context, id, null )).then((value) {
                 Get.back();
           Get.back();
           Get.back();});

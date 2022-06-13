@@ -8,6 +8,7 @@ import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -75,8 +76,8 @@ class _EventTabState extends State<EventTab> {
                         ListView.builder(
                             shrinkWrap: true,
                             primary: false,
-                            itemCount: controller.eventList.length >= 10
-                                ? 10
+                            itemCount: controller.eventList.length >= 7
+                                ? 7
                                 : controller.eventList.length,
                             padding: EdgeInsets.zero,
                             itemBuilder: (context, index) {
@@ -233,45 +234,71 @@ class _EventTabState extends State<EventTab> {
                                                       padding: EdgeInsets.only(
                                                           left: 6.w,
                                                           right: 6.w),
-                                                      child: ClipRRect(
-                                                        borderRadius: BorderRadius.circular(50),
-                                                        child: controller.eventList[index].hosts == null
+                                                      child:
+                                                          CircularProfileAvatar(
+                                                        '',
+                                                        borderColor: Colors.black,
+                                                        radius: 7.5,
+                                                        child: controller
+                                                                    .eventList[
+                                                                        index]
+                                                                    .hosts ==
+                                                                null
                                                             ? Icon(
                                                                 Icons.person,
                                                                 size: 15.r,
                                                                 color:
                                                                     grey_aaaaaa,
                                                               )
-                                                            : controller.eventList[index].hosts!.first.image.toString() == ''
+                                                            : controller
+                                                                        .eventList[
+                                                                            index]
+                                                                        .hosts!
+                                                                        .first
+                                                                        .image
+                                                                        .toString() ==
+                                                                    ''
                                                                 ? Icon(
-                                                                    Icons.person,
+                                                                    Icons
+                                                                        .person,
                                                                     size: 15.r,
                                                                     color:
                                                                         grey_aaaaaa,
                                                                   )
                                                                 : CachedNetworkImage(
                                                                     imageUrl: controller
-                                                                        .eventList[index]
-                                                                        .hosts!.first
+                                                                        .eventList[
+                                                                            index]
+                                                                        .hosts!
+                                                                        .first
                                                                         .image!,
-                                                                    height: 15.h,
+                                                                    height:
+                                                                        15.h,
                                                                     width: 15.w,
                                                                     fit: BoxFit
                                                                         .cover,
-                                                                    progressIndicatorBuilder:
-                                                                        (context,url,downloadProgress) =>
-                                                                          Icon(
-                                                                            Icons.person,
-                                                                            size: 15.r,
-                                                                            color: grey_aaaaaa,
-                                                                          ),
-                                                                    errorWidget:
-                                                                        (context, url, error) =>
-                                                                          Icon(
-                                                                            Icons.person,
-                                                                            size: 15.r,
-                                                                            color: grey_aaaaaa,
-                                                                          ),
+                                                                    progressIndicatorBuilder: (context,
+                                                                            url,
+                                                                            downloadProgress) =>
+                                                                        Icon(
+                                                                      Icons
+                                                                          .person,
+                                                                      size:
+                                                                          15.r,
+                                                                      color:
+                                                                          grey_aaaaaa,
+                                                                    ),
+                                                                    errorWidget: (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Icon(
+                                                                      Icons
+                                                                          .person,
+                                                                      size:
+                                                                          15.r,
+                                                                      color:
+                                                                          grey_aaaaaa,
+                                                                    ),
                                                                   ),
                                                       ),
                                                     ),
@@ -284,7 +311,8 @@ class _EventTabState extends State<EventTab> {
                                                             controller
                                                                 .eventList[
                                                                     index]
-                                                                .hosts!.first
+                                                                .hosts!
+                                                                .first
                                                                 .lastName!,
                                                         11.sp,
                                                         white_ffffff,
@@ -373,6 +401,26 @@ class _EventTabState extends State<EventTab> {
                                 ),
                               );
                             }),
+                            controller.eventList.length > 7 ?
+                        GestureDetector(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(top: 8.0, bottom: 18.0),
+                            child: InkWell(
+                                onTap: () {
+                                  Get.to(EventListDetail(
+                                      userId: widget.id,
+                                      id: controller.eventList[0].id));
+                                },
+                                child: Center(
+                                    child: setHelceticaBold(
+                                        'See More',
+                                        16,
+                                        blue_0A84FF,
+                                        FontWeight.w400,
+                                        FontStyle.normal))),
+                          ),
+                        ) : Container()
                       ],
                     ),
                   ],

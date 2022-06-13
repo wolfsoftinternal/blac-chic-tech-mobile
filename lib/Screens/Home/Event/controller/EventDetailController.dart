@@ -20,17 +20,16 @@ class EventDetailController extends GetxController {
   var cityList = <CityDatum>[].obs;
   RxString strCityId = "".obs;
   Rx<TextEditingController> dateController = TextEditingController().obs;
-  RxList<EventList> eventList = <EventList>[].obs;          
+  RxList<EventList> eventList = <EventList>[].obs;
   RxList<EventList> upcomingEventList = <EventList>[].obs;
   RxList<EventList> pastEventList = <EventList>[].obs;
   Rx<EventList> eventDetails = EventList().obs;
   ScrollController scrollController = ScrollController();
   ScrollController pastUpcomingScrollController = ScrollController();
-  RxInt pageNumber = 1.obs;
+  RxInt pageNumber = 0.obs;
   RxInt pastUpcomingPageNumber = 1.obs;
   RxBool isPaginationLoading = false.obs;
   RxBool isPastUpcomingPaginationLoading = false.obs;
-  
 
   initScrolling(BuildContext context, body) {
     scrollController.addListener(() async {
@@ -38,7 +37,7 @@ class EventDetailController extends GetxController {
           scrollController.position.pixels) {
         _scrollDown();
         isPaginationLoading.value = true;
-        // pageNumber = pageNumber + 1;
+        pageNumber = pageNumber + 1;
         await allEventListApi(body);
         isPaginationLoading.value = false;
       }
@@ -66,7 +65,8 @@ class EventDetailController extends GetxController {
   }
 
   void _pastUpcomingScrollDown() {
-    pastUpcomingScrollController.jumpTo(pastUpcomingScrollController.position.maxScrollExtent);
+    pastUpcomingScrollController
+        .jumpTo(pastUpcomingScrollController.position.maxScrollExtent);
   }
 
   cityListApi() async {
@@ -95,11 +95,14 @@ class EventDetailController extends GetxController {
   }
 
   allEventListApi(body) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
     String url = urlBase + urlallEventList;
     final apiReq = Request();
 
-    await apiReq.postAPIwithoutBearer(url, body).then((value) async {
-      if(pageNumber == 1){
+    apiReq.postAPI(url, body, token.toString()).then((value) {
+      
+      if (pageNumber == 1) {
         eventList.clear();
         upcomingEventList.clear();
         pastEventList.clear();
@@ -107,7 +110,7 @@ class EventDetailController extends GetxController {
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
-        await res.stream.bytesToString().then((value) async {
+        res.stream.bytesToString().then((value) async {
           String strData = value;
 
           print('strData order' + strData);
@@ -122,57 +125,24 @@ class EventDetailController extends GetxController {
             EventListModel detail = EventListModel.fromJson(userModel);
             eventList.value = detail.data!;
 
-            for(var item in eventList){
-              if(item.event_type == 'past'){
+            for (var item in eventList) {
+              if (item.event_type == 'past') {
                 past.add(item);
-              }else{
+              } else {
                 upcoming.add(item);
               }
             }
             upcomingEventList.value = upcoming;
             pastEventList.value = past;
-          } else if(model.statusCode == 101){
+          } else if (model.statusCode == 101) {
             eventList.clear();
             upcomingEventList.clear();
             pastEventList.clear();
-          }else {
+          } else {
             print(res.reasonPhrase);
           }
         });
       }
     });
   }
-
-  // allEventDetailApi(id) async {
-  //   String url = urlBase + urlallEventDetail;
-  //   final apiReq = Request();
-
-  //   dynamic body = {
-  //     'event_id': id.toString(),
-  //   };
-
-  //   await apiReq.postAPIwithoutBearer(url, body).then((value) async {
-  //     http.StreamedResponse res = value;
-
-  //     if (res.statusCode == 200) {
-  //       await res.stream.bytesToString().then((value) async {
-  //         String strData = value;
-  //         Map<String, dynamic> userModel = json.decode(strData);
-  //         BaseModel model = BaseModel.fromJson(userModel);
-
-  //         if (model.statusCode == 200) {
-  //           EventDetailModel detail = EventDetailModel.fromJson(userModel);
-  //           eventDetails.value = detail.data!;
-  //           Get.to(EventDetail());
-  //         }else {
-  //           print(res.reasonPhrase);
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
-
-
-
-
 }

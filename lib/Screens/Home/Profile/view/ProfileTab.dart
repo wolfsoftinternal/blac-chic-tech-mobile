@@ -4,6 +4,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -107,10 +108,9 @@ class _ProfileTabState extends State<ProfileTab> {
                                                 bottom: 12.h),
                                             child: Row(
                                               children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      50.r),
+                                                CircularProfileAvatar(
+                                '',
+                                radius: 20.5,
                                                   child: controller
                                                       .details
                                                       .value

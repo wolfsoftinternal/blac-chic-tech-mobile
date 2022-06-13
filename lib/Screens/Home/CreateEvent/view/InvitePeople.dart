@@ -9,6 +9,7 @@ import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -152,8 +153,9 @@ class _InvitePeopleState extends State<InvitePeople> {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.center,
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(50),
+                                    CircularProfileAvatar(
+                                '',
+                                radius: 32,
                                       child: widget.fromView == true ? controller.searchList[i].image == null 
                                       ? SvgPicture.asset(
                                         placeholder,

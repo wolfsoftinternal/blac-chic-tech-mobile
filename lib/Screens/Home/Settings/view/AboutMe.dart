@@ -19,6 +19,7 @@ import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/EditTextDecoration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -450,10 +451,9 @@ class _AboutMeState extends State<AboutMe> {
                                                     bottom: 12.h),
                                                 child: Row(
                                                   children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              50.r),
+                                                    CircularProfileAvatar(
+                                '',
+                                radius: 20.5,
                                                       child: pastJobImage[index]
                                                               .isEmpty
                                                           ? SvgPicture.asset(

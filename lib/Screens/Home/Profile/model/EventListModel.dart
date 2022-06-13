@@ -68,6 +68,7 @@ class EventList {
     this.countryDetails,
     this.stateDetails,
     this.cityDetails,
+    this.is_purchased,
     this.hosts,
     this.speakers,
     this.benefits,
@@ -100,6 +101,7 @@ class EventList {
   DateTime? createdAt;
   DateTime? updatedAt;
   dynamic deletedAt;
+  dynamic is_purchased;
   List<Benefit>? admissionData;
   Details? countryDetails;
   Details? stateDetails;
@@ -136,6 +138,7 @@ class EventList {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
+        is_purchased: json["is_purchased"],
         admissionData: json["admission_data"] != null
             ? List<Benefit>.from(
                 json["admission_data"].map((x) => Benefit.fromJson(x)))
@@ -199,6 +202,7 @@ class EventList {
         "country_details": countryDetails!.toJson(),
         "state_details": stateDetails!.toJson(),
         "city_details": cityDetails!.toJson(),
+        "is_purchased": is_purchased!.toJson(),
         "hosts": List<dynamic>.from(hosts!.map((x) => x.toJson())),
         "speakers": List<dynamic>.from(speakers!.map((x) => x.toJson())),
         "benefits": List<dynamic>.from(benefits!.map((x) => x.toJson())),

@@ -78,7 +78,7 @@ class _PostLocationState extends State<PostLocation> {
                   onSubmit: (value) {
                     if (value.isNotEmpty) {
                       controller.searchLocationController.value.text = value;
-                      // name = [];
+                      name = [];
                       autoCompleteSearch(value);
                     } else {
                       if (predictions.length > 0 && mounted) {
@@ -102,6 +102,8 @@ class _PostLocationState extends State<PostLocation> {
                 itemBuilder: (context, i) => InkWell(
                   onTap: () {
                     setState(() async {
+                      print(name.length);
+                      print(predictions.length);
                       debugPrint(predictions[i].description);
                       controller.location.value = name[i];
                       controller.address.value = predictions[i].description!;
@@ -116,7 +118,8 @@ class _PostLocationState extends State<PostLocation> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(name[i].toString() == '' ? '' : name[i], 
+                      name.length < i  ? Container() :
+                      Text(name.isEmpty ? "" : name.length < predictions.length ? "" : name[i], 
                           style: TextStyle(
                               color: black_121212,
 

@@ -11,6 +11,7 @@ import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,7 +29,7 @@ class ReplaceWith extends StatefulWidget {
 
 class _ReplaceWithState extends State<ReplaceWith> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
-  VideoController videoController = Get.put(VideoController());
+  // VideoController videoController = Get.put(VideoController());
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +50,10 @@ class _ReplaceWithState extends State<ReplaceWith> {
                 placeholder: "Search people",
                 onSubmit: (value) {
                   checkNet(context).then((value) {
-                    videoController.userListAPI(
+                    controller.replaceUserList(
                         context, controller.searchController.value.text);
                   });
-                  print(videoController);
-                  for (var item in videoController.userList) {
+                  for (var item in controller.userList) {
                     if (controller.selectedList.contains(item)) {
                       controller.searchList.clear();
                       controller.searchList.add(item);
@@ -83,13 +83,13 @@ class _ReplaceWithState extends State<ReplaceWith> {
                             primary: false,
                             shrinkWrap: true,
                             padding: EdgeInsets.all(0),
-                            itemCount: videoController.userList.length,
+                            itemCount: controller.userList.length,
                             itemBuilder: (context, i) => GestureDetector(
                               onTap: () {
                                 setState(() {
                                   controller.selectedList.clear();
                                   controller.selectedList
-                                      .add(videoController.userList[i]);
+                                      .add(controller.userList[i]);
                                 });
                               },
                               child: Padding(
@@ -102,10 +102,11 @@ class _ReplaceWithState extends State<ReplaceWith> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(50),
+                                      CircularProfileAvatar(
+                                '',
+                                radius: 22,
                                         child:
-                                            videoController.userList[i].image ==
+                                            controller.userList[i].image ==
                                                     null
                                                 ? SvgPicture.asset(
                                                     placeholder,
@@ -114,7 +115,7 @@ class _ReplaceWithState extends State<ReplaceWith> {
                                                     fit: BoxFit.cover,
                                                   )
                                                 : CachedNetworkImage(
-                                                    imageUrl: videoController
+                                                    imageUrl: controller
                                                         .userList[i].image!,
                                                     height: 44.h,
                                                     width: 44.w,
@@ -151,10 +152,10 @@ class _ReplaceWithState extends State<ReplaceWith> {
                                           children: [
                                             // claireroman
                                             Text(
-                                                videoController.userList[i]
+                                                controller.userList[i]
                                                             .userName !=
                                                         null
-                                                    ? videoController
+                                                    ? controller
                                                         .userList[i].userName!
                                                     : "",
                                                 style: TextStyle(
@@ -170,15 +171,15 @@ class _ReplaceWithState extends State<ReplaceWith> {
                                             ),
                                             // Claire Roman
                                             Text(
-                                                videoController.userList[i]
+                                                controller.userList[i]
                                                             .firstName !=
                                                         null
-                                                    ? videoController
+                                                    ? controller
                                                             .userList[i]
                                                             .firstName!
                                                             .capitalizeFirst! +
                                                         " " +
-                                                        videoController
+                                                        controller
                                                             .userList[i]
                                                             .lastName!
                                                             .capitalizeFirst!
@@ -198,7 +199,7 @@ class _ReplaceWithState extends State<ReplaceWith> {
                                         ),
                                       ),
                                       SvgPicture.asset(
-                                        controller.selectedList.contains(videoController.userList[i])
+                                        controller.selectedList.contains(controller.userList[i])
                                             ? orange_tick_icon
                                             : icon_next_arrow,
                                         width: 25.w,
@@ -223,12 +224,16 @@ class _ReplaceWithState extends State<ReplaceWith> {
                 if(controller.selectedList.isEmpty){
                   snackBar(context, 'Select replacement');
                 }
-                checkNet(context).then((value) {
+                checkNet(context).then((value) async {
                   if(widget.isFrom == 'user'){
-                    controller.replaceAdmireAPI(context, widget.id, controller.selectedList[0].id, null);
+                    await controller.replaceAdmireAPI(context, widget.id, controller.selectedList[0].id, null);
+                    controller.admireListAPI(context, null);
+                    Get.back();            
                   }else{
                     dynamic body = {'user_id': controller.details.value.id.toString()};
-                    controller.replaceAdmireAPI(context, widget.id, controller.selectedList[0].id, body);
+                    await controller.replaceAdmireAPI(context, widget.id, controller.selectedList[0].id, body);
+                    controller.admireListAPI(context, controller.details.value.id.toString());
+                    Get.back();
                   }
                 });
               }),
