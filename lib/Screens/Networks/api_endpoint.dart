@@ -61,6 +61,8 @@ const urlSendWithdrawRequest = '/mobile/payouts/send-request';
 
 // Featured
 const urlAllFeatures = '/mobile/home/feature-list';
+const urlLikeFeatures = '/mobile/feature-like';
+const urlDisLikeFeatures = '/mobile/feature-dislike';
 
 //language
 const urlLanguageList = '/mobile/langauge-list';

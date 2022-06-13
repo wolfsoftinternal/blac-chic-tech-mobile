@@ -85,6 +85,36 @@ class _BcConnectState extends State<BcConnect> {
         SizedBox(
           height: 32.h,
         ),
+
+
+      Padding(
+        padding: EdgeInsets.only(left: 16.w, right: 16.w),
+        child: SearchBarTag(
+          placeholder: "Search people",
+          autoFocus: false,
+          onSubmit: (value) {
+            checkNet(context).then((value) {
+              videoController.userListAPI(context,
+                  bcConnectController.searchController.value.text);
+            });
+          },
+          controller: bcConnectController.searchController.value,
+        ),
+      ),
+
+      // Recently Search
+      Padding(
+        padding: EdgeInsets.only(left: 16.w, top: 24.h),
+        child: Text("Recently Search",
+            style: TextStyle(
+                color: black_121212,
+                fontWeight: FontWeight.w900,
+                fontFamily: "NeueHelvetica",
+                fontStyle: FontStyle.normal,
+                fontSize: 16.sp),
+            textAlign: TextAlign.left),
+      ),
+
         Expanded(
           flex: 1,
           child: SingleChildScrollView(
@@ -93,33 +123,7 @@ class _BcConnectState extends State<BcConnect> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 16.w, right: 16.w),
-                  child: SearchBarTag(
-                    placeholder: "Search people",
-                    autoFocus: false,
-                    onSubmit: (value) {
-                      checkNet(context).then((value) {
-                        videoController.userListAPI(context,
-                            bcConnectController.searchController.value.text);
-                      });
-                    },
-                    controller: bcConnectController.searchController.value,
-                  ),
-                ),
 
-                // Recently Search
-                Padding(
-                  padding: EdgeInsets.only(left: 16.w, top: 24.h),
-                  child: Text("Recently Search",
-                      style: TextStyle(
-                          color: black_121212,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: "NeueHelvetica",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 16.sp),
-                      textAlign: TextAlign.left),
-                ),
 
                 //   SizedBox(height: 16.h,),
                 // Rectangle 1363

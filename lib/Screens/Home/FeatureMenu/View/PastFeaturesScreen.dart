@@ -20,9 +20,6 @@ class PastFeaturesScreen extends StatefulWidget {
   final List<FeaturedList> featureList;
   final int selectedPosition;
 
-
-
-
   const PastFeaturesScreen({Key? key,
   required this.featureList,
     required this.selectedPosition
@@ -61,11 +58,28 @@ class _PastFeaturesScreenState extends State<PastFeaturesScreen> {
               controller: _controller,
               itemCount: widget.featureList.length,
               itemBuilder: (BuildContext context, int index) {
-                if((index % 2) == 0){
-                  return PastFeature1(featuredData: widget.featureList[index], allFeatures: widget.featureList);
+
+                if(!isSet){
+                  isSet = true;
+                  return PastFeature1(selectedPositionFromPrevious: widget.selectedPosition);
                 }else{
-                  return PastFeature2(featuredData: widget.featureList[index], allFeatures: widget.featureList);
+                  if((index % 2) == 0){
+                    print('past 1');
+                    return PastFeature1(selectedPositionFromPrevious: index);
+                  }else{
+                    print('past 2');
+                    return PastFeature2(selectedPositionFromPrevious: index);
+                  }
                 }
+
+
+                // if((index % 2) == 0){
+                //   print('past 1');
+                //   return PastFeature1(selectedPositionFromPrevious: index);
+                // }else{
+                //   print('past 2');
+                //   return PastFeature2(selectedPositionFromPrevious: index);
+                // }
 
               },
             ),

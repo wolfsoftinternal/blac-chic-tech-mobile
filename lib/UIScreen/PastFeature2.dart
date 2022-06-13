@@ -9,6 +9,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:readmore/readmore.dart';
 
 import '../Screens/Home/FeatureMenu/View/SearchFeaturesScreen.dart';
+import '../Screens/Home/FeatureMenu/controller/FeaturedController.dart';
 import '../Screens/Home/FeatureMenu/model/FeaturedListModel.dart';
 import '../Styles/my_colors.dart';
 import '../Styles/my_icons.dart';
@@ -16,11 +17,9 @@ import '../Styles/my_strings.dart';
 import '../Utilities/Constant.dart';
 
 class PastFeature2 extends StatefulWidget {
-  final FeaturedList featuredData;
-  final List<FeaturedList> allFeatures;
+  final int selectedPositionFromPrevious;
 
-  const PastFeature2(
-      {Key? key, required this.featuredData, required this.allFeatures})
+  const PastFeature2({Key? key, required this.selectedPositionFromPrevious})
       : super(key: key);
 
   @override
@@ -28,13 +27,16 @@ class PastFeature2 extends StatefulWidget {
 }
 
 class _PastFeature2State extends State<PastFeature2> {
+  FeaturedController featuredController = Get.put(FeaturedController());
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: black_bg_1c2535,
-        body: SingleChildScrollView(
+        body: Obx(
+    () =>SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,8 +77,8 @@ class _PastFeature2State extends State<PastFeature2> {
                                         fontFamily: helvetica_neu_bold),
                                   ),
                                   GestureDetector(
-                                    onTap: (){
-                                      Get.to(() => SearchFeaturesScreen(featureList: widget.allFeatures,));
+                                    onTap: () {
+                                      Get.to(() => SearchFeaturesScreen());
                                     },
                                     child: SvgPicture.asset(
                                       search,
@@ -97,7 +99,11 @@ class _PastFeature2State extends State<PastFeature2> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     CachedNetworkImage(
-                                      imageUrl: widget.featuredData.image ?? "",
+                                      imageUrl: featuredController
+                                              .featuredList[widget
+                                                  .selectedPositionFromPrevious]
+                                              .image ??
+                                          "",
                                       fit: BoxFit.cover,
                                       width: 220.w,
                                       height: 302.h,
@@ -140,7 +146,11 @@ class _PastFeature2State extends State<PastFeature2> {
                         children: [
                           Expanded(
                             child: Text(
-                              widget.featuredData.writer_name ?? "",
+                              featuredController
+                                      .featuredList[
+                                          widget.selectedPositionFromPrevious]
+                                      .writer_name ??
+                                  "",
                               style: TextStyle(
                                 fontFamily: helvetica_neu_bold,
                                 fontSize: 90.sp,
@@ -165,18 +175,59 @@ class _PastFeature2State extends State<PastFeature2> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(
-                                  iconly_light_heart,
-                                  width: 25.w,
-                                  height: 25.h,
+                                GestureDetector(
+                                  onTap: () {
+                                    print("share clicked");
+                                  },
+                                  child: SvgPicture.asset(
+                                    icon_share,
+                                    width: 25.w,
+                                    height: 25.h,
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 25.h,
                                 ),
-                                SvgPicture.asset(
-                                  icon_share,
-                                  width: 25.w,
-                                  height: 25.h,
+                                GestureDetector(
+                                  onTap: () {
+                                    if (featuredController
+                                            .featuredList[widget
+                                                .selectedPositionFromPrevious]
+                                            .is_like ==
+                                        0) {
+                                      featuredController.likeFeatureAPI(
+                                          context,
+                                          featuredController
+                                              .featuredList[widget
+                                                  .selectedPositionFromPrevious]
+                                              .id,
+                                          widget.selectedPositionFromPrevious);
+                                    } else {
+                                      featuredController.DisLikeFeatureAPI(
+                                          context,
+                                          featuredController
+                                              .featuredList[widget
+                                                  .selectedPositionFromPrevious]
+                                              .id,
+                                          widget.selectedPositionFromPrevious);
+                                    }
+                                  },
+                                  child: featuredController
+                                              .featuredList[widget
+                                                  .selectedPositionFromPrevious]
+                                              .is_like ==
+                                          0
+                                      ? SvgPicture.asset(
+                                          icon_heart,
+                                          width: 25.w,
+                                          height: 25.h,
+                                        )
+                                      : SvgPicture.asset(
+                                          icon_heart,
+                                          width: 25.w,
+                                          height: 25.h,
+                                          color: Colors.red,
+                                        ),
                                 ),
                               ],
                             ),
@@ -189,7 +240,11 @@ class _PastFeature2State extends State<PastFeature2> {
                       margin:
                           EdgeInsets.only(top: 2.h, left: 24.w, right: 24.w),
                       child: Text(
-                        widget.featuredData.title ?? "",
+                        featuredController
+                                .featuredList[
+                                    widget.selectedPositionFromPrevious]
+                                .title ??
+                            "",
                         style: TextStyle(
                             fontFamily: helvetica_neu_bold,
                             fontSize: 24.sp,
@@ -200,7 +255,11 @@ class _PastFeature2State extends State<PastFeature2> {
                       margin:
                           EdgeInsets.only(top: 12.h, left: 24.w, right: 24.w),
                       child: Text(
-                        widget.featuredData.sub_text ?? "",
+                        featuredController
+                                .featuredList[
+                                    widget.selectedPositionFromPrevious]
+                                .sub_text ??
+                            "",
                         style: TextStyle(
                             fontFamily: poppins_BoldItalic,
                             fontSize: 12.sp,
@@ -213,7 +272,11 @@ class _PastFeature2State extends State<PastFeature2> {
                       margin: EdgeInsets.only(
                           top: 24.h, left: 24.w, right: 24.w, bottom: 15.h),
                       child: ReadMoreText(
-                        widget.featuredData.description ?? "",
+                        featuredController
+                                .featuredList[
+                                    widget.selectedPositionFromPrevious]
+                                .description ??
+                            "",
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.white,
@@ -263,7 +326,7 @@ class _PastFeature2State extends State<PastFeature2> {
               )
             ],
           ),
-        ),
+        )),
       ),
     );
   }
