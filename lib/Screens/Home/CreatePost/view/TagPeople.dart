@@ -184,8 +184,11 @@ class _TagPeopleState extends State<TagPeople> {
                 placeholder: "Search people",
                 onSubmit: (value) {
                   checkNet(context).then((value) {
+
+                    videoController.PageNumber.value = 0;
+
                     videoController.userListAPI(
-                        context, controller.searchController.value.text);
+                        context);
                   });
                   for (var item in videoController.userList) {
                     if (controller.selectedList.contains(item)) {
@@ -194,7 +197,7 @@ class _TagPeopleState extends State<TagPeople> {
                     }
                   }
                 },
-                controller: controller.searchController.value,
+                controller: videoController.searchController.value,
                 autoFocus: false,
               ),
             ),
@@ -367,5 +370,13 @@ class _TagPeopleState extends State<TagPeople> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    videoController.searchController.value.text = "";
   }
 }

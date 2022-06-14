@@ -40,7 +40,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
     checkNet(context).then(
       (value) {
         controller.admireListAPI(context, null);
-        videoController.userListAPI(context, '');
+        videoController.userListAPI(context);
       },
     );
     controller.addListener(() {});
@@ -260,5 +260,14 @@ class _AdmireProfileState extends State<AdmireProfile> {
               ),
       ),
     );
+  }
+
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    videoController.searchController.value.text = "";
   }
 }

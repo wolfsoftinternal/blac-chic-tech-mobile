@@ -59,7 +59,8 @@ class _InvitePeopleState extends State<InvitePeople> {
                         autoFocus: false,
                         onSubmit: (value){
                           checkNet(context).then((value) {
-                            videoController.userListAPI(context, controller.searchController.value.text);
+                            videoController.PageNumber.value = 0;
+                            videoController.userListAPI(context);
                           });
                           for(var item in videoController.userList){
                             if(controller.selectedList.contains(item)){
@@ -68,7 +69,7 @@ class _InvitePeopleState extends State<InvitePeople> {
                             }
                           }
                         },
-                        controller: controller.searchController.value,
+                        controller: videoController.searchController.value,
                       ),
                       SizedBox(
                         height: 24.h,
@@ -257,5 +258,13 @@ class _InvitePeopleState extends State<InvitePeople> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    videoController.searchController.value.text = "";
   }
 }
