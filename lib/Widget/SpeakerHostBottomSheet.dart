@@ -166,10 +166,6 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                     height: 24.h,
                                   ),
 
-                                  SizedBox(
-                                    height: 24.h,
-                                  ),
-
                                   ListView.builder(
                                     primary: false,
                                     shrinkWrap: true,
