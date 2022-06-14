@@ -4,6 +4,7 @@ import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
+import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -38,6 +39,7 @@ class VideoDetail extends StatefulWidget {
 
 class _VideoDetailState extends State<VideoDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
+  VideoMenuController videoMenuController = Get.put(VideoMenuController());
   String username = '';
   bool fullScreen = false;
 
@@ -54,6 +56,13 @@ class _VideoDetailState extends State<VideoDetail> {
     checkNet(context).then((value) {
       controller.videoListAPI(context, body, 'detail');
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.videoController.clear();
   }
 
   @override
@@ -180,6 +189,7 @@ class _VideoDetailState extends State<VideoDetail> {
               ],
             ),
           ),
+          controller.videoController.value.isEmpty ? Container() :
           Expanded(
             child: SingleChildScrollView(
               controller: controller.videoScrollController,
@@ -219,30 +229,33 @@ class _VideoDetailState extends State<VideoDetail> {
                                         height: 220,
                                         width:
                                             MediaQuery.of(context).size.width,
-                                        child: YoutubePlayerBuilder(
-                                          onEnterFullScreen: () {
-                                              this.fullScreen = false;
-                                            },
-                                            player: YoutubePlayer(
-                                              showVideoProgressIndicator: false,
-                                              bottomActions: [
-                                                const SizedBox(width: 14.0),
-                                                // CurrentPosition(),
-                                                // const SizedBox(width: 8.0),
-                                                // ProgressBar(),
-                                                // RemainingDuration(),
-                                                // const PlaybackSpeedButton(),
-                                              ],
-                                              controller: controller
-                                                  .videoController[index],
-                                            ),
-                                            builder: (context, player) {
-                                              return Column(
-                                                children: [
-                                                  player,
+                                        child: FittedBox(
+                                          fit: BoxFit.fill,
+                                          child: YoutubePlayerBuilder(
+                                            onEnterFullScreen: () {
+                                                fullScreen = false;
+                                              },
+                                              player: YoutubePlayer(
+                                                showVideoProgressIndicator: false,
+                                                bottomActions: const [
+                                                  SizedBox(width: 14.0),
+                                                  // CurrentPosition(),
+                                                  // const SizedBox(width: 8.0),
+                                                  // ProgressBar(),
+                                                  // RemainingDuration(),
+                                                  // const PlaybackSpeedButton(),
                                                 ],
-                                              );
-                                            })
+                                                controller: controller
+                                                    .videoController.value[index],
+                                              ),
+                                              builder: (context, player) {
+                                                return Column(
+                                                  children: [
+                                                    player,
+                                                  ],
+                                                );
+                                              }),
+                                        )
 
                                         // ? Center(
                                         //     child: SizedBox(
@@ -269,10 +282,9 @@ class _VideoDetailState extends State<VideoDetail> {
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  controller.videoList[index].like_count == null
-                                  ? Positioned(
-                                    bottom: 15.h,
-                                    left: 15.w,
+                                  Positioned(
+                                    bottom: 20.h,
+                                    left: 10.w,
                                     child: Container(
                                       height: 37.h,
                                       width: 110.w,
@@ -288,18 +300,44 @@ class _VideoDetailState extends State<VideoDetail> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            GestureDetector(
-                                                child: SvgPicture.asset(
+                                            controller.videoList[index].is_like == 1 ?
+                                            InkWell(
+                                              onTap: (){
+                                                setState(() {
+                                                  controller.videoList[index].is_like = 0;
+                                                  controller.videoList[index].like_count = controller.videoList[index].like_count! - 1;
+                                                  checkNet(context).then((value) {
+                                                    videoMenuController.videoUnLike(context: context, videoId: controller.videoList[index].id, isFrom: 'videoDetail');
+                                                  });
+                                                });
+                                              },
+                                              child: SvgPicture.asset(
                                               icon_heart,
                                               width: 17.w,
                                               height: 17.h,
-                                              color: Colors.red,
+                                              color:Colors.red,
+                                            )) :
+                                            InkWell(
+                                              onTap: (){
+                                                setState(() {
+                                                  controller.videoList[index].is_like = 1;
+                                                  controller.videoList[index].like_count = controller.videoList[index].like_count! + 1;
+                                                  checkNet(context).then((value) {
+                                                    videoMenuController.videoLike(context: context, videoId: controller.videoList[index].id, isFrom: 'videoDetail');
+                                                  });
+                                                });
+                                              },
+                                              child: Image.asset(
+                                              heart,
+                                              width: 17.w,
+                                              height: 17.h,
+                                              color: Colors.white,
                                             )),
                                             SizedBox(
                                               width: 5.w,
                                             ),
                                             setHelceticaBold(
-                                                "${controller.videoList[index].like_count} liked",
+                                                "${controller.videoList[index].like_count == null ? 0 : controller.videoList[index].like_count} liked",
                                                 14.sp,
                                                 white_ffffff,
                                                 FontWeight.w500,
@@ -308,7 +346,7 @@ class _VideoDetailState extends State<VideoDetail> {
                                         ),
                                       ),
                                     ),
-                                  ) : Container()
+                                  )
                                   //       Positioned(
                                   //         bottom: 10.h,
                                   //         right: 15.w,

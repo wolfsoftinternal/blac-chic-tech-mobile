@@ -51,6 +51,7 @@ class VideoList {
         this.speakerList,
         this.isFocus,
         this.like_count,
+        this.is_like,
     });
 
     int? id;
@@ -70,6 +71,7 @@ class VideoList {
     List<String>? speakerList;
     int? isFocus;
     int? like_count;
+    int? is_like;
 
     factory VideoList.fromJson(Map<String, dynamic> json) => VideoList(
         id: json["id"],
@@ -89,6 +91,7 @@ class VideoList {
         speakerList: List<String>.from(json["speaker_list"].map((x) => x)),
         isFocus: json["is_focus"],
         like_count: json["like_count"],
+        is_like: json["is_like"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -109,5 +112,6 @@ class VideoList {
         "speaker_list": List<dynamic>.from(speakerList!.map((x) => x)),
         "is_focus": isFocus,
         "like_count": like_count,
+        "is_like": is_like,
     };
 }

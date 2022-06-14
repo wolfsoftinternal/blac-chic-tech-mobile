@@ -75,7 +75,7 @@ class AdmireProfileController extends GetxController {
   Rx<RegisterUserModel> registerList = RegisterUserModel().obs;
   RxBool isLimitReached = false.obs;
   RxList<UserList> userList = <UserList>[].obs;
-  List<YoutubePlayerController> videoController = [];
+  RxList<YoutubePlayerController> videoController = <YoutubePlayerController>[].obs;
 
 
   initScrolling(BuildContext context, userId, [postId]) {
@@ -438,11 +438,16 @@ class AdmireProfileController extends GetxController {
             List videoId = []; 
             YoutubePlayerController controller;
             for(var item in videoList){
-              String src = item.embededCode.toString().split('=')[3];
-              src = src.replaceAll(' title', '');
-              src = src.replaceAll('"', '');
-              videoId.add(YoutubePlayer.convertUrlToId(src));
-              print(videoId);              
+              if(item.embededCode.toString().contains("iframe")){
+                String src = item.embededCode.toString().split('=')[3];
+                src = src.replaceAll(' title', '');
+                src = src.replaceAll('"', '');
+                videoId.add(YoutubePlayer.convertUrlToId(src));
+              }else{
+                String src = item.embededCode.toString();
+                src = src.replaceAll('"', '');
+                videoId.add(YoutubePlayer.convertUrlToId(src));
+              }          
             }
 
             for(int i = 0; i < videoList.length; i++){

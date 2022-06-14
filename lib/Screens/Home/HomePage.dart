@@ -67,7 +67,6 @@ class _HomePageState extends State<HomePage> {
               height: 58,
               width: 58,
             )),
-            SizedBox(height: 20,),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(

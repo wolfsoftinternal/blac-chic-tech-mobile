@@ -15,6 +15,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:http/http.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoTab extends StatefulWidget {
   final id;
@@ -67,48 +68,64 @@ class _VideoTabState extends State<VideoTab> {
                             return GridTile(
                               child: Stack(
                                 children: [
-                                  SizedBox(
+                                  Container(
                                     height: 220,
                                     width: MediaQuery.of(context).size.width,
                                     child: 
-                                    controller
-                                                .videoList[index].embededCode ==
-                                            null
-                                        ? Center(
-                                            child: SizedBox(
-                                            height: 20,
-                                            width: 20,
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: 2,
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      Color(0xff04080f)),
-                                            ),
-                                          ))
-                                        : FittedBox(
-                                          fit: BoxFit.fill,
-                                          child: Html(
-                                              data: controller.videoList[index].embededCode
-                                          ),
-                                        ),
+                                    FittedBox(
+                                      fit: BoxFit.fill,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                                    Radius.circular(15.r)),
+                                        child: YoutubePlayerBuilder(
+                                                player: YoutubePlayer(
+                                                  controller: controller
+                                                      .videoController.value[index],
+                                                ),
+                                                builder: (context, player) {
+                                                  return Column(
+                                                    children: [
+                                                      player,
+                                                    ],
+                                                  );
+                                                }),
+                                      ),
+                                    )
+                                  //   controller
+                                  //               .videoList[index].embededCode ==
+                                  //           null
+                                  //       ? Center(
+                                  //           child: SizedBox(
+                                  //           height: 20,
+                                  //           width: 20,
+                                  //           child: CircularProgressIndicator(
+                                  //             strokeWidth: 2,
+                                  //             valueColor:
+                                  //                 AlwaysStoppedAnimation<Color>(
+                                  //                     Color(0xff04080f)),
+                                  //           ),
+                                  //         ))
+                                  //       : FittedBox(
+                                  //         fit: BoxFit.fill,
+                                  //         child: Html(
+                                  //             data: controller.videoList[index].embededCode
+                                  //         ),
+                                  //       ),
                                   ),
                                   InkWell(
                                     onTap: () {
                                       Get.to(VideoDetail(id: controller.videoList[index].id, userId: widget.id,));
                                     },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 3.0, bottom: 3, left: 3.0, right: 3.0),
-                                      child: Container(
-                                        height: 220,
-                                        decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                  begin: Alignment.topCenter,
-                                                  end: Alignment.bottomCenter,
-                                                  colors: [
-                                                    Color(0x00121212),
-                                                    Color(0xff121212)
-                                                  ])),
-                                      ),
+                                    child: Container(
+                                      height: 220,
+                                      decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                                begin: Alignment.topCenter,
+                                                end: Alignment.bottomCenter,
+                                                colors: [
+                                                  Color(0x00121212),
+                                                  Color(0xff121212)
+                                                ])),
                                     ),
                                   ),
                                   // Align(
@@ -158,9 +175,8 @@ class _VideoTabState extends State<VideoTab> {
 
                           staggeredTileBuilder: (int index) =>
                               StaggeredTile.count(2, index.isEven ? 2.6 : 2),
-                          mainAxisSpacing: 8.0,
-
-                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 23.h,
+                          crossAxisSpacing: 23.w,
                         )),
                   ],
                 ),

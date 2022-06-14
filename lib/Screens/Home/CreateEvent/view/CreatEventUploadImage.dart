@@ -264,7 +264,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                   children: [
                                                     CircularProfileAvatar(
                                                       '',
-                                                      radius: 32,
+                                                      radius: 8.5,
                                                       child: controller
                                                                   .selectedSpeaker[
                                                                       index]
@@ -468,7 +468,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                         children: [
                                           CircularProfileAvatar(
                                             '',
-                                            radius: 32,
+                                            radius: 8.5,
                                             child: controller.selectedHost[0]
                                                         .image ==
                                                     null
@@ -552,21 +552,34 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                         snackBar(context, 'Please select host');
                       }
 
-                      for (var item in controller.selectedSpeaker) {
-                        if (item.firstName == null &&
-                            item.lastName == null &&
-                            item.image == null) {
-                          controller.speakerNameList.add(item.userName);
-                          controller.selectedSpeaker.remove(item);
+                      List removeItem = [];
+                      for (int i = 0; i < controller.selectedSpeaker.length; i++) {
+                        if (controller.selectedSpeaker[i].firstName == null &&
+                            controller.selectedSpeaker[i].lastName == null &&
+                            controller.selectedSpeaker[i].image == null) {
+                          controller.speakerNameList.add(controller.selectedSpeaker[i].userName);
+                          removeItem.add(controller.selectedSpeaker[i]);
                         }
                       }
 
-                      List speakerList = [];
-                      speakerList.clear();
-                      for (var item in controller.speakerNameList) {
-                        speakerList.add(item.id);
+                      if(removeItem.isNotEmpty){
+                        for(var item in removeItem){
+                        controller.selectedSpeaker.remove(item);
                       }
-                      controller.speakerName.value = speakerList.join(',');
+                      }
+
+                      // List speakerList = [];
+                      // speakerList.clear();
+                      // for (var item in controller.speakerNameList) {
+                      //   speakerList.add(item);
+                      // }
+                      if(controller.speakerNameList.isNotEmpty){
+                        if(controller.speakerNameList.length > 1){
+                          controller.speakerName.value = controller.speakerNameList.join(',');
+                        }else{
+                          controller.speakerName.value = controller.speakerNameList[0];
+                        }
+                      }                      
 
                       List list = [];
                       list.clear();
@@ -580,6 +593,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
 
                       print(controller.selectedHost[0].toString());
                       print(controller.selectedSpeaker.join(',').toString());
+                      print(controller.speakerName);
 
                       Get.to(CreateEventDetail());
                     }),
