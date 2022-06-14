@@ -1541,8 +1541,7 @@ class _EventDetailState extends State<EventDetail> {
                                                 shrinkWrap: true,
                                                 padding: EdgeInsets.zero,
                                                 scrollDirection: Axis.horizontal,
-                                                itemCount: controller.eventDetails
-                                                    .value.speakers!.length,
+                                                itemCount: controller.eventDetails.value.speakers!.length,
                                                 itemBuilder: (context, index) {
                                                   return Row(
                                                     mainAxisAlignment:

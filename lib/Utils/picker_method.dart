@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
@@ -188,8 +191,6 @@ class PickMethod {
       name: '',
       description: '',
       method: (BuildContext context, List<AssetEntity> assets) async {
-        print("click thay che");
-
         var picker = await AssetPicker.pickAssets(
           context,
           pickerConfig: AssetPickerConfig(
@@ -204,12 +205,9 @@ class PickMethod {
           print("image full path " + assets[0].relativePath! + "/"+assets[0].title!);
           image = assets;
           PostController controller = Get.put(PostController());
-          controller.assetImages.value = assets;
+          controller.assetImages.value = picker;
           controller.assetImages.refresh();
-
         }
-
-
 
         // var imageMy = AssetEntityImageProvider(
         //   assets.elementAt(0),

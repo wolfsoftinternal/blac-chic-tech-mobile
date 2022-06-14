@@ -4,6 +4,7 @@ import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
+import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -23,6 +24,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../../Widget/ReportBottomSheet.dart';
 
@@ -37,7 +39,9 @@ class VideoDetail extends StatefulWidget {
 
 class _VideoDetailState extends State<VideoDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
+  VideoMenuController videoMenuController = Get.put(VideoMenuController());
   String username = '';
+  bool fullScreen = false;
 
   @override
   void initState() {
@@ -52,6 +56,13 @@ class _VideoDetailState extends State<VideoDetail> {
     checkNet(context).then((value) {
       controller.videoListAPI(context, body, 'detail');
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.videoController.clear();
   }
 
   @override
@@ -79,8 +90,8 @@ class _VideoDetailState extends State<VideoDetail> {
                       Get.back();
                     },
                     child: CircularProfileAvatar(
-                                '',
-                                radius: 24,
+                      '',
+                      radius: 24,
                       child: controller.details.value.image == null
                           ? SvgPicture.asset(
                               placeholder,
@@ -178,6 +189,7 @@ class _VideoDetailState extends State<VideoDetail> {
               ],
             ),
           ),
+          controller.videoController.value.isEmpty ? Container() :
           Expanded(
             child: SingleChildScrollView(
               controller: controller.videoScrollController,
@@ -211,112 +223,166 @@ class _VideoDetailState extends State<VideoDetail> {
                               Stack(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 15.0, bottom: 12.0),
+                                    padding: const EdgeInsets.only(
+                                        top: 15.0, bottom: 12.0),
                                     child: SizedBox(
-                                      height: 220,
-                                      width: MediaQuery.of(context).size.width,
-                                      child:
-                                          controller.videoList[index].embededCode ==
-                                                  null
-                                              ? Center(
-                                                  child: SizedBox(
-                                                  height: 20,
-                                                  width: 20,
-                                                  child: CircularProgressIndicator(
-                                                    strokeWidth: 2,
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation<Color>(
-                                                            Color(0xff04080f)),
-                                                  ),
-                                                ))
-                                              : FittedBox(
-                                                  fit: BoxFit.cover,
-                                                  child: Html(
-                                                      data: controller
-                                                          .videoList[index]
-                                                          .embededCode
-                                                          .toString()),
-                                                ),
-                                    ),
+                                        height: 220,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: FittedBox(
+                                          fit: BoxFit.fill,
+                                          child: YoutubePlayerBuilder(
+                                            onEnterFullScreen: () {
+                                                fullScreen = false;
+                                              },
+                                              player: YoutubePlayer(
+                                                showVideoProgressIndicator: false,
+                                                bottomActions: const [
+                                                  SizedBox(width: 14.0),
+                                                  // CurrentPosition(),
+                                                  // const SizedBox(width: 8.0),
+                                                  // ProgressBar(),
+                                                  // RemainingDuration(),
+                                                  // const PlaybackSpeedButton(),
+                                                ],
+                                                controller: controller
+                                                    .videoController.value[index],
+                                              ),
+                                              builder: (context, player) {
+                                                return Column(
+                                                  children: [
+                                                    player,
+                                                  ],
+                                                );
+                                              }),
+                                        )
+
+                                        // ? Center(
+                                        //     child: SizedBox(
+                                        //     height: 20,
+                                        //     width: 20,
+                                        //     child: CircularProgressIndicator(
+                                        //       strokeWidth: 2,
+                                        //       valueColor:
+                                        //           AlwaysStoppedAnimation<Color>(
+                                        //               Color(0xff04080f)),
+                                        //     ),
+                                        //   ))
+                                        // : FittedBox(
+                                        //     fit: BoxFit.cover,
+                                        //     child: Html(
+
+                                        //         data: controller
+                                        //             .videoList[index]
+                                        //             .embededCode
+                                        //             .toString()),
+                                        //   ),
+                                        ),
                                   ),
                                   const SizedBox(
-                                  height: 15,
-                                ),
-                          //       Positioned(
-                          //         bottom: 15.h,
-                          //         left: 15.w,
-                          //         child: Container(
-                          //           height: 37.h,
-                          //           width: 110.w,
-                          //           decoration: BoxDecoration(
-                          //             gradient: LinearGradient(colors: [
-                          //               Color(0xff1c2535),
-                          //               Color(0xff04080f)
-                          //             ]),
-                          //             borderRadius: BorderRadius.all(
-                          //                 Radius.circular(40.r)),
-                          //           ),
-                          //           child: Center(
-                          //             child: Row(
-                          //               mainAxisSize: MainAxisSize.min,
-                          //               children: [
-                          //                 GestureDetector(
-                          //                     child: SvgPicture.asset(
-                          //                   icon_heart,
-                          //                   width: 17.w,
-                          //                   height: 17.h,
-                          //                   color: Colors.red,
-                          //                 )),
-                          //                 SizedBox(
-                          //                   width: 5.w,
-                          //                 ),
-                          //                 setHelceticaBold(
-                          //                     "1,2k liked",
-                          //                     14.sp,
-                          //                     white_ffffff,
-                          //                     FontWeight.w500,
-                          //                     FontStyle.normal)
-                          //               ],
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //       Positioned(
-                          //         bottom: 10.h,
-                          //         right: 15.w,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.all(8.0),
-                          //     child: Container(
-                          //       color: transparent,
-                          //       height: 32,
-                          //       width: 47,
-                          //       child: Center(
-                          //         child: setHelceticaBold(
-                          //            "00:00",
-                          //            12.0,
-                          //            white_ffffff,
-                          //            FontWeight.w500,
-                          //            FontStyle.normal
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+                                    height: 15,
+                                  ),
+                                  Positioned(
+                                    bottom: 20.h,
+                                    left: 10.w,
+                                    child: Container(
+                                      height: 37.h,
+                                      width: 110.w,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(colors: [
+                                          Color(0xff1c2535),
+                                          Color(0xff04080f)
+                                        ]),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(40.r)),
+                                      ),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            controller.videoList[index].is_like == 1 ?
+                                            InkWell(
+                                              onTap: (){
+                                                setState(() {
+                                                  controller.videoList[index].is_like = 0;
+                                                  controller.videoList[index].like_count = controller.videoList[index].like_count! - 1;
+                                                  checkNet(context).then((value) {
+                                                    videoMenuController.videoUnLike(context: context, videoId: controller.videoList[index].id, isFrom: 'videoDetail');
+                                                  });
+                                                });
+                                              },
+                                              child: SvgPicture.asset(
+                                              icon_heart,
+                                              width: 17.w,
+                                              height: 17.h,
+                                              color:Colors.red,
+                                            )) :
+                                            InkWell(
+                                              onTap: (){
+                                                setState(() {
+                                                  controller.videoList[index].is_like = 1;
+                                                  controller.videoList[index].like_count = controller.videoList[index].like_count! + 1;
+                                                  checkNet(context).then((value) {
+                                                    videoMenuController.videoLike(context: context, videoId: controller.videoList[index].id, isFrom: 'videoDetail');
+                                                  });
+                                                });
+                                              },
+                                              child: Image.asset(
+                                              heart,
+                                              width: 17.w,
+                                              height: 17.h,
+                                              color: Colors.white,
+                                            )),
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                            setHelceticaBold(
+                                                "${controller.videoList[index].like_count == null ? 0 : controller.videoList[index].like_count} liked",
+                                                14.sp,
+                                                white_ffffff,
+                                                FontWeight.w500,
+                                                FontStyle.normal)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  //       Positioned(
+                                  //         bottom: 10.h,
+                                  //         right: 15.w,
+                                  //   child: Padding(
+                                  //     padding: const EdgeInsets.all(8.0),
+                                  //     child: Container(
+                                  //       color: transparent,
+                                  //       height: 32,
+                                  //       width: 47,
+                                  //       child: Center(
+                                  //         child: setHelceticaBold(
+                                  //            "00:00",
+                                  //            12.0,
+                                  //            white_ffffff,
+                                  //            FontWeight.w500,
+                                  //            FontStyle.normal
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                               SizedBox(
                                 height: 15,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                                padding: const EdgeInsets.only(
+                                    left: 5.0, right: 5.0),
                                 child: Align(
                                   alignment: Alignment.topLeft,
                                   child: Text.rich(
                                     TextSpan(
                                       children: [
                                         TextSpan(
-                                          text:
-                                              "@$username ",
+                                          text: "@$username ",
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontFamily: helvetica_neu_bold,
@@ -325,7 +391,8 @@ class _VideoDetailState extends State<VideoDetail> {
                                           ),
                                         ),
                                         TextSpan(
-                                            text: controller.videoList[index].description ??
+                                            text: controller.videoList[index]
+                                                    .description ??
                                                 "",
                                             style: TextStyle(
                                                 fontSize: 14,
@@ -339,18 +406,28 @@ class _VideoDetailState extends State<VideoDetail> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0),
+                                padding: const EdgeInsets.only(
+                                    left: 5.0, right: 5.0, top: 5.0),
                                 child: Row(
                                   children: [
-                                    SvgPicture.asset(calendar_icon, color: grey_aaaaaa,),
-                                    SizedBox(width: 8,),
-                                    Text(Jiffy(DateFormat('yyyy-MM-dd').format(controller.videoList[index].createdAt!)).fromNow(),
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily:
-                                                    helveticaNeueNeue_medium,
-                                                fontWeight: FontWeight.w400,
-                                                color: grey_aaaaaa)),
+                                    SvgPicture.asset(
+                                      calendar_icon,
+                                      color: grey_aaaaaa,
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                        Jiffy(DateFormat('yyyy-MM-dd').format(
+                                                controller.videoList[index]
+                                                    .createdAt!))
+                                            .fromNow(),
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
+                                            fontWeight: FontWeight.w400,
+                                            color: grey_aaaaaa)),
                                   ],
                                 ),
                               )

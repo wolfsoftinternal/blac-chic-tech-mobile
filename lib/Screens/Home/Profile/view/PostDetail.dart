@@ -236,45 +236,74 @@ class _PostDetailState extends State<PostDetail> {
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                // Positioned(
-                                //   bottom: 15.h,
-                                //   left: 15.w,
-                                //   child: Container(
-                                //     height: 37.h,
-                                //     width: 110.w,
-                                //     decoration: BoxDecoration(
-                                //       gradient: LinearGradient(colors: [
-                                //         Color(0xff1c2535),
-                                //         Color(0xff04080f)
-                                //       ]),
-                                //       borderRadius: BorderRadius.all(
-                                //           Radius.circular(40.r)),
-                                //     ),
-                                //     child: Center(
-                                //       child: Row(
-                                //         mainAxisSize: MainAxisSize.min,
-                                //         children: [
-                                //           GestureDetector(
-                                //               child: SvgPicture.asset(
-                                //             icon_heart,
-                                //             width: 17.w,
-                                //             height: 17.h,
-                                //             color: Colors.red,
-                                //           )),
-                                //           SizedBox(
-                                //             width: 5.w,
-                                //           ),
-                                //           setHelceticaBold(
-                                //               "1,2k liked",
-                                //               14.sp,
-                                //               white_ffffff,
-                                //               FontWeight.w500,
-                                //               FontStyle.normal)
-                                //         ],
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
+                                Positioned(
+                                  bottom: 15.h,
+                                  left: 15.w,
+                                  child: Container(
+                                    height: 37.h,
+                                    // width: 110.w,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(colors: [
+                                        Color(0xff1c2535),
+                                        Color(0xff04080f)
+                                      ]),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(40.r)),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            controller.postList[index].isLike == 1 ?
+                                            InkWell(
+                                              onTap: (){
+                                                setState(() {
+                                                  controller.postList[index].isLike = 0;
+                                                  controller.postList[index].totalLikes = controller.postList[index].totalLikes! - 1;
+                                                  checkNet(context).then((value) {
+                                                    controller.postDisLikeApi(context, controller.postList[index].id);
+                                                  });
+                                                });
+                                              },
+                                              child: SvgPicture.asset(
+                                              icon_heart,
+                                              width: 17.w,
+                                              height: 17.h,
+                                              color:Colors.red,
+                                            )) :
+                                            InkWell(
+                                              onTap: (){
+                                                setState(() {
+                                                  controller.postList[index].isLike = 1;
+                                                  controller.postList[index].totalLikes = controller.postList[index].totalLikes! + 1;
+                                                  checkNet(context).then((value) {
+                                                    controller.postLikeApi(context, controller.postList[index].id);
+                                                  });
+                                                });
+                                              },
+                                              child: Image.asset(
+                                              heart,
+                                              width: 17.w,
+                                              height: 17.h,
+                                              color: Colors.white,
+                                            )),
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                            setHelceticaBold(
+                                                "${controller.postList[index].totalLikes} liked",
+                                                14.sp,
+                                                white_ffffff,
+                                                FontWeight.w500,
+                                                FontStyle.normal)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                             SizedBox(

@@ -452,8 +452,8 @@ class _AboutMeState extends State<AboutMe> {
                                                 child: Row(
                                                   children: [
                                                     CircularProfileAvatar(
-                                '',
-                                radius: 20.5,
+                                                      '',
+                                                      radius: 20.5,
                                                       child: pastJobImage[index]
                                                               .isEmpty
                                                           ? SvgPicture.asset(
