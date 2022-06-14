@@ -20,6 +20,7 @@ import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../../Model/BaseModel.dart';
 import '../../../../UIScreen/EventTicket.dart';
@@ -41,8 +42,6 @@ class AdmireProfileController extends GetxController {
   RxList<VideoList> videoDetailList = <VideoList>[].obs;
   RxList<EventList> eventList = <EventList>[].obs;
   RxList<EventList> eventDetailList = <EventList>[].obs;
-  List<VideoPlayerController> videoController = [];
-  List<VideoPlayerController> videoControllerList = [];
   Rx<EventList> eventDetails = EventList().obs;
   late List initializeVideoPlayerFuture = [];
   late List initializeVideoPlayerFutureList = [];
@@ -76,6 +75,8 @@ class AdmireProfileController extends GetxController {
   Rx<RegisterUserModel> registerList = RegisterUserModel().obs;
   RxBool isLimitReached = false.obs;
   RxList<UserList> userList = <UserList>[].obs;
+  List<YoutubePlayerController> videoController = [];
+
 
   initScrolling(BuildContext context, userId, [postId]) {
     postScrollController.addListener(() async {
@@ -432,10 +433,34 @@ class AdmireProfileController extends GetxController {
             videoListAPI(context, body);
           } else if (model.statusCode == 200) {
             VideoListModel detail = VideoListModel.fromJson(userModel);
+            videoList.addAll(detail.data!);
 
-            // if (isFrom == null) {
-              videoList.addAll(detail.data!);              
-            // }
+            List videoId = []; 
+            YoutubePlayerController controller;
+            for(var item in videoList){
+              String src = item.embededCode.toString().split('=')[3];
+              src = src.replaceAll(' title', '');
+              src = src.replaceAll('"', '');
+              videoId.add(YoutubePlayer.convertUrlToId(src));
+              print(videoId);              
+            }
+
+            for(int i = 0; i < videoList.length; i++){
+                controller = YoutubePlayerController(
+                  initialVideoId: videoId[i],
+                  flags: const YoutubePlayerFlags(
+                    mute: false,
+                    autoPlay: false,
+                    disableDragSeek: false,
+                    loop: false,
+                    isLive: false,
+                    forceHD: false,
+                    enableCaption: false,
+                    hideControls: false,
+                  ),
+                );
+                videoController.add(controller);
+              }
           }
         });
       } else {
@@ -980,6 +1005,72 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             RegisterUserModel detail = RegisterUserModel.fromJson(userModel);
             registerList.value = detail;
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  postLikeApi(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlPostLike;
+    final apiReq = Request();
+    dynamic body = {
+      'post_id': id.toString(),
+    };
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            postLikeApi(context, id);
+          } else if (model.statusCode == 200) {
+            print(model.message);
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  postDisLikeApi(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlPostDisLike;
+    final apiReq = Request();
+    dynamic body = {
+      'post_id': id.toString(),
+    };
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            postDisLikeApi(context, id);
+          } else if (model.statusCode == 200) {
+            print(model.message);
           }
         });
       } else {

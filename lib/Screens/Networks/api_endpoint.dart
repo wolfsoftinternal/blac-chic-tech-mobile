@@ -31,6 +31,8 @@ const urlOtherProfile = '/mobile/other-user-profile';
 //Post Tab
 const urlPostList = '/mobile/post-list';
 const urlCreatePost = '/mobile/post-create';
+const urlPostLike = '/mobile/post-like';
+const urlPostDisLike = '/mobile/post-dislike';
 
 // Create Order
 const urlCreateOrder = "/mobile/transaction/order/create";

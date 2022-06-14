@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> {
               height: 58,
               width: 58,
             )),
+            SizedBox(height: 20,),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
@@ -114,7 +115,8 @@ class _HomePageState extends State<HomePage> {
                                     color: index % 2 != 0
                                         ? white_ffffff
                                         : black_121212,
-                                    fontSize: 22,
+                                    fontSize: 28,
+                                    letterSpacing: -1.12,
                                     fontFamily: helvetica_neu_bold,
                                     fontWeight: FontWeight.w500,
                                   ),

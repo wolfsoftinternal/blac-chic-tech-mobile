@@ -598,8 +598,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                     transactionController
                                                         .payoutList[i]
                                                         .createdAt
-                                                        .toString() ??
-                                                        "",
+                                                        .toString(),
                                                     style: TextStyle(
                                                         fontFamily:
                                                         roboto_regular,

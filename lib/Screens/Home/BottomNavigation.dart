@@ -3,7 +3,12 @@ import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
 import 'package:blackchecktech/Screens/Home/chat_module/friend_list.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../Utils/preference_utils.dart';
@@ -20,11 +25,19 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int _currentIndex = 0;
+  SignupModel? myModel;
 
   @override
   void initState() {
     super.initState();
     _currentIndex = widget.selectedIndex!;
+    init();
+  }
+
+  init() async {
+    var preferences = MySharedPref();
+    myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
+    setState(() {});
   }
 
   @override
@@ -70,33 +83,60 @@ class _BottomNavigationState extends State<BottomNavigation> {
                       currentIndex: _currentIndex,
                       items: [
                         BottomNavigationBarItem(
-                            activeIcon: const Icon(Icons.home_outlined, color: Colors.white),
-                            icon : Icon(
-                                    Icons.home_outlined,
-                                    color: Colors.grey[600],
-                                  ),
+                            activeIcon: SvgPicture.asset(home_icon, color: white,), 
+                            icon : SvgPicture.asset(home_icon, color: Colors.grey[600],),
                             label: ''),
                         BottomNavigationBarItem(
-                            activeIcon: const Icon(
-                                    Icons.email_outlined,
-                                    color: Colors.white,
-                                  ),
-                            icon   : Icon(
-                                    Icons.email_outlined,
-                                    color: Colors.grey[600],
-                                  ),
+                            activeIcon: SvgPicture.asset(feed_icon, color: white,), 
+                            icon : SvgPicture.asset(feed_icon, color: Colors.grey[600],),
                             label: ''),
                         BottomNavigationBarItem(
-                            icon: _currentIndex == 2
-                                ? const Icon(Icons.dashboard, color: Colors.white)
-                                : Icon(Icons.dashboard, color: Colors.grey[600]),
+                            activeIcon: SvgPicture.asset(chat_icon, color: white, height: 28, width: 28,), 
+                            icon : SvgPicture.asset(chat_icon, color: Colors.grey[600], height: 28, width: 28,),
                             label: ''),
                         BottomNavigationBarItem(
-                            activeIcon: Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                  ),
-                             icon   : Icon(Icons.person, color: Colors.grey[600]),
+                            icon: Container(
+                              height: 24.h,
+                              width: 23.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                                border: Border.all(color: gray_b3ffffff, width: 2),
+                              ),
+                              child: CircularProfileAvatar(
+                                '',
+                                radius: 40,
+                                borderColor: Colors.transparent,
+                                child: myModel!.data!.image == null
+                                    ? SvgPicture.asset(
+                                        placeholder,
+                                        height: 20.h,
+                                        width: 20.w,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : CachedNetworkImage(
+                                        imageUrl: myModel!.data!.image!,
+                                        height: 20.h,
+                                        width: 20.w,
+                                        fit: BoxFit.cover,
+                                        progressIndicatorBuilder: (context,
+                                                url, downloadProgress) =>
+                                            SvgPicture.asset(
+                                          placeholder,
+                                          height: 20.h,
+                                          width: 20.w,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        errorWidget:
+                                            (context, url, error) =>
+                                                SvgPicture.asset(
+                                          placeholder,
+                                          height: 20.h,
+                                          width: 20.w,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                              ),
+                            ),
                             label: ''),
                       ],
                     ),
@@ -115,9 +155,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
       if(index == 0){
         Get.to(HomePage());
       }else if(index == 1){
+        Get.to(HomePage());
+      }else if(index == 2){
         Get.to(FriendListScreen());
       }else if(index == 3){
-        widget.selectedIndex = 3;
+        _currentIndex = 0;
         Get.to(AdmireProfile());
       }
     });
