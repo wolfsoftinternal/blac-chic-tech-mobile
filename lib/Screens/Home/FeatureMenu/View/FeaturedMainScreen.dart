@@ -123,7 +123,7 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
                         color: white_ffffff,
                       ),
                       onTap: (){
-                        Get.to(() => SearchFeaturesScreen(featureList: featuredController.featuredList,));
+                        Get.to(() => SearchFeaturesScreen());
 
                       },
                     ),

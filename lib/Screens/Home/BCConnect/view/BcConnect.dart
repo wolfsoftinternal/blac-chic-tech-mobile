@@ -163,7 +163,7 @@ class _BcConnectState extends State<BcConnect> {
                                               .toString()))!
                                       .then((value) {
                                     checkNet(context).then((value) => {
-                                        videoController.PageNumber.value = 0,
+                                          videoController.PageNumber.value = 0,
                                           videoController.userListAPI(
                                               context, '')
                                         });

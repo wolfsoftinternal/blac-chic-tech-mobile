@@ -193,6 +193,9 @@ class BCConnectController extends GetxController {
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
           String strData = value;
+
+          print('create admire response ' + strData);
+
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
@@ -208,6 +211,8 @@ class BCConnectController extends GetxController {
             controller.userList.refresh();
 
             update();
+          } else if (model.statusCode == 101) {
+            snackBar(context, model.message!);
           }
         });
       } else {

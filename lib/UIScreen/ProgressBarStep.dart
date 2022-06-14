@@ -69,11 +69,10 @@ class _ProgressBarStepState extends State<ProgressBarStep> with SingleTickerProv
                   // child: Center(
                   //   child: Text("page 1"),
                   // ),
-                  child: PastFeature1(featuredData: FeaturedList(),
-                  allFeatures: [],),
+                  child: PastFeature1(selectedPositionFromPrevious: 0,),
                 ),
                 Container(
-                  child: PastFeature2(featuredData: FeaturedList(),allFeatures: [],),
+                  child: PastFeature2(selectedPositionFromPrevious: 0,),
                   // color: Colors.yellow,
                   // child: Center(
                   //   child: Text("page 2"),

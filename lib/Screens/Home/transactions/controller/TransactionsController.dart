@@ -22,14 +22,57 @@ class TransactionsController extends GetxController {
   RxList<PayoutList> payoutList = <PayoutList>[].obs;
   Rx<UserDetails> userDetails = UserDetails().obs;
 
-  allTransactionListApi() async {
+  Rx<TextEditingController> searchControllerForTransactions = TextEditingController().obs;
+  ScrollController scrollControllerForTransactions = ScrollController();
+  RxInt PageNumberOfTransactions = 0.obs;
+  RxBool isPaginationLoadingForTransactions = false.obs;
+
+
+  // ScrollController scrollControllerForPayouts = ScrollController();
+  // RxInt PageNumberForPayouts = 0.obs;
+  // RxBool isPaginationLoadingForPayouts = false.obs;
+
+  initScrolling(BuildContext context) {
+    scrollControllerForTransactions.addListener(() async {
+      if (scrollControllerForTransactions.position.maxScrollExtent ==
+          scrollControllerForTransactions.position.pixels) {
+        _scrollDown();
+        isPaginationLoadingForTransactions.value = true;
+        await allTransactionListApi(context, '');
+        isPaginationLoadingForTransactions.value = false;
+      }
+    });
+  }
+
+  void _scrollDown() {
+    scrollControllerForTransactions.jumpTo(scrollControllerForTransactions.position.maxScrollExtent);
+  }
+
+
+  allTransactionListApi(BuildContext context, String search) async {
+
+    dynamic body;
+
+    if(search.isEmpty){
+      PageNumberOfTransactions = PageNumberOfTransactions + 1;
+      body = {
+        'page': PageNumberOfTransactions.toString(),
+      };
+    }else{
+      PageNumberOfTransactions.value = 0;
+      body = {
+        'search' : search.toString(),
+        // 'page': PageNumber.toString(),
+      };
+    }
+
 
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     String url = urlBase + urlAllTransactions;
     final apiReq = Request();
 
-    await apiReq.postAPIWithBearer(url, null, token.toString()).then((value) async {
+    await apiReq.postAPIWithBearer(url, body, token.toString()).then((value) async {
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -45,7 +88,7 @@ class TransactionsController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            allTransactionListApi();
+            allTransactionListApi(context, search);
           }else if (model.statusCode == 200) {
             TransactionListModel detail = TransactionListModel.fromJson(userModel);
             transactionList.value = detail.data!;
