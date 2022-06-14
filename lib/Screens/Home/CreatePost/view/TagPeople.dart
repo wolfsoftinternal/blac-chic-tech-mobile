@@ -97,11 +97,11 @@ class _TagPeopleState extends State<TagPeople> {
                   children: [
                     controller.assetImages.length > 0
                         ? Image.file(
-                            File((controller
-                                        .assetImages.value[0].relativePath ??
-                                    "") +
-                                "/" +
-                                (controller.assetImages.value[0].title ?? "")),
+                            File(
+                              controller.assetImages[0].relativePath.toString().contains('/storage/emulated/0/')
+                              ? (controller.assetImages[0].relativePath ?? "") + "/" + (controller.assetImages[0].title ?? "")
+                              : '/storage/emulated/0/' + (controller.assetImages[0].relativePath ?? "") + "/" + (controller.assetImages[0].title ?? "")
+                            ),
                             width: double.infinity,
                             height: 375.h,
                             fit: BoxFit.cover,
@@ -248,8 +248,8 @@ class _TagPeopleState extends State<TagPeople> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       CircularProfileAvatar(
-                                '',
-                                radius: 22,
+                                        '',
+                                        radius: 22,
                                         child:
                                             videoController.userList[i].image ==
                                                     null

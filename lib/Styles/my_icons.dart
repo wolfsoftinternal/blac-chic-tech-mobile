@@ -27,7 +27,7 @@ const icon_plus_chat_white = 'assets/images/icon_plus_chat_white.svg';
 const placeholder = 'assets/images/placeholder.svg';
 const add_icon = 'assets/images/add.svg';
 const settings_icon = 'assets/images/settings.svg';
-const home_icon = 'assets/images/home.png';
+const home_icon = 'assets/images/home.svg';
 const feed_icon = 'assets/images/category.svg';
 const upload_video_icon = 'assets/images/upload_video_icon.svg';
 const light_search_icon = 'assets/images/icon_light_search.svg';
@@ -80,6 +80,7 @@ const icon_light_heart = 'assets/images/icon_light_heart.svg';
 const icon_share = 'assets/images/icon_share.svg';
 
 const icon_add_play_list = 'assets/images/icon_add_play_list.svg';
+const heart = 'assets/images/heart.png';
 const icon_heart = 'assets/images/icon_heart.svg';
 const icon_message = 'assets/images/icon_message.svg';
 const loader = 'assets/images/loader.gif';

@@ -500,12 +500,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 userId != controller.details.value.id
                     ? controller.otherAdmireList.length >= 1
                         ? const SizedBox(
-                            height: 24,
+                            height: 16,
                           )
                         : Container()
                     : controller.admireList.length >= 1
                         ? const SizedBox(
-                            height: 24,
+                            height: 16,
                           )
                         : Container(),
                 userId != controller.details.value.id
@@ -682,7 +682,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
 
   Obx SeeAllAdmiresWidget(userId) {
     return Obx(() => Padding(
-        padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+        padding:  EdgeInsets.only(left: 24.w, right: 24.w),
         child: Row(
           children: [
             setHelceticaBold(
@@ -704,13 +704,13 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
                   FontWeight.w500, FontStyle.normal, -0.24),
             ),
-            const SizedBox(
-              width: 5,
+             SizedBox(
+              width: 5.w,
             ),
-            const Icon(
+             Icon(
               Icons.arrow_forward,
               color: grey_aaaaaa,
-              size: 12,
+              size: 12.r,
             )
           ],
         )));

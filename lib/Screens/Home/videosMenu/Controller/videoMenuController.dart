@@ -709,7 +709,7 @@ class VideoMenuController extends GetxController {
     });
   }
 
-  videoLike({BuildContext? context, int? videoId}) async {
+  videoLike({BuildContext? context, int? videoId, isFrom}) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -722,11 +722,13 @@ class VideoMenuController extends GetxController {
 
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
-          print(value.toString());
-          DefaultModel defaultModel = defaultModelFromJson(value);
-          isHeart.value = true;
-          videoDetail.value.likeCount = videoDetail.value.likeCount! + 1;
-          snackBar(context!, defaultModel.message.toString());
+          if(isFrom != "videoDetail"){
+            print(value.toString());
+            DefaultModel defaultModel = defaultModelFromJson(value);
+            isHeart.value = true;
+            videoDetail.value.likeCount = videoDetail.value.likeCount! + 1;
+            snackBar(context!, defaultModel.message.toString());
+          }
         });
       } else {
         print(res.reasonPhrase);
@@ -734,7 +736,7 @@ class VideoMenuController extends GetxController {
     });
   }
 
-  videoUnLike({BuildContext? context, int? videoId}) async {
+  videoUnLike({BuildContext? context, int? videoId, isFrom}) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -747,12 +749,14 @@ class VideoMenuController extends GetxController {
 
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
-          print(value.toString());
-          videoDetail.value.likeCount = videoDetail.value.likeCount! - 1;
-          DefaultModel defaultModel = defaultModelFromJson(value);
-          isHeart.value = false;
-          print("Stutus :: " + defaultModel.message.toString());
-          snackBar(context!, defaultModel.message.toString());
+          if(isFrom != "videoDetail"){
+            print(value.toString());
+            videoDetail.value.likeCount = videoDetail.value.likeCount! - 1;
+            DefaultModel defaultModel = defaultModelFromJson(value);
+            isHeart.value = false;
+            print("Stutus :: " + defaultModel.message.toString());
+            snackBar(context!, defaultModel.message.toString());
+          }          
         });
       } else {
         print(res.reasonPhrase);

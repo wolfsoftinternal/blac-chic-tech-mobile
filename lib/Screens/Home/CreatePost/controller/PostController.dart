@@ -23,7 +23,7 @@ class PostController extends GetxController {
   RxString address = "".obs;
   Rx<TextEditingController> searchLocationController =
       TextEditingController().obs;
-  RxList<AssetEntity> assetImages = <AssetEntity>[].obs;
+  RxList assetImages = <AssetEntity>[].obs;
 
   createPostAPI(BuildContext context) async {
     var preferences = MySharedPref();
@@ -52,9 +52,17 @@ class PostController extends GetxController {
     if (assetImages.length > 0) {
       request.files.add(await http.MultipartFile.fromPath(
           'image',
-          (assetImages.value[0].relativePath ?? "") +
-              "/" +
-              (assetImages.value[0].title ?? "")));
+          assetImages[0]
+                  .relativePath
+                  .toString()
+                  .contains('/storage/emulated/0/')
+              ? (assetImages[0].relativePath ?? "") +
+                  "/" +
+                  (assetImages[0].title ?? "")
+              : '/storage/emulated/0/' +
+                  (assetImages[0].relativePath ?? "") +
+                  "/" +
+                  (assetImages[0].title ?? "")));
     }
 
     request.headers.addAll(headers);

@@ -297,6 +297,7 @@ class _EventListDetailState extends State<EventListDetail> {
                                           //     FontStyle.normal),
                                         )),
                                   ),
+                                  controller.eventList[index].hosts.toString().isEmpty || controller.eventList[index].hosts.toString() == '[]' ? Container() :
                                   Padding(
                                     padding:
                                         EdgeInsets.only(top: 8.h, right: 8.w),
@@ -319,10 +320,7 @@ class _EventListDetailState extends State<EventListDetail> {
                                                 '',
                                                 radius: 7.5,
                                                 borderColor: Colors.black,
-                                                child: controller
-                                                        .eventList[index].hosts
-                                                        .toString()
-                                                        .isEmpty
+                                                child: controller.eventList[index].hosts![0].image!.isEmpty
                                                     ? Icon(
                                                         Icons.person,
                                                         size: 15.r,

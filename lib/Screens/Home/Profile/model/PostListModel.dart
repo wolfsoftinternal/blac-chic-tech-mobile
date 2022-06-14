@@ -48,6 +48,8 @@ class PostList {
         this.deletedAt,
         this.taggedUsers,
         this.isFocus,
+        this.totalLikes,
+        this.isLike,
     });
 
     int? id;
@@ -63,6 +65,8 @@ class PostList {
     dynamic deletedAt;
     List<TaggedUser>? taggedUsers;
     int? isFocus;
+    int? totalLikes;
+    int? isLike;
 
     factory PostList.fromJson(Map<String, dynamic> json) => PostList(
         id: json["id"],
@@ -78,6 +82,8 @@ class PostList {
         deletedAt: json["deleted_at"],
         taggedUsers: List<TaggedUser>.from(json["tagged_users"].map((x) => TaggedUser.fromJson(x))),
         isFocus: json["is_focus"],
+        totalLikes: json["total_likes"],
+        isLike: json["is_like"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -94,6 +100,8 @@ class PostList {
         "deleted_at": deletedAt,
         "tagged_users": List<dynamic>.from(taggedUsers!.map((x) => x.toJson())),
         "is_focus": isFocus,
+        "total_likes": totalLikes,
+        "is_like": isLike,
     };
 }
 
