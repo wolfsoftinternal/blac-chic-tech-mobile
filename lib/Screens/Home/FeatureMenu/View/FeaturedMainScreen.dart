@@ -41,55 +41,52 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
         featuredController.featuredList.length > 0?Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Flexible(
-              flex: 1,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  CachedNetworkImage(
-                    imageUrl: featuredController.featuredList[0].image??"",
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
-                    alignment: Alignment.center,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                        SvgPicture.asset(
-                          placeholder,
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                    errorWidget: (context, url, error) =>
-                        SvgPicture.asset(
-                          placeholder,
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                  ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                CachedNetworkImage(
+                  imageUrl: featuredController.featuredList[0].image??"",
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
+                  alignment: Alignment.center,
+                  progressIndicatorBuilder:
+                      (context, url, downloadProgress) =>
+                      SvgPicture.asset(
+                        placeholder,
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                  errorWidget: (context, url, error) =>
+                      SvgPicture.asset(
+                        placeholder,
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                ),
 
 
-                  // Image.asset(
-                  //   feature_img_1,
-                  //   fit: BoxFit.cover,
-                  //   width: double.infinity,
-                  //   height: double.infinity,
-                  //   alignment: Alignment.center,
-                  // ),
-                  // OSA UX OF LIVING
-                   Center(
-                    child: Text(featuredController.featuredList[0].writer_name??"",
-                        style: TextStyle(
-                            color: Color(0xffffffff),
-                            fontWeight: FontWeight.w900,
-                            fontFamily: "NeueHelvetica",
-                            fontStyle: FontStyle.normal,
-                            fontSize: 40.0),
-                        textAlign: TextAlign.center),
-                  ),
-                ],
-              ),
+                // Image.asset(
+                //   feature_img_1,
+                //   fit: BoxFit.cover,
+                //   width: double.infinity,
+                //   height: double.infinity,
+                //   alignment: Alignment.center,
+                // ),
+                // OSA UX OF LIVING
+                 Center(
+                  child: Text(featuredController.featuredList[0].writer_name??"",
+                      style: TextStyle(
+                          color: Color(0xffffffff),
+                          fontWeight: FontWeight.w900,
+                          fontFamily: "NeueHelvetica",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 40.0),
+                      textAlign: TextAlign.center),
+                ),
+              ],
             ),
             Align(
               alignment: Alignment.topCenter,
@@ -98,11 +95,16 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset(
-                      icon_cancel,
-                      width: 30.w,
-                      height: 30.h,
-                      color: white_ffffff,
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: SvgPicture.asset(
+                        icon_cancel,
+                        width: 30.w,
+                        height: 30.h,
+                        color: white_ffffff,
+                      ),
                     ),
 
                     // Featured

@@ -28,9 +28,10 @@ class TransactionsController extends GetxController {
   RxBool isPaginationLoadingForTransactions = false.obs;
 
 
-  // ScrollController scrollControllerForPayouts = ScrollController();
-  // RxInt PageNumberForPayouts = 0.obs;
-  // RxBool isPaginationLoadingForPayouts = false.obs;
+  Rx<TextEditingController> searchControllerForPayouts = TextEditingController().obs;
+  ScrollController scrollControllerForPayouts = ScrollController();
+  RxInt PageNumberForPayouts = 0.obs;
+  RxBool isPaginationLoadingForPayouts = false.obs;
 
   initScrolling(BuildContext context) {
     scrollControllerForTransactions.addListener(() async {
@@ -38,7 +39,7 @@ class TransactionsController extends GetxController {
           scrollControllerForTransactions.position.pixels) {
         _scrollDown();
         isPaginationLoadingForTransactions.value = true;
-        await allTransactionListApi(context, '');
+        await allTransactionListApi(context);
         isPaginationLoadingForTransactions.value = false;
       }
     });
@@ -48,23 +49,42 @@ class TransactionsController extends GetxController {
     scrollControllerForTransactions.jumpTo(scrollControllerForTransactions.position.maxScrollExtent);
   }
 
+  stopScrollingForTransactions(BuildContext context){
+    scrollControllerForTransactions.dispose();
+  }
 
-  allTransactionListApi(BuildContext context, String search) async {
 
-    dynamic body;
 
-    if(search.isEmpty){
+  initScrollingForPayouts(BuildContext context) {
+    scrollControllerForPayouts.addListener(() async {
+      if (scrollControllerForPayouts.position.maxScrollExtent ==
+          scrollControllerForPayouts.position.pixels) {
+        _scrollDownForPayouts();
+        isPaginationLoadingForPayouts.value = true;
+        await allPayoutListApi(context);
+        isPaginationLoadingForPayouts.value = false;
+      }
+    });
+  }
+
+
+  stopScrollingForPayouts(BuildContext context){
+    scrollControllerForPayouts.dispose();
+  }
+
+
+  void _scrollDownForPayouts() {
+    scrollControllerForPayouts.jumpTo(scrollControllerForPayouts.position.maxScrollExtent);
+  }
+
+  allTransactionListApi(BuildContext context) async {
+
+      dynamic body;
       PageNumberOfTransactions = PageNumberOfTransactions + 1;
       body = {
+        'search' : searchControllerForTransactions.value.text.toString(),
         'page': PageNumberOfTransactions.toString(),
       };
-    }else{
-      PageNumberOfTransactions.value = 0;
-      body = {
-        'search' : search.toString(),
-        // 'page': PageNumber.toString(),
-      };
-    }
 
 
     var preferences = MySharedPref();
@@ -73,6 +93,11 @@ class TransactionsController extends GetxController {
     final apiReq = Request();
 
     await apiReq.postAPIWithBearer(url, body, token.toString()).then((value) async {
+
+      if(PageNumberOfTransactions == 1){
+        transactionList.clear();
+      }
+
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -88,31 +113,46 @@ class TransactionsController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            allTransactionListApi(context, search);
+            allTransactionListApi(context);
           }else if (model.statusCode == 200) {
-            TransactionListModel detail = TransactionListModel.fromJson(userModel);
-            transactionList.value = detail.data!;
+            TransactionListModel transactionListModel = TransactionListModel.fromJson(userModel);
+
+            transactionList.addAll(transactionListModel.data!);
+
           } else if(model.statusCode == 101){
-            transactionList.clear();
+
+
           }else {
             print(res.reasonPhrase);
           }
 
-          allPayoutListApi();
+         // allPayoutListApi();
 
         });
       }
     });
   }
 
-  allPayoutListApi() async {
+  allPayoutListApi(BuildContext context) async {
+
+    dynamic body;
+    PageNumberForPayouts = PageNumberForPayouts + 1;
+    body = {
+      'search' : searchControllerForPayouts.value.text.toString(),
+      'page': PageNumberForPayouts.toString(),
+    };
 
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     String url = urlBase + urlAllPayouts;
     final apiReq = Request();
 
-    await apiReq.postAPIWithBearer(url, null, token.toString()).then((value) async {
+    await apiReq.postAPIWithBearer(url, body, token.toString()).then((value) async {
+
+      if(PageNumberForPayouts == 1){
+        payoutList.clear();
+      }
+
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -128,12 +168,14 @@ class TransactionsController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            allPayoutListApi();
+            allPayoutListApi(context);
           }else if (model.statusCode == 200) {
-            PayoutListModel detail = PayoutListModel.fromJson(userModel);
-            payoutList.value = detail.data!;
+            PayoutListModel payoutListModel = PayoutListModel.fromJson(userModel);
+
+            payoutList.addAll(payoutListModel.data!);
+
           } else if(model.statusCode == 101){
-            payoutList.clear();
+          //  payoutList.clear();
           }else {
             print(res.reasonPhrase);
           }

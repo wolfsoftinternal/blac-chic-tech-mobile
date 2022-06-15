@@ -37,7 +37,7 @@ class _CreatePostState extends State<CreatePost> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    videoController.userListAPI(context, '');
+    videoController.userListAPI(context);
   }
 
   @override
@@ -314,5 +314,13 @@ class _CreatePostState extends State<CreatePost> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    videoController.searchController.value.text = "";
   }
 }

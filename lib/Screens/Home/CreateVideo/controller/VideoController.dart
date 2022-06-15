@@ -50,7 +50,7 @@ class VideoController extends GetxController {
           scrollController.position.pixels) {
         _scrollDown();
         isPaginationLoading.value = true;
-        await userListAPI(context, '');
+        await userListAPI(context);
         isPaginationLoading.value = false;
       }
     });
@@ -183,23 +183,16 @@ class VideoController extends GetxController {
   }
 
   //Speaker List / Host List
-  userListAPI(BuildContext context, String search) async {
+  userListAPI(BuildContext context) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     dynamic body;
 
-    if(search.isEmpty){
-      PageNumber = PageNumber + 1;
-      body = {
-        'page': PageNumber.toString(),
-      };
-    }else{
-      PageNumber.value = 0;
-      body = {
-        'search' : search.toString(),
-        // 'page': PageNumber.toString(),
-      };
-    }
+    PageNumber = PageNumber + 1;
+    body = {
+      'search' : searchController.value.text.toString(),
+      'page': PageNumber.toString(),
+    };
 
     String url = urlBase + urlUserList;
     final apiReq = Request();
@@ -219,14 +212,10 @@ class VideoController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            userListAPI(context, search);
+            userListAPI(context);
           }else if(model.statusCode==200){
             UserListModel detail =
             UserListModel.fromJson(userModel);
-
-            if(search.isNotEmpty){
-              userList.clear();
-            }
 
             userList.addAll(detail.data!);
             print(userList.length);

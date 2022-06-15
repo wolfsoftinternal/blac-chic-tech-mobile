@@ -109,7 +109,7 @@ class _CreateEventState extends State<CreateEvent> {
       }
     }
     checkNet(context).then((value) {
-      videoController.userListAPI(context, '');
+      videoController.userListAPI(context);
     });
   }
 
@@ -1659,5 +1659,13 @@ class _CreateEventState extends State<CreateEvent> {
 
     controller.endDateController.value.text = formattedDate;
     print(controller.endDateController.value.text);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    videoController.searchController.value.text = "";
   }
 }

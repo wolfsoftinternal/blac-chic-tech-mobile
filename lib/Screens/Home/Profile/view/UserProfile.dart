@@ -184,8 +184,8 @@ class _UserProfileState extends State<UserProfile> {
                                     //     ? "@" + widget.admireList.admireDetails!.userName!
                                     //     : "@" + widget.admireList.admireDetails!.firstName!,
                                       controller.details.value.userName != null
-                                          ? "@" + controller.details.value.userName!
-                                          : "@" + controller.details.value.firstName!,
+                                          ? "@" + (controller.details.value.userName??"")
+                                          : "@" + (controller.details.value.firstName??""),
                                       20.sp,
                                       white_ffffff,
                                       FontWeight.w600,

@@ -43,11 +43,12 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    transactionController.initScrolling(context);
 
     checkNet(context).then(
       (value) {
         transactionController.getUserDetails(context);
-        transactionController.allTransactionListApi(context, '');
+        transactionController.allTransactionListApi(context);
       },
     );
     transactionController.addListener(() {});
@@ -181,6 +182,21 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                               tv2 = false;
                               _isFirstLayout = true;
                               _isSecondLayout = false;
+
+                              checkNet(context).then(
+                                    (value) {
+                                  transactionController.PageNumberOfTransactions.value = 0;
+                                  // transactionController.allTransactionListApi(context);
+                                  transactionController.stopScrollingForPayouts(context);
+                                  transactionController.transactionList.clear();
+                                  transactionController.payoutList.clear();
+                                  transactionController.scrollControllerForTransactions = ScrollController();
+                                  transactionController.initScrolling(context);
+                                  transactionController.allTransactionListApi(context);
+
+                                },
+                              );
+
                             });
                           },
                           child: Container(
@@ -214,6 +230,22 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                               tv2 = true;
                               _isFirstLayout = false;
                               _isSecondLayout = true;
+
+                              checkNet(context).then(
+                                    (value) {
+                                  transactionController.PageNumberForPayouts.value = 0;
+                                  // transactionController.allPayoutListApi(context);
+                                  transactionController.stopScrollingForTransactions(context);
+                                  transactionController.transactionList.clear();
+                                  transactionController.payoutList.clear();
+                                  transactionController.scrollControllerForPayouts = ScrollController();
+                                  transactionController.initScrollingForPayouts(context);
+                                  transactionController.allPayoutListApi(context);
+                                  transactionController.payoutList.clear();
+
+                                },
+                              );
+
                             });
                           },
                           child: Container(
@@ -241,73 +273,33 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
 
                 Expanded(
                   child: SingleChildScrollView(
+                    controller: transactionController.scrollControllerForTransactions,
                     child: Column(children: [
 
                       /*--------------- Transactions Tab --------------*/
-                      transactionController.transactionList.length > 0
+                      _isFirstLayout
                           ? Visibility(
                         visible: _isFirstLayout,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: 15.h, left: 24.w, right: 24.w),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.h, horizontal: 10.w),
-                              decoration: const BoxDecoration(
-                                // border: Border.all(color: grey_e9ecec, width: 1),
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                                  color: grey_f5f5f5),
-                              child:
-
-                              SearchBarTag(
-                                placeholder: "Search people",
+                            Padding(
+                              padding:  EdgeInsets.only(left: 24.w,right: 24.w,top: 16.h),
+                              child: SearchBarTag(
+                                placeholder: "Search",
                                 autoFocus: false,
                                 onSubmit: (value) {
                                   checkNet(context).then((value) {
-                                    transactionController.allTransactionListApi(context,
-                                        transactionController.searchControllerForTransactions.value.text);
+
+                                    transactionController.PageNumberOfTransactions.value = 0;
+                                    transactionController.allTransactionListApi(context);
                                   });
                                 },
                                 controller: transactionController.searchControllerForTransactions.value,
                               ),
-
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.start,
-                              //   mainAxisSize: MainAxisSize.max,
-                              //   children: [
-                              //     SvgPicture.asset(
-                              //       search,
-                              //       color: grey_aaaaaa,
-                              //     ),
-                              //     SizedBox(
-                              //       width: 10.w,
-                              //     ),
-                              //     const Expanded(
-                              //       child: TextField(
-                              //         style: TextStyle(
-                              //             color: black_121212,
-                              //             fontFamily: roboto_medium,
-                              //             fontSize: 14.0),
-                              //         decoration: InputDecoration(
-                              //           isDense: true,
-                              //           hintText: "Search.......",
-                              //           hintStyle: TextStyle(
-                              //               color: grey_aaaaaa,
-                              //               fontFamily: roboto_medium,
-                              //               fontSize: 14.0),
-                              //           border: InputBorder.none,
-                              //         ),
-                              //         keyboardType: TextInputType.text,
-                              //         textInputAction: TextInputAction.next,
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
                             ),
+
                             Container(
                               margin: EdgeInsets.only(
                                   top: 16.h, left: 24.w, right: 24.w),
@@ -329,10 +321,9 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                           BorderRadius.circular(4.r),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: const Color(0x194343b2)
-                                                  .withOpacity(0.15),
+                                              color:  Color(0x0c121212).withOpacity(0.05),
                                               offset: const Offset(
-                                                5.0,
+                                                0.0,
                                                 5.0,
                                               ),
                                               blurRadius: 10.0,
@@ -416,6 +407,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                             fontSize: 16.sp,
                                                             fontFamily:
                                                             roboto_bold,
+                                                            fontWeight: FontWeight.w600,
                                                             color:
                                                             black_121212),
                                                       ),
@@ -430,6 +422,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                   style: TextStyle(
                                                       fontSize: 16.sp,
                                                       fontFamily: roboto_bold,
+                                                      fontWeight: FontWeight.w600,
                                                       color: parrot_1ad04d),
                                                 ),
                                               ],
@@ -447,62 +440,31 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                         ),
                       )
 
-
-
                           : SizedBox(),
 
                       if (transactionController.isPaginationLoadingForTransactions.value == true)
                         PaginationUtils().loader(),
 
                       /*--------------- Payouts Tab --------------*/
-                      transactionController.payoutList.length > 0
+                      _isSecondLayout
                           ? Visibility(
                         visible: _isSecondLayout,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: 15.h, left: 24.w, right: 24.w),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.h, horizontal: 10.w),
-                              decoration: const BoxDecoration(
-                                // border: Border.all(color: grey_e9ecec, width: 1),
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                                  color: grey_f5f5f5),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  SvgPicture.asset(
-                                    search,
-                                    color: grey_aaaaaa,
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  const Expanded(
-                                    child: TextField(
-                                      style: TextStyle(
-                                          color: black_121212,
-                                          fontFamily: roboto_medium,
-                                          fontSize: 14.0),
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        hintText: "Search.......",
-                                        hintStyle: TextStyle(
-                                            color: grey_aaaaaa,
-                                            fontFamily: roboto_medium,
-                                            fontSize: 14.0),
-                                        border: InputBorder.none,
-                                      ),
-                                      keyboardType: TextInputType.text,
-                                      textInputAction: TextInputAction.next,
-                                    ),
-                                  ),
-                                ],
+                            Padding(
+                              padding:  EdgeInsets.only(left: 24.w,right: 24.w,top: 16.h),
+                              child: SearchBarTag(
+                                placeholder: "Search",
+                                autoFocus: false,
+                                onSubmit: (value) {
+                                  checkNet(context).then((value) {
+                                    transactionController.PageNumberForPayouts.value = 0;
+                                    transactionController.allPayoutListApi(context);
+                                  });
+                                },
+                                controller: transactionController.searchControllerForPayouts.value,
                               ),
                             ),
                             Container(
@@ -526,10 +488,9 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                           BorderRadius.circular(4.r),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: const Color(0x194343b2)
-                                                  .withOpacity(0.15),
+                                              color:  Color(0x0c121212).withOpacity(0.05),
                                               offset: const Offset(
-                                                5.0,
+                                                0.0,
                                                 5.0,
                                               ),
                                               blurRadius: 10.0,
@@ -566,6 +527,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                     style: TextStyle(
                                                         fontFamily:
                                                         roboto_bold,
+                                                        fontWeight: FontWeight.w600,
                                                         fontSize: 14.sp,
                                                         color: black_121212),
                                                   ),
@@ -633,6 +595,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                       "",
                                                   style: TextStyle(
                                                       fontFamily: roboto_bold,
+                                                      fontWeight: FontWeight.w600,
                                                       fontSize: 16.sp,
                                                       color: black_121212),
                                                 ),
@@ -647,7 +610,10 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                           ],
                         ),
                       )
-                          : SizedBox()
+                          : SizedBox(),
+
+                      if (transactionController.isPaginationLoadingForPayouts.value == true)
+                        PaginationUtils().loader(),
                     ],),
                   ),
                 )

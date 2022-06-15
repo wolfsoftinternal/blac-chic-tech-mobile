@@ -153,14 +153,14 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                     autoFocus: false,
                                     onSubmit: (value) {
                                       checkNet(context).then((value) {
+
+                                       videoController.PageNumber.value = 0;
                                         videoController.userListAPI(
-                                            context,
-                                            controller
-                                                .searchController.value.text);
+                                            context);
                                       });
                                     },
                                     controller:
-                                        controller.searchController.value,
+                                        videoController.searchController.value,
                                   ),
                                   SizedBox(
                                     height: 24.h,
@@ -364,5 +364,13 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    videoController.searchController.value.text = "";
   }
 }

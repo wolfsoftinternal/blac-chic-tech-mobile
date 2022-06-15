@@ -106,10 +106,9 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
                                     autoFocus: false,
                                     onSubmit: (value) {
                                       checkNet(context).then((value) {
+                                        controller.PageNumber.value = 0;
                                         controller.userListAPI(
-                                            context,
-                                            controller
-                                                .searchController.value.text);
+                                            context);
                                       });
                                     },
                                     controller:
@@ -286,5 +285,13 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    controller.searchController.value.text = "";
   }
 }
