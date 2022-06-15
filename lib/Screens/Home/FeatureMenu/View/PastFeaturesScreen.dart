@@ -53,36 +53,34 @@ class _PastFeaturesScreenState extends State<PastFeaturesScreen> {
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
-          Flexible(
-            child: PageView.builder(
-              controller: _controller,
-              itemCount: widget.featureList.length,
-              itemBuilder: (BuildContext context, int index) {
+          PageView.builder(
+            controller: _controller,
+            itemCount: widget.featureList.length,
+            itemBuilder: (BuildContext context, int index) {
 
-                if(!isSet){
-                  isSet = true;
-                  return PastFeature1(selectedPositionFromPrevious: widget.selectedPosition);
+              if(!isSet){
+                isSet = true;
+                return PastFeature1(selectedPositionFromPrevious: widget.selectedPosition);
+              }else{
+                if((index % 2) == 0){
+                  print('past 1');
+                  return PastFeature1(selectedPositionFromPrevious: index);
                 }else{
-                  if((index % 2) == 0){
-                    print('past 1');
-                    return PastFeature1(selectedPositionFromPrevious: index);
-                  }else{
-                    print('past 2');
-                    return PastFeature2(selectedPositionFromPrevious: index);
-                  }
+                  print('past 2');
+                  return PastFeature2(selectedPositionFromPrevious: index);
                 }
+              }
 
 
-                // if((index % 2) == 0){
-                //   print('past 1');
-                //   return PastFeature1(selectedPositionFromPrevious: index);
-                // }else{
-                //   print('past 2');
-                //   return PastFeature2(selectedPositionFromPrevious: index);
-                // }
+              // if((index % 2) == 0){
+              //   print('past 1');
+              //   return PastFeature1(selectedPositionFromPrevious: index);
+              // }else{
+              //   print('past 2');
+              //   return PastFeature2(selectedPositionFromPrevious: index);
+              // }
 
-              },
-            ),
+            },
           ),
 
         ],

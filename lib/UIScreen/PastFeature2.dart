@@ -63,11 +63,16 @@ class _PastFeature2State extends State<PastFeature2> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SvgPicture.asset(
-                                    icon_back_black_arrow,
-                                    color: Colors.white,
-                                    height: 24.h,
-                                    width: 24.h,
+                                  GestureDetector(
+                                    child: SvgPicture.asset(
+                                      icon_back_black_arrow,
+                                      color: Colors.white,
+                                      height: 24.h,
+                                      width: 24.h,
+                                    ),
+                                    onTap: (){
+                                      Navigator.pop(context);
+                                    },
                                   ),
                                   Text(
                                     "Past Features",
