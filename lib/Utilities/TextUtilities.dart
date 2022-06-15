@@ -105,7 +105,7 @@ Text setRoboto(String text, double size, Color color, FontWeight weight) {
       style: TextStyle(
           color: color,
           fontWeight: weight,
-          fontFamily: "Roboto",
+          fontFamily: roboto_bold,
           fontStyle: FontStyle.normal,
           letterSpacing: 0.5,
           fontSize: size),
