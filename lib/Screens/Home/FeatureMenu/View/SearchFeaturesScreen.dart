@@ -164,55 +164,59 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
                                 child: CachedNetworkImage(
                                   imageUrl: searchableFeatureList[i].image??"",
                                   fit: BoxFit.cover,
-                                  width: 60,
-                                  height: 60,
+                                  width: 60.w,
+                                  height: 60.h,
                                   progressIndicatorBuilder:
                                       (context, url, downloadProgress) =>
                                       SvgPicture.asset(
                                         placeholder,
-                                        height: 60,
-                                        width: 60,
+                                        width: 60.w,
+                                        height: 60.h,
                                         fit: BoxFit.cover,
                                       ),
                                   errorWidget: (context, url, error) =>
                                       SvgPicture.asset(
                                         placeholder,
-                                        height: 60,
-                                        width: 60,
+                                        width: 60.w,
+                                        height: 60.h,
                                         fit: BoxFit.cover,
                                       ),
                                 ),
                               ),
 
-                              SizedBox(width: 12,),
+                              SizedBox(width: 12.w,),
 
                               Expanded(
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
 
-                                      Align(
-                                    alignment: Alignment.centerLeft
-                                    ,child: setHelveticaMedium(
-                                            searchableFeatureList[i].title??"",
-                                            18.sp,
-                                            black_121212,
-                                            FontWeight.w900,
-                                            FontStyle.normal),
-                                      ),
+                                      setRoboto(
+                                              searchableFeatureList[i].title??"",
+                                              14.sp,
+                                              black_121212,
+                                              FontWeight.w900,
+                                              ),
 
-                                      SizedBox(height: 4,),
+                                      SizedBox(height: 4.h,),
 
-                                      Align(
-                                        alignment: Alignment.centerLeft
-                                        ,child: setHelveticaRegular(
+                                      // Fade
+                                      Text(
                                           searchableFeatureList[i].writer_name??"",
-                                          15.sp,
-                                          black_121212,
-                                          FontWeight.w900,
-                                          FontStyle.normal),
+                                          style:  TextStyle(
+                                              color: grey_aaaaaa,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: roboto_medium,
+                                              fontStyle:  FontStyle.normal,
+                                              fontSize: 12.sp
+                                          ),
+                                          textAlign: TextAlign.left
                                       ),
+
+
                                     ],
                                   ),
                                 ),

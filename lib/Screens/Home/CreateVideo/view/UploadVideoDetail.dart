@@ -34,7 +34,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
     checkNet(context).then((value) {
       controller.topicListAPI(context);
       controller.languageListAPI(context);
-      controller.userListAPI(context, '');
+      controller.userListAPI(context);
     });
   }
 
@@ -656,5 +656,13 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
     setState(() {
       controller.tagValues.removeAt(index);
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    controller.searchController.value.text = "";
   }
 }

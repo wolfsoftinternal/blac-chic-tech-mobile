@@ -65,7 +65,7 @@ class _BcConnectState extends State<BcConnect> {
     super.initState();
     videoController.initScrolling(context);
     checkNet(context)
-        .then((value) => {videoController.userListAPI(context, '')});
+        .then((value) => {videoController.userListAPI(context)});
   }
 
   @override
@@ -99,13 +99,12 @@ class _BcConnectState extends State<BcConnect> {
                         autoFocus: false,
                         onSubmit: (value) {
                           checkNet(context).then((value) {
+                            videoController.PageNumber.value = 0;
                             videoController.userListAPI(
-                                context,
-                                bcConnectController
-                                    .searchController.value.text);
+                                context);
                           });
                         },
-                        controller: bcConnectController.searchController.value,
+                        controller: videoController.searchController.value,
                       ),
                     ),
 
@@ -165,7 +164,7 @@ class _BcConnectState extends State<BcConnect> {
                                     checkNet(context).then((value) => {
                                           videoController.PageNumber.value = 0,
                                           videoController.userListAPI(
-                                              context, '')
+                                              context)
                                         });
                                   });
                                 },
@@ -431,5 +430,13 @@ class _BcConnectState extends State<BcConnect> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    videoController.searchController.value.text = "";
   }
 }

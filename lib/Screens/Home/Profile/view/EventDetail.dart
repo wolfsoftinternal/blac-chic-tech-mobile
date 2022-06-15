@@ -66,7 +66,7 @@ class _EventDetailState extends State<EventDetail> {
     lng = double.parse(controller.eventDetails.value.longitude!);
     if (controller.eventDetails.value.type == 'invite_only') {
       checkNet(context).then(
-          (value) async => await videoController.userListAPI(context, ''));
+          (value) async => await videoController.userListAPI(context));
       if (controller.eventDetails.value.invitedUsers != null) {
         for (var item in controller.eventDetails.value.invitedUsers!) {
           eventController.selectedList.add(item);
@@ -1827,5 +1827,13 @@ class _EventDetailState extends State<EventDetail> {
     }else{
       controller.finalTotal.value = controller.total.value;
     }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    videoController.searchController.value.text = "";
   }
 }
