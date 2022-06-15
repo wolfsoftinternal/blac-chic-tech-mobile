@@ -56,7 +56,6 @@ class _EventDetailState extends State<EventDetail> {
   late LocationData _currentPosition;
   Location location = Location();
   bool isUseWallet = false;
-  InstalledAppModel? installedAppModel;
 
   @override
   void initState() {
@@ -78,7 +77,6 @@ class _EventDetailState extends State<EventDetail> {
     checkNet(context).then((value) {
       controller.registeredUserApi(context, controller.eventDetails.value.id.toString());
     });
-    checkInstalledApp();
   }
 
   init() async {
@@ -126,16 +124,6 @@ class _EventDetailState extends State<EventDetail> {
         icon: sourceIcon,
       ));
     });
-  }
-
-  Future<void> checkInstalledApp() async {
-    var data = await SocialShare.checkInstalledAppsForShare();
-    print(data.toString());
-
-    var jsonString = json.encode(data);
-
-    installedAppModel = InstalledAppModel.fromJson(json.decode(jsonString));
-    // });
   }
 
   displayBottomSheet(category, price, selectedPositionOfAdmission) {
@@ -1620,24 +1608,7 @@ class _EventDetailState extends State<EventDetail> {
                             children: [
                               GestureDetector(
                                 onTap: () async {
-                                  if (!installedAppModel!.instagram!) {
-                                    launchURL("https://play.google.com/store/apps/details?id=com.instagram.android");
-                                    print("Instagram is not exist");
-                                  } else {
-                                    print("Instagram is available");
-
-                                    var imageLink =
-                                        "https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_1280.jpg";
-
-                                    File file = await getImageFileFromUrl(imageLink);
-
-                                    print("path ${file.path}");
-                                    var data = await SocialShare.shareInstagramStory(
-                                      file.path,
-                                      // attributionURL: "https://deep-link-url",
-                                    );
-                                    print("data - > " + data!);
-                                  }
+                                  
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 24.w),

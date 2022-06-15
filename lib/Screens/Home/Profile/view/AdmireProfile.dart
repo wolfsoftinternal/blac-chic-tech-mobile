@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
@@ -60,18 +62,17 @@ class _AdmireProfileState extends State<AdmireProfile> {
       backgroundColor: white_ffffff,
       body: Obx(
         () => 
-        // controller.admireList.isEmpty
-        //     ? Center(
-        //         child: Container(
-        //             width: 80.w,
-        //             height: 80.h,
-        //             decoration: const BoxDecoration(
-        //               shape: BoxShape.circle,
-        //               color: Colors.white,
-        //             ),
-        //             child: Image.asset(loader, height: 20.h, width: 20.w)),
-        //       )
-        //     : 
+        myModel == null
+            ? SizedBox(
+                height: MediaQuery.of(context).size.height * 0.75,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: black, 
+                    strokeWidth: 2
+                  )
+                ),
+              )
+            : 
             Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

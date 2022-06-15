@@ -54,6 +54,7 @@ class UserList {
         this.longitude,
         this.website,
         this.isAdmire,
+        this.currentJobs
     });
 
     dynamic id;
@@ -76,6 +77,7 @@ class UserList {
     dynamic latitude;
     dynamic longitude;
     dynamic website;
+    CurrentJobs? currentJobs;
 
     factory UserList.fromJson(Map<String, dynamic> json) => UserList(
         id: json["id"],
@@ -98,6 +100,7 @@ class UserList {
         longitude: json["longitude"],
         website: json["website"],
         isAdmire : json["is_admire"],
+        currentJobs: json["current_jobs"] == null ? null : CurrentJobs.fromJson(json["current_jobs"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -120,5 +123,62 @@ class UserList {
         "latitude": latitude,
         "longitude": longitude,
         "website": website,
+        "current_jobs": currentJobs!.toJson(),
+    };
+}
+
+class CurrentJobs {
+    CurrentJobs({
+        this.id,
+        this.userId,
+        this.type,
+        this.title,
+        this.companyName,
+        this.logo,
+        this.website,
+        this.status,
+        this.createdAt,
+        this.updatedAt,
+        this.deletedAt,
+    });
+
+    int? id;
+    int? userId;
+    String? type;
+    String? title;
+    String? companyName;
+    dynamic logo;
+    String? website;
+    int? status;
+    DateTime? createdAt;
+    DateTime? updatedAt;
+    dynamic deletedAt;
+
+    factory CurrentJobs.fromJson(Map<String, dynamic> json) => CurrentJobs(
+        id: json["id"],
+        userId: json["user_id"],
+        type: json["type"],
+        title: json["title"],
+        companyName: json["company_name"],
+        logo: json["logo"],
+        website: json["website"] == null ? null : json["website"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        deletedAt: json["deleted_at"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
+        "type": type,
+        "title": title,
+        "company_name": companyName,
+        "logo": logo,
+        "website": website == null ? null : website,
+        "status": status,
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
+        "deleted_at": deletedAt,
     };
 }

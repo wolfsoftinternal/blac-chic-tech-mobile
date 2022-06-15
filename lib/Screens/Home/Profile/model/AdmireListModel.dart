@@ -50,7 +50,7 @@ class AdmireList {
     int? id;
     int? userId;
     int? admireId;
-    String? number;
+    int? number;
     int? status;
     String? createdAt;
     String? updatedAt;
