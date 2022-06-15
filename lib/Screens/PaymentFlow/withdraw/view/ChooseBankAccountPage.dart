@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -58,12 +59,9 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      SizedBox(height: 15.h,),
                       ToolbarWithHeaderCenterTitle("Withdraw"),
-                      Divider(
-                        height: 1,
-                        color: grey_E9ECEC,
-                        thickness: 1,
-                      ),
+
                       isMoreAmount == true
                       ? Container(
                         width: double.infinity,
@@ -74,19 +72,19 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                         child: Center(child: Text(
                           "You can't request more than your available balance.",
                           style: TextStyle(
-                            fontSize: 14.0,
+                            fontSize: 14.sp,
                             fontFamily: helveticaNeue,
                             color: white_ccffffff,
                           ),
                         )),
                       ) : Container(),
                       SizedBox(
-                        height: 44,
+                        height: 44.h,
                       ),
                       Expanded(
                         flex: 1,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          padding:  EdgeInsets.only(left: 30.w, right: 30.w),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -106,7 +104,7 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                                               controller.addAmount.value,
                                           autofocus: true,
                                           style: TextStyle(
-                                            fontSize: 40.0,
+                                            fontSize: 40.sp,
                                             fontFamily: helvetica_neu_bold,
                                             color: black,
                                             fontStyle: FontStyle.normal,
@@ -115,7 +113,7 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                                           decoration: InputDecoration(
                                             prefixText: SharePreData.strDollar,
                                             prefixStyle: TextStyle(
-                                              fontSize: 40.0,
+                                              fontSize: 40.sp,
                                               fontFamily: helvetica_neu_bold,
                                               color: black,
                                               fontStyle: FontStyle.normal,
@@ -124,7 +122,7 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                                             contentPadding: EdgeInsets.all(10),
                                             border: InputBorder.none,
                                           ),
-                                          cursorColor: skygreen_24d39e,
+                                          cursorColor: black_121212,
                                           keyboardType: TextInputType.number,
                                         ),
                                       ),
@@ -133,25 +131,32 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 14,
+                                  height: 14.h,
                                 ),
                                 Center(
-                                  child: setHelveticaMedium(
+                                  child:
+                                  // Your Balance $8.500.000
+                                  Text(
                                       "$your_balance \$${controller.walletAmount.value}",
-                                      14.0,
-                                      grey_96a6a3,
-                                      FontWeight.w400,
-                                      FontStyle.normal),
+                                      style:  TextStyle(
+                                          color:  grey_aaaaaa,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: roboto_regular,
+                                          fontStyle:  FontStyle.normal,
+                                          fontSize: 14.sp
+                                      ),
+                                      textAlign: TextAlign.center
+                                  ),
                                 ),
                                 SizedBox(
-                                  height: 30,
+                                  height: 30.h,
                                 ),
                                 Center(
-                                  child: setHelveticaRegular(choose_bank_account, 16.0, black,
-                                      FontWeight.w600, FontStyle.normal),
+                                  child: setRoboto(choose_bank_account, 16.sp, black_121212,
+                                      FontWeight.w600),
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 10.h,
                                 ),
                                 Column(
                                   children: [
@@ -175,17 +180,17 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                                                     AddBankAccountPage()));
                                       },
                                       child: Container(
-                                        height: 44.0,
-                                        margin: EdgeInsets.only(top: 10),
+                                        height: 44.h,
+                                        margin: EdgeInsets.only(top: 10.h),
                                         decoration: BoxDecoration(
                                             // color: Colors.grey[300],
                                             borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(color: black)),
+                                                BorderRadius.circular(4.r),
+                                            border: Border.all(color: black_121212)),
                                         child: Center(
                                           child: setHelveticaMedium(
                                               "+ " + add_bank_account,
-                                              14,
+                                              14.sp,
                                               txt_color,
                                               FontWeight.w500,
                                               FontStyle.normal),
@@ -194,7 +199,7 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                                     )
                                   ],
                                 ),
-                                SizedBox(height: 15),
+                                SizedBox(height: 15.h),
                               ],
                             ),
                           ),
@@ -241,7 +246,7 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
         });
       },
       child: Container(
-        margin: EdgeInsets.only(top: 16),
+        margin: EdgeInsets.only(top: 16.h),
         decoration: BoxDecoration(
           boxShadow: [
             controller.selectedAccountIndex.value == index
@@ -256,11 +261,11 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
               ? Colors.white
               : grey_e9ecec,
           border: controller.selectedAccountIndex.value == index
-              ? Border.all(color: skygreen_24d39e)
+              ? Border.all(color: orange_ff881a)
               : Border.all(color: grey_e9ecec),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
         ),
-        padding: EdgeInsets.only(left: 24, top: 22, bottom: 22, right: 30),
+        padding: EdgeInsets.only(left: 24.w, top: 22.h, bottom: 22.h, right: 30.w),
         child: Row(
           children: [
             SvgPicture.asset(
@@ -269,11 +274,11 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                   : bankAccount.saveAs == 'buisness_account'
                       ? business_account_icon
                       : personal_account_icon,
-              width: 36,
-              height: 36,
+              width: 36.w,
+              height: 36.h,
             ),
             SizedBox(
-              width: 20,
+              width: 20.w,
             ),
             Expanded(
               child: Column(
@@ -286,16 +291,16 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
                           : bankAccount.saveAs == "buisness_account"
                               ? business_account
                               : personal_account,
-                      14,
+                      14.sp,
                       black,
                       FontWeight.w500,
                       FontStyle.normal),
                   SizedBox(
-                    height: 8,
+                    height: 8.h,
                   ),
                   setHelveticaMedium(
                       "****-****-${bankAccount.accountNumber?.substring(bankAccount.accountNumber!.length - 4)}",
-                      12,
+                      12.sp,
                       grey_96a6a3,
                       FontWeight.w400,
                       FontStyle.normal),
@@ -303,14 +308,14 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
               ),
             ),
             SizedBox(
-              width: 20,
+              width: 20.w,
             ),
             SvgPicture.asset(
               controller.selectedAccountIndex.value == index
                   ? orange_circle_check
                   : oval_icon,
-              width: 24,
-              height: 24,
+              width: 24.w,
+              height: 24.h,
             ),
           ],
         ),
