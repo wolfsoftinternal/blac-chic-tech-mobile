@@ -16,6 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoMenuController extends GetxController {
   RxBool isLoadingBCT = false.obs;
@@ -66,6 +67,10 @@ class VideoMenuController extends GetxController {
   Rx<FindSpeakerModel> findspeakerVideoList = FindSpeakerModel().obs;
   Rx<SpeakerVideoModel> videoMenuModelList = SpeakerVideoModel().obs;
   Rx<int> videoMenuPage = 1.obs;
+  RxList<YoutubePlayerController> videoController = <YoutubePlayerController>[].obs;
+  RxList<YoutubePlayerController> playlistController = <YoutubePlayerController>[].obs;
+  RxList<YoutubePlayerController> playerController = <YoutubePlayerController>[].obs;
+
   @override
   void onInit() {
     print("controller.selectedTopic.value ::" +
@@ -166,6 +171,37 @@ class VideoMenuController extends GetxController {
             : list.length,
         (index) => list[index]);
     isLoadingBCT.value = false;
+
+    List videoId = []; 
+    YoutubePlayerController controller;
+    for(var item in videoList){
+      if(item.embededCode.toString().contains("iframe")){
+        String src = item.embededCode.toString().split('=')[3];
+        src = src.replaceAll(' title', '');
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      }else{
+        String src = item.embededCode.toString();
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      }          
+    }
+    for(int i = 0; i < videoList.length; i++){
+      controller = YoutubePlayerController(
+        initialVideoId: videoId[i],
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: false,
+          hideControls: true,
+        ),
+      );
+      videoController.add(controller);
+    }
   }
 
   videoListSearchAPI({String? topicFilter}) async {
@@ -348,6 +384,32 @@ class VideoMenuController extends GetxController {
             isHeart.value = videoDetail.value.isLike == 0 ? false : true;
             String text = videoDetail.value.tags.toString();
             result.value = text.split(',');
+
+            var videoId; 
+            if(videoDetail.value.embededCode.toString().contains("iframe")){
+              String src = videoDetail.value.embededCode.toString().split('=')[3];
+              src = src.replaceAll(' title', '');
+              src = src.replaceAll('"', '');
+              videoId = YoutubePlayer.convertUrlToId(src);
+            }else{
+              String src = videoDetail.value.embededCode.toString();
+              src = src.replaceAll('"', '');
+              videoId = YoutubePlayer.convertUrlToId(src);
+            } 
+            
+            playerController.add(YoutubePlayerController(
+              initialVideoId: videoId,
+              flags: const YoutubePlayerFlags(
+                mute: false,
+                autoPlay: false,
+                disableDragSeek: false,
+                loop: false,
+                isLive: false,
+                forceHD: false,
+                enableCaption: false,
+                hideControls: false,
+              ),)
+            );
           }
         });
       } else {
@@ -549,6 +611,37 @@ class VideoMenuController extends GetxController {
             : list.length,
         (index) => list[index]);
     print("myPlayList.value :: " + myPlayList.length.toString());
+
+    List videoId = []; 
+    YoutubePlayerController controller;
+    for(var item in myPlayList){
+      if(item.embededCode.toString().contains("iframe")){
+        String src = item.embededCode.toString().split('=')[3];
+        src = src.replaceAll(' title', '');
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      }else{
+        String src = item.embededCode.toString();
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      }          
+    }
+    for(int i = 0; i < myPlayList.length; i++){
+      controller = YoutubePlayerController(
+        initialVideoId: videoId[i],
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: false,
+          hideControls: true,
+        ),
+      );
+      playlistController.add(controller);
+    }
     isLoading.value = false;
   }
 

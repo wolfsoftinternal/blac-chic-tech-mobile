@@ -77,7 +77,7 @@ class _CreatePostState extends State<CreatePost> {
                     Stack(children: [
                       Positioned(
                           top: 4, child: Icon(Icons.expand_more_rounded)),
-                      SizedBox(child: MultiAssetsPage()),
+                      SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
                     ]),
                     Spacer(),
                     InkWell(

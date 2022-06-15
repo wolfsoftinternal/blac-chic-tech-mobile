@@ -343,10 +343,9 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                 ),
                               ])
                       : SizedBox(
-                          height: 64.h,
-                          width: 64.w,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50.r),
+                          child: CircularProfileAvatar(
+                                '',
+                                radius: 32,
                             child: admireList.admireDetails!.image == null
                                 ? SvgPicture.asset(
                                     placeholder,
@@ -357,7 +356,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                     imageUrl:
                                         admireList.admireDetails!.image!,
                                     height: 64.h,
-                                    width: 64.w,
+                                    width: 62.w,
                                     fit: BoxFit.cover,
                                     progressIndicatorBuilder:
                                         (context, url, downloadProgress) =>

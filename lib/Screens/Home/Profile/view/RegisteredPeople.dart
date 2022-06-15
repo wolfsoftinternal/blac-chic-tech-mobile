@@ -28,14 +28,6 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
 
   @override
-  void initState() {
-    super.initState();
-    checkNet(context).then((value) {
-      controller.registeredUserApi(context, widget.id);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,

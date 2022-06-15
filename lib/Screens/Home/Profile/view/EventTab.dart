@@ -61,7 +61,7 @@ class _EventTabState extends State<EventTab> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 25.h,
+                          height: 13.h,
                         ),
                         setHelceticaBold(
                             'Upcomming Events',

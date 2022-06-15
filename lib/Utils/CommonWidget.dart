@@ -3,7 +3,10 @@ import 'dart:io';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 File imagePath = File("");
 List<AssetEntity>? image;
@@ -98,4 +101,26 @@ Future showImagePicker(context) {
     },
   );
   return future;
+}
+
+Future<void> launchURL(String url) async {
+  final uri = Uri.parse(url);
+  if (!await launchUrl(
+    uri,
+  )) {
+    throw 'Could not launch $url';
+  }
+}
+
+Future<File> getImageFileFromUrl(String imageLink) async {
+  final url = Uri.parse(imageLink);
+  final response = await http.get(url);
+  final bytes = response.bodyBytes;
+  final buffer = bytes.buffer;
+
+  final temp = await getTemporaryDirectory();
+  final path = "${temp.path}/image.jpg";
+  File(path).writeAsBytesSync(bytes);
+  return File(path).writeAsBytes(
+      buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
 }

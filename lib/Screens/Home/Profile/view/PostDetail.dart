@@ -199,7 +199,7 @@ class _PostDetailState extends State<PostDetail> {
                         borderRadius: BorderRadius.all(Radius.circular(4.r)),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(20.r),
+                        padding: EdgeInsets.all(16.r),
                         child: Column(
                           children: [
                             Stack(
@@ -210,14 +210,10 @@ class _PostDetailState extends State<PostDetail> {
                                   child: controller
                                               .postList[index].image ==
                                           null
-                                      ? ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4.r)),
-                                          child: SvgPicture.asset(
-                                            placeholder,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        )
+                                      ? SvgPicture.asset(
+                                        placeholder,
+                                        fit: BoxFit.fill,
+                                      )
                                       : ClipRRect(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(4.r)),
@@ -293,7 +289,7 @@ class _PostDetailState extends State<PostDetail> {
                                               width: 5.w,
                                             ),
                                             setHelceticaBold(
-                                                "${controller.postList[index].totalLikes} liked",
+                                                "${controller.postList[index].totalLikes} likes",
                                                 14.sp,
                                                 white_ffffff,
                                                 FontWeight.w500,
@@ -332,7 +328,7 @@ class _PostDetailState extends State<PostDetail> {
                                             fontFamily:
                                                 helveticaNeueNeue_medium,
                                             fontWeight: FontWeight.w400,
-                                            color: black_121212)),
+                                            color: grey_3f3f3f)),
                                   ],
                                 ),
                               ),
@@ -341,11 +337,11 @@ class _PostDetailState extends State<PostDetail> {
                                 padding: const EdgeInsets.only(top: 5.0),
                                 child: Row(
                                   children: [
-                                    SvgPicture.asset(calendar_icon, color: grey_aaaaaa,),
-                                    SizedBox(width: 8,),
+                                    SvgPicture.asset(calendar_icon, color: grey_aaaaaa, height: 14.h, width: 14.w,),
+                                    SizedBox(width: 5,),
                                     Text(Jiffy(DateFormat('yyyy-MM-dd').format(controller.postList[index].createdAt!)).fromNow(),
                                             style: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 12,
                                                 fontFamily:
                                                     helveticaNeueNeue_medium,
                                                 fontWeight: FontWeight.w400,

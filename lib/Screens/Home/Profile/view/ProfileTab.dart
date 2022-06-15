@@ -60,7 +60,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 25.h,
+                          height: 13.h,
                         ),
                         setHelceticaBold('About Me', 16.sp, black_121212,
                             FontWeight.w500, FontStyle.normal, -0.32),
