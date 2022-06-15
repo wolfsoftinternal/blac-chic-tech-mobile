@@ -68,7 +68,7 @@ class _VideoTabState extends State<VideoTab> {
                             return GridTile(
                               child: Stack(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: 220,
                                     width: MediaQuery.of(context).size.width,
                                     child: 
@@ -76,7 +76,7 @@ class _VideoTabState extends State<VideoTab> {
                                       fit: BoxFit.fill,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.all(
-                                                    Radius.circular(15.r)),
+                                                    Radius.circular(4.r)),
                                         child: YoutubePlayerBuilder(
                                                 player: YoutubePlayer(
                                                   controller: controller
@@ -114,7 +114,13 @@ class _VideoTabState extends State<VideoTab> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      Get.to(VideoDetail(id: controller.videoList[index].id, userId: widget.id,));
+                                      Get.to(VideoDetail(id: controller.videoList[index].id, userId: widget.id,))!.then((value) {
+                                        dynamic videoBody = {
+                                          'user_id': widget.id.toString(),
+                                          'page': controller.videoPageNumber.toString()
+                                        };
+                                        controller.videoListAPI(context, videoBody);
+                                      });
                                     },
                                     child: Container(
                                       height: 220,

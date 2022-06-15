@@ -200,43 +200,41 @@ class _VideoDetailState extends State<VideoDetail> {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(
-                          left: 24.0, right: 24.0, bottom: 24.0),
+                          left: 16.0, right: 16.0, bottom: 16.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color: white_ffffff,
                           boxShadow: [
                             BoxShadow(
-                              color: Color(0x17747796).withOpacity(0.07),
+                              color: const Color(0x17747796).withOpacity(0.07),
                               spreadRadius: 10,
                               blurRadius: 5,
-                              offset:
-                                  Offset(0, -10), // changes position of shadow
+                              offset: const Offset(
+                                  0, 10), // changes position of shadow
                             ),
                           ],
-                          borderRadius:
-                              BorderRadius.all(const Radius.circular(5)),
+                          borderRadius: BorderRadius.all(Radius.circular(4.r)),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Column(
                             children: [
                               Stack(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15.0, bottom: 12.0),
-                                    child: SizedBox(
-                                        height: 220,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: FittedBox(
-                                          fit: BoxFit.fill,
+                                  SizedBox(
+                                      height: 220,
+                                      width:
+                                          MediaQuery.of(context).size.width,
+                                      child: FittedBox(
+                                        fit: BoxFit.fill,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                                    Radius.circular(4.r)),
                                           child: YoutubePlayerBuilder(
                                             onEnterFullScreen: () {
                                                 fullScreen = false;
                                               },
                                               player: YoutubePlayer(
-                                                showVideoProgressIndicator: false,
                                                 bottomActions: const [
                                                   SizedBox(width: 14.0),
                                                   // CurrentPosition(),
@@ -255,32 +253,32 @@ class _VideoDetailState extends State<VideoDetail> {
                                                   ],
                                                 );
                                               }),
-                                        )
-
-                                        // ? Center(
-                                        //     child: SizedBox(
-                                        //     height: 20,
-                                        //     width: 20,
-                                        //     child: CircularProgressIndicator(
-                                        //       strokeWidth: 2,
-                                        //       valueColor:
-                                        //           AlwaysStoppedAnimation<Color>(
-                                        //               Color(0xff04080f)),
-                                        //     ),
-                                        //   ))
-                                        // : FittedBox(
-                                        //     fit: BoxFit.cover,
-                                        //     child: Html(
-
-                                        //         data: controller
-                                        //             .videoList[index]
-                                        //             .embededCode
-                                        //             .toString()),
-                                        //   ),
                                         ),
-                                  ),
+                                      )
+
+                                      // ? Center(
+                                      //     child: SizedBox(
+                                      //     height: 20,
+                                      //     width: 20,
+                                      //     child: CircularProgressIndicator(
+                                      //       strokeWidth: 2,
+                                      //       valueColor:
+                                      //           AlwaysStoppedAnimation<Color>(
+                                      //               Color(0xff04080f)),
+                                      //     ),
+                                      //   ))
+                                      // : FittedBox(
+                                      //     fit: BoxFit.cover,
+                                      //     child: Html(
+
+                                      //         data: controller
+                                      //             .videoList[index]
+                                      //             .embededCode
+                                      //             .toString()),
+                                      //   ),
+                                      ),
                                   const SizedBox(
-                                    height: 15,
+                                    height: 16,
                                   ),
                                   Positioned(
                                     bottom: 20.h,
@@ -337,7 +335,7 @@ class _VideoDetailState extends State<VideoDetail> {
                                               width: 5.w,
                                             ),
                                             setHelceticaBold(
-                                                "${controller.videoList[index].like_count == null ? 0 : controller.videoList[index].like_count} liked",
+                                                "${controller.videoList[index].like_count == null ? 0 : controller.videoList[index].like_count} likes",
                                                 14.sp,
                                                 white_ffffff,
                                                 FontWeight.w500,
@@ -373,63 +371,60 @@ class _VideoDetailState extends State<VideoDetail> {
                               SizedBox(
                                 height: 15,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 5.0, right: 5.0),
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: "@$username ",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontFamily: helvetica_neu_bold,
-                                            fontWeight: FontWeight.w600,
-                                            color: black_121212,
-                                          ),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: "@$username",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: helvetica_neu_bold,
+                                          fontWeight: FontWeight.w600,
+                                          color: black_121212,
                                         ),
-                                        TextSpan(
-                                            text: controller.videoList[index]
-                                                    .description ??
-                                                "",
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily:
-                                                    helveticaNeueNeue_medium,
-                                                fontWeight: FontWeight.w400,
-                                                color: black_121212)),
-                                      ],
-                                    ),
+                                      ),
+                                      TextSpan(
+                                          text: controller.videoList[index]
+                                                  .description ??
+                                              "",
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
+                                              fontWeight: FontWeight.w400,
+                                              color: grey_3f3f3f)),
+                                    ],
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 5.0, right: 5.0, top: 5.0),
-                                child: Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      calendar_icon,
-                                      color: grey_aaaaaa,
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                        Jiffy(DateFormat('yyyy-MM-dd').format(
-                                                controller.videoList[index]
-                                                    .createdAt!))
-                                            .fromNow(),
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontWeight: FontWeight.w400,
-                                            color: grey_aaaaaa)),
-                                  ],
-                                ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    calendar_icon,
+                                    color: grey_aaaaaa,
+                                    height: 14.h,
+                                    width: 14.w,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                      Jiffy(DateFormat('yyyy-MM-dd').format(
+                                              controller.videoList[index]
+                                                  .createdAt!))
+                                          .fromNow(),
+                                      style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontFamily:
+                                              helveticaNeueNeue_medium,
+                                          fontWeight: FontWeight.w400,
+                                          color: grey_aaaaaa)),
+                                ],
                               )
                             ],
                           ),

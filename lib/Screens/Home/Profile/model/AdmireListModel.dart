@@ -52,8 +52,8 @@ class AdmireList {
     int? admireId;
     String? number;
     int? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+    String? createdAt;
+    String? updatedAt;
     dynamic deletedAt;
     UserDetails? admireDetails;
 
@@ -63,8 +63,8 @@ class AdmireList {
         admireId: json["admire_id"],
         number: json["number"],
         status: json["status"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null ? "" : json["created_at"],
+        updatedAt: json["updated_at"] == null ? "" : json["updated_at"],
         deletedAt: json["deleted_at"],
         admireDetails: UserDetails.fromJson(json["admire_details"]),
     );
@@ -75,8 +75,8 @@ class AdmireList {
         "admire_id": admireId,
         "number": number,
         "status": status,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
+        "created_at": createdAt,
+        "updated_at": updatedAt,
         "deleted_at": deletedAt,
         "admire_details": admireDetails!.toJson(),
     };

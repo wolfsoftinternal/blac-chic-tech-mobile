@@ -279,8 +279,8 @@ class CurrentJobs {
     dynamic logo;
     String? website;
     int? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+    String? createdAt;
+    String? updatedAt;
     dynamic deletedAt;
 
     factory CurrentJobs.fromJson(Map<String, dynamic> json) => CurrentJobs(
@@ -292,8 +292,8 @@ class CurrentJobs {
         logo: json["logo"],
         website: json["website"],
         status: json["status"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null ? "" : json["created_at"],
+        updatedAt: json["updated_at"] == null ? "" : json["updated_at"],
         deletedAt: json["deleted_at"],
     );
 
@@ -306,8 +306,8 @@ class CurrentJobs {
         "logo": logo,
         "website": website,
         "status": status,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
+        "created_at": createdAt,
+        "updated_at": updatedAt,
         "deleted_at": deletedAt,
     };
 }

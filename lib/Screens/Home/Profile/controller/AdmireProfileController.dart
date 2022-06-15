@@ -53,7 +53,7 @@ class AdmireProfileController extends GetxController {
   RxList<UserList> searchList = <UserList>[].obs;
   Rx<TextEditingController> searchController = TextEditingController().obs;
   RxInt selectedIndex = 1.obs;
-  RxString admire = 'Admire'.obs;
+  RxString admire = ''.obs;
   RxInt count = 1.obs;
   RxInt total = 0.obs;
   RxInt finalTotal = 0.obs;
@@ -175,6 +175,8 @@ class AdmireProfileController extends GetxController {
   admireListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
+    SignupModel? myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
 
     String url = urlBase + urladmireList;
     final apiReq = Request();
@@ -199,6 +201,21 @@ class AdmireProfileController extends GetxController {
               admireList.value = detail.data!;
 
               print('admire list ' + admireList.value.toString());
+              if (myModel!.data!.id != details.value.id) {
+                var admireValue = '';
+                for (var item in admireList) {
+                  if (details.value.id == item.admireId) {
+                    admireValue = 'Admired';
+                  }
+                }
+
+                if(admireValue == 'Admired'){
+                  admire.value = 'Admired';
+                }else{
+                  admire.value = 'Admire';
+                }
+              }
+              
             } else {
               otherAdmireList.value = detail.data!;
             }
@@ -702,7 +719,7 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             UserListModel detail =
             UserListModel.fromJson(userModel);
-            userList.addAll(detail.data!);
+            userList.value = detail.data!;
           }
         });
       } else {

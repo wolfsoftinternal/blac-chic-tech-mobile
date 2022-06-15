@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:blackchecktech/Layout/BlackButton.dart';
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
@@ -24,7 +27,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:readmore/readmore.dart';
-
+import 'package:social_share/social_share.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../../Utils/CommonWidget.dart';
+import '../model/InstalledAppModel.dart';
 import '../../Event/view/AllPurchasedEventTicketList.dart';
 
 class EventDetail extends StatefulWidget {
@@ -50,6 +56,7 @@ class _EventDetailState extends State<EventDetail> {
   late LocationData _currentPosition;
   Location location = Location();
   bool isUseWallet = false;
+  InstalledAppModel? installedAppModel;
 
   @override
   void initState() {
@@ -68,6 +75,10 @@ class _EventDetailState extends State<EventDetail> {
     }
     init();
     getLoc();
+    checkNet(context).then((value) {
+      controller.registeredUserApi(context, controller.eventDetails.value.id.toString());
+    });
+    checkInstalledApp();
   }
 
   init() async {
@@ -75,9 +86,6 @@ class _EventDetailState extends State<EventDetail> {
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel?.data!.id;
-
-    // controller.userProfileAPI(context);
-
   }
 
   void _onMapCreated(GoogleMapController _cntlr) {
@@ -118,6 +126,16 @@ class _EventDetailState extends State<EventDetail> {
         icon: sourceIcon,
       ));
     });
+  }
+
+  Future<void> checkInstalledApp() async {
+    var data = await SocialShare.checkInstalledAppsForShare();
+    print(data.toString());
+
+    var jsonString = json.encode(data);
+
+    installedAppModel = InstalledAppModel.fromJson(json.decode(jsonString));
+    // });
   }
 
   displayBottomSheet(category, price, selectedPositionOfAdmission) {
@@ -1207,9 +1225,10 @@ class _EventDetailState extends State<EventDetail> {
                                   )
                                 : Container()
                             : Container(),
+                            controller.eventDetails.value.type != 'ticket_price' ? 
                         SizedBox(
                           height: 16.h,
-                        ),
+                        ) : Container(),
                         // Divider(
                         //   color: view_line_f4f6f6,
                         //   thickness: 1,
@@ -1456,14 +1475,8 @@ class _EventDetailState extends State<EventDetail> {
                                                   child: CircularProfileAvatar(
                                                     '',
                                                     imageFit: BoxFit.fill,
-                                                    child: controller
-                                                        .eventDetails
-                                                        .value
-                                                        .speakers![0]
-                                                        .image ==
-                                                        null
-                                                        ? SvgPicture.asset(
-                                                        placeholder)
+                                                    child: controller.eventDetails.value.speakers![0].image == null || controller.eventDetails.value.speakers![0].image == ""
+                                                        ? SvgPicture.asset(placeholder)
                                                         : Image.network(
                                                       controller
                                                           .eventDetails
@@ -1493,7 +1506,7 @@ class _EventDetailState extends State<EventDetail> {
                                                           .value
                                                           .speakers![1]
                                                           .image ==
-                                                          null
+                                                          null || controller.eventDetails.value.speakers![1].image == ""
                                                           ? SvgPicture.asset(
                                                           placeholder)
                                                           : Image.network(
@@ -1516,10 +1529,11 @@ class _EventDetailState extends State<EventDetail> {
                                                   2)
                                                 Positioned(
                                                   left: 20.w,
+                                                  bottom: 4,
                                                   child: SvgPicture.asset(
                                                     black_more_dot_icon,
-                                                    height: 17.h,
-                                                    width: 17.w,
+                                                    height: 20.h,
+                                                    width: 20.w,
                                                   ),
                                                 )
                                             ],
@@ -1531,50 +1545,51 @@ class _EventDetailState extends State<EventDetail> {
                                             grey_3f3f3f,
                                             FontWeight.w500,
                                             FontStyle.normal),
-                                        Padding(
-                                          padding: const EdgeInsets.only(bottom: 2.0),
-                                          child: SizedBox(
-                                            height: 20.h,
-                                            width: MediaQuery.of(context).size.width * 0.55,
-                                            child: ListView.builder(
-                                                primary: false,
-                                                shrinkWrap: true,
-                                                padding: EdgeInsets.zero,
-                                                scrollDirection: Axis.horizontal,
-                                                itemCount: controller.eventDetails.value.speakers!.length,
-                                                itemBuilder: (context, index) {
-                                                  return Row(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                    children: [
-                                                      setHelceticaBold(
-                                                          controller
-                                                              .eventDetails
-                                                              .value
-                                                              .speakers![
-                                                          index]
-                                                              .fullName !=
-                                                              null
-                                                              ? "@${controller.eventDetails.value.speakers![index].fullName!}" : '',
-                                                          11.sp,
-                                                          black_121212,
-                                                          FontWeight.w500,
-                                                          FontStyle.normal),
-                                                      controller.eventDetails.value
-                                                          .speakers!.length ==
-                                                          (index + 1)
-                                                          ? Container()
-                                                          : setHelceticaBold(
-                                                          ", ",
-                                                          11.sp,
-                                                          black_121212,
-                                                          FontWeight.w500,
-                                                          FontStyle.normal),
-                                                    ],
-                                                  );
-                                                }),
+                                        Flexible(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(bottom: 2.0),
+                                            child: SizedBox(
+                                              height: 20.h,
+                                              child: ListView.builder(
+                                                  primary: false,
+                                                  shrinkWrap: true,
+                                                  padding: EdgeInsets.zero,
+                                                  scrollDirection: Axis.horizontal,
+                                                  itemCount: controller.eventDetails.value.speakers!.length,
+                                                  itemBuilder: (context, index) {
+                                                    return Row(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                      children: [
+                                                        setHelceticaBold(
+                                                            controller
+                                                                .eventDetails
+                                                                .value
+                                                                .speakers![
+                                                            index]
+                                                                .fullName !=
+                                                                null
+                                                                ? "@${controller.eventDetails.value.speakers![index].fullName!}" : '',
+                                                            11.sp,
+                                                            black_121212,
+                                                            FontWeight.w500,
+                                                            FontStyle.normal),
+                                                        controller.eventDetails.value
+                                                            .speakers!.length ==
+                                                            (index + 1)
+                                                            ? Container()
+                                                            : setHelceticaBold(
+                                                            ", ",
+                                                            11.sp,
+                                                            black_121212,
+                                                            FontWeight.w500,
+                                                            FontStyle.normal),
+                                                      ],
+                                                    );
+                                                  }),
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -1603,12 +1618,34 @@ class _EventDetailState extends State<EventDetail> {
                               black_121212, FontWeight.w700, FontStyle.normal),
                           Row(
                             children: [
-                              Padding(
-                                padding: EdgeInsets.only(right: 24.w),
-                                child: Image.asset(
-                                  icon_instagram,
-                                  height: 24.h,
-                                  width: 24.w,
+                              GestureDetector(
+                                onTap: () async {
+                                  if (!installedAppModel!.instagram!) {
+                                    launchURL("https://play.google.com/store/apps/details?id=com.instagram.android");
+                                    print("Instagram is not exist");
+                                  } else {
+                                    print("Instagram is available");
+
+                                    var imageLink =
+                                        "https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_1280.jpg";
+
+                                    File file = await getImageFileFromUrl(imageLink);
+
+                                    print("path ${file.path}");
+                                    var data = await SocialShare.shareInstagramStory(
+                                      file.path,
+                                      // attributionURL: "https://deep-link-url",
+                                    );
+                                    print("data - > " + data!);
+                                  }
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: 24.w),
+                                  child: Image.asset(
+                                    icon_instagram,
+                                    height: 24.h,
+                                    width: 24.w,
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -1689,12 +1726,14 @@ class _EventDetailState extends State<EventDetail> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 25.h,
+                    ),
                     // controller.eventDetails.value.userId != userId ? Container()
+                    controller.registerList.value.data!.registeredUsers!.isNotEmpty ?
                     controller.eventDetails.value.type != 'ticket_price'
                         ? Container()
                         : Padding(
-                            padding: const EdgeInsets.only(
-                                top: 25.0, bottom: 25.0, left: 24, right: 24),
+                            padding: const EdgeInsets.only(bottom: 25.0, left: 24, right: 24),
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
@@ -1767,7 +1806,7 @@ class _EventDetailState extends State<EventDetail> {
                                 ),
                               ),
                             ),
-                          ),
+                          ) : Container(),
                   ],
                 ),
               ),

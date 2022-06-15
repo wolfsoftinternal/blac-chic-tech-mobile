@@ -12,6 +12,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
@@ -24,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -87,14 +89,6 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       checkNet(context).then((value) async {
         await controller.admireListAPI(context, null);
       });
-
-      for (var item in controller.admireList) {
-        if (controller.details.value.id == item.admireId) {
-          controller.admire.value = 'Admired';
-        }
-      }
-    } else {
-      controller.admire.value = 'Admire';
     }
     setState(() {});
   }
@@ -280,39 +274,70 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                 controller.details.value
                                                             .instagramUrl !=
                                                         null
-                                                    ? Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                right: 15.w),
-                                                        child: Image.asset(
-                                                          icon_instagram,
-                                                          height: 24.h,
-                                                          width: 24.w,
+                                                    ? GestureDetector(
+                                                      onTap: () async {
+                                                        launchURL(controller.details.value.instagramUrl);
+                                                        // if (await canLaunch(controller.details.value.instagramUrl)) {
+                                                        //   await launch(controller.details.value.instagramUrl);
+                                                        // } else {
+                                                        //   throw 'Could not launch ${controller.details.value.instagramUrl}';
+                                                        // }
+                                                      },
+                                                      child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  right: 15.w),
+                                                          child: Image.asset(
+                                                            icon_instagram,
+                                                            height: 24.h,
+                                                            width: 24.w,
+                                                          ),
                                                         ),
-                                                      )
+                                                    )
                                                     : Container(),
                                                 controller.details.value
                                                             .twitterUrl !=
                                                         null
-                                                    ? Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                right: 15.w),
-                                                        child: Image.asset(
-                                                          icon_twitter,
-                                                          height: 24.h,
-                                                          width: 24.w,
+                                                    ? GestureDetector(
+                                                      onTap: () async {
+                                                        launchURL(controller.details.value.twitterUrl);
+                                                        // if (await canLaunch(controller.details.value.twitterUrl)) {
+                                                        //   await launch(controller.details.value.twitterUrl);
+                                                        // } else {
+                                                        //   throw 'Could not launch ${controller.details.value.twitterUrl}';
+                                                        // }
+                                                      },
+                                                      child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  right: 15.w),
+                                                          child: Image.asset(
+                                                            icon_twitter,
+                                                            height: 24.h,
+                                                            width: 24.w,
+                                                          ),
                                                         ),
-                                                      )
+                                                    )
                                                     : Container(),
                                                 controller.details.value
                                                             .linkedinUrl !=
                                                         null
-                                                    ? Image.asset(
-                                                        icon_linkedin,
-                                                        height: 24.h,
-                                                        width: 24.w,
-                                                      )
+                                                    ? GestureDetector(
+                                                      onTap: () async {
+                                                        launchURL(controller.details.value.linkedinUrl);
+                                                        
+                                                        // if (await canLaunch(controller.details.value.linkedinUrl)) {
+                                                        //   await launch(controller.details.value.linkedinUrl);
+                                                        // } else {
+                                                        //   throw 'Could not launch ${controller.details.value.linkedinUrl}';
+                                                        // }
+                                                      },
+                                                      child: Image.asset(
+                                                          icon_linkedin,
+                                                          height: 24.h,
+                                                          width: 24.w,
+                                                        ),
+                                                    )
                                                     : Container(),
                                               ],
                                             )
@@ -465,7 +490,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                               padding: EdgeInsets.all(12.r),
                                               child: Row(children: [
                                                 Icon(
-                                                  Icons.person_add_alt_sharp,
+                                                  controller.admire.value == 'Admire' ? 
+                                                  Icons.person_add_alt_sharp : Icons.check_circle,
                                                   color: orange,
                                                   size: 12.r,
                                                 ),
@@ -664,14 +690,17 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             // ),
             // ),
             Expanded(
-              child: TabBarView(
-                controller: tabController,
-                children: [
-                  ProfileTab(),
-                  PostTab(id: controller.details.value.id),
-                  VideoTab(id: controller.details.value.id),
-                  EventTab(id: controller.details.value.id),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: TabBarView(
+                  controller: tabController,
+                  children: [
+                    ProfileTab(),
+                    PostTab(id: controller.details.value.id),
+                    VideoTab(id: controller.details.value.id),
+                    EventTab(id: controller.details.value.id),
+                  ],
+                ),
               ),
             ),
           ],

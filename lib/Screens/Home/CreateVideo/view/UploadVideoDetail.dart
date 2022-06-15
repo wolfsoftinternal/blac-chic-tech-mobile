@@ -66,13 +66,16 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                         height: 60,
                       ),
                       ToolbarWithHeaderCenterTitle("UPLOAD VIDEO"),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Expanded(
                         child: SingleChildScrollView(
                           child: Padding(
                             padding: EdgeInsets.only(
                                 left: 24.w,
                                 right: 24.w,
-                                top: 40.h,
+                                top: 20.h,
                                 bottom: 24.h),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -106,7 +109,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 24.h,
+                                  height: 16.h,
                                 ),
 
                                 Text("TOPIC",
@@ -161,7 +164,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 24.h,
+                                  height: 16.h,
                                 ),
 
                                 Text("LANGUAGE",
@@ -216,7 +219,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 24.h,
+                                  height: 16.h,
                                 ),
 
                                 Text("EMBED CODE",
@@ -267,7 +270,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 // ),
 
                                 SizedBox(
-                                  height: 24.h,
+                                  height: 16.h,
                                 ),
 
                                 Text("DESCRIPTION",
@@ -298,7 +301,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                               top: 4.h,
                                               bottom: 2.h,
                                               right: 24.w,
-                                              left: 16.w),
+                                              left: 11.w),
                                           child: TextFormField(
                                             controller:
                                                 controller.descController.value,
@@ -339,7 +342,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 24.h,
+                                  height: 16.h,
                                 ),
 
                                 Text("RELATED TAGS",
@@ -358,7 +361,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 Container(
                                   decoration: SpinnerDecorationBorder,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.only(left: 8.w),
                                     // child: Row(
                                     //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     //   children: [
@@ -394,9 +397,14 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                         FilteringTextInputFormatter.allow(
                                             RegExp(r'^[a-z A-Z]+$')),
                                       ],
-                                      inputDecoration: const InputDecoration(
+                                      inputDecoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText: 'Tag name',
+                                        hintStyle: TextStyle(
+                                          color: grey_aaaaaa,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontSize: 14.sp,
+                                        )
                                       ),
                                       onTagChanged: (newValue) {
                                         setState(() {
@@ -438,7 +446,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 24.h,
+                                  height: 16.h,
                                 ),
 
                                 GestureDetector(
