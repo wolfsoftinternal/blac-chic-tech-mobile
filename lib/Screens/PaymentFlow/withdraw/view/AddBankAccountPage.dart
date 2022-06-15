@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -46,117 +47,32 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 15.h,),
                     ToolbarWithHeaderCenterTitle(add_bank_account),
-                    Divider(
-                      height: 1,
-                      color: grey_E9ECEC,
-                      thickness: 1,
-                    ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 20.h,),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 24,right: 24,bottom: 24),
+                          padding:  EdgeInsets.only(left: 24.w,right: 24.w,bottom: 24.h),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // WalletBalanceWidget(
-                              //     amount:
-                              //         SharePreData.strDollar + "${controller.walletAmount.value}"), // Wallet Balance Widget
-                              // SizedBox(
-                              //   height: 35,
-                              // ),
-                              //
-                              // // set amount lable
-                              // setHelceticaBold(set_amount, 16.0, Colors.black,
-                              //     FontWeight.w600, FontStyle.normal),
-                              //
-                              // SizedBox(
-                              //   height: 22,
-                              // ),
-                              //
-                              // // set Amount widget
-                              // Container(
-                              //     height: 56,
-                              //     decoration: BoxDecoration(
-                              //       color: grey_e9ecec,
-                              //       borderRadius: BorderRadius.circular(10),
-                              //     ),
-                              //     // padding: EdgeInsets.all(20),
-                              //     child: Row(
-                              //       children: [
-                              //         Container(
-                              //           width: 50,
-                              //           height: double.infinity,
-                              //           decoration: BoxDecoration(
-                              //             color: grey_A0B0AD.withOpacity(0.4),
-                              //             borderRadius: BorderRadius.only(
-                              //               topLeft: Radius.circular(10),
-                              //               bottomLeft: Radius.circular(10),
-                              //             ),
-                              //           ),
-                              //           child: Center(
-                              //             child: setHelveticaRegular(
-                              //                 SharePreData.strDollar,
-                              //                 16.0,
-                              //                 black,
-                              //                 FontWeight.w700,
-                              //                 FontStyle.normal),
-                              //           ),
-                              //         ),
-                              //         Expanded(
-                              //             child: TextFormField(
-                              //               style: TextStyle(
-                              //                   fontFamily: helvetica_neu_bold,
-                              //                   fontSize: 16.0,
-                              //                   fontWeight: FontWeight.w500,
-                              //                   color: black),
-                              //           controller: controller.setAmount.value,
-                              //           keyboardType: TextInputType.number,
-                              //           decoration: InputDecoration(
-                              //               contentPadding: EdgeInsets.all(10),
-                              //               hintText: set_amount,
-                              //               border: InputBorder.none,
-                              //               hintStyle: TextStyle(
-                              //                   fontFamily: helveticaNeueNeue_medium,
-                              //                   fontSize: 14.0,
-                              //                   color: grey_96a6a3)),
-                              //               textInputAction: TextInputAction.next,
-                              //         )),
-                              //         // Column(
-                              //         //     mainAxisAlignment:
-                              //         //         MainAxisAlignment.center,
-                              //         //     children: [
-                              //         //       GestureDetector(
-                              //         //           child: Icon(Icons.arrow_drop_up)),
-                              //         //       GestureDetector(
-                              //         //           child: Icon(Icons.arrow_drop_down))
-                              //         //     ]),
-                              //       ],
-                              //     )),
-                              // SizedBox(
-                              //   height: 28,
-                              // ),
-                              //
-                              // // Withdraw to lable
-                              // setHelveticaMedium(withdraw_to, 16.0, Colors.black,
-                              //     FontWeight.w100, FontStyle.normal),
-                              //
-                              // SizedBox(
-                              //   height: 22,
-                              // ),
 
 
-                              Text(acc_name.toUpperCase(), style: TextStyle(fontFamily: helveticaNeueNeue_medium,
-                                  fontSize: 13.0,
-                                  color: grey_96a6a3),),
-                              SizedBox(height: 5,),
+                              SizedBox(height: 20.h,),
+
+                              Text(acc_name.toUpperCase(),
+                                style: TextStyle(fontFamily: roboto_bold,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 12.sp,
+                                  color: grey_aaaaaa),),
+                              SizedBox(height: 6.h,),
                               Container(
                                   height: HeightData.fifty_three,
                                   decoration: BoxDecoration(
                                     color: white,
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                   ),
                                   child: Center(
                                     child: TextFormField(
@@ -164,7 +80,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                       textInputAction: TextInputAction.next,
                                       style: TextStyle(
                                           fontFamily: helveticaNeueNeue_medium,
-                                          fontSize: 14.0,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.w500,
                                           color: black),
                                       decoration: InputDecoration(
@@ -174,17 +90,20 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                           ),
                                           hintStyle: TextStyle(
                                               fontFamily: helveticaNeueNeue_medium,
-                                              fontSize: 14.0,
+                                              fontSize: 14.sp,
                                               color: grey_96a6a3)),
                                     ),
                                   )
                               ),
-                              SizedBox(height: 20,),
+                              SizedBox(height: 16.h,),
 
-                              Text(bank_name.toUpperCase(), style: TextStyle(fontFamily: helveticaNeueNeue_medium,
-                                  fontSize: 13.0,
-                                  color: grey_96a6a3),),
-                              SizedBox(height: 5,),
+                              Text(bank_name.toUpperCase(),
+                                style: TextStyle(
+                                    fontFamily: roboto_bold,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 12.sp,
+                                    color: grey_aaaaaa),),
+                              SizedBox(height: 6.h,),
                               Container(
                                   height: HeightData.fifty_three,
                                   decoration: BoxDecoration(
@@ -212,12 +131,15 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                     ),
                                   )),
 
-                              SizedBox(height: 20,),
+                              SizedBox(height: 16.h,),
 
-                              Text(account_number.toUpperCase(), style: TextStyle(fontFamily: helveticaNeueNeue_medium,
-                                  fontSize: 13.0,
-                                  color: grey_96a6a3),),
-                              SizedBox(height: 5,),
+                              Text(account_number.toUpperCase(),
+                                style: TextStyle(
+                                    fontFamily: roboto_bold,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 12.sp,
+                                    color: grey_aaaaaa),),
+                              SizedBox(height: 6.h,),
                               Container(
                                   height: HeightData.fifty_three,
                                   decoration: BoxDecoration(
@@ -248,11 +170,14 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                   )),
 
 
-                              SizedBox(height: 20,),
-                              Text(routing_numder.toUpperCase(), style: TextStyle(fontFamily: helveticaNeueNeue_medium,
-                                  fontSize: 13.0,
-                                  color: grey_96a6a3),),
-                              SizedBox(height: 5,),
+                              SizedBox(height: 16.h,),
+                              Text(routing_numder.toUpperCase(),
+                                style: TextStyle(
+                                    fontFamily: roboto_bold,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 12.sp,
+                                    color: grey_aaaaaa),),
+                              SizedBox(height: 6.h,),
                               Container(
                                   height: HeightData.fifty_three,
                                   decoration: BoxDecoration(
@@ -283,11 +208,14 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                   )),
 
 
-                              SizedBox(height: 20,),
-                              Text(bank_address.toUpperCase(), style: TextStyle(fontFamily: helveticaNeueNeue_medium,
-                                  fontSize: 13.0,
-                                  color: grey_96a6a3),),
-                              SizedBox(height: 5,),
+                              SizedBox(height: 16.h,),
+                              Text(bank_address.toUpperCase(),
+                                style: TextStyle(
+                                    fontFamily: roboto_bold,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 12.sp,
+                                    color: grey_aaaaaa),),
+                              SizedBox(height: 6.h,),
                               Container(
                                   height: HeightData.fifty_three,
                                   decoration: BoxDecoration(
@@ -315,10 +243,10 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                               color: grey_96a6a3)),
                                     ),
                                   )),
-                              SizedBox(height: 30),
+                              SizedBox(height: 30.h),
 
                               // Withdraw to lable
-                              setHelceticaBold(save_as, 16.0, Colors.black,
+                              setHelceticaBold(save_as, 16.sp, Colors.black,
                                   FontWeight.w600, FontStyle.normal),
 
                               Row(
@@ -343,7 +271,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                 ],
                               ),
 
-                              SizedBox(height: 15),
+                              SizedBox(height: 15.h),
                               CommonElevatedButtonSecond(
                                   save, Colors.white, black, () {
                                     checkNet(context).then((value) {
@@ -406,7 +334,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                     SizedBox(
                       height: 12,
                     ),
-                    setHelveticaMedium(accountType, 12.0, black,
+                    setHelveticaMedium(accountType, 12.sp, Color(0xff1c2535),
                         FontWeight.w400, FontStyle.normal),
                   ],
                 ),
