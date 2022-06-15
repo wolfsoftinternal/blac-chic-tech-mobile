@@ -77,27 +77,26 @@ class VideoController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             topicListAPI(context);
-          }else if(model.statusCode==200){
-            TopicListModel detail =
-            TopicListModel.fromJson(userModel);
+          } else if (model.statusCode == 200) {
+            TopicListModel detail = TopicListModel.fromJson(userModel);
 
             topicList.value = detail.data!;
-            
+
             if (topicList.isNotEmpty) {
-            for (var item in topicList) {
-              topicNameList.add(item.name);
+              for (var item in topicList) {
+                topicNameList.add(item.name);
+              }
+              dropDownTopicItems = getDropDownTopicItems();
+              topicName.value = dropDownTopicItems![0].value!;
             }
-            dropDownTopicItems = getDropDownTopicItems();
-            topicName.value = dropDownTopicItems![0].value!;
-        }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -138,14 +137,13 @@ class VideoController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             languageListAPI(context);
-          }else if(model.statusCode==200){
-            TopicListModel detail =
-            TopicListModel.fromJson(userModel);
+          } else if (model.statusCode == 200) {
+            TopicListModel detail = TopicListModel.fromJson(userModel);
 
             languageList.value = detail.data!;
 
@@ -158,7 +156,7 @@ class VideoController extends GetxController {
             }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -183,23 +181,31 @@ class VideoController extends GetxController {
   }
 
   //Speaker List / Host List
-  userListAPI(BuildContext context) async {
+  userListAPI(BuildContext context, [userId]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     dynamic body;
 
     PageNumber = PageNumber + 1;
-    body = {
-      'search' : searchController.value.text.toString(),
-      'page': PageNumber.toString(),
-    };
+    if (userId != null) {
+      body = {
+        'user_id': userId.toString(),
+        'search': searchController.value.text.toString(),
+        'page': PageNumber.toString(),
+      };
+    } else {
+      body = {
+        'search': searchController.value.text.toString(),
+        'page': PageNumber.toString(),
+      };
+    }
 
     String url = urlBase + urlUserList;
     final apiReq = Request();
     await apiReq.postAPI(url, body, token.toString()).then((value) {
-      if(PageNumber == 1){
+      if (PageNumber == 1) {
         userList.clear();
-    }
+      }
       http.StreamedResponse res = value;
 
       if (res.statusCode == 200) {
@@ -208,20 +214,19 @@ class VideoController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             userListAPI(context);
-          }else if(model.statusCode==200){
-            UserListModel detail =
-            UserListModel.fromJson(userModel);
+          } else if (model.statusCode == 200) {
+            UserListModel detail = UserListModel.fromJson(userModel);
 
             userList.addAll(detail.data!);
             print(userList.length);
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -232,12 +237,12 @@ class VideoController extends GetxController {
     var token = await preferences.getStringValue(SharePreData.keytoken);
     List speaker = [];
 
-    for(var item in selectedList){    
+    for (var item in selectedList) {
       speaker.add(item.id);
     }
 
     dynamic body = {
-      'description' : descController.value.text,
+      'description': descController.value.text,
       'topic': topicName.value,
       'language': languageName.value,
       'speakers': speaker.join(','),
@@ -257,17 +262,17 @@ class VideoController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             createVideoApi(context);
-          }else if(model.statusCode==200){
+          } else if (model.statusCode == 200) {
             snackBar(context, 'Video Uploaded');
             Get.back();
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -280,7 +285,9 @@ class VideoController extends GetxController {
     } else if (linkController.value.text.isEmpty) {
       snackBar(context, "Enter video link");
       return false;
-    } else if(!RegExp(r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?').hasMatch(linkController.value.text)){
+    } else if (!RegExp(
+            r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?')
+        .hasMatch(linkController.value.text)) {
       snackBar(context, "Enter valid video link");
       return false;
     } else if (descController.value.text.isEmpty) {

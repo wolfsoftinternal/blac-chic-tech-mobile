@@ -341,44 +341,44 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  SelectedUserProfileAPI(BuildContext context, id) async {
-    var preferences = MySharedPref();
-    var token = await preferences.getStringValue(SharePreData.keytoken);
+  // SelectedUserProfileAPI(BuildContext context, id) async {
+  //   var preferences = MySharedPref();
+  //   var token = await preferences.getStringValue(SharePreData.keytoken);
 
-    String url = urlBase + urlOtherProfile;
-    final apiReq = Request();
+  //   String url = urlBase + urlOtherProfile;
+  //   final apiReq = Request();
 
-    dynamic body = {
-      'user_id': id.toString(),
-    };
-    await apiReq.postAPI(url, body, token.toString()).then((value) {
-      http.StreamedResponse res = value;
+  //   dynamic body = {
+  //     'user_id': id.toString(),
+  //   };
+  //   await apiReq.postAPI(url, body, token.toString()).then((value) {
+  //     http.StreamedResponse res = value;
 
-      if (res.statusCode == 200) {
-        res.stream.bytesToString().then((value) async {
-          String strData = value;
-          Map<String, dynamic> userModel = json.decode(strData);
-          BaseModel model = BaseModel.fromJson(userModel);
+  //     if (res.statusCode == 200) {
+  //       res.stream.bytesToString().then((value) async {
+  //         String strData = value;
+  //         Map<String, dynamic> userModel = json.decode(strData);
+  //         BaseModel model = BaseModel.fromJson(userModel);
 
-          if (model.statusCode == 500) {
-            final tokenUpdate = TokenUpdateRequest();
-            await tokenUpdate.updateToken();
+  //         if (model.statusCode == 500) {
+  //           final tokenUpdate = TokenUpdateRequest();
+  //           await tokenUpdate.updateToken();
 
-            SelectedUserProfileAPI(context, id);
-          } else if (model.statusCode == 200) {
-            UserDetails userDetailsModel =
-                UserDetails.fromJson(userModel['data']);
+  //           SelectedUserProfileAPI(context, id);
+  //         } else if (model.statusCode == 200) {
+  //           UserDetails userDetailsModel =
+  //               UserDetails.fromJson(userModel['data']);
 
-            details.value = userDetailsModel;
+  //           details.value = userDetailsModel;
 
-            print('details name ' + details.value.firstName!);
-          }
-        });
-      } else {
-        print(res.reasonPhrase);
-      }
-    });
-  }
+  //           print('details name ' + details.value.firstName!);
+  //         }
+  //       });
+  //     } else {
+  //       print(res.reasonPhrase);
+  //     }
+  //   });
+  // }
 
   postListAPI(BuildContext context, body, [isFrom]) async {
     var preferences = MySharedPref();

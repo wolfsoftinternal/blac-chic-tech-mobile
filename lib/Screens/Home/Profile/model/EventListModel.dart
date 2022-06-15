@@ -152,9 +152,9 @@ class EventList {
         cityDetails: json["city_details"] == null
             ? null
             : Details.fromJson(json["city_details"]),
-        hosts:
+        hosts: json["hosts"] == null ? null :
             List<UserList>.from(json["hosts"].map((x) => UserList.fromJson(x))),
-        speakers: List<SpeakerElement>.from(json["speakers"].map((x) => SpeakerElement.fromJson(x))),
+        speakers: json["speakers"] == null ? null : List<SpeakerElement>.from(json["speakers"].map((x) => SpeakerElement.fromJson(x))),
         benefits: json["benefits"] != null
             ? List<Benefit>.from(
                 json["benefits"].map((x) => Benefit.fromJson(x)))
