@@ -78,7 +78,7 @@ class _EventDetailState extends State<EventDetail> {
      await controller.userProfileAPI(context);
     });
   }
-  
+
 
   init() async {
     var preferences = MySharedPref();
@@ -1701,7 +1701,8 @@ class _EventDetailState extends State<EventDetail> {
                     SizedBox(height: 25.h,
                     ),
                     // controller.eventDetails.value.userId != userId ? Container()
-                    controller.registerList.value.data!.registeredUsers!.isNotEmpty ?
+                    ((controller.registerList.value.data?.registeredUsers != null) &&
+                        (controller.registerList.value.data!.registeredUsers!.isNotEmpty))?
                     controller.eventDetails.value.type != 'ticket_price'
                         ? Container()
                         : Padding(
