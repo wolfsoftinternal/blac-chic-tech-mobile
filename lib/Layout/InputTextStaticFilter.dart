@@ -67,6 +67,13 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    eventDetailController.initScrolling(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Obx(
       () => Column(
@@ -105,6 +112,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                     padding: EdgeInsets.only(
                         left: 10.w, right: 10.w, top: 16.h, bottom: 16.h),
                     child: TextFormField(
+                      controller: eventDetailController.searchController.value,
                       style: const TextStyle(
                           color: black_121212,
                           fontFamily: helveticaNeueNeue_medium,
@@ -136,7 +144,6 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       // validator: (value) => validator(value),
                       textInputAction: textInputAction,
-                      controller: controller,
                       cursorColor: black_121212,
                       onEditingComplete: () {
                         FocusScope.of(context).unfocus();
@@ -153,6 +160,22 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                             checkFillColor = true;
                           });
                         }
+
+                        checkNet(context).then((value) {
+                          eventDetailController.pageNumber.value = 0;
+                            eventDetailController.pageNumber =
+                                eventDetailController.pageNumber + 1;
+                            dynamic body = {
+                              'page': eventDetailController.pageNumber.toString(),
+                          'name':
+                              eventDetailController.searchController.value.text,
+                          'city': eventDetailController.strCityId.value,
+                          'date':
+                              eventDetailController.dateController.value.text,
+                          'type': strType.toString().toLowerCase()
+                            };
+                            eventDetailController.allEventListApi(body); 
+                        });
                       },
                       onFieldSubmitted: (String value) {
                         if (value.isNotEmpty) {
@@ -241,6 +264,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                             eventDetailController.dateController.value.text =
                                 '';
                             strType = null;
+                            eventDetailController.pageNumber.value = 0;
                             if (eventDetailController
                                     .searchController.value.text ==
                                 '') {
@@ -252,7 +276,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                       .toString(),
                                 };
                                 eventDetailController.initScrolling(
-                                    context, body);
+                                    context);
                                 eventDetailController.allEventListApi(body);
                               });
                             } else {
@@ -265,7 +289,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                     .searchController.value.text
                               };
                               eventDetailController.initScrolling(
-                                  context, body);
+                                  context);
                               checkNet(context).then((value) {
                                 eventDetailController.allEventListApi(body);
                               });
@@ -486,10 +510,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                   margin: EdgeInsets.only(top: 16.h),
                   child: BlackButton("Apply Filter", Colors.white, () {
                     checkNet(context).then((value) {
-                      if (eventDetailController
-                              .dateController.value.text.isNotEmpty ||
-                          strCityName != '' ||
-                          strType != '') {
+                      
+                        eventDetailController.pageNumber.value = 0;
                         eventDetailController.pageNumber =
                             eventDetailController.pageNumber + 1;
                         dynamic body = {
@@ -499,11 +521,10 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                           'city': eventDetailController.strCityId.value,
                           'date':
                               eventDetailController.dateController.value.text,
-                          'type': strType.toString()
+                          'type': strType.toString().toLowerCase()
                         };
-                        eventDetailController.initScrolling(context, body);
                         eventDetailController.allEventListApi(body);
-                      }
+                      
                     });
                   }),
                 ),

@@ -102,8 +102,8 @@ class TransactionHistory {
 
     String? admissionType;
     String? perTicketPrice;
-    int? totalUsers;
-    int? totalPrice;
+    dynamic totalUsers;
+    dynamic totalPrice;
 
     factory TransactionHistory.fromJson(Map<String, dynamic> json) => TransactionHistory(
         admissionType: json["admission_type"],

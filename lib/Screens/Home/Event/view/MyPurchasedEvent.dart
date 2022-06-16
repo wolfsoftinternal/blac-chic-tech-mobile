@@ -39,7 +39,13 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
   @override
   void initState() {
     super.initState();
-    controller.initPastUpcomingScrolling(context);
+    controller.initScrolling(context);
+    controller.pageNumber.value = 1;
+    dynamic body = {
+      'page': controller.pageNumber.toString(),
+      'type': 'upcoming'
+    };
+    controller.allEventListApi(body);
   }
 
   @override
@@ -103,6 +109,13 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                         tv2 = true;
                         _isFirstLayout = false;
                         _isSecondLayout = true;
+
+                        controller.pageNumber.value = 1;
+                        dynamic body = {
+                          'page': controller.pageNumber.toString(),
+                          'type': 'past'
+                        };
+                        controller.allEventListApi(body);
                       });
                     },
                     child: Container(
@@ -130,7 +143,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
           /*--------------- Upcoming Tab --------------*/
           Expanded(
             child: SingleChildScrollView(
-              controller: controller.pastUpcomingScrollController,
+              controller: controller.scrollController,
               child: Container(
                 margin: EdgeInsets.only(left: 16.w, right: 16.w),
                 child: ListView.builder(
@@ -147,10 +160,10 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                           checkNet(context).then((value) {
                             if (_isFirstLayout == true) {
                               admireProfileController.eventDetailAPI(context,
-                                  controller.upcomingEventList[i].id, 'upcoming', 'event');
+                                  controller.upcomingEventList[i].id, 'upcoming');
                             } else {
                               admireProfileController.eventDetailAPI(context,
-                                  controller.pastEventList[i].id, 'past', 'event');
+                                  controller.pastEventList[i].id, 'past');
                             }
                           });
                         },
@@ -569,7 +582,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
               ),
             ),
           ),
-          if (controller.isPastUpcomingPaginationLoading.value == true)
+          if (controller.isPaginationLoading.value == true)
             PaginationUtils().loader(),
 
           // /*--------------- Past Tab --------------*/

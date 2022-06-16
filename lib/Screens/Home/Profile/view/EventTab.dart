@@ -187,9 +187,7 @@ class _EventTabState extends State<EventTab> {
                                                       bottom: 7.h),
                                                   child: // Paid
                                                       Text(
-                                                          controller
-                                                              .eventList[index]
-                                                              .type!,
+                                                          controller.eventList[index].type! == 'ticket_price' ? 'Paid' : controller.eventList[index].type! == 'free' ? 'Free' : 'Invite Only',
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -243,7 +241,7 @@ class _EventTabState extends State<EventTab> {
                                                                     .eventList[
                                                                         index]
                                                                     .hosts ==
-                                                                null
+                                                                null || controller.eventList[index].hosts.toString() == '[]'
                                                             ? Icon(
                                                                 Icons.person,
                                                                 size: 15.r,
@@ -253,11 +251,13 @@ class _EventTabState extends State<EventTab> {
                                                             : controller
                                                                         .eventList[
                                                                             index]
-                                                                        .hosts!
-                                                                        .first
+                                                                        .hosts![0]
                                                                         .image
                                                                         .toString() ==
-                                                                    ''
+                                                                    '' || controller
+                                                                    .eventList[
+                                                                        index]
+                                                                    .hosts![0].image == null
                                                                 ? Icon(
                                                                     Icons
                                                                         .person,
@@ -302,6 +302,8 @@ class _EventTabState extends State<EventTab> {
                                                                   ),
                                                       ),
                                                     ),
+                                                    setHelceticaBold(
+                                                      "Hosted by ", 11.sp, grey_aaaaaa, FontWeight.w500, FontStyle.normal),
                                                     setHelceticaBold(
                                                         controller
                                                                 .eventList[

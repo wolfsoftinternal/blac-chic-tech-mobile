@@ -25,19 +25,22 @@ class EventDetailController extends GetxController {
   RxList<EventList> pastEventList = <EventList>[].obs;
   Rx<EventList> eventDetails = EventList().obs;
   ScrollController scrollController = ScrollController();
-  ScrollController pastUpcomingScrollController = ScrollController();
+  // ScrollController pastUpcomingScrollController = ScrollController();
   RxInt pageNumber = 0.obs;
-  RxInt pastUpcomingPageNumber = 1.obs;
+  // RxInt pastUpcomingPageNumber = 1.obs;
   RxBool isPaginationLoading = false.obs;
-  RxBool isPastUpcomingPaginationLoading = false.obs;
+  // RxBool isPastUpcomingPaginationLoading = false.obs;
 
-  initScrolling(BuildContext context, body) {
+  initScrolling(BuildContext context) {
     scrollController.addListener(() async {
       if (scrollController.position.maxScrollExtent ==
           scrollController.position.pixels) {
         _scrollDown();
         isPaginationLoading.value = true;
         pageNumber = pageNumber + 1;
+        dynamic body = {
+          'page': pageNumber.toString(),
+        };
         await allEventListApi(body);
         isPaginationLoading.value = false;
       }
@@ -48,26 +51,26 @@ class EventDetailController extends GetxController {
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
   }
 
-  initPastUpcomingScrolling(BuildContext context) {
-    pastUpcomingScrollController.addListener(() async {
-      if (pastUpcomingScrollController.position.maxScrollExtent ==
-          pastUpcomingScrollController.position.pixels) {
-        _scrollDown();
-        isPastUpcomingPaginationLoading.value = true;
-        pastUpcomingPageNumber = pastUpcomingPageNumber + 1;
-        dynamic body = {
-          'page': pastUpcomingPageNumber.toString(),
-        };
-        await allEventListApi(body);
-        isPastUpcomingPaginationLoading.value = false;
-      }
-    });
-  }
+  // initPastUpcomingScrolling(BuildContext context) {
+  //   pastUpcomingScrollController.addListener(() async {
+  //     if (pastUpcomingScrollController.position.maxScrollExtent ==
+  //         pastUpcomingScrollController.position.pixels) {
+  //       _scrollDown();
+  //       isPastUpcomingPaginationLoading.value = true;
+  //       pastUpcomingPageNumber = pastUpcomingPageNumber + 1;
+  //       dynamic body = {
+  //         'page': pastUpcomingPageNumber.toString(),
+  //       };
+  //       await allEventListApi(body);
+  //       isPastUpcomingPaginationLoading.value = false;
+  //     }
+  //   });
+  // }
 
-  void _pastUpcomingScrollDown() {
-    pastUpcomingScrollController
-        .jumpTo(pastUpcomingScrollController.position.maxScrollExtent);
-  }
+  // void _pastUpcomingScrollDown() {
+  //   pastUpcomingScrollController
+  //       .jumpTo(pastUpcomingScrollController.position.maxScrollExtent);
+  // }
 
   cityListApi() async {
     cityList.clear();
@@ -123,7 +126,7 @@ class EventDetailController extends GetxController {
             List<EventList> past = [];
 
             EventListModel detail = EventListModel.fromJson(userModel);
-            eventList.value = detail.data!;
+            eventList.addAll(detail.data!);
 
             for (var item in eventList) {
               if (item.event_type == 'past') {
@@ -132,12 +135,8 @@ class EventDetailController extends GetxController {
                 upcoming.add(item);
               }
             }
-            upcomingEventList.value = upcoming;
-            pastEventList.value = past;
-          } else if (model.statusCode == 101) {
-            eventList.clear();
-            upcomingEventList.clear();
-            pastEventList.clear();
+            upcomingEventList.addAll(upcoming);
+            pastEventList.addAll(past);
           } else {
             print(res.reasonPhrase);
           }

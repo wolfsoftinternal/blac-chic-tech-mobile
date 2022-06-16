@@ -34,9 +34,8 @@ import '../model/InstalledAppModel.dart';
 import '../../Event/view/AllPurchasedEventTicketList.dart';
 
 class EventDetail extends StatefulWidget {
-  final isFrom;
   final type;
-  const EventDetail({Key? key, this.isFrom, this.type}) : super(key: key);
+  const EventDetail({Key? key, this.type}) : super(key: key);
 
   @override
   State<EventDetail> createState() => _EventDetailState();
@@ -673,7 +672,7 @@ class _EventDetailState extends State<EventDetail> {
                                             //  height: 100.h,
                                        //       margin: EdgeInsets.only(bottom: 18,top: 10),
                                               padding:
-                                                  widget.isFrom == 'event' && widget.type == 'upcoming'
+                                                  widget.type == 'upcoming'
                                                       ?  EdgeInsets.only(
                                                           top: 8.h,
                                                           bottom: 8.h,
@@ -686,7 +685,7 @@ class _EventDetailState extends State<EventDetail> {
                                                           bottom: 10.h),
                                               decoration: BoxDecoration(
                                                   color:
-                                                      widget.isFrom == 'event' && widget.type == 'upcoming'
+                                                      widget.type == 'upcoming'
                                                           ? black_121212
                                                           : white_ffffff,
                                                   borderRadius:
@@ -717,9 +716,7 @@ class _EventDetailState extends State<EventDetail> {
                                                               index]
                                                           .category!,
                                                       style: TextStyle(
-                                                          color: widget
-                                                                      .isFrom ==
-                                                                  'event' && widget.type == 'upcoming'
+                                                          color: widget.type == 'upcoming'
                                                               ? white_ffffff
                                                               : black_121212,
                                                           fontWeight:
@@ -738,7 +735,7 @@ class _EventDetailState extends State<EventDetail> {
                                                   //         .admissionData![index]
                                                   //         .category!,
                                                   //     16,
-                                                  //     widget.isFrom == 'event' ? white_ffffff : black_121212,
+                                                  //     hite_ffffff : black_121212,
                                                   //     FontWeight.w500,
                                                   //     FontStyle.normal),
 
@@ -746,8 +743,7 @@ class _EventDetailState extends State<EventDetail> {
                                                   Text(
                                                       "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
                                                       style: TextStyle(
-                                                          color: widget.isFrom ==
-                                                                  'event' && widget.type == 'upcoming'
+                                                          color: widget.type == 'upcoming'
                                                               ? white_ffffff
                                                               : orange_ff881a,
                                                           fontWeight:
@@ -763,11 +759,11 @@ class _EventDetailState extends State<EventDetail> {
                                                   // setHelveticaMedium(
                                                   //     "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
                                                   //     16,
-                                                  //     widget.isFrom == 'event' ? white_ffffff : orange_ff881a,
+                                                  //     hite_ffffff : orange_ff881a,
                                                   //     FontWeight.w500,
                                                   //     FontStyle.normal),
 
-                                                  widget.isFrom == 'event' && widget.type == 'upcoming'
+                                                  widget.type == 'upcoming'
                                                       ? Padding(
                                                           padding:
                                                               EdgeInsets.only(
@@ -1011,7 +1007,7 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
                         ),
                         controller.eventDetails.value.type == 'invite_only'
-                            ? widget.isFrom != 'event' && widget.type != 'upcoming'
+                            ? widget.type != 'upcoming'
                                 ? Column(
                                     children: [
                                       eventController.selectedList.isNotEmpty
@@ -1041,8 +1037,8 @@ class _EventDetailState extends State<EventDetail> {
                                                             .selectedList
                                                             .isNotEmpty)
                                                           SizedBox(
-                                                            height: 36.h,
-                                                            width: 36.w,
+                                                            height: 17.5.h,
+                                                            width: 17.5.w,
                                                             child:
                                                                 CircularProfileAvatar(
                                                               '',
@@ -1079,8 +1075,8 @@ class _EventDetailState extends State<EventDetail> {
                                                           Positioned(
                                                             left: 10.0,
                                                             child: SizedBox(
-                                                              height: 36,
-                                                              width: 36,
+                                                              height: 17.5,
+                                                              width: 17.5,
                                                               child:
                                                                   CircularProfileAvatar(
                                                                 '',
@@ -1119,8 +1115,8 @@ class _EventDetailState extends State<EventDetail> {
                                                             child: SvgPicture
                                                                 .asset(
                                                               black_more_dot_icon,
-                                                              width: 36,
-                                                              height: 36,
+                                                              width: 19,
+                                                              height: 19,
                                                             ),
                                                           )
                                                       ],
@@ -1167,7 +1163,8 @@ class _EventDetailState extends State<EventDetail> {
                                               ),
                                             )
                                           : Container(),
-                                      Padding(
+                                      widget.type == null
+                                      ? Padding(
                                         padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
                                         child: InkWell(
                                           onTap: () {
@@ -1208,7 +1205,7 @@ class _EventDetailState extends State<EventDetail> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ) : Container()
                                     ],
                                   )
                                 : Container()

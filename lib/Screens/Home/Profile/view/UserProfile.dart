@@ -576,6 +576,7 @@ class _UserProfileState extends State<UserProfile> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    videoController.userList.clear();
     checkNet(context).then(
       (value) {
         videoController.userListAPI(context, widget.selectedUserId);

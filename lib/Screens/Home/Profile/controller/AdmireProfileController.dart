@@ -536,7 +536,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  eventDetailAPI(BuildContext context, id, type, [isFrom]) async {
+  eventDetailAPI(BuildContext context, id, [type]) async {
     print('Event detail api call');
 
     var preferences = MySharedPref();
@@ -562,16 +562,12 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            eventDetailAPI(context, id, type, [isFrom]);
+            eventDetailAPI(context, id, type);
           } else if (model.statusCode == 200) {
             EventDetailModel detail = EventDetailModel.fromJson(userModel);
             eventDetails.value = detail.data!;
 
-            if (isFrom != null) {
-              Get.to(EventDetail(isFrom: 'event', type: type));
-            } else {
-              Get.to(const EventDetail());
-            }
+            Get.to(EventDetail(type: type));
           }
         });
       } else {
@@ -655,13 +651,13 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  rearrangeAdmireAPI(BuildContext context, num1, num2) async {
+  rearrangeAdmireAPI(BuildContext context, id, num2) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
     dynamic body = {
-      'admire_one_number': num1.toString(),
-      'admire_two_number': num2.toString()
+      'admire_id': id.toString(),
+      'number': num2.toString()
     };
 
     String url = urlBase + urlRearrangeAdmire;
@@ -680,7 +676,7 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            rearrangeAdmireAPI(context, num1, num2);
+            rearrangeAdmireAPI(context, id, num2);
           } else if (model.statusCode == 200) {
             admireListAPI(context, null);
           }
