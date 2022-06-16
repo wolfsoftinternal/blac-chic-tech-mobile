@@ -1,12 +1,15 @@
 import 'dart:io';
 
 import 'package:blackchecktech/Model/SpeakersVideoModel.dart';
+import 'package:blackchecktech/Screens/Home/Settings/view/EditProfile.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuController.dart';
+import 'package:blackchecktech/Screens/Home/videosMenu/Model/FindSpeakerModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Model/SpeakerVideoModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoComments.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/UIScreen/DetailTab.dart';
+import 'package:blackchecktech/UIScreen/EventTicket.dart';
 import 'package:blackchecktech/UIScreen/RelatedTags.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -476,7 +479,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                       child: Scaffold(
                         appBar: AppBar(
                           actions: const <Widget>[],
-                          titleSpacing: 0,
+                          titleSpacing: -30,
                           elevation: 0,
                           shadowColor: grey_aaaaaa,
                           backgroundColor: const Color(0x80f2f2f2),
@@ -685,6 +688,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                         ),
                       )),
                 ),
+
 
                 Container(
                     width: double.infinity,
@@ -954,5 +958,30 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
     await Share.share(Url,
         subject: Url,
         sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+  }
+
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate(this._tabBar);
+
+  final TabBar _tabBar;
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return new Container(
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }
