@@ -106,7 +106,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                                 '',
                                 radius: 40,
                                 borderColor: Colors.transparent,
-                                child: myModel!.data!.image == null
+                                child: myModel?.data?.image == null
                                     ? SvgPicture.asset(
                                         placeholder,
                                         height: 20.h,

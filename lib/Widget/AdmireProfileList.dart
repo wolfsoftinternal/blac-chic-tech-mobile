@@ -40,7 +40,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
     var preferences = MySharedPref();
     myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
-    userId = myModel!.data!.id!.toInt();
+    userId = myModel?.data?.id?.toInt()??0;
     setState(() {});
   }
   
@@ -48,7 +48,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        myModel!.data!.image == null
+        myModel?.data?.image == null
             ? SvgPicture.asset(
                 placeholder,
                 height: controller.admireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
@@ -56,7 +56,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 fit: BoxFit.cover,
               )
             : CachedNetworkImage(
-                imageUrl: myModel!.data!.image!,
+                imageUrl: myModel?.data?.image??"",
                 // widget.admireList.admireDetails!.image!,
                 height: controller.admireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
                 width: double.infinity,
@@ -97,7 +97,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
               const Spacer(),
               GestureDetector(
                   onTap: () {
-                    createBottomSheet(context, myModel!.data!.id!);
+                    createBottomSheet(context, myModel?.data?.id??"");
                   },
                   child: 
                   // userId == widget.admireList.admireDetails!.id ?
@@ -153,9 +153,9 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                       // widget.admireList.admireDetails!.userName != null
                       //     ? "@" + widget.admireList.admireDetails!.userName!
                       //     : "@" + widget.admireList.admireDetails!.firstName!,
-                      myModel!.data!.userName != null
-                          ? "@" + myModel!.data!.userName!
-                          : "@" + myModel!.data!.firstName!,
+                      myModel?.data?.userName != null
+                          ? "@" + (myModel?.data?.userName??"")
+                          : "@" + (myModel?.data?.firstName??""),
                       20.sp,
                       white_ffffff,
                       FontWeight.w600,
@@ -183,8 +183,8 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                           //     ? widget.admireList.admireDetails!.fullName!
                           //         .toUpperCase()
                           //     : "",
-                          myModel!.data!.fullName != null
-                          ? myModel!.data!.fullName!
+                          myModel?.data?.fullName != null
+                          ? (myModel?.data?.fullName??"")
                               .toUpperCase()
                           : "",
                           40.sp,
@@ -213,13 +213,11 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                       //             .companyName!
                       //             .toUpperCase()
                       //     : "",
-                      myModel!.data!.currentJobs != null
-                          ? myModel!.data!.currentJobs!.title!
+                      myModel?.data?.currentJobs != null
+                          ? myModel?.data?.currentJobs?.title??""
                                   .toUpperCase() +
                               ' - ' +
-                              myModel!.data!.currentJobs!
-                                  .companyName!
-                                  .toUpperCase()
+                          (myModel?.data?.currentJobs?.companyName??"").toUpperCase()
                           : "",
                       softWrap: true,
                       textAlign: TextAlign.center,
@@ -296,7 +294,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // widget.admireList.admireDetails!.cityDetails != null
-                  myModel!.data!.cityDetails != null
+                  myModel?.data?.cityDetails != null
                       ? const Icon(
                           Icons.location_on,
                           size: 12,
@@ -313,12 +311,12 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                     //         widget
                     //             .admireList.admireDetails!.countryDetails!.name!
                     //     : "",
-                    myModel!.data!.cityDetails != null
-                        ? myModel!.data!.cityDetails!.name! +
+                    myModel?.data?.cityDetails != null
+                        ? (myModel?.data?.cityDetails?.name??"") +
                             ', ' +
-                            myModel!.data!.stateDetails!.name! +
+                        (myModel!.data!.stateDetails!.name??"") +
                             ', ' +
-                            myModel!.data!.countryDetails!.name!
+                        (myModel?.data?.countryDetails?.name??"")
                         : "",
                     10.sp,
                     Colors.white70,
