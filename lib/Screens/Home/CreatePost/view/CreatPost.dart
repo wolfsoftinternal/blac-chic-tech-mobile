@@ -67,13 +67,18 @@ class _CreatePostState extends State<CreatePost> {
                       ),
                     ),
                     Spacer(),
-                    Text('ALL PHOTOS',
-                        style: TextStyle(
-                            color: black_121212,
-                            fontFamily: helvetica_neu_bold,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 16),
-                        textAlign: TextAlign.left),
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Text('ALL PHOTOS',
+                          style: TextStyle(
+                              color: black_121212,
+                              fontFamily: helvetica_neu_bold,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 16),
+                          textAlign: TextAlign.left),
+                    ),
                     Stack(children: [
                       Positioned(
                           top: 4, child: Icon(Icons.expand_more_rounded)),
