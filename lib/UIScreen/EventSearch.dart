@@ -88,6 +88,7 @@ class _EventSearchState extends State<EventSearch> {
                   ],
                 ),
                 SearchBar(""),
+
                 SizedBox(
                   height: 24.h,
                 ),
