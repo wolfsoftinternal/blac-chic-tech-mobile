@@ -157,6 +157,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       }else if(index == 1){
         Get.to(HomePage());
       }else if(index == 2){
+        _currentIndex = 0;
         Get.to(FriendListScreen());
       }else if(index == 3){
         _currentIndex = 0;

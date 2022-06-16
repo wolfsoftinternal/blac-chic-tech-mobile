@@ -152,30 +152,32 @@ class _FriendListScreenState extends State<FriendListScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Column(
+        child: Scaffold(
+          body: Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        myBody(),
-        isLoading
-            ? Expanded(child: myLoader())
-            : Expanded(
-                child: mySearchedFriends.isEmpty
-                    ? searchValue.isNotEmpty
-                        ? Padding(
-                            padding: EdgeInsets.all(50),
-                            child: Center(child: noDataWidget()))
-                        : signupModel != null
-                            ? myConvo2()
-                            : initiateSignUpModel()
-                    : myAllFriends.isEmpty
-                        ? Padding(
-                            padding: EdgeInsets.all(50),
-                            child: Center(child: noDataWidget()))
-                        : searchListColumn())
-        // mySearchedFriends.length > 0 ? searchListColumn() : myConvo2(),
+          myBody(),
+          isLoading
+              ? Expanded(child: myLoader())
+              : Expanded(
+                  child: mySearchedFriends.isEmpty
+                      ? searchValue.isNotEmpty
+                          ? Padding(
+                              padding: EdgeInsets.all(50),
+                              child: Center(child: noDataWidget()))
+                          : signupModel != null
+                              ? myConvo2()
+                              : initiateSignUpModel()
+                      : myAllFriends.isEmpty
+                          ? Padding(
+                              padding: EdgeInsets.all(50),
+                              child: Center(child: noDataWidget()))
+                          : searchListColumn())
+          // mySearchedFriends.length > 0 ? searchListColumn() : myConvo2(),
       ],
       // ),
-    ));
+    ),
+        ));
   }
 
   Widget myLoader() {

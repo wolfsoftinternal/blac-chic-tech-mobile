@@ -73,12 +73,12 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
             setState(() {
               final element = controller.admireList.removeAt(oldIndex);
               controller.admireList.insert(newIndex, element);
-            });
 
-            checkNet(context).then((value) {
+              checkNet(context).then((value) {
               controller.rearrangeAdmireAPI(
-                  context, controller.admireList[oldIndex].number, controller.admireList[newIndex].number);
-            });
+                  context, controller.admireList[newIndex].id ,controller.admireList[oldIndex].number);
+              });
+            });            
           }
         },
       ),

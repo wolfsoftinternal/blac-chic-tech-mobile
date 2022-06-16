@@ -235,6 +235,7 @@ class _VideoDetailState extends State<VideoDetail> {
                                                 fullScreen = false;
                                               },
                                               player: YoutubePlayer(
+                                                showVideoProgressIndicator: false,
                                                 bottomActions: const [
                                                   SizedBox(width: 14.0),
                                                   // CurrentPosition(),

@@ -33,6 +33,7 @@ class EventListDetail extends StatefulWidget {
 
 class _EventListDetailState extends State<EventListDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
+  SignupModel? myModel;
 
   @override
   void initState() {
@@ -47,6 +48,13 @@ class _EventListDetailState extends State<EventListDetail> {
     checkNet(context).then((value) {
       controller.eventListAPI(context, body, 'detail');
     });
+    init();
+  }
+
+  init() async {
+    var preferences = MySharedPref();
+    myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
   }
 
   @override
@@ -202,8 +210,14 @@ class _EventListDetailState extends State<EventListDetail> {
                             child: GestureDetector(
                               onTap: () {
                                 checkNet(context).then((value) {
-                                  controller.eventDetailAPI(context,
-                                      controller.eventList[index].id, null);
+                                  if(myModel!.data!.id == controller.eventList[index].userId){
+                                    controller.eventDetailAPI(context,
+                                      controller.eventList[index].id, );
+                                  }else{
+                                    controller.eventDetailAPI(context,
+                                      controller.eventList[index].id, controller.eventList[index].event_type);
+                                  }
+                                  
                                 });
                               },
                               child: Padding(
@@ -298,8 +312,7 @@ class _EventListDetailState extends State<EventListDetail> {
                                                     top: 7.h,
                                                     bottom: 7.h),
                                                 child: Text(
-                                                    controller
-                                                        .eventList[index].type!,
+                                                    controller.eventList[index].type! == 'ticket_price' ? 'Paid' : controller.eventList[index].type! == 'free' ? 'Free' : 'Invite Only',
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontWeight:
@@ -359,9 +372,8 @@ class _EventListDetailState extends State<EventListDetail> {
                                                             child: controller
                                                                     .eventList[
                                                                         index]
-                                                                    .hosts![0]
-                                                                    .image!
-                                                                    .isEmpty
+                                                                    .hosts ==
+                                                                null || controller.eventList[index].hosts.toString() == '[]'
                                                                 ? Icon(
                                                                     Icons
                                                                         .person,
@@ -374,7 +386,10 @@ class _EventListDetailState extends State<EventListDetail> {
                                                                             .hosts![0]
                                                                             .image
                                                                             .toString() ==
-                                                                        ''
+                                                                        '' || controller
+                                                                    .eventList[
+                                                                        index]
+                                                                    .hosts![0].image == null
                                                                     ? Icon(
                                                                         Icons
                                                                             .person,
@@ -419,6 +434,8 @@ class _EventListDetailState extends State<EventListDetail> {
                                                                       ),
                                                           ),
                                                         ),
+                                                        setHelceticaBold(
+                                                      "Hosted by ", 11.sp, grey_aaaaaa, FontWeight.w500, FontStyle.normal),
                                                         setHelceticaBold(
                                                             controller
                                                                     .eventList[

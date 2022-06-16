@@ -6,6 +6,7 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utilities/TextfieldUtility.dart';
 import 'package:blackchecktech/Utilities/Validator.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -228,6 +229,23 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
                 "Save Address",
                 Colors.white,
                 () {
+                  if(controller.landmarkController.value.text == ""){
+                    snackBar(context, 'Enter landmark');
+                    return;
+                  }else if(controller.street1Controller.value.text == ""){
+                    snackBar(context, 'Enter address');
+                    return;
+                  }else if(controller.street2Controller.value.text == ""){
+                    snackBar(context, 'Enter address 2');
+                    return;
+                  }if(controller.cityController.value.text == ""){
+                    snackBar(context, 'Enter city');
+                    return;
+                  }if(controller.countryController.value.text == ""){
+                    snackBar(context, 'Enter country');
+                    return;
+                  }
+                  controller.addressController.value.text = "${controller.street1Controller.value.text} ${controller.landmarkController.value.text}, ${controller.street2Controller.value.text}, ${controller.cityController.value.text} ${controller.countryController.value.text}";
                   Get.back();
                   Get.back();
                 },
