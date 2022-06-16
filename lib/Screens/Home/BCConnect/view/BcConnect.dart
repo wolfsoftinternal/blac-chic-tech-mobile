@@ -167,6 +167,7 @@ class _BcConnectState extends State<BcConnect> {
                                               context)
                                         });
                                   });
+                                  videoController.userList.clear();
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,

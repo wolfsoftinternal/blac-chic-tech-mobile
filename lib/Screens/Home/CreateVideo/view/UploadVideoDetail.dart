@@ -222,7 +222,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   height: 16.h,
                                 ),
 
-                                Text("EMBED CODE",
+                                Text("VIDEO LINK",
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w900,
