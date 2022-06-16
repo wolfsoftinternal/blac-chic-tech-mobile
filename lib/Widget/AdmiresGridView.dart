@@ -219,7 +219,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                           onSelected: (i) {
                             if (i == 1) {
                               if (userId == admireList.admireDetails!.id) {
-                                controller.userProfileAPI(context);
+                                controller.userProfileAPI(context, true);
                               } else {
                                 controller.admireProfileAPI(
                                     context, admireList.admireDetails!.id);
