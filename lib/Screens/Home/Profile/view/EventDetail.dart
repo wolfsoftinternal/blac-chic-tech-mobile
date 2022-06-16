@@ -1388,41 +1388,43 @@ class _EventDetailState extends State<EventDetail> {
                                             grey_3f3f3f,
                                             FontWeight.w500,
                                             FontStyle.normal),
-                                        SizedBox(
-                                          height: 20,
-                                          child: ListView.builder(
-                                              primary: false,
-                                              shrinkWrap: true,
-                                              padding: EdgeInsets.zero,
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: controller
-                                                  .eventDetails.value.hosts!.length,
-                                              itemBuilder: (context, index) {
-                                                return Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                                  children: [
-                                                    setHelceticaBold(
-                                                        "@${controller.eventDetails.value.hosts![index].userName!}",
-                                                        11.sp,
-                                                        black_121212,
-                                                        FontWeight.w500,
-                                                        FontStyle.normal),
-                                                    controller.eventDetails.value
-                                                        .hosts!.length ==
-                                                        (index + 1)
-                                                        ? Container()
-                                                        : setHelceticaBold(
-                                                        ", ",
-                                                        11.sp,
-                                                        black_121212,
-                                                        FontWeight.w500,
-                                                        FontStyle.normal),
-                                                  ],
-                                                );
-                                              }),
+                                        Flexible(
+                                             child: SizedBox(
+                                            height: 20,
+                                            child: ListView.builder(
+                                                primary: false,
+                                                shrinkWrap: true,
+                                                padding: EdgeInsets.zero,
+                                                scrollDirection: Axis.horizontal,
+                                                itemCount: controller
+                                                    .eventDetails.value.hosts!.length,
+                                                itemBuilder: (context, index) {
+                                                  return Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                    children: [
+                                                      setHelceticaBold(
+                                                          "@${controller.eventDetails.value.hosts![index].userName!}",
+                                                          11.sp,
+                                                          black_121212,
+                                                          FontWeight.w500,
+                                                          FontStyle.normal),
+                                                      controller.eventDetails.value
+                                                          .hosts!.length ==
+                                                          (index + 1)
+                                                          ? Container()
+                                                          : setHelceticaBold(
+                                                          ", ",
+                                                          11.sp,
+                                                          black_121212,
+                                                          FontWeight.w500,
+                                                          FontStyle.normal),
+                                                    ],
+                                                  );
+                                                }),
+                                          ),
                                         ),
                                       ],
                                     ),

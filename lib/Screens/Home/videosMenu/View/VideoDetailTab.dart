@@ -461,6 +461,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                     decoration:
                         const BoxDecoration(color: view_line_f4f6f6)),
 
+
                 Container(
                   height: 250.h,
                   margin: EdgeInsets.only(
@@ -480,34 +481,32 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                           shadowColor: grey_aaaaaa,
                           backgroundColor: const Color(0x80f2f2f2),
                           bottom: PreferredSize(
-                            preferredSize: const Size(0, -3),
+                            preferredSize: Size(0, -3),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: TabBar(
                                 isScrollable: true,
                                 indicatorColor: orange_ff881a,
                                 indicatorWeight: 3,
+                                padding: EdgeInsets.zero,
                                 indicatorSize: TabBarIndicatorSize.label,
                                 labelColor: black_121212,
                                 unselectedLabelColor: grey_aaaaaa,
-                                labelPadding: const EdgeInsets.symmetric(
-                                    horizontal: 22.0),
+                                labelPadding:  EdgeInsets.symmetric(
+                                    horizontal: 15.0,vertical: 0),
                                 tabs: <Widget>[
-                                  SizedBox(
-                                    // height: 50.0,
-                                    child: Tab(
-                                      child: // DETAILS
-                                          Text("DETAILS",
-                                              style: TextStyle(
-                                                  fontWeight:
-                                                      FontWeight.w700,
-                                                  fontFamily:
-                                                      "NeueHelvetica",
-                                                  fontStyle:
-                                                      FontStyle.normal,
-                                                  fontSize: 12.sp),
-                                              textAlign: TextAlign.left),
-                                    ),
+                                  Tab(
+                                    child: // DETAILS
+                                        Text("DETAILS",
+                                            style: TextStyle(
+                                                fontWeight:
+                                                    FontWeight.w700,
+                                                fontFamily:
+                                                    "NeueHelvetica",
+                                                fontStyle:
+                                                    FontStyle.normal,
+                                                fontSize: 12.sp),
+                                            textAlign: TextAlign.left),
                                   ),
                                   Tab(
                                     child: // RELATED TAGS

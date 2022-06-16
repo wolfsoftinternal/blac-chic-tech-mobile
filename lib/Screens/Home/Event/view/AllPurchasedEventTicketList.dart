@@ -55,7 +55,7 @@ class _AllPurchasedEventTicketListState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xfff5f5f5),
         body: Obx(() => Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,26 @@ class _AllPurchasedEventTicketListState
                 SizedBox(
                   height: 60.h,
                 ),
-                ToolbarWithHeaderCenterTitle("Purchased Admission Tickets "),
+               // ToolbarWithHeaderCenterTitle("Purchased Admission Tickets "),
+                Stack(
+                  children: [
+                    BackLayout(),
+                    Padding(
+                      padding:  EdgeInsets.only(left: 40.w,top: 13.h),
+                      child: Center(
+                        child: Text("Purchased Admission Tickets ",
+                            style:  TextStyle(
+                                color: black_121212,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: helvetica_neu_bold,
+                                fontStyle: FontStyle.normal,
+                                letterSpacing: 0.7,
+                                fontSize: 16.sp),
+                            textAlign: TextAlign.center),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: 20.h,
                 ),
