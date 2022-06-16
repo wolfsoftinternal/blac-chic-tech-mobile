@@ -9,6 +9,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Styles/my_strings.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -436,7 +437,7 @@ class _EventLocationState extends State<EventLocation> {
         await geo.placemarkFromCoordinates(lat, lng);
 
     _isLoading = false;
-      _address = "${placemarks[0].street} ${placemarks[0].name} ${placemarks[0].subLocality} ${placemarks[0].locality} ${placemarks[0].postalCode} ${placemarks[0].country}";
+      _address = "${placemarks[0].street} ${placemarks[0].name} ${placemarks[0].subLocality}, ${placemarks[0].locality} ${placemarks[0].postalCode}, ${placemarks[0].country}";
 
       controller.street1Controller.value.text = placemarks[0].street.toString();
       controller.street2Controller.value.text = placemarks[0].subLocality.toString();
@@ -472,14 +473,14 @@ class _EventLocationState extends State<EventLocation> {
   }
 
   saveAddress(BuildContext context) async {
-    // if (controller.latitude.value == 0.0) {
-    //   snackBar(context, "Location is not fetched");
-    //   return;
-    // }
-    // if (controller.longitude.value == 0.0) {
-    //   snackBar(context, "Location is not fetched");
-    //   return;
-    // }
+    if (controller.latitude.value == 0.0) {
+      snackBar(context, "Location is not fetched");
+      return;
+    }
+    if (controller.longitude.value == 0.0) {
+      snackBar(context, "Location is not fetched");
+      return;
+    }
 
     Get.to(const ConfirmLocation());
   }

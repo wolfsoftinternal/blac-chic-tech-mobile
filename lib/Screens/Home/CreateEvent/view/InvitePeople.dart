@@ -27,13 +27,15 @@ class _InvitePeopleState extends State<InvitePeople> {
   EventController controller = Get.put(EventController());
   VideoController videoController = Get.put(VideoController());
   AdmireProfileController admireProfileController = Get.put(AdmireProfileController());
+ 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
     if(widget.fromView == true){
-      controller.searchList.value = controller.selectedList;
+      // controller.searchList.clear();
+      controller.searchList = controller.selectedList;
     }
   }
 

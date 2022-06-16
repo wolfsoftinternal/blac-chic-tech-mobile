@@ -39,7 +39,7 @@ class _EventListState extends State<EventList> {
     dynamic body = {
       'page': controller.pageNumber.toString(),
     };
-    controller.initScrolling(context, body);
+    controller.initScrolling(context);
     checkNet(context).then((value) async {
       await controller.allEventListApi(body);
       await controller.cityListApi();
@@ -167,7 +167,7 @@ class _EventListState extends State<EventList> {
                                         admireProfileController.eventDetailAPI(
                                             context,
                                             controller.eventList[i].id,
-                                            controller.eventList[i].event_type, 'event');
+                                            controller.eventList[i].event_type);
                                       });
                                     },
                                     child: Padding(
@@ -280,8 +280,7 @@ class _EventListState extends State<EventList> {
                                                     ),
                                                     child: Center(
                                                       child: Text(
-                                                        controller
-                                                            .eventList[i].type!,
+                                                        controller.eventList[i].type! == 'ticket_price' ? 'Paid' : controller.eventList[i].type! == 'free' ? 'Free' : 'Invite Only',
                                                         style: TextStyle(
                                                             fontSize: 12.sp,
                                                             color: Colors.white,
@@ -323,7 +322,7 @@ class _EventListState extends State<EventList> {
                                                                           .eventList[
                                                                               i]
                                                                           .hosts ==
-                                                                      null
+                                                                      null || controller.eventList[i].hosts.toString() == '[]'
                                                                   ? Icon(
                                                                       Icons
                                                                           .person,
@@ -338,7 +337,9 @@ class _EventListState extends State<EventList> {
                                                                               .first
                                                                               .image
                                                                               .toString() ==
-                                                                          ''
+                                                                          '' || controller
+                                                                    .eventList[i]
+                                                                    .hosts![0].image == null
                                                                       ? Icon(
                                                                           Icons
                                                                               .person,

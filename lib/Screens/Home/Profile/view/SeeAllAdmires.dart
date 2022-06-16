@@ -80,7 +80,7 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
                             },
                             child: Text(
                                 controller.isRearrange.value == false
-                                    ? 'Rearrange'
+                                    ? 'Delete'
                                     : 'Save',
                                 style: TextStyle(
                                     color: orange_ff881a,
