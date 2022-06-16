@@ -47,7 +47,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 24.w),
+                        padding: EdgeInsets.only(left: 10.w),
                         child: GridView.builder(
                             primary: false,
                             shrinkWrap: true,
@@ -56,15 +56,15 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
                                     childAspectRatio: 1.5.h,
-                                    mainAxisSpacing: 12,
-                                    crossAxisSpacing: 5),
+                                    mainAxisSpacing: 0,
+                                    crossAxisSpacing: 0),
                             itemCount: controller.registerList.value.data!.transactionHistory!.length,
                             itemBuilder: (context, i) => Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
-                                      width: 16.5.w,
+                                      width: 16.w,
                                     ),
                                     Expanded(
                                       flex: 1,
@@ -89,7 +89,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                                   Text(
                                                       controller.registerList.value.data!.transactionHistory![i].admissionType!,
                                                       style: TextStyle(
-                                                          fontFamily: "Roboto",
+                                                          fontFamily: roboto_regular,
                                                           fontStyle:
                                                               FontStyle.normal,
                                                           fontSize: 16.sp),
@@ -105,7 +105,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                                               0xffaaaaaa),
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontFamily: "Roboto",
+                                                          fontFamily: roboto_regular,
                                                           fontStyle:
                                                               FontStyle.normal,
                                                           fontSize: 16.sp),
@@ -121,7 +121,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                                       color:
                                                           const Color(0xff0a84ff),
                                                       fontWeight: FontWeight.w600,
-                                                      fontFamily: "Roboto",
+                                                      fontFamily: roboto_bold,
                                                       fontStyle: FontStyle.normal,
                                                       fontSize: 16.sp),
                                                   textAlign: TextAlign.left),
@@ -133,7 +133,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                               Text('\$' + controller.registerList.value.data!.transactionHistory![i].totalPrice!.toString(),
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.w400,
-                                                      fontFamily: "Roboto",
+                                                      fontFamily: roboto_regular,
                                                       fontStyle: FontStyle.normal,
                                                       fontSize: 14.sp),
                                                   textAlign: TextAlign.left)
@@ -168,7 +168,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                         child: Text(controller.registerList.value.data!.registeredUsers!.length.toString() + ' Users',
                             style: TextStyle(
                                 color: grey_aaaaaa,
-                                fontFamily: "Roboto",
+                                fontFamily: roboto_regular,
                                 fontStyle: FontStyle.normal,
                                 fontSize: 14.sp),
                             textAlign: TextAlign.left),
@@ -281,10 +281,10 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                             DateFormat('dd MMM yyyy, hh:mm a').format(controller.registerList.value.data!.registeredUsers![i].createdAt!).toString() : "",
                                               style: TextStyle(
                                                   color: Color(0xffaaaaaa),
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: "Roboto",
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: roboto_medium,
                                                   fontStyle: FontStyle.normal,
-                                                  fontSize: 10.0),
+                                                  fontSize: 10.sp),
                                               textAlign: TextAlign.left)
                                         ],
                                       ),
