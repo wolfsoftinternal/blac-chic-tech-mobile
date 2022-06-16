@@ -1,12 +1,14 @@
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/SplashScreen.dart';
+import 'package:blackchecktech/UIScreen/AdmireGrid.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 
-import 'UIScreen/ListScreen.dart';
+import 'UIScreen/Demo.dart';
+
 
 GetIt getIt = GetIt.instance;
 
@@ -37,7 +39,8 @@ class MyApp extends StatelessWidget {
           ),
 
           home: SplashScreen(),
-          //  home: ListScreen(),
+
+          //  home: AdmireGrid(),
         );
       },
     );
