@@ -144,7 +144,7 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        Get.to(PastFeaturesScreen(featureList: featuredController.featuredList.value,selectedPosition: 0,));
+                        Get.to(PastFeaturesScreen(featureList: featuredController.featuredList.value,selectedPosition: 1,));
 
                         // _controller.previousPage(
                         //     duration: _kDuration, curve: _kCurve);
