@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
@@ -265,7 +266,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  userProfileAPI(BuildContext context) async {
+  userProfileAPI(BuildContext context, bool goToProfileScreen) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -288,12 +289,17 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            userProfileAPI(context);
+            userProfileAPI(context, goToProfileScreen);
           } else if (model.statusCode == 200) {
             SignupModel admireListModel = SignupModel.fromJson(userModel);
 
             details.value = admireListModel.data!;
-            Get.to(const Profile());
+
+            if(goToProfileScreen){
+              Get.to(const Profile());
+            }
+
+
           }
         });
       } else {

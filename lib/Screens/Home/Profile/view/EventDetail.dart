@@ -75,7 +75,7 @@ class _EventDetailState extends State<EventDetail> {
     getLoc();
     checkNet(context).then((value) async{
      await controller.registeredUserApi(context, controller.eventDetails.value.id.toString());
-     await controller.userProfileAPI(context);
+     await controller.userProfileAPI(context, false);
     });
   }
 

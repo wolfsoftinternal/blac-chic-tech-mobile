@@ -194,7 +194,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                         onTap: () {
                                           checkNet(context).then((value) {
                                             admireProfileController
-                                                .userProfileAPI(context);
+                                                .userProfileAPI(context, true);
                                           });
                                         },
                                         child: Container(

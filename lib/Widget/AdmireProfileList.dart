@@ -250,7 +250,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   //     await preferences.getSignupModel(SharePreData.keySignupModel);
 
                   // if (modelM!.data!.id == widget.admireList.admireId) {
-                    controller.userProfileAPI(context);
+                    controller.userProfileAPI(context, true);
                   // }
                   //  else {
                     // controller.admireProfileAPI(
