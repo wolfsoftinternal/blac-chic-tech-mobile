@@ -190,7 +190,8 @@ class WithdrawController extends GetxController {
           } else if (model.statusCode == 200) {
             Get.back();
             Get.back();
-            Get.to(TransactionsPayoutsTabs());
+
+            Get.to(() => TransactionsPayoutsTabs());
           } else {
             printData("Send Withdraw Request", model.statusCode.toString());
           }
