@@ -79,6 +79,7 @@ class _VideoTabState extends State<VideoTab> {
                                                     Radius.circular(4.r)),
                                         child: YoutubePlayerBuilder(
                                                 player: YoutubePlayer(
+                                                  showVideoProgressIndicator: false,
                                                   controller: controller
                                                       .videoController.value[index],
                                                 ),
