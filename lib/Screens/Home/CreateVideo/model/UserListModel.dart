@@ -54,7 +54,9 @@ class UserList {
         this.longitude,
         this.website,
         this.isAdmire,
-        this.currentJobs
+        this.currentJobs,
+        this.isSpeakerSelected,
+        this.isHostSelected,
     });
 
     dynamic id;
@@ -78,6 +80,8 @@ class UserList {
     dynamic longitude;
     dynamic website;
     CurrentJobs? currentJobs;
+    bool? isSpeakerSelected;
+    bool? isHostSelected;
 
     factory UserList.fromJson(Map<String, dynamic> json) => UserList(
         id: json["id"],

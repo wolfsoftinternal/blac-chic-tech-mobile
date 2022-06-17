@@ -39,19 +39,35 @@ class MyDB {
     return snap;
   }
 
+
+  getFriendsData(UserDetails? _userObj) async{
+    var collection = FirebaseFirestore.instance.collection(userCollection);
+    DocumentSnapshot docSnapshot = await collection.doc(_userObj?.id.toString()).get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic>? data = docSnapshot.data();
+      var value = data?['some_field']; // <-- The value you want to retrieve.
+      // Call setState if needed.
+    }
+  }
+
   Stream<QuerySnapshot> getFriendsList2(UserDetails? _userObj) {
 
-    print("_userObj.toString() ${_userObj.toString()} kem choo");
-    return _firestore
+    var streamData =  _firestore
         .collection(userCollection)
         .doc(_userObj?.id.toString())
         .collection(userRoomCollection)
         .snapshots();
 
+
     // _firestore
     // .collection(userCollection)
     // .doc(_userObj.data.id.toString())
     // .collection(userRoomCollection).snapshots().li
+
+
+
+    print("_userObj.toString() ");
+    return streamData;
   }
 
   Stream<QuerySnapshot> getSearchFriendsList(

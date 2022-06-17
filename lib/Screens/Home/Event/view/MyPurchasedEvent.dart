@@ -40,12 +40,12 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
   void initState() {
     super.initState();
     controller.initScrolling(context);
-    controller.pageNumber.value = 1;
-    dynamic body = {
-      'page': controller.pageNumber.toString(),
-      'type': 'upcoming'
-    };
-    controller.allEventListApi(body);
+    // controller.pageNumber.value = 1;
+    // dynamic body = {
+    //   'page': controller.pageNumber.toString(),
+    //   'event_type': 'upcoming'
+    // };
+    // controller.allEventListApi(body, 'upcoming');
   }
 
   @override
@@ -110,12 +110,12 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                         _isFirstLayout = false;
                         _isSecondLayout = true;
 
-                        controller.pageNumber.value = 1;
-                        dynamic body = {
-                          'page': controller.pageNumber.toString(),
-                          'type': 'past'
-                        };
-                        controller.allEventListApi(body);
+                        // controller.pageNumber.value = 1;
+                        // dynamic body = {
+                        //   'page': controller.pageNumber.toString(),
+                        //   'event_type': 'past'
+                        // };
+                        // controller.allEventListApi(body, 'past');
                       });
                     },
                     child: Container(
