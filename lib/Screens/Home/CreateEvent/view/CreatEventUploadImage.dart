@@ -45,11 +45,17 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
   /*Speaker bottom sheet*/
   void displaySpeakerBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        isScrollControlled: true,
+        isScrollControlled: false,
         backgroundColor: Colors.transparent,
         context: context,
         builder: (ctx) {
-          return SpeakerHostBottomSheet();
+          return Column(
+            children: [
+              Expanded(child: SpeakerHostBottomSheet()),
+              if (videoController.isPaginationLoading.value == true)
+                PaginationUtils().loader(),
+            ],
+          );
         });
   }
 
@@ -354,7 +360,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                     SizedBox(
                                                       width: 5.w,
                                                     ),
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         if (controller
                                                                 .selectedSpeaker
@@ -364,39 +370,28 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                               .selectedSpeaker
                                                               .clear();
                                                         } else {
-                                                          if (controller
-                                                                  .selectedSpeaker[
-                                                                      index]
-                                                                  .id ==
-                                                              null) {
+                                                          if (controller.selectedSpeaker[index].id == null) {
                                                             controller
                                                                 .selectedSpeaker
                                                                 .remove(controller
                                                                         .selectedSpeaker[
                                                                     index]);
                                                           } else {
-                                                            var selectedIndex =
-                                                                controller
-                                                                    .selectedSpeaker[
-                                                                        index]
-                                                                    .id;
-                                                            for (var item
-                                                                in videoController
-                                                                    .userList) {
-                                                              if (selectedIndex ==
-                                                                  item.id) {
-                                                                controller
-                                                                    .selectedSpeaker
-                                                                    .remove(
-                                                                        item);
+                                                            var selectedIndex = controller.selectedSpeaker[index].id;
+                                                            for (var item in videoController.userList) {
+                                                              if (selectedIndex == item.id) {
+                                                                controller.selectedSpeaker.remove(item);
                                                               }
                                                             }
                                                           }
                                                         }
                                                       },
-                                                      child: Icon(
-                                                        Icons.cancel_outlined,
-                                                        size: 12,
+                                                      child: Container(
+                                                        height: 50,
+                                                        child: Icon(
+                                                          Icons.cancel_outlined,
+                                                          size: 12,
+                                                        ),
                                                       ),
                                                     )
                                                   ],

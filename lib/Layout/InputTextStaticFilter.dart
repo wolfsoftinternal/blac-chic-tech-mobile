@@ -37,6 +37,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
       Get.put(EventDetailController());
   String? strCityName;
   String? strType;
+  String? strDate;
 
   bool checkColor = false;
   bool checkFillColor = true;
@@ -165,16 +166,29 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                           eventDetailController.pageNumber.value = 0;
                             eventDetailController.pageNumber =
                                 eventDetailController.pageNumber + 1;
-                            dynamic body = {
-                              'page': eventDetailController.pageNumber.toString(),
+                            String type = '';
+                    if(strType != null){
+                      if(strType == 'Free'){
+                        type = 'free';
+                      }else if(strType == 'Ticket'){
+                        type = 'ticket_price';
+                      }else{
+                        type = 'invite_only';
+                      }
+                    }
+                      
+                        eventDetailController.pageNumber.value = 0;
+                        eventDetailController.pageNumber =
+                            eventDetailController.pageNumber + 1;
+                        dynamic body = {
+                          'page': eventDetailController.pageNumber.toString(),
                           'name':
                               eventDetailController.searchController.value.text,
                           'city': eventDetailController.strCityId.value,
-                          'date':
-                              eventDetailController.dateController.value.text,
-                          'type': strType.toString().toLowerCase()
-                            };
-                            eventDetailController.allEventListApi(body); 
+                          'date': strDate.toString(),
+                          'type': type.toString()
+                        };
+                        eventDetailController.allEventListApi(body);
                         });
                       },
                       onFieldSubmitted: (String value) {
@@ -509,6 +523,16 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                 Container(
                   margin: EdgeInsets.only(top: 16.h),
                   child: BlackButton("Apply Filter", Colors.white, () {
+                    String type = '';
+                    if(strType != null){
+                      if(strType == 'Free'){
+                        type = 'free';
+                      }else if(strType == 'Ticket'){
+                        type = 'ticket_price';
+                      }else{
+                        type = 'invite_only';
+                      }
+                    }
                     checkNet(context).then((value) {
                       
                         eventDetailController.pageNumber.value = 0;
@@ -519,9 +543,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                           'name':
                               eventDetailController.searchController.value.text,
                           'city': eventDetailController.strCityId.value,
-                          'date':
-                              eventDetailController.dateController.value.text,
-                          'type': strType.toString().toLowerCase()
+                          'date': strDate.toString(),
+                          'type': type.toString()
                         };
                         eventDetailController.allEventListApi(body);
                       
@@ -598,6 +621,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
     final String formattedDate = formatter.format(pickedDate!);
 
     eventDetailController.dateController.value.text = formattedDate;
+    strDate = eventDetailController.dateController.value.text.replaceAll('/', '-');
   }
 }
 
