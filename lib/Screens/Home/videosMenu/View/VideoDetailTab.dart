@@ -1,31 +1,21 @@
-import 'dart:io';
-
-import 'package:blackchecktech/Model/SpeakersVideoModel.dart';
-import 'package:blackchecktech/Screens/Home/Settings/view/EditProfile.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuController.dart';
-import 'package:blackchecktech/Screens/Home/videosMenu/Model/FindSpeakerModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Model/SpeakerVideoModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoComments.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
-import 'package:blackchecktech/UIScreen/DetailTab.dart';
-import 'package:blackchecktech/UIScreen/EventTicket.dart';
-import 'package:blackchecktech/UIScreen/RelatedTags.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:async';
-
 import 'package:share_plus/share_plus.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' as parser;
 
 class VideoDetailTab extends StatefulWidget {
   VideoList videoList;
@@ -279,10 +269,17 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
 
                             InkWell(
                               onTap: () {
-                                _onShare(
-                                    context,
-                                    controller.videoDetail.value.embededCode
-                                        .toString());
+                                String data = controller
+                                    .videoDetail.value.embededCode
+                                    .toString()
+                                    .replaceAll('"', "");
+                                String data1 = data.replaceAll(
+                                    '<iframe width=560 height=315 src=', "");
+                                String data2 = data1.replaceAll(
+                                    ' title=YouTube video player frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>',
+                                    "");
+
+                                _onShare(context, data2);
                               },
                               child: SvgPicture.asset(
                                 icon_share,
