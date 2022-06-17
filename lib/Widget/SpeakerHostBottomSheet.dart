@@ -323,6 +323,7 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                                   ],
                                                 ),
                                               ),
+
                                               SvgPicture.asset(
                                                 widget.type == 'host'
                                                     ? controller.selectedHost

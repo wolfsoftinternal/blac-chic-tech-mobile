@@ -282,10 +282,10 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                                 child: Center(
                                                                     child: Text(
                                                                         controller.selectedSpeaker[index].userName != null
-                                                                            ? controller.selectedSpeaker[index].userName[0]
+                                                                            ? controller.selectedSpeaker[index].userName
                                                                                 .toString()
                                                                                 .toUpperCase()
-                                                                            : controller.selectedSpeaker[index].firstName[0]
+                                                                            : controller.selectedSpeaker[index].firstName
                                                                                 .toString()
                                                                                 .toUpperCase(),
                                                                         style: TextStyle(
