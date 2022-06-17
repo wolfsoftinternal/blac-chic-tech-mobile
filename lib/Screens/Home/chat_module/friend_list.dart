@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
+import 'package:blackchecktech/Screens/Home/chat_module/view/RemaingAdmiresListForChat.dart';
 import 'package:blackchecktech/Styles/font.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/common_functions.dart';
@@ -24,6 +25,7 @@ class FriendListScreen extends StatefulWidget {
 //   final String sharedMessage;
 
   var isAdmireListGet = false;
+  var isDataSetInList = false;
 
   FriendListScreen({
     Key? key,
@@ -65,12 +67,13 @@ class _FriendListScreenState extends State<FriendListScreen> {
     signupModel =
         (await preferences.getSignupModel(SharePreData.keySignupModel))!;
     var userId = signupModel?.data?.id?.toInt();
-    dynamic body = {'user_id': userId.toString()};
-    await userListController.admireListAPI(context, body);
+    // dynamic body = {'user_id': userId.toString()};
+    // await userListController.admireListAPI(context, body);
     setState(() {});
   }
 
   init() async {
+    print("init called ");
     // var preferences = MySharedPref();
     // signupModel =
     // (await preferences.getSignupModel(SharePreData.keySignupModel))!;
@@ -79,6 +82,12 @@ class _FriendListScreenState extends State<FriendListScreen> {
       widget.isAdmireListGet = true;
 
       if (userListController.admireList.isNotEmpty) {
+        print("admireList not empty called ");
+
+        print("admireList id  " +
+            (userListController.admireList[0]?.admireId ?? 0).toString());
+
+        print("sign up id  " + (signupModel?.data?.id ?? 0).toString());
 
         // setLoading(true);
 
@@ -96,18 +105,28 @@ class _FriendListScreenState extends State<FriendListScreen> {
                   userListController.admireList[i].admireDetails?.email ?? ""
             };
 
+            print("hello hi ");
+
             var isAvailable = false;
             for (int j = 0; j < myRooms.length; j++) {
-
               var roomData = myRooms[j].data() as Map<dynamic, dynamic>;
 
-              if (roomData["user"] == userListController.admireList[i].userId) {
+              print("admireId " +
+                  (userListController.admireList[i].admireId).toString());
+
+              if (roomData["user"] ==
+                  userListController.admireList[i].admireId) {
                 isAvailable = true;
 
-
+                print('is available ' +
+                    (userListController.admireList[i].admireDetails?.fullName ??
+                        ""));
               }
             }
             if (!isAvailable) {
+              print('isNot available ' +
+                  (userListController.admireList[i].admireDetails?.fullName ??
+                      ""));
               await shareMix(receiverData, "");
             }
           }
@@ -153,9 +172,9 @@ class _FriendListScreenState extends State<FriendListScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          body: Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
           myBody(),
           isLoading
               ? Expanded(child: myLoader())
@@ -174,10 +193,10 @@ class _FriendListScreenState extends State<FriendListScreen> {
                               child: Center(child: noDataWidget()))
                           : searchListColumn())
           // mySearchedFriends.length > 0 ? searchListColumn() : myConvo2(),
-      ],
-      // ),
-    ),
-        ));
+        ],
+        // ),
+      ),
+    ));
   }
 
   Widget myLoader() {
@@ -209,14 +228,14 @@ class _FriendListScreenState extends State<FriendListScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           SizedBox(
+          SizedBox(
             height: 24.h,
           ), // Conversations
 
-           Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-             children: [
-               Text(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
                 "Chats",
                 style: TextStyle(
                   color: black,
@@ -226,38 +245,43 @@ class _FriendListScreenState extends State<FriendListScreen> {
                   fontSize: 22.sp,
                 ),
                 textAlign: TextAlign.left,
+              ),
+              Container(
+                width: 48.w,
+                height: 48.h,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x14121212),
+                      spreadRadius: 3,
+                      blurRadius: 10,
+                      offset: Offset(0, 4), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: GestureDetector(
+                  onTap: (){
+                    Get.to(RemaingAdmiresListForChat(admireList: userListController.admireList));
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(10.r),
+                    child: SvgPicture.asset(icon_plus_chat),
+                  ),
+                ),
+              )
+            ],
           ),
-               Container(
-                 width: 48.w,
-                 height: 48.h,
-                 decoration: BoxDecoration(
-                   color: Colors.white,
-                   shape: BoxShape.circle,
-                   boxShadow: [
-                     BoxShadow(
-                       color: Color(0x14121212),
-                       spreadRadius: 3,
-                       blurRadius: 10,
-                       offset:  Offset(0, 4), // changes position of shadow
-                     ),
-                   ],
-                 ),
-                 child: Padding(
-                   padding:  EdgeInsets.all(10.r),
-                   child: SvgPicture.asset(icon_plus_chat),
-                 ),
-               )
-             ],
-           ),
 
-           SizedBox(
+          SizedBox(
             height: 20.h,
           ),
           // Rectangle 1775
 
           searchBox(),
 
-           SizedBox(
+          SizedBox(
             height: 20.h,
           ),
         ],
@@ -288,9 +312,13 @@ class _FriendListScreenState extends State<FriendListScreen> {
   List<QueryDocumentSnapshot> myRooms = [];
 
   Widget myConvo2() {
+    print('myConvo2');
+
     return StreamBuilder(
       stream: MyDB().getFriendsList2(signupModel?.data),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        print("no snapshot ");
+
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: myLoader());
         }
@@ -302,8 +330,40 @@ class _FriendListScreenState extends State<FriendListScreen> {
 
           myRooms.addAll(snapshot.data!.docs);
 
+          // var isDataAvailableInList = false;
+          //
+          // if (myRooms.length > 0) {
+          //   for (int i = 0; i < snapshot.data!.docs.length - 1; i++) {
+          //     isDataAvailableInList = false;
+          //
+          //     for (int j = 0; j < myRooms.length - 1; j++) {
+          //       if (snapshot.data!.docs[i].data()['user'] ==
+          //           myRooms[j].data()["user"]) {
+          //         isDataAvailableInList = true;
+          //       }
+          //     }
+          //
+          //     if(!isDataAvailableInList){
+          //       myRooms.add(snapshot.data!.docs[i]);
+          //     }
+          //
+          //   }
+          // }else{
+          //   myRooms.addAll(snapshot.data!.docs);
+          // }
+
+          //  myRooms.clear();
+
+          print("no of items " + (snapshot.data!.docs.length).toString());
+
+        //
+
           print("myrooms, get");
-          init();
+          // init();
+
+
+           userListController.RemainingAdmireListAPI(context, null, myRooms);
+
           return handleChatListItem();
 
           print("Number of total friends: ${myRooms.length}");
@@ -321,75 +381,127 @@ class _FriendListScreenState extends State<FriendListScreen> {
   handleChatListItem() {
     //---------_Sorting_-------------
     // Last seen sorting
-    myRooms.sort((docA, docB) {
-      var a = docA.data() as Map<dynamic, dynamic>;
-      var b = docB.data() as Map<dynamic, dynamic>;
-      DateTime a1 = DateTime.now();
-      DateTime b1 = DateTime.now();
-      // if (a["last_seen"] != null && b["last_seen"] != null) {
-      //   a1 = checkIfDateNull(a["last_seen"] ?? "");
-      //   b1 = checkIfDateNull(b["last_seen"] ?? "");
-      // }
-      if (a["last_message_time"] != null && b["last_message_time"] != null) {
-        a1 = checkIfDateNull(a["last_message_time"] ?? "");
-        b1 = checkIfDateNull(b["last_message_time"] ?? "");
-      }
-      return b1.compareTo(a1);
-      // return b["last_seen"].compareTo(a["last_seen"]);
-    });
-    // Unread messages sorting
-    // myRooms.sort((docA, docB) {
-    //   var a = docA.data() as Map<dynamic, dynamic>;
-    //   var b = docB.data() as Map<dynamic, dynamic>;
 
-    //   return b["unread_message_count"] ??
-    //       0.compareTo(a["unread_message_count"] ?? 0);
-    // });
-    // return Container()
 
-    return ListView.builder(
-      // reverse: true,
-      // shrinkWrap: true,
+      widget.isDataSetInList = true;
 
-      // physics: NeverScrollableScrollPhysics(),
-      itemCount: myRooms.length,
-      itemBuilder: (BuildContext context, int index) {
-        var room = myRooms[index];
-        var roomData = room.data() as Map<dynamic, dynamic>;
-        print("roomData -->  ${roomData.toString()}");
-        String timeDifference = "";
-
-        // if (roomData["last_seen"] != null) {
-        //   DateTime sentAt = (roomData["last_seen"] as Timestamp).toDate();
-        // if (roomData["last_seen"] != null) {
-        if (roomData["last_message_time"] != null) {
-          DateTime sentAt =
-              (roomData["last_message_time"] as Timestamp).toDate();
-          timeDifference =
-              calculateTimeDifference(start: sentAt, end: DateTime.now());
-          print("--> " + timeDifference);
+      myRooms.sort((docA, docB) {
+        var a = docA.data() as Map<dynamic, dynamic>;
+        var b = docB.data() as Map<dynamic, dynamic>;
+        DateTime a1 = DateTime.now();
+        DateTime b1 = DateTime.now();
+        // if (a["last_seen"] != null && b["last_seen"] != null) {
+        //   a1 = checkIfDateNull(a["last_seen"] ?? "");
+        //   b1 = checkIfDateNull(b["last_seen"] ?? "");
+        // }
+        if (a["last_message_time"] != null && b["last_message_time"] != null) {
+          a1 = checkIfDateNull(a["last_message_time"] ?? "");
+          b1 = checkIfDateNull(b["last_message_time"] ?? "");
         }
-        print(
-            "roomDatatimeStamp ${roomData["last_message_time"]} timeDifference $timeDifference");
+        return b1.compareTo(a1);
+        // return b["last_seen"].compareTo(a["last_seen"]);
+      });
+      // Unread messages sorting
+      // myRooms.sort((docA, docB) {
+      //   var a = docA.data() as Map<dynamic, dynamic>;
+      //   var b = docB.data() as Map<dynamic, dynamic>;
 
-        return fetchFriendTile(
-            userId: roomData["user"].toString(),
-            unreadCount: checkIfNull(roomData["unread_message_count"]),
-            lastSeen: checkIfNull(roomData["last_seen"]),
-            lastMessage: checkIfNull(
-              roomData["last_message"],
-            ),
-            lastMessageType: checkIfNull(
-              roomData["last_message_type"],
-            ),
-            timeDifference: timeDifference);
-      },
-    );
+      //   return b["unread_message_count"] ??
+      //       0.compareTo(a["unread_message_count"] ?? 0);
+      // });
+      // return Container()
+
+
+
+
+
+    if(userListController.admireList.length <= myRooms.length){
+      return ListView.builder(
+        // reverse: true,
+        // shrinkWrap: true,
+
+        // physics: NeverScrollableScrollPhysics(),
+        itemCount: myRooms.length,
+        itemBuilder: (BuildContext context, int index) {
+          var room = myRooms[index];
+          var roomData = room.data() as Map<dynamic, dynamic>;
+          print("roomData -->  ${roomData.toString()}");
+          String timeDifference = "";
+
+          // if (roomData["last_seen"] != null) {
+          //   DateTime sentAt = (roomData["last_seen"] as Timestamp).toDate();
+          // if (roomData["last_seen"] != null) {
+          if (roomData["last_message_time"] != null) {
+            DateTime sentAt =
+            (roomData["last_message_time"] as Timestamp).toDate();
+            timeDifference =
+                calculateTimeDifference(start: sentAt, end: DateTime.now());
+            print("--> " + timeDifference);
+          }
+          print(
+              "roomDatatimeStamp ${roomData["last_message_time"]} timeDifference $timeDifference");
+
+          return fetchFriendTile(
+              userId: roomData["user"].toString(),
+              unreadCount: checkIfNull(roomData["unread_message_count"]),
+              lastSeen: checkIfNull(roomData["last_seen"]),
+              lastMessage: checkIfNull(
+                roomData["last_message"],
+              ),
+              lastMessageType: checkIfNull(
+                roomData["last_message_type"],
+              ),
+              timeDifference: timeDifference);
+        },
+      );
+    }else{
+      return ListView.builder(
+        // reverse: true,
+        // shrinkWrap: true,
+
+        // physics: NeverScrollableScrollPhysics(),
+        itemCount: myRooms.length,
+        itemBuilder: (BuildContext context, int index) {
+          var room = myRooms[index];
+          var roomData = room.data() as Map<dynamic, dynamic>;
+          print("roomData -->  ${roomData.toString()}");
+          String timeDifference = "";
+
+          // if (roomData["last_seen"] != null) {
+          //   DateTime sentAt = (roomData["last_seen"] as Timestamp).toDate();
+          // if (roomData["last_seen"] != null) {
+          if (roomData["last_message_time"] != null) {
+            DateTime sentAt =
+            (roomData["last_message_time"] as Timestamp).toDate();
+            timeDifference =
+                calculateTimeDifference(start: sentAt, end: DateTime.now());
+            print("--> " + timeDifference);
+          }
+          print(
+              "roomDatatimeStamp ${roomData["last_message_time"]} timeDifference $timeDifference");
+
+          return fetchFriendTile(
+              userId: roomData["user"].toString(),
+              unreadCount: checkIfNull(roomData["unread_message_count"]),
+              lastSeen: checkIfNull(roomData["last_seen"]),
+              lastMessage: checkIfNull(
+                roomData["last_message"],
+              ),
+              lastMessageType: checkIfNull(
+                roomData["last_message_type"],
+              ),
+              timeDifference: timeDifference);
+        },
+      );;
+    }
+
+
+
   }
 
   Widget searchBox() {
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(6.7.r)),
           color: light_grey_f2f2f2),
       child: Row(
@@ -533,7 +645,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
                     Text(
                       user["name"] ?? "",
                       maxLines: 1,
-                      style:  TextStyle(
+                      style: TextStyle(
                           color: txt_color,
                           fontWeight: FontWeight.w600,
                           fontFamily: helveticaNeueNeue_medium,
@@ -543,7 +655,9 @@ class _FriendListScreenState extends State<FriendListScreen> {
                     SizedBox(
                       height: 6.h,
                     ),
-                    if (lastMessageType == "0" || lastMessageType == "1" || lastMessageType == "2")
+                    if (lastMessageType == "0" ||
+                        lastMessageType == "1" ||
+                        lastMessageType == "2")
                       Text(
                         user["last_message"] ?? "",
                         maxLines: 1,
@@ -590,7 +704,6 @@ class _FriendListScreenState extends State<FriendListScreen> {
                 ),
                 flex: 1,
               ),
-
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -625,7 +738,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
                               user["unread_message_count"] ?? "",
                               style: TextStyle(
                                   fontSize: 11.sp,
-                                  fontFamily:helveticaNeueNeue_medium,
+                                  fontFamily: helveticaNeueNeue_medium,
                                   fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.normal,
                                   color: Colors.white),

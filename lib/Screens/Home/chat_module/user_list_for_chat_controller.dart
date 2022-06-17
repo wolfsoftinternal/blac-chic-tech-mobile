@@ -196,7 +196,8 @@ class UserLIstForChatController extends GetxController {
     }
   }
 
-  Future<List<AdmireList>> admireListAPI(BuildContext context, body) async {
+     RemainingAdmireListAPI(BuildContext context, body, List<QueryDocumentSnapshot> myRooms) async {
+       admireList.clear();
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -215,15 +216,35 @@ class UserLIstForChatController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            admireListAPI(context, body);
+            RemainingAdmireListAPI(context, body,myRooms);
           } else if (model.statusCode == 200) {
             AdmireListModel detail = AdmireListModel.fromJson(userModel);
 
             print('admireList length '  + admireList.length.toString());
+            for (int i = 0; i < detail.data!.length; i++) {
+              var isAvailable = false;
+              for (int j = 0; j < myRooms.length; j++) {
+                var roomData = myRooms[j].data() as Map<dynamic, dynamic>;
+
+                print("admireId " +
+                    (detail.data![i].admireId).toString());
+
+                if (roomData["user"] ==
+                    detail.data![i].admireId) {
+                  isAvailable = true;
+
+                  print('is available ' +
+                      (detail.data![i].admireDetails?.fullName ??
+                          ""));
+                }
+              }
 
 
+              if (!isAvailable) {
+                admireList.value.add(detail.data![i]);
+              }
+            }
 
-            admireList.value = detail.data!;
 
             // for (int i = 0; i < admireList.length; i++) {
             //   if (admireList[i].admireDetails?.email != null) {
