@@ -327,6 +327,23 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
                                                   textAlign: TextAlign.left),
+                                              Text(
+                                                  videoController.userList[i]
+                                                              .firstName !=
+                                                          null
+                                                      ? videoController
+                                                          .userList[i].firstName!
+                                                      : "",
+                                                  style: TextStyle(
+                                                      color: black,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helvetica_neu_bold,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 14.sp),
+                                                  textAlign: TextAlign.left),
                                               SizedBox(
                                                 height: 2.h,
                                               ),
