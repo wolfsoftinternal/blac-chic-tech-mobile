@@ -359,8 +359,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                 child: DropdownButton<TopicListModel>(
                                     dropdownColor: Colors.white,
                                     value:
-                                        controller.selectedTopic.value.id ==
-                                                -1
+                                        controller.selectedTopic.value.id == -1
                                             ? null
                                             : controller.selectedTopic.value,
                                     hint: Text("Topic",
@@ -379,8 +378,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                     ),
                                     onChanged: (TopicListModel? value) {
                                       controller.selectedTopic.value = value!;
-                                      if (controller
-                                              .selectedTopic.value.name !=
+                                      if (controller.selectedTopic.value.name !=
                                           "SEE ALL TOPICS") {
                                         if (!controller.selectMutiTopicList
                                             .contains(value)) {
@@ -434,15 +432,14 @@ class _VideoListBctState extends State<VideoListBct> {
                                             },
                                             child: Container(
                                                 decoration: BoxDecoration(
-                                                    color: const Color(
-                                                        0xfff5f5f5),
+                                                    color:
+                                                        const Color(0xfff5f5f5),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15)),
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.all(
-                                                          8.0),
+                                                      const EdgeInsets.all(8.0),
                                                   child: Wrap(
                                                     children: [
                                                       Padding(
@@ -450,8 +447,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                                             const EdgeInsets
                                                                     .only(
                                                                 left: 4.0),
-                                                        child: Text(
-                                                            element.name!,
+                                                        child: Text(element.name!,
                                                             style: TextStyle(
                                                                 color:
                                                                     black_121925,
@@ -497,11 +493,11 @@ class _VideoListBctState extends State<VideoListBct> {
                                     EdgeInsets.only(left: 10.w, right: 10.w),
                                 child: DropdownButton<TopicListModel>(
                                     dropdownColor: Colors.white,
-                                    value: controller
-                                                .selectedLanguage.value.id ==
-                                            -1
-                                        ? null
-                                        : controller.selectedLanguage.value,
+                                    value:
+                                        controller.selectedLanguage.value.id ==
+                                                -1
+                                            ? null
+                                            : controller.selectedLanguage.value,
                                     hint: Text("Language",
                                         style: TextStyle(
                                             color: grey_aaaaaa,
@@ -538,11 +534,10 @@ class _VideoListBctState extends State<VideoListBct> {
                                         value: value,
                                         child: Text(value.name.toString(),
                                             style: TextStyle(
-                                                color:
-                                                    value.name.toString() ==
-                                                            "SEE ALL LANGUAGE"
-                                                        ? grey_aaaaaa
-                                                        : black_121925,
+                                                color: value.name.toString() ==
+                                                        "SEE ALL LANGUAGE"
+                                                    ? grey_aaaaaa
+                                                    : black_121925,
                                                 fontWeight: FontWeight.w500,
                                                 fontFamily:
                                                     helveticaNeueNeue_medium,
@@ -574,15 +569,14 @@ class _VideoListBctState extends State<VideoListBct> {
                                             },
                                             child: Container(
                                                 decoration: BoxDecoration(
-                                                    color: const Color(
-                                                        0xfff5f5f5),
+                                                    color:
+                                                        const Color(0xfff5f5f5),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15)),
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.all(
-                                                          8.0),
+                                                      const EdgeInsets.all(8.0),
                                                   child: Wrap(
                                                     children: [
                                                       Padding(
@@ -590,8 +584,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                                             const EdgeInsets
                                                                     .only(
                                                                 left: 4.0),
-                                                        child: Text(
-                                                            element.name!,
+                                                        child: Text(element.name!,
                                                             style: TextStyle(
                                                                 color:
                                                                     black_121925,
@@ -655,8 +648,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                       print(
                                           ":::::::::::ALL DATA PUT API:::::::::::");
                                       controller.videoListAPI(
-                                          topicFilter: controller
-                                              .selectIdTopic
+                                          topicFilter: controller.selectIdTopic
                                               .toJson()
                                               .toString(),
                                           languageFilter: controller
@@ -669,8 +661,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                     height: 50.h,
                                     decoration: BoxDecoration(
                                       color: black_121212,
-                                      borderRadius:
-                                          BorderRadius.circular(4.r),
+                                      borderRadius: BorderRadius.circular(4.r),
                                     ),
                                     child: Center(
                                       child: Text("Apply Filter",
@@ -705,8 +696,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                     height: 50.h,
                                     decoration: BoxDecoration(
                                       color: const Color(0xfff5f5f5),
-                                      borderRadius:
-                                          BorderRadius.circular(4.r),
+                                      borderRadius: BorderRadius.circular(4.r),
                                     ),
                                     child: Center(
                                       child: Text("Clear",
@@ -753,11 +743,9 @@ class _VideoListBctState extends State<VideoListBct> {
                                   padding: EdgeInsets.zero,
                                   itemBuilder: (context, i) {
                                     if (i < controller.videoList.length) {
-                                      print(
-                                          "::::::::::::UPDATE 00:::::::::::");
+                                      print("::::::::::::UPDATE 00:::::::::::");
                                       return Padding(
-                                        padding:
-                                            EdgeInsets.only(bottom: 20.h),
+                                        padding: EdgeInsets.only(bottom: 20.h),
                                         child: InkWell(
                                           onTap: () {
                                             Get.to(VideoDetailTab(
@@ -780,9 +768,8 @@ class _VideoListBctState extends State<VideoListBct> {
                                                       child: ClipRRect(
                                                         borderRadius:
                                                             BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                        15.r)),
+                                                                Radius.circular(
+                                                                    15.r)),
                                                         child:
                                                             YoutubePlayerBuilder(
                                                                 onEnterFullScreen:
@@ -972,21 +959,20 @@ class _VideoListBctState extends State<VideoListBct> {
                                       return controller.hasMore.value == false
                                           ? const SizedBox()
                                           : Container(
-                                              margin: EdgeInsets.only(
-                                                  bottom: 25.h),
+                                              margin:
+                                                  EdgeInsets.only(bottom: 25.h),
                                               child: Center(
                                                 child: TextButton(
                                                   onPressed: () {
-                                                    controller.videoMenuPage
-                                                        .value++;
+                                                    controller
+                                                        .videoMenuPage.value++;
                                                     controller
                                                         .videoMenuPageMethod();
                                                   },
                                                   child: Text(
                                                     "Load More",
                                                     style: TextStyle(
-                                                        fontFamily:
-                                                            roboto_bold,
+                                                        fontFamily: roboto_bold,
                                                         fontSize: 14.sp,
                                                         color: blue_0a84ff),
                                                   ),
@@ -996,8 +982,8 @@ class _VideoListBctState extends State<VideoListBct> {
                                     }
                                   })
                               : SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.45,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.45,
                                   width: double.infinity,
                                   child: const Center(
                                       child: Text("No Data Found",

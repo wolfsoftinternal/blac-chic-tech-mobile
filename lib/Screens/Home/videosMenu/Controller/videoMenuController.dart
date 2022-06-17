@@ -67,9 +67,14 @@ class VideoMenuController extends GetxController {
   Rx<FindSpeakerModel> findspeakerVideoList = FindSpeakerModel().obs;
   Rx<SpeakerVideoModel> videoMenuModelList = SpeakerVideoModel().obs;
   Rx<int> videoMenuPage = 1.obs;
-  RxList<YoutubePlayerController> videoController = <YoutubePlayerController>[].obs;
-  RxList<YoutubePlayerController> playlistController = <YoutubePlayerController>[].obs;
-  RxList<YoutubePlayerController> playerController = <YoutubePlayerController>[].obs;
+  RxList<YoutubePlayerController> videoController =
+      <YoutubePlayerController>[].obs;
+  RxList<YoutubePlayerController> playlistController =
+      <YoutubePlayerController>[].obs;
+  RxList<YoutubePlayerController> playerController =
+      <YoutubePlayerController>[].obs;
+  RxList<YoutubePlayerController> videoDetailsNextController =
+      <YoutubePlayerController>[].obs;
 
   @override
   void onInit() {
@@ -109,10 +114,9 @@ class VideoMenuController extends GetxController {
     final apiReq = Request();
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
-      videoList.clear();
+      videoMenuModelList.value = SpeakerVideoModel();
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
-          print(value.toString());
           videoMenuModelList.value = speakerVideoModelFromJson(value);
 
           if (videoMenuModelList.value.statusCode == 500) {
@@ -135,6 +139,8 @@ class VideoMenuController extends GetxController {
   }
 
   videoMenuPageMethod() {
+    videoList.clear();
+
     int total = 6;
     var list = <VideoList>[];
     videoMenuModelList.value.data!.forEach((element) {
@@ -170,24 +176,23 @@ class VideoMenuController extends GetxController {
             ? videoMenuPage.value * total
             : list.length,
         (index) => list[index]);
-    isLoadingBCT.value = false;
 
-    List videoId = []; 
-    YoutubePlayerController controller;
-    for(var item in videoList){
-      if(item.embededCode.toString().contains("iframe")){
+    List videoId = [];
+
+    for (var item in videoList) {
+      if (item.embededCode.toString().contains("iframe")) {
         String src = item.embededCode.toString().split('=')[3];
         src = src.replaceAll(' title', '');
         src = src.replaceAll('"', '');
         videoId.add(YoutubePlayer.convertUrlToId(src));
-      }else{
+      } else {
         String src = item.embededCode.toString();
         src = src.replaceAll('"', '');
         videoId.add(YoutubePlayer.convertUrlToId(src));
-      }          
+      }
     }
-    for(int i = 0; i < videoList.length; i++){
-      controller = YoutubePlayerController(
+    for (int i = 0; i < videoId.length; i++) {
+      YoutubePlayerController controller = YoutubePlayerController(
         initialVideoId: videoId[i],
         flags: const YoutubePlayerFlags(
           mute: false,
@@ -202,6 +207,7 @@ class VideoMenuController extends GetxController {
       );
       videoController.add(controller);
     }
+    isLoadingBCT.value = false;
   }
 
   videoListSearchAPI({String? topicFilter}) async {
@@ -275,6 +281,7 @@ class VideoMenuController extends GetxController {
             ? searchVideoPage.value * total
             : list.length,
         (index) => list[index]);
+
     isLoading.value = false;
   }
 
@@ -283,15 +290,13 @@ class VideoMenuController extends GetxController {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
-    // dynamic body = {'search': topicFilter.toString()};
-    //FormData formData = new FormData.fromMap(body);
-
     String url = urlBase + urlVideoList;
     final apiReq = Request();
+
     await apiReq.postAPIWithBearer(url, null, token.toString()).then((value) {
       http.StreamedResponse res = value;
-      videoDetailsList.clear();
 
+      detailsVideoModel.value = SpeakerVideoModel();
       print("Stutus :: " + res.statusCode.toString());
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
@@ -316,11 +321,14 @@ class VideoMenuController extends GetxController {
   videoDetailsListMethod({VideoList? videoListData}) {
     int total = 6;
     var list = <VideoList>[];
+    videoDetailsNextController.clear();
+    videoDetailsList.clear();
+
     detailsVideoModel.value.data!.forEach((element) {
-      if (videoListData!.id != element.id) {
+      if (element.id != videoListData!.id) {
         String dataVideos =
             element.embededCode.toString().replaceAll("560", "130");
-        String videoData = dataVideos.replaceAll("315", "60");
+        String videoDataOne = dataVideos.replaceAll("315", "60");
         list.add(VideoList(
             id: element.id,
             userId: element.userId,
@@ -328,7 +336,7 @@ class VideoMenuController extends GetxController {
             topic: element.topic,
             language: element.language,
             file: element.file,
-            embededCode: videoData,
+            embededCode: videoDataOne,
             tags: element.tags,
             speakers: element.speakers,
             status: element.status,
@@ -351,6 +359,36 @@ class VideoMenuController extends GetxController {
             ? detailsVideoPage.value * total
             : list.length,
         (index) => list[index]);
+    List videoId = [];
+
+    for (var item in videoDetailsList) {
+      if (item.embededCode.toString().contains("iframe")) {
+        String src = item.embededCode.toString().split('=')[3];
+        src = src.replaceAll(' title', '');
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      } else {
+        String src = item.embededCode.toString();
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      }
+    }
+    for (int i = 0; i < videoDetailsList.length; i++) {
+      YoutubePlayerController controller = YoutubePlayerController(
+        initialVideoId: videoId[i],
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: false,
+          hideControls: true,
+        ),
+      );
+      videoDetailsNextController.add(controller);
+    }
     isLoading.value = false;
   }
 
@@ -378,25 +416,26 @@ class VideoMenuController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            videoListSearchAPI();
+            // videoListSearchAPI();
           } else if (videoDetailModel.statusCode == 200) {
             videoDetail.value = videoDetailModel.data!;
             isHeart.value = videoDetail.value.isLike == 0 ? false : true;
             String text = videoDetail.value.tags.toString();
             result.value = text.split(',');
 
-            var videoId; 
-            if(videoDetail.value.embededCode.toString().contains("iframe")){
-              String src = videoDetail.value.embededCode.toString().split('=')[3];
+            var videoId;
+            if (videoDetail.value.embededCode.toString().contains("iframe")) {
+              String src =
+                  videoDetail.value.embededCode.toString().split('=')[3];
               src = src.replaceAll(' title', '');
               src = src.replaceAll('"', '');
               videoId = YoutubePlayer.convertUrlToId(src);
-            }else{
+            } else {
               String src = videoDetail.value.embededCode.toString();
               src = src.replaceAll('"', '');
               videoId = YoutubePlayer.convertUrlToId(src);
-            } 
-            
+            }
+
             playerController.add(YoutubePlayerController(
               initialVideoId: videoId,
               flags: const YoutubePlayerFlags(
@@ -408,8 +447,8 @@ class VideoMenuController extends GetxController {
                 forceHD: false,
                 enableCaption: false,
                 hideControls: false,
-              ),)
-            );
+              ),
+            ));
           }
         });
       } else {
@@ -612,21 +651,21 @@ class VideoMenuController extends GetxController {
         (index) => list[index]);
     print("myPlayList.value :: " + myPlayList.length.toString());
 
-    List videoId = []; 
+    List videoId = [];
     YoutubePlayerController controller;
-    for(var item in myPlayList){
-      if(item.embededCode.toString().contains("iframe")){
+    for (var item in myPlayList) {
+      if (item.embededCode.toString().contains("iframe")) {
         String src = item.embededCode.toString().split('=')[3];
         src = src.replaceAll(' title', '');
         src = src.replaceAll('"', '');
         videoId.add(YoutubePlayer.convertUrlToId(src));
-      }else{
+      } else {
         String src = item.embededCode.toString();
         src = src.replaceAll('"', '');
         videoId.add(YoutubePlayer.convertUrlToId(src));
-      }          
+      }
     }
-    for(int i = 0; i < myPlayList.length; i++){
+    for (int i = 0; i < myPlayList.length; i++) {
       controller = YoutubePlayerController(
         initialVideoId: videoId[i],
         flags: const YoutubePlayerFlags(
@@ -815,7 +854,7 @@ class VideoMenuController extends GetxController {
 
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
-          if(isFrom != "videoDetail"){
+          if (isFrom != "videoDetail") {
             print(value.toString());
             DefaultModel defaultModel = defaultModelFromJson(value);
             isHeart.value = true;
@@ -842,14 +881,14 @@ class VideoMenuController extends GetxController {
 
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
-          if(isFrom != "videoDetail"){
+          if (isFrom != "videoDetail") {
             print(value.toString());
             videoDetail.value.likeCount = videoDetail.value.likeCount! - 1;
             DefaultModel defaultModel = defaultModelFromJson(value);
             isHeart.value = false;
             print("Stutus :: " + defaultModel.message.toString());
             snackBar(context!, defaultModel.message.toString());
-          }          
+          }
         });
       } else {
         print(res.reasonPhrase);
