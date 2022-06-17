@@ -575,10 +575,10 @@ class _UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-    videoController.userList.clear();
+    super.initState();  
     checkNet(context).then(
       (value) {
+        videoController.PageNumber.value = 0;
         videoController.userListAPI(context, widget.selectedUserId);
         dynamic body = {'user_id': widget.selectedUserId};
         controller.admireListAPI(context, body);
