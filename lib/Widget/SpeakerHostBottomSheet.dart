@@ -330,31 +330,7 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                               SizedBox(
                                                 height: 2.h,
                                               ),
-                                              // Claire Roman
-                                              Text(
-                                                  videoController.userList[i]
-                                                              .firstName !=
-                                                          null
-                                                      ? videoController
-                                                              .userList[i]
-                                                              .firstName!
-                                                              .capitalizeFirst! +
-                                                          " " +
-                                                          videoController
-                                                              .userList[i]
-                                                              .lastName!
-                                                              .capitalizeFirst!
-                                                      : "",
-                                                  style: TextStyle(
-                                                      color: black_121212,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 14.sp),
-                                                  textAlign: TextAlign.left)
+
                                             ],
                                           ),
                                         ),
