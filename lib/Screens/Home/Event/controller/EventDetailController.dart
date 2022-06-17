@@ -97,7 +97,7 @@ class EventDetailController extends GetxController {
     });
   }
 
-  allEventListApi(body) async {
+  allEventListApi(body, [isFrom]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     String url = urlBase + urlallEventList;
@@ -122,21 +122,35 @@ class EventDetailController extends GetxController {
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 200) {
-            List<EventList> upcoming = [];
-            List<EventList> past = [];
 
             EventListModel detail = EventListModel.fromJson(userModel);
             eventList.addAll(detail.data!);
 
-            for (var item in eventList) {
-              if (item.event_type == 'past') {
-                past.add(item);
-              } else {
-                upcoming.add(item);
+            if(isFrom != null){
+              if(isFrom == 'past'){
+                pastEventList.addAll(detail.data!);
+              }else{
+                upcomingEventList.addAll(detail.data!);
               }
-            }
-            upcomingEventList.addAll(upcoming);
-            pastEventList.addAll(past);
+            }else{
+              // eventList.addAll(detail.data!);
+
+              List<EventList> upcoming = [];
+              List<EventList> past = [];
+
+              EventListModel detail = EventListModel.fromJson(userModel);
+              eventList.addAll(detail.data!);
+
+              for (var item in eventList) {
+                if (item.event_type == 'past') {
+                  past.add(item);
+                } else {
+                  upcoming.add(item);
+                }
+              }
+              upcomingEventList.addAll(upcoming);
+              pastEventList.addAll(past);
+            }            
           } else {
             print(res.reasonPhrase);
           }
@@ -145,3 +159,4 @@ class EventDetailController extends GetxController {
     });
   }
 }
+

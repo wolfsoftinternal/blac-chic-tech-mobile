@@ -47,7 +47,7 @@ class EventController extends GetxController {
   RxDouble longitude = 0.0.obs;
   RxInt selectedAdmission = 0.obs;
   RxString poster = ''.obs;
-  RxList<dynamic> selectedSpeaker = <dynamic>[].obs;
+  RxList<UserList> selectedSpeaker = <UserList>[].obs;
   RxString speakers = ''.obs;
   RxList<UserList> selectedHost = <UserList>[].obs;
   RxString host = ''.obs;
