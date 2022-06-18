@@ -437,6 +437,8 @@ class _VideoListBctState extends State<VideoListBct> {
                                                 TopicListModel(id: -1);
                                             Get.to(FilterTopicList());
                                           }
+                                          controller.selectedTopic.value.id =
+                                              -1;
                                         },
                                         items: controller.topicList
                                             .map((TopicListModel value) {
@@ -578,6 +580,8 @@ class _VideoListBctState extends State<VideoListBct> {
                                             controller.selectedLanguage.value =
                                                 TopicListModel(id: -1);
                                           }
+                                          controller.selectedLanguage.value.id =
+                                              -1;
                                         },
                                         items: controller.languageList
                                             .map((TopicListModel value) {
