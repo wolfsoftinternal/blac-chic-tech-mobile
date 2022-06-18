@@ -76,7 +76,7 @@ class _VideoTabState extends State<VideoTab> {
                                       fit: BoxFit.fill,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.all(
-                                                    Radius.circular(4.r)),
+                                                    Radius.circular(8.r)),
                                         child: YoutubePlayerBuilder(
                                                 player: YoutubePlayer(
                                                   showVideoProgressIndicator: false,
@@ -126,6 +126,7 @@ class _VideoTabState extends State<VideoTab> {
                                     child: Container(
                                       height: 220,
                                       decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5.r),
                                             gradient: LinearGradient(
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter,
