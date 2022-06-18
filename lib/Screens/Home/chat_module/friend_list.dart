@@ -172,6 +172,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          backgroundColor: Color(0xfff5f5f5),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -503,7 +504,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(6.7.r)),
-          color: light_grey_f2f2f2),
+          color: white_ffffff),
       child: Row(
         children: [
           SizedBox(
@@ -604,8 +605,8 @@ class _FriendListScreenState extends State<FriendListScreen> {
         });
       },
       child: Container(
-          margin: EdgeInsets.only(bottom: 16.h, left: 24.w, right: 24.w),
-          padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 0),
+          margin: EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
+          padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 12.w),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.r),
@@ -650,7 +651,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
                           fontWeight: FontWeight.w600,
                           fontFamily: helveticaNeueNeue_medium,
                           fontStyle: FontStyle.normal,
-                          fontSize: 13.sp),
+                          fontSize: 14.sp),
                     ),
                     SizedBox(
                       height: 6.h,
@@ -663,8 +664,8 @@ class _FriendListScreenState extends State<FriendListScreen> {
                         maxLines: 1,
                         style: TextStyle(
                           overflow: TextOverflow.ellipsis,
-                          color: EdTxtBg,
-                          fontSize: 11.sp,
+                          color: grey_aaaaaa,
+                          fontSize: 12.sp,
                           fontFamily: helveticaNeueNeue_medium,
                           fontWeight: FontWeight.w400,
                         ),
@@ -711,7 +712,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
                     user["timeStamp"] ?? "",
                     style: TextStyle(
                       fontFamily: helveticaNeueNeue_medium,
-                      fontSize: 11.sp,
+                      fontSize: 12.sp,
                       color: grey_aaaaaa,
                       fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.normal,
