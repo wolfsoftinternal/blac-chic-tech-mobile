@@ -280,7 +280,7 @@ class _ChatPageState extends State<ChatPage> {
               var myData = chatDocs?[index].data() as Map;
               DateTime sentAt = (myData["timeStamp"] as Timestamp).toDate();
               String message = myData["message"];
-              
+
               _chatDateController.add(sentAt.toString());
 
               String? date;
