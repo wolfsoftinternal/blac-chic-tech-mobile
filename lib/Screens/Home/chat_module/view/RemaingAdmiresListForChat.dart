@@ -57,7 +57,7 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(title: Text('Select Admire'),),
-    body: isLoading == true?Center(child: CircularProgressIndicator(),):ListView.builder(
+    body: isLoading == true?Center(child: CircularProgressIndicator()):ListView.builder(
       primary: false,
       shrinkWrap: true,
       padding: EdgeInsets.all(0),
@@ -200,15 +200,15 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
                             };
 
                             isLoading = true;
+                            setState(() {});
                             shareMix(receiverData, "");
-                           setState(){
 
-                           }
                           },
                           child: SvgPicture.asset(
-                            orange_tick_icon,
+                            add_icon,
                             width: 25.w,
                             height: 25.h,
+
                           ),
                         )
                       ],

@@ -141,7 +141,7 @@ class _ChatPageState extends State<ChatPage> {
     });
     print("initState => ${widget.receiver["id"]}");
 
-    setState(() {});
+   // setState(() {});
   }
 
   @override
@@ -166,7 +166,7 @@ class _ChatPageState extends State<ChatPage> {
                 ? Container()
                 // _isLoading ? myLoader() :
                 : chatStream()),
-        roomId.isEmpty || roomId == null ? Container() : _typingStatus(),
+            roomId.isEmpty || roomId == null ? Container() : _typingStatus(),
         sendMessageForm2(),
       ])),
     );
@@ -279,12 +279,21 @@ class _ChatPageState extends State<ChatPage> {
               // }
               var myData = chatDocs?[index].data() as Map;
               DateTime sentAt = (myData["timeStamp"] as Timestamp).toDate();
-
+              String message = myData["message"];
+              
               _chatDateController.add(sentAt.toString());
 
               String? date;
-              if (index == (chatDocs?.length??1) - 1) {
-                date = formatDateddmmmmyyy(sentAt.toString());
+              if ((index == (chatDocs?.length??1) - 1) ) {
+
+                if(message.isEmpty && (chatDocs?.length??0) == 1){
+                  date = null;
+                }else{
+                  date = formatDateddmmmmyyy(sentAt.toString());
+                }
+
+
+                print('index == (chatDocs?');
               } else if (index >= 0) {
                 String messageDate = formatDateddmmmmyyy(sentAt.toString());
 
@@ -297,11 +306,14 @@ class _ChatPageState extends State<ChatPage> {
                 if (previousMessageDat != messageDate) {
                   print("--> Under ");
                   date = messageDate;
+
+                  print('previousMessageDat != messageDate');
                 } else {
                   date = null;
+                  print('date = null');
                 }
                 // date = formatDateddmmyyyy(sentAt);
-              } else {
+              } else{
                 date = formatDateddmmmmyyy(sentAt.toString());
               }
 
@@ -317,7 +329,11 @@ class _ChatPageState extends State<ChatPage> {
                     SizedBox(
                       height: 10,
                     ),
-                  _chatItem(myData, chatDocs, index)
+
+              if(message.isNotEmpty && (chatDocs?.length??0) > 0)
+                _chatItem(myData, chatDocs, index)
+
+
                 ],
               );
             },
