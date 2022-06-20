@@ -29,7 +29,8 @@ class RemaingAdmiresListForChat extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<RemaingAdmiresListForChat> createState() => _RemaingAdmiresListForChatState();
+  State<RemaingAdmiresListForChat> createState() =>
+      _RemaingAdmiresListForChatState();
 }
 
 class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
@@ -48,8 +49,7 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
 
   init() async {
     var preferences = MySharedPref();
-     signupModel =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
+    signupModel = await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = signupModel!.data!.id!.toInt();
 
     setState(() {});
@@ -60,181 +60,194 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: white_ffffff,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 15.h,),
-          ToolbarWithHeaderCenterTitle("Select Admires"),
-          SizedBox(height: 20.h,),
-          isLoading == true?Center(child: CircularProgressIndicator(),):ListView.builder(
-            primary: false,
-            shrinkWrap: true,
-            padding: EdgeInsets.all(0),
-            itemCount: widget.admireList.length,
-            itemBuilder: (context, i) =>
-                Material(
-                  color: white,
-                  child: GestureDetector(
-                    onTap: () {
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 16.h),
-                      child: Container(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: EdgeInsets.only( left: 20, right: 20),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment:
-                            MainAxisAlignment.start,
-                            crossAxisAlignment:
-                            CrossAxisAlignment.center,
-                            children: [
-                              ClipRRect(
-                                borderRadius:
-                                BorderRadius.circular(50),
-                                child: widget.admireList.isNotEmpty
-                                    ? widget.admireList[i]
-                                    .admireDetails?.image ==
-                                    null
-                                    ? SvgPicture.asset(
-                                  placeholder,
-                                  height: 40.h,
-                                  width: 40.w,
-                                  fit: BoxFit.cover,
-                                )
-                                    : CachedNetworkImage(
-                                  imageUrl:
-                                  widget.admireList[i]
-                                      .admireDetails!.image!,
-                                  height: 40.h,
-                                  width: 40.w,
-                                  fit: BoxFit.cover,
-                                  progressIndicatorBuilder:
-                                      (context, url,
-                                      downloadProgress) =>
-                                      SvgPicture
-                                          .asset(
-                                        placeholder,
-                                        height: 40.h,
-                                        width: 40.w,
-                                        fit: BoxFit.cover,
-                                      ),
-                                  errorWidget:
-                                      (context, url,
-                                      error) =>
-                                      SvgPicture
-                                          .asset(
-                                        placeholder,
-                                        height: 40.h,
-                                        width: 40.w,
-                                        fit: BoxFit.cover,
-                                      ),
-                                )
-                                    : SvgPicture.asset(
-                                  placeholder,
-                                  height: 40.h,
-                                  width: 40.w,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 16.w,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Column(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.start,
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    // claireroman
-                                    Text(
-                                        widget.admireList[i]
-                                            .admireDetails?.userName !=
-                                            null
-                                            ?  widget.admireList[i]
-                                            .admireDetails!.userName!
-                                            : "",
-                                        style: TextStyle(
-                                            color: grey_aaaaaa,
-                                            fontWeight:
-                                            FontWeight.w500,
-                                            fontFamily:
-                                            helveticaNeueNeue_medium,
-                                            fontStyle: FontStyle
-                                                .normal,
-                                            fontSize: 14.sp),
-                                        textAlign:
-                                        TextAlign.left),
-                                    SizedBox(
-                                      height: 2.h,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 15.h,
+            ),
+            ToolbarWithHeaderCenterTitle("Select Admires"),
+            SizedBox(
+              height: 20.h,
+            ),
+
+            Expanded(
+              child: SingleChildScrollView(
+                    child: Stack(
+                      children: [
+                        ListView.builder(
+                          primary: false,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.all(0),
+                          itemCount: widget.admireList.length,
+                          itemBuilder: (context, i) => Material(
+                            color: white,
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 16.h),
+                                child: Container(
+                                  color: Colors.white,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(50),
+                                          child: widget.admireList.isNotEmpty
+                                              ? widget.admireList[i].admireDetails
+                                              ?.image ==
+                                              null
+                                              ? SvgPicture.asset(
+                                            placeholder,
+                                            height: 40.h,
+                                            width: 40.w,
+                                            fit: BoxFit.cover,
+                                          )
+                                              : CachedNetworkImage(
+                                            imageUrl: widget.admireList[i]
+                                                .admireDetails!.image!,
+                                            height: 40.h,
+                                            width: 40.w,
+                                            fit: BoxFit.cover,
+                                            progressIndicatorBuilder:
+                                                (context, url,
+                                                downloadProgress) =>
+                                                SvgPicture.asset(
+                                                  placeholder,
+                                                  height: 40.h,
+                                                  width: 40.w,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                SvgPicture.asset(
+                                                  placeholder,
+                                                  height: 40.h,
+                                                  width: 40.w,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                          )
+                                              : SvgPicture.asset(
+                                            placeholder,
+                                            height: 40.h,
+                                            width: 40.w,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 16.w,
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              // claireroman
+                                              Text(
+                                                  widget.admireList[i].admireDetails
+                                                      ?.userName !=
+                                                      null
+                                                      ? widget.admireList[i]
+                                                      .admireDetails!.userName!
+                                                      : "",
+                                                  style: TextStyle(
+                                                      color: grey_aaaaaa,
+                                                      fontWeight: FontWeight.w500,
+                                                      fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontSize: 14.sp),
+                                                  textAlign: TextAlign.left),
+                                              SizedBox(
+                                                height: 2.h,
+                                              ),
+                                              // Claire Roman
+                                              Text(
+                                                  widget.admireList[i].admireDetails
+                                                      ?.firstName !=
+                                                      null
+                                                      ? (widget
+                                                      .admireList[i]
+                                                      ?.admireDetails
+                                                      ?.firstName
+                                                      ?.capitalizeFirst ??
+                                                      "") +
+                                                      " " +
+                                                      (widget
+                                                          .admireList[i]
+                                                          ?.admireDetails
+                                                          ?.lastName
+                                                          ?.capitalizeFirst ??
+                                                          "")
+                                                      : "",
+                                                  style: TextStyle(
+                                                      color: black_121212,
+                                                      fontWeight: FontWeight.w700,
+                                                      fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontSize: 14.sp),
+                                                  textAlign: TextAlign.left)
+                                            ],
+                                          ),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Map<String, dynamic> receiverData = {
+                                              "id": widget.admireList[i].admireId
+                                                  .toString(),
+                                              "name": widget.admireList[i]
+                                                  .admireDetails?.fullName
+                                                  .toString() ??
+                                                  widget.admireList[i].admireDetails
+                                                      ?.userName,
+                                              "image": widget.admireList[i]
+                                                  .admireDetails?.image ??
+                                                  "",
+                                              "email": widget.admireList[i]
+                                                  .admireDetails?.email ??
+                                                  ""
+                                            };
+
+                                            isLoading = true;
+                                            shareMix(receiverData, "");
+                                            setState(() {});
+                                          },
+                                          child: SvgPicture.asset(
+                                            add_icon,
+                                            width: 25.w,
+                                            height: 25.h,
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    // Claire Roman
-                                    Text(
-                                        widget.admireList[i]
-                                            .admireDetails?.firstName !=
-                                            null
-                                            ? (widget.admireList[i]?.admireDetails?.firstName?.capitalizeFirst??"") +
-                                            " " +
-                                            (widget.admireList[i]?.admireDetails?.lastName?.capitalizeFirst??"")
-                                            : "",
-                                        style: TextStyle(
-                                            color: black_121212,
-                                            fontWeight:
-                                            FontWeight.w700,
-                                            fontFamily:
-                                            helveticaNeueNeue_medium,
-                                            fontStyle: FontStyle
-                                                .normal,
-                                            fontSize: 14.sp),
-                                        textAlign:
-                                        TextAlign.left)
-                                  ],
+                                  ),
                                 ),
                               ),
-
-                              GestureDetector(
-                                onTap: (){
-                                  Map<String, dynamic> receiverData = {
-                                    "id": widget.admireList[i].admireId.toString(),
-                                    "name": widget.admireList[i].admireDetails?.fullName
-                                        .toString() ??
-                                        widget.admireList[i].admireDetails?.userName,
-                                    "image":
-                                    widget.admireList[i].admireDetails?.image ?? "",
-                                    "email":
-                                    widget.admireList[i].admireDetails?.email ?? ""
-                                  };
-
-                                  isLoading = true;
-                                  shareMix(receiverData, "");
-                                 setState(){
-
-                                 }
-                                },
-                                child: SvgPicture.asset(
-                                  orange_tick_icon,
-                                  width: 25.w,
-                                  height: 25.h,
-                                ),
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                        isLoading == true
+                            ? Center(
+                          child: CircularProgressIndicator(),
+                        ):SizedBox()
+                      ],
                     ),
                   ),
-                ),
-          ),
-        ],
-      ),),
-    )
-   ;
+            ),
+          ],
+        ),
+      ),
+    );
   }
-
 
   sendMessageToFriend(Map<String, dynamic> mySnap) {
     Navigator.of(context).push(
@@ -256,7 +269,6 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
           receiverData["id"].toString(), signupModel!.data!);
 
       Navigator.pop(context);
-
     }
   }
 
@@ -282,5 +294,4 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
 
     // await initTypingStatusDB();
   }
-
 }
