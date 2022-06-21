@@ -144,7 +144,7 @@ class _MyPlayListState extends State<MyPlayList> {
                                                               borderRadius: BorderRadius
                                                                   .all(Radius
                                                                       .circular(
-                                                                          15.r)),
+                                                                          8.r)),
                                                               child:
                                                                   YoutubePlayerBuilder(
                                                                       onEnterFullScreen:
@@ -347,14 +347,10 @@ class _MyPlayListState extends State<MyPlayList> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      12),
+                                                                      1),
                                                         ),
                                                         padding:
-                                                            const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal:
-                                                                    24,
-                                                                vertical: 10),
+                                                             EdgeInsets.zero,
                                                         icon: Image.asset(
                                                           img_more,
                                                           width: 16.w,
