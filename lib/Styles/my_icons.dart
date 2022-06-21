@@ -1,5 +1,6 @@
 
 const img_girl = 'assets/images/img_girl.png';
+const logo = 'assets/images/logo.svg';
 const img_giral_crop = 'assets/images/img_giral_crop.png';
 const iconly_light_heart = 'assets/images/iconly_light_heart.png';
 const img_close = 'assets/images/close.png';

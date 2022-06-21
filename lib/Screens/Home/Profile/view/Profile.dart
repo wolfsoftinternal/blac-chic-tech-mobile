@@ -206,7 +206,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                           padding: const EdgeInsets.only(right: 10.0),
                           child: GestureDetector(
                             onTap: () {
-                              displayBottomSheet(context);
+                              displayBottomSheet(context, userId);
                             },
                             child: Container(
                               width: 55.w,

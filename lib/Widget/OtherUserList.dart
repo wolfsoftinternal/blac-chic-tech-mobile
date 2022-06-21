@@ -81,7 +81,7 @@ class _OtherUserListState extends State<OtherUserList> {
               const Spacer(),
               GestureDetector(
                 onTap: () {
-                  displayBottomSheet(context);
+                  displayBottomSheet(context, widget.otherUser.id);
                 },
                 child: Container(
                   height: 48,

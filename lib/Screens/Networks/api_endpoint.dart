@@ -54,6 +54,8 @@ const urlDeleteEvent = '/mobile/event-delete';
 const urlallEventList = '/mobile/home/event-list';
 const urlallEventDetail = '/mobile/home/event-details';
 const urlRegisteredUser = '/mobile/registered-users';
+const urlInviteUser = '/mobile/event-invite-users';
+const urlInviteUserList = '/mobile/event-users-list';
 
 // Transactions
 const urlAllTransactions = '/mobile/transaction/list';
@@ -89,3 +91,7 @@ const urlAddComments = "/mobile/video-add-comment";
 const urlFindSpeaker = '/mobile/find-speaker';
 
 const urlspeakerVideoList = '/mobile/speaker-videos';
+
+//Report
+const urlReportList = '/mobile/report/list';
+const urlCreateReport = '/mobile/report/create';

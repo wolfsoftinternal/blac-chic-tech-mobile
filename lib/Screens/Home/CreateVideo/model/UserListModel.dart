@@ -57,6 +57,7 @@ class UserList {
         this.currentJobs,
         this.isSpeakerSelected,
         this.isHostSelected,
+        this.is_invited,
     });
 
     dynamic id;
@@ -82,6 +83,7 @@ class UserList {
     CurrentJobs? currentJobs;
     bool? isSpeakerSelected;
     bool? isHostSelected;
+    int? is_invited;
 
     factory UserList.fromJson(Map<String, dynamic> json) => UserList(
         id: json["id"],
@@ -105,6 +107,7 @@ class UserList {
         website: json["website"],
         isAdmire : json["is_admire"],
         currentJobs: json["current_jobs"] == null ? null : CurrentJobs.fromJson(json["current_jobs"]),
+        is_invited: json["is_invited"] == null ? null : json["is_invited"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -128,6 +131,7 @@ class UserList {
         "longitude": longitude,
         "website": website,
         "current_jobs": currentJobs!.toJson(),
+        "is_invited": is_invited,
     };
 }
 

@@ -51,7 +51,9 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
         builder: (ctx) {
           return Column(
             children: [
-              Expanded(child: SpeakerHostBottomSheet()),
+              Expanded(child: 
+              SpeakerHostBottomSheet()
+                ),
               if (videoController.isPaginationLoading.value == true)
                 PaginationUtils().loader(),
             ],
@@ -62,12 +64,20 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
   /*Host bottom sheet*/
   void displayHostBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        isScrollControlled: true,
+        isScrollControlled: false,
         backgroundColor: Colors.transparent,
         context: context,
         builder: (ctx) {
-          return SpeakerHostBottomSheet(
-            type: 'host',
+          return Column(
+            children: [
+              Expanded(
+                child: SpeakerHostBottomSheet(
+                  type: 'host',
+                ),
+              ),
+              if (videoController.isPaginationLoading.value == true)
+                PaginationUtils().loader(),
+            ],
           );
         });
   }
@@ -288,10 +298,10 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                                 child: Center(
                                                                     child: Text(
                                                                         controller.selectedSpeaker[index].userName != null
-                                                                            ? controller.selectedSpeaker[index].userName
+                                                                            ? controller.selectedSpeaker[index].userName[0]
                                                                                 .toString()
                                                                                 .toUpperCase()
-                                                                            : controller.selectedSpeaker[index].firstName
+                                                                            : controller.selectedSpeaker[index].firstName[0]
                                                                                 .toString()
                                                                                 .toUpperCase(),
                                                                         style: TextStyle(
@@ -366,21 +376,21 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                                 .selectedSpeaker
                                                                 .length ==
                                                             1) {
-                                                          controller
-                                                              .selectedSpeaker
-                                                              .clear();
+                                                          controller.selectedSpeaker.clear();
+                                                          for(var item in videoController.userList){
+                                                            if(item.isSpeakerSelected == true){
+                                                              item.isSpeakerSelected = false;
+                                                            }
+                                                          }
                                                         } else {
                                                           if (controller.selectedSpeaker[index].id == null) {
-                                                            controller
-                                                                .selectedSpeaker
-                                                                .remove(controller
-                                                                        .selectedSpeaker[
-                                                                    index]);
+                                                            controller.selectedSpeaker.remove(controller.selectedSpeaker[index]);
                                                           } else {
                                                             var selectedIndex = controller.selectedSpeaker[index].id;
                                                             for (var item in videoController.userList) {
                                                               if (selectedIndex == item.id) {
                                                                 controller.selectedSpeaker.remove(item);
+                                                                item.isSpeakerSelected = false;
                                                               }
                                                             }
                                                           }
@@ -517,8 +527,12 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                           GestureDetector(
                                             onTap: () {
                                               controller.selectedHost.clear();
-                                            },
-                                            child: Icon(
+                                              for(var item in videoController.userList){
+                                                if(item.isHostSelected == true){
+                                                  item.isHostSelected = false;
+                                                }
+                                              }
+                                            },                                            child: Icon(
                                               Icons.cancel_outlined,
                                               size: 12,
                                             ),

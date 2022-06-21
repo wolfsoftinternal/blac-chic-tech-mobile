@@ -189,7 +189,7 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                           padding: const EdgeInsets.only(right: 10.0),
                           child: GestureDetector(
                             onTap: () {
-                              displayBottomSheet(context);
+                              displayBottomSheet(context, controller.details.value.id);
                             },
                             child: Container(
                               width: 55.w,

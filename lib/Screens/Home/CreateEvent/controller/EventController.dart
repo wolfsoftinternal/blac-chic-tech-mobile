@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blackchecktech/Model/BaseModel.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
@@ -47,7 +48,7 @@ class EventController extends GetxController {
   RxDouble longitude = 0.0.obs;
   RxInt selectedAdmission = 0.obs;
   RxString poster = ''.obs;
-  RxList<UserList> selectedSpeaker = <UserList>[].obs;
+  RxList<dynamic> selectedSpeaker = <dynamic>[].obs;
   RxString speakers = ''.obs;
   RxList<UserList> selectedHost = <UserList>[].obs;
   RxString host = ''.obs;
@@ -59,7 +60,8 @@ class EventController extends GetxController {
   RxString admissionType = ''.obs;
   RxList<dynamic> speakerNameList = <dynamic>[].obs;
   RxString speakerName = ''.obs;
-
+  RxBool isSearched = false.obs;
+  VideoController videoController = Get.put(VideoController());
 
   Future<void> createEventAPI(BuildContext context) async {
     var preferences = MySharedPref();
@@ -155,12 +157,22 @@ class EventController extends GetxController {
           createEventAPI(context);
         } else if (model.statusCode == 200) {
           var id = userModel['data']['id'];
+          for (var item in videoController.userList) {
+            if (item.isSpeakerSelected == true) {
+              item.isSpeakerSelected = false;
+            }
+
+            if (item.isHostSelected == true) {
+              item.isHostSelected = false;
+            }
+          }
           checkNet(context)
-              .then((value) => controller.eventDetailAPI(context, id, null )).then((value) {
-                Get.back();
-          Get.back();
-          Get.back();});
-          
+              .then((value) => controller.eventDetailAPI(context, id, null))
+              .then((value) {
+            Get.back();
+            Get.back();
+            Get.back();
+          });
         }
       });
     } else {
@@ -170,7 +182,7 @@ class EventController extends GetxController {
   }
 
   // Get order details as per event id
-    getEventDetailsWithTransactions(body) async {
+  getEventDetailsWithTransactions(body) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -186,7 +198,8 @@ class EventController extends GetxController {
 
           print('event detail with transactions ' + strData);
 
-          Map<String, dynamic> eventDetailWithTransactionModel = json.decode(strData);
+          Map<String, dynamic> eventDetailWithTransactionModel =
+              json.decode(strData);
           BaseModel model = BaseModel.fromJson(eventDetailWithTransactionModel);
 
           if (model.statusCode == 500) {
@@ -195,9 +208,9 @@ class EventController extends GetxController {
 
             getEventDetailsWithTransactions(body);
           } else if (model.statusCode == 200) {
-            EventDetailModel detail = EventDetailModel.fromJson(eventDetailWithTransactionModel);
+            EventDetailModel detail =
+                EventDetailModel.fromJson(eventDetailWithTransactionModel);
             eventDetailsWithTransactions.value = detail.data!;
-
 
             //  chargeCardAndMakePayment(context,selectedPositionOfAdmission, orderListModel);
           }
@@ -207,5 +220,4 @@ class EventController extends GetxController {
       }
     });
   }
-
 }

@@ -7,6 +7,7 @@ import 'package:blackchecktech/Screens/Home/CreateEvent/view/CreatEventUploadIma
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/EventLocation.dart';
 import 'package:blackchecktech/Screens/Home/CreateEvent/view/InvitePeople.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -34,6 +35,7 @@ class CreateEvent extends StatefulWidget {
 class _CreateEventState extends State<CreateEvent> {
   EventController controller = Get.put(EventController());
   VideoController videoController = Get.put(VideoController());
+  AdmireProfileController admireProfileController = Get.put(AdmireProfileController());
   final eventKey = GlobalKey<FormState>();
   TimeOfDay? startTime;
   TimeOfDay? endTime;
@@ -108,9 +110,19 @@ class _CreateEventState extends State<CreateEvent> {
         benefitController[0][0] = benefitsController;
       }
     }
-    checkNet(context).then((value) {
-      videoController.userListAPI(context);
+    checkNet(context).then((value) async {
+      await videoController.userListAPI(context);
     });
+
+    for(var item in videoController.userList){
+      if(item.isSpeakerSelected == true){
+        item.isSpeakerSelected = false;
+      }
+
+      if(item.isHostSelected == true){
+        item.isHostSelected = false;
+      }
+    }
   }
 
   @override
@@ -984,9 +996,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                         1
                                                     ? Column(
                                                         children: [
-                                                          controller
-                                                                  .selectedList
-                                                                  .isNotEmpty
+                                                          controller.selectedList.isNotEmpty
                                                               ? Padding(
                                                                   padding:  EdgeInsets
                                                                           .only(
@@ -1108,12 +1118,24 @@ class _CreateEventState extends State<CreateEvent> {
                                                                     top: 8.h),
                                                             child: InkWell(
                                                               onTap: () {
-                                                                // if (controller.selectedList.isEmpty){
-                                                                //   checkNet(context).then((value) async =>
-                                                                //     await videoController.userListAPI(context, '')
-                                                                //   );
-                                                                // }
+                                                                if (admireProfileController.isSearched.value == true) {
+                                                                  admireProfileController.isSearched.value = false;
+                                                                  checkNet(context).then((value) async {
+                                                                      videoController.PageNumber.value = 0;
+                                                                      videoController.userList.clear();
+                                                                      await videoController.userListAPI(context);
 
+                                                                      Future.delayed(Duration(milliseconds: 3), () {
+                                                                        for (var item in videoController.userList) {
+                                                                          for (var selectedItem in admireProfileController.selectedList) {
+                                                                            if (selectedItem.id == item.id) {
+                                                                              item.isSpeakerSelected = selectedItem.isSpeakerSelected;
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      });
+                                                                    });
+                                                                }
                                                                 Get.to(
                                                                         InvitePeople(
                                                                   fromView:

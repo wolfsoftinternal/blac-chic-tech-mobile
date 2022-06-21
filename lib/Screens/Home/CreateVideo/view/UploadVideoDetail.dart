@@ -7,6 +7,8 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextfieldUtility.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
+import 'package:blackchecktech/Widget/SpeakerHostBottomSheet.dart';
 import 'package:blackchecktech/Widget/SpinnerDecorationBorder.dart';
 import 'package:blackchecktech/Widget/VideoSpeakerList.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
@@ -31,21 +33,39 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
   @override
   void initState() {
     super.initState();
-    checkNet(context).then((value) {
-      controller.topicListAPI(context);
-      controller.languageListAPI(context);
-      controller.userListAPI(context);
+    checkNet(context).then((value) async {
+      await controller.userListAPI(context);
+      await controller.topicListAPI(context);
+      await controller.languageListAPI(context);
+      
+    }); 
+
+    Future.delayed(Duration(seconds: 3), (){
+      for (var item in controller.userList) {
+      if (item.isSpeakerSelected == true) {
+        item.isSpeakerSelected = false;
+      }
+    }
     });
+    
   }
 
   /*Speaker bottom sheet*/
   void displayRecurringOrderBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        isScrollControlled: true,
+        isScrollControlled: false,
         backgroundColor: Colors.transparent,
         context: context,
         builder: (ctx) {
-          return VideoSpeakerList();
+          return Column(
+            children: [
+              Expanded(
+                child: VideoSpeakerList(),
+              ),
+              if (controller.isPaginationLoading.value == true)
+                PaginationUtils().loader(),
+            ],
+          );
         });
   }
 
@@ -186,8 +206,8 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   decoration: SpinnerDecorationBorder,
                                   child: DropdownButtonHideUnderline(
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 10, right: 10),
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10),
                                       child: DropdownButton(
                                           //  validator: (value) => value == null ? "Select a country" : null,
                                           dropdownColor: Colors.white,
@@ -398,14 +418,14 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                             RegExp(r'^[a-z A-Z]+$')),
                                       ],
                                       inputDecoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Tag name',
-                                        hintStyle: TextStyle(
-                                          color: grey_aaaaaa,
-                                          fontFamily: helveticaNeueNeue_medium,
-                                          fontSize: 14.sp,
-                                        )
-                                      ),
+                                          border: InputBorder.none,
+                                          hintText: 'Tag name',
+                                          hintStyle: TextStyle(
+                                            color: grey_aaaaaa,
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
+                                            fontSize: 14.sp,
+                                          )),
                                       onTagChanged: (newValue) {
                                         setState(() {
                                           controller.tagValues.add(newValue);
@@ -599,13 +619,51 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                                         ),
                                                         InkWell(
                                                           onTap: () {
-                                                            if(controller.selectedList.length == 1){
-                                                              controller.selectedList.clear();
-                                                            }else {
-                                                              var selectedIndex = controller.selectedList[index].id;
-                                                              for(var item in controller.userList){
-                                                                if(selectedIndex == item.id){
-                                                                  controller.selectedList.remove(item);
+                                                            if (controller
+                                                                    .selectedList
+                                                                    .length ==
+                                                                1) {
+                                                              controller
+                                                                  .selectedList
+                                                                  .clear();
+                                                              for (var item
+                                                                  in controller
+                                                                      .userList) {
+                                                                if (item.isSpeakerSelected ==
+                                                                    true) {
+                                                                  item.isSpeakerSelected =
+                                                                      false;
+                                                                }
+                                                              }
+                                                            } else {
+                                                              if (controller
+                                                                      .selectedList[
+                                                                          index]
+                                                                      .id ==
+                                                                  null) {
+                                                                controller
+                                                                    .selectedList
+                                                                    .remove(controller
+                                                                            .selectedList[
+                                                                        index]);
+                                                              } else {
+                                                                var selectedIndex =
+                                                                    controller
+                                                                        .selectedList[
+                                                                            index]
+                                                                        .id;
+                                                                for (var item
+                                                                    in controller
+                                                                        .userList) {
+                                                                  if (selectedIndex ==
+                                                                      item.id) {
+                                                                    controller
+                                                                        .selectedList
+                                                                        .remove(
+                                                                            item);
+                                                                    item.isSpeakerSelected =
+                                                                        false;
+                                                                  }
                                                                 }
                                                               }
                                                             }
