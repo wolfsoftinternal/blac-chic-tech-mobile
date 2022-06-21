@@ -21,6 +21,7 @@ import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:provider/provider.dart';
 
 class CreatePost extends StatefulWidget {
   const CreatePost({Key? key}) : super(key: key);
@@ -38,6 +39,11 @@ class _CreatePostState extends State<CreatePost> {
     // TODO: implement initState
     super.initState();
     videoController.userListAPI(context);
+    for(var item in videoController.userList){
+      if(item.isSpeakerSelected == true){
+        item.isSpeakerSelected = false;
+      }
+    }
   }
 
   @override
@@ -50,11 +56,8 @@ class _CreatePostState extends State<CreatePost> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 50,
-              ),
               Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 50.0, bottom: 20.0),
                 child: Row(
                   children: [
                     InkWell(
@@ -67,23 +70,60 @@ class _CreatePostState extends State<CreatePost> {
                       ),
                     ),
                     Spacer(),
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Text('ALL PHOTOS',
-                          style: TextStyle(
-                              color: black_121212,
-                              fontFamily: helvetica_neu_bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 16),
-                          textAlign: TextAlign.left),
+                    Container(
+                      height: 40,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            bottom: 5,
+                            child: Container(
+                              height: 40,
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 5.0),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Text('ALL PHOTOS',
+                                      style: TextStyle(
+                                          color: black_121212,
+                                          fontFamily: helvetica_neu_bold,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 16),
+                                      textAlign: TextAlign.left),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(height : 60, width: 102, child: MultiAssetsPage()),
+                        ],
+                      ),
                     ),
                     Stack(children: [
                       Positioned(
-                          top: 4, child: Icon(Icons.expand_more_rounded)),
+                          top: 5, child: Icon(Icons.expand_more_rounded)),
                       SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
                     ]),
+
+                    // Stack(
+                    //   children: [
+                    //     Row(
+                    //       children: [
+                    //         Positioned(
+                    //           bottom: 5,
+                    //           child: Text('ALL PHOTOS',
+                    //               style: TextStyle(
+                    //                   color: black_121212,
+                    //                   fontFamily: helvetica_neu_bold,
+                    //                   fontStyle: FontStyle.normal,
+                    //                   fontSize: 16),
+                    //               textAlign: TextAlign.left),
+                    //         ),
+                    //         Positioned(
+                    //       top: 3, child: Icon(Icons.expand_more_rounded)),
+                    //       ],
+                    //     ),
+                    //     Container(height: 24, width: 130, child: MultiAssetsPage()),
+                    //   ],
+                    // ),
                     Spacer(),
                     InkWell(
                       onTap: () {
@@ -118,7 +158,7 @@ class _CreatePostState extends State<CreatePost> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              
               Stack(
                 alignment: Alignment.bottomLeft,
                 children: [

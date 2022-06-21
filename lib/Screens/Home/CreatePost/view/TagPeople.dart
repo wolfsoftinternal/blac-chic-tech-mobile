@@ -35,11 +35,30 @@ class _TagPeopleState extends State<TagPeople> {
     // TODO: implement initState
     super.initState();
     videoController.initScrolling(context);
+    if (controller.isSearched.value == true) {
+      controller.isSearched.value = false;
+      checkNet(context).then((value) async {
+        videoController.PageNumber.value = 0;
+        videoController.userList.clear();
+        await videoController.userListAPI(context);
+
+        Future.delayed(Duration(milliseconds: 3), () {
+          for (var item in videoController.userList) {
+            for (var selectedItem in controller.selectedList) {
+              if (selectedItem.id == item.id) {
+                item.isSpeakerSelected = selectedItem.isSpeakerSelected;
+              }
+            }
+          }
+        });
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Obx(
         () => Column(
@@ -97,11 +116,18 @@ class _TagPeopleState extends State<TagPeople> {
                   children: [
                     controller.assetImages.length > 0
                         ? Image.file(
-                            File(
-                              controller.assetImages[0].relativePath.toString().contains('/storage/emulated/0/')
-                              ? (controller.assetImages[0].relativePath ?? "") + "/" + (controller.assetImages[0].title ?? "")
-                              : '/storage/emulated/0/' + (controller.assetImages[0].relativePath ?? "") + "/" + (controller.assetImages[0].title ?? "")
-                            ),
+                            File(controller.assetImages[0].relativePath
+                                    .toString()
+                                    .contains('/storage/emulated/0/')
+                                ? (controller.assetImages[0].relativePath ??
+                                        "") +
+                                    "/" +
+                                    (controller.assetImages[0].title ?? "")
+                                : '/storage/emulated/0/' +
+                                    (controller.assetImages[0].relativePath ??
+                                        "") +
+                                    "/" +
+                                    (controller.assetImages[0].title ?? "")),
                             width: double.infinity,
                             height: 375.h,
                             fit: BoxFit.cover,
@@ -159,8 +185,35 @@ class _TagPeopleState extends State<TagPeople> {
                                     ),
                                     GestureDetector(
                                         onTap: () {
-                                          controller.selectedList.remove(
-                                              videoController.userList[i]);
+                                          if (controller.selectedList.length ==
+                                              1) {
+                                            controller.selectedList.clear();
+                                            for (var item
+                                                in videoController.userList) {
+                                              if (item.isSpeakerSelected ==
+                                                  true) {
+                                                item.isSpeakerSelected = false;
+                                              }
+                                            }
+                                          } else {
+                                            if (controller.selectedList[i].id ==
+                                                null) {
+                                              controller.selectedList.remove(
+                                                  controller.selectedList[i]);
+                                            } else {
+                                              var selectedIndex =
+                                                  controller.selectedList[i].id;
+                                              for (var item
+                                                  in videoController.userList) {
+                                                if (selectedIndex == item.id) {
+                                                  controller.selectedList
+                                                      .remove(item);
+                                                  item.isSpeakerSelected =
+                                                      false;
+                                                }
+                                              }
+                                            }
+                                          }
                                         },
                                         child: Icon(
                                           Icons.close,
@@ -181,25 +234,41 @@ class _TagPeopleState extends State<TagPeople> {
               padding:
                   const EdgeInsets.only(left: 24.0, top: 24.0, right: 24.0),
               child: SearchBarTag(
-                placeholder: "Search people",
-                onSubmit: (value) {
-                  checkNet(context).then((value) {
-
-                    videoController.PageNumber.value = 0;
-
-                    videoController.userListAPI(
-                        context);
-                  });
-                  for (var item in videoController.userList) {
-                    if (controller.selectedList.contains(item)) {
-                      controller.searchList.clear();
-                      controller.searchList.add(item);
+                  placeholder: "Search people",
+                  onSubmit: (value) async {
+                    if (videoController.searchController.value.text == '') {
+                      controller.isSearched.value = false;
+                      videoController.PageNumber.value = 0;
+                      videoController.userList.clear();
+                      await videoController.userListAPI(context);
+                      Future.delayed(Duration(milliseconds: 3), () {
+                        for (var item in videoController.userList) {
+                          for (var selectedItem in controller.selectedList) {
+                            if (selectedItem.id == item.id) {
+                              item.isSpeakerSelected =
+                                  selectedItem.isSpeakerSelected;
+                            }
+                          }
+                        }
+                      });
+                    } else {
+                      controller.isSearched.value = true;
+                      videoController.PageNumber.value = 0;
+                      await videoController.userListAPI(context);
+                      Future.delayed(Duration(milliseconds: 3), () {
+                        for (var item in videoController.userList) {
+                          for (var selectedItem in controller.selectedList) {
+                            if (selectedItem.id == item.id) {
+                              item.isSpeakerSelected =
+                                  selectedItem.isSpeakerSelected;
+                            }
+                          }
+                        }
+                      });
                     }
-                  }
-                },
-                controller: videoController.searchController.value,
-                autoFocus: false,
-              ),
+                  },
+                  controller: videoController.searchController.value,
+                  autoFocus: false),
             ),
             Expanded(
               flex: 1,
@@ -226,10 +295,23 @@ class _TagPeopleState extends State<TagPeople> {
                               onTap: () {
                                 setState(
                                   () {
+                                    // if (controller.selectedList.contains(
+                                    //     videoController.userList[i])) {
+                                    //   controller.selectedList
+                                    //       .remove(videoController.userList[i]);
+                                    // } else {
+                                    //   controller.selectedList
+                                    //       .add(videoController.userList[i]);
+                                    // }
+
+                                    videoController
+                                        .userList[i].isSpeakerSelected = true;
                                     if (controller.selectedList.contains(
                                         videoController.userList[i])) {
                                       controller.selectedList
                                           .remove(videoController.userList[i]);
+                                      videoController
+                                          .userList[i].isHostSelected = false;
                                     } else {
                                       controller.selectedList
                                           .add(videoController.userList[i]);
@@ -344,8 +426,9 @@ class _TagPeopleState extends State<TagPeople> {
                                         ),
                                       ),
                                       SvgPicture.asset(
-                                        controller.selectedList.contains(
-                                                videoController.userList[i])
+                                        videoController.userList[i]
+                                                    .isSpeakerSelected ==
+                                                true
                                             ? orange_tick_icon
                                             : icon_next_arrow,
                                         width: 25.w,
@@ -365,7 +448,7 @@ class _TagPeopleState extends State<TagPeople> {
               ),
             ),
             if (videoController.isPaginationLoading.value == true)
-            PaginationUtils().loader(),
+              PaginationUtils().loader(),
           ],
         ),
       ),

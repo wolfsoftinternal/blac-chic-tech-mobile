@@ -177,7 +177,7 @@ class _VideoDetailState extends State<VideoDetail> {
                         padding: const EdgeInsets.only(right: 10.0),
                         child: GestureDetector(
                           onTap: () {
-                            displayBottomSheet(context);
+                            displayBottomSheet(context, widget.id);
                           },
                           child: SizedBox(
                             width: 55.w,
@@ -378,7 +378,7 @@ class _VideoDetailState extends State<VideoDetail> {
                                   TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: "@$username",
+                                        text: username.isEmpty ? "" : "@$username",
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontFamily: helvetica_neu_bold,

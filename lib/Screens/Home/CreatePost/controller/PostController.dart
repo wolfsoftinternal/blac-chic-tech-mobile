@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blackchecktech/Model/BaseModel.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Networks/api_endpoint.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
@@ -24,6 +25,8 @@ class PostController extends GetxController {
   Rx<TextEditingController> searchLocationController =
       TextEditingController().obs;
   RxList assetImages = <AssetEntity>[].obs;
+  RxBool isSearched = false.obs;
+  VideoController videoController = Get.put(VideoController());
 
   createPostAPI(BuildContext context) async {
     var preferences = MySharedPref();
@@ -81,6 +84,13 @@ class PostController extends GetxController {
           createPostAPI(context);
         } else if (model.statusCode == 200) {
           snackBar(context, model.message!);
+
+          for (var item in videoController.userList) {
+            if (item.isSpeakerSelected == true) {
+              item.isSpeakerSelected = false;
+            }
+          }
+
           Get.back();
         }
       });

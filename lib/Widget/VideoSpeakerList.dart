@@ -26,8 +26,26 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
     // TODO: implement initState
     super.initState();
     controller.initScrolling(context);
-  }
+    
+    if (controller.isSearched.value == true) {
+      controller.isSearched.value = false;
+      checkNet(context).then((value) async {
+        controller.PageNumber.value = 0;
+        controller.userList.clear();
+        await controller.userListAPI(context);
 
+        Future.delayed(Duration(milliseconds: 3), () {
+          for (var item in controller.userList) {
+            for (var selectedItem in controller.selectedList) {
+              if (selectedItem.id == item.id) {
+                item.isSpeakerSelected = selectedItem.isSpeakerSelected;
+              }
+            }
+          }
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,12 +122,47 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
                                   SearchBarTag(
                                     placeholder: "Search people",
                                     autoFocus: false,
-                                    onSubmit: (value) {
-                                      checkNet(context).then((value) {
+                                    onSubmit: (value) async {
+                                      if (controller
+                                              .searchController.value.text ==
+                                          '') {
+                                        controller.isSearched.value = false;
                                         controller.PageNumber.value = 0;
-                                        controller.userListAPI(
-                                            context);
-                                      });
+                                        controller.userList.clear();
+                                        await controller.userListAPI(context);
+                                        Future.delayed(
+                                            Duration(milliseconds: 3), () {
+                                          for (var item
+                                              in controller.userList) {
+                                            for (var selectedItem
+                                                in controller.selectedList) {
+                                              if (selectedItem.id == item.id) {
+                                                item.isSpeakerSelected =
+                                                    selectedItem
+                                                        .isSpeakerSelected;
+                                              }
+                                            }
+                                          }
+                                        });
+                                      } else {
+                                        controller.isSearched.value = true;
+                                        controller.PageNumber.value = 0;
+                                        await controller.userListAPI(context);
+                                        Future.delayed(
+                                            Duration(milliseconds: 3), () {
+                                          for (var item
+                                              in controller.userList) {
+                                            for (var selectedItem
+                                                in controller.selectedList) {
+                                              if (selectedItem.id == item.id) {
+                                                item.isSpeakerSelected =
+                                                    selectedItem
+                                                        .isSpeakerSelected;
+                                              }
+                                            }
+                                          }
+                                        });
+                                      }
                                     },
                                     controller:
                                         controller.searchController.value,
@@ -127,15 +180,18 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
                                       onTap: () {
                                         setState(
                                           () {
-                                            if (controller.selectedList
-                                                .contains(
-                                                    controller.userList[i])) {
-                                              controller.selectedList.remove(
-                                                  controller.userList[i]);
-                                            } else {
-                                              controller.selectedList
-                                                  .add(controller.userList[i]);
-                                            }
+                                            controller
+                                        .userList[i].isSpeakerSelected = true;
+                                    if (controller.selectedList.contains(
+                                        controller.userList[i])) {
+                                      controller.selectedList
+                                          .remove(controller.userList[i]);
+                                      controller
+                                          .userList[i].isHostSelected = false;
+                                    } else {
+                                      controller.selectedList
+                                          .add(controller.userList[i]);
+                                    }
                                           },
                                         );
                                         print(controller.selectedList.length);
@@ -254,9 +310,7 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
                                                 ),
                                               ),
                                               SvgPicture.asset(
-                                                controller.selectedList
-                                                        .contains(controller
-                                                            .userList[i])
+                                                controller.userList[i].isSpeakerSelected == true
                                                     ? orange_tick_icon
                                                     : icon_next_arrow,
                                                 width: 25.w,

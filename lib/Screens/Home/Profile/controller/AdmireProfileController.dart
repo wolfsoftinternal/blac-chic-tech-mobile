@@ -3,12 +3,14 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventDetailModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/EventListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/PostListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/RegisteredUserModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/model/ReportListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/VideoListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventDetail.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/EventListDetail.dart';
@@ -53,7 +55,7 @@ class AdmireProfileController extends GetxController {
   RxList<UserList> selectedList = <UserList>[].obs;
   RxList<UserList> searchList = <UserList>[].obs;
   Rx<TextEditingController> searchController = TextEditingController().obs;
-  RxInt selectedIndex = 1.obs;
+  RxInt selectedIndex = 0.obs;
   RxString admire = ''.obs;
   RxInt count = 1.obs;
   RxInt total = 0.obs;
@@ -72,11 +74,35 @@ class AdmireProfileController extends GetxController {
   ScrollController eventScrollController = ScrollController();
   RxInt eventPageNumber = 1.obs;
   RxBool isEventPaginationLoading = false.obs;
+  ScrollController userScrollController = ScrollController();
+  RxInt userPageNumber = 1.obs;
+  RxBool isUserPaginationLoading = false.obs;
   Rx<TextEditingController> registeredUserSearch = TextEditingController().obs;
   Rx<RegisterUserModel> registerList = RegisterUserModel().obs;
   RxBool isLimitReached = false.obs;
   RxList<UserList> userList = <UserList>[].obs;
   RxList<YoutubePlayerController> videoController = <YoutubePlayerController>[].obs;
+  RxList<UserList> inviteUser = <UserList>[].obs;
+  VideoController controller = Get.put(VideoController());
+  RxList selectedPeople = [].obs;
+  RxBool isSearched = false.obs;
+  RxList<ReportList> report = <ReportList>[].obs;
+
+  initUserScrolling(BuildContext context, id) {
+    userScrollController.addListener(() async {
+      if (userScrollController.position.maxScrollExtent ==
+          userScrollController.position.pixels) {
+        _scrollUserDown();
+        isUserPaginationLoading.value = true;
+        await eventInviteUsersList(context, id);
+        isUserPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void _scrollUserDown() {
+    userScrollController.jumpTo(userScrollController.position.maxScrollExtent);
+  }
 
 
   initScrolling(BuildContext context, userId, [postId]) {
@@ -573,7 +599,7 @@ class AdmireProfileController extends GetxController {
             EventDetailModel detail = EventDetailModel.fromJson(userModel);
             eventDetails.value = detail.data!;
 
-            Get.to(EventDetail(type: type));
+            Get.to(EventDetail(type: type, id: id));
           }
         });
       } else {
@@ -717,7 +743,7 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            admireProfileAPI(context, id);
+            replaceUserList(context, id);
           } else if (model.statusCode == 200) {
             UserListModel detail =
             UserListModel.fromJson(userModel);
@@ -1095,6 +1121,154 @@ class AdmireProfileController extends GetxController {
             postDisLikeApi(context, id);
           } else if (model.statusCode == 200) {
             print(model.message);
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  eventInviteUsers(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlInviteUser;
+    final apiReq = Request();
+
+    String invitedUsers = selectedPeople.join(',');
+
+    dynamic body = {
+      'event_id': id.toString(),
+      'invited_users': invitedUsers.toString(),
+    };
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            eventInviteUsers(context, id);
+          } else if (model.statusCode == 200) {
+            Get.back();
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  eventInviteUsersList(BuildContext context, id) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlInviteUserList;
+    final apiReq = Request();
+
+    userPageNumber = userPageNumber + 1;
+
+    dynamic body = {
+      'event_id': id.toString(),
+      'search': controller.searchController.value.text,
+      'page': userPageNumber.toString()
+    };
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+      if (userPageNumber == 1) {
+        userList.clear();
+      }
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            eventInviteUsersList(context, id);
+          } else if (model.statusCode == 200) {
+            controller.userList.clear();
+            UserListModel detail = UserListModel.fromJson(userModel);
+            controller.userList.addAll(detail.data!);
+            controller.userList.removeWhere((element) => element.is_invited == 1);
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  reportList(BuildContext context) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlReportList;
+    final apiReq = Request();
+
+    await apiReq.postAPI(url, null, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            reportList(context);
+          } else if (model.statusCode == 200) {
+            ReportListModel detail = ReportListModel.fromJson(userModel);
+            report.value = detail.data!;
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
+  createReport(BuildContext context, userId, reportId) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlCreateReport;
+    final apiReq = Request();
+
+    dynamic body = {
+      'report_user_id': userId.toString(),
+      'report_id': reportId.toString(),
+    };
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            createReport(context, userId, reportId);
+          } else if (model.statusCode == 200) {
+            Get.back();
           }
         });
       } else {

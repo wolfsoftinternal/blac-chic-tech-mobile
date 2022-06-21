@@ -2,6 +2,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../Layout/BlackNextButton.dart';
@@ -64,8 +65,8 @@ class _LoginState extends State<LoginView> {
                      SizedBox(
                       height: 51.h,
                     ),
-                    Image.asset(
-                      img_logo,
+                    SvgPicture.asset(
+                      logo,
                       width: 94.r,
                       height: 94.r,
                     ),

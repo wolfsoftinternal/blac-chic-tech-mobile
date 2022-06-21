@@ -169,7 +169,7 @@ class _EventListDetailState extends State<EventListDetail> {
                         padding: EdgeInsets.only(right: 10.w),
                         child: GestureDetector(
                           onTap: () {
-                            displayBottomSheet(context);
+                            displayBottomSheet(context, widget.userId);
                           },
                           child: SizedBox(
                             width: 55.w,

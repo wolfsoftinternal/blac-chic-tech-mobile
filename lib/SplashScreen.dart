@@ -10,6 +10,7 @@ import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'Screens/Authentication/login/model/SignupModel.dart';
@@ -94,8 +95,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: white_ffffff,
       body: Center(
-        child: Image.asset(
-          img_logo,
+        child: SvgPicture.asset(
+                      logo,
           width: 126,
           height: 126,
         ),

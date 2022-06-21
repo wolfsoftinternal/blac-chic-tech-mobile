@@ -43,6 +43,7 @@ class VideoController extends GetxController {
   ScrollController scrollController = ScrollController();
   RxInt PageNumber = 0.obs;
   RxBool isPaginationLoading = false.obs;
+  RxBool isSearched = false.obs;
 
   initScrolling(BuildContext context) {
     scrollController.addListener(() async {
@@ -270,6 +271,11 @@ class VideoController extends GetxController {
             createVideoApi(context);
           } else if (model.statusCode == 200) {
             snackBar(context, 'Video Uploaded');
+            for (var item in userList) {
+              if (item.isSpeakerSelected == true) {
+                item.isSpeakerSelected = false;
+              }
+            }
             Get.back();
           }
         });

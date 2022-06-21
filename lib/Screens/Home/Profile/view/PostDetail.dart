@@ -161,7 +161,7 @@ class _PostDetailState extends State<PostDetail> {
                         padding: EdgeInsets.only(right: 5.w),
                         child: GestureDetector(
                           onTap: () {
-                            displayBottomSheet(context);
+                            displayBottomSheet(context, widget.userId);
                           },
                           child: SizedBox(
                             width: 55.w,

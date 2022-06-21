@@ -35,7 +35,8 @@ import '../../Event/view/AllPurchasedEventTicketList.dart';
 
 class EventDetail extends StatefulWidget {
   final type;
-  const EventDetail({Key? key, this.type}) : super(key: key);
+  final id;
+  const EventDetail({Key? key, this.type, this.id}) : super(key: key);
 
   @override
   State<EventDetail> createState() => _EventDetailState();
@@ -63,8 +64,6 @@ class _EventDetailState extends State<EventDetail> {
     lat = double.parse(controller.eventDetails.value.latitude!);
     lng = double.parse(controller.eventDetails.value.longitude!);
     if (controller.eventDetails.value.type == 'invite_only') {
-      checkNet(context).then(
-          (value) async => await videoController.userListAPI(context));
       if (controller.eventDetails.value.invitedUsers != null) {
         for (var item in controller.eventDetails.value.invitedUsers!) {
           eventController.selectedList.add(item);
@@ -76,6 +75,9 @@ class _EventDetailState extends State<EventDetail> {
     checkNet(context).then((value) async{
      await controller.registeredUserApi(context, controller.eventDetails.value.id.toString());
      await controller.userProfileAPI(context, false);
+     controller.userPageNumber.value = 0;
+     videoController.userList.clear();
+     await controller.eventInviteUsersList(context, widget.id);
     });
   }
 
@@ -1170,11 +1172,32 @@ class _EventDetailState extends State<EventDetail> {
                                         padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
                                         child: InkWell(
                                           onTap: () {
-                                            Get.to(const InvitePeople(
-                                              fromView: false,
-                                            ))!
-                                                .then((value) =>
-                                                    setState(() {}));
+                                          if (controller.isSearched.value == true) {
+                                                controller.isSearched.value = false;
+                                                checkNet(context).then((value) async {
+                                                    controller.userPageNumber.value = 0;
+                                                    videoController.userList.clear();
+                                                    await controller.eventInviteUsersList(context, widget.id);
+
+                                                    Future.delayed(Duration(milliseconds: 3), () {
+                                                      for (var item in videoController.userList) {
+                                                        for (var selectedItem in controller.selectedList) {
+                                                          if (selectedItem.id == item.id) {
+                                                            item.isSpeakerSelected = selectedItem.isSpeakerSelected;
+                                                          }
+                                                        }
+                                                      }
+                                                    });
+                                                  });
+                                              }
+
+                                      
+                                              Get.to(InvitePeople(
+                                                fromView: false, id: widget.id,
+                                              ))!
+                                                  .then((value) =>
+                                                      setState(() {}));
+                                              
                                           },
                                           child: Container(
                                             width: double.infinity,
@@ -1806,7 +1829,8 @@ class _EventDetailState extends State<EventDetail> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
+    controller.selectedPeople.clear();
+    videoController.userList.clear();
     videoController.searchController.value.text = "";
   }
 }
