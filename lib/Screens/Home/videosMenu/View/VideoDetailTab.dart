@@ -466,7 +466,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                             const BoxDecoration(color: view_line_f4f6f6)),
 
                     Container(
-                      height: 250.h,
+                      height: 200.h,
                       margin: EdgeInsets.only(
                           left: 24.w, right: 24.w, top: 16.h, bottom: 16.h),
                       decoration: BoxDecoration(
@@ -477,51 +477,39 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                       child: DefaultTabController(
                           length: 2,
                           child: Scaffold(
-                            appBar: AppBar(
-                              actions: const <Widget>[],
-                              titleSpacing: -30,
-                              elevation: 0,
-                              shadowColor: grey_aaaaaa,
-                              backgroundColor: const Color(0x80f2f2f2),
-                              bottom: PreferredSize(
-                                preferredSize: Size(0, -3),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: TabBar(
-                                    isScrollable: true,
-                                    indicatorColor: orange_ff881a,
-                                    indicatorWeight: 3,
-                                    padding: EdgeInsets.zero,
-                                    indicatorSize: TabBarIndicatorSize.label,
-                                    labelColor: black_121212,
-                                    unselectedLabelColor: grey_aaaaaa,
-                                    labelPadding: EdgeInsets.symmetric(
-                                        horizontal: 15.0, vertical: 0),
-                                    tabs: <Widget>[
-                                      Tab(
-                                        child: // DETAILS
-                                            Text("DETAILS",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w700,
-                                                    fontFamily: "NeueHelvetica",
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 12.sp),
-                                                textAlign: TextAlign.left),
-                                      ),
-                                      Tab(
-                                        child: // RELATED TAGS
-                                            Text("RELATED TAGS",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w700,
-                                                    fontFamily: "NeueHelvetica",
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 12.sp),
-                                                textAlign: TextAlign.left),
-                                      ),
-                                    ],
-                                  ),
+                            backgroundColor: Color(0x80f2f2f2),
+                            appBar: TabBar(
+                              isScrollable: true,
+                              indicatorColor: orange_ff881a,
+                              indicatorWeight: 3,
+                              padding: EdgeInsets.zero,
+                              indicatorSize: TabBarIndicatorSize.label,
+                              labelColor: black_121212,
+                              unselectedLabelColor: grey_aaaaaa,
+                              labelPadding: EdgeInsets.symmetric(
+                                  horizontal: 15.0, vertical: 0),
+                              tabs: <Widget>[
+                                Tab(
+                                  child: // DETAILS
+                                  Text("DETAILS",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "NeueHelvetica",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 12.sp),
+                                      textAlign: TextAlign.left),
                                 ),
-                              ),
+                                Tab(
+                                  child: // RELATED TAGS
+                                  Text("RELATED TAGS",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "NeueHelvetica",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 12.sp),
+                                      textAlign: TextAlign.left),
+                                ),
+                              ],
                             ),
                             body: TabBarView(
                               children: <Widget>[
