@@ -808,7 +808,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                       primary: false,
                                       itemCount:
                                           controller.videoList.length + 1,
-                                      padding: EdgeInsets.zero,
+                                      padding: EdgeInsets.symmetric(horizontal: 10.w),
                                       itemBuilder: (context, i) {
                                         if (i < controller.videoList.length) {
                                           print(
