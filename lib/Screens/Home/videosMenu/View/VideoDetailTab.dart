@@ -696,9 +696,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                   fontSize: 12.sp),
                               textAlign: TextAlign.left),
 
-                          SizedBox(
-                            height: 12.h,
-                          ),
+
 
                           Obx(
                             () => Container(
