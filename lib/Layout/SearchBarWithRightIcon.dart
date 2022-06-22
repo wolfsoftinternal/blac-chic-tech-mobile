@@ -16,9 +16,9 @@ class SearchBarWithRightIcon extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 24.h, right: 24.w, left: 24.w),
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
-      decoration: const BoxDecoration(
+      decoration:  BoxDecoration(
           // border: Border.all(color: grey_e9ecec, width: 1),
-          borderRadius: BorderRadius.all(Radius.circular(4)),
+          borderRadius: BorderRadius.all(Radius.circular(4.r)),
           color: grey_f5f5f5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -30,14 +30,14 @@ class SearchBarWithRightIcon extends StatelessWidget {
               style: TextStyle(
                   color: black_121212,
                   fontFamily: roboto_medium,
-                  fontSize: 14.0),
+                  fontSize: 14.sp),
               decoration: InputDecoration(
                 isDense: true,
-                hintText: "Search.......",
+                hintText: "Search...",
                 hintStyle: TextStyle(
                     color: grey_aaaaaa,
                     fontFamily: roboto_medium,
-                    fontSize: 14.0),
+                    fontSize: 14.sp),
                 border: InputBorder.none,
               ),
               keyboardType: TextInputType.text,
