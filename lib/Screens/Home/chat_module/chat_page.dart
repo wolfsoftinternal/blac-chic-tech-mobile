@@ -244,10 +244,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget myLoader() {
-    return const Center(
-      child:
-          SizedBox(height: 50, width: 50, child: CircularProgressIndicator()),
-    );
+    return Container(height: MediaQuery.of(context).size.height * 0.75,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),));
   }
 
   Widget chatStream() {
@@ -552,16 +549,7 @@ class _ChatPageState extends State<ChatPage> {
                         bottomLeft: Radius.circular(10)),
                     color: isMe ? black : white,
                   ),
-                  child: Center(
-                      child: SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ))
-                      //  myLoader()
-                      ),
+                  child: Container(height: MediaQuery.of(context).size.height * 0.75,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),))
                 );
               }
 

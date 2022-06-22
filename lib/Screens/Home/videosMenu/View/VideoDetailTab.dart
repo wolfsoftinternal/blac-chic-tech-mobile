@@ -771,6 +771,11 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                                           ),
                                                         ),
                                                       ),
+                                                      Positioned(
+                                                        top: 20,
+                                                        right: 42,
+                                                        child: SvgPicture.asset(icon_play)
+                                                      ),
                                                       // Positioned(
                                                       //   bottom: 2,
                                                       //   right: 3,

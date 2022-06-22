@@ -30,6 +30,7 @@ class EventDetailController extends GetxController {
   RxInt pastUpcomingPageNumber = 1.obs;
   RxBool isPaginationLoading = false.obs;
   RxBool isPastUpcomingPaginationLoading = false.obs;
+  RxBool isLoading = true.obs;
 
   initScrolling(BuildContext context) {
     scrollController.addListener(() async {
@@ -42,7 +43,6 @@ class EventDetailController extends GetxController {
           'page': pageNumber.toString(),
         };
         await allEventListApi(body);
-        isPaginationLoading.value = false;
       }
     });
   }
@@ -62,7 +62,6 @@ class EventDetailController extends GetxController {
           'page': pastUpcomingPageNumber.toString(),
         };
         await allEventListApi(body);
-        isPastUpcomingPaginationLoading.value = false;
       }
     });
   }
@@ -104,7 +103,6 @@ class EventDetailController extends GetxController {
     final apiReq = Request();
 
     apiReq.postAPI(url, body, token.toString()).then((value) {
-      
       if (pageNumber == 1) {
         eventList.clear();
         upcomingEventList.clear();
@@ -132,9 +130,15 @@ class EventDetailController extends GetxController {
               }else{
                 upcomingEventList.addAll(detail.data!);
               }
-            }       
+            }   
+            isLoading.value = false;    
+            isPaginationLoading.value = false;
+            isPastUpcomingPaginationLoading.value = false;
           } else {
             print(res.reasonPhrase);
+            isLoading.value = false;
+            isPaginationLoading.value = false;
+            isPastUpcomingPaginationLoading.value = false;
           }
         });
       }

@@ -86,9 +86,9 @@ class _FindSpeakerState extends State<FindSpeaker> {
                         margin: EdgeInsets.only(
                             top: 16.h, left: 24.w, right: 24.w),
                         child: controller.isLoading.value
-                            ? const SizedBox(
+                            ? SizedBox(
                                 width: double.infinity,
-                                height: 100,
+                                height: MediaQuery.of(context).size.height * 0.60,
                                 child: Center(
                                     child: SizedBox(
                                   height: 20,

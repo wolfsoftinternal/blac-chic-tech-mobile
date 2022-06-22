@@ -44,7 +44,32 @@ class _PastFeature2State extends State<PastFeature2> {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.asset(img_giral_crop, fit: BoxFit.cover),
+                    CachedNetworkImage(
+                      imageUrl: featuredController
+                              .featuredList[widget
+                                  .selectedPositionFromPrevious]
+                              .image ??
+                          "",
+                      fit: BoxFit.cover,
+                      width: 220.w,
+                      height: 302.h,
+                      alignment: Alignment.center,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                              SvgPicture.asset(
+                        placeholder,
+                        width: 220.w,
+                        height: 302.h,
+                        fit: BoxFit.cover,
+                      ),
+                      errorWidget: (context, url, error) =>
+                          SvgPicture.asset(
+                        placeholder,
+                        width: 220.w,
+                        height: 302.h,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     ClipRRect(
                       // Clip it cleanly.
                       child: BackdropFilter(
@@ -56,7 +81,7 @@ class _PastFeature2State extends State<PastFeature2> {
                             /*------ Tool bar ------*/
                             Container(
                               margin: EdgeInsets.only(
-                                  top: 45.h, left: 24.w, right: 24.w),
+                                  top: 60.h, left: 24.w, right: 24.w),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

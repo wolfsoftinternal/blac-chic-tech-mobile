@@ -74,7 +74,7 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 60.h,
+              height: 55.h,
             ),
             ToolbarWithHeaderCenterTitle('Features'),
             SizedBox(

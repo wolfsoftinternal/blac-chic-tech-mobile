@@ -831,50 +831,59 @@ class _VideoListBctState extends State<VideoListBct> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      SizedBox(
-                                                        height: 80.h,
-                                                        width: 120.w,
-                                                        child: FittedBox(
-                                                          fit: BoxFit.fill,
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        15.r)),
-                                                            child:
-                                                                YoutubePlayerBuilder(
-                                                                    onEnterFullScreen:
-                                                                        () {
-                                                                      fullScreen =
-                                                                          false;
-                                                                    },
-                                                                    player:
-                                                                        YoutubePlayer(
-                                                                      bottomActions: const [
-                                                                        SizedBox(
-                                                                            width:
-                                                                                14.0),
-                                                                        // CurrentPosition(),
-                                                                        // const SizedBox(width: 8.0),
-                                                                        // ProgressBar(),
-                                                                        // RemainingDuration(),
-                                                                        // const PlaybackSpeedButton(),
-                                                                      ],
-                                                                      controller: controller
-                                                                          .videoController
-                                                                          .value[i],
-                                                                    ),
-                                                                    builder:
-                                                                        (context,
-                                                                            player) {
-                                                                      return Column(
-                                                                        children: [
-                                                                          player,
-                                                                        ],
-                                                                      );
-                                                                    }),
+                                                      Stack(
+                                                        children: [
+                                                          SizedBox(
+                                                            height: 80.h,
+                                                            width: 120.w,
+                                                            child: FittedBox(
+                                                              fit: BoxFit.fill,
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius.all(
+                                                                        Radius.circular(
+                                                                            15.r)),
+                                                                child:
+                                                                    YoutubePlayerBuilder(
+                                                                        onEnterFullScreen:
+                                                                            () {
+                                                                          fullScreen =
+                                                                              false;
+                                                                        },
+                                                                        player:
+                                                                            YoutubePlayer(
+                                                                          bottomActions: const [
+                                                                            SizedBox(
+                                                                                width:
+                                                                                    14.0),
+                                                                            // CurrentPosition(),
+                                                                            // const SizedBox(width: 8.0),
+                                                                            // ProgressBar(),
+                                                                            // RemainingDuration(),
+                                                                            // const PlaybackSpeedButton(),
+                                                                          ],
+                                                                          controller: controller
+                                                                              .videoController
+                                                                              .value[i],
+                                                                        ),
+                                                                        builder:
+                                                                            (context,
+                                                                                player) {
+                                                                          return Column(
+                                                                            children: [
+                                                                              player,
+                                                                            ],
+                                                                          );
+                                                                        }),
+                                                              ),
+                                                            ),
                                                           ),
-                                                        ),
+                                                          Positioned(
+                                                            top: 20,
+                                                            right: 42,
+                                                            child: SvgPicture.asset(icon_play)
+                                                          ),
+                                                        ],
                                                       ),
                                                       // SizedBox(
                                                       //         height: 80.h,

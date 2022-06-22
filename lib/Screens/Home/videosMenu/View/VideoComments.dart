@@ -81,9 +81,9 @@ class _VideoCommentsState extends State<VideoComments> {
                           top: 16.h,
                         ),
                         child: controller.isLoading.value
-                            ? const SizedBox(
+                            ? SizedBox(
                                 width: double.infinity,
-                                height: 100,
+                                height: MediaQuery.of(context).size.height * 0.60,
                                 child: Center(
                                     child: SizedBox(
                                   height: 20,
@@ -98,7 +98,7 @@ class _VideoCommentsState extends State<VideoComments> {
                                 ? SizedBox(
                                     height:
                                         MediaQuery.of(context).size.height *
-                                            0.5,
+                                            0.60,
                                     width: double.infinity,
                                     child: const Center(
                                         child: Text("No Data Found",

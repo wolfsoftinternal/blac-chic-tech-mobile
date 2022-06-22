@@ -4,6 +4,7 @@ import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoDetailTab.dart'
 import 'package:flutter/material.dart';
 // import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -74,9 +75,9 @@ class _MyPlayListState extends State<MyPlayList> {
                         margin: EdgeInsets.only(
                             top: 24.h, left: 24.w, right: 24.w),
                         child: controller.isLoading.value
-                            ? const SizedBox(
+                            ? SizedBox(
                                 width: double.infinity,
-                                height: 100,
+                                height: MediaQuery.of(context).size.height * 0.60,
                                 child: Center(
                                     child: SizedBox(
                                   height: 20,
@@ -177,6 +178,11 @@ class _MyPlayListState extends State<MyPlayList> {
                                                                       }),
                                                             ),
                                                           ),
+                                                        ),
+                                                        Positioned(
+                                                          top: 20,
+                                                          right: 40,
+                                                          child: SvgPicture.asset(icon_play)
                                                         ),
                                                         // Positioned(
                                                         //   bottom: 2,

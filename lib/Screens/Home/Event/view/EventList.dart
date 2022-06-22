@@ -85,6 +85,7 @@ class _EventListState extends State<EventList> {
                     ),
                     InkWell(
                       onTap: () {
+                        controller.isLoading.value = true;
                         Get.to(MyPurchasedEvent())!.then((value) {
                           controller.eventList.clear();
                           controller.pageNumber.value = 0;
@@ -92,6 +93,7 @@ class _EventListState extends State<EventList> {
                             'page': controller.pageNumber.toString(),
                           };
                           checkNet(context).then((value) async {
+                            controller.isLoading.value = true;
                             await controller.allEventListApi(body);
                           });
                         });
@@ -139,30 +141,31 @@ class _EventListState extends State<EventList> {
                     SizedBox(
                       height: 24.h,
                     ),
-                    controller.eventList.isEmpty
-                    ? Container(height: MediaQuery.of(context).size.height * 0.50,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),))
-                        // ? SizedBox(
-                        //     width: double.infinity,
-                        //     height: MediaQuery.of(context).size.height * 0.50,
-                        //     child: Column(
-                        //       crossAxisAlignment: CrossAxisAlignment.center,
-                        //       mainAxisAlignment: MainAxisAlignment.center,
-                        //       children: [
-                        //         Image.asset(
-                        //           img_logo,
-                        //           height: 80,
-                        //           width: 80,
-                        //         ),
-                        //         setHelceticaBold(
-                        //             "NO EVENTS YET",
-                        //             16.sp,
-                        //             grey_aaaaaa,
-                        //             FontWeight.w500,
-                        //             FontStyle.normal,
-                        //             0.5)
-                        //       ],
-                        //     ),
-                        //   )
+                    controller.isLoading.value == true
+                    ? Container(height: MediaQuery.of(context).size.height * 0.60,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),))
+                    : controller.eventList.isEmpty
+                    ? SizedBox(
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.50,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  img_logo,
+                                  height: 80,
+                                  width: 80,
+                                ),
+                                setHelceticaBold(
+                                    "NO EVENTS YET",
+                                    16.sp,
+                                    grey_aaaaaa,
+                                    FontWeight.w500,
+                                    FontStyle.normal,
+                                    0.5)
+                              ],
+                            ),
+                          )
                         : Container(
                             margin: EdgeInsets.only(left: 16.w, right: 16.w),
                             child: ListView.builder(
@@ -496,12 +499,13 @@ class _EventListState extends State<EventList> {
                                   );
                                 }),
                           ),
+                          
                   ],
                 ),
               ),
             ),
             if (controller.isPaginationLoading.value == true)
-              PaginationUtils().loader(),
+                            PaginationUtils().loader(),
 
             // Container(
             //   margin: EdgeInsets.only(bottom: 25.h),
