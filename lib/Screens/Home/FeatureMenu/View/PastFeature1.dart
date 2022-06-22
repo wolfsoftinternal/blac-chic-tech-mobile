@@ -6,33 +6,37 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:readmore/readmore.dart';
 
-
-class PastFeature2 extends StatefulWidget {
+class PastFeature1 extends StatefulWidget {
   final int selectedPositionFromPrevious;
 
-  const PastFeature2({Key? key, required this.selectedPositionFromPrevious})
-      : super(key: key);
+  const PastFeature1({Key? key,
+    required this.selectedPositionFromPrevious
+   }) : super(key: key);
 
   @override
-  _PastFeature2State createState() => _PastFeature2State();
+  _PastFeature1State createState() => _PastFeature1State();
 }
 
-class _PastFeature2State extends State<PastFeature2> {
+class _PastFeature1State extends State<PastFeature1> {
+
   FeaturedController featuredController = Get.put(FeaturedController());
+  // Updated
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: black_bg_1c2535,
+        backgroundColor: Colors.white,
         body: Obx(
     () =>SingleChildScrollView(
           child: Column(
@@ -44,7 +48,28 @@ class _PastFeature2State extends State<PastFeature2> {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.asset(img_giral_crop, fit: BoxFit.cover),
+                    CachedNetworkImage(
+                      imageUrl: featuredController.featuredList[widget.selectedPositionFromPrevious].image??"",
+                      fit: BoxFit.cover,
+                      width: 220.w,
+                      height: 302.h,
+                      alignment: Alignment.center,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                          SvgPicture.asset(
+                            placeholder,
+                            width: 220.w,
+                            height: 302.h,
+                            fit: BoxFit.cover,
+                          ),
+                      errorWidget: (context, url, error) =>
+                          SvgPicture.asset(
+                            placeholder,
+                            width: 220.w,
+                            height: 302.h,
+                            fit: BoxFit.cover,
+                          ),
+                    ),
                     ClipRRect(
                       // Clip it cleanly.
                       child: BackdropFilter(
@@ -56,7 +81,7 @@ class _PastFeature2State extends State<PastFeature2> {
                             /*------ Tool bar ------*/
                             Container(
                               margin: EdgeInsets.only(
-                                  top: 45.h, left: 24.w, right: 24.w),
+                                  top: 60.h, left: 24.w, right: 24.w),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -80,7 +105,7 @@ class _PastFeature2State extends State<PastFeature2> {
                                         fontFamily: helvetica_neu_bold),
                                   ),
                                   GestureDetector(
-                                    onTap: () {
+                                    onTap: (){
                                       Get.to(() => SearchFeaturesScreen());
                                     },
                                     child: SvgPicture.asset(
@@ -102,31 +127,34 @@ class _PastFeature2State extends State<PastFeature2> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     CachedNetworkImage(
-                                      imageUrl: featuredController
-                                              .featuredList[widget
-                                                  .selectedPositionFromPrevious]
-                                              .image ??
-                                          "",
+                                      imageUrl: featuredController.featuredList[widget.selectedPositionFromPrevious].image??"",
                                       fit: BoxFit.cover,
                                       width: 220.w,
                                       height: 302.h,
                                       alignment: Alignment.center,
                                       progressIndicatorBuilder:
                                           (context, url, downloadProgress) =>
-                                              SvgPicture.asset(
-                                        placeholder,
-                                        width: 220.w,
-                                        height: 302.h,
-                                        fit: BoxFit.cover,
-                                      ),
+                                          SvgPicture.asset(
+                                            placeholder,
+                                            width: 220.w,
+                                            height: 302.h,
+                                            fit: BoxFit.cover,
+                                          ),
                                       errorWidget: (context, url, error) =>
                                           SvgPicture.asset(
-                                        placeholder,
-                                        width: 220.w,
-                                        height: 302.h,
-                                        fit: BoxFit.cover,
-                                      ),
+                                            placeholder,
+                                            width: 220.w,
+                                            height: 302.h,
+                                            fit: BoxFit.cover,
+                                          ),
                                     ),
+
+                                    // Image.asset(
+                                    //   img_giral_crop,
+                                    //   width: 220.w,
+                                    //   height: 302.h,
+                                    //   fit: BoxFit.fill,
+                                    // ),
                                   ],
                                 )),
                           ],
@@ -137,7 +165,7 @@ class _PastFeature2State extends State<PastFeature2> {
                 ),
               ),
               Container(
-                transform: Matrix4.translationValues(0, -0, 0),
+                transform: Matrix4.translationValues(0, -15, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,29 +177,25 @@ class _PastFeature2State extends State<PastFeature2> {
                         children: [
                           Expanded(
                             child: Text(
-                              featuredController
-                                      .featuredList[
-                                          widget.selectedPositionFromPrevious]
-                                      .writer_name ??
-                                  "",
+                              featuredController.featuredList[widget.selectedPositionFromPrevious].writer_name??"",
                               style: TextStyle(
                                 fontFamily: helvetica_neu_bold,
-                                fontSize: 90.sp,
-                                color: Colors.white,
+                                fontSize: 100.sp,
+                                color: orange_ff881a,
                                 letterSpacing: -10,
                                 height: 0.8,
                               ),
                             ),
                           ),
                           Container(
-                            transform: Matrix4.translationValues(0, -80, 0),
+                            transform: Matrix4.translationValues(0, -40, 0),
                             height: 115.h,
                             padding: EdgeInsets.symmetric(horizontal: 17.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.r),
                               gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
                                 colors: [Color(0x331c2535), Color(0x4d04080f)],
                               ),
                             ),
@@ -194,15 +218,15 @@ class _PastFeature2State extends State<PastFeature2> {
                                 GestureDetector(
                                   onTap: () {
                                     if (featuredController
-                                            .featuredList[widget
-                                                .selectedPositionFromPrevious]
-                                            .is_like ==
+                                        .featuredList[widget
+                                        .selectedPositionFromPrevious]
+                                        .is_like ==
                                         0) {
                                       featuredController.likeFeatureAPI(
                                           context,
                                           featuredController
                                               .featuredList[widget
-                                                  .selectedPositionFromPrevious]
+                                              .selectedPositionFromPrevious]
                                               .id,
                                           widget.selectedPositionFromPrevious);
                                     } else {
@@ -210,27 +234,27 @@ class _PastFeature2State extends State<PastFeature2> {
                                           context,
                                           featuredController
                                               .featuredList[widget
-                                                  .selectedPositionFromPrevious]
+                                              .selectedPositionFromPrevious]
                                               .id,
                                           widget.selectedPositionFromPrevious);
                                     }
                                   },
                                   child: featuredController
-                                              .featuredList[widget
-                                                  .selectedPositionFromPrevious]
-                                              .is_like ==
-                                          0
+                                      .featuredList[widget
+                                      .selectedPositionFromPrevious]
+                                      .is_like ==
+                                      0
                                       ? SvgPicture.asset(
-                                          icon_heart,
-                                          width: 25.w,
-                                          height: 25.h,
-                                        )
+                                    icon_heart,
+                                    width: 25.w,
+                                    height: 25.h,
+                                  )
                                       : SvgPicture.asset(
-                                          icon_heart,
-                                          width: 25.w,
-                                          height: 25.h,
-                                          color: Colors.red,
-                                        ),
+                                    icon_heart,
+                                    width: 25.w,
+                                    height: 25.h,
+                                    color: Colors.red,
+                                  ),
                                 ),
                               ],
                             ),
@@ -243,26 +267,18 @@ class _PastFeature2State extends State<PastFeature2> {
                       margin:
                           EdgeInsets.only(top: 2.h, left: 24.w, right: 24.w),
                       child: Text(
-                        featuredController
-                                .featuredList[
-                                    widget.selectedPositionFromPrevious]
-                                .title ??
-                            "",
+                        featuredController.featuredList[widget.selectedPositionFromPrevious].title??"",
                         style: TextStyle(
                             fontFamily: helvetica_neu_bold,
                             fontSize: 24.sp,
-                            color: Colors.white),
+                            color: black_121212),
                       ),
                     ),
                     Container(
                       margin:
                           EdgeInsets.only(top: 12.h, left: 24.w, right: 24.w),
                       child: Text(
-                        featuredController
-                                .featuredList[
-                                    widget.selectedPositionFromPrevious]
-                                .sub_text ??
-                            "",
+                        featuredController.featuredList[widget.selectedPositionFromPrevious].sub_text??"",
                         style: TextStyle(
                             fontFamily: poppins_BoldItalic,
                             fontSize: 12.sp,
@@ -272,17 +288,13 @@ class _PastFeature2State extends State<PastFeature2> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(
-                          top: 24.h, left: 24.w, right: 24.w, bottom: 15.h),
+                      margin:
+                          EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
                       child: ReadMoreText(
-                        featuredController
-                                .featuredList[
-                                    widget.selectedPositionFromPrevious]
-                                .description ??
-                            "",
+                        featuredController.featuredList[widget.selectedPositionFromPrevious].description??"",
                         style: TextStyle(
                             fontSize: 12.sp,
-                            color: Colors.white,
+                            color: opcity_black_B3121212,
                             fontFamily: roboto_medium),
                         trimLines: 3,
                         // trimLength: 10,
@@ -292,11 +304,11 @@ class _PastFeature2State extends State<PastFeature2> {
                         trimExpandedText: 'See less article',
                         moreStyle: TextStyle(
                             fontSize: 12.sp,
-                            color: Colors.white,
+                            color: black_121212,
                             fontFamily: helvetica_neu_bold),
                         lessStyle: TextStyle(
                             fontSize: 12.sp,
-                            color: Colors.white,
+                            color: black_121212,
                             fontFamily: helvetica_neu_bold),
                       ),
                     ),

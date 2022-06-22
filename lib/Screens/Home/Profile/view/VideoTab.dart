@@ -80,8 +80,10 @@ class _VideoTabState extends State<VideoTab> {
                                         child: YoutubePlayerBuilder(
                                                 player: YoutubePlayer(
                                                   showVideoProgressIndicator: false,
-                                                  controller: controller
-                                                      .videoController.value[index],
+                                                  // thumbnail: Image.network(controller.thumbnail[index]),
+                                                  controller: YoutubePlayerController(initialVideoId: controller.videoId[index], flags: YoutubePlayerFlags(hideControls: true))
+                                                  // controller
+                                                  //     .videoController.value[index],
                                                 ),
                                                 builder: (context, player) {
                                                   return Column(
@@ -89,9 +91,11 @@ class _VideoTabState extends State<VideoTab> {
                                                       player,
                                                     ],
                                                   );
-                                                }),
+                                                }
+                                                ),
                                       ),
                                     )
+                                  ),
                                   //   controller
                                   //               .videoList[index].embededCode ==
                                   //           null
@@ -112,7 +116,6 @@ class _VideoTabState extends State<VideoTab> {
                                   //             data: controller.videoList[index].embededCode
                                   //         ),
                                   //       ),
-                                  ),
                                   InkWell(
                                     onTap: () {
                                       Get.to(VideoDetail(id: controller.videoList[index].id, userId: widget.id,))!.then((value) {
@@ -136,6 +139,7 @@ class _VideoTabState extends State<VideoTab> {
                                                 ])),
                                     ),
                                   ),
+                                  Center(child: SvgPicture.asset(icon_play)),
                                   // Align(
                                   //   alignment: Alignment.topRight,
                                   //   child: Padding(

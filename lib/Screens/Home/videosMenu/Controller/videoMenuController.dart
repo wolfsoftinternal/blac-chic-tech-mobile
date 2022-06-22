@@ -75,6 +75,8 @@ class VideoMenuController extends GetxController {
       <YoutubePlayerController>[].obs;
   RxList<YoutubePlayerController> videoDetailsNextController =
       <YoutubePlayerController>[].obs;
+  RxList<YoutubePlayerController> searchVideoList =
+      <YoutubePlayerController>[].obs;
 
   @override
   void onInit() {
@@ -281,6 +283,37 @@ class VideoMenuController extends GetxController {
             ? searchVideoPage.value * total
             : list.length,
         (index) => list[index]);
+
+    List videoId = [];
+
+    for (var item in videoAllList) {
+      if (item.embededCode.toString().contains("iframe")) {
+        String src = item.embededCode.toString().split('=')[3];
+        src = src.replaceAll(' title', '');
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      } else {
+        String src = item.embededCode.toString();
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      }
+    }
+    for (int i = 0; i < videoAllList.length; i++) {
+      YoutubePlayerController controller = YoutubePlayerController(
+        initialVideoId: videoId[i],
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: false,
+          hideControls: true,
+        ),
+      );
+      searchVideoList.add(controller);
+    }
 
     isLoading.value = false;
   }

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:blackchecktech/Screens/Home/FeatureMenu/View/SearchFeaturesScreen.dart';
+import 'package:blackchecktech/Screens/Home/FeatureMenu/controller/FeaturedController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
@@ -12,11 +14,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:readmore/readmore.dart';
-
-import '../Screens/Home/FeatureMenu/View/SearchFeaturesScreen.dart';
-import '../Screens/Home/FeatureMenu/controller/FeaturedController.dart';
-import '../Screens/Home/FeatureMenu/model/FeaturedListModel.dart';
-import '../Styles/my_strings.dart';
 
 class PastFeature1 extends StatefulWidget {
   final int selectedPositionFromPrevious;

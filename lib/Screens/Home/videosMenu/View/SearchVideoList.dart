@@ -7,11 +7,11 @@ import 'package:blackchecktech/Screens/Home/videosMenu/View/A_TopicaList.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Widget/search_bar_demo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class SearchVideoList extends StatefulWidget {
   const SearchVideoList({Key? key}) : super(key: key);
@@ -120,11 +120,12 @@ class _SearchVideoListState extends State<SearchVideoList> {
             () => Container(
               margin: EdgeInsets.only(top: 24.h, left: 0.w, right: 0.w),
               child: controller.isLoading.value
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: double.infinity,
-                      height: 100,
+                      height: MediaQuery.of(context).size.height * 0.60,
                       child: Center(
                           child: CircularProgressIndicator(
+                            strokeWidth: 2,
                         valueColor: AlwaysStoppedAnimation<Color>(
                             Color(0xff04080f)),
                       )))
@@ -170,57 +171,79 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                                 Alignment.bottomRight,
                                             children: [
                                               SizedBox(
-                                                  height: 80.h,
-                                                  width: 120.w,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        const BorderRadius
-                                                                .all(
-                                                            Radius.circular(
-                                                                35)),
-                                                    child: Html(
-                                                        data: controller
-                                                            .videoAllList[i]
-                                                            .embededCode),
-                                                  )),
-                                              Positioned(
-                                                bottom: 2,
-                                                right: 3,
-                                                child: Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 6.w,
-                                                      bottom: 6.h),
-                                                  padding:
-                                                      EdgeInsets.symmetric(
-                                                          vertical: 1.5.h,
-                                                          horizontal: 6.w),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius
-                                                            .circular(4),
-                                                    gradient:
-                                                        const LinearGradient(
-                                                      begin: Alignment
-                                                          .topCenter,
-                                                      end: Alignment
-                                                          .bottomCenter,
-                                                      colors: [
-                                                        Color(0xff1c2535),
-                                                        Color(0xff04080f)
-                                                      ],
-                                                      stops: [0.0, 5.0],
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    "3.05",
-                                                    style: TextStyle(
-                                                        fontSize: 11.sp,
-                                                        color: Colors.white,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium),
-                                                  ),
+                                              height: 80.h,
+                                              width: 120.w,
+                                              child: FittedBox(
+                                                fit: BoxFit.fill,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              15.r)),
+                                                  child:
+                                                      YoutubePlayerBuilder(
+                                                          player:
+                                                              YoutubePlayer(
+                                                            controller:
+                                                                controller
+                                                                    .searchVideoList[i],
+                                                          ),
+                                                          builder:
+                                                              (context,
+                                                                  player) {
+                                                            return Column(
+                                                              children: [
+                                                                player,
+                                                              ],
+                                                            );
+                                                          }),
                                                 ),
                                               ),
+                                              ),
+                                                  Positioned(
+                                                    top: 20,
+                                                    right: 42,
+                                                    child: SvgPicture.asset(icon_play)
+                                                  ),
+                                                
+                                              // Positioned(
+                                              //   bottom: 2,
+                                              //   right: 3,
+                                              //   child: Container(
+                                              //     margin: EdgeInsets.only(
+                                              //         right: 6.w,
+                                              //         bottom: 6.h),
+                                              //     padding:
+                                              //         EdgeInsets.symmetric(
+                                              //             vertical: 1.5.h,
+                                              //             horizontal: 6.w),
+                                              //     decoration: BoxDecoration(
+                                              //       borderRadius:
+                                              //           BorderRadius
+                                              //               .circular(4),
+                                              //       gradient:
+                                              //           const LinearGradient(
+                                              //         begin: Alignment
+                                              //             .topCenter,
+                                              //         end: Alignment
+                                              //             .bottomCenter,
+                                              //         colors: [
+                                              //           Color(0xff1c2535),
+                                              //           Color(0xff04080f)
+                                              //         ],
+                                              //         stops: [0.0, 5.0],
+                                              //       ),
+                                              //     ),
+                                              //     child: Text(
+                                              //       "3.05",
+                                              //       style: TextStyle(
+                                              //           fontSize: 11.sp,
+                                              //           color: Colors.white,
+                                              //           fontFamily:
+                                              //               helveticaNeueNeue_medium),
+                                              //     ),
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
                                           Expanded(

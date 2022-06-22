@@ -292,8 +292,7 @@ class VideoController extends GetxController {
     } else if (linkController.value.text.isEmpty) {
       snackBar(context, "Enter video link");
       return false;
-    } else if (!RegExp(
-            r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?')
+    } else if (!RegExp(r'^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$')
         .hasMatch(linkController.value.text)) {
       snackBar(context, "Enter valid video link");
       return false;

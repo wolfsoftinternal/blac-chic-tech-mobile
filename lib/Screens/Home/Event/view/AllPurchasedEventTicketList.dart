@@ -86,10 +86,11 @@ class _AllPurchasedEventTicketListState
                 SizedBox(
                   height: 20.h,
                 ),
+                eventController.eventDetailsWithTransactions.value.transactions != null
+                      && ((eventController.eventDetailsWithTransactions.value.transactions!.length) > 0) ?
                 Expanded(
                   flex: 1,
-                  child: eventController.eventDetailsWithTransactions.value.transactions != null
-                      && ((eventController.eventDetailsWithTransactions.value.transactions!.length) > 0) ?
+                  child: 
                   ListView.builder(
                       shrinkWrap: true,
                       primary: false,
@@ -106,8 +107,7 @@ class _AllPurchasedEventTicketListState
                           ),
                         );
                       })
-                  : CircularProgressIndicator(),
-                ),
+                ): Container(height: MediaQuery.of(context).size.height * 0.75,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),)),
               ],
             )));
   }

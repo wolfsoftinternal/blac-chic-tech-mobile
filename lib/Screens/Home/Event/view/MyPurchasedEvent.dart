@@ -77,6 +77,14 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                           tv2 = false;
                           _isFirstLayout = true;
                           _isSecondLayout = false;
+
+                          controller.pageNumber.value = 1;
+                          dynamic body = {
+                            'page': controller.pageNumber.toString(),
+                            'event_type': 'past'
+                          };
+                          controller.isLoading.value = true;
+                          controller.allEventListApi(body, 'past');
                         });
                       },
                       child: Container(
@@ -116,6 +124,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                             'page': controller.pageNumber.toString(),
                             'event_type': 'past'
                           };
+                          controller.isLoading.value = true;
                           controller.allEventListApi(body, 'past');
                         });
                       },
@@ -142,461 +151,64 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
             ),
 
             /*--------------- Upcoming Tab --------------*/
-            Expanded(
-              child: SingleChildScrollView(
-                controller: controller.pastUpcomingScrollController,
-                child: Container(
-                  margin: EdgeInsets.only(left: 16.w, right: 16.w),
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      primary: false,
-                      itemCount: _isFirstLayout == true
-                          ? controller.upcomingEventList.length
-                          : controller.pastEventList.length,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, i) {
-                        return InkWell(
-                          onTap: () {
-                            checkNet(context).then((value) {
-                              if (_isFirstLayout == true) {
-                                admireProfileController.eventDetailAPI(context,
-                                    controller.upcomingEventList[i].id, 'upcoming');
-                              } else {
-                                admireProfileController.eventDetailAPI(context,
-                                    controller.pastEventList[i].id, 'past');
-                              }
-                            });
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: 16.h),
-                            child: Stack(
+            controller.isLoading.value == true
+                ? Container(
+                    height: MediaQuery.of(context).size.height * 0.60,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: black,
+                        strokeWidth: 2,
+                      ),
+                    ))
+                : _isFirstLayout == true
+                    ? controller.upcomingEventList.isEmpty
+                        ? SizedBox(
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.60,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 207.h,
-                                  child: _isFirstLayout == true
-                                      ? controller.upcomingEventList[i].poster ==
-                                              null
-                                          ? ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.r)),
-                                              child: SvgPicture.asset(
-                                                placeholder,
-                                                fit: BoxFit.cover,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: 207.h,
-                                              ),
-                                            )
-                                          : ClipRRect(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(5)),
-                                              child: CachedNetworkImage(
-                                                imageUrl: controller
-                                                    .upcomingEventList[i].poster!,
-                                                fit: BoxFit.cover,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: 207.h,
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            downloadProgress) =>
-                                                        SvgPicture.asset(
-                                                  placeholder,
-                                                  fit: BoxFit.cover,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: 207.h,
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        SvgPicture.asset(
-                                                  placeholder,
-                                                  fit: BoxFit.cover,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: 207.h,
-                                                ),
-                                              ),
-                                            )
-                                      : controller.pastEventList[i].poster == null
-                                          ? ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.r)),
-                                              child: SvgPicture.asset(
-                                                placeholder,
-                                                fit: BoxFit.cover,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: 207.h,
-                                              ),
-                                            )
-                                          : ClipRRect(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(5)),
-                                              child: CachedNetworkImage(
-                                                imageUrl: controller
-                                                    .pastEventList[i].poster!,
-                                                fit: BoxFit.cover,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: 207.h,
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            downloadProgress) =>
-                                                        SvgPicture.asset(
-                                                  placeholder,
-                                                  fit: BoxFit.cover,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: 207.h,
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        SvgPicture.asset(
-                                                  placeholder,
-                                                  fit: BoxFit.cover,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: 207.h,
-                                                ),
-                                              ),
-                                            ),
+                                Image.asset(
+                                  img_logo,
+                                  height: 80,
+                                  width: 80,
                                 ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 207.h,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.r),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [
-                                            Color(0x00121212),
-                                            Color(0xff121212)
-                                          ])),
-                                ),
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                        top: 8.h, left: 8.w, right: 8.w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 15.w),
-                                          height: 26.h,
-                                          decoration: BoxDecoration(
-                                            color: orange.withOpacity(0.7),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(25.r)),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              _isFirstLayout == true
-                                                  ? controller
-                                                      .upcomingEventList[i].type!
-                                                  : controller
-                                                      .pastEventList[i].type!,
-                                              style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  color: Colors.white,
-                                                  fontFamily: roboto_bold),
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                            padding: EdgeInsets.only(right: 6.w),
-                                            height: 29.h,
-                                            decoration: BoxDecoration(
-                                              gradient: const LinearGradient(
-                                                  colors: [
-                                                    Color(0xff1c2535),
-                                                    Color(0xff04080f)
-                                                  ]),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(4.r)),
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 6.0.w, right: 6.0.w),
-                                                  child: CircularProfileAvatar(
-                                                    '',
-                                                    radius: 7.5,
-                                                    borderColor: black,
-                                                    child: _isFirstLayout == true
-                                                        ? controller
-                                                                    .upcomingEventList[
-                                                                        i]
-                                                                    .hosts ==
-                                                                null || controller.upcomingEventList[i].hosts.toString() == '[]' 
-                                                            ? Icon(
-                                                                Icons.person,
-                                                                size: 15.r,
-                                                                color:
-                                                                    grey_aaaaaa,
-                                                              )
-                                                            : controller
-                                                                        .upcomingEventList[
-                                                                            i]
-                                                                        .hosts!
-                                                                        .first
-                                                                        .image
-                                                                        .toString() ==
-                                                                    '' || controller.upcomingEventList[i].hosts == null
-                                                                ? Icon(
-                                                                    Icons.person,
-                                                                    size: 15.r,
-                                                                    color:
-                                                                        grey_aaaaaa,
-                                                                  )
-                                                                : CachedNetworkImage(
-                                                                    imageUrl: controller
-                                                                        .upcomingEventList[
-                                                                            i]
-                                                                        .hosts!
-                                                                        .first
-                                                                        .image ?? "",
-                                                                    height: 15.h,
-                                                                    width: 15.w,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    progressIndicatorBuilder:
-                                                                        (context,
-                                                                                url,
-                                                                                downloadProgress) =>
-                                                                            Icon(
-                                                                      Icons
-                                                                          .person,
-                                                                      size: 15.r,
-                                                                      color:
-                                                                          grey_aaaaaa,
-                                                                    ),
-                                                                    errorWidget:
-                                                                        (context,
-                                                                                url,
-                                                                                error) =>
-                                                                            Icon(
-                                                                      Icons
-                                                                          .person,
-                                                                      size: 15.r,
-                                                                      color:
-                                                                          grey_aaaaaa,
-                                                                    ),
-                                                                  )
-                                                        : controller
-                                                                    .pastEventList[
-                                                                        i]
-                                                                    .hosts ==
-                                                                null || controller.pastEventList[i].hosts.toString() == '[]' 
-                                                            ? Icon(
-                                                                Icons.person,
-                                                                size: 15.r,
-                                                                color:
-                                                                    grey_aaaaaa,
-                                                              )
-                                                            : controller
-                                                                        .pastEventList[
-                                                                            i]
-                                                                        .hosts![0]
-                                                                        .image
-                                                                        .toString() ==
-                                                                    '' || controller.pastEventList[i].hosts == null
-                                                                ? Icon(
-                                                                    Icons.person,
-                                                                    size: 15.r,
-                                                                    color:
-                                                                        grey_aaaaaa,
-                                                                  )
-                                                                : CachedNetworkImage(
-                                                                    imageUrl: controller
-                                                                            .pastEventList[
-                                                                                i]
-                                                                            .hosts![
-                                                                                0]
-                                                                            .image ?? "",
-                                                                    height: 15.h,
-                                                                    width: 15.w,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    progressIndicatorBuilder:
-                                                                        (context,
-                                                                                url,
-                                                                                downloadProgress) =>
-                                                                            Icon(
-                                                                      Icons
-                                                                          .person,
-                                                                      size: 15.r,
-                                                                      color:
-                                                                          grey_aaaaaa,
-                                                                    ),
-                                                                    errorWidget:
-                                                                        (context,
-                                                                                url,
-                                                                                error) =>
-                                                                            Icon(
-                                                                      Icons
-                                                                          .person,
-                                                                      size: 15.r,
-                                                                      color:
-                                                                          grey_aaaaaa,
-                                                                    ),
-                                                                  ),
-                                                  ),
-                                                ),
-                                                setHelveticaMedium(
-                                                    "Hosted by",
-                                                    11.sp,
-                                                    gray_b3ffffff,
-                                                    FontWeight.w500,
-                                                    FontStyle.normal,
-                                                    -0.22),
-                                                SizedBox(
-                                                  width: 4.w,
-                                                ),
-                                                setHelceticaBold(
-                                                    _isFirstLayout == true
-                                                    ? controller
-                                                                .upcomingEventList[
-                                                                    i]
-                                                                .hosts.toString() == '[]' || controller
-                                                                .upcomingEventList[
-                                                                    i]
-                                                                .hosts == null
-                                                        ? controller
-                                                                .upcomingEventList[
-                                                                    i]
-                                                                .hosts![0]
-                                                                .firstName! +
-                                                            controller
-                                                                .upcomingEventList[
-                                                                    i]
-                                                                .hosts![0]
-                                                                .lastName!
-                                                        : ""
-                                                        : controller
-                                                                .pastEventList[
-                                                                    i]
-                                                                .hosts.toString() == '[]' || controller
-                                                                .pastEventList[
-                                                                    i]
-                                                                .hosts == null
-                                                        ? controller
-                                                                .pastEventList[i]
-                                                                .hosts![0]
-                                                                .firstName! +
-                                                            controller
-                                                                .pastEventList[i]
-                                                                .hosts![0]
-                                                                .lastName! : "",
-                                                    11.sp,
-                                                    white_ffffff,
-                                                    FontWeight.w500,
-                                                    FontStyle.normal,
-                                                    -0.22),
-                                              ],
-                                            )),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                    bottom: 19.h,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 16.w),
-                                      child: Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            calendar_icon,
-                                            height: 12.h,
-                                            width: 12.w,
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 4.w),
-                                            child: setHelveticaMedium(
-                                                _isFirstLayout == true
-                                                    ? '${DateFormat("MMM dd, yyyy").format(controller.upcomingEventList[i].startDateTime!)} at ${DateFormat("hh:mm a").format(controller.upcomingEventList[i].startDateTime!)}'
-                                                    : '${DateFormat("MMM dd, yyyy").format(controller.pastEventList[i].startDateTime!)} at ${DateFormat("hh:mm a").format(controller.pastEventList[i].startDateTime!)}',
-                                                10.sp,
-                                                white_ffffff,
-                                                FontWeight.w100,
-                                                FontStyle.normal,
-                                                -0.4),
-                                          ),
-                                        ],
-                                      ),
-                                    )),
-                                Positioned(
-                                    bottom: 19.h,
-                                    right: 16.w,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 16.w),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(right: 4.w),
-                                            child: setHelveticaMedium(
-                                                _isFirstLayout == true
-                                                    ? controller
-                                                        .upcomingEventList[i]
-                                                        .venue!
-                                                    : controller
-                                                        .pastEventList[i].venue!,
-                                                10.sp,
-                                                white_ffffff,
-                                                FontWeight.w100,
-                                                FontStyle.normal,
-                                                -0.4),
-                                          ),
-                                          SvgPicture.asset(
-                                            icon_location,
-                                            height: 12.h,
-                                            width: 12.w,
-                                          ),
-                                        ],
-                                      ),
-                                    )),
-                                Positioned(
-                                    bottom: 40.h,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 16.w),
-                                      child: setHelceticaBold(
-                                          _isFirstLayout == true
-                                              ? controller
-                                                  .upcomingEventList[i].title!
-                                              : controller
-                                                  .pastEventList[i].title!,
-                                          22.sp,
-                                          white_ffffff,
-                                          FontWeight.w500,
-                                          FontStyle.normal,
-                                          -0.88),
-                                    )),
+                                setHelceticaBold(
+                                    "NO UPCOMING EVENTS YET",
+                                    16.sp,
+                                    grey_aaaaaa,
+                                    FontWeight.w500,
+                                    FontStyle.normal,
+                                    0.5)
                               ],
                             ),
-                          ),
-                        );
-                      }),
-                ),
-              ),
-            ),
+                          )
+                        : eventList()
+                    : controller.pastEventList.isEmpty
+                        ? SizedBox(
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.60,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  img_logo,
+                                  height: 80,
+                                  width: 80,
+                                ),
+                                setHelceticaBold(
+                                    "NO Past EVENTS YET",
+                                    16.sp,
+                                    grey_aaaaaa,
+                                    FontWeight.w500,
+                                    FontStyle.normal,
+                                    0.5)
+                              ],
+                            ),
+                          )
+                        : eventList(),
             if (controller.isPastUpcomingPaginationLoading.value == true)
               PaginationUtils().loader(),
 
@@ -653,6 +265,438 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
             //   ),
             // )
           ],
+        ),
+      ),
+    );
+  }
+
+  Expanded eventList() {
+    return Expanded(
+      child: SingleChildScrollView(
+        controller: controller.pastUpcomingScrollController,
+        child: Container(
+          margin: EdgeInsets.only(left: 16.w, right: 16.w),
+          child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              primary: false,
+              itemCount: _isFirstLayout == true
+                  ? controller.upcomingEventList.length
+                  : controller.pastEventList.length,
+              padding: EdgeInsets.zero,
+              itemBuilder: (context, i) {
+                return InkWell(
+                  onTap: () {
+                    checkNet(context).then((value) {
+                      if (_isFirstLayout == true) {
+                        admireProfileController.eventDetailAPI(context,
+                            controller.upcomingEventList[i].id, 'upcoming');
+                      } else {
+                        admireProfileController.eventDetailAPI(
+                            context, controller.pastEventList[i].id, 'past');
+                      }
+                    });
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 16.h),
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 207.h,
+                          child: _isFirstLayout == true
+                              ? controller.upcomingEventList[i].poster == null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.r)),
+                                      child: SvgPicture.asset(
+                                        placeholder,
+                                        fit: BoxFit.cover,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 207.h,
+                                      ),
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(5)),
+                                      child: CachedNetworkImage(
+                                        imageUrl: controller
+                                            .upcomingEventList[i].poster!,
+                                        fit: BoxFit.cover,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 207.h,
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                SvgPicture.asset(
+                                          placeholder,
+                                          fit: BoxFit.cover,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 207.h,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            SvgPicture.asset(
+                                          placeholder,
+                                          fit: BoxFit.cover,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 207.h,
+                                        ),
+                                      ),
+                                    )
+                              : controller.pastEventList[i].poster == null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.r)),
+                                      child: SvgPicture.asset(
+                                        placeholder,
+                                        fit: BoxFit.cover,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 207.h,
+                                      ),
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(5)),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            controller.pastEventList[i].poster!,
+                                        fit: BoxFit.cover,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 207.h,
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                SvgPicture.asset(
+                                          placeholder,
+                                          fit: BoxFit.cover,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 207.h,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            SvgPicture.asset(
+                                          placeholder,
+                                          fit: BoxFit.cover,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 207.h,
+                                        ),
+                                      ),
+                                    ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 207.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.r),
+                              gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Color(0x00121212),
+                                    Color(0xff121212)
+                                  ])),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                top: 8.h, left: 8.w, right: 8.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Container(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 15.w),
+                                  height: 26.h,
+                                  decoration: BoxDecoration(
+                                    color: orange.withOpacity(0.7),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25.r)),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      _isFirstLayout == true
+                                          ? controller
+                                              .upcomingEventList[i].type!
+                                          : controller.pastEventList[i].type!,
+                                      style: TextStyle(
+                                          fontSize: 12.sp,
+                                          color: Colors.white,
+                                          fontFamily: roboto_bold),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                    padding: EdgeInsets.only(right: 6.w),
+                                    height: 29.h,
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(colors: [
+                                        Color(0xff1c2535),
+                                        Color(0xff04080f)
+                                      ]),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(4.r)),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 6.0.w, right: 6.0.w),
+                                          child: CircularProfileAvatar(
+                                            '',
+                                            radius: 7.5,
+                                            borderColor: black,
+                                            child: _isFirstLayout == true
+                                                ? controller.upcomingEventList[i].hosts ==
+                                                            null ||
+                                                        controller.upcomingEventList[i].hosts
+                                                                .toString() ==
+                                                            '[]'
+                                                    ? Icon(
+                                                        Icons.person,
+                                                        size: 15.r,
+                                                        color: grey_aaaaaa,
+                                                      )
+                                                    : controller
+                                                                    .upcomingEventList[
+                                                                        i]
+                                                                    .hosts!
+                                                                    .first
+                                                                    .image
+                                                                    .toString() ==
+                                                                '' ||
+                                                            controller.upcomingEventList[i].hosts ==
+                                                                null
+                                                        ? Icon(
+                                                            Icons.person,
+                                                            size: 15.r,
+                                                            color: grey_aaaaaa,
+                                                          )
+                                                        : CachedNetworkImage(
+                                                            imageUrl: controller
+                                                                    .upcomingEventList[
+                                                                        i]
+                                                                    .hosts!
+                                                                    .first
+                                                                    .image ??
+                                                                "",
+                                                            height: 15.h,
+                                                            width: 15.w,
+                                                            fit: BoxFit.cover,
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    Icon(
+                                                              Icons.person,
+                                                              size: 15.r,
+                                                              color:
+                                                                  grey_aaaaaa,
+                                                            ),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Icon(
+                                                              Icons.person,
+                                                              size: 15.r,
+                                                              color:
+                                                                  grey_aaaaaa,
+                                                            ),
+                                                          )
+                                                : controller.pastEventList[i]
+                                                                .hosts ==
+                                                            null ||
+                                                        controller.pastEventList[i].hosts
+                                                                .toString() ==
+                                                            '[]'
+                                                    ? Icon(
+                                                        Icons.person,
+                                                        size: 15.r,
+                                                        color: grey_aaaaaa,
+                                                      )
+                                                    : controller.pastEventList[i]
+                                                                    .hosts![0].image
+                                                                    .toString() ==
+                                                                '' ||
+                                                            controller.pastEventList[i].hosts == null
+                                                        ? Icon(
+                                                            Icons.person,
+                                                            size: 15.r,
+                                                            color: grey_aaaaaa,
+                                                          )
+                                                        : CachedNetworkImage(
+                                                            imageUrl: controller
+                                                                    .pastEventList[
+                                                                        i]
+                                                                    .hosts![0]
+                                                                    .image ??
+                                                                "",
+                                                            height: 15.h,
+                                                            width: 15.w,
+                                                            fit: BoxFit.cover,
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    Icon(
+                                                              Icons.person,
+                                                              size: 15.r,
+                                                              color:
+                                                                  grey_aaaaaa,
+                                                            ),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Icon(
+                                                              Icons.person,
+                                                              size: 15.r,
+                                                              color:
+                                                                  grey_aaaaaa,
+                                                            ),
+                                                          ),
+                                          ),
+                                        ),
+                                        setHelveticaMedium(
+                                            "Hosted by",
+                                            11.sp,
+                                            gray_b3ffffff,
+                                            FontWeight.w500,
+                                            FontStyle.normal,
+                                            -0.22),
+                                        SizedBox(
+                                          width: 4.w,
+                                        ),
+                                        setHelceticaBold(
+                                            _isFirstLayout == true
+                                                ? controller
+                                                                .upcomingEventList[
+                                                                    i]
+                                                                .hosts
+                                                                .toString() ==
+                                                            '[]' ||
+                                                        controller
+                                                                .upcomingEventList[
+                                                                    i]
+                                                                .hosts ==
+                                                            null
+                                                    ? controller
+                                                            .upcomingEventList[
+                                                                i]
+                                                            .hosts![0]
+                                                            .firstName! +
+                                                        controller
+                                                            .upcomingEventList[
+                                                                i]
+                                                            .hosts![0]
+                                                            .lastName!
+                                                    : ""
+                                                : controller.pastEventList[i]
+                                                                .hosts
+                                                                .toString() ==
+                                                            '[]' ||
+                                                        controller
+                                                                .pastEventList[
+                                                                    i]
+                                                                .hosts ==
+                                                            null
+                                                    ? controller
+                                                            .pastEventList[i]
+                                                            .hosts![0]
+                                                            .firstName! +
+                                                        controller
+                                                            .pastEventList[i]
+                                                            .hosts![0]
+                                                            .lastName!
+                                                    : "",
+                                            11.sp,
+                                            white_ffffff,
+                                            FontWeight.w500,
+                                            FontStyle.normal,
+                                            -0.22),
+                                      ],
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                            bottom: 19.h,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    calendar_icon,
+                                    height: 12.h,
+                                    width: 12.w,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 4.w),
+                                    child: setHelveticaMedium(
+                                        _isFirstLayout == true
+                                            ? '${DateFormat("MMM dd, yyyy").format(controller.upcomingEventList[i].startDateTime!)} at ${DateFormat("hh:mm a").format(controller.upcomingEventList[i].startDateTime!)}'
+                                            : '${DateFormat("MMM dd, yyyy").format(controller.pastEventList[i].startDateTime!)} at ${DateFormat("hh:mm a").format(controller.pastEventList[i].startDateTime!)}',
+                                        10.sp,
+                                        white_ffffff,
+                                        FontWeight.w100,
+                                        FontStyle.normal,
+                                        -0.4),
+                                  ),
+                                ],
+                              ),
+                            )),
+                        Positioned(
+                            bottom: 19.h,
+                            right: 16.w,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 4.w),
+                                    child: setHelveticaMedium(
+                                        _isFirstLayout == true
+                                            ? controller
+                                                .upcomingEventList[i].venue!
+                                            : controller
+                                                .pastEventList[i].venue!,
+                                        10.sp,
+                                        white_ffffff,
+                                        FontWeight.w100,
+                                        FontStyle.normal,
+                                        -0.4),
+                                  ),
+                                  SvgPicture.asset(
+                                    icon_location,
+                                    height: 12.h,
+                                    width: 12.w,
+                                  ),
+                                ],
+                              ),
+                            )),
+                        Positioned(
+                            bottom: 40.h,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w),
+                              child: setHelceticaBold(
+                                  _isFirstLayout == true
+                                      ? controller.upcomingEventList[i].title!
+                                      : controller.pastEventList[i].title!,
+                                  22.sp,
+                                  white_ffffff,
+                                  FontWeight.w500,
+                                  FontStyle.normal,
+                                  -0.88),
+                            )),
+                      ],
+                    ),
+                  ),
+                );
+              }),
         ),
       ),
     );

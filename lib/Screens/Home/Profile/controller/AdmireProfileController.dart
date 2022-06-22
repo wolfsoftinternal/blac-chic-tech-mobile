@@ -82,11 +82,13 @@ class AdmireProfileController extends GetxController {
   RxBool isLimitReached = false.obs;
   RxList<UserList> userList = <UserList>[].obs;
   RxList<YoutubePlayerController> videoController = <YoutubePlayerController>[].obs;
+  RxList thumbnail = [].obs;
   RxList<UserList> inviteUser = <UserList>[].obs;
   VideoController controller = Get.put(VideoController());
   RxList selectedPeople = [].obs;
   RxBool isSearched = false.obs;
   RxList<ReportList> report = <ReportList>[].obs;
+  RxList videoId = [].obs; 
 
   initUserScrolling(BuildContext context, id) {
     userScrollController.addListener(() async {
@@ -484,7 +486,6 @@ class AdmireProfileController extends GetxController {
             VideoListModel detail = VideoListModel.fromJson(userModel);
             videoList.addAll(detail.data!);
 
-            List videoId = []; 
             YoutubePlayerController controller;
             for(var item in videoList){
               if(item.embededCode.toString().contains("iframe")){
@@ -500,21 +501,22 @@ class AdmireProfileController extends GetxController {
             }
 
             for(int i = 0; i < videoList.length; i++){
-                controller = YoutubePlayerController(
-                  initialVideoId: videoId[i],
-                  flags: const YoutubePlayerFlags(
-                    mute: false,
-                    autoPlay: false,
-                    disableDragSeek: false,
-                    loop: false,
-                    isLive: false,
-                    forceHD: false,
-                    enableCaption: false,
-                    hideControls: false,
-                  ),
-                );
-                videoController.add(controller);
-              }
+              // thumbnail.add("http://img.youtube.com/vi/" + videoId[i] + "/0" + ".jpg");
+              controller = YoutubePlayerController(
+                initialVideoId: videoId[i],
+                flags: const YoutubePlayerFlags(
+                  mute: false,
+                  autoPlay: false,
+                  disableDragSeek: false,
+                  loop: false,
+                  isLive: false,
+                  forceHD: false,
+                  enableCaption: false,
+                  hideControls: false,
+                ),
+              );
+              videoController.add(controller);
+            }
           }
         });
       } else {

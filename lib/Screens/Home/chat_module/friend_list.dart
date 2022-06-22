@@ -170,41 +170,38 @@ class _FriendListScreenState extends State<FriendListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-          backgroundColor: Color(0xfff5f5f5),
+    return Scaffold(
+      backgroundColor: Color(0xfff5f5f5),
       body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          myBody(),
-          isLoading
-              ? Expanded(child: myLoader())
-              : Expanded(
-                  child: mySearchedFriends.isEmpty
-                      ? searchValue.isNotEmpty
-                          ? Padding(
-                              padding: EdgeInsets.all(50),
-                              child: Center(child: noDataWidget()))
-                          : signupModel != null
-                              ? myConvo2()
-                              : initiateSignUpModel()
-                      : myAllFriends.isEmpty
-                          ? Padding(
-                              padding: EdgeInsets.all(50),
-                              child: Center(child: noDataWidget()))
-                          : searchListColumn())
-          // mySearchedFriends.length > 0 ? searchListColumn() : myConvo2(),
-        ],
-        // ),
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      SizedBox(height: 30.0,),
+      myBody(),
+      isLoading
+          ? Expanded(child: myLoader())
+          : Expanded(
+              child: mySearchedFriends.isEmpty
+                  ? searchValue.isNotEmpty
+                      ? Padding(
+                          padding: EdgeInsets.all(50),
+                          child: Center(child: noDataWidget()))
+                      : signupModel != null
+                          ? myConvo2()
+                          : initiateSignUpModel()
+                  : myAllFriends.isEmpty
+                      ? Padding(
+                          padding: EdgeInsets.all(50),
+                          child: Center(child: noDataWidget()))
+                      : searchListColumn())
+      // mySearchedFriends.length > 0 ? searchListColumn() : myConvo2(),
+    ],
+    // ),
       ),
-    ));
+    );
   }
 
   Widget myLoader() {
-    return const Center(
-      child:
-          SizedBox(height: 50, width: 50, child: CircularProgressIndicator()),
-    );
+    return Container(height: MediaQuery.of(context).size.height * 0.75,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),));
   }
 
   noDataWidget() {
@@ -282,9 +279,6 @@ class _FriendListScreenState extends State<FriendListScreen> {
 
           searchBox(),
 
-          SizedBox(
-            height: 20.h,
-          ),
         ],
       ),
     );

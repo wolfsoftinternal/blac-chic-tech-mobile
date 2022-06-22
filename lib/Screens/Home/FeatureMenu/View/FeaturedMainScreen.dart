@@ -33,200 +33,199 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       body: Obx(
-        () => featuredController.isDataFetched ==true ?
-        featuredController.featuredList.length > 0?Stack(
-          alignment: Alignment.bottomCenter,
+    () => featuredController.isDataFetched ==true ?
+    featuredController.featuredList.length > 0?Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Stack(
+          alignment: Alignment.center,
           children: [
-            Stack(
+            CachedNetworkImage(
+              imageUrl: featuredController.featuredList[0].image??"",
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
               alignment: Alignment.center,
+              progressIndicatorBuilder:
+                  (context, url, downloadProgress) =>
+                  SvgPicture.asset(
+                    placeholder,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+              errorWidget: (context, url, error) =>
+                  SvgPicture.asset(
+                    placeholder,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+            ),
+
+
+            // Image.asset(
+            //   feature_img_1,
+            //   fit: BoxFit.cover,
+            //   width: double.infinity,
+            //   height: double.infinity,
+            //   alignment: Alignment.center,
+            // ),
+            // OSA UX OF LIVING
+             Center(
+              child: Text(featuredController.featuredList[0].writer_name??"",
+                  style: TextStyle(
+                      color: Color(0xffffffff),
+                      fontWeight: FontWeight.w900,
+                      fontFamily: "NeueHelvetica",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 40.0),
+                  textAlign: TextAlign.center),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 50.0, left: 15.0, right: 20.0),
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CachedNetworkImage(
-                  imageUrl: featuredController.featuredList[0].image??"",
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
-                  alignment: Alignment.center,
-                  progressIndicatorBuilder:
-                      (context, url, downloadProgress) =>
-                      SvgPicture.asset(
-                        placeholder,
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                  errorWidget: (context, url, error) =>
-                      SvgPicture.asset(
-                        placeholder,
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: SvgPicture.asset(
+                    icon_cancel,
+                    width: 30.w,
+                    height: 30.h,
+                    color: white_ffffff,
+                  ),
                 ),
 
+                // Featured
+                Text("Featured",
+                    style: TextStyle(
+                        color: white_ffffff,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: "NeueHelvetica",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 20.sp),
+                    textAlign: TextAlign.left),
 
-                // Image.asset(
-                //   feature_img_1,
-                //   fit: BoxFit.cover,
-                //   width: double.infinity,
-                //   height: double.infinity,
-                //   alignment: Alignment.center,
-                // ),
-                // OSA UX OF LIVING
-                 Center(
-                  child: Text(featuredController.featuredList[0].writer_name??"",
-                      style: TextStyle(
-                          color: Color(0xffffffff),
-                          fontWeight: FontWeight.w900,
-                          fontFamily: "NeueHelvetica",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 40.0),
-                      textAlign: TextAlign.center),
+                GestureDetector(
+                  child: SvgPicture.asset(
+                    search,
+                    width: 20.w,
+                    height: 20.h,
+                    color: white_ffffff,
+                  ),
+                  onTap: (){
+                    Get.to(() => SearchFeaturesScreen());
+
+                  },
                 ),
               ],
             ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
-                      child: SvgPicture.asset(
-                        icon_cancel,
-                        width: 30.w,
-                        height: 30.h,
-                        color: white_ffffff,
-                      ),
-                    ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(bottom: 50.w, left: 32.w, right: 32.w),
+          child: Container(
+            // color: Colors.lightBlueAccent,
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    Get.to(PastFeaturesScreen(featureList: featuredController.featuredList.value,selectedPosition: 1,));
 
-                    // Featured
-                    Text("Featured",
-                        style: TextStyle(
-                            color: white_ffffff,
-                            fontWeight: FontWeight.w900,
-                            fontFamily: "NeueHelvetica",
-                            fontStyle: FontStyle.normal,
-                            fontSize: 20.sp),
-                        textAlign: TextAlign.left),
-
-                    GestureDetector(
-                      child: SvgPicture.asset(
-                        search,
-                        width: 20.w,
-                        height: 20.h,
-                        color: white_ffffff,
-                      ),
-                      onTap: (){
-                        Get.to(() => SearchFeaturesScreen());
-
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 50.w, left: 32.w, right: 32.w),
-              child: Container(
-                // color: Colors.lightBlueAccent,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(PastFeaturesScreen(featureList: featuredController.featuredList.value,selectedPosition: 1,));
-
-                        // _controller.previousPage(
-                        //     duration: _kDuration, curve: _kCurve);
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Transform.rotate(
-                              angle: 180 * pi / 180,
-                              child: SvgPicture.asset(
-                                icon_feature_next_arrow,
-                                width: 40,
-                                height: 15,
-                              )),
-
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          // READ ARTICLE
-                          Text("PAST \nFEATURE",
-                              style: TextStyle(
-                                  color: white_ffffff,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "NeueHelvetica",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 24.sp),
-                              textAlign: TextAlign.left)
-                        ],
-                      ),
-                    ),
-
-                    GestureDetector(
-                      onTap: () {
-                        // _controller.nextPage(
-                        //     duration: _kDuration, curve: _kCurve);
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          SvgPicture.asset(
+                    // _controller.previousPage(
+                    //     duration: _kDuration, curve: _kCurve);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Transform.rotate(
+                          angle: 180 * pi / 180,
+                          child: SvgPicture.asset(
                             icon_feature_next_arrow,
                             width: 40,
                             height: 15,
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          // READ ARTICLE
-                          Text("READ \nARTICLE",
-                              style: TextStyle(
-                                  color: white_ffffff,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "NeueHelvetica",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 24.sp),
-                              textAlign: TextAlign.right)
-                        ],
+                          )),
+
+                      SizedBox(
+                        height: 5.h,
                       ),
-                    ),
-                    // FlatButton(
-                    //   child: Text('Prev'),
-                    //   onPressed: () {
-                    //     _controller.previousPage(
-                    //         duration: _kDuration, curve: _kCurve);
-                    //   },
-                    // ),
-                    // FlatButton(
-                    //   child: Text('Next'),
-                    //   onPressed: () {
-                    //     _controller.nextPage(duration: _kDuration, curve: _kCurve);
-                    //   },
-                    // )
-                  ],
+                      // READ ARTICLE
+                      Text("PAST \nFEATURE",
+                          style: TextStyle(
+                              color: white_ffffff,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "NeueHelvetica",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 24.sp),
+                          textAlign: TextAlign.left)
+                    ],
+                  ),
                 ),
-              ),
+
+                GestureDetector(
+                  onTap: () {
+                    // _controller.nextPage(
+                    //     duration: _kDuration, curve: _kCurve);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        icon_feature_next_arrow,
+                        width: 40,
+                        height: 15,
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      // READ ARTICLE
+                      Text("READ \nARTICLE",
+                          style: TextStyle(
+                              color: white_ffffff,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "NeueHelvetica",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 24.sp),
+                          textAlign: TextAlign.right)
+                    ],
+                  ),
+                ),
+                // FlatButton(
+                //   child: Text('Prev'),
+                //   onPressed: () {
+                //     _controller.previousPage(
+                //         duration: _kDuration, curve: _kCurve);
+                //   },
+                // ),
+                // FlatButton(
+                //   child: Text('Next'),
+                //   onPressed: () {
+                //     _controller.nextPage(duration: _kDuration, curve: _kCurve);
+                //   },
+                // )
+              ],
             ),
-          ],
-        ):
-        Text('No Data Found'):const Center(child: CircularProgressIndicator()),
+          ),
+        ),
+      ],
+    ):
+    Text('No Data Found'):Container(height: MediaQuery.of(context).size.height,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),)),
       ),
-    ));
+    );
   }
 }
