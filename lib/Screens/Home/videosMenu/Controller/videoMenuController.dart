@@ -407,6 +407,7 @@ class VideoMenuController extends GetxController {
             : list.length,
         (index) => list[index]);
     List videoId = [];
+    videoDetailsNextController.clear();
 
     for (var item in videoDetailsList) {
       if (item.embededCode.toString().contains("iframe")) {
@@ -422,7 +423,7 @@ class VideoMenuController extends GetxController {
     }
     for (int i = 0; i < videoDetailsList.length; i++) {
       YoutubePlayerController controller = YoutubePlayerController(
-        initialVideoId: videoId[i],
+        initialVideoId: videoId[i] == null ? "" : videoId[i],
         flags: const YoutubePlayerFlags(
           mute: false,
           autoPlay: false,
