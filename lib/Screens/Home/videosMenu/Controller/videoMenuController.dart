@@ -77,6 +77,8 @@ class VideoMenuController extends GetxController {
       <YoutubePlayerController>[].obs;
   RxList<YoutubePlayerController> searchVideoList =
       <YoutubePlayerController>[].obs;
+  RxString totalVideoCount = "0".obs;
+  RxBool checkCount = false.obs;
 
   @override
   void onInit() {
@@ -128,6 +130,13 @@ class VideoMenuController extends GetxController {
 
             videoListAPI();
           } else if (videoMenuModelList.value.statusCode == 200) {
+            print("PASSWORD :: " +
+                videoMenuModelList.value.data!.length.toString());
+            if (checkCount.value == false) {
+              totalVideoCount.value =
+                  videoMenuModelList.value.data!.length.toString();
+              checkCount.value = true;
+            }
             videoMenuPageMethod();
           } else {
             isLoading.value = false;

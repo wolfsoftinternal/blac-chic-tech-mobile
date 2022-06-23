@@ -127,14 +127,18 @@ class _VideoListBctState extends State<VideoListBct> {
                         height: 30.h,
                       ),
 
-                      Text("3,800+ Life & Tech Talks \nto help you navigate.",
-                          style: TextStyle(
-                              color: black_121212,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: "NeueHelvetica",
-                              fontStyle: FontStyle.normal,
-                              fontSize: 24.sp),
-                          textAlign: TextAlign.center),
+                      Obx(
+                        () => Text(
+                            controller.totalVideoCount.value +
+                                "+ Life & Tech Talks \nto help you navigate.",
+                            style: TextStyle(
+                                color: black_121212,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: "NeueHelvetica",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 24.sp),
+                            textAlign: TextAlign.center),
+                      ),
 
                       SizedBox(
                         height: 16.h,
@@ -808,7 +812,8 @@ class _VideoListBctState extends State<VideoListBct> {
                                       primary: false,
                                       itemCount:
                                           controller.videoList.length + 1,
-                                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w),
                                       itemBuilder: (context, i) {
                                         if (i < controller.videoList.length) {
                                           print(
@@ -839,9 +844,9 @@ class _VideoListBctState extends State<VideoListBct> {
                                                             child: FittedBox(
                                                               fit: BoxFit.fill,
                                                               child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius.all(
-                                                                        Radius.circular(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
                                                                             15.r)),
                                                                 child:
                                                                     YoutubePlayerBuilder(
@@ -853,9 +858,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                                                         player:
                                                                             YoutubePlayer(
                                                                           bottomActions: const [
-                                                                            SizedBox(
-                                                                                width:
-                                                                                    14.0),
+                                                                            SizedBox(width: 14.0),
                                                                             // CurrentPosition(),
                                                                             // const SizedBox(width: 8.0),
                                                                             // ProgressBar(),
@@ -879,10 +882,11 @@ class _VideoListBctState extends State<VideoListBct> {
                                                             ),
                                                           ),
                                                           Positioned(
-                                                            top: 20,
-                                                            right: 42,
-                                                            child: SvgPicture.asset(icon_play)
-                                                          ),
+                                                              top: 20,
+                                                              right: 42,
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                      icon_play)),
                                                         ],
                                                       ),
                                                       // SizedBox(
