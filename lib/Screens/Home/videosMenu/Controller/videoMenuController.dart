@@ -112,7 +112,11 @@ class VideoMenuController extends GetxController {
       languageString1 = "";
     }
 
-    dynamic body = {'topic': topicString1, 'language': languageString1};
+    dynamic body = {
+      'topic': topicString1,
+      'language': languageString1,
+      'page': 0.toString()
+    };
     print("body :: " + body.toString());
     String url = urlBase + urlVideoList;
     final apiReq = Request();
@@ -189,6 +193,7 @@ class VideoMenuController extends GetxController {
         (index) => list[index]);
 
     List videoId = [];
+    videoController.clear();
 
     for (var item in videoList) {
       if (item.embededCode.toString().contains("iframe")) {
@@ -204,7 +209,7 @@ class VideoMenuController extends GetxController {
     }
     for (int i = 0; i < videoId.length; i++) {
       YoutubePlayerController controller = YoutubePlayerController(
-        initialVideoId: videoId[i],
+        initialVideoId: videoId[i] == null ? "" : videoId[i],
         flags: const YoutubePlayerFlags(
           mute: false,
           autoPlay: false,
@@ -309,7 +314,7 @@ class VideoMenuController extends GetxController {
     }
     for (int i = 0; i < videoAllList.length; i++) {
       YoutubePlayerController controller = YoutubePlayerController(
-        initialVideoId: videoId[i],
+        initialVideoId: videoId[i] == null ? "" : videoId[i],
         flags: const YoutubePlayerFlags(
           mute: false,
           autoPlay: false,
@@ -737,17 +742,18 @@ class VideoMenuController extends GetxController {
     await apiReq.postAPIWithBearer(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
       commentModelList.clear();
-      isLoading.value = false;
+
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
-          print("CommentsListModel :: " + value.toString());
           CommentListModel commentsListModel = commentListModelFromJson(value);
+          isLoading.value = false;
 
           if (commentsListModel.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
           } else if (commentsListModel.statusCode == 200) {
             commentModelList.value = commentsListModel.data!;
+
             Future.delayed(const Duration(seconds: 1), () {
               moveDown();
             });
@@ -764,9 +770,9 @@ class VideoMenuController extends GetxController {
     print(":::::::::::::::::::Move JUMP::::::::::::::::::::::::::" +
         scrollController.value.position.minScrollExtent.toString());
     scrollController.value.animateTo(
-        scrollController.value.position.maxScrollExtent,
+        scrollController.value.position.minScrollExtent,
         curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 100));
+        duration: const Duration(milliseconds: 200));
   }
 
   dateTOTimeConvert(String date) {

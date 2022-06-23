@@ -40,7 +40,7 @@ const urlOrderDetail = "/mobile/transaction/details";
 const urlOrderUpdate = "/mobile/transaction/order/update";
 
 //video
-const urlVideoList = '/mobile/video-list';
+const urlVideoList = '/home/video-list';
 const urlVideoCreate = '/mobile/video-create';
 const urlVideoDetails = '/mobile/video-details';
 const urlVideoLike = "/mobile/video-like";

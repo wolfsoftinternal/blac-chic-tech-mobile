@@ -114,10 +114,10 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       controller.playerController.isEmpty
-                          ? const SizedBox(
-                              height: 315,
-                              width: 560,
-                              child: Center(
+                          ? SizedBox(
+                              height: 235.h,
+                              width: MediaQuery.of(context).size.width,
+                              child: const Center(
                                   child: SizedBox(
                                 height: 20,
                                 width: 20,
@@ -281,11 +281,14 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
 
                                 InkWell(
                                   onTap: () {
-                                    controller.playerController.clear();
-                                    controller.videoDetailsList.clear();
                                     Get.to(VideoComments(
-                                        videoId:
-                                            controller.videoDetail.value.id!));
+                                            videoId: controller
+                                                .videoDetail.value.id!))!
+                                        .then((value) {
+                                      controller.videoDetailsAPI(
+                                          id: widget.videoList.id);
+                                      setState(() {});
+                                    });
                                   },
                                   child: SvgPicture.asset(
                                     icon_message,
