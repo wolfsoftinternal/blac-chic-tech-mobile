@@ -55,7 +55,9 @@ class _MyPlayListState extends State<MyPlayList> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 50,),
+            const SizedBox(
+              height: 50,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -72,13 +74,14 @@ class _MyPlayListState extends State<MyPlayList> {
                     ),
                     Obx(
                       () => Container(
-                        margin: EdgeInsets.only(
-                            top: 24.h, left: 24.w, right: 24.w),
+                        margin:
+                            EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
                         child: controller.isLoading.value
                             ? SizedBox(
                                 width: double.infinity,
-                                height: MediaQuery.of(context).size.height * 0.60,
-                                child: Center(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.60,
+                                child: const Center(
                                     child: SizedBox(
                                   height: 20,
                                   width: 20,
@@ -90,9 +93,8 @@ class _MyPlayListState extends State<MyPlayList> {
                                 )))
                             : controller.myPlayList.length == 0
                                 ? SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height *
-                                            0.5,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.5,
                                     width: double.infinity,
                                     child: const Center(
                                         child: Text("No Data Found",
@@ -107,12 +109,10 @@ class _MyPlayListState extends State<MyPlayList> {
                                 : ListView.builder(
                                     shrinkWrap: true,
                                     primary: false,
-                                    itemCount:
-                                        controller.myPlayList.length + 1,
+                                    itemCount: controller.myPlayList.length + 1,
                                     padding: EdgeInsets.zero,
                                     itemBuilder: (context, i) {
-                                      print(
-                                          "::::::::::::UPDATE 00:::::::::::");
+                                      print("::::::::::::UPDATE 00:::::::::::");
                                       if (i < controller.myPlayList.length) {
                                         return Padding(
                                           padding:
@@ -129,12 +129,11 @@ class _MyPlayListState extends State<MyPlayList> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Stack(
-                                                      alignment: Alignment
-                                                          .bottomRight,
+                                                      alignment:
+                                                          Alignment.bottomRight,
                                                       children: [
                                                         SizedBox(
                                                           height: 80.h,
@@ -156,7 +155,8 @@ class _MyPlayListState extends State<MyPlayList> {
                                                                       player:
                                                                           YoutubePlayer(
                                                                         bottomActions: const [
-                                                                          SizedBox(width: 14.0),
+                                                                          SizedBox(
+                                                                              width: 14.0),
                                                                           // CurrentPosition(),
                                                                           // const SizedBox(width: 8.0),
                                                                           // ProgressBar(),
@@ -180,10 +180,11 @@ class _MyPlayListState extends State<MyPlayList> {
                                                           ),
                                                         ),
                                                         Positioned(
-                                                          top: 20,
-                                                          right: 40,
-                                                          child: SvgPicture.asset(icon_play)
-                                                        ),
+                                                            top: 20,
+                                                            right: 40,
+                                                            child: SvgPicture
+                                                                .asset(
+                                                                    icon_play)),
                                                         // Positioned(
                                                         //   bottom: 2,
                                                         //   right: 3,
@@ -240,10 +241,9 @@ class _MyPlayListState extends State<MyPlayList> {
                                                     ),
                                                     Expanded(
                                                       child: Container(
-                                                        margin:
-                                                            EdgeInsets.only(
-                                                                left: 8.w,
-                                                                right: 10.w),
+                                                        margin: EdgeInsets.only(
+                                                            left: 8.w,
+                                                            right: 10.w),
                                                         child: Column(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -257,8 +257,7 @@ class _MyPlayListState extends State<MyPlayList> {
                                                             ),
                                                             Text(
                                                               controller
-                                                                  .myPlayList[
-                                                                      i]
+                                                                  .myPlayList[i]
                                                                   .title
                                                                   .toString(),
                                                               softWrap: true,
@@ -271,8 +270,7 @@ class _MyPlayListState extends State<MyPlayList> {
                                                                       helvetica_neu_bold,
                                                                   color:
                                                                       black_121212,
-                                                                  fontSize:
-                                                                      14),
+                                                                  fontSize: 14),
                                                             ),
                                                             SizedBox(
                                                               height: 8.h,
@@ -295,8 +293,7 @@ class _MyPlayListState extends State<MyPlayList> {
                                                                       helveticaNeueNeue_medium,
                                                                   color:
                                                                       opcity_black_121212,
-                                                                  fontSize:
-                                                                      10),
+                                                                  fontSize: 10),
                                                             ),
                                                             SizedBox(
                                                               height: 2.h,
@@ -306,7 +303,8 @@ class _MyPlayListState extends State<MyPlayList> {
                                                                   DateFormat
                                                                           .yMMMM()
                                                                       .format(DateTime.parse(controller
-                                                                          .myPlayList[i]
+                                                                          .myPlayList[
+                                                                              i]
                                                                           .createdAt
                                                                           .toString()))
                                                                       .toString(),
@@ -315,8 +313,7 @@ class _MyPlayListState extends State<MyPlayList> {
                                                                       helveticaNeueNeue_medium,
                                                                   color:
                                                                       opcity_black_121212,
-                                                                  fontSize:
-                                                                      8),
+                                                                  fontSize: 8),
                                                             ),
                                                           ],
                                                         ),
@@ -324,14 +321,16 @@ class _MyPlayListState extends State<MyPlayList> {
                                                     ),
                                                     PopupMenuButton(
                                                         onSelected: (value) {
-                                                          controller.removeFromPlaylist(
-                                                              context:
-                                                                  context,
-                                                              videoId: controller
-                                                                  .myPlayList[
-                                                                      i]
-                                                                  .id,
-                                                              index: i);
+                                                          controller
+                                                              .removeFromPlaylist(
+                                                                  context:
+                                                                      context,
+                                                                  videoId:
+                                                                      controller
+                                                                          .myPlayList[
+                                                                              i]
+                                                                          .id,
+                                                                  index: i);
                                                         },
                                                         itemBuilder:
                                                             (context) => [
@@ -352,11 +351,10 @@ class _MyPlayListState extends State<MyPlayList> {
                                                             RoundedRectangleBorder(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(
-                                                                      1),
+                                                                  .circular(1),
                                                         ),
                                                         padding:
-                                                             EdgeInsets.zero,
+                                                            EdgeInsets.zero,
                                                         icon: Image.asset(
                                                           img_more,
                                                           width: 16.w,
@@ -367,8 +365,7 @@ class _MyPlayListState extends State<MyPlayList> {
                                           ),
                                         );
                                       } else {
-                                        return controller.hasMore.value ==
-                                                false
+                                        return controller.hasMore.value == false
                                             ? const SizedBox()
                                             : Container(
                                                 margin: EdgeInsets.only(
@@ -376,8 +373,7 @@ class _MyPlayListState extends State<MyPlayList> {
                                                 child: Center(
                                                   child: TextButton(
                                                     onPressed: () {
-                                                      controller
-                                                          .myPlayListPage
+                                                      controller.myPlayListPage
                                                           .value++;
                                                       controller
                                                           .pageMyPlayListAdd();
