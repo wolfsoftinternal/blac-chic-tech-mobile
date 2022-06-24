@@ -38,7 +38,7 @@ class _CreatePostState extends State<CreatePost> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    videoController.userListAPI(context);
+    videoController.userListAPI(context, true);
     for(var item in videoController.userList){
       if(item.isSpeakerSelected == true){
         item.isSpeakerSelected = false;

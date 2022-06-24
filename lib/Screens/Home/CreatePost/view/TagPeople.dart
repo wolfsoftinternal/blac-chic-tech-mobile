@@ -34,13 +34,13 @@ class _TagPeopleState extends State<TagPeople> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    videoController.initScrolling(context);
+    videoController.initScrolling(context, true);
     if (controller.isSearched.value == true) {
       controller.isSearched.value = false;
       checkNet(context).then((value) async {
         videoController.PageNumber.value = 0;
         videoController.userList.clear();
-        await videoController.userListAPI(context);
+        await videoController.userListAPI(context, true);
 
         Future.delayed(Duration(milliseconds: 3), () {
           for (var item in videoController.userList) {
@@ -240,7 +240,7 @@ class _TagPeopleState extends State<TagPeople> {
                       controller.isSearched.value = false;
                       videoController.PageNumber.value = 0;
                       videoController.userList.clear();
-                      await videoController.userListAPI(context);
+                      await videoController.userListAPI(context, true);
                       Future.delayed(Duration(milliseconds: 3), () {
                         for (var item in videoController.userList) {
                           for (var selectedItem in controller.selectedList) {
@@ -254,7 +254,7 @@ class _TagPeopleState extends State<TagPeople> {
                     } else {
                       controller.isSearched.value = true;
                       videoController.PageNumber.value = 0;
-                      await videoController.userListAPI(context);
+                      await videoController.userListAPI(context, true);
                       Future.delayed(Duration(milliseconds: 3), () {
                         for (var item in videoController.userList) {
                           for (var selectedItem in controller.selectedList) {

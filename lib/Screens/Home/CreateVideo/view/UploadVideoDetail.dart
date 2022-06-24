@@ -34,17 +34,20 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
   void initState() {
     super.initState();
     checkNet(context).then((value) async {
-      await controller.userListAPI(context);
+      await controller.userListAPI(context, false);
       await controller.topicListAPI(context);
       await controller.languageListAPI(context);
       
     }); 
 
-    Future.delayed(Duration(seconds: 3), (){
+    Future.delayed(Duration(seconds: 500), (){
       for (var item in controller.userList) {
       if (item.isSpeakerSelected == true) {
         item.isSpeakerSelected = false;
       }
+      setState(() {
+        
+      });
     }
     });
     
@@ -53,19 +56,11 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
   /*Speaker bottom sheet*/
   void displayRecurringOrderBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        isScrollControlled: false,
+        isScrollControlled: true,
         backgroundColor: Colors.transparent,
         context: context,
         builder: (ctx) {
-          return Column(
-            children: [
-              Expanded(
-                child: VideoSpeakerList(),
-              ),
-              if (controller.isPaginationLoading.value == true)
-                PaginationUtils().loader(),
-            ],
-          );
+          return VideoSpeakerList();
         });
   }
 
@@ -472,7 +467,29 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      displayRecurringOrderBottomSheet(context);
+                                          if (controller.isSearched.value == true) {
+                                            controller.isSearched.value = false;
+                                            checkNet(context).then((value) async {
+                                              controller.PageNumber.value = 0;
+                                              controller.userList.clear();
+                                              await controller.userListAPI(context, false);
+
+                                              Future.delayed(Duration(milliseconds: 500), () {
+                                                for (var item in controller.userList) {
+                                                  for (var selectedItem in controller.selectedList) {
+                                                    if (selectedItem.id == item.id) {
+                                                      item.isSpeakerSelected = selectedItem.isSpeakerSelected;
+                                                    }
+                                                  }
+                                                }
+                                                setState((){});
+                                                displayRecurringOrderBottomSheet(context);
+                                              });
+                                            });
+                                          }else{
+                                            displayRecurringOrderBottomSheet(context);
+                                          }
+                                      
                                     });
                                   },
                                   child: Container(
@@ -722,5 +739,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
     super.dispose();
 
     controller.searchController.value.text = "";
+    controller.userList.clear();
+    controller.selectedList.clear();
   }
 }

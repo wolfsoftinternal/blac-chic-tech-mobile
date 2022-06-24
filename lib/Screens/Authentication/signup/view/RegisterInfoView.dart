@@ -155,7 +155,7 @@ class RegisterInfoView extends StatelessWidget {
                                 style: TextStyle(
                                     color: const Color(0xff121212),
                                     fontWeight: FontWeight.w400,
-                                    fontFamily: "Helvetica",
+                                    fontFamily: "Roboto",
                                     fontStyle: FontStyle.normal,
                                     fontSize: 10.0.sp,
                                     height: 1.5.h),
@@ -165,7 +165,7 @@ class RegisterInfoView extends StatelessWidget {
                                 style: TextStyle(
                                     color: const Color(0xffff881a),
                                     fontWeight: FontWeight.w400,
-                                    fontFamily: "Helvetica",
+                                    fontFamily: "Roboto",
                                     fontStyle: FontStyle.normal,
                                     fontSize: 10.0.sp,
                                     height: 1.5.h),
@@ -174,7 +174,7 @@ class RegisterInfoView extends StatelessWidget {
                                 style: TextStyle(
                                     color: const Color(0xff121212),
                                     fontWeight: FontWeight.w400,
-                                    fontFamily: "Helvetica",
+                                    fontFamily: "Roboto",
                                     fontStyle: FontStyle.normal,
                                     fontSize: 10.0.sp,
                                     height: 1.5.h),
@@ -184,7 +184,7 @@ class RegisterInfoView extends StatelessWidget {
                                 style: TextStyle(
                                     color: Color(0xffff881a),
                                     fontWeight: FontWeight.w400,
-                                    fontFamily: "Helvetica",
+                                    fontFamily: "Roboto",
                                     fontStyle: FontStyle.normal,
                                     fontSize: 10.0,
                                     height: 1.5),

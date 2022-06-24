@@ -27,32 +27,34 @@ class SpeakerHostBottomSheet extends StatefulWidget {
 class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
   EventController controller = Get.put(EventController());
   VideoController videoController = Get.put(VideoController());
-  
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    videoController.initScrolling(context);
+    videoController.initScrolling(context, false);
     if (controller.isSearched.value == true) {
       controller.isSearched.value = false;
       checkNet(context).then((value) async {
         videoController.PageNumber.value = 0;
         videoController.userList.clear();
-        await videoController.userListAPI(context);
+        await videoController.userListAPI(context, false);
 
         if(widget.type != 'host'){
-          Future.delayed(Duration(milliseconds: 3), () {
+          Future.delayed(Duration(milliseconds: 500), () {
           for (var item in videoController.userList) {
             for (var selectedItem in controller.selectedSpeaker) {
               if (selectedItem.id == item.id) {
                 item.isSpeakerSelected = selectedItem.isSpeakerSelected;
               }
             }
+            setState(() {
+              
+            });
           }
         });
         }else{
-          Future.delayed(Duration(milliseconds: 3), () {
+          Future.delayed(Duration(milliseconds: 500), () {
           for (var item in videoController.userList) {
             for (var selectedItem in controller.selectedHost) {
               if (selectedItem.id == item.id) {
@@ -60,6 +62,9 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
               }
             }
           }
+          setState(() {
+            
+          });
         });
         }
         
@@ -75,179 +80,182 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30.r), topRight: Radius.circular(30.r))),
       child: SingleChildScrollView(
-        controller: videoController.scrollController,
-        child: Wrap(
-          children: [
-            StatefulBuilder(
-                builder: (BuildContext context, StateSetter setState) {
-              return Obx(
-                () => Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15.h,
-                      ),
-
-                      // Rectangle 1329
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Opacity(
-                          opacity: 0.4000000059604645,
-                          child: Container(
-                              width: 48.w,
-                              height: 4.h,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(4.r)),
-                                  color: const Color(0xff96a6a3))),
+        child: Container(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Wrap(
+            children: [
+              StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                return Obx(
+                  () => Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 15.h,
                         ),
-                      ),
 
-                      SizedBox(
-                        height: 24.h,
-                      ),
+                        // Rectangle 1329
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Opacity(
+                            opacity: 0.4000000059604645,
+                            child: Container(
+                                width: 48.w,
+                                height: 4.h,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(4.r)),
+                                    color: const Color(0xff96a6a3))),
+                          ),
+                        ),
 
-                      // SPEAKERS
-                      Padding(
-                        padding: EdgeInsets.only(right: 15),
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: Text(
-                                  widget.type == 'host' ? "HOST" : "SPEAKERS",
-                                  style: TextStyle(
-                                      color: Color(0xff121212),
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: "NeueHelvetica",
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 16.0),
-                                  textAlign: TextAlign.left),
-                            ),
-                            // +ADD
-                            widget.type == 'host'
-                                ? Container()
-                                : GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        showGeneralDialog(
-                                            context: context,
-                                            pageBuilder: (BuildContext
-                                                    buildContext,
-                                                Animation animation,
-                                                Animation secondaryAnimation) {
-                                              return AddSpeaker();
-                                            });
+                        SizedBox(
+                          height: 24.h,
+                        ),
+
+                        // SPEAKERS
+                        Padding(
+                          padding: EdgeInsets.only(right: 15),
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Text(
+                                    widget.type == 'host' ? "HOST" : "SPEAKERS",
+                                    style: TextStyle(
+                                        color: Color(0xff121212),
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: "NeueHelvetica",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 16.0),
+                                    textAlign: TextAlign.left),
+                              ),
+                              // +ADD
+                              widget.type == 'host'
+                                  ? Container()
+                                  : GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          showGeneralDialog(
+                                              context: context,
+                                              pageBuilder: (BuildContext
+                                                      buildContext,
+                                                  Animation animation,
+                                                  Animation secondaryAnimation) {
+                                                return AddSpeaker();
+                                              });
+                                        });
+                                      },
+                                      child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: Text("+ADD",
+                                            style: TextStyle(
+                                                color: Color(0xffff8819),
+                                                fontFamily: "Roboto",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 14.0),
+                                            textAlign: TextAlign.left),
+                                      ),
+                                    )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 24.h,
+                        ),
+
+                        Divider(
+                          thickness: 1,
+                          height: 1,
+                          color: Color(0xfff4f6f6),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              /*--------------Please Uncomment the below search bar--------------*/
+
+                              //   SearchBarTag(placeholder: "Search people"),
+
+                              SearchBarTag(
+                                placeholder: "Search people",
+                                autoFocus: false,
+                                onSubmit: (value) {
+                                  checkNet(context).then((value) async {
+                                    if (videoController
+                                            .searchController.value.text ==
+                                        '') {
+                                      controller.isSearched.value = false;
+                                      // videoController.PageNumber.value = 0;
+                                      videoController.userList.clear();
+                                      await videoController.userListAPI(context, false);
+                                      Future.delayed(Duration(milliseconds: 500),
+                                          () {
+                                        for (var item
+                                            in videoController.userList) {
+                                          if (widget.type != 'host') {
+                                            for (var selectedItem
+                                                in controller.selectedSpeaker) {
+                                              if (selectedItem.id == item.id) {
+                                                item.isSpeakerSelected =
+                                                    selectedItem.isSpeakerSelected;
+                                              }
+                                            }
+                                          } else {
+                                            for (var selectedItem
+                                                in controller.selectedHost) {
+                                              if (selectedItem.id == item.id) {
+                                                item.isHostSelected =
+                                                    selectedItem.isHostSelected;
+                                              }
+                                            }
+                                          }
+                                        }
+                                        setState((){});
                                       });
-                                    },
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: Text("+ADD",
-                                          style: TextStyle(
-                                              color: Color(0xffff8819),
-                                              fontFamily: "Roboto",
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: 14.0),
-                                          textAlign: TextAlign.left),
-                                    ),
-                                  )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 24.h,
-                      ),
-
-                      Divider(
-                        thickness: 1,
-                        height: 1,
-                        color: Color(0xfff4f6f6),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            /*--------------Please Uncomment the below search bar--------------*/
-
-                            //   SearchBarTag(placeholder: "Search people"),
-
-                            SearchBarTag(
-                              placeholder: "Search people",
-                              autoFocus: false,
-                              onSubmit: (value) {
-                                checkNet(context).then((value) async {
-                                  if (videoController
-                                          .searchController.value.text ==
-                                      '') {
-                                    controller.isSearched.value = false;
-                                    videoController.PageNumber.value = 0;
-                                    videoController.userList.clear();
-                                    await videoController.userListAPI(context);
-                                    Future.delayed(Duration(milliseconds: 3),
-                                        () {
-                                      for (var item
-                                          in videoController.userList) {
-                                        if (widget.type != 'host') {
-                                          for (var selectedItem
-                                              in controller.selectedSpeaker) {
-                                            if (selectedItem.id == item.id) {
-                                              item.isSpeakerSelected =
-                                                  selectedItem.isSpeakerSelected;
+                                    } else {
+                                      controller.isSearched.value = true;
+                                      // videoController.PageNumber.value = 0;
+                                      videoController.userList.clear();
+                                      await videoController.userListAPI(context, false);
+                                      Future.delayed(Duration(milliseconds: 500),
+                                          () {
+                                        for (var item in videoController.userList) {
+                                          if (widget.type != 'host') {
+                                            for (var selectedItem
+                                                in controller.selectedSpeaker) {
+                                              if (selectedItem.id == item.id) {
+                                                item.isSpeakerSelected =
+                                                    selectedItem
+                                                        .isSpeakerSelected;
+                                              }
+                                            }
+                                          } else {
+                                            for (var selectedItem in controller.selectedHost) {
+                                              if (selectedItem.id == item.id) {
+                                                item.isHostSelected = selectedItem.isHostSelected;
+                                              }
                                             }
                                           }
-                                        } else {
-                                          for (var selectedItem
-                                              in controller.selectedHost) {
-                                            if (selectedItem.id == item.id) {
-                                              item.isHostSelected =
-                                                  selectedItem.isHostSelected;
-                                            }
-                                          }
+                                          setState((){});
                                         }
-                                      }
-                                    });
-                                  } else {
-                                    controller.isSearched.value = true;
-                                    videoController.PageNumber.value = 0;
-                                    await videoController.userListAPI(context);
-                                    Future.delayed(Duration(milliseconds: 3),
-                                        () {
-                                      for (var item in videoController.userList) {
-                                        if (widget.type != 'host') {
-                                          for (var selectedItem
-                                              in controller.selectedSpeaker) {
-                                            if (selectedItem.id == item.id) {
-                                              item.isSpeakerSelected =
-                                                  selectedItem
-                                                      .isSpeakerSelected;
-                                            }
-                                          }
-                                        } else {
-                                          for (var selectedItem in controller.selectedHost) {
-                                            if (selectedItem.id == item.id) {
-                                              item.isHostSelected = selectedItem.isHostSelected;
-                                            }
-                                          }
-                                        }
-                                      }
-                                    });
-                                  }
-                                });
-                              },
-                              controller:
-                                  videoController.searchController.value,
-                            ),
-                            SizedBox(
-                              height: 24.h,
-                            ),
+                                      });
+                                    }
+                                  });
+                                },
+                                controller:
+                                    videoController.searchController.value,
+                              ),
+                              SizedBox(
+                                height: 24.h,
+                              ),
 
-                            Center(
-                              // height: MediaQuery.of(context).size.height * 0.3060,
-                              child: ListView.builder(
+                              ListView.builder(
                                 primary: false,
                                 shrinkWrap: true,
                                 padding: EdgeInsets.all(0),
@@ -257,33 +265,91 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                     setState(
                                       () {
                                         if (widget.type == 'host') {
-                                          videoController
-                                              .userList[i].isHostSelected = true;
-                                          if (controller.selectedHost.contains(
-                                              videoController.userList[i])) {
-                                            controller.selectedHost.remove(
-                                                videoController.userList[i]);
-                                            videoController.userList[i]
-                                                .isHostSelected = false;
-                                          } else {
-                                            controller.selectedHost
-                                                .add(videoController.userList[i]);
-                                          }
+                                          // videoController
+                                          //     .userList[i].isHostSelected = true;
+                                          // if (controller.selectedHost.contains(
+                                          //     videoController.userList[i])) {
+                                          //   controller.selectedHost.remove(videoController.userList[i]);
+                                          //   videoController.userList[i]
+                                          //       .isHostSelected = false;
+                                          // } else {
+                                          //   controller.selectedHost
+                                          //       .add(videoController.userList[i]);
+                                          // }
+
+                                          List list = [];
+                                            if(controller.selectedHost.isEmpty){
+                                              videoController.userList[i].isHostSelected = true;
+                                              controller.selectedHost.add(videoController.userList[i]);
+                                            }else{
+                                              if (videoController.userList[i].isHostSelected == true) {
+                                                videoController.userList[i].isHostSelected = false;
+                                                // for (var item in controller.userList) {
+                                                  for (var selectedItem in controller.selectedHost) {
+                                                    if (selectedItem.id == videoController.userList[i].id) {
+                                                      selectedItem.isHostSelected = videoController.userList[i].isHostSelected;
+                                                      list.add(selectedItem.id);
+                                                    }
+                                                  }
+                                                // }
+
+                                                print(list);
+
+                                                for (var selectedItem in list) {
+                                                  controller.selectedHost.removeWhere((element) => element.id == selectedItem);
+                                                }
+                                              } else {
+                                                controller.selectedHost.add(videoController.userList[i]);
+                                                videoController.userList[i].isHostSelected = true;
+                                              }
+                                            }
                                         } else {
-                                          videoController.userList[i]
-                                              .isSpeakerSelected = true;
-                                          print(videoController
-                                              .userList[i].isSpeakerSelected);
-                                          if (controller.selectedSpeaker.contains(
-                                              videoController.userList[i])) {
-                                            controller.selectedSpeaker.remove(
-                                                videoController.userList[i]);
-                                            videoController.userList[i]
-                                                .isSpeakerSelected = false;
-                                          } else {
-                                            controller.selectedSpeaker
-                                                .add(videoController.userList[i]);
-                                          }
+
+
+
+                                            List list = [];
+                                            if(controller.selectedSpeaker.isEmpty){
+                                              videoController.userList[i].isSpeakerSelected = true;
+                                              controller.selectedSpeaker.add(videoController.userList[i]);
+                                            }else{
+                                              if (videoController.userList[i].isSpeakerSelected == true) {
+                                                videoController.userList[i].isSpeakerSelected = false;
+                                                // for (var item in controller.userList) {
+                                                  for (var selectedItem in controller.selectedSpeaker) {
+                                                    if (selectedItem.id == videoController.userList[i].id) {
+                                                      selectedItem.isSpeakerSelected = videoController.userList[i].isSpeakerSelected;
+                                                      list.add(selectedItem.id);
+                                                    }
+                                                  }
+                                                // }
+
+                                                print(list);
+
+                                                for (var selectedItem in list) {
+                                                  controller.selectedSpeaker.removeWhere((element) => element.id == selectedItem);
+                                                }
+                                              } else {
+                                                controller.selectedSpeaker.add(videoController.userList[i]);
+                                                videoController.userList[i].isSpeakerSelected = true;
+                                              }
+                                            }
+
+
+
+                                          // videoController.userList[i]
+                                          //     .isSpeakerSelected = true;
+                                          // print(videoController
+                                          //     .userList[i].isSpeakerSelected);
+                                          // if (controller.selectedSpeaker.contains(
+                                          //     videoController.userList[i])) {
+                                          //   controller.selectedSpeaker.remove(
+                                          //       videoController.userList[i]);
+                                          //   videoController.userList[i]
+                                          //       .isSpeakerSelected = false;
+                                          // } else {
+                                          //   controller.selectedSpeaker
+                                          //       .add(videoController.userList[i]);
+                                          // }
                                         }
                                       },
                                     );
@@ -417,17 +483,17 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }),
-          ],
+                );
+              }),
+            ],
+          ),
         ),
       ),
     );

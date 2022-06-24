@@ -110,10 +110,9 @@ class _CreateEventState extends State<CreateEvent> {
         benefitController[0][0] = benefitsController;
       }
     }
-    checkNet(context).then((value) async {
-      await videoController.userListAPI(context);
-    });
 
+    admireProfileController.isSearched.value = true;
+    
     for(var item in videoController.userList){
       if(item.isSpeakerSelected == true){
         item.isSpeakerSelected = false;
@@ -1120,19 +1119,21 @@ class _CreateEventState extends State<CreateEvent> {
                                                               onTap: () {
                                                                 if (admireProfileController.isSearched.value == true) {
                                                                   admireProfileController.isSearched.value = false;
-                                                                  checkNet(context).then((value) async {
+                                                                
+                                                                checkNet(context).then((value) async {
                                                                       videoController.PageNumber.value = 0;
                                                                       videoController.userList.clear();
-                                                                      await videoController.userListAPI(context);
+                                                                      await videoController.userListAPI(context, true);
 
-                                                                      Future.delayed(Duration(milliseconds: 3), () {
+                                                                      Future.delayed(Duration(milliseconds: 500), () {
                                                                         for (var item in videoController.userList) {
-                                                                          for (var selectedItem in admireProfileController.selectedList) {
+                                                                          for (var selectedItem in controller.selectedList) {
                                                                             if (selectedItem.id == item.id) {
                                                                               item.isSpeakerSelected = selectedItem.isSpeakerSelected;
                                                                             }
                                                                           }
                                                                         }
+                                                                        setState(() {});
                                                                       });
                                                                     });
                                                                 }

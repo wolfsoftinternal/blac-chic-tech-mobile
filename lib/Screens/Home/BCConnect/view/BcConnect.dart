@@ -63,9 +63,9 @@ class _BcConnectState extends State<BcConnect> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    videoController.initScrolling(context);
+    videoController.initScrolling(context, false);
     checkNet(context)
-        .then((value) => {videoController.userListAPI(context)});
+        .then((value) => {videoController.userListAPI(context, true)});
   }
 
   @override
@@ -101,7 +101,7 @@ class _BcConnectState extends State<BcConnect> {
                           checkNet(context).then((value) {
                             videoController.PageNumber.value = 0;
                             videoController.userListAPI(
-                                context);
+                                context, true);
                           });
                         },
                         controller: videoController.searchController.value,
@@ -111,7 +111,7 @@ class _BcConnectState extends State<BcConnect> {
                     // Recently Search
                     Padding(
                       padding: EdgeInsets.only(left: 16.w, top: 24.h),
-                      child: Text("Recently Search",
+                      child: Text("${videoController.userCount.toString()} Results",
                           style: TextStyle(
                               color: black_121212,
                               fontWeight: FontWeight.w900,
@@ -164,7 +164,7 @@ class _BcConnectState extends State<BcConnect> {
                                     checkNet(context).then((value) => {
                                           videoController.PageNumber.value = 0,
                                           videoController.userListAPI(
-                                              context)
+                                              context, true)
                                         });
                                   });
                                   videoController.userList.clear();

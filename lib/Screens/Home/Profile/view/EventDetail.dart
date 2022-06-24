@@ -1179,7 +1179,7 @@ class _EventDetailState extends State<EventDetail> {
                                                     videoController.userList.clear();
                                                     await controller.eventInviteUsersList(context, widget.id);
 
-                                                    Future.delayed(Duration(milliseconds: 3), () {
+                                                    Future.delayed(Duration(milliseconds: 500), () {
                                                       for (var item in videoController.userList) {
                                                         for (var selectedItem in controller.selectedList) {
                                                           if (selectedItem.id == item.id) {
@@ -1187,6 +1187,7 @@ class _EventDetailState extends State<EventDetail> {
                                                           }
                                                         }
                                                       }
+                                                      setState(() {});
                                                     });
                                                   });
                                               }
