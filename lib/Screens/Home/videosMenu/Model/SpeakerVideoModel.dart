@@ -98,7 +98,9 @@ class VideoList {
             ? null
             : DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
-        userDetails: UserDetails.fromJson(json["user_details"]),
+        userDetails: json["user_details"] == null
+            ? UserDetails()
+            : UserDetails.fromJson(json["user_details"]),
         speakerList: json["speaker_list"] == null
             ? null
             : List<String>.from(json["speaker_list"].map((x) => x)),
