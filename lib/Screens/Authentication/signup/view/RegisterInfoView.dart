@@ -42,8 +42,8 @@ class RegisterInfoView extends StatelessWidget {
                         child: Image.asset(img_girl), fit: BoxFit.cover)),
                 Image.asset(
                   img_logo,
-                  width: 72.r,
-                  height: 72.r,
+                  width: 70.r,
+                  height: 70.r,
                 )
               ],
             ),
@@ -60,62 +60,65 @@ class RegisterInfoView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      BlackNextButton(str_register, white_ffffff, () async {
-                        var preferences = MySharedPref();
-                        SignupModel? myModel = await preferences
-                            .getSignupModel(SharePreData.keySignupModel);
+                      Container(
+                        
+                        child: BlackNextButton(str_register, white_ffffff, () async {
+                          var preferences = MySharedPref();
+                          SignupModel? myModel = await preferences
+                              .getSignupModel(SharePreData.keySignupModel);
 
-                        // String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
-                        // String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
-                        // String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
-                        // String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
-                        // String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+                          // String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
+                          // String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
+                          // String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
+                          // String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
+                          // String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
 
-                        // if(myModel == null){
-                        //   Get.to(const SignupFormView());
-                        // }else if (personalInfo == "") {
-                        //   Get.to(const PersonalInfoFormView());
-                        // }else if (experienceInfo == "") {
-                        //   Get.to(const ExperienceInfoFormView());
-                        // }else if (educationalInfo == "") {
-                        //   Get.to(const EducationInfoFormView());
-                        // }else if (questionsInfo == "") {
-                        //   Get.to(const AdditionalQueFormView());
-                        // }else if(lastQuestionsInfo == ""){
-                        //   Get.to(AdditionalLastQueView());
-                        // }else{
-                        //   Get.offAll(BottomNavigation());
-                        // }
+                          // if(myModel == null){
+                          //   Get.to(const SignupFormView());
+                          // }else if (personalInfo == "") {
+                          //   Get.to(const PersonalInfoFormView());
+                          // }else if (experienceInfo == "") {
+                          //   Get.to(const ExperienceInfoFormView());
+                          // }else if (educationalInfo == "") {
+                          //   Get.to(const EducationInfoFormView());
+                          // }else if (questionsInfo == "") {
+                          //   Get.to(const AdditionalQueFormView());
+                          // }else if(lastQuestionsInfo == ""){
+                          //   Get.to(AdditionalLastQueView());
+                          // }else{
+                          //   Get.offAll(BottomNavigation());
+                          // }
 
-                        if (myModel == null) {
-                          Get.to(const SignupFormView());
-                        } else if (myModel.data!.aboutUs == "") {
-                          Get.to(const PersonalInfoFormView());
-                        } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
-                          Get.to(const ExperienceInfoFormView());
-                        } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
-                          Get.to(const EducationInfoFormView());
-                        } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
-                          Get.to(const AdditionalQueFormView());
-                        } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
-                          String lastQuestionsInfo = "";
-                          for (int i = 0;
-                              i < myModel.data!.questions!.length;
-                              i++) {
-                            if (myModel.data!.questions![i].type ==
-                                "additional") {
-                              lastQuestionsInfo = "Done";
+                          if (myModel == null) {
+                            Get.to(const SignupFormView());
+                          } else if (myModel.data!.aboutUs == "") {
+                            Get.to(const PersonalInfoFormView());
+                          } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
+                            Get.to(const ExperienceInfoFormView());
+                          } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
+                            Get.to(const EducationInfoFormView());
+                          } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                            Get.to(const AdditionalQueFormView());
+                          } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                            String lastQuestionsInfo = "";
+                            for (int i = 0;
+                                i < myModel.data!.questions!.length;
+                                i++) {
+                              if (myModel.data!.questions![i].type ==
+                                  "additional") {
+                                lastQuestionsInfo = "Done";
+                              }
                             }
-                          }
-                          if (lastQuestionsInfo != "Done") {
-                            Get.to(const AdditionalLastQueView());
+                            if (lastQuestionsInfo != "Done") {
+                              Get.to(const AdditionalLastQueView());
+                            } else {
+                              Get.offAll(HomePage());
+                            }
                           } else {
                             Get.offAll(HomePage());
                           }
-                        } else {
-                          Get.offAll(HomePage());
-                        }
-                      }),
+                        }),
+                      ),
                        SizedBox(
                         height: 16.h,
                       ),
@@ -131,7 +134,7 @@ class RegisterInfoView extends StatelessWidget {
                           ),
                           child: // Already have an account
                               Padding(
-                            padding: const EdgeInsets.all(17.0),
+                            padding: EdgeInsets.all(17.5.r),
                             child: Center(
                               child: Text(str_already_have_second,
                                   style:  TextStyle(

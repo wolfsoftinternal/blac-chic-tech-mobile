@@ -55,7 +55,9 @@ class _LoginState extends State<LoginView> {
                             child: Text("LOGIN",
                                 style: TextStyle(
                                     fontFamily: helvetica_neu_bold,
+                                    fontWeight: FontWeight.w900,
                                     fontStyle: FontStyle.normal,
+                                    letterSpacing: 1.5,
                                     fontSize: 16.0.sp),
                                 textAlign: TextAlign.center),
                           ),
@@ -65,8 +67,8 @@ class _LoginState extends State<LoginView> {
                      SizedBox(
                       height: 51.h,
                     ),
-                    SvgPicture.asset(
-                      logo,
+                    Image.asset(
+                      img_logo,
                       width: 94.r,
                       height: 94.r,
                     ),
@@ -88,7 +90,7 @@ class _LoginState extends State<LoginView> {
                                 TextInputAction.next,
                                 TextInputType.text, (v) {}),
                              SizedBox(
-                              height: 16.h,
+                              height: 20.h,
                             ),
                             InputTextLayoutPassword(
                                 str_pwd,
@@ -115,8 +117,8 @@ class _LoginState extends State<LoginView> {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Container(
-                                          height: 20.h,
-                                          width: 20.w,
+                                          height: 22.h,
+                                          width: 22.w,
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                    BorderRadius.all(
@@ -141,7 +143,7 @@ class _LoginState extends State<LoginView> {
                                                   color: Colors.white,
                                                 )),
                                        SizedBox(
-                                        width: 11.7.w,
+                                        width: 8.w,
                                       ),
                                       // Save password
                                        Text("Remember me",
@@ -201,7 +203,7 @@ class _LoginState extends State<LoginView> {
                       style: TextStyle(
                           color: const Color(0xffaaaaaa),
                           fontWeight: FontWeight.w500,
-                          fontFamily: "NeueHelvetica",
+                          fontFamily: helveticaNeueNeue_medium,
                           fontStyle: FontStyle.normal,
                           fontSize: 14.0.sp),
                       text: "Dont have an account yet? "),
@@ -209,7 +211,7 @@ class _LoginState extends State<LoginView> {
                     style: TextStyle(
                         color: const Color(0xffff881a),
                         fontWeight: FontWeight.w700,
-                        fontFamily: "NeueHelvetica",
+                        fontFamily: helvetica_neu_bold,
                         fontStyle: FontStyle.normal,
                         fontSize: 14.0.sp),
                     text: "Create Account",

@@ -36,8 +36,8 @@ class _WelcomeState extends State<Welcome> {
                   alignment: Alignment.topCenter,
                   child: Image.asset(
                     img_logo,
-                    width: 72.r,
-                    height: 72.r,
+                    width: 70.r,
+                    height: 70.r,
                   )),
             ),
             Padding(

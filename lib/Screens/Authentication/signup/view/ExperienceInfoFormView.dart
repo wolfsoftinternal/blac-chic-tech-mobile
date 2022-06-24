@@ -64,41 +64,44 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
             SizedBox(
               height: 60.h,
             ),
-            ToolbarWithHeader(
-                step: 1,
-                ontap: () async {
-                  var preferences = MySharedPref();
-                  SignupModel? myModel = await preferences
-                      .getSignupModel(SharePreData.keySignupModel);
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: ToolbarWithHeader(
+                  step: 1,
+                  ontap: () async {
+                    var preferences = MySharedPref();
+                    SignupModel? myModel = await preferences
+                        .getSignupModel(SharePreData.keySignupModel);
 
-                  if (myModel!.data!.educations == null ||
-                      myModel.data!.educations.toString() == '[]') {
-                    Get.to(const EducationInfoFormView());
-                  } else if (myModel.data!.questions == null ||
-                      myModel.data!.questions.toString() == '[]') {
-                    Get.to(const AdditionalQueFormView());
-                  } else if (myModel.data!.questions == null ||
-                      myModel.data!.questions.toString() == '[]') {
-                    String lastQuestionsInfo = "";
-                    for (int i = 0; i < myModel.data!.questions!.length; i++) {
-                      if (myModel.data!.questions![i].type == "additional") {
-                        lastQuestionsInfo = "Done";
+                    if (myModel!.data!.educations == null ||
+                        myModel.data!.educations.toString() == '[]') {
+                      Get.to(const EducationInfoFormView());
+                    } else if (myModel.data!.questions == null ||
+                        myModel.data!.questions.toString() == '[]') {
+                      Get.to(const AdditionalQueFormView());
+                    } else if (myModel.data!.questions == null ||
+                        myModel.data!.questions.toString() == '[]') {
+                      String lastQuestionsInfo = "";
+                      for (int i = 0; i < myModel.data!.questions!.length; i++) {
+                        if (myModel.data!.questions![i].type == "additional") {
+                          lastQuestionsInfo = "Done";
+                        }
                       }
-                    }
-                    if (lastQuestionsInfo != "Done") {
-                      Get.to(const AdditionalLastQueView());
+                      if (lastQuestionsInfo != "Done") {
+                        Get.to(const AdditionalLastQueView());
+                      } else {
+                        Get.offAll(HomePage());
+                      }
                     } else {
                       Get.offAll(HomePage());
                     }
-                  } else {
-                    Get.offAll(HomePage());
-                  }
-                }),
+                  }),
+            ),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
+                  padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 16.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,6 +150,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                               fontWeight: FontWeight.w900,
                               fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
+                              letterSpacing: 0.6.sp,
                               fontSize: 12.sp),
                           textAlign: TextAlign.left),
                       SizedBox(
@@ -157,29 +161,23 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                           Expanded(
                             flex: 1,
                             child: Container(
-                              height: HeightData.fifty_seven,
+                              // height: 39.h,
                               decoration: EditTextDecoration,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                  left: 12.w,
-                                  right: 12.w,
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5.r),
-                                    child: setTextFieldNext(
-                                        controller.currentTitleController.value,
-                                        "Title",
-                                        false,
-                                        TextInputType.name,
-                                        false,
-                                        "",
-                                        TextInputAction.next,
-                                        () => {
-                                              // on Chnages
-                                            },
-                                        () {}),
-                                  ),
+                              child: Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(10.r),
+                                  child: setTextFieldNext(
+                                      controller.currentTitleController.value,
+                                      "Title",
+                                      false,
+                                      TextInputType.name,
+                                      false,
+                                      "",
+                                      TextInputAction.next,
+                                      () => {
+                                            // on Chnages
+                                          },
+                                      () {}),
                                 ),
                               ),
                             ),
@@ -191,52 +189,46 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                             flex: 1,
                             child: SizedBox(
                               child: Container(
-                                height: HeightData.fifty_seven,
+                                height: 55.h,
                                 decoration: EditTextDecoration,
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: 12.w,
-                                      right: 12.w,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(5.r),
-                                      child: GestureDetector(
-                                          onTap: () {
-                                            Get.to(const CompanyList());
-                                          },
-                                          child: Text(
-                                            controller.companyName.value,
-                                            style: TextStyle(
-                                                color: controller.companyName
-                                                            .value ==
-                                                        'Company Name'
-                                                    ? grey_aaaaaa
-                                                    : black_121212,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily:
-                                                    helveticaNeueNeue_medium,
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 14.sp),
-                                          )),
-                                      // child: setTextFieldNext(
-                                      //   controller.currentCompanyNameController.value,
-                                      //   "Company Name",
-                                      //   false,
-                                      //   TextInputType.name,
-                                      //   false,
-                                      //   "",
-                                      //   TextInputAction.next,
-                                      //   () => {
-                                      //     // on Chnages
-                                      //   },
-                                      //   (){
-                                      //     Get.to(CompanyList());
-                                      //   },
-                                      //   true,
-                                      // ),
-                                    ),
+                                    padding: EdgeInsets.all(10.r),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          Get.to(const CompanyList());
+                                        },
+                                        child: Text(
+                                          controller.companyName.value,
+                                          style: TextStyle(
+                                              color: controller.companyName
+                                                          .value ==
+                                                      'Company Name'
+                                                  ? grey_aaaaaa
+                                                  : black_121212,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 14.sp),
+                                        )),
+                                    // child: setTextFieldNext(
+                                    //   controller.currentCompanyNameController.value,
+                                    //   "Company Name",
+                                    //   false,
+                                    //   TextInputType.name,
+                                    //   false,
+                                    //   "",
+                                    //   TextInputAction.next,
+                                    //   () => {
+                                    //     // on Chnages
+                                    //   },
+                                    //   (){
+                                    //     Get.to(CompanyList());
+                                    //   },
+                                    //   true,
+                                    // ),
                                   ),
                                 ),
                               ),
@@ -249,21 +241,25 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         height: 16.h,
                       ),
 
-                      SizedBox(
-                        height: HeightData.fifty_seven,
+                      Container(
+                        decoration: EditTextDecoration,
+                        // height: HeightData.fifty_seven,
                         width: MediaQuery.of(context).size.width,
                         child: Center(
-                          child: setTextField(
-                            controller.currentCompanyWebsiteController.value,
-                            "Company Website",
-                            false,
-                            TextInputType.name,
-                            false,
-                            "",
-                            TextInputAction.next,
-                            (value) => {
-                              // on Chnages
-                            },
+                          child: Padding(
+                            padding: EdgeInsets.all(10.r),
+                            child: setTextFieldNext(
+                              controller.currentCompanyWebsiteController.value,
+                              "Company Website",
+                              false,
+                              TextInputType.name,
+                              false,
+                              "",
+                              TextInputAction.next,
+                              (value) => {
+                                // on Chnages
+                              },(){},
+                            ),
                           ),
                         ),
                       ),
@@ -278,6 +274,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                               fontWeight: FontWeight.w900,
                               fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
+                              letterSpacing: 0.6,
                               fontSize: 12.sp),
                           textAlign: TextAlign.left),
                       SizedBox(
@@ -288,16 +285,19 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                           style: TextStyle(
                               color: const Color(0xffaaaaaa),
                               fontWeight: FontWeight.w500,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helveticaNeueNeue_medium,
                               fontStyle: FontStyle.normal,
+                              letterSpacing: 0.04,
                               fontSize: 12.sp),
                           textAlign: TextAlign.left),
+                      SizedBox(height: 16.h,),
                       Column(
                         children: [
                           ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: cards.length,
                             shrinkWrap: true,
+                            padding: EdgeInsets.zero,
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
                                 child: Column(
@@ -306,18 +306,22 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                       children: [
                                         Expanded(
                                           flex: 1,
-                                          child: SizedBox(
+                                          child: Container(
+                                            decoration: EditTextDecoration,
                                             child: Center(
-                                              child: setTextField(
-                                                pastCompanyTitleController[
-                                                    index],
-                                                "Title",
-                                                false,
-                                                TextInputType.name,
-                                                false,
-                                                "",
-                                                TextInputAction.next,
-                                                (value) {},
+                                              child: Padding(
+                                                padding: EdgeInsets.all(10.r),
+                                                child: setTextFieldNext(
+                                                  pastCompanyTitleController[
+                                                      index],
+                                                  "Title",
+                                                  false,
+                                                  TextInputType.name,
+                                                  false,
+                                                  "",
+                                                  TextInputAction.next,
+                                                  (value) {}, (){}
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -327,18 +331,22 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         ),
                                         Expanded(
                                           flex: 1,
-                                          child: SizedBox(
+                                          child: Container(
+                                            decoration: EditTextDecoration,
                                             child: Center(
-                                              child: setTextField(
-                                                pastCompanyNameController[
-                                                    index],
-                                                "Company Name",
-                                                false,
-                                                TextInputType.name,
-                                                false,
-                                                "",
-                                                TextInputAction.next,
-                                                (value) {},
+                                              child: Padding(
+                                                padding: EdgeInsets.all(10.r),
+                                                child: setTextFieldNext(
+                                                  pastCompanyNameController[
+                                                      index],
+                                                  "Company Name",
+                                                  false,
+                                                  TextInputType.name,
+                                                  false,
+                                                  "",
+                                                  TextInputAction.next,
+                                                  (value) {},(){}
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -348,16 +356,22 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                     SizedBox(
                                       height: 16.h,
                                     ),
-                                    Center(
-                                      child: setTextField(
-                                        pastCompanyWebsiteController[index],
-                                        "Company Website",
-                                        false,
-                                        TextInputType.name,
-                                        false,
-                                        "",
-                                        TextInputAction.next,
-                                        (value) {},
+                                    Container(
+                                      decoration: EditTextDecoration,
+                                      child: Center(
+                                        child: Padding(
+                                          padding: EdgeInsets.all(10.r),
+                                          child: setTextFieldNext(
+                                            pastCompanyWebsiteController[index],
+                                            "Company Website",
+                                            false,
+                                            TextInputType.name,
+                                            false,
+                                            "",
+                                            TextInputAction.next,
+                                            (value) {}, () {}
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
@@ -367,9 +381,6 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                 ),
                               );
                             },
-                          ),
-                          SizedBox(
-                            height: 16.h,
                           ),
                           isDeleteLast == true
                               ? GestureDetector(
@@ -392,12 +403,13 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         Padding(
                                       padding: EdgeInsets.all(16.r),
                                       child: Center(
-                                        child: Text("Delete Last",
+                                        child: Text("Remove Last",
                                             style: TextStyle(
                                                 color: const Color(0xff121212),
                                                 fontWeight: FontWeight.w500,
-                                                fontFamily: "NeueHelvetica",
+                                                fontFamily: helveticaNeueNeue_medium,
                                                 fontStyle: FontStyle.normal,
+                                                letterSpacing: 0.04.sp,
                                                 fontSize: 12.sp),
                                             textAlign: TextAlign.left),
                                       ),
@@ -435,24 +447,27 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                 cards.add("");
                               });
                             },
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  border: Border.all(
-                                      width: 1.w, color: black_121212)),
-                              child: // Add More
-                                  Padding(
-                                padding: EdgeInsets.all(16.r),
-                                child: Center(
-                                  child: Text("+ Add More",
-                                      style: TextStyle(
-                                          color: const Color(0xff121212),
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "NeueHelvetica",
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 12.sp),
-                                      textAlign: TextAlign.left),
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4.r),
+                                    border: Border.all(
+                                        width: 1.w, color: black_121212)),
+                                child: // Add More
+                                    Padding(
+                                  padding: EdgeInsets.all(16.r),
+                                  child: Center(
+                                    child: Text("+ Add More",
+                                        style: TextStyle(
+                                            color: const Color(0xff121212),
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: helveticaNeueNeue_medium,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.sp),
+                                        textAlign: TextAlign.left),
+                                  ),
                                 ),
                               ),
                             ),

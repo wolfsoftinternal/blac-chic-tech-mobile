@@ -38,7 +38,7 @@ class BlackNextButton extends StatelessWidget {
         //height: HeightData.fiftyfive,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(4.r),
             gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -85,8 +85,8 @@ class BlackNextButton extends StatelessWidget {
                 onSurface: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
-                padding:
-                EdgeInsets.symmetric(horizontal: 0, vertical: size ?? 21),
+                padding: EdgeInsets.only(top: 17.5, bottom: 17.5),
+                // EdgeInsets.symmetric(horizontal: 0, vertical: size ?? 21),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                   side: const BorderSide(color: black_121212, width: 0),
