@@ -95,8 +95,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: white_ffffff,
       body: Center(
-        child: SvgPicture.asset(
-                      logo,
+        child: Image.asset(
+                      img_logo,
           width: 126,
           height: 126,
         ),

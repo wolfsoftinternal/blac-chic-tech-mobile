@@ -58,6 +58,7 @@ class _SignupDetailState extends State<SignupFormView> {
                                 color: black_121212,
                                 fontFamily: helvetica_neu_bold,
                                 fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w800,
                                 fontSize: 24.0.sp),
                             textAlign: TextAlign.left),
                       ),
@@ -77,7 +78,7 @@ class _SignupDetailState extends State<SignupFormView> {
                       ),
 
                        SizedBox(
-                        height: 16.h,
+                        height: 32.h,
                       ),
                       Row(
                         children: [
@@ -92,7 +93,7 @@ class _SignupDetailState extends State<SignupFormView> {
                             )
                           ),
                            SizedBox(
-                            width: 8.h,
+                            width: 15.w,
                           ),
                           Expanded(
                             child: InputTextLayout(
@@ -150,16 +151,19 @@ class _SignupDetailState extends State<SignupFormView> {
                         TextInputType.text, (v) {}
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 24.h,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SvgPicture.asset(
-                            icon_info,
-                            width: 15.r,
-                            height: 15.r,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2.0),
+                            child: SvgPicture.asset(
+                              icon_info,
+                              width: 15.r,
+                              height: 15.r,
+                            ),
                           ),
                            SizedBox(
                             width: 7.w,
@@ -173,7 +177,8 @@ class _SignupDetailState extends State<SignupFormView> {
                                   FontWeight.w500,
                                   FontStyle.normal,
                                   null,
-                                  3),
+                                  3,
+                                  1.5),
                             ),
                           )
                         ],
@@ -189,7 +194,7 @@ class _SignupDetailState extends State<SignupFormView> {
                 ),
               ),
             ),
-             Padding(
+            Padding(
               padding:  EdgeInsets.only(left: 24.w, right: 24.w),
               child: Align(
                 alignment: Alignment.bottomCenter,

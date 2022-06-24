@@ -5,7 +5,7 @@ import 'Constant.dart';
 
 Text setHelveticaMedium(String text, double size, Color color,
     FontWeight weight, FontStyle fontStyle,
-    [spacing, maxline]) {
+    [spacing, maxline, height]) {
   return Text(
     text,
     softWrap: true,
@@ -17,6 +17,7 @@ Text setHelveticaMedium(String text, double size, Color color,
         fontWeight: weight,
         color: color,
         fontStyle: fontStyle,
+        height: height,
         letterSpacing: spacing),
   );
 }

@@ -17,45 +17,60 @@ class ToolbarWithHeader extends StatelessWidget {
          SizedBox(
           width: 30.w,
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              "Step ${step + 1}",
-              style: const TextStyle(
-                  color: orange_ff881a,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: helveticaNeueNeue_medium),
-            ),
-            SizedBox(
-              height: 30.h,
-              width: 190.h,
-              child: ListView.builder(
-                  itemCount: 5,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: ((context, index) {
-                    return Row(
-                      children: [
-                        Container(
-                          height: 6.h,
-                          width: 30.w,
-                          decoration: BoxDecoration(
-                            color: step == index ? orange_ff881a : grey_aaaaaa,
-                            borderRadius:
-                                 BorderRadius.all(Radius.circular(5.r)),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  Spacer(),
+                  Padding(
+                    padding: EdgeInsets.only(left: 12.0.w),
+                    child: Text(
+                      "Step ${step + 1}",
+                      style: TextStyle(
+                          color: orange_ff881a,
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: helveticaNeueNeue_medium),
+                    ),
+                  ),
+                  Spacer(),
+                  Spacer(),
+                  Spacer(),
+                ],
+              ),
+              Container(
+                // color: black,
+                height: 30.h,
+                // width: 250.h,
+                child: ListView.builder(
+                    itemCount: 5,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: ((context, index) {
+                      return Row(
+                        children: [
+                          Container(
+                            height: 6.h,
+                            width: 30.w,
+                            decoration: BoxDecoration(
+                              color: step >= index ? orange_ff881a : Color(0Xfff2f2f2),
+                              borderRadius:
+                                   BorderRadius.all(Radius.circular(5.r)),
+                            ),
                           ),
-                        ),
-                         SizedBox(
-                          width: 10.w,
-                        )
-                      ],
-                    );
-                  })),
-            ),
-          ],
+                           SizedBox(
+                            width: 10.w,
+                          )
+                        ],
+                      );
+                    })),
+              ),
+            ],
+          ),
         ),
-        const Spacer(),
+        // const Spacer(),
         // step == 0
         //     ? Container()
         //     : Padding(
