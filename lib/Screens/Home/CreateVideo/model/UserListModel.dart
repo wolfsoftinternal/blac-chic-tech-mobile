@@ -10,18 +10,21 @@ class UserListModel {
         this.statusCode,
         this.message,
         this.data,
+        this.user_count,
     });
 
     bool? success;
     int? statusCode;
     String? message;
     List<UserList>? data;
+    int? user_count;
 
     factory UserListModel.fromJson(Map<String, dynamic> json) => UserListModel(
         success: json["success"],
         statusCode: json["status_code"],
         message: json["message"],
         data: List<UserList>.from(json["data"].map((x) => UserList.fromJson(x))),
+        user_count: json["user_count"] != null ? json["user_count"] : null
     );
 
     Map<String, dynamic> toJson() => {
@@ -29,6 +32,7 @@ class UserListModel {
         "status_code": statusCode,
         "message": message,
         "data": List<dynamic>.from(data!.map((x) => x.toJson())),
+        "user_count": user_count,
     };
 }
 

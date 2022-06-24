@@ -40,45 +40,32 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
   @override
   void initState() {
     super.initState();
+    checkNet(context).then((value) async {
+      await videoController.userListAPI(context, false);
+    });
   }
 
   /*Speaker bottom sheet*/
   void displaySpeakerBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        isScrollControlled: false,
+        isScrollControlled: true,
         backgroundColor: Colors.transparent,
         context: context,
         builder: (ctx) {
-          return Column(
-            children: [
-              Expanded(child: 
-              SpeakerHostBottomSheet()
-                ),
-              if (videoController.isPaginationLoading.value == true)
-                PaginationUtils().loader(),
-            ],
-          );
+          return SpeakerHostBottomSheet();
         });
   }
 
   /*Host bottom sheet*/
   void displayHostBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        isScrollControlled: false,
+        isScrollControlled: true,
         backgroundColor: Colors.transparent,
         context: context,
         builder: (ctx) {
-          return Column(
-            children: [
-              Expanded(
-                child: SpeakerHostBottomSheet(
+          return SpeakerHostBottomSheet(
                   type: 'host',
-                ),
-              ),
-              if (videoController.isPaginationLoading.value == true)
-                PaginationUtils().loader(),
-            ],
-          );
+                );
         });
   }
 

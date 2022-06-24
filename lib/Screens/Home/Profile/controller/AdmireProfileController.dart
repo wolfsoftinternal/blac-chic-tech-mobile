@@ -1176,19 +1176,19 @@ class AdmireProfileController extends GetxController {
     String url = urlBase + urlInviteUserList;
     final apiReq = Request();
 
-    userPageNumber = userPageNumber + 1;
+    // userPageNumber = userPageNumber + 1;
 
     dynamic body = {
       'event_id': id.toString(),
       'search': controller.searchController.value.text,
-      'page': userPageNumber.toString()
+      // 'page': userPageNumber.toString()
     };
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
-      if (userPageNumber == 1) {
-        userList.clear();
-      }
+      // if (userPageNumber == 1) {
+      //   userList.clear();
+      // }
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
           String strData = value;

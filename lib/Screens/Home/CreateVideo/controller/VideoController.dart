@@ -44,14 +44,15 @@ class VideoController extends GetxController {
   RxInt PageNumber = 0.obs;
   RxBool isPaginationLoading = false.obs;
   RxBool isSearched = false.obs;
+  RxInt userCount = 0.obs;
 
-  initScrolling(BuildContext context) {
+  initScrolling(BuildContext context, bool pagination) {
     scrollController.addListener(() async {
       if (scrollController.position.maxScrollExtent ==
           scrollController.position.pixels) {
         _scrollDown();
         isPaginationLoading.value = true;
-        await userListAPI(context);
+        await userListAPI(context, pagination);
         isPaginationLoading.value = false;
       }
     });
@@ -182,12 +183,17 @@ class VideoController extends GetxController {
   }
 
   //Speaker List / Host List
-  userListAPI(BuildContext context, [userId]) async {
+  userListAPI(BuildContext context, bool pagination, [userId]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     dynamic body;
 
-    PageNumber = PageNumber + 1;
+    if(pagination == false){
+       body = {
+        'search': searchController.value.text.toString(),
+      };
+    }else{
+      PageNumber = PageNumber + 1;
     if (userId != null) {
       body = {
         'user_id': userId.toString(),
@@ -199,6 +205,7 @@ class VideoController extends GetxController {
         'search': searchController.value.text.toString(),
         'page': PageNumber.toString(),
       };
+    }
     }
 
     String url = urlBase + urlUserList;
@@ -219,12 +226,17 @@ class VideoController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            userListAPI(context);
+            userListAPI(context, pagination, [userId]);
           } else if (model.statusCode == 200) {
             UserListModel detail = UserListModel.fromJson(userModel);
+            userCount.value = detail.user_count!;
 
-            userList.addAll(detail.data!);
+            if(pagination == false){
+              userList.value = detail.data!;
+            }else{
+              userList.addAll(detail.data!);
 
+            }
             print(userList.length);
           }
         });

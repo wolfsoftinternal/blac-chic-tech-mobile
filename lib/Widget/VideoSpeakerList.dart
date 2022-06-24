@@ -25,26 +25,7 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller.initScrolling(context);
-    
-    if (controller.isSearched.value == true) {
-      controller.isSearched.value = false;
-      checkNet(context).then((value) async {
-        controller.PageNumber.value = 0;
-        controller.userList.clear();
-        await controller.userListAPI(context);
-
-        Future.delayed(Duration(milliseconds: 3), () {
-          for (var item in controller.userList) {
-            for (var selectedItem in controller.selectedList) {
-              if (selectedItem.id == item.id) {
-                item.isSpeakerSelected = selectedItem.isSpeakerSelected;
-              }
-            }
-          }
-        });
-      });
-    }
+    controller.initScrolling(context, false);
   }
 
   @override
@@ -54,11 +35,10 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
           color: Colors.white,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0))),
-      child: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              controller: controller.scrollController,
+      child:
+          SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Wrap(
                 children: [
                   StatefulBuilder(
@@ -68,6 +48,7 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             const SizedBox(
                               height: 15,
@@ -127,40 +108,32 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
                                               .searchController.value.text ==
                                           '') {
                                         controller.isSearched.value = false;
-                                        controller.PageNumber.value = 0;
                                         controller.userList.clear();
-                                        await controller.userListAPI(context);
-                                        Future.delayed(
-                                            Duration(milliseconds: 3), () {
-                                          for (var item
-                                              in controller.userList) {
-                                            for (var selectedItem
-                                                in controller.selectedList) {
+                                        await controller.userListAPI(context, false);
+                                        Future.delayed(Duration(milliseconds: 500), () {
+                                          for (var item in controller.userList) {
+                                            for (var selectedItem in controller.selectedList) {
                                               if (selectedItem.id == item.id) {
-                                                item.isSpeakerSelected =
-                                                    selectedItem
-                                                        .isSpeakerSelected;
+                                                item.isSpeakerSelected = selectedItem.isSpeakerSelected;
                                               }
                                             }
                                           }
+                                          setState((){});
                                         });
                                       } else {
                                         controller.isSearched.value = true;
-                                        controller.PageNumber.value = 0;
-                                        await controller.userListAPI(context);
+                                        controller.userList.clear();
+                                        await controller.userListAPI(context, false);
                                         Future.delayed(
-                                            Duration(milliseconds: 3), () {
-                                          for (var item
-                                              in controller.userList) {
-                                            for (var selectedItem
-                                                in controller.selectedList) {
+                                            Duration(milliseconds: 500), () {
+                                          for (var item in controller.userList) {
+                                            for (var selectedItem in controller.selectedList) {
                                               if (selectedItem.id == item.id) {
-                                                item.isSpeakerSelected =
-                                                    selectedItem
-                                                        .isSpeakerSelected;
+                                                item.isSpeakerSelected = selectedItem.isSpeakerSelected;
                                               }
                                             }
                                           }
+                                          setState((){});
                                         });
                                       }
                                     },
@@ -180,22 +153,35 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
                                       onTap: () {
                                         setState(
                                           () {
-                                            controller
-                                        .userList[i].isSpeakerSelected = true;
-                                    if (controller.selectedList.contains(
-                                        controller.userList[i])) {
-                                      controller.selectedList
-                                          .remove(controller.userList[i]);
-                                      controller
-                                          .userList[i].isHostSelected = false;
-                                    } else {
-                                      controller.selectedList
-                                          .add(controller.userList[i]);
-                                    }
+                                            List list = [];
+                                            if(controller.selectedList.isEmpty){
+                                              controller.userList[i].isSpeakerSelected = true;
+                                              controller.selectedList.add(controller.userList[i]);
+                                            }else{
+                                              if (controller.userList[i].isSpeakerSelected == true) {
+                                                controller.userList[i].isSpeakerSelected = false;
+                                                // for (var item in controller.userList) {
+                                                  for (var selectedItem in controller.selectedList) {
+                                                    if (selectedItem.id == controller.userList[i].id) {
+                                                      selectedItem.isSpeakerSelected = controller.userList[i].isSpeakerSelected;
+                                                      list.add(selectedItem.id);
+                                                    }
+                                                  }
+                                                // }
+
+                                                print(list);
+
+                                                for (var selectedItem in list) {
+                                                  controller.selectedList.removeWhere((element) => element.id == selectedItem);
+                                                }
+                                                print(controller.selectedList.length);
+                                              } else {
+                                                controller.selectedList.add(controller.userList[i]);
+                                                controller.userList[i].isSpeakerSelected = true;
+                                              }
+                                            }
                                           },
                                         );
-                                        print(controller.selectedList.length);
-                                        print(controller.userList.length);
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.only(bottom: 16.h),
@@ -334,10 +320,6 @@ class _VideoSpeakerListState extends State<VideoSpeakerList> {
               ),
             ),
           ),
-          if (controller.isPaginationLoading.value == true)
-            PaginationUtils().loader(),
-        ],
-      ),
     );
   }
 

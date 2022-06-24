@@ -1,7 +1,7 @@
-const String helvetica_neu_bold = "Helvetica Neu Bold";
-const String helveticaNeue = "HelveticaNeue";
-const String helveticaNeueNeue_light = "HelveticaNeueNeue Light";
-const String helveticaNeueNeue_medium = "HelveticaNeueNeue Medium";
+const String helvetica_neu_bold = "robotoBold";
+const String helveticaNeue = "Roboto";
+const String helveticaNeueNeue_light = "robotoRegular";
+const String helveticaNeueNeue_medium = "robotoMedium";
 const String helveticaNeueNeue_thin = "HelveticaNeueNeue Thin";
 const String roboto_regular = "robotoRegular ";
 const String roboto_medium = "robotoMedium ";

@@ -579,7 +579,7 @@ class _UserProfileState extends State<UserProfile> {
     checkNet(context).then(
       (value) {
         videoController.PageNumber.value = 0;
-        videoController.userListAPI(context, widget.selectedUserId);
+        videoController.userListAPI(context, true, widget.selectedUserId);
         dynamic body = {'user_id': widget.selectedUserId};
         controller.admireListAPI(context, body);
       },

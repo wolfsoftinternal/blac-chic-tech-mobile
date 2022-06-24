@@ -39,7 +39,7 @@ class _InvitePeopleState extends State<InvitePeople> {
     // TODO: implement initState
     super.initState();
     if(widget.id == null){
-      videoController.initScrolling(context);
+      videoController.initScrolling(context, true);
     }else{
       admireProfileController.initUserScrolling(context, widget.id);
     }
@@ -49,6 +49,7 @@ class _InvitePeopleState extends State<InvitePeople> {
       controller.searchList = controller.selectedList;
     }
     list = controller.selectedList;
+    setState(() {});
   }
 
   @override
@@ -89,7 +90,7 @@ class _InvitePeopleState extends State<InvitePeople> {
                                       if (controller
                                               .searchController.value.text ==
                                           '') {
-                                        controller.isSearched.value = false;
+                                        admireProfileController.isSearched.value = true;
                                         // if (widget.fromView == true) {
                                         //   checkNet(context).then((value) async {
                                         //     videoController.PageNumber.value = 0;
@@ -108,11 +109,11 @@ class _InvitePeopleState extends State<InvitePeople> {
                                           } else {
                                             videoController.PageNumber.value = 0;
                                             await videoController
-                                                .userListAPI(context);
+                                                .userListAPI(context, true);
                                           // }
                                         }
 
-                                        Future.delayed(Duration(milliseconds: 3),
+                                        Future.delayed(Duration(milliseconds: 500),
                                             () {
                                           for (var item
                                               in videoController.userList) {
@@ -124,9 +125,10 @@ class _InvitePeopleState extends State<InvitePeople> {
                                               }
                                             }
                                           }
+                                          setState(() {});
                                         });
                                       } else {
-                                        controller.isSearched.value = true;
+                                        admireProfileController.isSearched.value = false;
                                         // if (widget.fromView == true) {
                                         //   checkNet(context).then((value) async {
                                         //     videoController.PageNumber.value = 0;
@@ -145,11 +147,11 @@ class _InvitePeopleState extends State<InvitePeople> {
                                           } else {
                                             videoController.PageNumber.value = 0;
                                             await videoController
-                                                .userListAPI(context);
+                                                .userListAPI(context, true);
                                           }
                                         // }
 
-                                        Future.delayed(Duration(milliseconds: 3),
+                                        Future.delayed(Duration(milliseconds: 500),
                                             () {
                                           for (var item
                                               in videoController.userList) {
@@ -161,6 +163,7 @@ class _InvitePeopleState extends State<InvitePeople> {
                                               }
                                             }
                                           }
+                                          setState(() {});
                                         });
 
                                         
@@ -293,43 +296,81 @@ class _InvitePeopleState extends State<InvitePeople> {
                                             //   }
                                             // }
                                           } else {
-                                            videoController
-                                        .userList[i].isSpeakerSelected = true;
-                                            if (list.contains(
-                                                videoController.userList[i])) {
-                                              // controller.selectedList.remove(
-                                              // videoController.userList[i]);
-                                              videoController
-                                        .userList[i].isSpeakerSelected = true;
-                                              admireProfileController
-                                                  .selectedPeople
-                                                  .remove(videoController
-                                                      .userList[i].id);
-                                              list.remove(
-                                                  videoController.userList[i]);
-                                              controller.selectName.value =
-                                                  'Select All';
-                                              videoController.userList[i]
-                                                  .isSpeakerSelected = false;
+
+
+
+
+                                          List removeList = [];
+                                          if(list.isEmpty){
+                                            videoController.userList[i].isSpeakerSelected = true;
+                                            list.add(videoController.userList[i]);
+                                          }else{
+                                            if (videoController.userList[i].isSpeakerSelected == true) {
+                                              videoController.userList[i].isSpeakerSelected = false;
+                                              // for (var item in controller.userList) {
+                                                for (var selectedItem in list) {
+                                                  if (selectedItem.id == videoController.userList[i].id) {
+                                                    selectedItem.isSpeakerSelected = videoController.userList[i].isSpeakerSelected;
+                                                    admireProfileController.selectedPeople.remove(videoController.userList[i].id);
+                                                    controller.selectName.value = 'Select All';
+                                                    removeList.add(selectedItem.id);
+                                                  }
+                                                }
+                                              // }
+
+                                              print(admireProfileController.selectedPeople.length);
+
+                                              for (var selectedItem in removeList) {
+                                                list.removeWhere((element) => element.id == selectedItem);
+                                              }
                                             } else {
-                                              // controller.selectedList
-                                              //     .add(videoController.userList[i]);
-                                              
-                                              admireProfileController
-                                                  .selectedPeople
-                                                  .add(videoController
-                                                      .userList[i].id);
-                                              list.add(
-                                                  videoController.userList[i]);
-                                              videoController.userList[i]
-                                                  .isSpeakerSelected = true;
-                                              if (list.length ==
-                                                  videoController
-                                                      .userList.length) {
-                                                controller.selectName.value =
-                                                    'Deselect All';
+                                              list.add(videoController.userList[i]);
+                                              videoController.userList[i].isSpeakerSelected = true;
+                                              admireProfileController.selectedPeople.add(videoController.userList[i].id);
+                                              if (list.length == videoController.userList.length) {
+                                                controller.selectName.value = 'Deselect All';
                                               }
                                             }
+                                          }
+
+                                            
+                                        //     videoController
+                                        // .userList[i].isSpeakerSelected = true;
+                                        //     if (list.contains(
+                                        //         videoController.userList[i])) {
+                                        //       // controller.selectedList.remove(
+                                        //       // videoController.userList[i]);
+                                        //       videoController
+                                        // .userList[i].isSpeakerSelected = true;
+                                        //       admireProfileController
+                                        //           .selectedPeople
+                                        //           .remove(videoController
+                                        //               .userList[i].id);
+                                        //       list.remove(
+                                        //           videoController.userList[i]);
+                                        //       controller.selectName.value =
+                                        //           'Select All';
+                                        //       videoController.userList[i]
+                                        //           .isSpeakerSelected = false;
+                                        //     } else {
+                                        //       // controller.selectedList
+                                        //       //     .add(videoController.userList[i]);
+                                              
+                                        //       admireProfileController
+                                        //           .selectedPeople
+                                        //           .add(videoController
+                                        //               .userList[i].id);
+                                        //       list.add(
+                                        //           videoController.userList[i]);
+                                        //       videoController.userList[i]
+                                        //           .isSpeakerSelected = true;
+                                        //       if (list.length ==
+                                        //           videoController
+                                        //               .userList.length) {
+                                        //         controller.selectName.value =
+                                        //             'Deselect All';
+                                        //       }
+                                        //     }
                                           }
                                         },
                                       );

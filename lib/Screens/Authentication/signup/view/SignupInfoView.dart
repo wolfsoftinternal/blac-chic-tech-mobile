@@ -65,7 +65,7 @@ class SignupInfoView extends StatelessWidget {
                             style: TextStyle(
                                 color: Color(0xff121212),
                                 fontWeight: FontWeight.w400,
-                                fontFamily: "Helvetica",
+                                fontFamily: "Roboto",
                                 fontStyle: FontStyle.normal,
                                 fontSize: 10.0,
                                 height: 1.5),
@@ -75,7 +75,7 @@ class SignupInfoView extends StatelessWidget {
                             style: TextStyle(
                                 color: Color(0xffff881a),
                                 fontWeight: FontWeight.w400,
-                                fontFamily: "Helvetica",
+                                fontFamily: "Roboto",
                                 fontStyle: FontStyle.normal,
                                 fontSize: 10.0,
                                 height: 1.5),
@@ -84,7 +84,7 @@ class SignupInfoView extends StatelessWidget {
                             style: TextStyle(
                                 color: Color(0xff121212),
                                 fontWeight: FontWeight.w400,
-                                fontFamily: "Helvetica",
+                                fontFamily: "Roboto",
                                 fontStyle: FontStyle.normal,
                                 fontSize: 10.0,
                                 height: 1.5),
@@ -94,7 +94,7 @@ class SignupInfoView extends StatelessWidget {
                             style: TextStyle(
                                 color: Color(0xffff881a),
                                 fontWeight: FontWeight.w400,
-                                fontFamily: "Helvetica",
+                                fontFamily: "Roboto",
                                 fontStyle: FontStyle.normal,
                                 fontSize: 10.0,
                                 height: 1.5),

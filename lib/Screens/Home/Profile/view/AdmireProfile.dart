@@ -42,7 +42,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
     checkNet(context).then(
       (value) {
         controller.admireListAPI(context, null);
-        videoController.userListAPI(context);
+        videoController.userListAPI(context, true);
       },
     );
     controller.addListener(() {});
