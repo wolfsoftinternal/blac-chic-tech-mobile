@@ -36,7 +36,7 @@ class _TextInputState extends State<InputTextLayoutPassword> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.h,
+      height: 48.h,
       decoration: BoxDecoration(
         border: Border.all(
           color: checkColor == true ? orange_ff881a : light_grey_f2f2f2,
@@ -49,12 +49,12 @@ class _TextInputState extends State<InputTextLayoutPassword> {
             : light_grey_f2f2f2,
       ),
       child: Padding(
-        padding:  EdgeInsets.only(left: 16.w, right: 5.w, top: 12.h, bottom: 12.h),
+        padding:  EdgeInsets.only(left: 16.w, right: 5.w,top: 7.h,bottom: 7.h),
         child: TextFormField(
           style:  TextStyle(
               color: black_121212,
               fontFamily: helveticaNeueNeue_medium,
-              fontSize: 14.0.sp),
+              fontSize: 14.sp),
           keyboardType: widget.inputType,
           inputFormatters: [
             widget.numKeypad == true

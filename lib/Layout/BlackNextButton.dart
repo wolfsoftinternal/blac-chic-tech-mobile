@@ -24,14 +24,17 @@ class BlackNextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0x17747796).withOpacity(0.07),
-              spreadRadius: 10,
-              blurRadius: 5,
-              offset: const Offset(0, 10), // changes position of shadow
+        boxShadow: [
+          BoxShadow(
+            color: Color(0x14000000).withOpacity(0.25),
+            offset:  Offset(
+              10.0,
+              8.0,
             ),
-          ]
+            blurRadius: 25.0,
+            spreadRadius: 2.0,
+          ),
+        ],
       ),
       child: SizedBox(
         width: double.infinity,

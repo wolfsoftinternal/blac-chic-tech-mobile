@@ -58,8 +58,9 @@ class _SignupDetailState extends State<SignupFormView> {
                                 color: black_121212,
                                 fontFamily: helvetica_neu_bold,
                                 fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 24.0.sp),
+
+                                letterSpacing: 0.5,
+                                fontSize: 24.sp),
                             textAlign: TextAlign.left),
                       ),
                        SizedBox(
@@ -72,7 +73,8 @@ class _SignupDetailState extends State<SignupFormView> {
                                 color: grey_aaaaaa,
                                 fontFamily: helveticaNeueNeue_medium,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 14.0.sp,
+                                fontSize: 14.sp,
+                                letterSpacing: 0.3,
                                 height: 1.2.h),
                             textAlign: TextAlign.center),
                       ),
