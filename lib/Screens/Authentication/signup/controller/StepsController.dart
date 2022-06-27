@@ -47,6 +47,7 @@ class StepsController extends GetxController {
   Rx<TextEditingController> currentCompanyWebsiteController =
       TextEditingController().obs;
   RxList companyList = [].obs;
+  List<TextEditingController> pastJobController = <TextEditingController>[].obs;
 
   RxBool boolComapnyLogo = false.obs;
   Rx<TextEditingController> searchCompanyController =

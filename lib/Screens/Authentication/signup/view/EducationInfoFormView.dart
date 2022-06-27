@@ -105,7 +105,7 @@ class _EducationState extends State<EducationInfoFormView> {
             flex: 1,
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
+                padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 32.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,6 +118,7 @@ class _EducationState extends State<EducationInfoFormView> {
                               fontWeight: FontWeight.w900,
                               fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
+                              letterSpacing: 0.7,
                               fontSize: 24.sp),
                           textAlign: TextAlign.center),
                     ),
@@ -137,12 +138,13 @@ class _EducationState extends State<EducationInfoFormView> {
                           textAlign: TextAlign.center),
                     ),
                     SizedBox(
-                      height: 32.h,
+                      height: 40.h,
                     ),
 
                     Column(
                       children: [
                         ListView.builder(
+                          padding: EdgeInsets.zero,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: cards.length,
                           shrinkWrap: true,
@@ -151,12 +153,14 @@ class _EducationState extends State<EducationInfoFormView> {
                               child: Column(
                                 children: [
                                   Container(
-                                    height: HeightData.fifty_seven,
+                                    height: 48.h,
                                     decoration: EditTextDecoration,
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                        left: 12.w,
-                                        right: 12.w,
+                                        left: 17.w,
+                                        right: 17.w,
+                                        top: 5.h,
+                                        bottom: 5.h
                                       ),
                                       child: Row(
                                         mainAxisAlignment:
@@ -164,21 +168,18 @@ class _EducationState extends State<EducationInfoFormView> {
                                         children: [
                                           Expanded(
                                             flex: 1,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(5.r),
-                                              child: setTextFieldNext(
-                                                universityController[index],
-                                                "University/School",
-                                                false,
-                                                TextInputType.name,
-                                                false,
-                                                "",
-                                                TextInputAction.next,
-                                                (value) => {
-                                                  // on Chnages
-                                                },
-                                                () {},
-                                              ),
+                                            child: setTextFieldNext(
+                                              universityController[index],
+                                              "University/School",
+                                              false,
+                                              TextInputType.name,
+                                              false,
+                                              "",
+                                              TextInputAction.next,
+                                              (value) => {
+                                                // on Chnages
+                                              },
+                                              () {},
                                             ),
                                           ),
                                         ],
@@ -193,130 +194,130 @@ class _EducationState extends State<EducationInfoFormView> {
                                       Expanded(
                                         flex: 1,
                                         child: Container(
-                                          height: HeightData.fifty_seven,
+                                          height: 48.h,
                                           decoration: EditTextDecoration,
                                           child: Padding(
                                             padding: EdgeInsets.only(
-                                                left: 12.w, right: 12.w),
+                                              left: 17.w,
+                                              right: 17.w,
+                                              top: 5.h,
+                                              bottom: 5.h
+                                            ),
                                             child: Row(
                                               children: [
                                                 Expanded(
                                                   flex: 1,
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.all(5.r),
-                                                    child: setDobTextFieldNext(
-                                                      startyearController[
-                                                          index],
-                                                      "Start year",
-                                                      false,
-                                                      TextInputType.name,
-                                                      false,
-                                                      "",
-                                                      TextInputAction.next,
-                                                      (value) {},
-                                                      () async {
-                                                        DateTime? pickedDate =
-                                                            await showModalBottomSheet<
-                                                                DateTime>(
-                                                          context: context,
-                                                          builder: (context) {
-                                                            DateTime?
-                                                                tempPickedDate =
-                                                                DateTime.now();
-                                                            return SizedBox(
-                                                              height: 250.h,
-                                                              child: Column(
-                                                                children: <
-                                                                    Widget>[
-                                                                  Container(
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: <
-                                                                          Widget>[
-                                                                        Padding(
-                                                                          padding:
-                                                                              EdgeInsets.only(left: 5.w),
+                                                  child: setDobTextFieldNext(
+                                                    startyearController[
+                                                        index],
+                                                    "Start year",
+                                                    false,
+                                                    TextInputType.name,
+                                                    false,
+                                                    "",
+                                                    TextInputAction.next,
+                                                    (value) {},
+                                                    () async {
+                                                      DateTime? pickedDate =
+                                                          await showModalBottomSheet<
+                                                              DateTime>(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          DateTime?
+                                                              tempPickedDate =
+                                                              DateTime.now();
+                                                          return SizedBox(
+                                                            height: 250.h,
+                                                            child: Column(
+                                                              children: <
+                                                                  Widget>[
+                                                                Container(
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: <
+                                                                        Widget>[
+                                                                      Padding(
+                                                                        padding:
+                                                                            EdgeInsets.only(left: 5.w),
+                                                                        child:
+                                                                            CupertinoButton(
                                                                           child:
-                                                                              CupertinoButton(
-                                                                            child:
-                                                                                const Text(
-                                                                              'Cancel',
-                                                                              style: TextStyle(color: orange_ff881a),
-                                                                            ),
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(context).pop();
-                                                                            },
+                                                                              const Text(
+                                                                            'Cancel',
+                                                                            style: TextStyle(color: orange_ff881a),
                                                                           ),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
                                                                         ),
-                                                                        Padding(
-                                                                          padding:
-                                                                              EdgeInsets.only(right: 5.w),
-                                                                          child:
-                                                                              CupertinoButton(
-                                                                            child:
-                                                                                const Text('Done', style: TextStyle(color: orange_ff881a)),
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(context).pop(tempPickedDate);
-                                                                            },
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  const Divider(
-                                                                    height: 0,
-                                                                    thickness:
-                                                                        1,
-                                                                  ),
-                                                                  Expanded(
-                                                                    child:
-                                                                        Container(
-                                                                      child:
-                                                                          YearPicker(
-                                                                        firstDate:
-                                                                            DateTime(DateTime.now().year -
-                                                                                100),
-                                                                        lastDate:
-                                                                            DateTime.now(),
-                                                                        selectedDate:
-                                                                            DateTime.now(),
-                                                                        onChanged:
-                                                                            (DateTime
-                                                                                dateTime) {
-                                                                          tempPickedDate =
-                                                                              dateTime;
-                                                                          startDate =
-                                                                              dateTime;
-                                                                          Navigator.of(context)
-                                                                              .pop(tempPickedDate);
-                                                                        },
                                                                       ),
+                                                                      Padding(
+                                                                        padding:
+                                                                            EdgeInsets.only(right: 5.w),
+                                                                        child:
+                                                                            CupertinoButton(
+                                                                          child:
+                                                                              const Text('Done', style: TextStyle(color: orange_ff881a)),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context).pop(tempPickedDate);
+                                                                          },
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                const Divider(
+                                                                  height: 0,
+                                                                  thickness:
+                                                                      1,
+                                                                ),
+                                                                Expanded(
+                                                                  child:
+                                                                      Container(
+                                                                    child:
+                                                                        YearPicker(
+                                                                      firstDate:
+                                                                          DateTime(DateTime.now().year -
+                                                                              100),
+                                                                      lastDate:
+                                                                          DateTime.now(),
+                                                                      selectedDate:
+                                                                          DateTime.now(),
+                                                                      onChanged:
+                                                                          (DateTime
+                                                                              dateTime) {
+                                                                        tempPickedDate =
+                                                                            dateTime;
+                                                                        startDate =
+                                                                            dateTime;
+                                                                        Navigator.of(context)
+                                                                            .pop(tempPickedDate);
+                                                                      },
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
-                                                            );
-                                                          },
-                                                        );
-                                                        final DateFormat
-                                                            formatter =
-                                                            DateFormat('yyyy');
-                                                        final String
-                                                            formattedDate =
-                                                            formatter.format(
-                                                                pickedDate!);
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                      final DateFormat
+                                                          formatter =
+                                                          DateFormat('yyyy');
+                                                      final String
+                                                          formattedDate =
+                                                          formatter.format(
+                                                              pickedDate!);
 
-                                                        startyearController[
-                                                                    index]
-                                                                .text =
-                                                            formattedDate;
-                                                      },
-                                                    ),
+                                                      startyearController[
+                                                                  index]
+                                                              .text =
+                                                          formattedDate;
+                                                    },
                                                   ),
                                                 ),
                                                 SvgPicture.asset(
@@ -335,130 +336,130 @@ class _EducationState extends State<EducationInfoFormView> {
                                       Expanded(
                                         flex: 1,
                                         child: Container(
-                                          height: HeightData.fifty_seven,
+                                          height: 48.h,
                                           decoration: EditTextDecoration,
                                           child: Padding(
                                             padding: EdgeInsets.only(
-                                                left: 12.w, right: 12.w),
+                                              left: 17.w,
+                                              right: 17.w,
+                                              top: 5.h,
+                                              bottom: 5.h
+                                            ),
                                             child: Row(
                                               children: [
                                                 Expanded(
                                                   flex: 1,
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.all(5.r),
-                                                    child: setDobTextFieldNext(
-                                                      endyearController[index],
-                                                      "End year",
-                                                      false,
-                                                      TextInputType.name,
-                                                      false,
-                                                      "",
-                                                      TextInputAction.next,
-                                                      (value) {},
-                                                      () async {
-                                                        if (startyearController[
-                                                                index]
-                                                            .text
-                                                            .isEmpty) {
-                                                          snackBar(context,
-                                                              'Enter start year');
-                                                        } else {
-                                                          DateTime? pickedDate =
-                                                              await showModalBottomSheet<
-                                                                  DateTime>(
-                                                            context: context,
-                                                            builder: (context) {
-                                                              DateTime?
-                                                                  tempPickedDate =
-                                                                  DateTime
-                                                                      .now();
-                                                              return SizedBox(
-                                                                height: 250.h,
-                                                                child: Column(
-                                                                  children: <
-                                                                      Widget>[
-                                                                    Container(
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: <
-                                                                            Widget>[
-                                                                          Padding(
-                                                                            padding:
-                                                                                EdgeInsets.only(left: 5.w),
-                                                                            child:
-                                                                                CupertinoButton(
-                                                                              child: const Text(
-                                                                                'Cancel',
-                                                                                style: TextStyle(color: orange_ff881a),
-                                                                              ),
-                                                                              onPressed: () {
-                                                                                Navigator.of(context).pop();
-                                                                              },
+                                                  child: setDobTextFieldNext(
+                                                    endyearController[index],
+                                                    "End year",
+                                                    false,
+                                                    TextInputType.name,
+                                                    false,
+                                                    "",
+                                                    TextInputAction.next,
+                                                    (value) {},
+                                                    () async {
+                                                      if (startyearController[
+                                                              index]
+                                                          .text
+                                                          .isEmpty) {
+                                                        snackBar(context,
+                                                            'Enter start year');
+                                                      } else {
+                                                        DateTime? pickedDate =
+                                                            await showModalBottomSheet<
+                                                                DateTime>(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            DateTime?
+                                                                tempPickedDate =
+                                                                DateTime
+                                                                    .now();
+                                                            return SizedBox(
+                                                              height: 250.h,
+                                                              child: Column(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Container(
+                                                                    child:
+                                                                        Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment.spaceBetween,
+                                                                      children: <
+                                                                          Widget>[
+                                                                        Padding(
+                                                                          padding:
+                                                                              EdgeInsets.only(left: 5.w),
+                                                                          child:
+                                                                              CupertinoButton(
+                                                                            child: const Text(
+                                                                              'Cancel',
+                                                                              style: TextStyle(color: orange_ff881a),
                                                                             ),
+                                                                            onPressed: () {
+                                                                              Navigator.of(context).pop();
+                                                                            },
                                                                           ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                EdgeInsets.only(right: 5.w),
-                                                                            child:
-                                                                                CupertinoButton(
-                                                                              child: const Text('Done', style: TextStyle(color: orange_ff881a)),
-                                                                              onPressed: () {
-                                                                                Navigator.of(context).pop(tempPickedDate);
-                                                                              },
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    const Divider(
-                                                                      height: 0,
-                                                                      thickness:
-                                                                          1,
-                                                                    ),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Container(
-                                                                        child:
-                                                                            YearPicker(
-                                                                          firstDate:
-                                                                              startDate,
-                                                                          lastDate:
-                                                                              DateTime(DateTime.now().year + 10),
-                                                                          selectedDate:
-                                                                              DateTime.now(),
-                                                                          onChanged:
-                                                                              (DateTime value) {
-                                                                            tempPickedDate =
-                                                                                value;
-                                                                            Navigator.of(context).pop(tempPickedDate);
-                                                                          },
                                                                         ),
+                                                                        Padding(
+                                                                          padding:
+                                                                              EdgeInsets.only(right: 5.w),
+                                                                          child:
+                                                                              CupertinoButton(
+                                                                            child: const Text('Done', style: TextStyle(color: orange_ff881a)),
+                                                                            onPressed: () {
+                                                                              Navigator.of(context).pop(tempPickedDate);
+                                                                            },
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  const Divider(
+                                                                    height: 0,
+                                                                    thickness:
+                                                                        1,
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Container(
+                                                                      child:
+                                                                          YearPicker(
+                                                                        firstDate:
+                                                                            startDate,
+                                                                        lastDate:
+                                                                            DateTime(DateTime.now().year + 10),
+                                                                        selectedDate:
+                                                                            DateTime.now(),
+                                                                        onChanged:
+                                                                            (DateTime value) {
+                                                                          tempPickedDate =
+                                                                              value;
+                                                                          Navigator.of(context).pop(tempPickedDate);
+                                                                        },
                                                                       ),
                                                                     ),
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                          final DateFormat
-                                                              formatter =
-                                                              DateFormat(
-                                                                  'yyyy');
-                                                          final String
-                                                              formattedDate =
-                                                              formatter.format(
-                                                                  pickedDate!);
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+                                                        final DateFormat
+                                                            formatter =
+                                                            DateFormat(
+                                                                'yyyy');
+                                                        final String
+                                                            formattedDate =
+                                                            formatter.format(
+                                                                pickedDate!);
 
-                                                          endyearController[
-                                                                      index]
-                                                                  .text =
-                                                              formattedDate;
-                                                        }
-                                                      },
-                                                    ),
+                                                        endyearController[
+                                                                    index]
+                                                                .text =
+                                                            formattedDate;
+                                                      }
+                                                    },
                                                   ),
                                                 ),
                                                 SvgPicture.asset(
@@ -474,15 +475,12 @@ class _EducationState extends State<EducationInfoFormView> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 16.h,
+                                    height: 32.h,
                                   ),
                                 ],
                               ),
                             );
                           },
-                        ),
-                        SizedBox(
-                          height: 19.h,
                         ),
                         isDeleteLast == true
                             ? GestureDetector(
@@ -495,6 +493,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                   });
                                 },
                                 child: Container(
+                                  height: 48.h,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(4.r),
@@ -504,11 +503,11 @@ class _EducationState extends State<EducationInfoFormView> {
                                       Padding(
                                     padding: EdgeInsets.all(16.r),
                                     child: Center(
-                                      child: Text("Delete Last",
+                                      child: Text("Remove Last",
                                           style: TextStyle(
                                               color: const Color(0xff121212),
                                               fontWeight: FontWeight.w500,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 12.sp),
                                           textAlign: TextAlign.left),
@@ -543,24 +542,40 @@ class _EducationState extends State<EducationInfoFormView> {
                             });
                           },
                           child: Container(
+                            height: 48.h,
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4.r),
                                 border: Border.all(
                                     width: 1.w, color: black_121212)),
                             child: // Add More
-                                Padding(
-                              padding: EdgeInsets.all(16.r),
-                              child: Center(
-                                child: Text("+ Add More",
-                                    style: TextStyle(
-                                        color: const Color(0xff121212),
-                                        fontFamily: helvetica_neu_bold,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 12.sp),
-                                    textAlign: TextAlign.left),
-                              ),
-                            ),
+                                Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: 1.h),
+                                        child: Text("+ ",
+                                            style: TextStyle(
+                                                color: const Color(0xff121212),
+                                                fontFamily: helveticaNeueNeue_medium,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 22.sp),
+                                            textAlign: TextAlign.left),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: 16.h, top: 16.h),
+                                        child: Text(" Add More",
+                                            style: TextStyle(
+                                                color: const Color(0xff121212),
+                                                fontFamily: helveticaNeueNeue_medium,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.sp),
+                                            textAlign: TextAlign.left),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                           ),
                         ),
                       ],

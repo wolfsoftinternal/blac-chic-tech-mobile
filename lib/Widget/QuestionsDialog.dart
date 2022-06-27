@@ -31,6 +31,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
   Widget build(BuildContext context) {
     return Container(
       child: Dialog(
+        insetPadding: EdgeInsets.all(20.r),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4.r)), //this right here
             child: SizedBox(
@@ -84,18 +85,33 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'^[a-z A-Z]+$')),
                               ],
-                              inputDecoration: const InputDecoration(
+                              textStyle: TextStyle(
+                                  color: black_121212,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: helvetica_neu_bold,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 14.sp),
+                              inputDecoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Please type here...',),
+                                  hintText: 'Please type here...',
+                                 hintStyle: TextStyle(
+                                    color: grey_aaaaaa,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: helvetica_neu_bold,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 14.sp),
+                              ),
                               onTagChanged: (newValue) {
                                 setState(() {
                                   controller.tagValues.add(newValue);
                                 });
                               },
                               onSubmitted: (newValue) {
-                                setState(() {
+                                if(newValue.toString() != ''){
+                                  setState(() {
                                   controller.tagValues.add(newValue);
                                 });
+                                }
                               },
                               tagBuilder: (context, index) => ChipLayout(
                                 index: index,
@@ -123,10 +139,11 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                               minLines: 2,
                               maxLines: 10,
                               keyboardType: TextInputType.multiline,
+                              cursorColor: orange_ff881a,
                               style: TextStyle(
                                   color: black_121212,
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: helveticaNeueNeue_medium,
+                                  fontFamily: helvetica_neu_bold,
                                   fontStyle: FontStyle.normal,
                                   fontSize: 14.sp),
                               decoration: InputDecoration(
@@ -139,7 +156,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                                 hintStyle: TextStyle(
                                     color: grey_aaaaaa,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: helveticaNeueNeue_medium,
+                                    fontFamily: helvetica_neu_bold,
                                     fontStyle: FontStyle.normal,
                                     fontSize: 14.sp),
                               ),

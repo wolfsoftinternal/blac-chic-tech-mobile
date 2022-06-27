@@ -114,7 +114,8 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                 fontWeight: FontWeight.w900,
                                 fontFamily: helvetica_neu_bold,
                                 fontStyle: FontStyle.normal,
-                                fontSize: 24.sp),
+                                fontSize: 24.sp,
+                                letterSpacing: 0.7),
                             textAlign: TextAlign.center),
                       ),
                       SizedBox(
@@ -133,7 +134,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                             textAlign: TextAlign.center),
                       ),
                       SizedBox(
-                        height: 32.h,
+                        height: 40.h,
                       ),
 
                       // InputTextLayout(
@@ -150,7 +151,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                               fontWeight: FontWeight.w900,
                               fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
-                              letterSpacing: 0.6.sp,
+                              letterSpacing: 0.8.sp,
                               fontSize: 12.sp),
                           textAlign: TextAlign.left),
                       SizedBox(
@@ -161,11 +162,16 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                           Expanded(
                             flex: 1,
                             child: Container(
-                              // height: 39.h,
+                             height: 48.h,
                               decoration: EditTextDecoration,
-                              child: Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(10.r),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  left: 17.w,
+                                  right: 17.w,
+                                  top: 5.h,
+                                  bottom: 5.h
+                                ),
+                                child: Center(
                                   child: setTextFieldNext(
                                       controller.currentTitleController.value,
                                       "Title",
@@ -189,12 +195,17 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                             flex: 1,
                             child: SizedBox(
                               child: Container(
-                                height: 55.h,
+                                height: 48.h,
                                 decoration: EditTextDecoration,
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.all(10.r),
+                                    padding: EdgeInsets.only(
+                                      left: 17.w,
+                                      right: 17.w,
+                                      top: 5.h,
+                                      bottom: 5.h
+                                    ),
                                     child: GestureDetector(
                                         onTap: () {
                                           Get.to(const CompanyList());
@@ -243,11 +254,16 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
 
                       Container(
                         decoration: EditTextDecoration,
-                        // height: HeightData.fifty_seven,
+                        height: 48.h,
                         width: MediaQuery.of(context).size.width,
                         child: Center(
                           child: Padding(
-                            padding: EdgeInsets.all(10.r),
+                            padding: EdgeInsets.only(
+                                  left: 17.w,
+                                  right: 17.w,
+                                  top: 5.h,
+                                  bottom: 5.h
+                                ),
                             child: setTextFieldNext(
                               controller.currentCompanyWebsiteController.value,
                               "Company Website",
@@ -274,7 +290,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                               fontWeight: FontWeight.w900,
                               fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
-                              letterSpacing: 0.6,
+                              letterSpacing: 0.8,
                               fontSize: 12.sp),
                           textAlign: TextAlign.left),
                       SizedBox(
@@ -307,10 +323,16 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         Expanded(
                                           flex: 1,
                                           child: Container(
+                                            height: 48.h,
                                             decoration: EditTextDecoration,
                                             child: Center(
                                               child: Padding(
-                                                padding: EdgeInsets.all(10.r),
+                                                padding: EdgeInsets.only(
+                                                  left: 17.w,
+                                                  right: 17.w,
+                                                  top: 5.h,
+                                                  bottom: 5.h
+                                                ),
                                                 child: setTextFieldNext(
                                                   pastCompanyTitleController[
                                                       index],
@@ -332,22 +354,48 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         Expanded(
                                           flex: 1,
                                           child: Container(
+                                            height: 48.h,
                                             decoration: EditTextDecoration,
-                                            child: Center(
-                                              child: Padding(
-                                                padding: EdgeInsets.all(10.r),
-                                                child: setTextFieldNext(
-                                                  pastCompanyNameController[
-                                                      index],
-                                                  "Company Name",
-                                                  false,
-                                                  TextInputType.name,
-                                                  false,
-                                                  "",
-                                                  TextInputAction.next,
-                                                  (value) {},(){}
-                                                ),
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                left: 17.w,
+                                                right: 17.w,
+                                                top: 14.h,
                                               ),
+                                              child: GestureDetector(
+                                              onTap: () {
+                                                Get.to(const CompanyList(
+                                                                isFrom:
+                                                                    'experience_pastjob'))!
+                                                            .then((value) {
+                                                          pastCompanyNameController[index] =
+                                                              controller.pastJobController[index];
+                                                          setState(() {});
+                                                        });
+                                              },
+                                              child: Text(pastCompanyNameController[index].value.text == '' ? 'Company Name' :
+                                                pastCompanyNameController[index].value.text,
+                                                style: TextStyle(
+                                                    color: pastCompanyNameController[index].value.text == ''
+                                                        ? grey_aaaaaa
+                                                        : black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                              )),
+                                              // child: setTextFieldNext(
+                                              //   pastCompanyNameController[
+                                              //       index],
+                                              //   "Company Name",
+                                              //   false,
+                                              //   TextInputType.name,
+                                              //   false,
+                                              //   "",
+                                              //   TextInputAction.next,
+                                              //   (value) {},(){}
+                                              // ),
                                             ),
                                           ),
                                         ),
@@ -358,9 +406,15 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                     ),
                                     Container(
                                       decoration: EditTextDecoration,
+                                      height: 48.h,
                                       child: Center(
                                         child: Padding(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.only(
+                                            left: 17.w,
+                                            right: 17.w,
+                                            top: 5.h,
+                                            bottom: 5.h
+                                          ),
                                           child: setTextFieldNext(
                                             pastCompanyWebsiteController[index],
                                             "Company Website",
@@ -393,6 +447,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                     });
                                   },
                                   child: Container(
+                                    height: 48.h,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                         borderRadius:
@@ -401,7 +456,12 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                             width: 1.w, color: black_121212)),
                                     child: // Add More
                                         Padding(
-                                      padding: EdgeInsets.all(16.r),
+                                      padding: EdgeInsets.only(
+                                            left: 17.w,
+                                            right: 17.w,
+                                            top: 5.h,
+                                            bottom: 5.h
+                                          ),
                                       child: Center(
                                         child: Text("Remove Last",
                                             style: TextStyle(
@@ -450,6 +510,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                             child: Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: Container(
+                                height: 48.h,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4.r),
@@ -457,7 +518,12 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         width: 1.w, color: black_121212)),
                                 child: // Add More
                                     Padding(
-                                  padding: EdgeInsets.all(16.r),
+                                  padding: EdgeInsets.only(
+                                            left: 17.w,
+                                            right: 17.w,
+                                            top: 5.h,
+                                            bottom: 5.h
+                                          ),
                                   child: Center(
                                     child: Text("+ Add More",
                                         style: TextStyle(

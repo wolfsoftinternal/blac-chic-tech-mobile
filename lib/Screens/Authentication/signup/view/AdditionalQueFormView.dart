@@ -72,7 +72,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
               flex: 1,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
+                  padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 32.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,6 +85,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                                 fontWeight: FontWeight.w900,
                                 fontFamily: helvetica_neu_bold,
                                 fontStyle: FontStyle.normal,
+                                letterSpacing: 0.7,
                                 fontSize: 24.sp),
                             textAlign: TextAlign.center),
                       ),
@@ -100,11 +101,12 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                                 fontFamily: helveticaNeueNeue_medium,
                                 fontStyle: FontStyle.normal,
                                 fontSize: 14.sp,
+                                letterSpacing: 0.8,
                                 height: 1.5.h),
                             textAlign: TextAlign.center),
                       ),
                       SizedBox(
-                        height: 32.h,
+                        height: 40.h,
                       ),
 
                       GestureDetector(
@@ -112,21 +114,24 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           showDoneDialog(context, 'q1');
                         },
                         child: Container(
+                          height: 48.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
-                          child: Padding(
-                            padding:  EdgeInsets.all(16.r),
-                            child: // What have you done?
-                                Text(controller.ques1.value,
-                                    maxLines: 1,
-                                    style:  TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        color: grey_aaaaaa,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: helveticaNeueNeue_medium,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 14.sp),
-                                    textAlign: TextAlign.left),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: Text(controller.ques1.value,
+                                  maxLines: 1,
+                                  style:  TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                      color: grey_aaaaaa,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: helveticaNeueNeue_medium,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 14.sp),
+                                  textAlign: TextAlign.left),
+                            ),
                           ),
                         ),
                       ),
@@ -138,21 +143,25 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           showDoneDialog(context, 'q2');
                         },
                         child: Container(
+                          height: 48.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
-                          child: Padding(
-                            padding:  EdgeInsets.all(16.r),
-                            child: // What have you done?
-                                Text(controller.ques2.value,
-                                    maxLines: 1,
-                                    style:  TextStyle(
-                                        color: grey_aaaaaa,
-                                        overflow: TextOverflow.ellipsis,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: helveticaNeueNeue_medium,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 14.sp),
-                                    textAlign: TextAlign.left),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: // What have you done?
+                                  Text(controller.ques2.value,
+                                      maxLines: 1,
+                                      style:  TextStyle(
+                                          color: grey_aaaaaa,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                            ),
                           ),
                         ),
                       ),
@@ -162,20 +171,24 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q3'),
                         child: Container(
+                          height: 48.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
-                          child: Padding(
-                            padding:  EdgeInsets.all(16.r),
-                            child: // What have you done?
-                                Text(controller.ques3.value,
-                                    maxLines: 1,
-                                    style:  TextStyle(
-                                        color: grey_aaaaaa,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: helveticaNeueNeue_medium,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 14.sp),
-                                    textAlign: TextAlign.left),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: // What have you done?
+                                  Text(controller.ques3.value,
+                                      maxLines: 1,
+                                      style:  TextStyle(
+                                          color: grey_aaaaaa,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                            ),
                           ),
                         ),
                       ),
@@ -185,21 +198,25 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q4'),
                         child: Container(
+                          height: 48.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
-                          child: Padding(
-                            padding:  EdgeInsets.all(16.r),
-                            child: // What have you done?
-                                Text(controller.ques4.value,
-                                    maxLines: 1,
-                                    style:  TextStyle(
-                                        color: grey_aaaaaa,
-                                        overflow: TextOverflow.ellipsis,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: helveticaNeueNeue_medium,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 14.sp),
-                                    textAlign: TextAlign.left),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: // What have you done?
+                                  Text(controller.ques4.value,
+                                      maxLines: 1,
+                                      style:  TextStyle(
+                                          color: grey_aaaaaa,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                            ),
                           ),
                         ),
                       ),
@@ -209,21 +226,25 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q5'),
                         child: Container(
+                          height: 48.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
-                          child: Padding(
-                            padding:  EdgeInsets.all(16.sp),
-                            child: // What have you done?
-                                Text(controller.ques5.value,
-                                    maxLines: 1,
-                                    style:  TextStyle(
-                                        color: grey_aaaaaa,
-                                        overflow: TextOverflow.ellipsis,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: helveticaNeueNeue_medium,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 14.sp),
-                                    textAlign: TextAlign.left),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: // What have you done?
+                                  Text(controller.ques5.value,
+                                      maxLines: 1,
+                                      style:  TextStyle(
+                                          color: grey_aaaaaa,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                            ),
                           ),
                         ),
                       ),
