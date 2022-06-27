@@ -27,6 +27,7 @@ class _TextInputState extends State<InputTextLayout> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 48.h,
       decoration: BoxDecoration(
         border: Border.all(
           color: checkColor == true ? orange_ff881a : light_grey_f2f2f2,
@@ -40,71 +41,73 @@ class _TextInputState extends State<InputTextLayout> {
       ),
       child: Padding(
         padding:
-             EdgeInsets.only(left: 16.w, right: 16.w, top: 13.h, bottom: 12.h),
-        child: TextFormField(
-          style:  TextStyle(
-              color: black_121212,
-              fontFamily: helveticaNeueNeue_medium,
-              fontSize: 14.0.sp),
-          keyboardType: widget.inputType,
-          inputFormatters: [
-            widget.numKeypad == true
-                ? FilteringTextInputFormatter.digitsOnly
-                : FilteringTextInputFormatter.singleLineFormatter,
-            widget.numKeypad == true
-                ? LengthLimitingTextInputFormatter(10)
-                : LengthLimitingTextInputFormatter(200),
-          ],
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-            isDense: true,
-            // you can change this with the top text like you want
-            labelText: widget.hintData,
-            labelStyle:  TextStyle(
-                color: grey_aaaaaa,
-                fontFamily: helveticaNeueNeue_medium,
-                fontSize: 14.sp),
-            hintStyle:  TextStyle(
+             EdgeInsets.only(left: 16.w, right: 16.w,),
+        child: Center(
+          child: TextFormField(
+            style:  TextStyle(
                 color: black_121212,
                 fontFamily: helveticaNeueNeue_medium,
                 fontSize: 14.sp),
-            border: InputBorder.none,
-            filled: false,
+            keyboardType: widget.inputType,
+            inputFormatters: [
+              widget.numKeypad == true
+                  ? FilteringTextInputFormatter.digitsOnly
+                  : FilteringTextInputFormatter.singleLineFormatter,
+              widget.numKeypad == true
+                  ? LengthLimitingTextInputFormatter(10)
+                  : LengthLimitingTextInputFormatter(200),
+            ],
+            decoration: InputDecoration(
+              contentPadding:  EdgeInsets.zero,
+              isDense: true,
+              // you can change this with the top text like you want
+              labelText: widget.hintData,
+              labelStyle:  TextStyle(
+                  color: grey_aaaaaa,
+                  fontFamily: helveticaNeueNeue_medium,
+                  fontSize: 14.sp),
+              hintStyle:  TextStyle(
+                  color: black_121212,
+                  fontFamily: helveticaNeueNeue_medium,
+                  fontSize: 14.sp),
+              border: InputBorder.none,
+              filled: false,
+            ),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) => widget.validator(value!),
+            textInputAction: widget.textInputAction,
+            controller: widget.controller,
+            cursorColor: black_121212,
+            onEditingComplete: () {
+              FocusScope.of(context).unfocus();
+              FocusScope.of(context).nextFocus();
+            },
+            onChanged: (inputValue) {
+              if (inputValue.isNotEmpty) {
+                setState(() {
+                  checkFillColor = false;
+                  checkColor = true;
+                });
+              } else {
+                setState(() {
+                  checkFillColor = true;
+                  checkColor = false;
+                });
+              }
+            },
+            onFieldSubmitted: (String value) {
+              if (value.isNotEmpty) {
+                setState(() {
+                  checkFillColor = false;
+                  checkColor = false;
+                });
+              } else {
+                setState(() {
+                  checkFillColor = true;
+                });
+              }
+            },
           ),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) => widget.validator(value!),
-          textInputAction: widget.textInputAction,
-          controller: widget.controller,
-          cursorColor: black_121212,
-          onEditingComplete: () {
-            FocusScope.of(context).unfocus();
-            FocusScope.of(context).nextFocus();
-          },
-          onChanged: (inputValue) {
-            if (inputValue.isNotEmpty) {
-              setState(() {
-                checkFillColor = false;
-                checkColor = true;
-              });
-            } else {
-              setState(() {
-                checkFillColor = true;
-                checkColor = false;
-              });
-            }
-          },
-          onFieldSubmitted: (String value) {
-            if (value.isNotEmpty) {
-              setState(() {
-                checkFillColor = false;
-                checkColor = false;
-              });
-            } else {
-              setState(() {
-                checkFillColor = true;
-              });
-            }
-          },
         ),
       ),
     );

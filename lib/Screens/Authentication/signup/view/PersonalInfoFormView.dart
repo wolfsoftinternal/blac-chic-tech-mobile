@@ -391,7 +391,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                           child: TextField(
                             controller: controller.aboutController.value,
                             maxLines: 10,
-                            minLines: 6,
+                            minLines: 7,
                             textInputAction: TextInputAction.newline,
                             keyboardType: TextInputType.multiline,
                             style: TextStyle(
@@ -427,7 +427,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                       ),
 
                       SizedBox(
-                        height: 16.h,
+                        height: 24.h,
                       ),
                       Row(
                         children: [
@@ -449,6 +449,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                   fontWeight: FontWeight.w500,
                                   fontFamily: helveticaNeueNeue_medium,
                                   fontStyle: FontStyle.normal,
+                                  letterSpacing: 0.5,
                                   fontSize: 14.sp),
                               textAlign: TextAlign.left),
 
