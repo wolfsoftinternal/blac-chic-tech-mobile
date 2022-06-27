@@ -16,6 +16,8 @@ class SharePreData {
 
   static String key_UserInfoModel = "UserInfoModel";
 
+  static String key_UserList = "UserList";
+
   //American dollar currency
   static String strDollar = "\$";
 

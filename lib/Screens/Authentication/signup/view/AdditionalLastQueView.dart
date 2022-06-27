@@ -46,7 +46,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
           flex: 1,
           child: SingleChildScrollView(
             child: Padding(
-              padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
+              padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 32.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,6 +59,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                             fontWeight: FontWeight.w900,
                             fontFamily: helvetica_neu_bold,
                             fontStyle: FontStyle.normal,
+                            letterSpacing: 0.7,
                             fontSize: 24.sp),
                         textAlign: TextAlign.center),
                   ),
@@ -74,16 +75,17 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                             fontFamily: helveticaNeueNeue_medium,
                             fontStyle: FontStyle.normal,
                             fontSize: 14.sp,
+                            letterSpacing: 0.8,
                             height: 1.5.h),
                         textAlign: TextAlign.center),
                   ),
                   SizedBox(
-                    height: 32.h,
+                    height: 40.h,
                   ),
 
                   Container(
                     decoration: EditTextDecoration,
-                    height: 250.h,
+                    height: 280.h,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +94,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                           flex: 1,
                           child: Padding(
                             padding:  EdgeInsets.only(
-                                top: 15.h, bottom: 2.h, right: 24.w, left: 24.w),
+                                top: 16.h, bottom: 2.h, right: 16.w, left: 16.w),
                             child: TextFormField(
                               controller: controller.addtionalController.value,
                               minLines: 2,
@@ -103,8 +105,10 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                                   fontWeight: FontWeight.w500,
                                   fontFamily: helveticaNeueNeue_medium,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14.sp),
+                                  fontSize: 14.sp,
+                                  height: 1.5.h),
                               decoration: InputDecoration(
+                                contentPadding: EdgeInsets.zero,
                                 border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -116,7 +120,8 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                                     fontWeight: FontWeight.w500,
                                     fontFamily: helveticaNeueNeue_medium,
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 14.sp),
+                                    fontSize: 14.sp,
+                                    height: 1.5.h),
                               ),
                             ),
                           ),
@@ -129,7 +134,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                           margin: EdgeInsets.all(16.r),
                           child: Padding(
                             padding:  EdgeInsets.symmetric(
-                                horizontal: 12.w, vertical: 10.h),
+                                horizontal: 12.w, vertical: 10.5.h),
                             child: Row(
                               mainAxisAlignment:
                                   MainAxisAlignment.spaceBetween,
