@@ -109,7 +109,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   BackLayout(),
                   Container(
                     height: 48.h,
-                    width: 48.w,
+                    width: 36.w,
                   ),
                   const Spacer(),
                   Center(
@@ -159,8 +159,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                 context, controller.details.value.id);
                           },
                           child: Container(
-                            width: 48.w,
-                            height: 48.h,
+                            width: 44.w,
+                            height: 44.h,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10.r),
@@ -181,7 +181,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                         ),
                   userId == controller.details.value.id
                       ? Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
+                          padding: const EdgeInsets.only(right: 14.0),
                           child: GestureDetector(
                             onTap: () {
                               Get.to(ProfileSetting());
@@ -691,7 +691,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             // ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 12.0),
+                padding:  EdgeInsets.only(top: 12.h),
                 child: TabBarView(
                   controller: tabController,
                   children: [

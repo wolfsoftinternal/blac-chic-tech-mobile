@@ -442,6 +442,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                           SizedBox(
                             width: 5.w,
                           ),
+
                           // Social Media Account
                           Text("Social Media Account",
                               style: TextStyle(
@@ -464,6 +465,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               color: Colors.black12,
                             ),
                           ),
+
                         ],
                       ),
                       SizedBox(

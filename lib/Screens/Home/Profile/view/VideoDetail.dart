@@ -130,8 +130,8 @@ class _VideoDetailState extends State<VideoDetail> {
                           createBottomSheet(context, widget.userId);
                         },
                         child: Container(
-                          width: 48.w,
-                          height: 48.h,
+                          width: 45.w,
+                          height: 40.h,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -152,14 +152,14 @@ class _VideoDetailState extends State<VideoDetail> {
                       ),
                 widget.userId == controller.details.value.id
                     ? Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
+                        padding:  EdgeInsets.only(right: 15.w),
                         child: GestureDetector(
                           onTap: () {
                             Get.to(ProfileSetting());
                           },
                           child: Container(
-                            width: 55.w,
-                            height: 55.h,
+                            width: 45.w,
+                            height: 45.h,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),

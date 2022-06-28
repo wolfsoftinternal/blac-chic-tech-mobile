@@ -50,7 +50,7 @@ class _EventTabState extends State<EventTab> {
                 ),
               )
             : Padding(
-                padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                padding: EdgeInsets.only(left: 16.w, right: 16.w),
                 child: ListView(
                   physics: ScrollPhysics(), // <-- this will disable scroll
                   shrinkWrap: true,
