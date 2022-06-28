@@ -451,7 +451,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
               ),
               setHelveticaMedium(
                   admireList.admireDetails!.currentJobs != null
-                      ? admireList.admireDetails!.currentJobs!.companyName!
+                      ? admireList.admireDetails!.currentJobs!.companyName ?? ""
                       : "",
                   12.sp,
                   grey_aaaaaa,

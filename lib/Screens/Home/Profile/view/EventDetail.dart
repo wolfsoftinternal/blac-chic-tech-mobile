@@ -294,7 +294,7 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
 
                                   Visibility(
-                                    visible: controller.details.value.wallet != null && (int.parse(controller.details.value.wallet??"0") > 0),
+                                    visible: controller.details.value.wallet != null && double.parse(controller.details.value.wallet??"0").toInt() > 0,
                                     child: Column(
                                       children: [  Align(
                                         alignment: Alignment.centerLeft,

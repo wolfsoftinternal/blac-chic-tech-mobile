@@ -224,7 +224,7 @@ class StepsController extends GetxController {
         'about_us': aboutController.value.text,
       });
     } else if(isFrom == 'edit_profile'){
-      if (imagePath != "") {
+      if (imagePath.toString() != "null") {
         request.files.add(await http.MultipartFile.fromPath(
             'image', imagePath.value.toString()));
       }
