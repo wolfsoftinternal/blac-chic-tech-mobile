@@ -75,6 +75,7 @@ class EventList {
     this.invitedUsers,
     this.transactions,
     this.event_type,
+    this.event_status,
   });
 
   int? id;
@@ -112,6 +113,7 @@ class EventList {
   List<UserList>? invitedUsers;
   List<Order>? transactions;
   String? event_type;
+  dynamic event_status;
 
   factory EventList.fromJson(Map<String, dynamic> json) => EventList(
         id: json["id"],
@@ -169,7 +171,8 @@ class EventList {
         : null,
 
 
-        event_type: json["event_type"],
+        event_type: json["event_type"] != null ? json["event_type"] : null,
+        event_status: json["event_status"] == null ? null : json["event_status"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -210,6 +213,7 @@ class EventList {
             List<dynamic>.from(invitedUsers!.map((x) => x.toJson())),
        "transactions": List<dynamic>.from(transactions!.map((x) => x.toJson())),
         "event_type": event_type,
+        "event_status": event_status
       };
 }
 

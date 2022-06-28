@@ -189,9 +189,16 @@ class VideoController extends GetxController {
     dynamic body;
 
     if(pagination == false){
-       body = {
+      if (userId != null) {
+      body = {
+        'user_id': userId.toString(),
         'search': searchController.value.text.toString(),
       };
+    } else {
+      body = {
+        'search': searchController.value.text.toString(),
+      };
+    }
     }else{
       PageNumber = PageNumber + 1;
     if (userId != null) {

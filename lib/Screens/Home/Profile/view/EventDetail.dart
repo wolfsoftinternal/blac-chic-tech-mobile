@@ -305,8 +305,11 @@ class _EventDetailState extends State<EventDetail> {
                                           height: 6,
                                         ),
                                         Row(
+                                          
                                           children: [
                                             Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 setRoboto("Use Wallet Balance", 14,
                                                     Colors.black, FontWeight.w500),
@@ -321,11 +324,11 @@ class _EventDetailState extends State<EventDetail> {
                                               ],
                                             ),
 
-                                            Spacer(flex: 1,),
+                                            Spacer(),
 
-                                            Expanded(
-                                              flex: 1,
-                                              child: Checkbox(
+                                            // Expanded(
+                                            //   flex: 1,
+                                              Checkbox(
                                                 value: controller.isWallet.value,
                                                 onChanged: (value) {
                                                   setState(() {
@@ -334,7 +337,7 @@ class _EventDetailState extends State<EventDetail> {
                                                   });
                                                 },
                                               ),
-                                            )
+                                            // )
                                           ],
                                         ),
                                         const SizedBox(

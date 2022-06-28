@@ -115,11 +115,8 @@ class _VideoListBctState extends State<VideoListBct> {
             ),
           ),
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
+
+        Container(
                   color: light_grey_f2f2f2,
                   child: Column(
                     children: [
@@ -302,6 +299,11 @@ class _VideoListBctState extends State<VideoListBct> {
                     ],
                   ),
                 ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                
                 Container(
                     width: double.infinity,
                     height: 1,

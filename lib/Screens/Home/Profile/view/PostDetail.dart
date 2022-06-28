@@ -139,7 +139,11 @@ class _PostDetailState extends State<PostDetail> {
                         padding: EdgeInsets.only(right: 10.w),
                         child: GestureDetector(
                           onTap: () {
-                            Get.to(ProfileSetting());
+                            Get.to(ProfileSetting())!.then((value) {
+                              checkNet(context).then((value) {
+                                controller.userProfileAPI(context, false);
+                              });
+                            });
                           },
                           child: Container(
                             width: 55.w,

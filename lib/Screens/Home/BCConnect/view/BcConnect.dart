@@ -84,15 +84,7 @@ class _BcConnectState extends State<BcConnect> {
             SizedBox(
               height: 32.h,
             ),
-            Expanded(
-              flex: 1,
-              child: SingleChildScrollView(
-                controller: videoController.scrollController,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
+            Padding(
                       padding: EdgeInsets.only(left: 16.w, right: 16.w),
                       child: SearchBarTag(
                         placeholder: "Search people",
@@ -110,7 +102,7 @@ class _BcConnectState extends State<BcConnect> {
 
                     // Recently Search
                     Padding(
-                      padding: EdgeInsets.only(left: 16.w, top: 24.h),
+                      padding: EdgeInsets.only(left: 16.w, top: 24.h, bottom: 12.h),
                       child: Text("${videoController.userCount.toString()} Results",
                           style: TextStyle(
                               color: black_121212,
@@ -120,8 +112,19 @@ class _BcConnectState extends State<BcConnect> {
                               fontSize: 16.sp),
                           textAlign: TextAlign.left),
                     ),
+            Expanded(
+              flex: 1,
+              child: SingleChildScrollView(
+                controller: videoController.scrollController,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    
 
-                    //   SizedBox(height: 16.h,),
+                    
+
+                      SizedBox(height: 12.h,),
                     // Rectangle 1363
 
                     GridView.builder(

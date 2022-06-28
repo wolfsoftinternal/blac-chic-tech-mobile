@@ -167,7 +167,11 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                           padding: const EdgeInsets.only(right: 10.0),
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(ProfileSetting());
+                              Get.to(ProfileSetting())!.then((value) {
+                              checkNet(context).then((value) {
+                                controller.userProfileAPI(context, false);
+                              });
+                            });
                             },
                             child: Container(
                               width: 48.w,

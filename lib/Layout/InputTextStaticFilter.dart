@@ -182,6 +182,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                             eventDetailController.pageNumber + 1;
                         dynamic body = {
                           'page': eventDetailController.pageNumber.toString(),
+                          'event_type': 'upcoming',
                           'name':
                               eventDetailController.searchController.value.text,
                           'city': eventDetailController.strCityId.value,
@@ -288,6 +289,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                 dynamic body = {
                                   'page': eventDetailController.pageNumber
                                       .toString(),
+                                      'event_type': 'upcoming',
                                 };
                                 eventDetailController.initScrolling(
                                     context);
@@ -300,7 +302,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                 'page':
                                     eventDetailController.pageNumber.toString(),
                                 'name': eventDetailController
-                                    .searchController.value.text
+                                    .searchController.value.text,
+                                    'event_type': 'upcoming',
                               };
                               eventDetailController.initScrolling(
                                   context);
@@ -544,7 +547,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                               eventDetailController.searchController.value.text,
                           'city': eventDetailController.strCityId.value,
                           'date': strDate.toString(),
-                          'type': type.toString()
+                          'type': type.toString(),
+                          'event_type': 'upcoming',
                         };
                         eventDetailController.allEventListApi(body);
                       

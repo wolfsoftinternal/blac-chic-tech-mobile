@@ -43,9 +43,8 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
     controller.pastUpcomingPageNumber.value = 1;
     dynamic body = {
       'page': controller.pastUpcomingPageNumber.toString(),
-      'event_type': 'upcoming'
     };
-    controller.allEventListApi(body, 'upcoming');
+    controller.UpcomingPastEventListApi(body);
   }
 
   @override
@@ -81,10 +80,10 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                           controller.pageNumber.value = 1;
                           dynamic body = {
                             'page': controller.pageNumber.toString(),
-                            'event_type': 'upcoming'
+                            // 'event_type': 'upcoming'
                           };
                           controller.isLoading.value = true;
-                          controller.allEventListApi(body, 'upcoming');
+                          controller.UpcomingPastEventListApi(body);
                         });
                       },
                       child: Container(
@@ -122,10 +121,10 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                           controller.pageNumber.value = 1;
                           dynamic body = {
                             'page': controller.pageNumber.toString(),
-                            'event_type': 'past'
+                            // 'event_type': 'past'
                           };
                           controller.isLoading.value = true;
-                          controller.allEventListApi(body, 'past');
+                          controller.UpcomingPastEventListApi(body);
                         });
                       },
                       child: Container(
