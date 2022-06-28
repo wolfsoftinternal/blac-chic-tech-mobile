@@ -183,7 +183,16 @@ class LoginController extends GetxController {
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 200) {
+            SignupModel loginInModel = SignupModel.fromJson(userModel);
             var preferences = MySharedPref();
+            
+            await preferences.setSignupModel(
+                loginInModel, SharePreData.keySignupModel);
+
+            await preferences.setString(
+                SharePreData.keytoken, loginInModel.data!.token.toString());
+
+
             SignupModel? myModel =
                 await preferences.getSignupModel(SharePreData.keySignupModel);
 

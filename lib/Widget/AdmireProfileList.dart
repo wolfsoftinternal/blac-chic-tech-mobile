@@ -117,7 +117,9 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
 
               GestureDetector(
                 onTap: () {
-                  Get.to(ProfileSetting());
+                  Get.to(ProfileSetting())!.then((value) {
+                    init();
+                  });
                 },
                 child: 
                 // userId == widget.admireList.admireDetails!.id ?

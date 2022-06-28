@@ -68,8 +68,8 @@ class _LoginState extends State<LoginView> {
                      SizedBox(
                       height: 51.h,
                     ),
-                    Image.asset(
-                      img_logo,
+                    SvgPicture.asset(
+                      logo,
                       width: 94.r,
                       height: 94.r,
                     ),

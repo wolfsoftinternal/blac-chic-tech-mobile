@@ -152,12 +152,10 @@ class _OtherUserListState extends State<OtherUserList> {
                   Expanded(
                     child: Text(
                       widget.otherUser.currentJobs != null
-                          ? widget.otherUser.currentJobs!.title!
-                                  .toUpperCase() +
-                              ' - ' +
-                              widget.otherUser.currentJobs!
-                                  .companyName!
-                                  .toUpperCase()
+                          ? widget.otherUser.currentJobs!.title != null && widget.otherUser.currentJobs!.companyName != null ? "${widget.otherUser.currentJobs!.title!.toUpperCase()} - ${widget.otherUser.currentJobs!.companyName!.toUpperCase()}" : ""
+                              // widget.otherUser.currentJobs!
+                              //     .companyName!
+                              //     .toUpperCase()
                           : "",
                       softWrap: true,
                       textAlign: TextAlign.center,

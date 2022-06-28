@@ -41,6 +41,7 @@ class EventDetailController extends GetxController {
         pageNumber = pageNumber + 1;
         dynamic body = {
           'page': pageNumber.toString(),
+          'event_type': 'upcoming',
         };
         await allEventListApi(body);
       }
@@ -61,7 +62,7 @@ class EventDetailController extends GetxController {
         dynamic body = {
           'page': pastUpcomingPageNumber.toString(),
         };
-        await allEventListApi(body);
+        await UpcomingPastEventListApi(body);
       }
     });
   }
@@ -96,15 +97,14 @@ class EventDetailController extends GetxController {
     });
   }
 
-  allEventListApi(body, [isFrom]) async {
+  UpcomingPastEventListApi(body) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
-    String url = urlBase + urlallEventList;
+    String url = urlBase + urlUpcomingPast;
     final apiReq = Request();
 
     apiReq.postAPI(url, body, token.toString()).then((value) {
-      if (pageNumber == 1) {
-        eventList.clear();
+      if (pastUpcomingPageNumber == 1) {
         upcomingEventList.clear();
         pastEventList.clear();
       }
@@ -122,23 +122,67 @@ class EventDetailController extends GetxController {
           if (model.statusCode == 200) {
 
             EventListModel detail = EventListModel.fromJson(userModel);
-            eventList.addAll(detail.data!);
-
-            if(isFrom != null){
-              if(isFrom == 'past'){
-                pastEventList.addAll(detail.data!);
+            // eventList.addAll(detail.data!);
+            pastEventList.clear();
+            upcomingEventList.clear();
+            for(var item in detail.data!){
+              if(item.event_status == 1){
+                pastEventList.add(item);
               }else{
-                upcomingEventList.addAll(detail.data!);
+                upcomingEventList.add(item);
               }
-            }   
-            isLoading.value = false;    
-            isPaginationLoading.value = false;
+            
+            }
+
+            print(pastEventList.length);
+            print(upcomingEventList.length);
+            
+            isLoading.value = false; 
             isPastUpcomingPaginationLoading.value = false;
           } else {
             print(res.reasonPhrase);
             isLoading.value = false;
-            isPaginationLoading.value = false;
             isPastUpcomingPaginationLoading.value = false;
+          }
+        });
+      }
+    });
+  }
+
+  allEventListApi(body) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+    String url = urlBase + urlallEventList;
+    final apiReq = Request();
+
+
+
+    apiReq.postAPI(url, body, token.toString()).then((value) {
+      if (pageNumber == 1) {
+        eventList.clear();
+      }
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+
+          print('strData order' + strData);
+
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 200) {
+
+            EventListModel detail = EventListModel.fromJson(userModel);
+            eventList.addAll(detail.data!);
+          
+            isLoading.value = false;    
+            isPaginationLoading.value = false;
+          } else {
+            print(res.reasonPhrase);
+            isLoading.value = false;
+            isPaginationLoading.value = false;
           }
         });
       }

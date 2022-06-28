@@ -179,7 +179,8 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
 
                 GestureDetector(
                   onTap: () {
-                    launchURL(featuredController.featuredList[0].link!);
+                    // launchURL(featuredController.featuredList[0].link!);
+                    launchURL('https://www.google.com');
                     // _controller.nextPage(
                     //     duration: _kDuration, curve: _kCurve);
                   },

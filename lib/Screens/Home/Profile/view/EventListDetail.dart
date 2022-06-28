@@ -147,7 +147,11 @@ class _EventListDetailState extends State<EventListDetail> {
                         padding: const EdgeInsets.only(right: 10.0),
                         child: GestureDetector(
                           onTap: () {
-                            Get.to(ProfileSetting());
+                            Get.to(ProfileSetting())!.then((value) {
+                              checkNet(context).then((value) {
+                                controller.userProfileAPI(context, false);
+                              });
+                            });
                           },
                           child: Container(
                             width: 55.w,
