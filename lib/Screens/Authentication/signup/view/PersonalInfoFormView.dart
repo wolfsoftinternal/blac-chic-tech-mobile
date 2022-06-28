@@ -594,7 +594,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                 child: BlackNextButton(str_continue, black_121212, () {
                   FocusScope.of(context).unfocus();
                   if (imagePath.path.isNotEmpty) {
-                    controller.imagePath.value = imagePath.path.toString();
+                    controller.imagePath.value = profilePath.toString();
                   }
                   if (controller.checkPersonalValidation(context)) {
                     checkNet(context).then((value) {

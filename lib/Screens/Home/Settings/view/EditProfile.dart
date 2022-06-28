@@ -667,7 +667,7 @@ class _EditProfileState extends State<EditProfile> {
               child: BlackButton("Save Profile", Colors.white, () {
                 if (controller.checkValidation(context)) {
                   if(imagePath.path.isNotEmpty){
-                    stepsController.imagePath.value = imagePath.path.toString();
+                    stepsController.imagePath.value = profilePath.toString();
                   }
                   checkNet(context).then((value) {
                     stepsController.personalInfoAPI(context, 'edit_profile');
