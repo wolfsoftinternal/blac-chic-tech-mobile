@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:blackchecktech/Screens/Authentication/login/view/ForgotPassword.dart';
+import 'package:blackchecktech/Screens/Authentication/login/view/ResetPassword.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/EducationInfoFormView.dart';
@@ -23,6 +25,9 @@ import '../model/SignupModel.dart';
 class LoginController extends GetxController {
   Rx<TextEditingController> inputText = TextEditingController().obs;
   Rx<TextEditingController> pswdText = TextEditingController().obs;
+
+  Rx<TextEditingController> forgotPswdText = TextEditingController().obs;
+  Rx<TextEditingController> confirmPswdText = TextEditingController().obs;
 
   RxBool boolRemember = false.obs;
 
@@ -132,6 +137,98 @@ class LoginController extends GetxController {
     });
   }
 
+  forgotPasswordApi(BuildContext context) async {
+    String url = urlBase + urlForgotPassword;
+    final apiReq = Request();
+    dynamic body = {
+      'email': inputText.value.text,
+    };
+
+    await apiReq.postAPIwithoutAuth(url, body).then((value) async {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        await res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 200) {
+            Get.to(ResetPassword());
+          } else {
+            snackBar(context, model.message!);
+          }
+        });
+      } else if (res.statusCode == 101) {
+        snackBar(context, "Enter valid Credentials");
+      }
+    });
+  }
+
+  resetPasswordApi(BuildContext context) async {
+    String url = urlBase + urlResetPassword;
+    final apiReq = Request();
+    dynamic body = {
+      'email': inputText.value.text,
+      'password': forgotPswdText.value.text,
+    };
+
+    await apiReq.postAPIwithoutAuth(url, body).then((value) async {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        await res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 200) {
+            var preferences = MySharedPref();
+            SignupModel? myModel =
+                await preferences.getSignupModel(SharePreData.keySignupModel);
+
+            if (myModel!.data!.aboutUs == "" || myModel.data!.aboutUs == null) {
+              Get.offAll(const PersonalInfoFormView());
+            } else if (myModel.data!.currentJobs == null ||
+                myModel.data!.currentJobs.toString() == '[]') {
+              Get.offAll(const ExperienceInfoFormView());
+            } else if (myModel.data!.educations == null ||
+                myModel.data!.educations.toString() == '[]') {
+              Get.offAll(const EducationInfoFormView());
+            } else if (myModel.data!.questions == null ||
+                myModel.data!.questions.toString() == '[]') {
+              Get.offAll(const AdditionalQueFormView());
+            } else if (myModel.data!.questions != null ||
+                myModel.data!.questions.toString() != '[]') {
+              String questionsInfo = "";
+              String lastQuestionsInfo = "";
+              for (int i = 0; i < myModel.data!.questions!.length; i++) {
+                if (myModel.data!.questions![i].type == "normal") {
+                  questionsInfo = "Done";
+                } else {
+                  lastQuestionsInfo = "Done";
+                }
+              }
+              if (questionsInfo != "Done") {
+                Get.offAll(const AdditionalQueFormView());
+              } else if (lastQuestionsInfo != "Done") {
+                Get.offAll(const AdditionalLastQueView());
+              } else {
+                Get.offAll(HomePage());
+              }
+            } else {
+              Get.offAll(HomePage());
+            }
+          } else {
+            snackBar(context, model.message!);
+          }
+        });
+      } else if (res.statusCode == 101) {
+        snackBar(context, "Enter valid Credentials");
+      }
+    });
+  }
+
   Future<void> getStoredUserDetails() async {
     var preferences = MySharedPref();
     SignupModel? profileModel =
@@ -143,7 +240,7 @@ class LoginController extends GetxController {
 
   bool checkValidation(context) {
     if (inputText.value.text.isEmpty) {
-      snackBar(context, "Enter Username");
+      snackBar(context, "Enter Email/Username");
       return false;
     } else if (pswdText.value.text.isEmpty) {
       snackBar(context, "Enter password");

@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Screens/Authentication/login/view/ForgotPassword.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/SignupFormView.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +85,7 @@ class _LoginState extends State<LoginView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             InputTextLayout(
-                                str_username,
+                                str_email + "/" + str_username,
                                 controller.inputText.value,
                                 false,
                                 TextInputAction.next,
@@ -158,14 +159,19 @@ class _LoginState extends State<LoginView> {
                                   ),
                                 ),
                                 // Forgot password
-                                 Text("Forgot password?",
-                                    style: TextStyle(
-                                        color: grey_aaaaaa,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: helveticaNeueNeue_medium,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 12.0.sp),
-                                    textAlign: TextAlign.right)
+                                 InkWell(
+                                  onTap: (){
+                                    Get.to(ForgotPassword());
+                                  },
+                                   child: Text("Forgot password?",
+                                      style: TextStyle(
+                                          color: grey_aaaaaa,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 12.0.sp),
+                                      textAlign: TextAlign.right),
+                                 )
                               ],
                             ),
                              SizedBox(

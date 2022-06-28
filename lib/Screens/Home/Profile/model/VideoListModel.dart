@@ -88,7 +88,7 @@ class VideoList {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
-        speakerList: List<String>.from(json["speaker_list"].map((x) => x)),
+        speakerList: json["speaker_list"] == null ? null : List<String>.from(json["speaker_list"].map((x) => x)),
         isFocus: json["is_focus"],
         like_count: json["like_count"],
         is_like: json["is_like"],

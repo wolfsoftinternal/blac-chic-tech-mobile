@@ -265,44 +265,51 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                     setState(
                                       () {
                                         if (widget.type == 'host') {
-                                          // videoController
-                                          //     .userList[i].isHostSelected = true;
-                                          // if (controller.selectedHost.contains(
-                                          //     videoController.userList[i])) {
-                                          //   controller.selectedHost.remove(videoController.userList[i]);
-                                          //   videoController.userList[i]
-                                          //       .isHostSelected = false;
-                                          // } else {
-                                          //   controller.selectedHost
-                                          //       .add(videoController.userList[i]);
-                                          // }
-
-                                          List list = [];
-                                            if(controller.selectedHost.isEmpty){
-                                              videoController.userList[i].isHostSelected = true;
-                                              controller.selectedHost.add(videoController.userList[i]);
-                                            }else{
-                                              if (videoController.userList[i].isHostSelected == true) {
-                                                videoController.userList[i].isHostSelected = false;
-                                                // for (var item in controller.userList) {
-                                                  for (var selectedItem in controller.selectedHost) {
-                                                    if (selectedItem.id == videoController.userList[i].id) {
-                                                      selectedItem.isHostSelected = videoController.userList[i].isHostSelected;
-                                                      list.add(selectedItem.id);
-                                                    }
-                                                  }
-                                                // }
-
-                                                print(list);
-
-                                                for (var selectedItem in list) {
-                                                  controller.selectedHost.removeWhere((element) => element.id == selectedItem);
+                                          if(controller.selectedHost.isEmpty){
+                                            videoController.userList[i].isHostSelected = true;
+                                            controller.selectedHost.add(videoController.userList[i]);
+                                          }else{
+                                            if (videoController.userList[i].isHostSelected == true) {
+                                              controller.selectedHost.remove(videoController.userList[i]);
+                                              videoController.userList[i].isHostSelected = false;
+                                            } else {
+                                              controller.selectedHost.clear();
+                                              for(var item in videoController.userList){
+                                                if(item.isHostSelected == true){
+                                                  item.isHostSelected = false;
                                                 }
-                                              } else {
-                                                controller.selectedHost.add(videoController.userList[i]);
-                                                videoController.userList[i].isHostSelected = true;
                                               }
+                                              controller.selectedHost.add(videoController.userList[i]);
+                                              videoController.userList[i].isHostSelected = true;
                                             }
+                                          }
+
+                                          // List list = [];
+                                          //   if(controller.selectedHost.isEmpty){
+                                          //     videoController.userList[i].isHostSelected = true;
+                                          //     controller.selectedHost.add(videoController.userList[i]);
+                                          //   }else{
+                                          //     if (videoController.userList[i].isHostSelected == true) {
+                                          //       videoController.userList[i].isHostSelected = false;
+                                          //       // for (var item in controller.userList) {
+                                          //         for (var selectedItem in controller.selectedHost) {
+                                          //           if (selectedItem.id == videoController.userList[i].id) {
+                                          //             selectedItem.isHostSelected = videoController.userList[i].isHostSelected;
+                                          //             list.add(selectedItem.id);
+                                          //           }
+                                          //         }
+                                          //       // }
+
+                                          //       print(list);
+
+                                          //       for (var selectedItem in list) {
+                                          //         controller.selectedHost.removeWhere((element) => element.id == selectedItem);
+                                          //       }
+                                          //     } else {
+                                          //       controller.selectedHost.add(videoController.userList[i]);
+                                          //       videoController.userList[i].isHostSelected = true;
+                                          //     }
+                                          //   }
                                         } else {
 
 

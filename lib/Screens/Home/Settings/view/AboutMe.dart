@@ -270,9 +270,10 @@ class _AboutMeState extends State<AboutMe> {
                                                               FontWeight.w500,
                                                           fontFamily:
                                                               helveticaNeueNeue_medium,
-                                                          fontStyle: FontStyle
-                                                              .normal,
-                                                          overflow: TextOverflow.ellipsis,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           fontSize: 14.sp),
                                                     ),
                                                   )),
@@ -560,204 +561,211 @@ class _AboutMeState extends State<AboutMe> {
                                                       ),
                                                       // Expanded(
                                                       //     child: InkWell(
-                                                        // onTap: () {
-                                                        //   Get.to(const CompanyList(
-                                                        //           isFrom:
-                                                        //               'past_job'))!
-                                                        //       .then((value) {
-                                                        //     pastCompanyNameController[
-                                                        //             index] =
-                                                        //         stepsController
-                                                        //             .pastJobName
-                                                        //             .value;
-                                                        //     pastJobImage[
-                                                        //             index] =
-                                                        //         stepsController
-                                                        //             .pastJobImage
-                                                        //             .value;
-                                                        //     setState(() {});
-                                                        //   });
-                                                        // },
+                                                      // onTap: () {
+                                                      //   Get.to(const CompanyList(
+                                                      //           isFrom:
+                                                      //               'past_job'))!
+                                                      //       .then((value) {
+                                                      //     pastCompanyNameController[
+                                                      //             index] =
+                                                      //         stepsController
+                                                      //             .pastJobName
+                                                      //             .value;
+                                                      //     pastJobImage[
+                                                      //             index] =
+                                                      //         stepsController
+                                                      //             .pastJobImage
+                                                      //             .value;
+                                                      //     setState(() {});
+                                                      //   });
+                                                      // },
                                                       //   child:
                                                       //       InputTextLayoutDemo(
                                                       //     "Company name",
-                                                          // pastCompanyNameController[
-                                                          //     index],
+                                                      // pastCompanyNameController[
+                                                      //     index],
                                                       //     false,
                                                       //     TextInputAction.done,
                                                       //     TextInputType.text,
                                                       //     true,
                                                       //     Container(
                                                       //       // padding: const EdgeInsets.all(8.0),
-                                                          //   child: pastJobImage[
-                                                          //               index]
-                                                          //           .isEmpty
-                                                          //       ? SvgPicture
-                                                          //           .asset(
-                                                          //           placeholder,
-                                                          //           width: 15.w,
-                                                          //           height:
-                                                          //               15.h,
-                                                          //           fit: BoxFit
-                                                          //               .cover,
-                                                          //         )
-                                                          //       : CachedNetworkImage(
-                                                          //           imageUrl:
-                                                          //               pastJobImage[
-                                                          //                   index],
-                                                          //           width: 15.w,
-                                                          //           height:
-                                                          //               15.h,
-                                                          //           fit: BoxFit
-                                                          //               .cover,
-                                                          //           progressIndicatorBuilder: (context,
-                                                          //                   url,
-                                                          //                   downloadProgress) =>
-                                                          //               SvgPicture
-                                                          //                   .asset(
-                                                          //             placeholder,
-                                                          //             width:
-                                                          //                 15.w,
-                                                          //             height:
-                                                          //                 15.h,
-                                                          //             fit: BoxFit
-                                                          //                 .cover,
-                                                          //           ),
-                                                          //           errorWidget: (context,
-                                                          //                   url,
-                                                          //                   error) =>
-                                                          //               SvgPicture
-                                                          //                   .asset(
-                                                          //             placeholder,
-                                                          //             width:
-                                                          //                 15.w,
-                                                          //             height:
-                                                          //                 15.h,
-                                                          //             fit: BoxFit
-                                                          //                 .cover,
-                                                          //           ),
-                                                          //         ),
-                                                          // ),
+                                                      //   child: pastJobImage[
+                                                      //               index]
+                                                      //           .isEmpty
+                                                      //       ? SvgPicture
+                                                      //           .asset(
+                                                      //           placeholder,
+                                                      //           width: 15.w,
+                                                      //           height:
+                                                      //               15.h,
+                                                      //           fit: BoxFit
+                                                      //               .cover,
+                                                      //         )
+                                                      //       : CachedNetworkImage(
+                                                      //           imageUrl:
+                                                      //               pastJobImage[
+                                                      //                   index],
+                                                      //           width: 15.w,
+                                                      //           height:
+                                                      //               15.h,
+                                                      //           fit: BoxFit
+                                                      //               .cover,
+                                                      //           progressIndicatorBuilder: (context,
+                                                      //                   url,
+                                                      //                   downloadProgress) =>
+                                                      //               SvgPicture
+                                                      //                   .asset(
+                                                      //             placeholder,
+                                                      //             width:
+                                                      //                 15.w,
+                                                      //             height:
+                                                      //                 15.h,
+                                                      //             fit: BoxFit
+                                                      //                 .cover,
+                                                      //           ),
+                                                      //           errorWidget: (context,
+                                                      //                   url,
+                                                      //                   error) =>
+                                                      //               SvgPicture
+                                                      //                   .asset(
+                                                      //             placeholder,
+                                                      //             width:
+                                                      //                 15.w,
+                                                      //             height:
+                                                      //                 15.h,
+                                                      //             fit: BoxFit
+                                                      //                 .cover,
+                                                      //           ),
+                                                      //         ),
+                                                      // ),
                                                       //   ),
                                                       // )),
 
                                                       Expanded(
-                                                        flex:1,
+                                                        flex: 1,
                                                         child: InkWell(
-                                                          onTap: (){
-                                                          Get.to(const CompanyList(
-                                                                  isFrom:
-                                                                      'past_job'))!
-                                                              .then((value) {
-                                                            pastCompanyNameController[
-                                                                    index] =
-                                                                stepsController
-                                                                    .pastJobName
-                                                                    .value;
-                                                            pastJobImage[
-                                                                    index] =
-                                                                stepsController
-                                                                    .pastJobImage
-                                                                    .value;
-                                                            setState(() {});
-                                                          });
-                                                        
+                                                          onTap: () {
+                                                            Get.to(const CompanyList(
+                                                                    isFrom:
+                                                                        'past_job'))!
+                                                                .then((value) {
+                                                              pastCompanyNameController[
+                                                                          index]
+                                                                      .text =
+                                                                  stepsController
+                                                                      .pastJobName
+                                                                      .value;
+                                                              pastJobImage[
+                                                                      index] =
+                                                                  stepsController
+                                                                      .pastJobImage
+                                                                      .value;
+                                                              setState(() {});
+                                                            });
                                                           },
                                                           child: Align(
-                                                            alignment: Alignment.centerLeft,
+                                                            alignment: Alignment
+                                                                .centerLeft,
                                                             child: Container(
                                                               decoration: BoxDecoration(
-                                                                color: light_grey_f2f2f2,
-                                                                borderRadius: BorderRadius.circular(4.r)
-                                                              ),
+                                                                  color:
+                                                                      light_grey_f2f2f2,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              4.r)),
                                                               child: Padding(
-                                                                 padding:  EdgeInsets.only(left: 16.w, right: 16.w, top: 13.h, bottom: 13.h),
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        left: 16
+                                                                            .w,
+                                                                        right: 16
+                                                                            .w,
+                                                                        top: 13
+                                                                            .h,
+                                                                        bottom:
+                                                                            13.h),
                                                                 child: Row(
-                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
                                                                   children: [
                                                                     Column(
-                                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
                                                                       children: [
                                                                         // Company name
                                                                         Text(
                                                                             "Company name",
-                                                                            style:  TextStyle(
+                                                                            style: TextStyle(
                                                                                 color: grey_aaaaaa,
                                                                                 fontWeight: FontWeight.w500,
                                                                                 fontFamily: helveticaNeueNeue_medium,
-                                                                                fontStyle:  FontStyle.normal,
-                                                                                fontSize: 10.sp
-                                                                            ),
-                                                                            textAlign: TextAlign.left
+                                                                                fontStyle: FontStyle.normal,
+                                                                                fontSize: 10.sp),
+                                                                            textAlign: TextAlign.left),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              5.h,
                                                                         ),
-                                                                        SizedBox(height: 5.h,),
                                                                         // Netflix
                                                                         Container(
-                                                                          width: MediaQuery.of(context).size.width * 0.20.w,
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.20.w,
                                                                           child: Text(
                                                                               pastCompanyNameController[index].text,
-                                                                              style:  TextStyle(
-                                                                                  color:  black_121212,
-                                                                                  fontFamily: helveticaNeueNeue_medium,
-                                                                                  fontStyle:  FontStyle.normal,
-                                                                                  fontSize: 14.sp,
-                                                                                  overflow: TextOverflow.ellipsis,
+                                                                              style: TextStyle(
+                                                                                color: black_121212,
+                                                                                fontFamily: helveticaNeueNeue_medium,
+                                                                                fontStyle: FontStyle.normal,
+                                                                                fontSize: 14.sp,
+                                                                                overflow: TextOverflow.ellipsis,
                                                                               ),
-                                                                              textAlign: TextAlign.left
-                                                                          ),
+                                                                              textAlign: TextAlign.left),
                                                                         )
                                                                       ],
                                                                     ),
-                                                                    pastJobImage[
-                                                                            index]
-                                                                        .isEmpty
-                                                                    ? SvgPicture
-                                                                        .asset(
-                                                                        placeholder,
-                                                                        width: 25.w,
-                                                                        height:
-                                                                            25.h,
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      )
-                                                                    : CachedNetworkImage(
-                                                                        imageUrl:
-                                                                            pastJobImage[
-                                                                                index],
-                                                                        width: 25.w,
-                                                                        height:
-                                                                            25.h,
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                        progressIndicatorBuilder: (context,
-                                                                                url,
-                                                                                downloadProgress) =>
-                                                                            SvgPicture
-                                                                                .asset(
-                                                                          placeholder,
-                                                                          width:
-                                                                              25.w,
-                                                                          height:
-                                                                              25.h,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        ),
-                                                                        errorWidget: (context,
-                                                                                url,
-                                                                                error) =>
-                                                                            SvgPicture
-                                                                                .asset(
-                                                                          placeholder,
-                                                                          width:
-                                                                              25.w,
-                                                                          height:
-                                                                              25.h,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        ),
-                                                                      ),
-                                                              
+                                                                    pastJobImage[index]
+                                                                            .isEmpty
+                                                                        ? SvgPicture
+                                                                            .asset(
+                                                                            placeholder,
+                                                                            width:
+                                                                                25.w,
+                                                                            height:
+                                                                                25.h,
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                          )
+                                                                        : CachedNetworkImage(
+                                                                            imageUrl:
+                                                                                pastJobImage[index],
+                                                                            width:
+                                                                                25.w,
+                                                                            height:
+                                                                                25.h,
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                                                                SvgPicture.asset(
+                                                                              placeholder,
+                                                                              width: 25.w,
+                                                                              height: 25.h,
+                                                                              fit: BoxFit.cover,
+                                                                            ),
+                                                                            errorWidget: (context, url, error) =>
+                                                                                SvgPicture.asset(
+                                                                              placeholder,
+                                                                              width: 25.w,
+                                                                              height: 25.h,
+                                                                              fit: BoxFit.cover,
+                                                                            ),
+                                                                          ),
                                                                   ],
                                                                 ),
                                                               ),
@@ -767,7 +775,6 @@ class _AboutMeState extends State<AboutMe> {
                                                       )
                                                     ],
                                                   ),
-
                                                   SizedBox(
                                                     height: 16.h,
                                                   ),
@@ -897,34 +904,46 @@ class _AboutMeState extends State<AboutMe> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        for (var element in cards) {
-                                          var image = element;
-                                          var titleController =
-                                              TextEditingController(
-                                                  text: element);
-                                          var nameController =
-                                              TextEditingController(
-                                                  text: element);
-                                          var websiteController =
-                                              TextEditingController(
-                                                  text: element);
-                                          var job = false;
+                                        if (pastCompanyTitleController
+                                                .last.value.text ==
+                                            '') {
+                                          snackBar(
+                                              context, 'Enter Company Title');
+                                        } else if (pastCompanyNameController
+                                                .last.value.text ==
+                                            '') {
+                                          snackBar(
+                                              context, 'Enter Company Name');
+                                        } else {
+                                          for (var element in cards) {
+                                            var image = element;
+                                            var titleController =
+                                                TextEditingController(
+                                                    text: element);
+                                            var nameController =
+                                                TextEditingController(
+                                                    text: element);
+                                            var websiteController =
+                                                TextEditingController(
+                                                    text: element);
+                                            var job = false;
 
-                                          pastJobImage.add(image);
-                                          pastCompanyTitleController
-                                              .add(titleController);
-                                          pastCompanyNameController
-                                              .add(nameController);
-                                          pastJob.add(job);
-                                          pastCompanyWebsiteController
-                                              .add(websiteController);
-
-                                          if (element.toString() == "") {
+                                            pastJobImage.add(image);
                                             pastCompanyTitleController
-                                                .remove(element);
+                                                .add(titleController);
+                                            pastCompanyNameController
+                                                .add(nameController);
+                                            pastJob.add(job);
+                                            pastCompanyWebsiteController
+                                                .add(websiteController);
+
+                                            if (element.toString() == "") {
+                                              pastCompanyTitleController
+                                                  .remove(element);
+                                            }
                                           }
+                                          cards.add("");
                                         }
-                                        cards.add("");
                                       });
                                     },
                                     child: Container(
@@ -1482,6 +1501,13 @@ class _AboutMeState extends State<AboutMe> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
+                                        if(universityController.last.value.text == ''){
+                                  snackBar(context, 'Enter university');
+                                }else if(startyearController.last.value.text == ''){
+                                  snackBar(context, 'Enter start year');
+                                }else if(endyearController.last.value.text == ''){
+                                  snackBar(context, 'Enter end year');
+                                }else{
                                         for (var element in cardsEducation) {
                                           var university =
                                               TextEditingController(
@@ -1499,6 +1525,7 @@ class _AboutMeState extends State<AboutMe> {
                                         }
 
                                         cardsEducation.add("");
+                                }
                                       });
                                     },
                                     child: Container(
@@ -2718,7 +2745,54 @@ class _AboutMeState extends State<AboutMe> {
                                     height: 16.h,
                                   ),
                                   BlackButton("Save", white_ffffff, () {
-                                    companyDetails.clear();
+                                    var status;
+                                    for(var item in pastCompanyNameController){
+                                      if(item.text == ''){
+                                        snackBar(context, 'Enter company name');
+                                        status = 'pending';
+                                      }else{
+                                        status = 'done';
+                                      }
+                                    }
+
+                                    for(var item in pastCompanyTitleController){
+                                      if(item.text == ''){
+                                        snackBar(context, 'Enter company title');
+                                        status = 'pending';
+                                      }else{
+                                        status = 'done';
+                                      }
+                                    }
+
+                                    for(var item in universityController){
+                                      if(item.text == ''){
+                                        snackBar(context, 'Enter university');
+                                        status = 'pending';
+                                      }else{
+                                        status = 'done';
+                                      }
+                                    }
+
+                                    for(var item in startyearController){
+                                      if(item.text == ''){
+                                        snackBar(context, 'Enter start year');
+                                        status = 'pending';
+                                      }else{
+                                        status = 'done';
+                                      }
+                                    }
+
+                                    for(var item in endyearController){
+                                      if(item.text == ''){
+                                        snackBar(context, 'Enter end year');
+                                        status = 'pending';
+                                      }else{
+                                        status = 'done';
+                                      }
+                                    }
+
+                                    if(status == 'done'){
+                                      companyDetails.clear();
                                     for (int i = 0; i < cards.length; i++) {
                                       companyDetails.add({
                                         '"title"':
@@ -2780,60 +2854,76 @@ class _AboutMeState extends State<AboutMe> {
                                       print(stepsController
                                           .educationalDetails.value);
 
-
                                       List ques = [{}];
-                  if (ques[0].toString() == "{}") {
-                    ques.removeAt(0);
-                  }
+                                      if (ques[0].toString() == "{}") {
+                                        ques.removeAt(0);
+                                      }
 
-                  if (stepsController.q1Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${myModel!.data!.questions![0].question!}"',
-                      '"answer"': '"${stepsController.q1Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q2Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${myModel!.data!.questions![1].question!}"',
-                      '"answer"': '"${stepsController.q2Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q3Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${myModel!.data!.questions![2].question!}"',
-                      '"answer"': '"${stepsController.q3Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q4Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${myModel!.data!.questions![3].question!}"',
-                      '"answer"': '"${stepsController.q4Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q5Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${myModel!.data!.questions![4].question!}"',
-                      '"answer"': '"${stepsController.q5Controller.value.text}"',
-                    });
-                  }
+                                      if (stepsController
+                                          .q1Controller.value.text.isNotEmpty) {
+                                        ques.add({
+                                          '"question"':
+                                              '"${myModel!.data!.questions![0].question!}"',
+                                          '"answer"':
+                                              '"${stepsController.q1Controller.value.text}"',
+                                        });
+                                      }
+                                      if (stepsController
+                                          .q2Controller.value.text.isNotEmpty) {
+                                        ques.add({
+                                          '"question"':
+                                              '"${myModel!.data!.questions![1].question!}"',
+                                          '"answer"':
+                                              '"${stepsController.q2Controller.value.text}"',
+                                        });
+                                      }
+                                      if (stepsController
+                                          .q3Controller.value.text.isNotEmpty) {
+                                        ques.add({
+                                          '"question"':
+                                              '"${myModel!.data!.questions![2].question!}"',
+                                          '"answer"':
+                                              '"${stepsController.q3Controller.value.text}"',
+                                        });
+                                      }
+                                      if (stepsController
+                                          .q4Controller.value.text.isNotEmpty) {
+                                        ques.add({
+                                          '"question"':
+                                              '"${myModel!.data!.questions![3].question!}"',
+                                          '"answer"':
+                                              '"${stepsController.q4Controller.value.text}"',
+                                        });
+                                      }
+                                      if (stepsController
+                                          .q5Controller.value.text.isNotEmpty) {
+                                        ques.add({
+                                          '"question"':
+                                              '"${myModel!.data!.questions![4].question!}"',
+                                          '"answer"':
+                                              '"${stepsController.q5Controller.value.text}"',
+                                        });
+                                      }
 
-                  print(ques);
+                                      print(ques);
 
-                  List itemQuesList = [];
+                                      List itemQuesList = [];
 
-                  itemQuesList.clear();
-                  for (var item in ques) {
-                    itemQuesList.add(item);
-                  }
-                  stepsController.questions.clear();
-                  stepsController.questions.value = itemQuesList;
-                                      
-
+                                      itemQuesList.clear();
+                                      for (var item in ques) {
+                                        itemQuesList.add(item);
+                                      }
+                                      stepsController.questions.clear();
+                                      stepsController.questions.value =
+                                          itemQuesList;
 
                                       checkNet(context).then((value) {
-                                        stepsController.personalInfoAPI(context, 'about_us');
+                                        stepsController.personalInfoAPI(
+                                            context, 'about_us');
                                       });
                                     }
+                                    }
+                                    
                                   })
                                 ],
                               ),

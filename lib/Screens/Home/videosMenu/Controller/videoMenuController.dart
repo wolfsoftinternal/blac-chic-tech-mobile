@@ -118,7 +118,7 @@ class VideoMenuController extends GetxController {
       'page': 0.toString()
     };
     print("body :: " + body.toString());
-    String url = urlBase + urlVideoList;
+    String url = urlBase + urlHomeVideoList;
     final apiReq = Request();
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
@@ -234,7 +234,7 @@ class VideoMenuController extends GetxController {
     dynamic body = {'search': topicFilter.toString()};
     //FormData formData = new FormData.fromMap(body);
 
-    String url = urlBase + urlVideoList;
+    String url = urlBase + urlHomeVideoList;
     final apiReq = Request();
     await apiReq.postAPIWithBearer(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
@@ -337,7 +337,7 @@ class VideoMenuController extends GetxController {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
-    String url = urlBase + urlVideoList;
+    String url = urlBase + urlHomeVideoList;
     final apiReq = Request();
 
     await apiReq.postAPIWithBearer(url, null, token.toString()).then((value) {

@@ -81,10 +81,10 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                           controller.pageNumber.value = 1;
                           dynamic body = {
                             'page': controller.pageNumber.toString(),
-                            'event_type': 'past'
+                            'event_type': 'upcoming'
                           };
                           controller.isLoading.value = true;
-                          controller.allEventListApi(body, 'past');
+                          controller.allEventListApi(body, 'upcoming');
                         });
                       },
                       child: Container(
@@ -199,7 +199,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                   width: 80,
                                 ),
                                 setHelceticaBold(
-                                    "NO Past EVENTS YET",
+                                    "NO PAST EVENTS YET",
                                     16.sp,
                                     grey_aaaaaa,
                                     FontWeight.w500,

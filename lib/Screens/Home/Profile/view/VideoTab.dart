@@ -81,7 +81,7 @@ class _VideoTabState extends State<VideoTab> {
                                                 player: YoutubePlayer(
                                                   showVideoProgressIndicator: false,
                                                   // thumbnail: Image.network(controller.thumbnail[index]),
-                                                  controller: YoutubePlayerController(initialVideoId: controller.videoId[index], flags: YoutubePlayerFlags(hideControls: true))
+                                                  controller: YoutubePlayerController(initialVideoId: controller.videoId[index], flags: YoutubePlayerFlags(hideControls: true, autoPlay: false))
                                                   // controller
                                                   //     .videoController.value[index],
                                                 ),
@@ -139,7 +139,16 @@ class _VideoTabState extends State<VideoTab> {
                                                 ])),
                                     ),
                                   ),
-                                  Center(child: SvgPicture.asset(icon_play)),
+                                  InkWell(
+                                    onTap: () {
+                                      Get.to(VideoDetail(id: controller.videoList[index].id, userId: widget.id,))!.then((value) {
+                                        dynamic videoBody = {
+                                          'user_id': widget.id.toString(),
+                                          'page': controller.videoPageNumber.toString()
+                                        };
+                                        controller.videoListAPI(context, videoBody);
+                                      });
+                                    },child: Center(child: SvgPicture.asset(icon_play))),
                                   // Align(
                                   //   alignment: Alignment.topRight,
                                   //   child: Padding(
