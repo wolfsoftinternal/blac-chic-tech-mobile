@@ -70,8 +70,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Container(
                         child: Center(
-                            child: Image.asset(
-                          img_logo,
+                            child: SvgPicture.asset(
+                          logo,
                           height: 58,
                           width: 58,
                         )),

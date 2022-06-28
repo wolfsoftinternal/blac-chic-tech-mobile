@@ -157,11 +157,10 @@ class _EducationState extends State<EducationInfoFormView> {
                                     decoration: EditTextDecoration,
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                        left: 17.w,
-                                        right: 17.w,
-                                        top: 5.h,
-                                        bottom: 5.h
-                                      ),
+                                          left: 17.w,
+                                          right: 17.w,
+                                          top: 5.h,
+                                          bottom: 5.h),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -198,18 +197,16 @@ class _EducationState extends State<EducationInfoFormView> {
                                           decoration: EditTextDecoration,
                                           child: Padding(
                                             padding: EdgeInsets.only(
-                                              left: 17.w,
-                                              right: 17.w,
-                                              top: 5.h,
-                                              bottom: 5.h
-                                            ),
+                                                left: 17.w,
+                                                right: 17.w,
+                                                top: 5.h,
+                                                bottom: 5.h),
                                             child: Row(
                                               children: [
                                                 Expanded(
                                                   flex: 1,
                                                   child: setDobTextFieldNext(
-                                                    startyearController[
-                                                        index],
+                                                    startyearController[index],
                                                     "Start year",
                                                     false,
                                                     TextInputType.name,
@@ -246,7 +243,8 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                           child:
                                                                               const Text(
                                                                             'Cancel',
-                                                                            style: TextStyle(color: orange_ff881a),
+                                                                            style:
+                                                                                TextStyle(color: orange_ff881a),
                                                                           ),
                                                                           onPressed:
                                                                               () {
@@ -259,8 +257,9 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                             EdgeInsets.only(right: 5.w),
                                                                         child:
                                                                             CupertinoButton(
-                                                                          child:
-                                                                              const Text('Done', style: TextStyle(color: orange_ff881a)),
+                                                                          child: const Text(
+                                                                              'Done',
+                                                                              style: TextStyle(color: orange_ff881a)),
                                                                           onPressed:
                                                                               () {
                                                                             Navigator.of(context).pop(tempPickedDate);
@@ -272,8 +271,7 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                 ),
                                                                 const Divider(
                                                                   height: 0,
-                                                                  thickness:
-                                                                      1,
+                                                                  thickness: 1,
                                                                 ),
                                                                 Expanded(
                                                                   child:
@@ -284,9 +282,11 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                           DateTime(DateTime.now().year -
                                                                               100),
                                                                       lastDate:
-                                                                          DateTime.now(),
+                                                                          DateTime
+                                                                              .now(),
                                                                       selectedDate:
-                                                                          DateTime.now(),
+                                                                          DateTime
+                                                                              .now(),
                                                                       onChanged:
                                                                           (DateTime
                                                                               dateTime) {
@@ -313,10 +313,8 @@ class _EducationState extends State<EducationInfoFormView> {
                                                           formatter.format(
                                                               pickedDate!);
 
-                                                      startyearController[
-                                                                  index]
-                                                              .text =
-                                                          formattedDate;
+                                                      startyearController[index]
+                                                          .text = formattedDate;
                                                     },
                                                   ),
                                                 ),
@@ -340,11 +338,10 @@ class _EducationState extends State<EducationInfoFormView> {
                                           decoration: EditTextDecoration,
                                           child: Padding(
                                             padding: EdgeInsets.only(
-                                              left: 17.w,
-                                              right: 17.w,
-                                              top: 5.h,
-                                              bottom: 5.h
-                                            ),
+                                                left: 17.w,
+                                                right: 17.w,
+                                                top: 5.h,
+                                                bottom: 5.h),
                                             child: Row(
                                               children: [
                                                 Expanded(
@@ -373,18 +370,17 @@ class _EducationState extends State<EducationInfoFormView> {
                                                           builder: (context) {
                                                             DateTime?
                                                                 tempPickedDate =
-                                                                DateTime
-                                                                    .now();
+                                                                DateTime.now();
                                                             return SizedBox(
                                                               height: 250.h,
                                                               child: Column(
                                                                 children: <
                                                                     Widget>[
                                                                   Container(
-                                                                    child:
-                                                                        Row(
+                                                                    child: Row(
                                                                       mainAxisAlignment:
-                                                                          MainAxisAlignment.spaceBetween,
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
                                                                       children: <
                                                                           Widget>[
                                                                         Padding(
@@ -392,11 +388,13 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                               EdgeInsets.only(left: 5.w),
                                                                           child:
                                                                               CupertinoButton(
-                                                                            child: const Text(
+                                                                            child:
+                                                                                const Text(
                                                                               'Cancel',
                                                                               style: TextStyle(color: orange_ff881a),
                                                                             ),
-                                                                            onPressed: () {
+                                                                            onPressed:
+                                                                                () {
                                                                               Navigator.of(context).pop();
                                                                             },
                                                                           ),
@@ -406,8 +404,10 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                               EdgeInsets.only(right: 5.w),
                                                                           child:
                                                                               CupertinoButton(
-                                                                            child: const Text('Done', style: TextStyle(color: orange_ff881a)),
-                                                                            onPressed: () {
+                                                                            child:
+                                                                                const Text('Done', style: TextStyle(color: orange_ff881a)),
+                                                                            onPressed:
+                                                                                () {
                                                                               Navigator.of(context).pop(tempPickedDate);
                                                                             },
                                                                           ),
@@ -428,14 +428,17 @@ class _EducationState extends State<EducationInfoFormView> {
                                                                         firstDate:
                                                                             startDate,
                                                                         lastDate:
-                                                                            DateTime(DateTime.now().year + 10),
+                                                                            DateTime(DateTime.now().year +
+                                                                                10),
                                                                         selectedDate:
                                                                             DateTime.now(),
                                                                         onChanged:
-                                                                            (DateTime value) {
+                                                                            (DateTime
+                                                                                value) {
                                                                           tempPickedDate =
                                                                               value;
-                                                                          Navigator.of(context).pop(tempPickedDate);
+                                                                          Navigator.of(context)
+                                                                              .pop(tempPickedDate);
                                                                         },
                                                                       ),
                                                                     ),
@@ -447,15 +450,13 @@ class _EducationState extends State<EducationInfoFormView> {
                                                         );
                                                         final DateFormat
                                                             formatter =
-                                                            DateFormat(
-                                                                'yyyy');
+                                                            DateFormat('yyyy');
                                                         final String
                                                             formattedDate =
                                                             formatter.format(
                                                                 pickedDate!);
 
-                                                        endyearController[
-                                                                    index]
+                                                        endyearController[index]
                                                                 .text =
                                                             formattedDate;
                                                       }
@@ -507,7 +508,8 @@ class _EducationState extends State<EducationInfoFormView> {
                                           style: TextStyle(
                                               color: const Color(0xff121212),
                                               fontWeight: FontWeight.w500,
-                                              fontFamily: helveticaNeueNeue_medium,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 12.sp),
                                           textAlign: TextAlign.left),
@@ -524,21 +526,31 @@ class _EducationState extends State<EducationInfoFormView> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              isDeleteLast = true;
-                              for (var element in cards) {
-                                var university =
-                                    TextEditingController(text: element);
-                                var startyear =
-                                    TextEditingController(text: element);
-                                var endyear =
-                                    TextEditingController(text: element);
+                              if (universityController.last.value.text == '') {
+                                snackBar(context, 'Enter university');
+                              } else if (startyearController.last.value.text ==
+                                  '') {
+                                snackBar(context, 'Enter Start Year');
+                              } else if (endyearController.last.value.text ==
+                                  '') {
+                                snackBar(context, 'Enter End Year');
+                              } else {
+                                isDeleteLast = true;
+                                for (var element in cards) {
+                                  var university =
+                                      TextEditingController(text: element);
+                                  var startyear =
+                                      TextEditingController(text: element);
+                                  var endyear =
+                                      TextEditingController(text: element);
 
-                                universityController.add(university);
-                                startyearController.add(startyear);
-                                endyearController.add(endyear);
+                                  universityController.add(university);
+                                  startyearController.add(startyear);
+                                  endyearController.add(endyear);
+                                }
+
+                                cards.add("");
                               }
-
-                              cards.add("");
                             });
                           },
                           child: Container(
@@ -550,32 +562,35 @@ class _EducationState extends State<EducationInfoFormView> {
                                     width: 1.w, color: black_121212)),
                             child: // Add More
                                 Center(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(bottom: 1.h),
-                                        child: Text("+ ",
-                                            style: TextStyle(
-                                                color: const Color(0xff121212),
-                                                fontFamily: helveticaNeueNeue_medium,
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 22.sp),
-                                            textAlign: TextAlign.left),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(bottom: 16.h, top: 16.h),
-                                        child: Text(" Add More",
-                                            style: TextStyle(
-                                                color: const Color(0xff121212),
-                                                fontFamily: helveticaNeueNeue_medium,
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 12.sp),
-                                            textAlign: TextAlign.left),
-                                      ),
-                                    ],
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 1.h),
+                                    child: Text("+ ",
+                                        style: TextStyle(
+                                            color: const Color(0xff121212),
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 22.sp),
+                                        textAlign: TextAlign.left),
                                   ),
-                                ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom: 16.h, top: 16.h),
+                                    child: Text(" Add More",
+                                        style: TextStyle(
+                                            color: const Color(0xff121212),
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.sp),
+                                        textAlign: TextAlign.left),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -588,44 +603,52 @@ class _EducationState extends State<EducationInfoFormView> {
           Padding(
             padding: EdgeInsets.all(24.sp),
             child: BlackNextButton(str_continue, black_121212, () {
-              details.clear();
-
-              for (int i = 0; i < cards.length; i++) {
-                details.add({
-                  '"university_school_name"':
-                      '"${universityController[i].text}"',
-                  '"start_year"': '"${startyearController[i].text}"',
-                  '"end_year"': '"${endyearController[i].text}"',
-                });
-              }
-
-              if (!details.toString().contains("[{"
-                  '"university_school_name"'
-                  ": "
-                  '""'
-                  ", "
-                  '"start_year"'
-                  ": "
-                  '""'
-                  ", "
-                  '"end_year"'
-                  ": "
-                  '""'
-                  "}]")) {
-                List itemList = [];
-
-                itemList.clear();
-                for (var item in details) {
-                  itemList.add(item);
-                }
-                controller.educationalDetails.clear();
-                controller.educationalDetails.value = itemList;
-
-                checkNet(context).then((value) {
-                  controller.educationalInfoAPI(context);
-                });
+              if (universityController.last.value.text == '') {
+                snackBar(context, 'Enter university');
+              } else if (startyearController.last.value.text == '') {
+                snackBar(context, 'Enter Start Year');
+              } else if (endyearController.last.value.text == '') {
+                snackBar(context, 'Enter End Year');
               } else {
-                snackBar(context, 'Add educational details');
+                details.clear();
+
+                for (int i = 0; i < cards.length; i++) {
+                  details.add({
+                    '"university_school_name"':
+                        '"${universityController[i].text}"',
+                    '"start_year"': '"${startyearController[i].text}"',
+                    '"end_year"': '"${endyearController[i].text}"',
+                  });
+                }
+
+                if (!details.toString().contains("[{"
+                    '"university_school_name"'
+                    ": "
+                    '""'
+                    ", "
+                    '"start_year"'
+                    ": "
+                    '""'
+                    ", "
+                    '"end_year"'
+                    ": "
+                    '""'
+                    "}]")) {
+                  List itemList = [];
+
+                  itemList.clear();
+                  for (var item in details) {
+                    itemList.add(item);
+                  }
+                  controller.educationalDetails.clear();
+                  controller.educationalDetails.value = itemList;
+
+                  checkNet(context).then((value) {
+                    controller.educationalInfoAPI(context);
+                  });
+                } else {
+                  snackBar(context, 'Add educational details');
+                }
               }
             }),
           )

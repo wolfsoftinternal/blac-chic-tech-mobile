@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:blackchecktech/Screens/Home/FeatureMenu/View/PastFeaturesScreen.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -178,6 +179,7 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
 
                 GestureDetector(
                   onTap: () {
+                    launchURL(featuredController.featuredList[0].link!);
                     // _controller.nextPage(
                     //     duration: _kDuration, curve: _kCurve);
                   },

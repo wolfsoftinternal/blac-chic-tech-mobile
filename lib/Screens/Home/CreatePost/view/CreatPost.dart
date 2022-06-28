@@ -70,60 +70,59 @@ class _CreatePostState extends State<CreatePost> {
                       ),
                     ),
                     Spacer(),
-                    Container(
-                      height: 40,
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            bottom: 5,
-                            child: Container(
-                              height: 40,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 5.0),
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text('ALL PHOTOS',
-                                      style: TextStyle(
-                                          color: black_121212,
-                                          fontFamily: helvetica_neu_bold,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 16),
-                                      textAlign: TextAlign.left),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(height : 60, width: 102, child: MultiAssetsPage()),
-                        ],
-                      ),
-                    ),
-                    Stack(children: [
-                      Positioned(
-                          top: 5, child: Icon(Icons.expand_more_rounded)),
-                      SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
-                    ]),
-
-                    // Stack(
-                    //   children: [
-                    //     Row(
-                    //       children: [
-                    //         Positioned(
-                    //           bottom: 5,
-                    //           child: Text('ALL PHOTOS',
-                    //               style: TextStyle(
-                    //                   color: black_121212,
-                    //                   fontFamily: helvetica_neu_bold,
-                    //                   fontStyle: FontStyle.normal,
-                    //                   fontSize: 16),
-                    //               textAlign: TextAlign.left),
+                    // Container(
+                    //   height: 40,
+                    //   child: Stack(
+                    //     children: [
+                    //       Positioned(
+                    //         bottom: 5,
+                    //         child: Container(
+                    //           height: 40,
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.only(bottom: 5.0),
+                    //             child: Align(
+                    //               alignment: Alignment.bottomCenter,
+                    //               child: Text('ALL PHOTOS',
+                    //                   style: TextStyle(
+                    //                       color: black_121212,
+                    //                       fontFamily: helvetica_neu_bold,
+                    //                       fontStyle: FontStyle.normal,
+                    //                       fontSize: 16),
+                    //                   textAlign: TextAlign.left),
+                    //             ),
+                    //           ),
                     //         ),
-                    //         Positioned(
-                    //       top: 3, child: Icon(Icons.expand_more_rounded)),
-                    //       ],
-                    //     ),
-                    //     Container(height: 24, width: 130, child: MultiAssetsPage()),
-                    //   ],
+                    //       ),
+                    //       Container(height : 60, width: 102, child: MultiAssetsPage()),
+                    //     ],
+                    //   ),
                     // ),
+                    // Stack(children: [
+                    //   Positioned(
+                    //       top: 5, child: Icon(Icons.expand_more_rounded)),
+                    //   SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
+                    // ]),
+
+                    Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Row(
+                            children: [
+                              Text('ALL PHOTOS',
+                                  style: TextStyle(
+                                      color: black_121212,
+                                      fontFamily: helvetica_neu_bold,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 16),
+                                  textAlign: TextAlign.left),
+                              Icon(Icons.expand_more_rounded),
+                            ],
+                          ),
+                        ),
+                        Container(height: 40, width: 120, child: MultiAssetsPage()),
+                      ],
+                    ),
                     Spacer(),
                     InkWell(
                       onTap: () {

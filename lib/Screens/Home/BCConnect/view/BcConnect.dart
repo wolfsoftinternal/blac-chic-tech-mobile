@@ -63,7 +63,7 @@ class _BcConnectState extends State<BcConnect> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    videoController.initScrolling(context, false);
+    videoController.initScrolling(context, true);
     checkNet(context)
         .then((value) => {videoController.userListAPI(context, true)});
   }

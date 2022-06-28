@@ -21,7 +21,8 @@ class ReplaceWith extends StatefulWidget {
   final name;
   final id;
   final isFrom;
-  const ReplaceWith({Key? key, this.name, this.id, this.isFrom}) : super(key: key);
+  const ReplaceWith({Key? key, this.name, this.id, this.isFrom})
+      : super(key: key);
 
   @override
   _ReplaceWithState createState() => _ReplaceWithState();
@@ -103,11 +104,10 @@ class _ReplaceWithState extends State<ReplaceWith> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       CircularProfileAvatar(
-                                '',
-                                radius: 22,
+                                        '',
+                                        radius: 22,
                                         child:
-                                            controller.userList[i].image ==
-                                                    null
+                                            controller.userList[i].image == null
                                                 ? SvgPicture.asset(
                                                     placeholder,
                                                     height: 44.h,
@@ -184,22 +184,20 @@ class _ReplaceWithState extends State<ReplaceWith> {
                                                             .lastName!
                                                             .capitalizeFirst!
                                                     : "",
-                                                style:
-                                                    TextStyle(
-                                                        color: black_121212,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
                                                 textAlign: TextAlign.left)
                                           ],
                                         ),
                                       ),
                                       SvgPicture.asset(
-                                        controller.selectedList.contains(controller.userList[i])
+                                        controller.selectedList.contains(
+                                                controller.userList[i])
                                             ? orange_tick_icon
                                             : icon_next_arrow,
                                         width: 25.w,
@@ -220,23 +218,81 @@ class _ReplaceWithState extends State<ReplaceWith> {
             ),
             Padding(
               padding: const EdgeInsets.all(24.0),
-              child: BlackButton('Replace', white_ffffff, () {
-                if(controller.selectedList.isEmpty){
-                  snackBar(context, 'Select replacement');
-                }
-                checkNet(context).then((value) async {
-                  if(widget.isFrom == 'user'){
-                    await controller.replaceAdmireAPI(context, widget.id, controller.selectedList[0].id, null);
-                    controller.admireListAPI(context, null);
-                    Get.back();            
-                  }else{
-                    dynamic body = {'user_id': controller.details.value.id.toString()};
-                    await controller.replaceAdmireAPI(context, widget.id, controller.selectedList[0].id, body);
-                    controller.admireListAPI(context, controller.details.value.id.toString());
-                    Get.back();
-                  }
-                });
-              }),
+              child: controller.selectedList.isEmpty
+                  ? Container(
+                      decoration: BoxDecoration(boxShadow: [
+                        BoxShadow(
+                          color: const Color(0x17747796).withOpacity(0.07),
+                          spreadRadius: 10,
+                          blurRadius: 5,
+                          offset:
+                              const Offset(0, 10), // changes position of shadow
+                        ),
+                      ]),
+                      child: SizedBox(
+                        width: double.infinity,
+                        //height: HeightData.fiftyfive,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4.0),
+                              color: grey_aaaaaa),
+                          child: ElevatedButton(
+                              child: //
+                                  Stack(
+                                alignment: Alignment.centerRight,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Replace',
+                                        style: TextStyle(
+                                            fontFamily: helvetica_neu_bold,
+                                            fontSize: 16.sp),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ), // Button
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.transparent,
+                                onSurface: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                elevation: 0,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 0, vertical: 18),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  side: const BorderSide(
+                                      color: grey_aaaaaa, width: 0),
+                                ),
+                              )),
+                        ),
+                      ),
+                    )
+                  : BlackButton('Replace', white_ffffff, () {
+                      if (controller.selectedList.isEmpty) {
+                        snackBar(context, 'Select replacement');
+                      }
+                      checkNet(context).then((value) async {
+                        if (widget.isFrom == 'user') {
+                          await controller.replaceAdmireAPI(context, widget.id,
+                              controller.selectedList[0].id, null);
+                          controller.admireListAPI(context, null);
+                          Get.back();
+                        } else {
+                          dynamic body = {
+                            'user_id': controller.details.value.id.toString()
+                          };
+                          await controller.replaceAdmireAPI(context, widget.id,
+                              controller.selectedList[0].id, body);
+                          controller.admireListAPI(
+                              context, controller.details.value.id.toString());
+                          Get.back();
+                        }
+                      });
+                    }),
             )
           ],
         ),

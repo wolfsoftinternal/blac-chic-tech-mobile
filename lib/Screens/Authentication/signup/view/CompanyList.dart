@@ -129,7 +129,7 @@ class _CompanyListState extends State<CompanyList> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           setHelveticaRegular(
-                              '${controller.companyList.length} Companies',
+                              '${controller.companyCount} Companies',
                               14.sp,
                               grey_aaaaaa,
                               FontWeight.w500,
@@ -166,14 +166,14 @@ class _CompanyListState extends State<CompanyList> {
                             child: InkWell(
                               onTap: () {
                                 if (widget.isFrom == 'past_job') {
-                                  controller.pastJobName.value.text =
+                                  controller.pastJobName.value =
                                       controller.companyList[index]['name'];
                                   controller.pastJobImage.value =
                                       controller.companyList[index]['logo'];
                                 } else if (widget.isFrom ==
                                     'experience_pastjob') {
-                                  controller.pastJobController.add(
-                                      controller.companyList[index]['name']);
+                                  controller.pastJobController.value = 
+                                      controller.companyList[index]['name'];
                                 } else {
                                   controller.companyName.value =
                                       controller.companyList[index]['name'];

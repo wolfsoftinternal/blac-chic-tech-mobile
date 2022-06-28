@@ -8,6 +8,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/CompanyList.da
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
@@ -368,8 +369,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                                                 isFrom:
                                                                     'experience_pastjob'))!
                                                             .then((value) {
-                                                          pastCompanyNameController[index] =
-                                                              controller.pastJobController[index];
+                                                          pastCompanyNameController[index].text = controller.pastJobController.value;
                                                           setState(() {});
                                                         });
                                               },
@@ -441,9 +441,9 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                   onTap: () {
                                     setState(() {
                                       cards.removeLast();
-                                      if (cards.length == 1) {
-                                        isDeleteLast = false;
-                                      }
+                                        if (cards.length == 1) {
+                                          isDeleteLast = false;
+                                        }
                                     });
                                   },
                                   child: Container(
@@ -485,8 +485,15 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                isDeleteLast = true;
-                                for (var element in cards) {
+                                if(pastCompanyTitleController.last.value.text == ''){
+                                  snackBar(context, 'Enter Company Title');
+                                }else if(pastCompanyNameController.last.value.text == ''){
+                                  snackBar(context, 'Enter Company Name');
+                                }else if(pastCompanyWebsiteController.last.value.text == ''){
+                                  snackBar(context, 'Enter Company Website');
+                                }else{
+                                  isDeleteLast = true;
+                                  for (var element in cards) {
                                   var titleController =
                                       TextEditingController(text: element);
                                   var nameController =
@@ -505,6 +512,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                   }
                                 }
                                 cards.add("");
+                                }
                               });
                             },
                             child: Padding(
@@ -549,29 +557,37 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
               padding: EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
                 if (controller.checkExperienceValidation(context)) {
-                  companyDetails.clear();
+                  if(pastCompanyTitleController.last.value.text == ''){
+                    snackBar(context, 'Enter Company Title');
+                  }else if(pastCompanyNameController.last.value.text == ''){
+                    snackBar(context, 'Enter Company Name');
+                  }else if(pastCompanyWebsiteController.last.value.text == ''){
+                    snackBar(context, 'Enter Company Website');
+                  }else{
+                    companyDetails.clear();
 
-                  for (int i = 0; i < cards.length; i++) {
-                    companyDetails.add({
-                      '"title"': '"${pastCompanyTitleController[i].text}"',
-                      '"company_name"':
-                          '"${pastCompanyNameController[i].text}"',
-                      '"website"': '"${pastCompanyWebsiteController[i].text}"',
+                    for (int i = 0; i < cards.length; i++) {
+                      companyDetails.add({
+                        '"title"': '"${pastCompanyTitleController[i].text}"',
+                        '"company_name"':
+                            '"${pastCompanyNameController[i].text}"',
+                        '"website"': '"${pastCompanyWebsiteController[i].text}"',
+                      });
+                    }
+
+                    List itemList = [];
+
+                    itemList.clear();
+                    for (var item in companyDetails) {
+                      itemList.add(item);
+                    }
+                    controller.pastCompanyDetails.value = itemList;
+                    print(controller.pastCompanyDetails.value);
+
+                    checkNet(context).then((value) {
+                      controller.experienceInfoAPI(context);
                     });
                   }
-
-                  List itemList = [];
-
-                  itemList.clear();
-                  for (var item in companyDetails) {
-                    itemList.add(item);
-                  }
-                  controller.pastCompanyDetails.value = itemList;
-                  print(controller.pastCompanyDetails.value);
-
-                  checkNet(context).then((value) {
-                    controller.experienceInfoAPI(context);
-                  });
                 }
               }),
             )

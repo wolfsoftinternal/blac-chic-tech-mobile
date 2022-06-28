@@ -47,7 +47,8 @@ class StepsController extends GetxController {
   Rx<TextEditingController> currentCompanyWebsiteController =
       TextEditingController().obs;
   RxList companyList = [].obs;
-  List<TextEditingController> pastJobController = <TextEditingController>[].obs;
+  RxString companyCount = ''.obs;
+  RxString pastJobController = ''.obs;
 
   RxBool boolComapnyLogo = false.obs;
   Rx<TextEditingController> searchCompanyController =
@@ -75,7 +76,7 @@ class StepsController extends GetxController {
   RxList questions = [].obs;
 
   SettingsController settingsController = Get.put(SettingsController());
-  Rx<TextEditingController> pastJobName = TextEditingController().obs;
+  RxString pastJobName = ''.obs;
   RxString pastJobImage = ''.obs;
 
   ScrollController scrollController = ScrollController();
@@ -327,6 +328,7 @@ class StepsController extends GetxController {
             companyListAPI(context, body);
           } else if (model.statusCode == 200) {
             companyList.addAll(userModel['data']);
+            companyCount.value = userModel['company_count'].toString();
           }
         });
       } else {
