@@ -54,7 +54,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 17.0, right: 17.0, bottom: 30),
                 child: Container(
-                  height: 72,
+                  height: 70,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(
                       Radius.circular(40),

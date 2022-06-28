@@ -235,7 +235,7 @@ class _EditProfileState extends State<EditProfile> {
                                 Expanded(
                                   flex: 1,
                                   child: Container(
-                                    height: 60.h,
+                                    height: 48.h,
                                     padding:  EdgeInsets.only(
                                         left: 16.w, right: 16.w),
                                     decoration: BoxDecoration(
@@ -289,7 +289,7 @@ class _EditProfileState extends State<EditProfile> {
                                 Expanded(
                                   flex: 1,
                                   child: Container(
-                                    height: 60.h,
+                                    height: 48.h,
                                     padding:  EdgeInsets.only(
                                         left: 16.w, right: 16.w),
                                     decoration: BoxDecoration(
@@ -351,7 +351,7 @@ class _EditProfileState extends State<EditProfile> {
                                 Expanded(
                                   flex: 1,
                                   child: Container(
-                                    height: 60.h,
+                                    height: 48.h,
                                     padding:  EdgeInsets.only(
                                         left: 16.w, right: 16.w),
                                     decoration: BoxDecoration(
@@ -400,7 +400,7 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                                 Expanded(
                                   child: Container(
-                                    height: HeightData.fifty_seven,
+                                    height: 48.h,
                                     decoration: EditTextDecoration,
                                     child: Padding(
                                       padding: EdgeInsets.only(
@@ -462,7 +462,8 @@ class _EditProfileState extends State<EditProfile> {
                                     style: TextStyle(
                                         color: const Color(0xff3f3f3f),
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "NeueHelvetica",
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        letterSpacing: 0.8,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 14.sp),
                                     textAlign: TextAlign.left),

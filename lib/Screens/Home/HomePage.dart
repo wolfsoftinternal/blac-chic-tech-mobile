@@ -18,6 +18,7 @@ import '../../Utils/share_predata.dart';
 import 'FeatureMenu/View/FeaturedMainScreen.dart';
 import 'FeatureMenu/View/PastFeaturesScreen.dart';
 import 'chat_module/my_db.dart';
+import 'dart:math' as math;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -108,14 +109,14 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 },
                                 child: Container(
-                                  height: 68,
+                                  height: 66,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     color: index % 2 != 0
                                         ? black_121212
                                         : white_ffffff,
                                     borderRadius: const BorderRadius.all(
-                                        Radius.circular(5.0)),
+                                        Radius.circular(4.0)),
                                   ),
                                   child: Row(
                                     mainAxisAlignment:
@@ -123,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 12.0),
+                                             EdgeInsets.only(left: 16.0),
                                         child: Text(
                                           values[index],
                                           style: TextStyle(
@@ -137,11 +138,14 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                       ),
-                                      const Padding(
+                                       Padding(
                                         padding: EdgeInsets.only(right: 12.0),
-                                        child: Icon(
-                                          Icons.arrow_forward,
-                                          color: grey_aaaaaa,
+                                        child: Transform.rotate(
+                                          angle: 90 * math.pi / 375,
+                                          child: Icon(
+                                            Icons.arrow_forward,
+                                            color: grey_aaaaaa,
+                                          ),
                                         ),
                                       )
                                     ],

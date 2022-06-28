@@ -46,13 +46,14 @@ class _PostTabState extends State<PostTab> {
             : SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(height: 13.h,),
                   ListView(
                     primary: false,
                       shrinkWrap: true,
-                      padding: EdgeInsets.all(0),
+                      padding: EdgeInsets.zero,
                       children: [
                         Padding(
-                            padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                            padding: EdgeInsets.only(left: 16.w, right: 16.w),
                             child: StaggeredGridView.countBuilder(
                               crossAxisCount: 4,
                               itemCount: controller.postList.length >= 6
@@ -60,6 +61,7 @@ class _PostTabState extends State<PostTab> {
                                   : controller.postList.length,
                               shrinkWrap: true,
                               primary: false,
+                              padding: EdgeInsets.zero,
                               itemBuilder: (BuildContext context, int index) =>
                                   GestureDetector(
                                 onTap: () {

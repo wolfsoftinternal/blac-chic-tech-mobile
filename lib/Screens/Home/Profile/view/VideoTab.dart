@@ -49,13 +49,14 @@ class _VideoTabState extends State<VideoTab> {
           :  SingleChildScrollView(
             child: Column(
               children: [
+                SizedBox(height: 13.h,),
                 ListView(
                   physics: ScrollPhysics(), // <-- this will disable scroll
                 shrinkWrap: true,
                 padding: EdgeInsets.all(0),
                   children: [
                     Padding(
-                        padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                        padding:  EdgeInsets.only(left: 16.w, right: 16.w),
                         child: StaggeredGridView.countBuilder(
                           crossAxisCount: 4,
                         //  physics : NeverScrollableScrollPhysics(),
@@ -64,6 +65,7 @@ class _VideoTabState extends State<VideoTab> {
                                 : controller.videoList.length,
                           shrinkWrap: true,
                           primary: false,
+                          padding: EdgeInsets.zero,
                           itemBuilder: (BuildContext context, int index) {
                             return GridTile(
                               child: Stack(

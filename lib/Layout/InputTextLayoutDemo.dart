@@ -67,8 +67,8 @@ class _TextInputState extends State<InputTextLayoutDemo> {
         padding:  EdgeInsets.only(
           left: 16.w,
           right: 16.w,
-          top: 13.h,
-            bottom: 12.h
+          top: 8.h,
+            bottom: 7.h
         ),
         child: TextFormField(
           style:   TextStyle(
