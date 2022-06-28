@@ -8,6 +8,7 @@ import 'package:blackchecktech/Screens/Home/Settings/view/AboutMe.dart';
 import 'package:blackchecktech/Screens/Home/Settings/view/EditProfile.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
@@ -135,7 +136,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                               style: TextStyle(
                                                   color: black_121212,
                                                   fontWeight: FontWeight.w900,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helvetica_neu_bold,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 18.sp),
                                               textAlign: TextAlign.left),
@@ -154,7 +155,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                           style: TextStyle(
                                               color: const Color(0xff3f3f3f),
                                               fontWeight: FontWeight.w500,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 14.sp),
                                           textAlign: TextAlign.left),
@@ -181,7 +182,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                               style: TextStyle(
                                                   color: grey_aaaaaa,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helveticaNeueNeue_medium,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 10.sp),
                                               textAlign: TextAlign.left)
@@ -218,7 +219,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                   height: 12.h,
                                                 ),
                                                 SizedBox(
-                                                  width: 5.w,
+                                                  width: 8.w,
                                                 ),
                                                 // Preview profile
                                                 Text("Preview profile",
@@ -228,7 +229,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                         fontWeight:
                                                             FontWeight.w700,
                                                         fontFamily:
-                                                            "NeueHelvetica",
+                                                            helvetica_neu_bold,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 14.sp),
@@ -297,15 +298,155 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 height: 1,
                                 decoration: const BoxDecoration(
                                     color: view_line_f4f6f6)),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 24.w, right: 24.w, top: 26.h),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+
+                            SizedBox(height: 26.h,),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 42.w,
+                                      height: 42.h,
+                                      decoration: const BoxDecoration(
+                                          color: Color(0xfff5f5f5),
+                                          shape: BoxShape.circle),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10.r),
+                                        child: SvgPicture.asset(
+                                          icon_icognito,
+                                          width: 24.w,
+                                          height: 24.h,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 16.w,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                  children: [
+                                                    // Go Incognito
+                                                    Text("Go Incognito",
+                                                        style: TextStyle(
+                                                            color:
+                                                                black_121212,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w700,
+                                                            fontFamily:
+                                                                "NeueHelvetica",
+                                                            fontStyle:
+                                                                FontStyle
+                                                                    .normal,
+                                                            fontSize: 16.sp),
+                                                        textAlign:
+                                                            TextAlign.left),
+                                                    SizedBox(
+                                                      height: 5.h,
+                                                    ),
+                                                    // Hide yourself for a while
+                                                    Text(
+                                                        "Hide yourself for a while",
+                                                        style: TextStyle(
+                                                            color:
+                                                                grey_aaaaaa,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500,
+                                                            fontFamily:
+                                                                "NeueHelvetica",
+                                                            fontStyle:
+                                                                FontStyle
+                                                                    .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left),
+                                                  ],
+                                                ),
+                                              ),
+                                              FlutterSwitch(
+                                                width: 40.0,
+                                                height: 20.0,
+                                                activeColor:
+                                                    const Color(0xff38bf49),
+                                                inactiveColor:
+                                                    const Color(0xffe9ecec),
+                                                valueFontSize: 0.0,
+                                                toggleSize: 15.0,
+                                                value: controller
+                                                            .visible.value ==
+                                                        1
+                                                    ? false
+                                                    : true,
+                                                borderRadius: 15.0,
+                                                padding: 2.0,
+                                                showOnOff: true,
+                                                onToggle: (val) {
+                                                  setState(() {
+                                                    if (val == false) {
+                                                      controller
+                                                          .visible.value = 1;
+                                                    } else {
+                                                      controller
+                                                          .visible.value = 0;
+                                                    }
+                                                    stepsController
+                                                        .personalInfoAPI(
+                                                            context,
+                                                            'profile_setting',
+                                                            controller.visible
+                                                                .value);
+                                                  });
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 15.h,
+                                          ),
+                                          Container(
+                                              width: double.infinity,
+                                              height: 1,
+                                              decoration: const BoxDecoration(
+                                                  color: view_line_f4f6f6)),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 28.h,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(AboutMe());
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -318,7 +459,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                         child: Padding(
                                           padding: EdgeInsets.all(10.r),
                                           child: SvgPicture.asset(
-                                            icon_icognito,
+                                            icon_about_me,
                                             width: 24.w,
                                             height: 24.h,
                                           ),
@@ -328,148 +469,229 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                         width: 16.w,
                                       ),
                                       Expanded(
+                                        flex: 1,
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      // Go Incognito
-                                                      Text("Go Incognito",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontFamily:
-                                                                  "NeueHelvetica",
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 16.sp),
-                                                          textAlign:
-                                                              TextAlign.left),
-                                                      SizedBox(
-                                                        height: 5.h,
-                                                      ),
-                                                      // Hide yourself for a while
-                                                      Text(
-                                                          "Hide yourself for a while",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  grey_aaaaaa,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontFamily:
-                                                                  "NeueHelvetica",
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 14.sp),
-                                                          textAlign:
-                                                              TextAlign.left),
-                                                    ],
-                                                  ),
-                                                ),
-                                                FlutterSwitch(
-                                                  width: 40.0,
-                                                  height: 20.0,
-                                                  activeColor:
-                                                      const Color(0xff38bf49),
-                                                  inactiveColor:
-                                                      const Color(0xffe9ecec),
-                                                  valueFontSize: 0.0,
-                                                  toggleSize: 15.0,
-                                                  value: controller
-                                                              .visible.value ==
-                                                          1
-                                                      ? false
-                                                      : true,
-                                                  borderRadius: 15.0,
-                                                  padding: 2.0,
-                                                  showOnOff: true,
-                                                  onToggle: (val) {
-                                                    setState(() {
-                                                      if (val == false) {
-                                                        controller
-                                                            .visible.value = 1;
-                                                      } else {
-                                                        controller
-                                                            .visible.value = 0;
-                                                      }
-                                                      stepsController
-                                                          .personalInfoAPI(
-                                                              context,
-                                                              'profile_setting',
-                                                              controller.visible
-                                                                  .value);
-                                                    });
-                                                  },
-                                                ),
-                                              ],
+                                            // Go Incognito
+                                            Text("About me",
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight:
+                                                        FontWeight.w700,
+                                                    fontFamily:
+                                                        "NeueHelvetica",
+                                                    fontStyle:
+                                                        FontStyle.normal,
+                                                    fontSize: 16.sp),
+                                                textAlign: TextAlign.left),
+                                            SizedBox(
+                                              height: 5.h,
                                             ),
+                                            // Hide yourself for a while
+                                            Text(
+                                                "Edit your personal information",
+                                                style: TextStyle(
+                                                    color: grey_aaaaaa,
+                                                    fontWeight:
+                                                        FontWeight.w500,
+                                                    fontFamily:
+                                                        "NeueHelvetica",
+                                                    fontStyle:
+                                                        FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                textAlign: TextAlign.left),
                                             SizedBox(
                                               height: 15.h,
                                             ),
+
                                             Container(
                                                 width: double.infinity,
                                                 height: 1,
-                                                decoration: const BoxDecoration(
-                                                    color: view_line_f4f6f6)),
+                                                decoration:
+                                                    const BoxDecoration(
+                                                        color:
+                                                            view_line_f4f6f6)),
                                           ],
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 28.h,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      Get.to(AboutMe());
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 42.w,
-                                          height: 42.h,
-                                          decoration: const BoxDecoration(
-                                              color: Color(0xfff5f5f5),
-                                              shape: BoxShape.circle),
-                                          child: Padding(
-                                            padding: EdgeInsets.all(10.r),
-                                            child: SvgPicture.asset(
-                                              icon_about_me,
-                                              width: 24.w,
-                                              height: 24.h,
-                                            ),
-                                          ),
+                                ),
+                                SizedBox(
+                                  height: 28.h,
+                                ),
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.start,
+                                //   crossAxisAlignment:
+                                //       CrossAxisAlignment.start,
+                                //   children: [
+                                //     Container(
+                                //       width: 42.w,
+                                //       height: 42.h,
+                                //       decoration: const BoxDecoration(
+                                //           color: Color(0xfff5f5f5),
+                                //           shape: BoxShape.circle),
+                                //       child: Padding(
+                                //         padding: EdgeInsets.all(10.r),
+                                //         child: SvgPicture.asset(
+                                //           icon_rate,
+                                //           width: 24.w,
+                                //           height: 24.h,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       width: 16.w,
+                                //     ),
+                                //     Expanded(
+                                //       flex: 1,
+                                //       child: Padding(
+                                //         padding:
+                                //             const EdgeInsets.only(top: 8),
+                                //         child: Column(
+                                //           mainAxisAlignment:
+                                //               MainAxisAlignment.start,
+                                //           crossAxisAlignment:
+                                //               CrossAxisAlignment.start,
+                                //           children: [
+                                //             // Go Incognito
+                                //             Text("Rate our app",
+                                //                 style: TextStyle(
+                                //                     color: black_121212,
+                                //                     fontWeight:
+                                //                         FontWeight.w700,
+                                //                     fontFamily:
+                                //                         "NeueHelvetica",
+                                //                     fontStyle:
+                                //                         FontStyle.normal,
+                                //                     fontSize: 16.sp),
+                                //                 textAlign: TextAlign.left),
+
+                                //             SizedBox(
+                                //               height: 28.h,
+                                //             ),
+
+                                //             Container(
+                                //                 width: double.infinity,
+                                //                 height: 1,
+                                //                 decoration:
+                                //                     const BoxDecoration(
+                                //                         color:
+                                //                             view_line_f4f6f6)),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     )
+                                //   ],
+                                // ),
+                                // SizedBox(
+                                //   height: 28.h,
+                                // ),
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.start,
+                                //   crossAxisAlignment:
+                                //       CrossAxisAlignment.start,
+                                //   children: [
+                                //     Container(
+                                //       width: 42.w,
+                                //       height: 42.h,
+                                //       decoration: const BoxDecoration(
+                                //           color: Color(0xfff5f5f5),
+                                //           shape: BoxShape.circle),
+                                //       child: Padding(
+                                //         padding: EdgeInsets.all(10.r),
+                                //         child: SvgPicture.asset(
+                                //           icon_feedback,
+                                //           width: 24.w,
+                                //           height: 24.h,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       width: 16.w,
+                                //     ),
+                                //     Expanded(
+                                //       flex: 1,
+                                //       child: Padding(
+                                //         padding:
+                                //             const EdgeInsets.only(top: 8),
+                                //         child: Column(
+                                //           mainAxisAlignment:
+                                //               MainAxisAlignment.start,
+                                //           crossAxisAlignment:
+                                //               CrossAxisAlignment.start,
+                                //           children: [
+                                //             // Go Incognito
+                                //             Text("Feedback & Help",
+                                //                 style: TextStyle(
+                                //                     color: black_121212,
+                                //                     fontWeight:
+                                //                         FontWeight.w700,
+                                //                     fontFamily:
+                                //                         "NeueHelvetica",
+                                //                     fontStyle:
+                                //                         FontStyle.normal,
+                                //                     fontSize: 16.sp),
+                                //                 textAlign: TextAlign.left),
+
+                                //             SizedBox(
+                                //               height: 28.h,
+                                //             ),
+
+                                //             Container(
+                                //                 width: double.infinity,
+                                //                 height: 1,
+                                //                 decoration:
+                                //                     const BoxDecoration(
+                                //                         color:
+                                //                             view_line_f4f6f6)),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     )
+                                //   ],
+                                // ),
+                                // SizedBox(
+                                //   height: 28.h,
+                                // ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 42.w,
+                                      height: 42.h,
+                                      decoration: const BoxDecoration(
+                                          color: Color(0xfff5f5f5),
+                                          shape: BoxShape.circle),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10.r),
+                                        child: SvgPicture.asset(
+                                          icon_logout,
+                                          width: 24.w,
+                                          height: 24.h,
                                         ),
-                                        SizedBox(
-                                          width: 16.w,
-                                        ),
-                                        Expanded(
-                                          flex: 1,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 16.w,
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: InkWell(
+                                        onTap: (){
+                                          checkNet(context).then((value) {
+                                            controller.userLogout(context);
+                                          });
+                                        },
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 8),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -477,7 +699,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               // Go Incognito
-                                              Text("About me",
+                                              Text("Logout account",
                                                   style: TextStyle(
                                                       color: black_121212,
                                                       fontWeight:
@@ -488,24 +710,9 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                           FontStyle.normal,
                                                       fontSize: 16.sp),
                                                   textAlign: TextAlign.left),
+
                                               SizedBox(
-                                                height: 5.h,
-                                              ),
-                                              // Hide yourself for a while
-                                              Text(
-                                                  "Edit your personal information",
-                                                  style: TextStyle(
-                                                      color: grey_aaaaaa,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily:
-                                                          "NeueHelvetica",
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 14.sp),
-                                                  textAlign: TextAlign.left),
-                                              SizedBox(
-                                                height: 15.h,
+                                                height: 28.h,
                                               ),
 
                                               Container(
@@ -517,220 +724,12 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                               view_line_f4f6f6)),
                                             ],
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 28.h,
-                                  ),
-                                  // Row(
-                                  //   mainAxisAlignment: MainAxisAlignment.start,
-                                  //   crossAxisAlignment:
-                                  //       CrossAxisAlignment.start,
-                                  //   children: [
-                                  //     Container(
-                                  //       width: 42.w,
-                                  //       height: 42.h,
-                                  //       decoration: const BoxDecoration(
-                                  //           color: Color(0xfff5f5f5),
-                                  //           shape: BoxShape.circle),
-                                  //       child: Padding(
-                                  //         padding: EdgeInsets.all(10.r),
-                                  //         child: SvgPicture.asset(
-                                  //           icon_rate,
-                                  //           width: 24.w,
-                                  //           height: 24.h,
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //     SizedBox(
-                                  //       width: 16.w,
-                                  //     ),
-                                  //     Expanded(
-                                  //       flex: 1,
-                                  //       child: Padding(
-                                  //         padding:
-                                  //             const EdgeInsets.only(top: 8),
-                                  //         child: Column(
-                                  //           mainAxisAlignment:
-                                  //               MainAxisAlignment.start,
-                                  //           crossAxisAlignment:
-                                  //               CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             // Go Incognito
-                                  //             Text("Rate our app",
-                                  //                 style: TextStyle(
-                                  //                     color: black_121212,
-                                  //                     fontWeight:
-                                  //                         FontWeight.w700,
-                                  //                     fontFamily:
-                                  //                         "NeueHelvetica",
-                                  //                     fontStyle:
-                                  //                         FontStyle.normal,
-                                  //                     fontSize: 16.sp),
-                                  //                 textAlign: TextAlign.left),
-
-                                  //             SizedBox(
-                                  //               height: 28.h,
-                                  //             ),
-
-                                  //             Container(
-                                  //                 width: double.infinity,
-                                  //                 height: 1,
-                                  //                 decoration:
-                                  //                     const BoxDecoration(
-                                  //                         color:
-                                  //                             view_line_f4f6f6)),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //     )
-                                  //   ],
-                                  // ),
-                                  // SizedBox(
-                                  //   height: 28.h,
-                                  // ),
-                                  // Row(
-                                  //   mainAxisAlignment: MainAxisAlignment.start,
-                                  //   crossAxisAlignment:
-                                  //       CrossAxisAlignment.start,
-                                  //   children: [
-                                  //     Container(
-                                  //       width: 42.w,
-                                  //       height: 42.h,
-                                  //       decoration: const BoxDecoration(
-                                  //           color: Color(0xfff5f5f5),
-                                  //           shape: BoxShape.circle),
-                                  //       child: Padding(
-                                  //         padding: EdgeInsets.all(10.r),
-                                  //         child: SvgPicture.asset(
-                                  //           icon_feedback,
-                                  //           width: 24.w,
-                                  //           height: 24.h,
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //     SizedBox(
-                                  //       width: 16.w,
-                                  //     ),
-                                  //     Expanded(
-                                  //       flex: 1,
-                                  //       child: Padding(
-                                  //         padding:
-                                  //             const EdgeInsets.only(top: 8),
-                                  //         child: Column(
-                                  //           mainAxisAlignment:
-                                  //               MainAxisAlignment.start,
-                                  //           crossAxisAlignment:
-                                  //               CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             // Go Incognito
-                                  //             Text("Feedback & Help",
-                                  //                 style: TextStyle(
-                                  //                     color: black_121212,
-                                  //                     fontWeight:
-                                  //                         FontWeight.w700,
-                                  //                     fontFamily:
-                                  //                         "NeueHelvetica",
-                                  //                     fontStyle:
-                                  //                         FontStyle.normal,
-                                  //                     fontSize: 16.sp),
-                                  //                 textAlign: TextAlign.left),
-
-                                  //             SizedBox(
-                                  //               height: 28.h,
-                                  //             ),
-
-                                  //             Container(
-                                  //                 width: double.infinity,
-                                  //                 height: 1,
-                                  //                 decoration:
-                                  //                     const BoxDecoration(
-                                  //                         color:
-                                  //                             view_line_f4f6f6)),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //     )
-                                  //   ],
-                                  // ),
-                                  // SizedBox(
-                                  //   height: 28.h,
-                                  // ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 42.w,
-                                        height: 42.h,
-                                        decoration: const BoxDecoration(
-                                            color: Color(0xfff5f5f5),
-                                            shape: BoxShape.circle),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(10.r),
-                                          child: SvgPicture.asset(
-                                            icon_logout,
-                                            width: 24.w,
-                                            height: 24.h,
-                                          ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 16.w,
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: InkWell(
-                                          onTap: (){
-                                            checkNet(context).then((value) {
-                                              controller.userLogout(context);
-                                            });
-                                          },
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 8),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                // Go Incognito
-                                                Text("Logout account",
-                                                    style: TextStyle(
-                                                        color: black_121212,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontFamily:
-                                                            "NeueHelvetica",
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 16.sp),
-                                                    textAlign: TextAlign.left),
-
-                                                SizedBox(
-                                                  height: 28.h,
-                                                ),
-
-                                                Container(
-                                                    width: double.infinity,
-                                                    height: 1,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                            color:
-                                                                view_line_f4f6f6)),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                    )
+                                  ],
+                                ),
+                              ],
                             )
                           ],
                         ),
