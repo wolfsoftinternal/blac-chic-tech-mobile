@@ -112,7 +112,7 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
             flex: 1,
             child: SingleChildScrollView(
               child: Padding(
-                  padding: EdgeInsets.all(24.r),
+                  padding: EdgeInsets.only(left: 24.w,right: 24.w,top: 40,bottom: 24),
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       if (constraints.maxWidth < 310) {

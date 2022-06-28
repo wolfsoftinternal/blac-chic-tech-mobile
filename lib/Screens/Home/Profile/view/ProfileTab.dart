@@ -53,7 +53,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 child: ListView(
                   physics: ScrollPhysics(), // <-- this will disable scroll
                   shrinkWrap: true,
-                  padding: EdgeInsets.all(0),
+                  padding: EdgeInsets.zero,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -333,7 +333,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   Padding(
                                     padding:  EdgeInsets.only(
                                         top: 12.h,
-                                        left: 16.w,
+                                        left: 40.w,
                                         bottom: 12.h),
                                     child: setHelveticaMedium(
                                         controller
@@ -394,7 +394,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   Padding(
                                     padding:  EdgeInsets.only(
                                         top: 12.h,
-                                        left: 16.w,
+                                        left: 40.w,
                                         bottom: 12.h),
                                     child: Container(
                                         child: setHelveticaMedium(
@@ -454,7 +454,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   Padding(
                                     padding:  EdgeInsets.only(
                                         top: 12.h,
-                                        left: 16.w,
+                                        left: 40.w,
                                         bottom: 12.h),
                                     child: Container(
                                         child: setHelveticaMedium(
@@ -516,7 +516,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   Padding(
                                     padding:  EdgeInsets.only(
                                         top: 12.h,
-                                        left: 16.w,
+                                        left: 40.w,
                                         bottom: 12.w),
                                     child: Container(
                                         child: setHelveticaMedium(
@@ -575,7 +575,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   Padding(
                                     padding:  EdgeInsets.only(
                                         top: 12.h,
-                                        left: 16.w,
+                                        left: 40.w,
                                         bottom: 12.h),
                                     child: Container(
                                         child: setHelveticaMedium(
@@ -634,7 +634,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   Padding(
                                     padding:  EdgeInsets.only(
                                         top: 12.h,
-                                        left: 16.w,
+                                        left: 40.w,
                                         bottom: 12.h),
                                     child: Container(
                                         child: setHelveticaMedium(

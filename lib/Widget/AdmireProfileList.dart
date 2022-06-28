@@ -139,6 +139,8 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                     //     ),
                     //   ),
               ),
+
+              SizedBox(width: 12.w,),
             ],
           ),
         ),
@@ -191,9 +193,9 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                           : "",
                           40.sp,
                           white_ffffff,
-                          FontWeight.w600,
+                          FontWeight.w900,
                           FontStyle.normal,
-                          -1.6),
+                          1.6),
                     ),
                   ),
                 ],
@@ -294,6 +296,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // widget.admireList.admireDetails!.cityDetails != null
                   myModel?.data?.cityDetails != null
