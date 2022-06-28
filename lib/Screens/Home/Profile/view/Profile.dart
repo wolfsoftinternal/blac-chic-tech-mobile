@@ -223,13 +223,13 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 ],
               ),
             ),
-            // Expanded(
-            //   flex: 1,
-            // child: NestedScrollView(
-            //   headerSliverBuilder: (context, value) {
-            //     return [
-            // SliverToBoxAdapter(
-            Column(
+            Expanded(
+              flex: 1,
+            child: NestedScrollView(
+              headerSliverBuilder: (context, value) {
+                return [
+            SliverToBoxAdapter(
+            child: Column(
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 24.w, right: 24.w),
@@ -677,25 +677,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 ),
               ],
             ),
-            //     )
-            //   ];
-            // },
-            // body: Container(
-            //   child: TabBarView(
-            //     controller: tabController,
-            //     children: [
-            //       ProfileTab(),
-            //       PostTab(id: controller.details.value.id),
-            //       VideoTab(id: controller.details.value.id),
-            //       EventTab(id: controller.details.value.id),
-            //     ],
-            //   ),
-            // ),
-            // ),
-            // ),
-            Expanded(
+                )
+              ];
+            },
+            body: Container(
               child: Padding(
-                padding:  EdgeInsets.only(top: 12.h),
+                padding: const EdgeInsets.all(8.0),
                 child: TabBarView(
                   controller: tabController,
                   children: [
@@ -707,6 +694,22 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 ),
               ),
             ),
+            ),
+            ),
+            // Expanded(
+            //   child: Padding(
+            //     padding:  EdgeInsets.only(top: 12.h),
+            //     child: TabBarView(
+            //       controller: tabController,
+            //       children: [
+            //         ProfileTab(),
+            //         PostTab(id: controller.details.value.id),
+            //         VideoTab(id: controller.details.value.id),
+            //         EventTab(id: controller.details.value.id),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
