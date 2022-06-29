@@ -10,7 +10,6 @@ import 'package:get_it/get_it.dart';
 
 import 'UIScreen/Demo.dart';
 
-
 GetIt getIt = GetIt.instance;
 
 const Color themeColor = Color(0xff00bc56);
@@ -32,7 +31,6 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, child) {
-
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
