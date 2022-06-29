@@ -114,16 +114,18 @@ class _CreatePostState extends State<CreatePost> {
                                       color: black_121212,
                                       fontFamily: helvetica_neu_bold,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 16),
+                                      fontWeight: FontWeight.w900,
+                                      letterSpacing: 0.7,
+                                      fontSize: 16.sp),
                                   textAlign: TextAlign.left),
                               Icon(Icons.expand_more_rounded),
                             ],
                           ),
                         ),
-                        Container(height: 40, width: 120, child: MultiAssetsPage()),
+                        Container( width: 145, child: MultiAssetsPage()),
                       ],
                     ),
-                    Spacer(),
+
                     InkWell(
                       onTap: () {
                         if (controller.captionController.value.text.isEmpty) {
@@ -239,9 +241,10 @@ class _CreatePostState extends State<CreatePost> {
                         style: TextStyle(
                             color: black_121212,
                             fontWeight: FontWeight.w900,
-                            fontFamily: "NeueHelvetica",
+                            fontFamily: helvetica_neu_bold,
+                            letterSpacing: 1.0,
                             fontStyle: FontStyle.normal,
-                            fontSize: 12.0),
+                            fontSize: 12.sp),
                         textAlign: TextAlign.left),
 
                     SizedBox(
@@ -297,7 +300,7 @@ class _CreatePostState extends State<CreatePost> {
                     ),
 
                     SizedBox(
-                      height: 16.h,
+                      height: 26.h,
                     ),
 
                     InkWell(
@@ -311,9 +314,10 @@ class _CreatePostState extends State<CreatePost> {
                               style: TextStyle(
                                   color: black_121212,
                                   fontWeight: FontWeight.w900,
-                                  fontFamily: "NeueHelvetica",
+                                  fontFamily: helvetica_neu_bold,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 12.0),
+                                  letterSpacing: 1.0,
+                                  fontSize: 12.sp),
                               textAlign: TextAlign.left),
                           RotatedBox(
                               quarterTurns: 90,
