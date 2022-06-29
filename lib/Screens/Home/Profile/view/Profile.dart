@@ -159,8 +159,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                 context, controller.details.value.id);
                           },
                           child: Container(
-                            width: 44.w,
-                            height: 44.h,
+                            width: 40.w,
+                            height: 40.h,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10.r),

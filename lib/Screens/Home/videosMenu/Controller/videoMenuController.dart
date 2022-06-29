@@ -59,6 +59,7 @@ class VideoMenuController extends GetxController {
 
   RxList<FindSpeaker> findSpeakerList = <FindSpeaker>[].obs;
   RxBool hasMore = false.obs;
+  RxBool hasDataMore = false.obs;
   Rx<SpeakerVideoModel> speakerVideoList = SpeakerVideoModel().obs;
   RxList<VideoList> speakerList = <VideoList>[].obs;
   RxInt speakerListPage = 1.obs;
@@ -79,12 +80,11 @@ class VideoMenuController extends GetxController {
       <YoutubePlayerController>[].obs;
   RxString totalVideoCount = "0".obs;
   RxBool checkCount = false.obs;
+  Rx<ScrollController> scrollListController = ScrollController().obs;
+  RxInt pageNo = 1.obs;
 
   @override
   void onInit() {
-    print("controller.selectedTopic.value ::" +
-        selectedTopic.value.id.toString());
-    videoListAPI();
     topicListAPI();
     languageListAPI();
     filtterListMethod("");
@@ -94,28 +94,46 @@ class VideoMenuController extends GetxController {
   }
 
   videoListAPI({String? topicFilter, String? languageFilter}) async {
-    isLoadingBCT.value = true;
+    print("CALL LIST API :: " + pageNo.value.toString());
+
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     String topicString1;
     String languageString1;
-    if (topicFilter == "") {
+
+    if (topicFilter != null && topicFilter.toString() != '[]') {
       String topicString = topicFilter.toString().replaceAll('[', '');
       topicString1 = topicString.replaceAll(']', '');
+      if (topicString1.substring(topicString1.length - 1) == ",") {
+        topicString1.substring(0, topicString1.length - 1);
+      }
     } else {
       topicString1 = "";
     }
-    if (topicFilter == "") {
+    if (languageFilter != null && languageFilter.toString() != '[]') {
       String languageString = languageFilter.toString().replaceAll('[', '');
       languageString1 = languageString.replaceAll(']', '');
+      if (languageString1.substring(languageString1.length - 1) == ",") {
+        languageString1.substring(0, languageString1.length - 1);
+      }
     } else {
       languageString1 = "";
+    }
+    if (languageString1.length > 1) {
+      if (languageString1.substring(languageString1.length - 1) == ",") {
+        languageString1.substring(0, languageString1.length - 1);
+      }
+    }
+    if (topicString1.length > 1) {
+      if (topicString1.substring(topicString1.length - 1) == ",") {
+        topicString1.substring(0, topicString1.length - 1);
+      }
     }
 
     dynamic body = {
       'topic': topicString1,
       'language': languageString1,
-      'page': 0.toString()
+      'page': pageNo.value.toString()
     };
     print("body :: " + body.toString());
     String url = urlBase + urlHomeVideoList;
@@ -154,15 +172,17 @@ class VideoMenuController extends GetxController {
   }
 
   videoMenuPageMethod() {
-    videoList.clear();
-
-    int total = 6;
-    var list = <VideoList>[];
+    if (videoMenuModelList.value.data!.length < 10) {
+      hasDataMore.value = false;
+    } else {
+      hasDataMore.value = true;
+      pageNo.value++;
+    }
     videoMenuModelList.value.data!.forEach((element) {
       String dataVideos =
           element.embededCode.toString().replaceAll("560", "130");
       String videoData = dataVideos.replaceAll("315", "60");
-      list.add(VideoList(
+      videoList.add(VideoList(
           id: element.id,
           userId: element.userId,
           title: element.title,
@@ -181,16 +201,6 @@ class VideoMenuController extends GetxController {
           createdAt: element.createdAt,
           updatedAt: element.updatedAt));
     });
-    if (list.length > videoMenuPage.value * total) {
-      hasMore.value = true;
-    } else {
-      hasMore.value = false;
-    }
-    videoList.value = List.generate(
-        list.length > videoMenuPage.value * total
-            ? videoMenuPage.value * total
-            : list.length,
-        (index) => list[index]);
 
     List videoId = [];
     videoController.clear();
@@ -223,6 +233,7 @@ class VideoMenuController extends GetxController {
       );
       videoController.add(controller);
     }
+
     isLoadingBCT.value = false;
   }
 

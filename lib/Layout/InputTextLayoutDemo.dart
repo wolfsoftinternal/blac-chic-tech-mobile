@@ -74,7 +74,8 @@ class _TextInputState extends State<InputTextLayoutDemo> {
           style:   TextStyle(
               color: black_121212,
               fontFamily: helveticaNeueNeue_medium,
-              fontSize: 14.sp
+              fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
           ),
           keyboardType: inputType ,
           readOnly: widget.readonly,
