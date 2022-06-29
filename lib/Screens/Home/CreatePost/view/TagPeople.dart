@@ -74,7 +74,8 @@ class _TagPeopleState extends State<TagPeople> {
                 Text('TAG PEOPLE',
                     style: TextStyle(
                         color: black_121212,
-                        /*  fontWeight: FontWeight.w700,*/ /*akib changes*/
+                          fontWeight: FontWeight.w900,
+                        letterSpacing: 1.0,
                         fontFamily: helvetica_neu_bold,
                         /*akib changes*/
                         fontStyle: FontStyle.normal,
@@ -139,7 +140,7 @@ class _TagPeopleState extends State<TagPeople> {
                             fit: BoxFit.cover,
                           ),
                     SizedBox(
-                      height: 50.h,
+                      height: 56.h,
                       child: ListView.separated(
                           primary: false,
                           shrinkWrap: true,
@@ -147,7 +148,7 @@ class _TagPeopleState extends State<TagPeople> {
                                 width: 8.w,
                               ),
                           padding: EdgeInsets.only(
-                              left: 16.w, right: 16.w, bottom: 16),
+                              left: 24.w, right: 24.w, bottom: 24.h),
                           itemCount: controller.selectedList.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, i) {
@@ -331,37 +332,37 @@ class _TagPeopleState extends State<TagPeople> {
                                     children: [
                                       CircularProfileAvatar(
                                         '',
-                                        radius: 22,
+                                        radius: 20,
                                         child:
                                             videoController.userList[i].image ==
                                                     null
                                                 ? SvgPicture.asset(
                                                     placeholder,
-                                                    height: 44.h,
-                                                    width: 44.w,
+                                                    height: 40.h,
+                                                    width: 40.w,
                                                     fit: BoxFit.cover,
                                                   )
                                                 : CachedNetworkImage(
                                                     imageUrl: videoController
                                                         .userList[i].image!,
-                                                    height: 44.h,
-                                                    width: 44.w,
+                                                    height: 40.h,
+                                                    width: 40.w,
                                                     fit: BoxFit.cover,
                                                     progressIndicatorBuilder:
                                                         (context, url,
                                                                 downloadProgress) =>
                                                             SvgPicture.asset(
                                                       placeholder,
-                                                      height: 44.h,
-                                                      width: 44.w,
+                                                      height: 40.h,
+                                                      width: 40.w,
                                                       fit: BoxFit.cover,
                                                     ),
                                                     errorWidget:
                                                         (context, url, error) =>
                                                             SvgPicture.asset(
                                                       placeholder,
-                                                      height: 44.h,
-                                                      width: 44.w,
+                                                      height: 40.h,
+                                                      width: 40.w,
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
@@ -431,8 +432,8 @@ class _TagPeopleState extends State<TagPeople> {
                                                 true
                                             ? orange_tick_icon
                                             : icon_next_arrow,
-                                        width: 25.w,
-                                        height: 25.h,
+                                        width: 24.w,
+                                        height: 24.h,
                                       )
                                     ],
                                   ),
