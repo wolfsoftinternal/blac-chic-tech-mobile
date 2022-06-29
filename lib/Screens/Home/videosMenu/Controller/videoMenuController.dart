@@ -138,6 +138,7 @@ class VideoMenuController extends GetxController {
     print("body :: " + body.toString());
     String url = urlBase + urlHomeVideoList;
     final apiReq = Request();
+    print("Page no :: " + pageNo.value.toString());
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
       videoMenuModelList.value = SpeakerVideoModel();
@@ -172,7 +173,7 @@ class VideoMenuController extends GetxController {
   }
 
   videoMenuPageMethod() {
-    if (videoMenuModelList.value.data!.length < 10) {
+    if (videoMenuModelList.value.data!.length < 7) {
       hasDataMore.value = false;
     } else {
       hasDataMore.value = true;
