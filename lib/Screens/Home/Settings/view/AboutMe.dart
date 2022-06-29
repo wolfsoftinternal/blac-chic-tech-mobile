@@ -175,7 +175,7 @@ class _AboutMeState extends State<AboutMe> {
         () => Column(
           children: [
             SizedBox(
-              height: 60,
+              height: 50,
             ),
             ToolbarWithHeaderCenterTitle("ABOUT ME"),
             Expanded(
@@ -183,7 +183,7 @@ class _AboutMeState extends State<AboutMe> {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.only(
-                      left: 24.w, right: 24.w, top: 20.h, bottom: 24.h),
+                      left: 24.w, right: 24.w, top: 32.h, bottom: 24.h),
                   child: myModel == null
                       ? Container()
                       : Column(
@@ -194,8 +194,9 @@ class _AboutMeState extends State<AboutMe> {
                                 style: TextStyle(
                                     color: black_121212,
                                     fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
+                                    fontFamily: helvetica_neu_bold,
                                     fontStyle: FontStyle.normal,
+                                    letterSpacing: 1.2,
                                     fontSize: 12.sp),
                                 textAlign: TextAlign.left),
 
@@ -204,7 +205,7 @@ class _AboutMeState extends State<AboutMe> {
                             ),
 
                             Row(
-                              children: [
+                                 children: [
                                 Expanded(
                                     child: InputTextLayoutDemo(
                                         "Title",
@@ -219,16 +220,18 @@ class _AboutMeState extends State<AboutMe> {
                                 ),
                                 Expanded(
                                   child: Container(
-                                    height: HeightData.fifty_seven,
+                                    height: 48.h,
                                     decoration: EditTextDecoration,
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Padding(
                                         padding: EdgeInsets.only(
-                                            left: 12.w, right: 12.w, top: 5.w),
+                                            left: 12.w, right: 12.w, ),
                                         child: Padding(
                                           padding: EdgeInsets.all(5.r),
                                           child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               Align(
                                                 alignment: Alignment.centerLeft,
@@ -295,7 +298,8 @@ class _AboutMeState extends State<AboutMe> {
                                 style: TextStyle(
                                     color: black_121212,
                                     fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
+                                    fontFamily: helvetica_neu_bold,
+                                    letterSpacing: 1.2,
                                     fontStyle: FontStyle.normal,
                                     fontSize: 12.sp),
                                 textAlign: TextAlign.left),
@@ -328,11 +332,15 @@ class _AboutMeState extends State<AboutMe> {
                                           onTap: () {
                                             controller.website.value = false;
                                           },
-                                          child: SvgPicture.asset(
-                                            icon_edit_blue,
-                                            width: 12.w,
-                                            height: 12.h,
-                                          ))
+                                          child: Padding(
+                                            padding:  EdgeInsets.only(right: 10.w),
+                                            child: SvgPicture.asset(
+                                              icon_edit_blue,
+                                              width: 12.w,
+                                              height: 12.h,
+                                            ),
+                                          )),
+
                                     ],
                                   )
                                 : Container(
@@ -416,13 +424,13 @@ class _AboutMeState extends State<AboutMe> {
                                     ),
                                   ),
                             SizedBox(
-                              height: 16.h,
+                              height: 24.h,
                             ),
                             Container(
                               width: double.infinity,
                               height: 1,
                               decoration:
-                                  const BoxDecoration(color: view_line_f4f6f6),
+                                   BoxDecoration(color: view_line_f4f6f6),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 16.h, bottom: 16.h),
@@ -434,7 +442,8 @@ class _AboutMeState extends State<AboutMe> {
                                       style: TextStyle(
                                           color: black_121212,
                                           fontWeight: FontWeight.w900,
-                                          fontFamily: "NeueHelvetica",
+                                          fontFamily: helvetica_neu_bold,
+                                          letterSpacing: 1.2,
                                           fontStyle: FontStyle.normal,
                                           fontSize: 12.sp),
                                       textAlign: TextAlign.left),
@@ -454,7 +463,7 @@ class _AboutMeState extends State<AboutMe> {
                                                   children: [
                                                     CircularProfileAvatar(
                                                       '',
-                                                      radius: 20.5,
+                                                      radius: 16,
                                                       child: pastJobImage[index]
                                                               .isEmpty
                                                           ? SvgPicture.asset(
@@ -532,10 +541,13 @@ class _AboutMeState extends State<AboutMe> {
                                                             !pastJob[index];
                                                         setState(() {});
                                                       },
-                                                      child: SvgPicture.asset(
-                                                        icon_edit_blue,
-                                                        width: 12.w,
-                                                        height: 12.w,
+                                                      child: Padding(
+                                                        padding:  EdgeInsets.only(right: 10.w),
+                                                        child: SvgPicture.asset(
+                                                          icon_edit_blue,
+                                                          width: 12.w,
+                                                          height: 12.w,
+                                                        ),
                                                       ),
                                                     )
                                                   ],
@@ -668,6 +680,7 @@ class _AboutMeState extends State<AboutMe> {
                                                             alignment: Alignment
                                                                 .centerLeft,
                                                             child: Container(
+                                                              height:48.h,
                                                               decoration: BoxDecoration(
                                                                   color:
                                                                       light_grey_f2f2f2,
@@ -682,10 +695,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                             .w,
                                                                         right: 16
                                                                             .w,
-                                                                        top: 13
-                                                                            .h,
-                                                                        bottom:
-                                                                            13.h),
+                                                                        ),
                                                                 child: Row(
                                                                   mainAxisAlignment:
                                                                       MainAxisAlignment
@@ -694,7 +704,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                     Column(
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment
-                                                                              .start,
+                                                                              .center,
                                                                       crossAxisAlignment:
                                                                           CrossAxisAlignment
                                                                               .start,
@@ -808,7 +818,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                 },
                                                                 child:
                                                                     Container(
-                                                                  height: 50.h,
+                                                                  height: 40.h,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     border: Border.all(
@@ -857,7 +867,7 @@ class _AboutMeState extends State<AboutMe> {
                                                             setState(() {});
                                                           },
                                                           child: Container(
-                                                            height: 50.h,
+                                                            height: 40.h,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color:
@@ -892,9 +902,9 @@ class _AboutMeState extends State<AboutMe> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 16.h,
-                                                  )
+                                                  // SizedBox(
+                                                  //   height: 16.h,
+                                                  // )
                                                 ],
                                               );
                                       }),
@@ -983,7 +993,7 @@ class _AboutMeState extends State<AboutMe> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 16.h,
+                                    height: 5.h,
                                   ),
                                 ],
                               ),
@@ -1004,7 +1014,8 @@ class _AboutMeState extends State<AboutMe> {
                                       style: TextStyle(
                                           color: black_121212,
                                           fontWeight: FontWeight.w900,
-                                          fontFamily: "NeueHelvetica",
+                                          fontFamily: helvetica_neu_bold,
+                                          letterSpacing: 1.2,
                                           fontStyle: FontStyle.normal,
                                           fontSize: 12.sp),
                                       textAlign: TextAlign.left),
@@ -1050,10 +1061,13 @@ class _AboutMeState extends State<AboutMe> {
                                                           !education[index];
                                                       setState(() {});
                                                     },
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
+                                                    child: Padding(
+                                                      padding:  EdgeInsets.only(right: 10.w),
+                                                      child: SvgPicture.asset(
+                                                        icon_edit_blue,
+                                                        width: 12.w,
+                                                        height: 12.w,
+                                                      ),
                                                     ),
                                                   )
                                                 ],
@@ -1064,7 +1078,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 children: [
                                                   Container(
                                                     height:
-                                                        HeightData.fifty_seven,
+                                                        48.h,
                                                     decoration:
                                                         EditTextDecoration,
                                                     child: Padding(
@@ -1114,8 +1128,7 @@ class _AboutMeState extends State<AboutMe> {
                                                       Expanded(
                                                         flex: 1,
                                                         child: Container(
-                                                          height: HeightData
-                                                              .fifty_seven,
+                                                          height: 48.h,
                                                           decoration:
                                                               EditTextDecoration,
                                                           child: Padding(
@@ -1242,8 +1255,7 @@ class _AboutMeState extends State<AboutMe> {
                                                       Expanded(
                                                         flex: 1,
                                                         child: Container(
-                                                          height: HeightData
-                                                              .fifty_seven,
+                                                          height: 48.h,
                                                           decoration:
                                                               EditTextDecoration,
                                                           child: Padding(
@@ -1402,7 +1414,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                 },
                                                                 child:
                                                                     Container(
-                                                                  height: 50.h,
+                                                                  height: 40,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     border: Border.all(
@@ -1452,7 +1464,7 @@ class _AboutMeState extends State<AboutMe> {
                                                             setState(() {});
                                                           },
                                                           child: Container(
-                                                            height: 50.h,
+                                                            height: 40.h,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color:
@@ -1487,9 +1499,9 @@ class _AboutMeState extends State<AboutMe> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 16.h,
-                                                  )
+                                                  // SizedBox(
+                                                  //   height: 16.h,
+                                                  // )
                                                 ],
                                               ),
                                             );
@@ -1567,6 +1579,11 @@ class _AboutMeState extends State<AboutMe> {
                                 ],
                               ),
                             ),
+
+                            SizedBox(
+                              height: 5.h,
+                            ),
+
                             Container(
                               width: double.infinity,
                               height: 1,

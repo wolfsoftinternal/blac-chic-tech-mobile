@@ -313,8 +313,8 @@ class _EventLocationState extends State<EventLocation> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(30.0),
-                          topRight: Radius.circular(30.0)),
+                          topLeft: Radius.circular(16.0),
+                          topRight: Radius.circular(16.0)),
                       boxShadow: [
                         BoxShadow(
                           color: const Color(0xff4343b2).withOpacity(0.05),
@@ -346,7 +346,7 @@ class _EventLocationState extends State<EventLocation> {
                         // ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 14, left: 24, right: 24, bottom: 17),
+                              top: 10, left: 24, right: 24, bottom: 17),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -379,10 +379,12 @@ class _EventLocationState extends State<EventLocation> {
                                       fontStyle: FontStyle.normal,
                                       fontSize: 12.sp),
                                   textAlign: TextAlign.left),
-                              const SizedBox(
-                                height: 14,
+                               SizedBox(
+                                height: 6.h,
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SvgPicture.asset(icon_location,
                                       width: 24.w, height: 24.h),

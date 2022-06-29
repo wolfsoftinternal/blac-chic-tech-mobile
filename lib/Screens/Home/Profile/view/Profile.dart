@@ -575,7 +575,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             },
             body: Column(children: [
               
-                        Padding(
+              Padding(
                   padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 22.h),
                   child: Container(
                     height: 66.h,
@@ -684,6 +684,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     ),
                   ),
                 ),
+
                 Expanded(
               child: Padding(
                 padding:  EdgeInsets.only(top: 12.h),
