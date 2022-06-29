@@ -35,10 +35,23 @@ class _VideoListBctState extends State<VideoListBct> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    controller.videoList.clear();
+    controller.pageNo.value = 1;
+    controller.isLoadingBCT.value = true;
+    controller.videoListAPI();
+
     if (mounted) {
       controller.isLoading.value = true;
       controller.isLoadingButton.value = false;
     }
+    controller.scrollListController.value.addListener(() {
+      if (controller.scrollListController.value.position.maxScrollExtent ==
+          controller.scrollListController.value.offset) {
+        print("::::::::::::: CALL LIST API :::::::::::::::::::");
+        controller.videoListAPI();
+      }
+    });
   }
 
   @override
@@ -115,8 +128,11 @@ class _VideoListBctState extends State<VideoListBct> {
             ),
           ),
         ),
-
-        Container(
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
                   color: light_grey_f2f2f2,
                   child: Column(
                     children: [
@@ -299,11 +315,6 @@ class _VideoListBctState extends State<VideoListBct> {
                     ],
                   ),
                 ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                
                 Container(
                     width: double.infinity,
                     height: 1,
@@ -712,8 +723,9 @@ class _VideoListBctState extends State<VideoListBct> {
                                             controller.selectIdLanguage
                                                 .add(element.name!);
                                           });
-                                          print(
-                                              ":::::::::::ALL DATA PUT API:::::::::::");
+                                          controller.videoList.clear();
+                                          controller.pageNo.value = 1;
+                                          controller.isLoadingBCT.value = true;
                                           controller.videoListAPI(
                                               topicFilter: controller
                                                   .selectIdTopic
@@ -760,6 +772,9 @@ class _VideoListBctState extends State<VideoListBct> {
                                         controller.selectIdTopic.clear();
                                         controller.selectIdLanguage.clear();
 
+                                        controller.videoList.clear();
+                                        controller.pageNo.value = 1;
+                                        controller.isLoadingBCT.value = true;
                                         controller.videoListAPI();
                                       },
                                       child: Container(
@@ -791,25 +806,29 @@ class _VideoListBctState extends State<VideoListBct> {
                       ),
                     ),
                     Obx(
-                      () => Container(
-                          margin: EdgeInsets.only(
-                              top: 24.h, left: 12.w, right: 24.w),
-                          child: controller.isLoadingBCT.value
-                              ? const SizedBox(
+                      () => controller.isLoadingBCT.value
+                          ? const SizedBox(
+                              width: double.infinity,
+                              height: 200,
+                              child: Center(
+                                  child: SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Color(0xff04080f))),
+                              )))
+                          : controller.videoList.isNotEmpty
+                              ? Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.85,
                                   width: double.infinity,
-                                  height: 100,
-                                  child: Center(
-                                      child: SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                Color(0xff04080f))),
-                                  )))
-                              : controller.videoList.isNotEmpty
-                                  ? ListView.builder(
+                                  margin: EdgeInsets.only(
+                                      top: 24.h, left: 12.w, right: 24.w),
+                                  child: ListView.builder(
+                                      controller:
+                                          controller.scrollListController.value,
                                       shrinkWrap: true,
                                       primary: false,
                                       itemCount:
@@ -818,8 +837,6 @@ class _VideoListBctState extends State<VideoListBct> {
                                           horizontal: 10.w),
                                       itemBuilder: (context, i) {
                                         if (i < controller.videoList.length) {
-                                          print(
-                                              "::::::::::::UPDATE 00:::::::::::");
                                           return Padding(
                                             padding:
                                                 EdgeInsets.only(bottom: 20.h),
@@ -1047,48 +1064,54 @@ class _VideoListBctState extends State<VideoListBct> {
                                             ),
                                           );
                                         } else {
-                                          return controller.hasMore.value ==
-                                                  false
-                                              ? const SizedBox()
+                                          return controller.hasDataMore.value ==
+                                                  true
+                                              ? const SizedBox(
+                                                  width: double.infinity,
+                                                  height: 50,
+                                                  child: Center(
+                                                      child: SizedBox(
+                                                    height: 20,
+                                                    width: 20,
+                                                    child: CircularProgressIndicator(
+                                                        strokeWidth: 2,
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                    Color>(
+                                                                Color(
+                                                                    0xff04080f))),
+                                                  )))
                                               : Container(
                                                   margin: EdgeInsets.only(
                                                       bottom: 25.h),
                                                   child: Center(
-                                                    child: TextButton(
-                                                      onPressed: () {
-                                                        controller.videoMenuPage
-                                                            .value++;
-                                                        controller
-                                                            .videoMenuPageMethod();
-                                                      },
-                                                      child: Text(
-                                                        "Load More",
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                roboto_bold,
-                                                            fontSize: 14.sp,
-                                                            color: blue_0a84ff),
-                                                      ),
-                                                    ),
-                                                  ),
+                                                      child:
+                                                          Text("No More Data",
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    roboto_bold,
+                                                                fontSize: 14.sp,
+                                                                color: const Color(
+                                                                    0xff04080f),
+                                                              ))),
                                                 );
                                         }
-                                      })
-                                  : SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.45,
-                                      width: double.infinity,
-                                      child: const Center(
-                                          child: Text("No Data Found",
-                                              style: TextStyle(
-                                                  color: grey_aaaaaa,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily:
-                                                      helveticaNeueNeue_medium,
-                                                  fontStyle: FontStyle.normal,
-                                                  fontSize: 14))),
-                                    )),
+                                      }),
+                                )
+                              : SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.45,
+                                  width: double.infinity,
+                                  child: const Center(
+                                      child: Text("No Data Found",
+                                          style: TextStyle(
+                                              color: grey_aaaaaa,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 14))),
+                                ),
                     ),
                   ],
                 ),
