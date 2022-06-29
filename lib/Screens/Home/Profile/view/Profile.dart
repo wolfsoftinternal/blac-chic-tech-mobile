@@ -159,8 +159,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                 context, controller.details.value.id);
                           },
                           child: Container(
-                            width: 44.w,
-                            height: 44.h,
+                            width: 40.w,
+                            height: 40.h,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10.r),
@@ -566,7 +566,16 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             height: 1,
                           )
                         : Container(),
-                Padding(
+
+                
+              ],
+            ),
+                )
+              ];
+            },
+            body: Column(children: [
+              
+                        Padding(
                   padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 22.h),
                   child: Container(
                     height: 66.h,
@@ -675,14 +684,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     ),
                   ),
                 ),
-              ],
-            ),
-                )
-              ];
-            },
-            body: Container(
+                Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:  EdgeInsets.only(top: 12.h),
                 child: TabBarView(
                   controller: tabController,
                   children: [
@@ -694,11 +698,10 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 ),
               ),
             ),
-            ),
-            ),
-            // Expanded(
+            ]),
+            // body: Container(
             //   child: Padding(
-            //     padding:  EdgeInsets.only(top: 12.h),
+            //     padding: const EdgeInsets.all(8.0),
             //     child: TabBarView(
             //       controller: tabController,
             //       children: [
@@ -710,6 +713,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             //     ),
             //   ),
             // ),
+            ),
+            ),
+            
+                
+            
           ],
         ),
       ),
