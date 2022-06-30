@@ -721,7 +721,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  replaceUserList(BuildContext context, id) async {
+  replaceUserList(BuildContext context, [id]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 

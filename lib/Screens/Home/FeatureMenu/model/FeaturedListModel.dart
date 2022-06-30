@@ -50,7 +50,8 @@ class FeaturedList {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
-    this.is_like
+    this.is_like,
+    this.share_link,
   });
 
   int? id;
@@ -65,6 +66,7 @@ class FeaturedList {
   DateTime? updatedAt;
   dynamic deletedAt;
   int? is_like;
+  String? share_link;
 
   factory FeaturedList.fromJson(Map<String, dynamic> json) => FeaturedList(
         id: json["id"],
@@ -79,6 +81,7 @@ class FeaturedList {
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
         is_like: json["is_like"],
+        share_link: json["share_link"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -94,5 +97,6 @@ class FeaturedList {
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
         "is_like": is_like,
+        "share_link": share_link,
       };
 }

@@ -66,15 +66,7 @@ class _EventListState extends State<EventList> {
               height: 20.h,
             ),
 
-            Expanded(
-              flex: 1,
-              child: SingleChildScrollView(
-                controller: controller.scrollController,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
+            Padding(
                       padding:
                           EdgeInsets.only(left: 16.w, right: 16.w, top: 12.h),
                       child: InputTextStaicFilter(
@@ -141,9 +133,19 @@ class _EventListState extends State<EventList> {
                       ),
                     ),
                     SizedBox(
-                      height: 24.h,
+                      height: 12.h,
                     ),
 
+            Expanded(
+              flex: 1,
+              child: SingleChildScrollView(
+                controller: controller.scrollController,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    
+                    SizedBox(height: 12.h,),
                     controller.isLoading.value == true
                     ? Container(height: MediaQuery.of(context).size.height * 0.60,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),))
                     : controller.eventList.isEmpty

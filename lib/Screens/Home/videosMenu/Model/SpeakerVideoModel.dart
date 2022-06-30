@@ -56,7 +56,7 @@ class VideoList {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
-    required this.userDetails,
+    this.userDetails,
     this.speakerList,
     this.isFocus,
   });
@@ -75,7 +75,7 @@ class VideoList {
   DateTime? createdAt;
   DateTime? updatedAt;
   dynamic deletedAt;
-  UserDetails userDetails;
+  UserDetails? userDetails;
   List<String>? speakerList;
   int? isFocus;
 
@@ -99,7 +99,7 @@ class VideoList {
             : DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
         userDetails: json["user_details"] == null
-            ? UserDetails()
+            ? null
             : UserDetails.fromJson(json["user_details"]),
         speakerList: json["speaker_list"] == null
             ? null
@@ -122,7 +122,7 @@ class VideoList {
         "created_at": createdAt == null ? null : createdAt!.toIso8601String(),
         "updated_at": updatedAt == null ? null : updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
-        "user_details": userDetails == null ? null : userDetails.toJson(),
+        "user_details": userDetails == null ? null : userDetails!.toJson(),
         "speaker_list": speakerList == null
             ? null
             : List<dynamic>.from(speakerList!.map((x) => x)),

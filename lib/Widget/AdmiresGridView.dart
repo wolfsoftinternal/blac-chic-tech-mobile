@@ -97,6 +97,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                 children: [
                   widget.type == 'user' && widget.limit == 'completed' ?
                   PopupMenuButton(
+                    tooltip: '',
                           child: SizedBox(
                             child: Center(
                               child: CircularProfileAvatar(
@@ -178,6 +179,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                       ? PopupMenuButton(
 
                           // position: PopupMenuPosition.under,
+                          tooltip: '',
                           child: SizedBox(
                             child: Center(
                               child: CircularProfileAvatar(
