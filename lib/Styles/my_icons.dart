@@ -23,6 +23,7 @@ const icon_instagram = 'assets/images/instagram.png';
 const icon_twitter = 'assets/images/twitter.png';
 const search = 'assets/images/search.svg';
 const plus = 'assets/images/plus.svg';
+const icon_past_search = 'assets/images/icon_past_search.svg';
 const icon_plus_chat = 'assets/images/icon_plus_chat.svg';
 const icon_plus_chat_white = 'assets/images/icon_plus_chat_white.svg';
 const placeholder = 'assets/images/placeholder.svg';

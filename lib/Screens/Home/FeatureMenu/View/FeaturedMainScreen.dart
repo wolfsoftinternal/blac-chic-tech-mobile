@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:blackchecktech/Screens/Home/FeatureMenu/View/PastFeaturesScreen.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,7 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 50.0, left: 15.0, right: 20.0),
+          padding: const EdgeInsets.only(top: 45.0, left: 30.0, right: 30.0),
           child: Align(
             alignment: Alignment.topCenter,
             child: Row(
@@ -112,7 +113,8 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
                     style: TextStyle(
                         color: white_ffffff,
                         fontWeight: FontWeight.w900,
-                        fontFamily: "NeueHelvetica",
+                        fontFamily: helvetica_neu_bold,
+                        letterSpacing: 1.2,
                         fontStyle: FontStyle.normal,
                         fontSize: 20.sp),
                     textAlign: TextAlign.left),
@@ -169,8 +171,9 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
                           style: TextStyle(
                               color: white_ffffff,
                               fontWeight: FontWeight.w700,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helvetica_neu_bold,
                               fontStyle: FontStyle.normal,
+                              letterSpacing: 1.2,
                               fontSize: 24.sp),
                           textAlign: TextAlign.left)
                     ],
@@ -201,7 +204,8 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
                           style: TextStyle(
                               color: white_ffffff,
                               fontWeight: FontWeight.w700,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helvetica_neu_bold,
+                              letterSpacing: 1.2,
                               fontStyle: FontStyle.normal,
                               fontSize: 24.sp),
                           textAlign: TextAlign.right)

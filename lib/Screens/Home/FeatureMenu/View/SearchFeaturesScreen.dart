@@ -117,8 +117,8 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
               child: Text("Recently Search",
                   style: TextStyle(
                       color: black_121212,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: "NeueHelvetica",
+                      fontWeight: FontWeight.w800,
+                      fontFamily: helvetica_neu_bold,
                       fontStyle: FontStyle.normal,
                       fontSize: 16.sp),
                   textAlign: TextAlign.left),
@@ -139,7 +139,7 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
                       searchableFeatureList.length > 0?  ListView.builder(
                     primary: false,
                     shrinkWrap: true,
-                    padding: EdgeInsets.only(bottom: 20.h),
+                    padding: EdgeInsets.only(bottom: 20.h,top: 16.h),
                     itemCount: searchableFeatureList.length,
                     itemBuilder: (context, i) => // Activism
                     InkWell(
@@ -154,7 +154,7 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
 
                       },
                       child: Padding(
-                        padding: EdgeInsets.only(bottom: 16.h, top: 16),
+                        padding: EdgeInsets.only(bottom: 16.h),
                         child: Row(
                             mainAxisAlignment:
                             MainAxisAlignment.spaceBetween,
@@ -198,7 +198,7 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
                                               searchableFeatureList[i].title??"",
                                               14.sp,
                                               black_121212,
-                                              FontWeight.w900,
+                                              FontWeight.w800,
                                               ),
 
                                       SizedBox(height: 4.h,),
