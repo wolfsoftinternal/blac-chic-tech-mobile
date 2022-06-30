@@ -23,10 +23,10 @@ class ToolbarWithHeaderCenterTitle extends StatelessWidget {
           Text(title!,
               style:  TextStyle(
                   color: black_121212,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w900,
                   fontFamily: helvetica_neu_bold,
                   fontStyle: FontStyle.normal,
-                  letterSpacing: 0.7,
+                  letterSpacing: 1.2,
                   fontSize: 16.sp),
               textAlign: TextAlign.center),
               const Spacer(),

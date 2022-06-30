@@ -55,7 +55,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
-                                    childAspectRatio: 1.5.h,
+                                    childAspectRatio: 1.42.h,
                                     mainAxisSpacing: 0,
                                     crossAxisSpacing: 0),
                             itemCount: controller.registerList.value.data!.transactionHistory!.length,
@@ -69,6 +69,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                     Expanded(
                                       flex: 1,
                                       child: Container(
+                                        margin: EdgeInsets.only(bottom: 16.h),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(4.r),
@@ -146,9 +147,7 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                 )),
                       ),
 
-                      SizedBox(
-                        height: 16.h,
-                      ),
+
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
                         child: SearchBarTag(placeholder: "Search people", onSubmit: (value){

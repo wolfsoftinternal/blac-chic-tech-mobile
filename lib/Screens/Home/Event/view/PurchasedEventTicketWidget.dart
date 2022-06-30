@@ -121,7 +121,7 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                               Container(
                                 decoration: BoxDecoration(
                                     color: white_ffffff,
-                                    borderRadius: BorderRadius.circular(3),
+                                    borderRadius: BorderRadius.circular(4.r),
                                     border: Border.all(
                                         width: 1,
                                         color: const Color(0xfff5f5f5))),
@@ -130,7 +130,7 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                     Expanded(
                                       flex: 1,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding:  EdgeInsets.all(8.r),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -147,7 +147,7 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                                 textAlign: TextAlign.left),
 
                                             SizedBox(
-                                              height: 5.h,
+                                              height: 8.h,
                                             ),
                                             // Fade Ogunro
                                             Text(
@@ -158,7 +158,7 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                                     fontWeight:
                                                         FontWeight.w700,
                                                     fontFamily:
-                                                        "NeueHelvetica",
+                                                        helvetica_neu_bold,
                                                     fontStyle:
                                                         FontStyle.normal,
                                                     overflow: TextOverflow
@@ -171,13 +171,13 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                     ),
                                     Container(
                                         width: 1,
-                                        height: 50,
+                                        height: 53.h,
                                         decoration: const BoxDecoration(
                                             color: view_line_f4f6f6)),
                                     Expanded(
                                       flex: 1,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding:  EdgeInsets.all(8.r),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -194,7 +194,7 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                                 textAlign: TextAlign.left),
 
                                             SizedBox(
-                                              height: 5.h,
+                                              height: 8.h,
                                             ),
                                             // Fade Ogunro
                                             Text(
@@ -206,7 +206,7 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                                     fontWeight:
                                                         FontWeight.w700,
                                                     fontFamily:
-                                                        "NeueHelvetica",
+                                                    helvetica_neu_bold,
                                                     fontStyle:
                                                         FontStyle.normal,
                                                     fontSize: 12.sp),
@@ -217,13 +217,13 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                     ),
                                     Container(
                                         width: 1,
-                                        height: 50,
+                                        height: 53.h,
                                         decoration: const BoxDecoration(
                                             color: view_line_f4f6f6)),
                                     Expanded(
                                       flex: 1,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding:  EdgeInsets.all(8.r),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -240,7 +240,7 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                                 textAlign: TextAlign.left),
 
                                             SizedBox(
-                                              height: 5.h,
+                                              height: 8.h,
                                             ),
 
                                             // Fade Ogunro
@@ -253,7 +253,7 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                                     fontWeight:
                                                         FontWeight.w700,
                                                     fontFamily:
-                                                        "NeueHelvetica",
+                                                    helvetica_neu_bold,
                                                     fontStyle:
                                                         FontStyle.normal,
                                                     fontSize: 12.sp),
@@ -267,21 +267,18 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                               ),
 
                               SizedBox(
-                                height: 18.h,
+                                height: 12.h,
                               ),
 
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                              Padding(
+                                padding:  EdgeInsets.only(left: 10.w,right: 10.w),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // GOLD - $50
                                         Text(
                                             (widget.orderDetails
                                                         .admission_type ??
@@ -292,181 +289,175 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                                     ""),
                                             style: TextStyle(
                                                 color: black_121212,
-                                                fontWeight: FontWeight.w900,
+                                                fontWeight: FontWeight.w800,
                                                 fontFamily: roboto_bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 12.sp),
                                             textAlign: TextAlign.left),
+                                        Padding(
+                                          padding:  EdgeInsets.only(right: 15.w),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Opacity(
+                                                opacity: 0.699999988079071,
+                                                child: Text("Qty",
+                                                    style: TextStyle(
+                                                        color: black_121212,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily:
+                                                            roboto_regular,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 10.sp),
+                                                    textAlign: TextAlign.center),
+                                              ),
 
-                                        // Trxn ID 12321312112113
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Opacity(
-                                          opacity: 0.699999988079071,
-                                          child: Text("Qty",
-                                              style: TextStyle(
-                                                  color: black_121212,
-                                                  fontWeight:
-                                                      FontWeight.w400,
-                                                  fontFamily:
-                                                      roboto_regular,
-                                                  fontStyle:
-                                                      FontStyle.normal,
-                                                  fontSize: 10.sp),
-                                              textAlign: TextAlign.center),
+                                              SizedBox(
+                                                width: 4.w,
+                                              ),
+
+                                              // GOLD - $50
+                                              Text(
+                                                  (widget.orderDetails.total_tickets ??
+                                                          0)
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: black_121212,
+                                                      fontWeight: FontWeight.w900,
+                                                      fontFamily: roboto_bold,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontSize: 12.sp),
+                                                  textAlign: TextAlign.left),
+
+                                              // Trxn ID 12321312112113
+                                            ],
+                                          ),
                                         ),
-
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-
-                                        // GOLD - $50
+                                        // $100
                                         Text(
-                                            (widget.orderDetails.total_tickets ??
-                                                    0)
-                                                .toString(),
+                                            widget.orderDetails.total_price ??
+                                                "",
                                             style: TextStyle(
                                                 color: black_121212,
                                                 fontWeight: FontWeight.w900,
                                                 fontFamily: roboto_bold,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 12.sp),
-                                            textAlign: TextAlign.left),
+                                            textAlign: TextAlign.right),
 
-                                        // Trxn ID 12321312112113
+
                                       ],
                                     ),
-                                  ),
-                                  // $100
-                                  Text(
-                                      widget.orderDetails.total_price ??
-                                          "",
-                                      style: TextStyle(
-                                          color: black_121212,
-                                          fontWeight: FontWeight.w900,
-                                          fontFamily: roboto_bold,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 12.sp),
-                                      textAlign: TextAlign.right),
+                                    SizedBox(
+                                      height: 12.h,
+                                    ),
 
-                                  SizedBox(
-                                    width: 20.w,
-                                  )
-                                ],
-                              ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text("Debited from",
+                                          style: TextStyle(
+                                              color: grey_aaaaaa,
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: roboto_bold,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 12.sp),
+                                          textAlign: TextAlign.left),
+                                    ),
 
-                              SizedBox(
-                                height: 20.h,
-                              ),
+                                    SizedBox(
+                                      height: 6.h,
+                                    ),
 
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text("Debited from",
-                                    style: TextStyle(
-                                        color: grey_aaaaaa,
-                                        fontWeight: FontWeight.w900,
-                                        fontFamily: roboto_bold,
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 12.sp),
-                                    textAlign: TextAlign.left),
-                              ),
+                                    Row(
+                                      children: [
+                                        Text("Wallet",
+                                            style: TextStyle(
+                                                color: black_121212,
+                                                fontWeight: FontWeight.w900,
+                                                fontFamily: roboto_regular,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.sp),
+                                            textAlign: TextAlign.right),
+                                        Expanded(
+                                          child: Text(
+                                              SharePreData.strDollar +
+                                                  (widget.orderDetails.wallet_amount ??
+                                                      0)
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  color: black_121212,
+                                                  fontWeight: FontWeight.w900,
+                                                  fontFamily: roboto_bold,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 12.sp),
+                                              textAlign: TextAlign.right),
+                                        ),
 
-                              SizedBox(
-                                height: 12.h,
-                              ),
+                                      ],
+                                    ),
 
-                              Row(
-                                children: [
-                                  Text("Wallet",
-                                      style: TextStyle(
-                                          color: black_121212,
-                                          fontWeight: FontWeight.w900,
-                                          fontFamily: roboto_regular,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 12.sp),
-                                      textAlign: TextAlign.right),
-                                  Expanded(
-                                    child: Text(
-                                        SharePreData.strDollar +
-                                            (widget.orderDetails.wallet_amount ??
-                                                    0)
-                                                .toString(),
-                                        style: TextStyle(
-                                            color: black_121212,
-                                            fontWeight: FontWeight.w900,
-                                            fontFamily: roboto_bold,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 12.sp),
-                                        textAlign: TextAlign.right),
-                                  ),
-                                  SizedBox(
-                                    width: 20.w,
-                                  )
-                                ],
-                              ),
+                                    SizedBox(
+                                      height: 6.h,
+                                    ),
 
-                              SizedBox(
-                                height: 12.h,
-                              ),
+                                    Row(
+                                      children: [
+                                        Text("****7657689",
+                                            style: TextStyle(
+                                                color: black_121212,
+                                                fontWeight: FontWeight.w900,
+                                                fontFamily: roboto_regular,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.sp),
+                                            textAlign: TextAlign.right),
+                                        Expanded(
+                                          child: Text(
+                                              SharePreData.strDollar +
+                                                  (widget.orderDetails.trans_amount??0)
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  color: black_121212,
+                                                  fontWeight: FontWeight.w900,
+                                                  fontFamily: roboto_regular,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 12.sp),
+                                              textAlign: TextAlign.right),
+                                        ),
 
-                              Row(
-                                children: [
-                                  Text("****7657689",
-                                      style: TextStyle(
-                                          color: black_121212,
-                                          fontWeight: FontWeight.w900,
-                                          fontFamily: roboto_regular,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 12.sp),
-                                      textAlign: TextAlign.right),
-                                  Expanded(
-                                    child: Text(
-                                        SharePreData.strDollar +
-                                            (widget.orderDetails.trans_amount??0)
-                                                .toString(),
-                                        style: TextStyle(
-                                            color: black_121212,
-                                            fontWeight: FontWeight.w900,
-                                            fontFamily: roboto_regular,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 12.sp),
-                                        textAlign: TextAlign.right),
-                                  ),
-                                  SizedBox(
-                                    width: 20.w,
-                                  )
-                                ],
-                              ),
+                                      ],
+                                    ),
 
-                              SizedBox(
-                                height: 14.w,
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Opacity(
-                                  opacity: 0.699999988079071,
-                                  child: Text(
-                                      "Trxn ID " +
-                                          (widget.orderDetails
-                                              .transaction_id??""),
-                                      style: TextStyle(
-                                          color: Color(0xff121212),
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: roboto_regular,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 11.sp),
-                                      textAlign: TextAlign.center),
+                                    SizedBox(
+                                      height: 10.w,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Opacity(
+                                        opacity: 0.699999988079071,
+                                        child: Text(
+                                            "Trxn ID " +
+                                                (widget.orderDetails
+                                                    .transaction_id??""),
+                                            style: TextStyle(
+                                                color: Color(0xff121212),
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: roboto_regular,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 11.sp),
+                                            textAlign: TextAlign.center),
+                                      ),
+                                    ),
+
+                                  ],
                                 ),
                               ),
+
 
                               SizedBox(
                                 height: 52.h,

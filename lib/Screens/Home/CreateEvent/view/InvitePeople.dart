@@ -388,7 +388,7 @@ class _InvitePeopleState extends State<InvitePeople> {
                                           children: [
                                             CircularProfileAvatar(
                                               '',
-                                              radius: 22,
+                                              radius: 19.5,
                                               child: widget.fromView == true
                                                   ? controller.searchList[i]
                                                               .image ==

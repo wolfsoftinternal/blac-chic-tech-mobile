@@ -267,8 +267,9 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                       Text(
                         "Filter by",
                         style: TextStyle(
-                            fontSize: 15.sp,
+                            fontSize: 14.sp,
                             color: black_121212,
+                            fontWeight: FontWeight.w800,
                             fontFamily: helvetica_neu_bold),
                       ),
                       InkWell(
@@ -316,7 +317,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                         child: Text(
                           "Clear filter",
                           style: TextStyle(
-                              fontSize: 15.sp,
+                              fontSize: 14.sp,
                               color: black_121212,
                               fontFamily: roboto_regular),
                         ),
@@ -336,7 +337,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                       child: Stack(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(right: 14.w, left: 35.w),
+                            height: 36.h,
+                            padding: EdgeInsets.only(right: 8.w, left: 35.w),
                             margin: EdgeInsets.only(left: 0.w, right: 3.5.w),
                             decoration: BoxDecoration(
                               color: grey_f5f5f5,
@@ -349,20 +351,20 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontFamily: helveticaNeueNeue_medium,
-                                        fontSize: 15.0.sp)),
+                                        fontSize: 12.0.sp)),
                                 value: strCityName,
                                 isExpanded: true,
                                 icon: SvgPicture.asset(
                                   icon_down_arrow_spinner,
                                   color: grey_aaaaaa,
-                                  height: 15.h,
-                                  width: 15.w,
+                                  height: 14.h,
+                                  width: 14.w,
                                 ),
-                                iconSize: 24.sp,
+                                iconSize: 20.sp,
                                 elevation: 16,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 15.sp,
+                                    fontSize: 12.sp,
                                     fontFamily: helveticaNeueNeue_medium),
                                 // underline: Container(
                                 //   height: 2,
@@ -386,11 +388,11 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                             ),
                           ),
                           Container(
-                              margin: EdgeInsets.only(top: 15.h, left: 10.w),
+                              margin: EdgeInsets.only(top:12, left: 16.w),
                               child: SvgPicture.asset(
                                 icon_location,
-                                height: 20.h,
-                                width: 20.w,
+                                height: 12.h,
+                                width: 12.w,
                               )),
                         ],
                       ),
@@ -398,8 +400,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                     Expanded(
                       flex: 1,
                       child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 14.h, horizontal: 15.w),
+                        height: 36.h,
+                          padding: EdgeInsets.only(right: 8.w,left: 16.w),
                           margin: EdgeInsets.only(left: 3.5.w, right: 0.w),
                           decoration: BoxDecoration(
                             color: grey_f5f5f5,
@@ -412,11 +414,11 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                             children: [
                               SvgPicture.asset(
                                 icon_calendar,
-                                height: 20.h,
-                                width: 20.w,
+                                height: 12.h,
+                                width: 12.w,
                               ),
                               SizedBox(
-                                width: 6.w,
+                                width: 10.w,
                               ),
                               Expanded(
                                 flex: 1,
@@ -434,7 +436,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                           .textTheme
                                           .caption
                                           ?.copyWith(
-                                            fontSize: 15,
+                                            fontSize: 12.sp,
                                             fontFamily:
                                                 helveticaNeueNeue_medium,
                                             color: Colors.black,
@@ -445,7 +447,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontFamily: helveticaNeueNeue_medium,
-                                        fontSize: 15.sp),
+                                        fontSize: 12.sp),
                                     onTap: () {
                                       selectDate();
                                     }),
@@ -467,7 +469,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                 Stack(
                   children: [
                     Container(
-                      padding: EdgeInsets.only(right: 14.w, left: 35.w),
+                      height: 36.h,
+                      padding: EdgeInsets.only(right: 8.w, left: 36.w),
                       decoration: BoxDecoration(
                         color: grey_f5f5f5,
                         borderRadius: BorderRadius.circular(4.r),
@@ -479,7 +482,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontFamily: helveticaNeueNeue_medium,
-                                  fontSize: 15.0.sp)),
+                                  fontSize: 12.sp)),
 
                           value: strType,
                           isExpanded: true,
@@ -493,7 +496,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                           elevation: 16,
                           style: TextStyle(
                               color: Colors.black,
-                              fontSize: 15.sp,
+                              fontSize: 12.sp,
                               fontFamily: helveticaNeueNeue_medium),
                           // underline: Container(
                           //   height: 2,
@@ -515,16 +518,16 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                       ),
                     ),
                     Container(
-                        margin: EdgeInsets.only(top: 15.h, left: 10.w),
+                        margin: EdgeInsets.only(top: 12.h, left: 16.w),
                         child: SvgPicture.asset(
                           icon_ticket,
-                          height: 20.h,
-                          width: 20.w,
+                          height: 12.h,
+                          width: 12.w,
                         )),
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 16.h),
+                  margin: EdgeInsets.only(top: 15.h),
                   child: BlackButton("Apply Filter", Colors.white, () {
                     String type = '';
                     if(strType != null){

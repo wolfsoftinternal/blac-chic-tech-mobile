@@ -101,7 +101,8 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: "Roboto",
+                                        fontFamily: helvetica_neu_bold,
+                                        letterSpacing: 0.7,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 12.sp),
                                     textAlign: TextAlign.left),
@@ -131,7 +132,8 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: "Roboto",
+                                        fontFamily: helvetica_neu_bold,
+                                        letterSpacing: 0.7,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 12.sp),
                                     textAlign: TextAlign.left),
@@ -186,7 +188,8 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: "Roboto",
+                                        fontFamily: helvetica_neu_bold,
+                                        letterSpacing: 0.7,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 12.sp),
                                     textAlign: TextAlign.left),
@@ -241,7 +244,8 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: "Roboto",
+                                        fontFamily: helvetica_neu_bold,
+                                        letterSpacing: 0.7,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 12.sp),
                                     textAlign: TextAlign.left),
@@ -292,7 +296,8 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: "Roboto",
+                                        fontFamily: helvetica_neu_bold,
+                                        letterSpacing: 0.7,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 12.sp),
                                     textAlign: TextAlign.left),
@@ -364,7 +369,8 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: "Roboto",
+                                        fontFamily: helvetica_neu_bold,
+                                        letterSpacing: 0.7,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 12.sp),
                                     textAlign: TextAlign.left),
@@ -502,7 +508,8 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                             style: TextStyle(
                                                 color: black_121212,
                                                 fontWeight: FontWeight.w900,
-                                                fontFamily: "Roboto",
+                                                fontFamily: helvetica_neu_bold,
+                                                letterSpacing: 0.7,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 12.sp),
                                             textAlign: TextAlign.left),
