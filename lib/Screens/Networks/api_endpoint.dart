@@ -43,7 +43,7 @@ const urlOrderUpdate = "/mobile/transaction/order/update";
 
 //video
 const urlVideoList = '/mobile/video-list';
-const urlHomeVideoList = '/home/video-list';
+const urlHomeVideoList = '/mobile/home/video-list';
 const urlVideoCreate = '/mobile/video-create';
 const urlVideoDetails = '/mobile/video-details';
 const urlVideoLike = "/mobile/video-like";

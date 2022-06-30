@@ -255,7 +255,7 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                                           controller
                                                               .speakerList[
                                                                   i]
-                                                              .userDetails
+                                                              .userDetails!
                                                               .fullName
                                                               .toString(),
                                                           style: const TextStyle(

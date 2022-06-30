@@ -33,6 +33,15 @@ class _ReplaceWithState extends State<ReplaceWith> {
   // VideoController videoController = Get.put(VideoController());
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkNet(context).then((value){
+      controller.replaceUserList(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,

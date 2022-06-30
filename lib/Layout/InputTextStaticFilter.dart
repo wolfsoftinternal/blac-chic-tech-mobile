@@ -37,7 +37,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
       Get.put(EventDetailController());
   String? strCityName;
   String? strType;
-  String? strDate;
+  String? strDate = '';
 
   bool checkColor = false;
   bool checkFillColor = true;
@@ -279,6 +279,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                             eventDetailController.dateController.value.text =
                                 '';
                             strType = null;
+                            strDate = '';
                             eventDetailController.pageNumber.value = 0;
                             if (eventDetailController
                                     .searchController.value.text ==
@@ -311,6 +312,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                 eventDetailController.allEventListApi(body);
                               });
                             }
+                            isLayoutFirst = false;
+                            _hasBeenPressednBidNow = !_hasBeenPressednBidNow;
                           });
                         },
                         child: Text(
@@ -553,6 +556,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                         eventDetailController.allEventListApi(body);
                       
                     });
+                    isLayoutFirst = false;
+                    _hasBeenPressednBidNow = !_hasBeenPressednBidNow;
                   }),
                 ),
               ],

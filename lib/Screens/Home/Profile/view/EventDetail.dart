@@ -21,12 +21,14 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_social_content_share/flutter_social_content_share.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:readmore/readmore.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:social_share/social_share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../Utils/CommonWidget.dart';
@@ -1636,7 +1638,10 @@ class _EventDetailState extends State<EventDetail> {
                             children: [
                               GestureDetector(
                                 onTap: () async {
-                                  
+                                  Share.share(
+                                    'Hey checkout this amazing event' +
+                                        controller.eventDetails.value.link!,
+                                  );
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 24.w),
@@ -1647,18 +1652,38 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(right: 24.w),
+                              GestureDetector(
+                                onTap: (){
+                                  SocialShare.shareTwitter(
+                                    'Hey checkout this amazing event',
+                                    url: controller.eventDetails.value.link!,
+                                  ).then((data) {
+                                    print(data);
+                                  });
+                                },
+                                
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 24.w),
+                                    child: Image.asset(
+                                      icon_twitter,
+                                      height: 24.h,
+                                      width: 24.w,
+                                    ),
+                                  ),
+                                
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  Share.share(
+                                    'Hey checkout this amazing event' +
+                                        controller.eventDetails.value.link!,
+                                  );
+                                },
                                 child: Image.asset(
-                                  icon_twitter,
+                                  icon_linkedin,
                                   height: 24.h,
                                   width: 24.w,
                                 ),
-                              ),
-                              Image.asset(
-                                icon_linkedin,
-                                height: 24.h,
-                                width: 24.w,
                               ),
                             ],
                           ),
@@ -1819,8 +1844,8 @@ class _EventDetailState extends State<EventDetail> {
 
   void setFinalValue() {
     if(controller.isWallet.value){
-      if(int.parse(controller.details.value.wallet??"0") < controller.total.value){
-        controller.finalTotal.value = controller.total.value - int.parse(controller.details.value.wallet??"0");
+      if(double.parse(controller.details.value.wallet??"0").toInt() < controller.total.value){
+        controller.finalTotal.value = controller.total.value - double.parse(controller.details.value.wallet??"0").toInt();
       }else{
         controller.finalTotal.value = 0;
       }

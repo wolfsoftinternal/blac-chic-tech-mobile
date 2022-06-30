@@ -12,6 +12,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:readmore/readmore.dart';
+import 'package:share_plus/share_plus.dart';
 
 
 class PastFeature2 extends StatefulWidget {
@@ -205,7 +206,10 @@ class _PastFeature2State extends State<PastFeature2> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    print("share clicked");
+                                    Share.share(
+                                    'Hey checkout this amazing feature' +
+                                        featuredController.featuredList[widget.selectedPositionFromPrevious].share_link!,
+                                    );
                                   },
                                   child: SvgPicture.asset(
                                     icon_share,
@@ -269,8 +273,7 @@ class _PastFeature2State extends State<PastFeature2> {
                           EdgeInsets.only(top: 2.h, left: 24.w, right: 24.w),
                       child: Text(
                         featuredController
-                                .featuredList[
-                                    widget.selectedPositionFromPrevious]
+                                .featuredList[widget.selectedPositionFromPrevious]
                                 .title ??
                             "",
                         style: TextStyle(
