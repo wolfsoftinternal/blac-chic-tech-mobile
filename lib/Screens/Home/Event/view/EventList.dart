@@ -96,7 +96,7 @@ class _EventListState extends State<EventList> {
                         padding: EdgeInsets.only(
                             left: 16.w, right: 10.w, bottom: 10.h, top: 10.h),
                         margin:
-                            EdgeInsets.only(left: 16.w, right: 16.w, top: 15.h),
+                            EdgeInsets.only(left: 16.w, right: 16.w, top: 16.h),
                         decoration: BoxDecoration(
                             border: Border.all(color: blue_0a84ff, width: 1.w),
                             borderRadius:

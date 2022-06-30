@@ -69,7 +69,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                   color: grey_aaaaaa),),
                               SizedBox(height: 6.h,),
                               Container(
-                                  height: HeightData.fifty_three,
+                                  height: 40.h,
                                   decoration: BoxDecoration(
                                     color: white,
                                     borderRadius: BorderRadius.circular(10.r),
@@ -105,7 +105,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                     color: grey_aaaaaa),),
                               SizedBox(height: 6.h,),
                               Container(
-                                  height: HeightData.fifty_three,
+                                  height: 40.h,
                                   decoration: BoxDecoration(
                                     color: white,
                                     borderRadius: BorderRadius.circular(10),
@@ -141,7 +141,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                     color: grey_aaaaaa),),
                               SizedBox(height: 6.h,),
                               Container(
-                                  height: HeightData.fifty_three,
+                                  height: 40.h,
                                   decoration: BoxDecoration(
                                     color: white,
                                     borderRadius: BorderRadius.circular(10),
@@ -179,7 +179,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                     color: grey_aaaaaa),),
                               SizedBox(height: 6.h,),
                               Container(
-                                  height: HeightData.fifty_three,
+                                  height: 40.h,
                                   decoration: BoxDecoration(
                                     color: white,
                                     borderRadius: BorderRadius.circular(10),
@@ -217,7 +217,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                                     color: grey_aaaaaa),),
                               SizedBox(height: 6.h,),
                               Container(
-                                  height: HeightData.fifty_three,
+                                  height: 40.h,
                                   decoration: BoxDecoration(
                                     color: white,
                                     borderRadius: BorderRadius.circular(10),

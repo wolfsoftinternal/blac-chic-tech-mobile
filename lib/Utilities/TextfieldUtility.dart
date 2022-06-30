@@ -172,7 +172,7 @@ setTextFieldHelveticaMediumOrangeBorder(
         readOnly: readonly,
         decoration: InputDecoration(
           isDense: true,
-          // contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+          contentPadding: EdgeInsets.all(12.r),
           hintText: hintText,
           hintStyle: TextStyle(
               color: grey_aaaaaa,
@@ -181,21 +181,21 @@ setTextFieldHelveticaMediumOrangeBorder(
               fontStyle: FontStyle.normal,
               fontSize: 14.sp),
           border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(color: grey_e8e8e8, width: 1),
           ),
           filled: true,
           fillColor: Colors.white70,
           enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(color:grey_e8e8e8, width: 1),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(color: orange_ff881a),
           ),
           errorBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(6.7)),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(color: Colors.red),
           ),
         ),

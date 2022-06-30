@@ -101,10 +101,11 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
               Container(
                   margin: EdgeInsets.only(top: 15.h),
                   child: ToolbarWithHeaderCenterTitle("TRXNS. & PAYOUTS")),
+
               /*----- Wallet Balance Layout ------*/
               Container(
                 padding:
-                    EdgeInsets.symmetric(horizontal: 16.w, vertical: 7.h),
+                    EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                 margin: EdgeInsets.only(left: 24.w, right: 24.w, top: 42.h),
                 decoration: BoxDecoration(
                   color: black_121925,
@@ -126,9 +127,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                 fontSize: 14.sp,
                                 color: opcity_white_ffffff),
                           ),
-                          SizedBox(
-                            height: 3.h,
-                          ),
+                          SizedBox(height: 5.h,),
                           Text(
                             SharePreData.strDollar +
                                 (transactionController

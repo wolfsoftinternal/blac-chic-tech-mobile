@@ -144,8 +144,8 @@ class _EventDetailState extends State<EventDetail> {
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30.0),
-                      topRight: Radius.circular(30.0))),
+                      topLeft: Radius.circular(16.0),
+                      topRight: Radius.circular(16.0))),
               child: SingleChildScrollView(
                 child: Wrap(
                   children: [
@@ -153,8 +153,8 @@ class _EventDetailState extends State<EventDetail> {
                       return Obx(
                         () => Column(
                           children: [
-                            const SizedBox(
-                              height: 15,
+                             SizedBox(
+                              height: 8.h,
                             ),
                             Align(
                                 alignment: Alignment.center,
@@ -163,25 +163,29 @@ class _EventDetailState extends State<EventDetail> {
                                   height: 3,
                                   decoration: BoxDecoration(
                                       color: grey_3f3f3f.withOpacity(0.4),
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(50),
+                                      borderRadius:  BorderRadius.all(
+                                        Radius.circular(50.r),
                                       )),
                                 )),
-                            const SizedBox(
-                              height: 23.5,
+                             SizedBox(
+                              height: 24.h,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 24.0, right: 24.0),
-                              child: setRoboto("CONFIRMATION", 16, black_121212,
-                                  FontWeight.w500),
+                              padding:  EdgeInsets.only(
+                                  left: 24.w, right: 24.w),
+                              child: setRoboto("CONFIRMATION", 16.sp, black_121212,
+                                  FontWeight.w900),
                             ),
-                            const SizedBox(
-                              height: 23.5,
+                             SizedBox(
+                              height: 23.5.h,
                             ),
-                            const Divider(),
-                            const SizedBox(
-                              height: 23.5,
+                             Divider(
+                               height: 1,
+                               thickness: 1,
+                               color: Color(0xfff4f6f6),
+                             ),
+                             SizedBox(
+                              height: 23.5.h,
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
@@ -190,40 +194,40 @@ class _EventDetailState extends State<EventDetail> {
                                 children: [
                                   setRoboto(
                                       "Ticket ${controller.eventDetails.value.title!}",
-                                      16,
+                                      14.sp,
                                       black_121212,
                                       FontWeight.w900),
-                                  const SizedBox(
-                                    height: 24,
+                                   SizedBox(
+                                    height: 24.h,
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
                                       color: grey_f5f5f5,
-                                      borderRadius: BorderRadius.circular(5),
+                                      borderRadius: BorderRadius.circular(4.r),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 20.0,
-                                          bottom: 20.0,
-                                          left: 16.0,
-                                          right: 16.0),
+                                      padding:  EdgeInsets.only(
+                                          top: 15.5.h,
+                                          bottom: 15.5.h,
+                                          left: 16.w,
+                                          right: 16.w),
                                       child: Row(
                                         children: [
                                           setRoboto(
                                               "$category \$${controller.total.value}",
-                                              12,
+                                              12.sp,
                                               black_121212,
                                               FontWeight.w900),
-                                          const Spacer(),
+                                           Spacer(),
                                           Container(
                                             decoration: BoxDecoration(
                                               color: white_ffffff,
                                               borderRadius:
-                                                  BorderRadius.circular(5),
+                                                  BorderRadius.circular(4.r),
                                             ),
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.all(10.0),
+                                                   EdgeInsets.all(10.r),
                                               child: Row(
                                                 children: [
                                                   GestureDetector(
@@ -251,17 +255,17 @@ class _EventDetailState extends State<EventDetail> {
                                                         color: grey_3f3f3f,
                                                         size: 12,
                                                       )),
-                                                  const SizedBox(
-                                                    width: 20,
+                                                   SizedBox(
+                                                    width: 20.w,
                                                   ),
                                                   setRoboto(
                                                       controller.count.value
                                                           .toString(),
-                                                      12,
+                                                      12.sp,
                                                       black_121212,
                                                       FontWeight.w900),
-                                                  const SizedBox(
-                                                    width: 20,
+                                                   SizedBox(
+                                                    width: 20.w,
                                                   ),
                                                   GestureDetector(
                                                       onTap: () {
@@ -291,8 +295,8 @@ class _EventDetailState extends State<EventDetail> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 24,
+                                   SizedBox(
+                                    height: 16.h,
                                   ),
 
                                   Visibility(
@@ -300,11 +304,11 @@ class _EventDetailState extends State<EventDetail> {
                                     child: Column(
                                       children: [  Align(
                                         alignment: Alignment.centerLeft,
-                                        child: setRoboto("Wallet", 16, Colors.black,
+                                        child: setRoboto("Wallet", 14.sp, black_121212,
                                             FontWeight.w800),
                                       ),
-                                        const SizedBox(
-                                          height: 6,
+                                         SizedBox(
+                                          height: 10.h,
                                         ),
                                         Row(
                                           
@@ -313,16 +317,16 @@ class _EventDetailState extends State<EventDetail> {
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                setRoboto("Use Wallet Balance", 14,
-                                                    Colors.black, FontWeight.w500),
+                                                setRoboto("Use Wallet Balance", 12.sp,
+                                                    black_121212, FontWeight.w500),
 
-                                                SizedBox(height: 4,),
+                                                SizedBox(height: 10.h,),
 
                                                 setRoboto(
                                                     SharePreData.strDollar + (controller.details.value.wallet??"0"),
-                                                    14,
-                                                    Colors.black,
-                                                    FontWeight.w500),
+                                                    14.sp,
+                                                    orange_ff881a,
+                                                    FontWeight.w600),
                                               ],
                                             ),
 
@@ -330,48 +334,58 @@ class _EventDetailState extends State<EventDetail> {
 
                                             // Expanded(
                                             //   flex: 1,
-                                              Checkbox(
-                                                value: controller.isWallet.value,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    controller.isWallet.value = value ?? false;
-                                                    setFinalValue();
-                                                  });
-                                                },
+                                              Theme(
+                                                data: ThemeData(
+                                                  primarySwatch: Colors.orange,
+                                                  unselectedWidgetColor: Colors.grey, // Your color
+                                                ),
+                                                child: Checkbox(
+
+                                                  shape: RoundedRectangleBorder(
+                                                    side: BorderSide(
+                                                      width: 0.5,
+                                                      color: grey_96a6a3,
+
+                                                    ),
+                                                      borderRadius: BorderRadius.circular(4)),
+                                                  value: controller.isWallet.value,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      controller.isWallet.value = value ?? false;
+                                                      setFinalValue();
+                                                    });
+                                                  },
+                                                ),
                                               ),
                                             // )
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 24,
-                                        ),],
+                                         SizedBox(
+                                          height: 16.h,
+                                        ),
+                                        Align(
+                                          alignment: Alignment.topLeft,
+                                          child: setRoboto("PAYMENT METHOD", 12.sp,
+                                              grey_aaaaaa, FontWeight.w900),
+                                        ),
+                                      ],
                                     ),
                                   ),
 
-
-
-
-
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 24.0, right: 24.0),
-                                    child: setRoboto("PAYMENT METHOD", 16,
-                                        Colors.grey, FontWeight.w500),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
+                                   SizedBox(
+                                    height: 16.h,
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
                                       color: grey_f5f5f5,
-                                      borderRadius: BorderRadius.circular(5),
+                                      borderRadius: BorderRadius.circular(4.r),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.only(
-                                          top: 20.0,
-                                          bottom: 20.0,
-                                          left: 16.0,
-                                          right: 16.0),
+                                          top: 16.0,
+                                          bottom: 16.0,
+                                          left: 17.0,
+                                          right: 17.0),
                                       child: Row(
                                         children: [
                                           setRoboto("Credit/Debit Card", 12,
@@ -381,8 +395,8 @@ class _EventDetailState extends State<EventDetail> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 24,
+                                   SizedBox(
+                                    height: 24.h,
                                   ),
                                   BlackButton('PAY \$${controller.finalTotal.value}',
                                       white_ffffff, () {
@@ -437,68 +451,6 @@ class _EventDetailState extends State<EventDetail> {
         () => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 60.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BackLayout(),
-                // Padding(
-                //   padding: EdgeInsets.only(right: 24.w),
-                //   child: controller.eventDetails.value.userId != userId
-                //       ? Container()
-                //       : Align(
-                //           alignment: Alignment.topRight,
-                //           child: PopupMenuButton(
-                //               // padding: EdgeInsets.only(bottom: 20),
-                //               // position: PopupMenuPosition.under,
-                //               shape: RoundedRectangleBorder(
-                //                   borderRadius: BorderRadius.circular(10.r)),
-                //               icon: const Icon(Icons.more_horiz,
-                //                   color: Colors.black),
-                //               onSelected: (index) {
-                //                 if (index == 1) {
-                //                 } else if (index == 2) {
-                //                   checkNet(context).then((value) => {
-                //                         controller.eventDeleteAPI(context,
-                //                             controller.eventDetails.value.id)
-                //                       });
-                //                 }
-                //               },
-                //               itemBuilder: (context) => [
-                //                     PopupMenuItem(
-                //                       height: 35.h,
-                //                       child: Text(
-                //                         "Edit",
-                //                         style: TextStyle(
-                //                             color: Colors.black,
-                //                             fontFamily:
-                //                                 helveticaNeueNeue_medium,
-                //                             fontSize: 14.sp),
-                //                       ),
-                //                       value: 1,
-                //                     ),
-                //                     PopupMenuItem(
-                //                       height: 35.h,
-                //                       child: Text(
-                //                         "Delete",
-                //                         style: TextStyle(
-                //                             color: Colors.black,
-                //                             fontFamily:
-                //                                 helveticaNeueNeue_medium,
-                //                             fontSize: 14.sp),
-                //                       ),
-                //                       value: 2,
-                //                     ),
-                //                   ]),
-                //         ),
-                // ),
-              ],
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
@@ -506,32 +458,38 @@ class _EventDetailState extends State<EventDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.h),
-                      child: SizedBox(
-                        height: 330.h,
-                        width: MediaQuery.of(context).size.width,
-                        child: controller.eventDetails.value.poster == null
-                            ? SvgPicture.asset(
-                                placeholder,
-                                fit: BoxFit.cover,
-                              )
-                            : CachedNetworkImage(
-                                imageUrl: controller.eventDetails.value.poster!,
-                                fit: BoxFit.cover,
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        SvgPicture.asset(
+                    Stack(
+                      children: [
+                        SizedBox(
+                          height: 350.h,
+                          width: MediaQuery.of(context).size.width,
+                          child: controller.eventDetails.value.poster == null
+                              ? SvgPicture.asset(
                                   placeholder,
                                   fit: BoxFit.cover,
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    SvgPicture.asset(
-                                  placeholder,
+                                )
+                              : CachedNetworkImage(
+                                  imageUrl: controller.eventDetails.value.poster!,
                                   fit: BoxFit.cover,
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          SvgPicture.asset(
+                                    placeholder,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      SvgPicture.asset(
+                                    placeholder,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                      ),
+                        ),
+
+                        Padding(
+                          padding:  EdgeInsets.only(top: 60.h),
+                          child: BackLayout(),
+                        ),
+                      ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -605,12 +563,12 @@ class _EventDetailState extends State<EventDetail> {
                                                   ),
                                                   child: Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 14.w,
-                                                          right: 14.w,
+                                                          left: 32.w,
+                                                          right: 32.w,
                                                           top: 9.h,
                                                           bottom: 9.h),
                                                       child: // Invite Only
-                                                          Text("VIEW",
+                                                          Text("View",
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .white,
@@ -634,7 +592,7 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
                         Padding(
                           padding: EdgeInsets.only(top: 16.h),
-                          child: controller.eventDetails.value.type == 'ticket_price' 
+                          child: controller.eventDetails.value.type == 'ticket_price'
                               ? Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.start,
@@ -1197,13 +1155,13 @@ class _EventDetailState extends State<EventDetail> {
                                                   });
                                               }
 
-                                      
+
                                               Get.to(InvitePeople(
                                                 fromView: false, id: widget.id,
                                               ))!
                                                   .then((value) =>
                                                       setState(() {}));
-                                              
+
                                           },
                                           child: Container(
                                             width: double.infinity,
@@ -1241,7 +1199,7 @@ class _EventDetailState extends State<EventDetail> {
                                   )
                                 : Container()
                             : Container(),
-                            controller.eventDetails.value.type != 'ticket_price' ? 
+                            controller.eventDetails.value.type != 'ticket_price' ?
                         SizedBox(
                           height: 16.h,
                         ) : Container(),
@@ -1258,7 +1216,7 @@ class _EventDetailState extends State<EventDetail> {
                             children: [
                               setHelveticaMedium(
                                   controller.eventDetails.value.title!,
-                                  25.sp,
+                                  24.sp,
                                   black_121212,
                                   FontWeight.w900,
                                   FontStyle.normal),
@@ -1269,14 +1227,14 @@ class _EventDetailState extends State<EventDetail> {
                                   children: [
                                     SvgPicture.asset(
                                       calendar_icon,
-                                      height: 15.h,
-                                      width: 15.w,
+                                      height: 12.h,
+                                      width: 12.w,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 4.0),
+                                      padding:  EdgeInsets.only(left: 4.w),
                                       child: setHelveticaMedium(
                                           '${DateFormat("MMM dd, yyyy").format(controller.eventDetails.value.startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventDetails.value.startDateTime!)}',
-                                          12.sp,
+                                          10.sp,
                                           grey_aaaaaa,
                                           FontWeight.w500,
                                           FontStyle.normal,
@@ -1291,14 +1249,14 @@ class _EventDetailState extends State<EventDetail> {
                                   children: [
                                     SvgPicture.asset(
                                       icon_location,
-                                      height: 15.h,
-                                      width: 15.w,
+                                      height: 12.h,
+                                      width: 12.w,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 4.0),
+                                      padding:  EdgeInsets.only(left: 4.w),
                                       child: setHelveticaMedium(
                                           controller.eventDetails.value.venue!,
-                                          12.sp,
+                                          10.sp,
                                           grey_aaaaaa,
                                           FontWeight.w500,
                                           FontStyle.normal,
@@ -1437,7 +1395,7 @@ class _EventDetailState extends State<EventDetail> {
                                                           "@${controller.eventDetails.value.hosts![index].userName!}",
                                                           11.sp,
                                                           black_121212,
-                                                          FontWeight.w500,
+                                                          FontWeight.w800,
                                                           FontStyle.normal),
                                                       controller.eventDetails.value
                                                           .hosts!.length ==
@@ -1447,7 +1405,7 @@ class _EventDetailState extends State<EventDetail> {
                                                           ", ",
                                                           11.sp,
                                                           black_121212,
-                                                          FontWeight.w500,
+                                                          FontWeight.w800,
                                                           FontStyle.normal),
                                                     ],
                                                   );
@@ -1460,7 +1418,7 @@ class _EventDetailState extends State<EventDetail> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 8.h, bottom: 25.h),
+                                padding: EdgeInsets.only(top: 8.h, bottom: 24.h),
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: grey_f4f6f6,
@@ -1592,7 +1550,7 @@ class _EventDetailState extends State<EventDetail> {
                                                                 ? "@${controller.eventDetails.value.speakers![index].fullName!}" : '',
                                                             11.sp,
                                                             black_121212,
-                                                            FontWeight.w500,
+                                                            FontWeight.w800,
                                                             FontStyle.normal),
                                                         controller.eventDetails.value
                                                             .speakers!.length ==
@@ -1602,7 +1560,7 @@ class _EventDetailState extends State<EventDetail> {
                                                             ", ",
                                                             11.sp,
                                                             black_121212,
-                                                            FontWeight.w500,
+                                                            FontWeight.w800,
                                                             FontStyle.normal),
                                                       ],
                                                     );
@@ -1628,7 +1586,7 @@ class _EventDetailState extends State<EventDetail> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 25.0, left: 24, right: 24),
+                           EdgeInsets.only(top: 18.h, left: 24.w, right: 24.w,bottom: 18.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -1642,6 +1600,7 @@ class _EventDetailState extends State<EventDetail> {
                                     'Hey checkout this amazing event' +
                                         controller.eventDetails.value.link!,
                                   );
+
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 24.w),
@@ -1690,19 +1649,16 @@ class _EventDetailState extends State<EventDetail> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 25),
-                      child: Divider(
-                        height: 1.h,
-                        thickness: 1,
-                        color: view_line_f4f6f6,
-                      ),
+                    Divider(
+                      height: 1.h,
+                      thickness: 1,
+                      color: view_line_f4f6f6,
                     ),
                     Padding(
                       padding:
                           EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
                       child: setHelceticaBold("Event Details", 14.sp,
-                          black_121212, FontWeight.w700, FontStyle.normal),
+                          black_121212, FontWeight.w800, FontStyle.normal),
                     ),
                     Padding(
                       padding:
@@ -1718,7 +1674,7 @@ class _EventDetailState extends State<EventDetail> {
                         style: TextStyle(
                             height: 1.5,
                             fontFamily: helveticaNeueNeue_medium,
-                            fontSize: 16.sp,
+                            fontSize: 12.sp,
                             color: Color(0xff3f3f3f)),
                       ),
                     ),
@@ -1726,26 +1682,27 @@ class _EventDetailState extends State<EventDetail> {
                       padding:
                           EdgeInsets.only(top: 24.0, left: 24.w, right: 24.w),
                       child: setHelceticaBold("Location", 14.sp, black_121212,
-                          FontWeight.w700, FontStyle.normal),
+                          FontWeight.w800, FontStyle.normal),
                     ),
                     Padding(
                       padding:
                           EdgeInsets.only(top: 15.h, left: 24.w, right: 24.w),
                       child: Container(
-                        height: 200.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(30.r)),
-                        ),
-                        child: GoogleMap(
-                          initialCameraPosition: CameraPosition(
-                              target: LatLng(lat, lng), zoom: 17),
-                          markers: markers,
-                          zoomControlsEnabled: true,
-                          myLocationEnabled: true,
-                          myLocationButtonEnabled: false,
-                          onMapCreated: _onMapCreated,
-                          padding: const EdgeInsets.only(
-                            top: 40.0,
+                        height: 170.h,
+                        child: ClipRRect(
+                          borderRadius:
+                          BorderRadius.circular(10),
+                          child: GoogleMap(
+                            initialCameraPosition: CameraPosition(
+                                target: LatLng(lat, lng), zoom: 17),
+                            markers: markers,
+                            zoomControlsEnabled: true,
+                            myLocationEnabled: true,
+                            myLocationButtonEnabled: false,
+                            onMapCreated: _onMapCreated,
+                            padding: const EdgeInsets.only(
+                              top: 40.0,
+                            ),
                           ),
                         ),
                       ),

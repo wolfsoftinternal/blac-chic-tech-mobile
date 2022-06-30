@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
@@ -15,21 +16,27 @@ class SearchBarTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: TextStyle(
+        fontFamily: helveticaNeueNeue_medium,
+        fontSize: 14.sp,
+        color: black_121212
+      ),
       controller: controller,
       autofocus: autoFocus,
       decoration: InputDecoration(
         filled: true,
         hintText: placeholder,
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         suffixIcon: Icon(
           IconlyLight.search,
           color: black_121212,
-          size: 20.r,
+          size: 16.r,
         ),
         fillColor: const Color(0xfff5f5f5),
         hintStyle: TextStyle(
           fontSize: 14.sp,
           // fontWeight: FontWeight.w500,
+          fontFamily: helveticaNeueNeue_medium,
           color: const Color(0xff96A6A3),
         ),
         border: OutlineInputBorder(

@@ -365,7 +365,7 @@ class _CreateEventState extends State<CreateEvent> {
                                             color: black_121212,
                                             fontWeight: FontWeight.w500,
                                             fontFamily:
-                                                helveticaNeueNeue_medium,
+                                            helvetica_neu_bold,
                                             fontStyle: FontStyle.normal,
                                             fontSize: 14.sp),
                                         readOnly: true,
@@ -377,12 +377,12 @@ class _CreateEventState extends State<CreateEvent> {
                                               color: grey_aaaaaa,
                                               fontWeight: FontWeight.w500,
                                               fontFamily:
-                                                  helveticaNeueNeue_medium,
+                                              helvetica_neu_bold,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 14.sp),
                                           border: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(6.7)),
+                                                Radius.circular(4)),
                                             borderSide: BorderSide(
                                                 color: grey_e8e8e8, width: 1),
                                           ),
@@ -390,19 +390,19 @@ class _CreateEventState extends State<CreateEvent> {
                                           fillColor: Colors.white70,
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(6.7)),
+                                                Radius.circular(4)),
                                             borderSide: BorderSide(
                                                 color: grey_e8e8e8, width: 1),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(6.7)),
+                                                Radius.circular(4)),
                                             borderSide: BorderSide(
                                                 color: orange_ff881a),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(6.7)),
+                                                Radius.circular(4)),
                                             borderSide:
                                                 BorderSide(color: Colors.red),
                                           ),
@@ -539,12 +539,12 @@ class _CreateEventState extends State<CreateEvent> {
                                             });
                                           },
                                           child: Container(
-                                              height: 24.h,
-                                              width: 24.w,
+                                              height: 22.h,
+                                              width: 22.w,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                          Radius.circular(3.r)),
+                                                          Radius.circular(4.r)),
                                                   border: Border.all(
                                                       color: controller
                                                                   .selectedAdmission
@@ -617,12 +617,12 @@ class _CreateEventState extends State<CreateEvent> {
                                             });
                                           },
                                           child: Container(
-                                              height: 24.h,
-                                              width: 24.w,
+                                              height: 22.h,
+                                              width: 22.w,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                          Radius.circular(3.r)),
+                                                          Radius.circular(4.r)),
                                                   border: Border.all(
                                                       color: controller
                                                                   .selectedAdmission
@@ -695,12 +695,12 @@ class _CreateEventState extends State<CreateEvent> {
                                             });
                                           },
                                           child: Container(
-                                              height: 24.h,
-                                              width: 24.w,
+                                              height: 22.h,
+                                              width: 22.w,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                          Radius.circular(3.r)),
+                                                          Radius.circular(4.r)),
                                                   border: Border.all(
                                                       color: controller
                                                                   .selectedAdmission
@@ -843,16 +843,16 @@ class _CreateEventState extends State<CreateEvent> {
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          height: 24.h,
+                                                          height: 16.h,
                                                         ),
-                                                        setRoboto(
-                                                            'AMOUNT',
-                                                            12.sp,
-                                                            grey_aaaaaa,
-                                                            FontWeight.w800),
-                                                        SizedBox(
-                                                          height: 8.h,
-                                                        ),
+                                                        // setRoboto(
+                                                        //     'AMOUNT',
+                                                        //     12.sp,
+                                                        //     grey_aaaaaa,
+                                                        //     FontWeight.w800),
+                                                        // SizedBox(
+                                                        //   height: 8.h,
+                                                        // ),
                                                         Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -873,10 +873,10 @@ class _CreateEventState extends State<CreateEvent> {
                                                                         .only(
                                                                   topLeft: Radius
                                                                       .circular(
-                                                                          8),
+                                                                          4),
                                                                   bottomLeft: Radius
                                                                       .circular(
-                                                                          8),
+                                                                          4),
                                                                 ),
                                                               ),
                                                               child: Center(
@@ -939,10 +939,10 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   borderRadius: BorderRadius.only(
                                                                       topRight:
                                                                           Radius.circular(
-                                                                              6.7),
+                                                                              4),
                                                                       bottomRight:
                                                                           Radius.circular(
-                                                                              6.7)),
+                                                                              4)),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color:
@@ -958,10 +958,10 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   borderRadius: BorderRadius.only(
                                                                       topRight:
                                                                           Radius.circular(
-                                                                              6.7),
+                                                                              4),
                                                                       bottomRight:
                                                                           Radius.circular(
-                                                                              6.7)),
+                                                                             4)),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color:
@@ -974,10 +974,10 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   borderRadius: BorderRadius.only(
                                                                       topRight:
                                                                           Radius.circular(
-                                                                              6.7),
+                                                                              4),
                                                                       bottomRight:
                                                                           Radius.circular(
-                                                                              6.7)),
+                                                                             4)),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color:
@@ -1020,8 +1020,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                                               Widget>[
                                                                             if (controller.selectedList.isNotEmpty)
                                                                               SizedBox(
-                                                                                width: 21.w,
-                                                                                height: 21.h,
+                                                                                width: 28.w,
+                                                                                height: 28.h,
                                                                                 child: CircularProfileAvatar(
                                                                                   '',
                                                                                   imageFit: BoxFit.fill,
@@ -1042,8 +1042,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                                               Positioned(
                                                                                 left: 10.w,
                                                                                 child: SizedBox(
-                                                                                  width: 21.w,
-                                                                                  height: 21.h,
+                                                                                  width: 28.w,
+                                                                                  height: 28.h,
                                                                                   child: CircularProfileAvatar(
                                                                                     '',
                                                                                     child: controller.selectedList[1].image == null
@@ -1065,8 +1065,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                                                 left: 20.w,
                                                                                 child: SvgPicture.asset(
                                                                                   black_more_dot_icon,
-                                                                                  width: 23.w,
-                                                                                  height: 23.h,
+                                                                                  width: 30.w,
+                                                                                  height: 30.h,
                                                                                 ),
                                                                               )
                                                                           ],
@@ -1083,7 +1083,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                                 " People Invited",
                                                                             14.sp,
                                                                             black_121212,
-                                                                            FontWeight.w600),
+                                                                            FontWeight.w800),
                                                                       ),
                                                                       Spacer(),
                                                                       InkWell(
@@ -1103,7 +1103,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                               "VIEW",
                                                                               12.sp,
                                                                               orange_ff881a,
-                                                                              FontWeight.w600),
+                                                                              FontWeight.w800),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -1191,7 +1191,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                     : Container(),
                                             Padding(
                                               padding:  EdgeInsets.only(
-                                                  top: 24.h),
+                                                  top: 16.h),
                                               child: setRoboto(
                                                   'BENEFITS',
                                                   12.sp,
@@ -1266,7 +1266,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   borderRadius:
                                                                       BorderRadius.all(
                                                                           Radius.circular(
-                                                                              6.7)),
+                                                                              4)),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color:
@@ -1282,7 +1282,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   borderRadius:
                                                                       BorderRadius.all(
                                                                           Radius.circular(
-                                                                              6.7)),
+                                                                              4)),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color:
@@ -1295,7 +1295,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   borderRadius:
                                                                       BorderRadius.all(
                                                                           Radius.circular(
-                                                                              6.7)),
+                                                                              4)),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color:
@@ -1306,7 +1306,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   borderRadius:
                                                                       BorderRadius.all(
                                                                           Radius.circular(
-                                                                              6.7)),
+                                                                              4)),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color:
@@ -1364,7 +1364,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                             Padding(
                                                           padding:
                                                               EdgeInsets.all(
-                                                                  18.r),
+                                                                  14.r),
                                                           child: Center(
                                                             child: Row(
                                                               mainAxisSize: MainAxisSize.min,
@@ -1457,12 +1457,12 @@ class _CreateEventState extends State<CreateEvent> {
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.only(
-                                                top: 24.0, bottom: 100.0),
+                                                top: 20.0, bottom: 100.0),
                                             child: setRoboto(
                                                 '+ Add new ticket category',
                                                 16.sp,
                                                 orange_ff881a,
-                                                FontWeight.w500),
+                                                FontWeight.w700),
                                           ),
                                         )
                                       : Container(),
