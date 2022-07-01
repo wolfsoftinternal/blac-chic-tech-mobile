@@ -370,11 +370,13 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                           textAlign: TextAlign.left),
                                     ),
 
+                                    widget.orderDetails.wallet_amount == null && widget.orderDetails.wallet_amount.toString() != '0' ? Container() :
                                     SizedBox(
                                       height: 6.h,
                                     ),
 
-                                    Row(
+                                    widget.orderDetails.wallet_amount != null && widget.orderDetails.wallet_amount.toString() != '0'
+                                    ? Row(
                                       children: [
                                         Text("Wallet",
                                             style: TextStyle(
@@ -400,13 +402,15 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                         ),
 
                                       ],
-                                    ),
+                                    ) : Container(),
 
+                                    widget.orderDetails.trans_amount == null && widget.orderDetails.trans_amount.toString() != '0' ? Container() :
                                     SizedBox(
                                       height: 6.h,
                                     ),
 
-                                    Row(
+                                    widget.orderDetails.trans_amount != null && widget.orderDetails.trans_amount.toString() != '0'
+                                    ? Row(
                                       children: [
                                         Text("****7657689",
                                             style: TextStyle(
@@ -431,7 +435,8 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                         ),
 
                                       ],
-                                    ),
+                                    ) : Container(),
+
 
                                     SizedBox(
                                       height: 10.w,

@@ -430,11 +430,11 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
                                             fontSize: 12.sp),
                                         textAlign: TextAlign.left),
                                   ),
-
+                                  widget.debitedFromWallet.toString() != '0' ?
                                   SizedBox(
                                     height: 12.h,
-                                  ),
-
+                                  ): Container(),
+                                  widget.debitedFromWallet.toString() != '0' ?
                                   Row(
                                     children: [
                                       Text("Wallet",
@@ -458,16 +458,17 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
                                                 fontSize: 12.sp),
                                             textAlign: TextAlign.right),
                                       ),
+                                      widget.debitedFromWallet.toString() != '0' ?
                                       SizedBox(
                                         width: 20.w,
-                                      )
+                                      ): Container()
                                     ],
-                                  ),
-
+                                  ) : Container(),
+                                  widget.debitedFromPayStack.toString() == '0' ? Container() :
                                   SizedBox(
                                     height: 12.h,
                                   ),
-
+                                  widget.debitedFromPayStack.toString() == '0' ? Container() :
                                   Row(
                                     children: [
                                       Text("****7657689",
@@ -491,6 +492,7 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
                                                 fontSize: 12.sp),
                                             textAlign: TextAlign.right),
                                       ),
+                                      widget.debitedFromPayStack.toString() == '0' ? Container() :
                                       SizedBox(
                                         width: 20.w,
                                       )

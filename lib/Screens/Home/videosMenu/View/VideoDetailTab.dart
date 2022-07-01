@@ -41,7 +41,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
         controller.videoDetailsList.clear();
         controller.isLoading.value = false;
         controller.videoDetailsAPI(id: widget.videoList.id);
-        controller.videoListDetailApi(videoListData: widget.videoList);
+        controller.videoListDetailApi(videoListData: widget.videoList, id: widget.videoList.id);
 
         controller.isLoadingButton.value = false;
        

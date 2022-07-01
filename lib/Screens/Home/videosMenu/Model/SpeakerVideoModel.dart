@@ -12,12 +12,14 @@ class SpeakerVideoModel {
     this.statusCode,
     this.message,
     this.data,
+    this.video_count,
   });
 
   bool? success;
   int? statusCode;
   String? message;
   List<VideoList>? data;
+  int? video_count;
 
   factory SpeakerVideoModel.fromJson(Map<String, dynamic> json) =>
       SpeakerVideoModel(
@@ -28,6 +30,7 @@ class SpeakerVideoModel {
             ? null
             : List<VideoList>.from(
                 json["data"].map((x) => VideoList.fromJson(x))),
+        video_count: json["video_count"] == null ? null : json["video_count"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,6 +40,7 @@ class SpeakerVideoModel {
         "data": data == null
             ? null
             : List<dynamic>.from(data!.map((x) => x.toJson())),
+        "video_count": video_count
       };
 }
 
