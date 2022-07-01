@@ -82,7 +82,7 @@ class _PastFeature2State extends State<PastFeature2> {
                             /*------ Tool bar ------*/
                             Container(
                               margin: EdgeInsets.only(
-                                  top: 60.h, left: 24.w, right: 24.w),
+                                  top: 60.h, left: 35.w, right: 35.w),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -110,7 +110,7 @@ class _PastFeature2State extends State<PastFeature2> {
                                       Get.to(() => SearchFeaturesScreen());
                                     },
                                     child: SvgPicture.asset(
-                                      search,
+                                      icon_past_search,
                                       color: Colors.white,
                                       height: 24.h,
                                       width: 24.h,
@@ -191,7 +191,7 @@ class _PastFeature2State extends State<PastFeature2> {
                           ),
                           Container(
                             transform: Matrix4.translationValues(0, -80, 0),
-                            height: 115.h,
+                            height: 96.h,
                             padding: EdgeInsets.symmetric(horizontal: 17.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.r),
@@ -213,8 +213,8 @@ class _PastFeature2State extends State<PastFeature2> {
                                   },
                                   child: SvgPicture.asset(
                                     icon_share,
-                                    width: 25.w,
-                                    height: 25.h,
+                                    width: 22.w,
+                                    height: 22.h,
                                   ),
                                 ),
                                 SizedBox(
@@ -251,13 +251,13 @@ class _PastFeature2State extends State<PastFeature2> {
                                           0
                                       ? SvgPicture.asset(
                                           icon_heart,
-                                          width: 25.w,
-                                          height: 25.h,
+                                          width: 22.w,
+                                          height: 22.h,
                                         )
                                       : SvgPicture.asset(
                                           icon_heart,
-                                          width: 25.w,
-                                          height: 25.h,
+                                          width: 22.w,
+                                          height: 22.h,
                                           color: Colors.red,
                                         ),
                                 ),
