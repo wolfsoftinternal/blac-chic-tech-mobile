@@ -206,8 +206,8 @@ class _PastFeature1State extends State<PastFeature1> {
                                 GestureDetector(
                                   onTap: () {
                                     Share.share(
-                                    'Hey checkout this amazing feature' +
-                                      featuredController.featuredList[widget.selectedPositionFromPrevious].share_link!,
+                                    'Hey checkout this feature' +
+                                      featuredController.featuredList[widget.selectedPositionFromPrevious].link!,
                                     );
                                   },
                                   child: SvgPicture.asset(

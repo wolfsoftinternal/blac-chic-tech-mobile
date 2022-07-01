@@ -211,11 +211,13 @@ class _PostDetailState extends State<PostDetail> {
                                 InkWell(
                                   onDoubleTap: (){
                                     setState(() {
-                                      controller.postList[index].isLike = 1;
-                                      controller.postList[index].totalLikes = controller.postList[index].totalLikes! + 1;
-                                      checkNet(context).then((value) {
-                                        controller.postLikeApi(context, controller.postList[index].id);
-                                      });
+                                      if(controller.postList[index].isLike == 0){
+                                        controller.postList[index].isLike = 1;
+                                        controller.postList[index].totalLikes = controller.postList[index].totalLikes! + 1;
+                                        checkNet(context).then((value) {
+                                          controller.postLikeApi(context, controller.postList[index].id);
+                                        });
+                                      }
                                     });
                                   },
                                   child: SizedBox(
