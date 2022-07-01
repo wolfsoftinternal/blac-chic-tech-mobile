@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
@@ -41,13 +42,14 @@ class _SearchBarDemoState extends State<SearchBarDemo> {
         prefixIcon: Icon(
           IconlyLight.search,
           color: grey_aaaaaa,
-          size: 20.r,
+          size: 18.r,
         ),
         fillColor: widget.fillcolor,
         hintStyle: TextStyle(
           fontSize: 14.sp,
           // fontWeight: FontWeight.w500,
           color: const Color(0xff96A6A3),
+          fontFamily: helveticaNeueNeue_medium
         ),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,

@@ -14,7 +14,7 @@ class SearchBarWithRightIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 24.h, right: 24.w, left: 24.w),
+      margin: EdgeInsets.only(top: 40.h, right: 24.w, left: 24.w),
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
       decoration:  BoxDecoration(
           // border: Border.all(color: grey_e9ecec, width: 1),
