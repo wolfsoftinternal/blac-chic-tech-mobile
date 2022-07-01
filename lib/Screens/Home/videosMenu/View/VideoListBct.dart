@@ -154,7 +154,6 @@ class _VideoListBctState extends State<VideoListBct> {
         Expanded(
           flex: 1,
           child: NestedScrollView(
-            controller: controller.scrollListController,
             headerSliverBuilder: (context, value) {
               return [
                 SliverToBoxAdapter(
@@ -448,13 +447,7 @@ class _VideoListBctState extends State<VideoListBct> {
                   decoration: const BoxDecoration(color: Color(0xffebebeb)),
                 ),
 
-                Expanded(
-                  flex: 1,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-
-                        Obx(
+                Obx(
                           () => Visibility(
                             visible: controller.isLayoutFirst.value,
                             child: Padding(
@@ -799,6 +792,9 @@ class _VideoListBctState extends State<VideoListBct> {
                                                       .selectIdLanguage
                                                       .toJson()
                                                       .toString());
+                                              controller.isTextChange.value = false;
+                                              controller.isLayoutFirst.value = false;
+                                              setState(() {});
                                             }
                                           },
                                           child: Container(
@@ -840,6 +836,9 @@ class _VideoListBctState extends State<VideoListBct> {
                                             controller.pageNo.value = 1;
                                             controller.isLoadingBCT.value = true;
                                             controller.videoListApi();
+                                            controller.isTextChange.value = false;
+                                            controller.isLayoutFirst.value = false;
+                                            setState(() {});
                                           },
                                           child: Container(
                                             height: 50.h,
@@ -869,6 +868,13 @@ class _VideoListBctState extends State<VideoListBct> {
                             ),
                           ),
                         ),
+
+                Expanded(
+                  flex: 1,
+                  child: SingleChildScrollView(
+                     controller: controller.scrollListController,
+                    child: Column(
+                      children: [
                         Obx(
                           () => controller.isLoadingBCT.value
                               ? const SizedBox(

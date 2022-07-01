@@ -180,12 +180,12 @@ class VideoMenuController extends GetxController {
             videoList.addAll(admireListModel.data!);
 
             print(videoList.length);
+            totalVideoCount.value = admireListModel.video_count.toString();
 
-            if (checkCount.value == false) {
-              totalVideoCount.value =
-                  videoList.length.toString();
-              checkCount.value = true;
-            }
+            // if (checkCount.value == false) {
+            //    totalVideoCount.value = videoList.length.toString();
+            //   checkCount.value = true;
+            // }
 
             videoMenuPageMethod();
           }
@@ -463,7 +463,7 @@ class VideoMenuController extends GetxController {
     
   }
 
-  videoListDetailApi({VideoList? videoListData}) async {
+  videoListDetailApi({VideoList? videoListData, id}) async {
     isLoading.value = true;
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
@@ -499,6 +499,20 @@ class VideoMenuController extends GetxController {
           } else if (model.statusCode == 200) {
             SpeakerVideoModel admireListModel = SpeakerVideoModel.fromJson(userModel);
             videoDetailsList.addAll(admireListModel.data!);
+            print(videoDetailsList.length);
+            List list = [];
+
+            for(var item in videoDetailsList){
+              if(id == item.id){
+                list.add(item);
+              }
+            }
+
+            for(var item in list){
+              videoDetailsList.remove(item);
+            }
+
+            print('vvvvv' + videoDetailsList.length.toString());
 
             videoDetailsListMethod(videoListData: videoListData);
           }
