@@ -150,8 +150,8 @@ class VideoMenuController extends GetxController {
     }
 
     dynamic body = {
-      'topic': topicString1,
-      'language': languageString1,
+      'topic': topicString1.replaceAll(' ', ''),
+      'language': languageString1.replaceAll(' ', ''),
       'page': pageNo.value.toString()
     };
 
