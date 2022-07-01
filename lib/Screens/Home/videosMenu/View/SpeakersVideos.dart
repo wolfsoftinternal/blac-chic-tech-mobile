@@ -112,21 +112,21 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                         margin: EdgeInsets.only(
                             top: 24.h, left: 24.w, right: 24.w),
                         child: 
-                        controller.isLoading.value
-                            ? const SizedBox(
-                                width: double.infinity,
-                                height: 100,
-                                child: Center(
-                                    child: SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Color(0xff04080f)),
-                                  ),
-                                )))
-                            : 
+                        // controller.isLoading.value
+                        //     ? const SizedBox(
+                        //         width: double.infinity,
+                        //         height: 100,
+                        //         child: Center(
+                        //             child: SizedBox(
+                        //           height: 20,
+                        //           width: 20,
+                        //           child: CircularProgressIndicator(
+                        //             strokeWidth: 2,
+                        //             valueColor: AlwaysStoppedAnimation<Color>(
+                        //                 Color(0xff04080f)),
+                        //           ),
+                        //         )))
+                        //     : 
                             controller.speakerList.length == 0
                                 ? SizedBox(
                                     height:
