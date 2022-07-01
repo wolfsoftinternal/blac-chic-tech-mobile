@@ -166,7 +166,7 @@ class _VideoListBctState extends State<VideoListBct> {
                         child: Column(
                           children: [
                             SizedBox(
-                              height: 10.h,
+                              height: 20.h,
                             ),
 
                             Obx(
@@ -176,7 +176,9 @@ class _VideoListBctState extends State<VideoListBct> {
                                   style: TextStyle(
                                       color: black_121212,
                                       fontWeight: FontWeight.w900,
-                                      fontFamily: "NeueHelvetica",
+                                      fontFamily: helvetica_neu_bold,
+                                      letterSpacing: 1.2,
+                                      height: 1.3,
                                       fontStyle: FontStyle.normal,
                                       fontSize: 24.sp),
                                   textAlign: TextAlign.center),
@@ -191,7 +193,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                 style: TextStyle(
                                     color: grey_aaaaaa,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "NeueHelvetica",
+                                    fontFamily: helveticaNeueNeue_medium,
                                     fontStyle: FontStyle.normal,
                                     fontSize: 14.sp),
                                 textAlign: TextAlign.left),
@@ -297,6 +299,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                               Text(
                                                 "Find a Speaker",
                                                 style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
                                                     fontFamily:
                                                     helvetica_neu_bold,
                                                     fontSize: 14.sp),
@@ -399,7 +402,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                   : "More filters",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontFamily: "Roboto",
+                                  fontFamily: roboto_bold,
                                   fontStyle: FontStyle.normal,
                                   fontSize: 14.sp),
                               textAlign: TextAlign.left)
@@ -430,7 +433,7 @@ class _VideoListBctState extends State<VideoListBct> {
                           Text("My play list",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontFamily: "Roboto",
+                                  fontFamily: roboto_bold,
                                   fontStyle: FontStyle.normal,
                                   fontSize: 14.sp),
                               textAlign: TextAlign.left)

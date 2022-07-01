@@ -354,46 +354,51 @@ class _MyPlayListState extends State<MyPlayList> {
                                                           ),
                                                         ),
                                                       ),
-                                                      PopupMenuButton(
-                                                          onSelected: (value) {
-                                                            controller.removeFromPlaylist(
-                                                                context:
-                                                                    context,
-                                                                videoId: controller
-                                                                    .myPlayList[
-                                                                        i]
-                                                                    .id,
-                                                                index: i);
-                                                          },
-                                                          itemBuilder:
-                                                              (context) => [
-                                                                    const PopupMenuItem(
-                                                                      child: Text(
-                                                                          "Remove"),
-                                                                      textStyle: TextStyle(
-                                                                          color:
-                                                                              black_121212,
-                                                                          fontFamily:
-                                                                              roboto_regular,
-                                                                          fontSize:
-                                                                              14),
-                                                                      value: 1,
-                                                                    ),
-                                                                  ],
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        1),
-                                                          ),
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          icon: Image.asset(
-                                                            img_more,
-                                                            width: 16.w,
-                                                            height: 16.w,
-                                                          )),
+                                                      SizedBox(
+                                                        width: 20,
+                                                        height: 20,
+                                                        child: PopupMenuButton(
+                                                          tooltip: "",
+                                                            padding: EdgeInsets.all(0),
+                                                            onSelected: (value) {
+                                                              controller.removeFromPlaylist(
+                                                                  context:
+                                                                      context,
+                                                                  videoId: controller
+                                                                      .myPlayList[
+                                                                          i]
+                                                                      .id,
+                                                                  index: i);
+                                                            },
+                                                            itemBuilder:
+                                                                (context) => [
+                                                                      const PopupMenuItem(
+                                                                        child: Text(
+                                                                            "Remove"),
+                                                                        textStyle: TextStyle(
+                                                                            color:
+                                                                                black_121212,
+                                                                            fontFamily:
+                                                                                roboto_regular,
+                                                                            fontSize:
+                                                                                14),
+                                                                        value: 1,
+                                                                      ),
+                                                                    ],
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          1),
+                                                            ),
+
+                                                            icon: Image.asset(
+                                                              img_more,
+                                                              width: 16.w,
+                                                              height: 16.w,
+                                                            )),
+                                                      ),
                                                     ],
                                                   )),
                                             ),

@@ -59,6 +59,8 @@ class _CreatePostState extends State<CreatePost> {
               Padding(
                 padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 50.0, bottom: 20.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     InkWell(
                       onTap: () {
@@ -67,63 +69,37 @@ class _CreatePostState extends State<CreatePost> {
                       child: Icon(
                         Icons.close,
                         size: 24,
+
                       ),
                     ),
-                    Spacer(),
-                    // Container(
-                    //   height: 40,
-                    //   child: Stack(
-                    //     children: [
-                    //       Positioned(
-                    //         bottom: 5,
-                    //         child: Container(
-                    //           height: 40,
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.only(bottom: 5.0),
-                    //             child: Align(
-                    //               alignment: Alignment.bottomCenter,
-                    //               child: Text('ALL PHOTOS',
-                    //                   style: TextStyle(
-                    //                       color: black_121212,
-                    //                       fontFamily: helvetica_neu_bold,
-                    //                       fontStyle: FontStyle.normal,
-                    //                       fontSize: 16),
-                    //                   textAlign: TextAlign.left),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       Container(height : 60, width: 102, child: MultiAssetsPage()),
-                    //     ],
-                    //   ),
-                    // ),
-                    // Stack(children: [
-                    //   Positioned(
-                    //       top: 5, child: Icon(Icons.expand_more_rounded)),
-                    //   SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
-                    // ]),
 
-                    Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Row(
-                            children: [
-                              Text('ALL PHOTOS',
-                                  style: TextStyle(
-                                      color: black_121212,
-                                      fontFamily: helvetica_neu_bold,
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w900,
-                                      letterSpacing: 0.7,
-                                      fontSize: 16.sp),
-                                  textAlign: TextAlign.left),
-                              Icon(Icons.expand_more_rounded),
-                            ],
-                          ),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: Stack(
+                          alignment: Alignment.center,
+
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('ALL PHOTOS',
+                                    style: TextStyle(
+                                        color: black_121212,
+                                        fontFamily: helvetica_neu_bold,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w900,
+                                        letterSpacing: 0.7,
+                                        fontSize: 16.sp),
+                                    textAlign: TextAlign.left),
+                                Icon(Icons.expand_more_rounded),
+                              ],
+                            ),
+                            Container(height: 30, width: 148, child: MultiAssetsPage()),
+                          ],
                         ),
-                        Container( width: 145, child: MultiAssetsPage()),
-                      ],
+                      ),
                     ),
 
                     InkWell(
