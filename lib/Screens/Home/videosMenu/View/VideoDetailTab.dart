@@ -147,7 +147,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                     children: [
                       controller.playerController.isEmpty
                           ? SizedBox(
-                              height: 235.h,
+                              height: 302.h,
                               width: MediaQuery.of(context).size.width,
                               child: const Center(
                                   child: SizedBox(
@@ -164,7 +164,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                               width: MediaQuery.of(context).size.width,
                               height: fullScreen == true
                                   ? MediaQuery.of(context).size.height
-                                  : 235.h,
+                                  : 302.h,
                               child: YoutubePlayerBuilder(
                                   onEnterFullScreen: () {
                                     setState(() {
@@ -193,8 +193,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                             ),
                       if (fullScreen == false)
                         Container(
-                          margin: const EdgeInsets.only(
-                              left: 24, right: 24, bottom: 24, top: 12),
+                          margin:  EdgeInsets.all(24.r),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.r),
                               gradient: const LinearGradient(
@@ -383,7 +382,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                   style: TextStyle(
                                       color: grey_aaaaaa,
                                       fontWeight: FontWeight.w600,
-                                      fontFamily: "NeueHelvetica",
+                                      fontFamily: helvetica_neu_bold,
                                       fontStyle: FontStyle.normal,
                                       fontSize: 12.sp),
                                   textAlign: TextAlign.left),
@@ -459,7 +458,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                               style: TextStyle(
                                                   color: black_121212,
                                                   fontWeight: FontWeight.w700,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helvetica_neu_bold,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 16.sp),
                                               textAlign: TextAlign.left),
@@ -498,7 +497,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                           style: TextStyle(
                                               color: const Color(0xff3f3f3f),
                                               fontWeight: FontWeight.w500,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 12.sp),
                                           textAlign: TextAlign.left)
@@ -776,7 +775,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                 const BoxDecoration(color: view_line_f4f6f6)),
                       if (fullScreen == false)
                         Padding(
-                          padding: const EdgeInsets.all(24.0),
+                          padding:  EdgeInsets.all(24.r),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -785,8 +784,8 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                               Text("WATCH NEXT",
                                   style: TextStyle(
                                       color: grey_aaaaaa,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: "NeueHelvetica",
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: helvetica_neu_bold,
                                       fontStyle: FontStyle.normal,
                                       fontSize: 12.sp),
                                   textAlign: TextAlign.left),
