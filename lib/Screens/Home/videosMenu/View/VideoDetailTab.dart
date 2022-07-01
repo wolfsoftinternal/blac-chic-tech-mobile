@@ -58,8 +58,6 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
           controller.scrollListDetailController.position.pixels) {
         scrollDown();
         controller.isPaginationLoading.value = true;
-        
-
         await controller.videoListDetailApi(videoListData: widget.videoList);
         controller.isPaginationLoading.value = false;
       }

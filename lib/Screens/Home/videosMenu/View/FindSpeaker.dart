@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuController.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/SpeakersVideos.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,15 +23,35 @@ class FindSpeaker extends StatefulWidget {
 
 class _FindSpeakerState extends State<FindSpeaker> {
   VideoMenuController controller = Get.find<VideoMenuController>();
+  String search = '';
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    initScrolling(context);
     if (mounted) {
       controller.isLoading.value = true;
       controller.isLoadingButton.value = false;
     }
+  }
+
+  initScrolling(BuildContext context) {
+    controller.scrollSpeakerListController.addListener(() async {
+      if (controller.scrollSpeakerListController.position.maxScrollExtent ==
+          controller.scrollSpeakerListController.position.pixels) {
+        scrollDown();
+        controller.isPaginationLoading.value = true;
+        controller.speakerPageNo = controller.speakerPageNo + 1;
+        await controller.findSpeakerApi(search: search);
+        controller.isPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void scrollDown() {
+    controller.scrollSpeakerListController.jumpTo(
+        controller.scrollSpeakerListController.position.maxScrollExtent);
   }
 
   @override
@@ -49,61 +70,66 @@ class _FindSpeakerState extends State<FindSpeaker> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: white_ffffff,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 50.h,),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Obx(
-                  () => Column(
+        body: Obx(
+          () => Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 50.h,
+              ),
+              Container(
+                  margin: EdgeInsets.only(top: 15.h),
+                  child: ToolbarWithHeaderCenterTitle("FIND A SPEAKER")),
+              SearchBarWithRightIcon(onSearch: (value) {
+                controller.findSpeakerList.clear();
+                controller.speakerPageNo.value = 1;
+                search = value;
+                controller.findSpeakerApi(search: value);
+              }),
+              Container(
+                margin: EdgeInsets.only(top: 16.h, left: 24.w),
+                child: Text(
+                  controller.findSpeakerList.length == 0
+                      ? "0 Speakers"
+                      : controller.findSpeakerList.length.toString() +
+                          " Speakers",
+                  style: TextStyle(
+                      color: grey_aaaaaa,
+                      fontSize: 14.sp,
+                      fontFamily: roboto_regular),
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: controller.scrollSpeakerListController,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          margin: EdgeInsets.only(top: 15.h),
-                          child:
-                              ToolbarWithHeaderCenterTitle("FIND A SPEAKER")),
-                      SearchBarWithRightIcon(
-                        onSearch: (value) =>
-                            controller.findSpeakerApi(search: value),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 16.h, left: 24.w),
-                        child: Text(
-                          controller.findSpeakerList.length == 0
-                              ? "0 Speakers"
-                              : controller.findSpeakerList.length.toString() +
-                                  " Speakers",
-                          style: TextStyle(
-                              color: grey_aaaaaa,
-                              fontSize: 14.sp,
-                              fontFamily: roboto_regular),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: 16.h, left: 24.w, right: 24.w),
-                        child: controller.isLoading.value
-                            ? SizedBox(
-                                width: double.infinity,
-                                height: MediaQuery.of(context).size.height * 0.60,
-                                child: Center(
-                                    child: SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Color(0xff04080f)),
-                                  ),
-                                )))
-                            : controller.findSpeakerList == null
+                        margin:
+                            EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
+                        child:
+                            // controller.isLoading.value
+                            //     ? SizedBox(
+                            //         width: double.infinity,
+                            //         height: MediaQuery.of(context).size.height * 0.60,
+                            //         child: Center(
+                            //             child: SizedBox(
+                            //           height: 20,
+                            //           width: 20,
+                            //           child: CircularProgressIndicator(
+                            //             strokeWidth: 2,
+                            //             valueColor: AlwaysStoppedAnimation<Color>(
+                            //                 Color(0xff04080f)),
+                            //           ),
+                            //         )))
+                            //     :
+                            controller.findSpeakerList == null
                                 ? SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height *
-                                            0.5,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.5,
                                     width: double.infinity,
                                     child: const Center(
                                         child: Text("No Data Found",
@@ -119,167 +145,133 @@ class _FindSpeakerState extends State<FindSpeaker> {
                                     shrinkWrap: true,
                                     primary: false,
                                     itemCount:
-                                        controller.findSpeakerList.length + 1,
+                                        controller.findSpeakerList.length,
                                     padding: EdgeInsets.zero,
                                     itemBuilder: (context, i) {
-                                      if (i <
-                                          controller.findSpeakerList.length) {
-                                        return Padding(
-                                          padding:
-                                              EdgeInsets.only(bottom: 16.h),
-                                          child: InkWell(
-                                            onTap: () {
-                                              controller.speakerDataVideoAPI(
-                                                  search: "",
-                                                  videoId: controller
-                                                      .findSpeakerList[i].id);
-                                              Get.to((SpeakersVideos(
-                                                  id: int.parse(controller
-                                                      .findSpeakerList[i].id
-                                                      .toString()))));
-                                            },
-                                            child: SizedBox(
-                                                width: double.infinity,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius
-                                                              .circular(20),
-                                                      child:
-                                                          CachedNetworkImage(
-                                                        imageUrl: controller
+                                      return Padding(
+                                        padding: EdgeInsets.only(bottom: 16.h),
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.speakerDataVideoAPI(
+                                                search: "",
+                                                videoId: controller
+                                                    .findSpeakerList[i].id);
+                                            Get.to((SpeakersVideos(
+                                                id: int.parse(controller
+                                                    .findSpeakerList[i].id
+                                                    .toString()), name: controller.findSpeakerList[i].fullName ?? controller.findSpeakerList[i].userName ?? "")));
+                                          },
+                                          child: SizedBox(
+                                              width: double.infinity,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: controller
+                                                                  .findSpeakerList[
+                                                                      i]
+                                                                  .image ==
+                                                              null
+                                                          ? ""
+                                                          : controller
+                                                              .findSpeakerList[
+                                                                  i]
+                                                              .image
+                                                              .toString(),
+                                                      height: 40.h,
+                                                      width: 40.w,
+                                                      fit: BoxFit.cover,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              SvgPicture.asset(
+                                                        placeholder,
+                                                        height: 40.h,
+                                                        width: 40.w,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          SvgPicture.asset(
+                                                        placeholder,
+                                                        height: 40.h,
+                                                        width: 40.w,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 16.w,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        controller
                                                                     .findSpeakerList[
                                                                         i]
-                                                                    .image ==
+                                                                    .fullName ==
                                                                 null
                                                             ? ""
                                                             : controller
                                                                 .findSpeakerList[
                                                                     i]
-                                                                .image
+                                                                .fullName
                                                                 .toString(),
-                                                        height: 40.h,
-                                                        width: 40.w,
-                                                        fit: BoxFit.cover,
-                                                        progressIndicatorBuilder:
-                                                            (context, url,
-                                                                    downloadProgress) =>
-                                                                SvgPicture
-                                                                    .asset(
-                                                          placeholder,
-                                                          height: 40.h,
-                                                          width: 40.w,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            SvgPicture.asset(
-                                                          placeholder,
-                                                          height: 40.h,
-                                                          width: 40.w,
-                                                          fit: BoxFit.cover,
-                                                        ),
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                                helveticaNeueNeue_medium,
+                                                            color: grey_aaaaaa,
+                                                            fontSize: 14),
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 16.w,
-                                                    ),
-                                                    Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          controller
-                                                                      .findSpeakerList[
-                                                                          i]
-                                                                      .fullName ==
-                                                                  null
-                                                              ? ""
-                                                              : controller
-                                                                  .findSpeakerList[
-                                                                      i]
-                                                                  .fullName
-                                                                  .toString(),
-                                                          style: const TextStyle(
-                                                              fontFamily:
-                                                                  helveticaNeueNeue_medium,
-                                                              color:
-                                                                  grey_aaaaaa,
-                                                              fontSize: 14),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 3.h,
-                                                        ),
-                                                        Text(
-                                                          controller
-                                                                      .findSpeakerList[
-                                                                          i]
-                                                                      .userName ==
-                                                                  null
-                                                              ? ""
-                                                              : controller
-                                                                  .findSpeakerList[
-                                                                      i]
-                                                                  .userName
-                                                                  .toString(),
-                                                          style: const TextStyle(
-                                                              fontFamily:
-                                                                  helvetica_neu_bold,
-                                                              color:
-                                                                  black_121212,
-                                                              fontSize: 14),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  ],
-                                                )),
-                                          ),
-                                        );
-                                      } else {
-                                        return controller.hasMore.value ==
-                                                false
-                                            ? const SizedBox()
-                                            : Container(
-                                                margin: EdgeInsets.only(
-                                                    bottom: 25.h),
-                                                child: Center(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      controller
-                                                          .findSpeakerPage
-                                                          .value++;
-                                                      controller.pageAdd();
-                                                    },
-                                                    child: Text(
-                                                      "Load More",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              roboto_bold,
-                                                          fontSize: 14.sp,
-                                                          color: blue_0a84ff),
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                      }
+                                                      SizedBox(
+                                                        height: 3.h,
+                                                      ),
+                                                      Text(
+                                                        controller
+                                                                    .findSpeakerList[
+                                                                        i]
+                                                                    .userName ==
+                                                                null
+                                                            ? ""
+                                                            : controller
+                                                                .findSpeakerList[
+                                                                    i]
+                                                                .userName
+                                                                .toString(),
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                                helvetica_neu_bold,
+                                                            color: black_121212,
+                                                            fontSize: 14),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                      );
                                     }),
                       ),
                     ],
                   ),
                 ),
               ),
-            ),
-          ],
+              if (controller.isPaginationLoading.value == true)
+                        PaginationUtils().loader(),
+            ],
+          ),
         ),
       ),
     );

@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../Layout/ToolbarWithHeaderCenterTitle.dart';
 import '../../../../Model/TransactionsModel.dart';
@@ -362,12 +363,12 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                       fontSize: 11.sp,
                                                       color: black_121212),
                                                 ),
-                                                Text(
-                                                  transactionController
+                                                Text(transactionController
                                                       .transactionList[i]
-                                                      .createdAt
-                                                      ?.timeZoneName ??
-                                                      "",
+                                                      .createdAt == null || transactionController
+                                                      .transactionList[i]
+                                                      .createdAt.toString() == '' ? "" :
+                                                  DateFormat("MMM dd yyyy 'at' hh:mm a").format(transactionController.transactionList[i].createdAt!),
                                                   style: TextStyle(
                                                       fontFamily:
                                                       roboto_regular,
@@ -432,7 +433,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                       fontSize: 16.sp,
                                                       fontFamily: roboto_bold,
                                                       fontWeight: FontWeight.w600,
-                                                      color: parrot_1ad04d),
+                                                      color: transactionController.transactionList[i].payment_type == 'out' ? Colors.red : parrot_1ad04d),
                                                 ),
                                               ],
                                             )

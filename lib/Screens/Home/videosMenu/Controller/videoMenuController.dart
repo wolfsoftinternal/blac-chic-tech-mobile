@@ -82,17 +82,23 @@ class VideoMenuController extends GetxController {
       <YoutubePlayerController>[].obs;
   RxList<YoutubePlayerController> searchVideoList =
       <YoutubePlayerController>[].obs;
+  RxList<YoutubePlayerController> speakerVideoController =
+      <YoutubePlayerController>[].obs;
   RxString totalVideoCount = "0".obs;
   RxBool checkCount = false.obs;
   ScrollController scrollListController = ScrollController();
   ScrollController scrollListDetailController = ScrollController();
   ScrollController scrollPlaylistController = ScrollController();
   ScrollController scrollSearchListController = ScrollController();
+  ScrollController scrollSpeakerListController = ScrollController();
+  ScrollController scrollVideoController = ScrollController();
   RxBool isPaginationLoading = false.obs;
   RxInt pageNo = 1.obs;
   RxInt detailPageNo = 0.obs;
   RxInt playlistPageNo = 0.obs;
-  RxInt searchListPageNo = 0.obs;
+  RxInt searchListPageNo = 1.obs;
+  RxInt speakerPageNo = 1.obs;
+  RxInt videoPageNo = 0.obs;
 
   @override
   void onInit() {
@@ -343,7 +349,9 @@ class VideoMenuController extends GetxController {
     isLoading.value = true;
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
-
+    
+    
+    print("ddd $searchListPageNo");
     dynamic body = {'search': topicFilter.toString(), 'page': searchListPageNo.value.toString()};
     //FormData formData = new FormData.fromMap(body);
 
@@ -1143,37 +1151,47 @@ class VideoMenuController extends GetxController {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
-    dynamic body = {'search': search.toString()};
+    dynamic body = {'search': search.toString(), 'page': speakerPageNo.value.toString()};
     //FormData formData = new FormData.fromMap(body);
 
     String url = urlBase + urlFindSpeaker;
     final apiReq = Request();
-    try {
-      await apiReq.postAPIWithBearer(url, body, token.toString()).then((value) {
-        http.StreamedResponse res = value;
+
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(speakerPageNo.value == 1){
         findSpeakerList.clear();
+      }
 
-        if (res.statusCode == 200) {
-          res.stream.bytesToString().then((value) async {
-            print(value.toString());
-            findspeakerVideoList.value = findSpeakerModelFromJson(value);
+      http.StreamedResponse res = value;
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
 
-            if (findspeakerVideoList.value.statusCode == 500) {
-              isLoading.value = false;
-              final tokenUpdate = TokenUpdateRequest();
-              await tokenUpdate.updateToken();
-            } else if (findspeakerVideoList.value.statusCode == 200) {
-              pageAdd();
-            }
-          });
-        } else {
-          isLoading.value = false;
-          print(res.reasonPhrase);
-        }
-      });
-    } catch (e) {
-      print(e);
-    }
+          print('strData userdetails get ' + strData);
+
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            isLoading.value = false;
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            myPlayListAPI();
+          } else if (model.statusCode == 200) {
+            FindSpeakerModel admireListModel = FindSpeakerModel.fromJson(userModel);
+            findSpeakerList.addAll(admireListModel.data!);
+            // pageAdd();
+            isLoading.value = false;
+          }else{
+            isLoading.value = false;
+          }
+          isLoadingBCT.value = false;
+        });
+      } else {
+        isLoadingBCT.value = false;
+      }
+    });
   }
 
   pageAdd() {
@@ -1197,73 +1215,122 @@ class VideoMenuController extends GetxController {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
+    videoPageNo = videoPageNo + 1;
+    print("DDD$videoPageNo");
+
     dynamic body = {
       'search': search.toString(),
-      'speaker_id': videoId.toString()
+      'speaker_id': videoId.toString(),
+      'page': videoPageNo.value.toString(),
     };
-    //FormData formData = new FormData.fromMap(body);
 
     String url = urlBase + urlspeakerVideoList;
     final apiReq = Request();
-    await apiReq.postAPIWithBearer(url, body, token.toString()).then((value) {
-      http.StreamedResponse res = value;
-      speakerList.clear();
 
+    await apiReq.postAPI(url, body, token.toString()).then((value) {
+      if(videoPageNo.value == 1){
+        speakerList.clear();
+      }
+
+      http.StreamedResponse res = value;
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
-          speakerVideoList.value = speakerVideoModelFromJson(value);
+          String strData = value;
 
-          if (speakerVideoList.value.statusCode == 500) {
+          print('strData userdetails get ' + strData);
+
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
             isLoading.value = false;
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
-          } else if (speakerVideoList.value.statusCode == 200) {
+
+            myPlayListAPI();
+          } else if (model.statusCode == 200) {
+            SpeakerVideoModel admireListModel = SpeakerVideoModel.fromJson(userModel);
+            speakerList.addAll(admireListModel.data!);
             speakerDataVideoPageAdd();
+          }else{
+            isLoading.value = false;
           }
+          isLoadingBCT.value = false;
         });
       } else {
-        isLoading.value = false;
-        print(res.reasonPhrase);
+        isLoadingBCT.value = false;
       }
     });
   }
 
   speakerDataVideoPageAdd() {
-    int total = 6;
-    var list = <VideoList>[];
-    speakerVideoList.value.data!.forEach((element) {
-      String dataVideos =
-          element.embededCode.toString().replaceAll("560", "130");
-      String videoData = dataVideos.replaceAll("315", "60");
-      list.add(VideoList(
-          id: element.id,
-          userId: element.userId,
-          title: element.title,
-          topic: element.topic,
-          language: element.language,
-          file: element.file,
-          embededCode: videoData,
-          tags: element.tags,
-          speakers: element.speakers,
-          status: element.status,
-          description: element.description,
-          deletedAt: element.deletedAt,
-          speakerList: element.speakerList,
-          isFocus: element.isFocus,
-          userDetails: element.userDetails,
-          createdAt: element.createdAt,
-          updatedAt: element.updatedAt));
-    });
-    if (list.length > speakerListPage.value * total) {
-      hasMore.value = true;
-    } else {
-      hasMore.value = false;
+    // int total = 6;
+    // var list = <VideoList>[];
+    // speakerVideoList.value.data!.forEach((element) {
+    //   String dataVideos =
+    //       element.embededCode.toString().replaceAll("560", "130");
+    //   String videoData = dataVideos.replaceAll("315", "60");
+    //   list.add(VideoList(
+    //       id: element.id,
+    //       userId: element.userId,
+    //       title: element.title,
+    //       topic: element.topic,
+    //       language: element.language,
+    //       file: element.file,
+    //       embededCode: videoData,
+    //       tags: element.tags,
+    //       speakers: element.speakers,
+    //       status: element.status,
+    //       description: element.description,
+    //       deletedAt: element.deletedAt,
+    //       speakerList: element.speakerList,
+    //       isFocus: element.isFocus,
+    //       userDetails: element.userDetails,
+    //       createdAt: element.createdAt,
+    //       updatedAt: element.updatedAt));
+    // });
+    // if (list.length > speakerListPage.value * total) {
+    //   hasMore.value = true;
+    // } else {
+    //   hasMore.value = false;
+    // }
+    // speakerList.value = List.generate(
+    //     list.length > speakerListPage.value * total
+    //         ? speakerListPage.value * total
+    //         : list.length,
+    //     (index) => list[index]);
+    // isLoading.value = false;
+
+    List videoId = [];
+    speakerVideoController.clear();
+
+    for (var item in speakerList) {
+      if (item.embededCode.toString().contains("iframe")) {
+        String src = item.embededCode.toString().split('=')[3];
+        src = src.replaceAll(' title', '');
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      } else {
+        String src = item.embededCode.toString();
+        src = src.replaceAll('"', '');
+        videoId.add(YoutubePlayer.convertUrlToId(src));
+      }
     }
-    speakerList.value = List.generate(
-        list.length > speakerListPage.value * total
-            ? speakerListPage.value * total
-            : list.length,
-        (index) => list[index]);
-    isLoading.value = false;
+    for (int i = 0; i < videoId.length; i++) {
+      YoutubePlayerController controller = YoutubePlayerController(
+        initialVideoId: videoId[i] == null ? "" : videoId[i],
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: false,
+          hideControls: true,
+        ),
+      );
+      speakerVideoController.add(controller);
+    }
   }
 }
