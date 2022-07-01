@@ -26,6 +26,7 @@ class MyPlayList extends StatefulWidget {
 class _MyPlayListState extends State<MyPlayList> {
   VideoMenuController controller = Get.find<VideoMenuController>();
   bool fullScreen = false;
+  String search = '';
   @override
   void initState() {
     // TODO: implement initState
@@ -83,6 +84,9 @@ class _MyPlayListState extends State<MyPlayList> {
                 child: ToolbarWithHeaderCenterTitle("MY PLAY LIST")),
             SearchBarWithRightIcon(
               onSearch: (value) {
+                search = value;
+                controller.playlistPageNo.value = 0;
+                controller.myPlayList.clear();
                 controller.myPlayListAPI(search: value);
               },
             ),

@@ -208,30 +208,41 @@ class _PostDetailState extends State<PostDetail> {
                           children: [
                             Stack(
                               children: [
-                                SizedBox(
-                                  height: 270.h,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: controller
-                                              .postList[index].image ==
-                                          null
-                                      ? SvgPicture.asset(
-                                        placeholder,
-                                        fit: BoxFit.fill,
-                                      )
-                                      : ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4.r)),
-                                          child: CachedNetworkImage(
-                                            imageUrl: controller
-                                                .postList[index].image!,
-                                            fit: BoxFit.fill,
-                                            progressIndicatorBuilder: (context,
-                                                    url, downloadProgress) =>
-                                                SvgPicture.asset(
-                                              placeholder,
+                                InkWell(
+                                  onDoubleTap: (){
+                                    setState(() {
+                                      controller.postList[index].isLike = 1;
+                                      controller.postList[index].totalLikes = controller.postList[index].totalLikes! + 1;
+                                      checkNet(context).then((value) {
+                                        controller.postLikeApi(context, controller.postList[index].id);
+                                      });
+                                    });
+                                  },
+                                  child: SizedBox(
+                                    height: 270.h,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: controller
+                                                .postList[index].image ==
+                                            null
+                                        ? SvgPicture.asset(
+                                          placeholder,
+                                          fit: BoxFit.fill,
+                                        )
+                                        : ClipRRect(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(4.r)),
+                                            child: CachedNetworkImage(
+                                              imageUrl: controller
+                                                  .postList[index].image!,
                                               fit: BoxFit.fill,
-                                            ),
-                                          )),
+                                              progressIndicatorBuilder: (context,
+                                                      url, downloadProgress) =>
+                                                  SvgPicture.asset(
+                                                placeholder,
+                                                fit: BoxFit.fill,
+                                              ),
+                                            )),
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 15,

@@ -32,6 +32,8 @@ class VideoListBct extends StatefulWidget {
 class _VideoListBctState extends State<VideoListBct> {
   VideoMenuController controller = Get.put(VideoMenuController());
   bool fullScreen = false;
+  String topic = '';
+  String language = '';
 
   @override
   void initState() {
@@ -57,7 +59,14 @@ class _VideoListBctState extends State<VideoListBct> {
         controller.isPaginationLoading.value = true;
         controller.pageNo = controller.pageNo + 1;
 
-        await controller.videoListApi();
+        await controller.videoListApi(topicFilter: controller
+                                                  .selectIdTopic
+                                                  .toJson()
+                                                  .toString(),
+                                              languageFilter: controller
+                                                  .selectIdLanguage
+                                                  .toJson()
+                                                  .toString());
         controller.isPaginationLoading.value = false;
       }
     });
@@ -152,7 +161,7 @@ class _VideoListBctState extends State<VideoListBct> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 30.h,
+                        height: 10.h,
                       ),
 
                       Obx(
@@ -739,8 +748,16 @@ class _VideoListBctState extends State<VideoListBct> {
                                                 .add(element.name!);
                                           });
                                           controller.videoList.clear();
-                                          controller.pageNo.value = 1;
+                                          controller.pageNo.value = 0;
                                           controller.isLoadingBCT.value = true;
+                                          topic = controller
+                                                  .selectIdTopic
+                                                  .toJson()
+                                                  .toString();
+                                          language = controller
+                                                  .selectIdLanguage
+                                                  .toJson()
+                                                  .toString();
                                           controller.videoListApi(
                                               topicFilter: controller
                                                   .selectIdTopic

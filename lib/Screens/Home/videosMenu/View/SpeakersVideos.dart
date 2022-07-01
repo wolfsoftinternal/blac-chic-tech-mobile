@@ -2,11 +2,13 @@ import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuContr
 import 'package:blackchecktech/Screens/Home/videosMenu/Model/SpeakerVideoModel.dart';
 import 'package:blackchecktech/Model/SpeakersVideoModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoDetailTab.dart';
+import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../../Layout/SearchBarWithRightIcon.dart';
 import '../../../../Layout/ToolbarWithHeaderCenterTitle.dart';
@@ -16,7 +18,8 @@ import '../../../../Utilities/Constant.dart';
 
 class SpeakersVideos extends StatefulWidget {
   int id;
-  SpeakersVideos({required this.id, Key? key}) : super(key: key);
+  String name;
+  SpeakersVideos({required this.id, required this.name, Key? key}) : super(key: key);
 
   @override
   _SpeakersVideosState createState() => _SpeakersVideosState();
@@ -24,7 +27,8 @@ class SpeakersVideos extends StatefulWidget {
 
 class _SpeakersVideosState extends State<SpeakersVideos> {
   VideoMenuController controller = Get.find<VideoMenuController>();
-
+  String search = '';
+  bool fullScreen = false;
   // @override
   // void initState() {
   //   // TODO: implement initState
@@ -35,10 +39,29 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    initScrolling(context);
     if (mounted) {
       controller.isLoading.value = true;
       controller.isLoadingButton.value = false;
     }
+  }
+
+  initScrolling(BuildContext context) {
+    controller.scrollVideoController.addListener(() async {
+      if (controller.scrollVideoController.position.maxScrollExtent ==
+          controller.scrollVideoController.position.pixels) {
+        scrollDown();
+        controller.isPaginationLoading.value = true;
+        
+        await controller.speakerDataVideoAPI(search: search, videoId: widget.id);
+        controller.isPaginationLoading.value = false;
+      }
+    });
+  }
+
+  void scrollDown() {
+    controller.scrollVideoController.jumpTo(
+        controller.scrollVideoController.position.maxScrollExtent);
   }
 
   @override
@@ -48,6 +71,8 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
     if (mounted) {
       controller.isLoading.value = false;
       controller.isLoadingButton.value = false;
+      controller.videoPageNo.value = 0;
+      controller.speakerList.clear();
     }
   }
 
@@ -62,25 +87,32 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 50,),
+            Container(
+                          margin: EdgeInsets.only(top: 15.h),
+                          child:
+                              ToolbarWithHeaderCenterTitle(widget.name.capitalize)),
+                      SearchBarWithRightIcon(
+                        onSearch: (value) {
+                          controller.speakerList.clear();
+                          controller.videoPageNo.value = 0;
+                          search = value;
+                          controller.speakerDataVideoAPI(search: value.toString(), videoId: widget.id);
+                        }
+                      ),
             Expanded(
               child: SingleChildScrollView(
+                controller: controller.scrollVideoController,
                 child: Obx(
                   () => Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                          margin: EdgeInsets.only(top: 15.h),
-                          child:
-                              ToolbarWithHeaderCenterTitle("CLAIRE ROMAN")),
-                      SearchBarWithRightIcon(
-                        onSearch: (value) => controller.speakerDataVideoAPI(
-                            search: value.toString(), videoId: widget.id),
-                      ),
+                      
                       Container(
                         margin: EdgeInsets.only(
                             top: 24.h, left: 24.w, right: 24.w),
-                        child: controller.isLoading.value
+                        child: 
+                        controller.isLoading.value
                             ? const SizedBox(
                                 width: double.infinity,
                                 height: 100,
@@ -94,7 +126,8 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                         Color(0xff04080f)),
                                   ),
                                 )))
-                            : controller.speakerList.length == 0
+                            : 
+                            controller.speakerList.length == 0
                                 ? SizedBox(
                                     height:
                                         MediaQuery.of(context).size.height *
@@ -114,12 +147,12 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                     shrinkWrap: true,
                                     primary: false,
                                     itemCount:
-                                        controller.speakerList.length + 1,
+                                        controller.speakerList.length,
                                     padding: EdgeInsets.zero,
                                     itemBuilder: (context, i) {
-                                      if (i < controller.speakerList.length) {
-                                        print(
-                                            "::::::::::::UPDATE 00:::::::::::");
+                                      // if (i < controller.speakerList.length) {
+                                      //   print(
+                                      //       "::::::::::::UPDATE 00:::::::::::");
                                         return Padding(
                                           padding:
                                               EdgeInsets.only(bottom: 20.h),
@@ -140,76 +173,54 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
 
                                                   children: [
                                                     SizedBox(
-                                                        height: 80.h,
-                                                        width: 120.w,
-                                                        child: controller
-                                                                    .speakerList[
-                                                                        i]
-                                                                    .embededCode ==
-                                                                null
-                                                            ? Text("")
-                                                            : ClipRRect(
-                                                                borderRadius: const BorderRadius
-                                                                        .all(
-                                                                    Radius.circular(
-                                                                        35)),
-                                                                child: Html(
-                                                                    data: controller
-                                                                        .speakerList[i]
-                                                                        .embededCode),
-                                                              )),
-                                                    Positioned(
-                                                      bottom: 2,
-                                                      right: 3,
-                                                      child: Container(
-                                                        margin: EdgeInsets
-                                                            .only(
-                                                                right:
-                                                                    6.w,
-                                                                bottom:
-                                                                    6.h),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                vertical:
-                                                                    1.5.h,
-                                                                horizontal:
-                                                                    6.w),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      4),
-                                                          gradient:
-                                                              const LinearGradient(
-                                                            begin: Alignment
-                                                                .topCenter,
-                                                            end: Alignment
-                                                                .bottomCenter,
-                                                            colors: [
-                                                              Color(
-                                                                  0xff1c2535),
-                                                              Color(
-                                                                  0xff04080f)
-                                                            ],
-                                                            stops: [
-                                                              0.0,
-                                                              5.0
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        child: Text(
-                                                          "3.05",
-                                                          style: TextStyle(
-                                                              fontSize:
-                                                                  11.sp,
-                                                              color: Colors
-                                                                  .white,
-                                                              fontFamily:
-                                                                  helveticaNeueNeue_medium),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                                height: 80.h,
+                                                                width: 120.w,
+                                                                child: FittedBox(
+                                                                  fit: BoxFit.fill,
+                                                                  child: ClipRRect(
+                                                                    borderRadius: BorderRadius
+                                                                        .all(Radius
+                                                                            .circular(
+                                                                                15.r)),
+                                                                    child:
+                                                                        YoutubePlayerBuilder(
+                                                                            onEnterFullScreen:
+                                                                                () {
+                                                                              fullScreen =
+                                                                                  false;
+                                                                            },
+                                                                            player:
+                                                                                YoutubePlayer(
+                                                                              bottomActions: const [
+                                                                                SizedBox(width: 14.0),
+                                                                                // CurrentPosition(),
+                                                                                // const SizedBox(width: 8.0),
+                                                                                // ProgressBar(),
+                                                                                // RemainingDuration(),
+                                                                                // const PlaybackSpeedButton(),
+                                                                              ],
+                                                                              controller: controller
+                                                                                  .speakerVideoController
+                                                                                  .value[i],
+                                                                            ),
+                                                                            builder:
+                                                                                (context,
+                                                                                    player) {
+                                                                              return Column(
+                                                                                children: [
+                                                                                  player,
+                                                                                ],
+                                                                              );
+                                                                            }),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Positioned(
+                                                                  top: 20,
+                                                                  right: 42,
+                                                                  child: SvgPicture
+                                                                      .asset(
+                                                                          icon_play)),
                                                   ],
                                                 ),
                                                 Expanded(
@@ -294,36 +305,38 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                             ),
                                           ),
                                         );
-                                      } else {
-                                        return controller.hasMore.value ==
-                                                false
-                                            ? const SizedBox()
-                                            : Container(
-                                                margin: EdgeInsets.only(
-                                                    bottom: 25.h),
-                                                child: Center(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      controller
-                                                          .speakerListPage
-                                                          .value++;
-                                                      controller
-                                                          .speakerDataVideoPageAdd();
-                                                    },
-                                                    child: Text(
-                                                      "Load More",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              roboto_bold,
-                                                          fontSize: 14.sp,
-                                                          color: blue_0a84ff),
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                      }
+                                      // } else {
+                                      //   return controller.hasMore.value ==
+                                      //           false
+                                      //       ? const SizedBox()
+                                      //       : Container(
+                                      //           margin: EdgeInsets.only(
+                                      //               bottom: 25.h),
+                                      //           child: Center(
+                                      //             child: TextButton(
+                                      //               onPressed: () {
+                                      //                 controller
+                                      //                     .speakerListPage
+                                      //                     .value++;
+                                      //                 controller
+                                      //                     .speakerDataVideoPageAdd();
+                                      //               },
+                                      //               child: Text(
+                                      //                 "Load More",
+                                      //                 style: TextStyle(
+                                      //                     fontFamily:
+                                      //                         roboto_bold,
+                                      //                     fontSize: 14.sp,
+                                      //                     color: blue_0a84ff),
+                                      //               ),
+                                      //             ),
+                                      //           ),
+                                      //         );
+                                      // }
                                     }),
                       ),
+                      if (controller.isPaginationLoading.value == true)
+                        PaginationUtils().loader(),
                     ],
                   ),
                 ),
