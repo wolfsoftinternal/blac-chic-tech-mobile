@@ -558,7 +558,8 @@ import 'SelectedUserProfile.dart';
 
 class UserProfile extends StatefulWidget {
   final String selectedUserId;
-  const UserProfile({Key? key, required this.selectedUserId}) : super(key: key);
+  final isFrom;
+  const UserProfile({Key? key, required this.selectedUserId, required this.isFrom}) : super(key: key);
 
   @override
   State<UserProfile> createState() => _UserProfileState();
@@ -580,8 +581,8 @@ class _UserProfileState extends State<UserProfile> {
       (value) {
         videoController.PageNumber.value = 0;
         videoController.userListAPI(context, false, widget.selectedUserId);
-        dynamic body = {'user_id': widget.selectedUserId};
-        controller.admireListAPI(context, body);
+        // dynamic body = {'user_id': widget.selectedUserId};
+        controller.admireListAPI(context, widget.selectedUserId);
       },
     );
     controller.addListener(() {});
@@ -595,7 +596,7 @@ class _UserProfileState extends State<UserProfile> {
         () => 
         videoController.userList.isEmpty
             ? SizedBox(
-                height: MediaQuery.of(context).size.height * 0.75,
+                height: MediaQuery.of(context).size.height,
                 child: Center(
                   child: CircularProgressIndicator(
                     color: black, 
@@ -614,7 +615,7 @@ class _UserProfileState extends State<UserProfile> {
                         PageView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             controller: pageController,
-                            itemCount: videoController.userList.length,
+                            itemCount: widget.isFrom == true ? 1 : videoController.userList.length,
                             onPageChanged: (v) {
                               if (v == videoController.userList.length) {
                                 hadReachedEnd = true;
@@ -630,12 +631,13 @@ class _UserProfileState extends State<UserProfile> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                widget.isFrom == true ? Container() :
                                 GestureDetector(
                                   onTap: () {
                                     if(index > 0){
                                       index--;
-                                      dynamic body = {'user_id': videoController.userList[index].id.toString()};
-                                      controller.admireListAPI(context, body);
+                                      // dynamic body = {'user_id': videoController.userList[index].id.toString()};
+                                      controller.admireListAPI(context, videoController.userList[index].id.toString());
                                     }
                                     pageController.previousPage(
                                         duration: Duration(milliseconds: 300),
@@ -655,18 +657,19 @@ class _UserProfileState extends State<UserProfile> {
                                     ),
                                   ),
                                 ),
+                                widget.isFrom == true ? Container() :
                                 GestureDetector(
                                   onTap: () {
                                     if (hadReachedEnd == true) {
                                       pageController.jumpToPage(0);
-                                      dynamic body = {'user_id': widget.selectedUserId.toString()};
-                                      controller.admireListAPI(context, body);
+                                      // dynamic body = {'user_id': widget.selectedUserId.toString()};
+                                      controller.admireListAPI(context, widget.selectedUserId.toString());
                                       hadReachedEnd = false;
                                     } else {
                                       if(index != videoController.userList.length){
                                         index++;
-                                      dynamic body = {'user_id': videoController.userList[index].id.toString()};
-                                      controller.admireListAPI(context, body);
+                                      // dynamic body = {'user_id': videoController.userList[index].id.toString()};
+                                      controller.admireListAPI(context, videoController.userList[index].id.toString());
                                       pageController.nextPage(
                                           duration: Duration(milliseconds: 300),
                                           curve: Curves.fastOutSlowIn);
@@ -747,39 +750,49 @@ class _UserProfileState extends State<UserProfile> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              CircularProfileAvatar(
-                                '',
-                                radius: 24,
-                                child: controller.otherAdmireList[index]
-                                            .admireDetails!.image ==
-                                        null
-                                    ? SvgPicture.asset(
-                                        placeholder,
-                                        height: 48.h,
-                                        width: 48.w,
-                                      )
-                                    : CachedNetworkImage(
-                                        imageUrl: controller
-                                            .otherAdmireList[index]
-                                            .admireDetails!
-                                            .image!,
-                                  height: 48.h,
-                                  width: 48.w,
-                                        fit: BoxFit.cover,
-                                        progressIndicatorBuilder: (context,
-                                                url, downloadProgress) =>
-                                            SvgPicture.asset(
+                              GestureDetector(
+                               onTap: (){
+                                  if (widget.selectedUserId == controller.otherAdmireList[index].admireDetails!.id.toString()) {
+                                controller.userProfileAPI(context, true);
+                              } else {
+                                controller.admireProfileAPI(
+                                    context, controller.otherAdmireList[index].admireDetails!.id);
+                              }
+                              },
+                                child: CircularProfileAvatar(
+                                  '',
+                                  radius: 24,
+                                  child: controller.otherAdmireList[index]
+                                              .admireDetails!.image ==
+                                          null
+                                      ? SvgPicture.asset(
                                           placeholder,
-                                              height: 48.h,
-                                              width: 48.w,
+                                          height: 48.h,
+                                          width: 48.w,
+                                        )
+                                      : CachedNetworkImage(
+                                          imageUrl: controller
+                                              .otherAdmireList[index]
+                                              .admireDetails!
+                                              .image!,
+                                    height: 48.h,
+                                    width: 48.w,
+                                          fit: BoxFit.cover,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              SvgPicture.asset(
+                                            placeholder,
+                                                height: 48.h,
+                                                width: 48.w,
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              SvgPicture.asset(
+                                            placeholder,
+                                                height: 48.h,
+                                                width: 48.w,
+                                          ),
                                         ),
-                                        errorWidget: (context, url, error) =>
-                                            SvgPicture.asset(
-                                          placeholder,
-                                              height: 48.h,
-                                              width: 48.w,
-                                        ),
-                                      ),
+                                ),
                               ),
                                SizedBox(
                                 height: 4.h,

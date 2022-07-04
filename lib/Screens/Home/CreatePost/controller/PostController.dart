@@ -46,11 +46,15 @@ class PostController extends GetxController {
 
     request.fields.addAll({
       'caption': captionController.value.text,
-      'address': location.toString(),
+      'address': location.value.toString() == '' ? 'null' : location.value.toString(),
       'latitude': latitude.toString(),
       'longitude': longitude.toString(),
       'tagged_users': taggedUser.join(',')
     });
+
+    print(location.value.toString());
+    print(latitude.value.toString());
+    print(longitude.value.toString());
 
     if (assetImages.length > 0) {
       request.files.add(await http.MultipartFile.fromPath(

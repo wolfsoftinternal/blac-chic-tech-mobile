@@ -41,7 +41,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
     myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel?.data?.id?.toInt()??0;
-    setState(() {});
+    // setState(() {});
   }
   
   @override

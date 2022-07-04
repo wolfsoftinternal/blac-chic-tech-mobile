@@ -205,39 +205,49 @@ class _AdmireProfileState extends State<AdmireProfile> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              CircularProfileAvatar(
-                                '',
-                                radius: 24,
-                                child: controller.admireList[index]
-                                            .admireDetails!.image ==
-                                        null
-                                    ? SvgPicture.asset(
-                                        placeholder,
-                                        height: 48.h,
-                                        width: 48.w,
-                                      )
-                                    : CachedNetworkImage(
-                                        imageUrl: controller
-                                            .admireList[index]
-                                            .admireDetails!
-                                            .image!,
-                                  height: 48.h,
-                                  width: 48.w,
-                                        fit: BoxFit.cover,
-                                        progressIndicatorBuilder: (context,
-                                                url, downloadProgress) =>
-                                            SvgPicture.asset(
+                              GestureDetector(
+                                onTap: (){
+                                  if (myModel!.data!.id == controller.admireList[index].admireDetails!.id) {
+                                controller.userProfileAPI(context, true);
+                              } else {
+                                controller.admireProfileAPI(
+                                    context, controller.admireList[index].admireDetails!.id);
+                              }
+                                },
+                                child: CircularProfileAvatar(
+                                  '',
+                                  radius: 24,
+                                  child: controller.admireList[index]
+                                              .admireDetails!.image ==
+                                          null
+                                      ? SvgPicture.asset(
                                           placeholder,
-                                              height: 48.h,
-                                              width: 48.w,
+                                          height: 48.h,
+                                          width: 48.w,
+                                        )
+                                      : CachedNetworkImage(
+                                          imageUrl: controller
+                                              .admireList[index]
+                                              .admireDetails!
+                                              .image!,
+                                    height: 48.h,
+                                    width: 48.w,
+                                          fit: BoxFit.cover,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              SvgPicture.asset(
+                                            placeholder,
+                                                height: 48.h,
+                                                width: 48.w,
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              SvgPicture.asset(
+                                            placeholder,
+                                                height: 48.h,
+                                                width: 48.w,
+                                          ),
                                         ),
-                                        errorWidget: (context, url, error) =>
-                                            SvgPicture.asset(
-                                          placeholder,
-                                              height: 48.h,
-                                              width: 48.w,
-                                        ),
-                                      ),
+                                ),
                               ),
                                SizedBox(
                                 height: 4.h,
