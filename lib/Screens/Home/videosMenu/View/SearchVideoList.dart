@@ -142,6 +142,10 @@ class _SearchVideoListState extends State<SearchVideoList> {
               placeholder: "Search Video...",
               fillcolor: Color(0xfff5f5f5),
             ),
+
+            SizedBox(
+              height: 14.h,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 controller: controller.scrollSearchListController,
@@ -149,7 +153,7 @@ class _SearchVideoListState extends State<SearchVideoList> {
                   () => Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 24.h, left: 0.w, right: 0.w),
+                        margin: EdgeInsets.only(top: 10.h, left: 0.w, right: 0.w),
                         child: 
                         // controller.isLoading.value
                             // ? SizedBox(
@@ -202,11 +206,11 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                                   children: [
                                                     Stack(
                                                       alignment:
-                                                          Alignment.bottomRight,
+                                                          Alignment.center,
                                                       children: [
                                                         SizedBox(
-                                                        height: 80.h,
-                                                        width: 120.w,
+                                                        height: 56.h,
+                                                        width: 100.w,
                                                         child: FittedBox(
                                                           fit: BoxFit.fill,
                                                           child: ClipRRect(
@@ -234,11 +238,7 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                                           ),
                                                         ),
                                                         ),
-                                                            Positioned(
-                                                              top: 20,
-                                                              right: 42,
-                                                              child: SvgPicture.asset(icon_play)
-                                                            ),
+                                                            SvgPicture.asset(icon_play,width: 25,height: 25,),
                                                           
                                                         // Positioned(
                                                         //   bottom: 2,
