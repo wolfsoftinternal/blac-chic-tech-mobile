@@ -2,7 +2,10 @@
 
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/UserProfile.dart';
 import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
@@ -40,8 +43,10 @@ class VideoDetail extends StatefulWidget {
 class _VideoDetailState extends State<VideoDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
   VideoMenuController videoMenuController = Get.put(VideoMenuController());
+  VideoController videoController = Get.put(VideoController());  
   String username = '';
   bool fullScreen = false;
+  SignupModel? myModel;
 
   @override
   void initState() {
@@ -56,6 +61,14 @@ class _VideoDetailState extends State<VideoDetail> {
     checkNet(context).then((value) {
       controller.videoListAPI(context, body, 'detail');
     });
+    init();
+  }
+
+  init() async {
+    var preferences = MySharedPref();
+    myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
+    
   }
 
   @override
@@ -86,8 +99,15 @@ class _VideoDetailState extends State<VideoDetail> {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      Get.back();
-                      Get.back();
+                      if (myModel?.data!.id == controller.details.value.id) {
+                          Get.to(AdmireProfile());
+                        } else {
+                          videoController.userList.clear();
+                          Get.to(UserProfile(
+                            selectedUserId: controller.details.value.id.toString(),
+                            isFrom: true,
+                          ));
+                        }
                     },
                     child: CircularProfileAvatar(
                       '',
@@ -124,7 +144,7 @@ class _VideoDetailState extends State<VideoDetail> {
                   ),
                 ),
                 const Spacer(),
-                widget.userId == controller.details.value.id
+                myModel?.data!.id == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
                           createBottomSheet(context, widget.userId);
@@ -150,7 +170,7 @@ class _VideoDetailState extends State<VideoDetail> {
                         width: 48.w,
                         height: 48.h,
                       ),
-                widget.userId == controller.details.value.id
+                myModel?.data!.id == controller.details.value.id
                     ? Padding(
                         padding:  EdgeInsets.only(right: 15.w),
                         child: GestureDetector(

@@ -1,6 +1,9 @@
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/UserProfile.dart';
 import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -32,7 +35,9 @@ class PostDetail extends StatefulWidget {
 
 class _PostDetailState extends State<PostDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
+  VideoController videoController = Get.put(VideoController());
   String username = '';
+  SignupModel? myModel;
 
   @override
   void initState() {
@@ -47,6 +52,14 @@ class _PostDetailState extends State<PostDetail> {
     checkNet(context).then((value) {
       controller.postListAPI(context, body, 'detail');
     });
+    init();
+  }
+
+  init() async {
+    var preferences = MySharedPref();
+    myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
+    
   }
 
   @override
@@ -70,8 +83,15 @@ class _PostDetailState extends State<PostDetail> {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      Get.back();
-                      Get.back();
+                      if (myModel?.data!.id == controller.details.value.id) {
+                          Get.to(AdmireProfile());
+                        } else {
+                          videoController.userList.clear();
+                          Get.to(UserProfile(
+                            selectedUserId: controller.details.value.id.toString(),
+                            isFrom: true,
+                          ));
+                        }
                     },
                     child: CircularProfileAvatar(
                                 '',
@@ -108,7 +128,7 @@ class _PostDetailState extends State<PostDetail> {
                   ),
                 ),
                 const Spacer(),
-                widget.userId == controller.details.value.id
+                myModel?.data!.id == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
                           createBottomSheet(context, widget.userId);
@@ -134,7 +154,7 @@ class _PostDetailState extends State<PostDetail> {
                         width: 48.w,
                         height: 48.h,
                       ),
-                widget.userId == controller.details.value.id
+                myModel?.data!.id == controller.details.value.id
                     ? Padding(
                         padding: EdgeInsets.only(right: 15.w),
                         child: GestureDetector(

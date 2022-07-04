@@ -875,6 +875,7 @@ class _VideoListBctState extends State<VideoListBct> {
                 Expanded(
                   flex: 1,
                   child: SingleChildScrollView(
+                    controller: controller.scrollListController,
                     child: Column(
                       children: [
                         FilterList(),

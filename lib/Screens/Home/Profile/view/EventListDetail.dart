@@ -1,6 +1,9 @@
 import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/UserProfile.dart';
 import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -33,6 +36,7 @@ class EventListDetail extends StatefulWidget {
 
 class _EventListDetailState extends State<EventListDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
+  VideoController videoController = Get.put(VideoController());  
   SignupModel? myModel;
 
   @override
@@ -78,8 +82,15 @@ class _EventListDetailState extends State<EventListDetail> {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      Get.back();
-                      Get.back();
+                      if (myModel?.data!.id == controller.details.value.id) {
+                          Get.to(AdmireProfile());
+                        } else {
+                          videoController.userList.clear();
+                          Get.to(UserProfile(
+                            selectedUserId: controller.details.value.id.toString(),
+                            isFrom: true,
+                          ));
+                        }
                     },
                     child: CircularProfileAvatar(
                       '',
@@ -116,7 +127,7 @@ class _EventListDetailState extends State<EventListDetail> {
                   ),
                 ),
                 const Spacer(),
-                widget.userId == controller.details.value.id
+                myModel?.data!.id == controller.details.value.id
                     ? GestureDetector(
                         onTap: () {
                           createBottomSheet(context, widget.userId);
@@ -142,7 +153,7 @@ class _EventListDetailState extends State<EventListDetail> {
                         width: 48.w,
                         height: 48.h,
                       ),
-                widget.userId == controller.details.value.id
+                myModel?.data!.id == controller.details.value.id
                     ? Padding(
                         padding:  EdgeInsets.only(right: 15.w),
                         child: GestureDetector(

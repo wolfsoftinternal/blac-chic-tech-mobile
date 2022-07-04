@@ -60,9 +60,9 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
     setState(() {});
 
     if (widget.userDetails.id != controller.details.value.id) {
-      dynamic body = {'user_id': controller.details.value.id.toString()};
+      // dynamic body = {'user_id': controller.details.value.id.toString()};
       checkNet(context).then((value) async {
-        await controller.admireListAPI(context, body);
+        await controller.admireListAPI(context, controller.details.value.id.toString());
       });
 
       for (var item in controller.otherAdmireList) {

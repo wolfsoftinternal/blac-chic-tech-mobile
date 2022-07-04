@@ -36,6 +36,7 @@ class _ReplaceWithState extends State<ReplaceWith> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller.selectedList.clear();
     checkNet(context).then((value){
       controller.replaceUserList(context);
     });
@@ -287,15 +288,15 @@ class _ReplaceWithState extends State<ReplaceWith> {
                       checkNet(context).then((value) async {
                         if (widget.isFrom == 'user') {
                           await controller.replaceAdmireAPI(context, widget.id,
-                              controller.selectedList[0].id, null);
+                              controller.selectedList[0].id);
                           controller.admireListAPI(context, null);
                           Get.back();
                         } else {
-                          dynamic body = {
-                            'user_id': controller.details.value.id.toString()
-                          };
+                          // dynamic body = {
+                          //   'user_id': controller.details.value.id.toString()
+                          // };
                           await controller.replaceAdmireAPI(context, widget.id,
-                              controller.selectedList[0].id, body);
+                              controller.selectedList[0].id);
                           controller.admireListAPI(
                               context, controller.details.value.id.toString());
                           Get.back();

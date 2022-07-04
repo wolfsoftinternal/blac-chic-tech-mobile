@@ -140,7 +140,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                           onSelected: (i) {
                             if (i == 1) {
                               checkNet(context).then((value){
-                                controller.replaceAdmireAPI(context, admireList.admireId, controller.details.value.id, null);
+                                controller.replaceAdmireAPI(context, admireList.admireId, controller.details.value.id);
                               }).then((value) {
                                 setState(() {
                                   // controller.admireListAPI(context, null);

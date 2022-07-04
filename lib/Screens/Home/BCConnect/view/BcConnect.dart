@@ -162,7 +162,7 @@ class _BcConnectState extends State<BcConnect> {
                                   Get.to(UserProfile(
                                           selectedUserId: videoController
                                               .userList[i].id
-                                              .toString()))!
+                                              .toString(), isFrom: false,))!
                                       .then((value) {
                                     checkNet(context).then((value) => {
                                           videoController.PageNumber.value = 0,

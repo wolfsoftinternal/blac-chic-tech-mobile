@@ -76,7 +76,7 @@ class _EventDetailState extends State<EventDetail> {
     getLoc();
     checkNet(context).then((value) async{
      await controller.registeredUserApi(context, controller.eventDetails.value.id.toString());
-     await controller.userProfileAPI(context, false);
+     await controller.userProfileAPI(context, false, false);
      controller.userPageNumber.value = 0;
      videoController.userList.clear();
      await controller.eventInviteUsersList(context, widget.id);
@@ -300,7 +300,7 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
 
                                   Visibility(
-                                    visible: controller.details.value.wallet != null && double.parse(controller.details.value.wallet??"0").toInt() > 0,
+                                    visible: controller.walletDetails.value.wallet != null && double.parse(controller.walletDetails.value.wallet??"0").toInt() > 0,
                                     child: Column(
                                       children: [  Align(
                                         alignment: Alignment.centerLeft,
@@ -323,7 +323,7 @@ class _EventDetailState extends State<EventDetail> {
                                                 SizedBox(height: 10.h,),
 
                                                 setRoboto(
-                                                    SharePreData.strDollar + (controller.details.value.wallet??"0"),
+                                                    SharePreData.strDollar + (controller.walletDetails.value.wallet??"0"),
                                                     14.sp,
                                                     orange_ff881a,
                                                     FontWeight.w600),
@@ -1801,8 +1801,8 @@ class _EventDetailState extends State<EventDetail> {
 
   void setFinalValue() {
     if(controller.isWallet.value){
-      if(double.parse(controller.details.value.wallet??"0").toInt() < controller.total.value){
-        controller.finalTotal.value = controller.total.value - double.parse(controller.details.value.wallet??"0").toInt();
+      if(double.parse(controller.walletDetails.value.wallet??"0").toInt() < controller.total.value){
+        controller.finalTotal.value = controller.total.value - double.parse(controller.walletDetails.value.wallet??"0").toInt();
       }else{
         controller.finalTotal.value = 0;
       }

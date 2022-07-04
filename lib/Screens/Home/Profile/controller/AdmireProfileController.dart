@@ -39,6 +39,7 @@ class AdmireProfileController extends GetxController {
   RxList<AdmireList> admireList = <AdmireList>[].obs;
   RxList<AdmireList> otherAdmireList = <AdmireList>[].obs;
   Rx<UserDetails> details = UserDetails().obs;
+  Rx<UserDetails> walletDetails = UserDetails().obs;
   RxList<PostList> postList = <PostList>[].obs;
   RxList<PostList> postDetailList = <PostList>[].obs;
   RxList<VideoList> videoList = <VideoList>[].obs;
@@ -201,11 +202,16 @@ class AdmireProfileController extends GetxController {
     eventScrollController.jumpTo(eventScrollController.position.maxScrollExtent);
   }
 
-  admireListAPI(BuildContext context, body) async {
+  admireListAPI(BuildContext context, userId) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
+    dynamic body = null;
+    if(userId != null){
+      body = {'user_id': userId.toString()};
+    }
+    
 
     String url = urlBase + urladmireList;
     final apiReq = Request();
@@ -222,15 +228,11 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            admireListAPI(context, body);
+            admireListAPI(context, userId);
           } else if (model.statusCode == 200) {
             AdmireListModel detail = AdmireListModel.fromJson(userModel);
 
-            if (body == null) {
-              admireList.value = detail.data!;
-
-              print('admire list ' + admireList.value.toString());
-              if (myModel!.data!.id != details.value.id) {
+            if (myModel!.data!.id != userId) {
                 var admireValue = '';
                 for (var item in admireList) {
                   if (details.value.id == item.admireId) {
@@ -244,7 +246,9 @@ class AdmireProfileController extends GetxController {
                   admire.value = 'Admire';
                 }
               }
-              
+
+            if (body == null) {
+              admireList.value = detail.data!;
             } else {
               otherAdmireList.value = detail.data!;
             }
@@ -294,7 +298,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  userProfileAPI(BuildContext context, bool goToProfileScreen) async {
+  userProfileAPI(BuildContext context, bool goToProfileScreen, [isFrom]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -321,13 +325,20 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             SignupModel admireListModel = SignupModel.fromJson(userModel);
 
-            details.value = admireListModel.data!;
-
-            if(goToProfileScreen){
-              Get.to(const Profile());
+            if(isFrom == false){
+              walletDetails.value = admireListModel.data!;
+            }else{
+              details.value = admireListModel.data!;
             }
-
-
+            
+            if(goToProfileScreen){
+              if(isFrom != null){
+                Get.back();
+                Get.to(Profile());
+              }else{
+                Get.to(Profile());
+              }
+            }
           }
         });
       } else {
@@ -336,7 +347,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  admireProfileAPI(BuildContext context, id) async {
+  admireProfileAPI(BuildContext context, id, [isFrom]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -366,7 +377,13 @@ class AdmireProfileController extends GetxController {
 
             details.value = admireListModel;
             print(details);
-            Get.to(const Profile());
+            if(isFrom != null){
+              Get.back();
+              Get.to(Profile());
+            }else{          
+              Get.to(Profile());
+            }
+            
           }
         });
       } else {
@@ -649,7 +666,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  replaceAdmireAPI(BuildContext context, id, newId, userID) async {
+  replaceAdmireAPI(BuildContext context, id, newId) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -674,7 +691,7 @@ class AdmireProfileController extends GetxController {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
-            replaceAdmireAPI(context, id, newId, body);
+            replaceAdmireAPI(context, id, newId);
           } else if (model.statusCode == 200) {
             snackBar(context, 'Admire Replaced');
           }

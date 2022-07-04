@@ -64,7 +64,7 @@ class _EventTabState extends State<EventTab> {
                           height: 13.h,
                         ),
                         setHelceticaBold(
-                            'Upcomming Events',
+                            'All Events',
                             14.sp,
                             black_121212,
                             FontWeight.w500,
