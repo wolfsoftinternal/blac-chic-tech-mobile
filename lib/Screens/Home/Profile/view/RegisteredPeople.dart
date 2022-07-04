@@ -38,16 +38,8 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
               height: 60.h,
             ),
             ToolbarWithHeaderCenterTitle("REGISTERED PEOPLE"),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(right: 24.w, top: 40.h),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 10.w),
+            Padding(
+                        padding: EdgeInsets.only(left: 10.w, top: 40.h),
                         child: GridView.builder(
                             primary: false,
                             shrinkWrap: true,
@@ -147,7 +139,6 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                                 )),
                       ),
 
-
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
                         child: SearchBarTag(placeholder: "Search people", onSubmit: (value){
@@ -162,20 +153,38 @@ class _RegisteredPeopleState extends State<RegisteredPeople> {
                       ),
 
                       // 100 Users
-                      Padding(
-                        padding: const EdgeInsets.only(left: 24.0),
-                        child: Text(controller.registerList.value.data!.registeredUsers!.length.toString() + ' Users',
-                            style: TextStyle(
-                                color: grey_aaaaaa,
-                                fontFamily: roboto_regular,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 14.sp),
-                            textAlign: TextAlign.left),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 24.0),
+                            child: Text(controller.registerList.value.data!.registeredUsers!.length.toString() + ' Users',
+                                style: TextStyle(
+                                    color: grey_aaaaaa,
+                                    fontFamily: roboto_regular,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 14.sp),
+                                textAlign: TextAlign.left),
+                          ),
+                        ],
                       ),
 
                       SizedBox(
-                        height: 16.h,
+                        height: 8.h,
                       ),
+
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.only(right: 24.w, top: 8.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      
+
+                      
 
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
