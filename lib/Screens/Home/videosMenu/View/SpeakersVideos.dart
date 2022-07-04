@@ -170,11 +170,11 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                                       .start,
                                               children: [
                                                 Stack(
-
+                                                  alignment: Alignment.center,
                                                   children: [
                                                     SizedBox(
-                                                                height: 80.h,
-                                                                width: 120.w,
+                                                                height: 56.h,
+                                                                width: 100.w,
                                                                 child: FittedBox(
                                                                   fit: BoxFit.fill,
                                                                   child: ClipRRect(
@@ -215,12 +215,9 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                                                   ),
                                                                 ),
                                                               ),
-                                                              Positioned(
-                                                                  top: 20,
-                                                                  right: 42,
-                                                                  child: SvgPicture
-                                                                      .asset(
-                                                                          icon_play)),
+                                                              SvgPicture
+                                                                  .asset(
+                                                                      icon_play,width: 25,height: 25,),
                                                   ],
                                                 ),
                                                 Expanded(

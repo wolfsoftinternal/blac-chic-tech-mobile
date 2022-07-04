@@ -165,11 +165,11 @@ class _MyPlayListState extends State<MyPlayList> {
                                                     children: [
                                                       Stack(
                                                         alignment: Alignment
-                                                            .bottomRight,
+                                                            .center,
                                                         children: [
                                                           SizedBox(
-                                                            height: 80.h,
-                                                            width: 120.w,
+                                                            height: 56.h,
+                                                            width: 100.w,
                                                             child: FittedBox(
                                                               fit: BoxFit.fill,
                                                               child: ClipRRect(
@@ -210,12 +210,11 @@ class _MyPlayListState extends State<MyPlayList> {
                                                               ),
                                                             ),
                                                           ),
-                                                          Positioned(
-                                                              top: 20,
-                                                              right: 40,
-                                                              child: SvgPicture
-                                                                  .asset(
-                                                                      icon_play)),
+                                                          Center(
+                                                            child: SvgPicture
+                                                                .asset(
+                                                                    icon_play,width: 30,height: 30,),
+                                                          ),
                                                           // Positioned(
                                                           //   bottom: 2,
                                                           //   right: 3,
