@@ -191,6 +191,7 @@ class _OtherUserListState extends State<OtherUserList> {
                     // controller.userProfileAPI(context);
                   // }
                   //  else {
+                    setState(() {});
                     controller.admireProfileAPI(
                       context, widget.otherUser.id
                     );

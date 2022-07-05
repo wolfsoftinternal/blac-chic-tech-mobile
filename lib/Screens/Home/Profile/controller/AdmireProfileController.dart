@@ -202,7 +202,44 @@ class AdmireProfileController extends GetxController {
     eventScrollController.jumpTo(eventScrollController.position.maxScrollExtent);
   }
 
+  ownAdmireListAPI(BuildContext context) async {
+    var preferences = MySharedPref();
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+    SignupModel? myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
+    
+
+    String url = urlBase + urladmireList;
+    final apiReq = Request();
+    await apiReq.postAPI(url, null, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            ownAdmireListAPI(context);
+          } else if (model.statusCode == 200) {
+            AdmireListModel detail = AdmireListModel.fromJson(userModel);
+            admireList.value = detail.data!;
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
   admireListAPI(BuildContext context, userId) async {
+    if(admireList.toString() == '[]' || admireList.isEmpty){
+      ownAdmireListAPI(context);
+    }
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     SignupModel? myModel =
@@ -233,19 +270,19 @@ class AdmireProfileController extends GetxController {
             AdmireListModel detail = AdmireListModel.fromJson(userModel);
 
             if (myModel!.data!.id != userId) {
-                var admireValue = '';
-                for (var item in admireList) {
-                  if (details.value.id == item.admireId) {
-                    admireValue = 'Admired';
-                  }
-                }
-
-                if(admireValue == 'Admired'){
-                  admire.value = 'Admired';
-                }else{
-                  admire.value = 'Admire';
+              var admireValue = '';
+              for (var item in admireList) {
+                if (details.value.id == item.admireId) {
+                  admireValue = 'Admired';
                 }
               }
+
+              if(admireValue == 'Admired'){
+                admire.value = 'Admired';
+              }else{
+                admire.value = 'Admire';
+              }
+            }
 
             if (body == null) {
               admireList.value = detail.data!;
