@@ -49,6 +49,7 @@ class _FilterListState extends State<FilterList> {
                       )))
                   : controller.videoList.isNotEmpty
                   ? Column(
+
                 children: [
                   Container(
                     // height:
@@ -79,17 +80,17 @@ class _FilterListState extends State<FilterList> {
                                   width: double.infinity,
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.start,
+                                    MainAxisAlignment.center,
                                     crossAxisAlignment:
                                     CrossAxisAlignment
-                                        .start,
+                                        .center,
                                     children: [
                                       Stack(
                                         alignment: Alignment.center,
                                         children: [
                                           SizedBox(
-                                            height: 56.h,
-                                            width: 100.w,
+                                            height: 66.h,
+                                            width: 110.w,
                                             child: FittedBox(
                                               fit: BoxFit.fill,
                                               child: ClipRRect(
@@ -222,9 +223,9 @@ class _FilterListState extends State<FilterList> {
                                             CrossAxisAlignment
                                                 .start,
                                             children: [
-                                              SizedBox(
-                                                height: 3.h,
-                                              ),
+                                              // SizedBox(
+                                              //   height: 3.h,
+                                              // ),
                                               Text(
                                                 controller
                                                     .videoList[
@@ -235,7 +236,7 @@ class _FilterListState extends State<FilterList> {
                                                 overflow:
                                                 TextOverflow
                                                     .ellipsis,
-                                                maxLines: 2,
+                                                maxLines: 1,
                                                 style: const TextStyle(
                                                     fontFamily:
                                                     helvetica_neu_bold,

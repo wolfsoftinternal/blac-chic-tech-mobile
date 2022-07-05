@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Model/BusinessTypeModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuController.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoDetailTab.dart';
@@ -72,44 +73,45 @@ class _SearchVideoListState extends State<SearchVideoList> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.only(left: 24.w, top: 50.h, right: 24.w),
+        padding: EdgeInsets.only( top: 50.h, right: 24.w),
         child: Column(
           children: [
             Row(
               children: [
-                Container(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      width: 48.r,
-                      height: 48.r,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        // borderRadius: BorderRadius.circular(10.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 6,
-                            blurRadius: 10,
-                            offset: const Offset(
-                                1, 4), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0.r),
-                        child: SvgPicture.asset(
-                          icon_cancel,
-                          width: 30.w,
-                          height: 30.w,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                BackLayout(),
+                // Container(
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       Navigator.pop(context);
+                //     },
+                //     child: Container(
+                //       width: 48.r,
+                //       height: 48.r,
+                //       decoration: BoxDecoration(
+                //         color: Colors.white,
+                //         shape: BoxShape.circle,
+                //         // borderRadius: BorderRadius.circular(10.r),
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.grey.withOpacity(0.1),
+                //             spreadRadius: 6,
+                //             blurRadius: 10,
+                //             offset: const Offset(
+                //                 1, 4), // changes position of shadow
+                //           ),
+                //         ],
+                //       ),
+                //       child: Padding(
+                //         padding: EdgeInsets.all(5.0.r),
+                //         child: SvgPicture.asset(
+                //           icon_cancel,
+                //           width: 30.w,
+                //           height: 30.w,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Spacer(),
                 const Padding(
                   padding: EdgeInsets.only(top: 5),
@@ -131,16 +133,19 @@ class _SearchVideoListState extends State<SearchVideoList> {
             SizedBox(
               height: 24.h,
             ),
-            SearchBarDemo(
-              autoFoucs: true,
-              onChanged: (text) {
-                controller.videoAllList.clear();
-                controller.searchListPageNo.value = 0;
-                search = text;
-                controller.videoListSearchAPI(topicFilter: text);
-              },
-              placeholder: "Search Video...",
-              fillcolor: Color(0xfff5f5f5),
+            Padding(
+              padding: EdgeInsets.only(left: 24.0.w),
+              child: SearchBarDemo(
+                autoFoucs: true,
+                onChanged: (text) {
+                  controller.videoAllList.clear();
+                  controller.searchListPageNo.value = 0;
+                  search = text;
+                  controller.videoListSearchAPI(topicFilter: text);
+                },
+                placeholder: "Search Video...",
+                fillcolor: Color(0xfff5f5f5),
+              ),
             ),
 
             SizedBox(
@@ -153,7 +158,7 @@ class _SearchVideoListState extends State<SearchVideoList> {
                   () => Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 10.h, left: 0.w, right: 0.w),
+                        margin: EdgeInsets.only(top: 10.h, left: 24.w, right: 0.w),
                         child: 
                         // controller.isLoading.value
                             // ? SizedBox(

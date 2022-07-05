@@ -57,14 +57,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white_ffffff,
-      // body: Stack(
-      //   alignment: Alignment.bottomCenter,
-      //   children: [
-        body:  Column(
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Column(
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                child:   Column(
+                  child: Column(
                     children: [
                       SizedBox(
                         height: 60.h,
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                         )),
                       ),
                       SizedBox(
-                        height: 10.h,
+                        height: 30.h,
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -109,14 +109,14 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height * 0.085.h,
+                                  // height: 66,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     color: index % 2 != 0
                                         ? black_121212
                                         : white_ffffff,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(4.0.r)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(4.0)),
                                   ),
                                   child: Row(
                                     mainAxisAlignment:
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Padding(
                                         padding:
-                                             EdgeInsets.only(left: 16.0.w),
+                                             EdgeInsets.only(left: 16.0.w, top: 16.0.h, bottom: 16.0.h),
                                         child: Text(
                                           values[index],
                                           style: TextStyle(
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                        Padding(
-                                        padding: EdgeInsets.only(right: 12.0.w),
+                                        padding: EdgeInsets.only(right: 12.0),
                                         child: Transform.rotate(
                                           angle: 90 * math.pi / 375,
                                           child: Icon(
@@ -154,18 +154,20 @@ class _HomePageState extends State<HomePage> {
                               );
                             })),
                       ),
+                      SizedBox(
+                        height: 100.h,
+                      ),
                     ],
                   ),
                 ),
               ),
-              BottomNavigation(
-                selectedIndex: 0,
-              ),
             ],
           ),
-          
-      //   ],
-      // ),
+          BottomNavigation(
+            selectedIndex: 0,
+          ),
+        ],
+      ),
     );
   }
 }

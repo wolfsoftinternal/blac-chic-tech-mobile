@@ -112,6 +112,7 @@ class _BcConnectState extends State<BcConnect> {
                               fontSize: 16.sp),
                           textAlign: TextAlign.left),
                     ),
+            videoController.userList.isEmpty ? Container(height: MediaQuery.of(context).size.height *0.50, width: MediaQuery.of(context).size.width ,child: Center(child: CircularProgressIndicator(strokeWidth: 2, color: black,))) :                    
             Expanded(
               flex: 1,
               child: SingleChildScrollView(

@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Model/SpeakerVideoModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/FilterTopicList.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/FindSpeaker.dart';
@@ -99,45 +100,46 @@ class _VideoListBctState extends State<VideoListBct> {
         Container(
           color: light_grey_f2f2f2,
           child: Padding(
-            padding: EdgeInsets.only(left: 24.w, top: 33.h, right: 24.w),
+            padding: EdgeInsets.only(top: 33.h, right: 24.w),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 30),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        width: 48.r,
-                        height: 48.r,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          // borderRadius: BorderRadius.circular(10.r),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 6,
-                              blurRadius: 10,
-                              offset: const Offset(
-                                  1, 4), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(12.0.r),
-                          child: SvgPicture.asset(
-                            icon_back_black_arrow,
-                            width: 24.w,
-                            height: 24.w,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  BackLayout(),
+                  // Container(
+                  //   child: GestureDetector(
+                  //     onTap: () {
+                  //       Navigator.pop(context);
+                  //     },
+                  //     child: Container(
+                  //       width: 48.r,
+                  //       height: 48.r,
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         shape: BoxShape.circle,
+                  //         // borderRadius: BorderRadius.circular(10.r),
+                  //         boxShadow: [
+                  //           BoxShadow(
+                  //             color: Colors.grey.withOpacity(0.1),
+                  //             spreadRadius: 6,
+                  //             blurRadius: 10,
+                  //             offset: const Offset(
+                  //                 1, 4), // changes position of shadow
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       child: Padding(
+                  //         padding: EdgeInsets.all(12.0.r),
+                  //         child: SvgPicture.asset(
+                  //           icon_back_black_arrow,
+                  //           width: 24.w,
+                  //           height: 24.w,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   Center(
                       child: Image.asset(
                     bct_logo,
