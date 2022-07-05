@@ -57,28 +57,28 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white_ffffff,
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Column(
+      // body: Stack(
+      //   alignment: Alignment.bottomCenter,
+      //   children: [
+        body:  Column(
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
+                child:   Column(
                     children: [
-                      const SizedBox(
-                        height: 60,
+                      SizedBox(
+                        height: 60.h,
                       ),
                       Container(
                         child: Center(
                             child: SvgPicture.asset(
                           logo,
-                          height: 58,
-                          width: 58,
+                          height: 58.h,
+                          width: 58.w,
                         )),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: 10.h,
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -109,14 +109,14 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 },
                                 child: Container(
-                                  height: 66,
+                                  height: MediaQuery.of(context).size.height * 0.085.h,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     color: index % 2 != 0
                                         ? black_121212
                                         : white_ffffff,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(4.0)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(4.0.r)),
                                   ),
                                   child: Row(
                                     mainAxisAlignment:
@@ -124,14 +124,14 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Padding(
                                         padding:
-                                             EdgeInsets.only(left: 16.0),
+                                             EdgeInsets.only(left: 16.0.w),
                                         child: Text(
                                           values[index],
                                           style: TextStyle(
                                             color: index % 2 != 0
                                                 ? white_ffffff
                                                 : black_121212,
-                                            fontSize: 28,
+                                            fontSize: 28.sp,
                                             letterSpacing: -1.12,
                                             fontFamily: helvetica_neu_bold,
                                             fontWeight: FontWeight.w500,
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                        Padding(
-                                        padding: EdgeInsets.only(right: 12.0),
+                                        padding: EdgeInsets.only(right: 12.0.w),
                                         child: Transform.rotate(
                                           angle: 90 * math.pi / 375,
                                           child: Icon(
@@ -154,20 +154,18 @@ class _HomePageState extends State<HomePage> {
                               );
                             })),
                       ),
-                      const SizedBox(
-                        height: 110,
-                      ),
                     ],
                   ),
                 ),
               ),
+              BottomNavigation(
+                selectedIndex: 0,
+              ),
             ],
           ),
-          BottomNavigation(
-            selectedIndex: 0,
-          ),
-        ],
-      ),
+          
+      //   ],
+      // ),
     );
   }
 }
