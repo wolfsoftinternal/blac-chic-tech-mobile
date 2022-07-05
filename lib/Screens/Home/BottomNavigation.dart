@@ -52,7 +52,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 canvasColor: const Color.fromARGB(255, 27, 25, 35),
               ), //
               child: Padding(
-                padding: const EdgeInsets.only(left: 17.0, right: 17.0, bottom: 30),
+                padding: EdgeInsets.only(left: 17.0.w, right: 17.0.w, bottom: 20.0.h),
                 child: Container(
                   height: 70,
                   decoration: BoxDecoration(
