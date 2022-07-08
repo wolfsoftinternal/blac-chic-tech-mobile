@@ -2,6 +2,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfo
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/SplashScreen.dart';
 import 'package:blackchecktech/UIScreen/AdmireGrid.dart';
+import 'package:blackchecktech/UIScreen/SpinnerDemo.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
 
+      //    home: SpinnerDemo(),
           home: SplashScreen(),
 
           //  home: AdmireGrid(),

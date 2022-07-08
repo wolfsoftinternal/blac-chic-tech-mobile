@@ -15,6 +15,7 @@ import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:blackchecktech/Widget/EditTextDecoration.dart';
 import 'package:blackchecktech/Widget/SpinnerDecorationBorder.dart';
 import 'package:blackchecktech/Widget/search_bar_demo.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -92,6 +93,7 @@ class _VideoListBctState extends State<VideoListBct> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,6 +160,7 @@ class _VideoListBctState extends State<VideoListBct> {
         Expanded(
           flex: 1,
           child: NestedScrollView(
+
             headerSliverBuilder: (context, value) {
               return [
                 SliverToBoxAdapter(
@@ -200,6 +203,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                     fontStyle: FontStyle.normal,
                                     fontSize: 14.sp),
                                 textAlign: TextAlign.left),
+
 
                             SizedBox(
                               height: 30.h,
@@ -877,7 +881,7 @@ class _VideoListBctState extends State<VideoListBct> {
                 Expanded(
                   flex: 1,
                   child: SingleChildScrollView(
-                    controller: controller.scrollListController,
+                     // controller: controller.scrollListController,
                     child: Column(
                       children: [
                         FilterList(),
