@@ -185,7 +185,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                                   padding:
                                                   EdgeInsets
                                                       .only(
-                                                      left: 12.w),
+                                                      left: 12.w, right: 8.w),
                                                   child: setHelveticaMedium(
                                                       controller
                                                           .details
@@ -201,12 +201,12 @@ class _ProfileTabState extends State<ProfileTab> {
                                                               .pastJobs![
                                                           index]
                                                               .companyName!,
-                                                      16.sp,
+                                                      15.sp,
                                                       grey_aaaaaa,
                                                       FontWeight.w500,
                                                       FontStyle
                                                           .normal,
-                                                      -0.28),
+                                                      -0.28, 2),
                                                 )
                                                     : Container(),
                                               ],

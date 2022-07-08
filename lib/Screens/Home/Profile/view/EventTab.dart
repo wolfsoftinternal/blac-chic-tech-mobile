@@ -159,7 +159,7 @@ class _EventTabState extends State<EventTab> {
                                                 end: Alignment.bottomCenter,
                                                 colors: [
                                                   Color(0x00121212),
-                                                  Color(0xff121212)
+                                                  Color(0xff121212).withOpacity(0.9)
                                                 ])),
                                       ),
                                       Row(

@@ -12,6 +12,7 @@ import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -172,45 +173,52 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               height: 48.h,
                               decoration: EditTextDecoration,
                               child: DropdownButtonHideUnderline(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, right: 16.w),
-                                  child: DropdownButton(
-                                      //  validator: (value) => value == null ? "Select a country" : null,
-                                      dropdownColor: Colors.white,
-                                      value: strCountryName,
-                                      hint: Text("Country",
-                                          style: TextStyle(
-                                              color: grey_aaaaaa,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily:
-                                                  helveticaNeueNeue_medium,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: 14.sp),
-                                          textAlign: TextAlign.left),
-                                      icon: SvgPicture.asset(
-                                        icon_down_arrow_spinner,
-                                        width: 12.r,
-                                        height: 12.r,
-                                      ),
-                                      onChanged: (String? value) {
-                                        setState(() {
-                                          controller.strCountryId.value =
-                                              value!;
-                                          strCountryName = value;
-                                          strStateName = null;
-                                          strCityName = null;
-                                          controller.stateListApi(value);
-                                        });
-                                      },
-                                      items: controller.countrylist
-                                          .map((CountryDatum value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value.id.toString(),
-                                          child: Text(value.name.toString()),
-                                        );
-                                      }).toList()),
-                                ),
+                                child: DropdownButton2(
+                                  isExpanded: true,
+                                  value: strCountryName,
+                                  hint: Text("Country",
+                                      style: TextStyle(
+                                          color: grey_aaaaaa,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily:
+                                              helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                                  icon: SvgPicture.asset(
+                                    icon_down_arrow_spinner,
+                                    width: 12.r,
+                                    height: 12.r,
+                                  ),
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      controller.strCountryId.value =
+                                          value!;
+                                      strCountryName = value;
+                                      strStateName = null;
+                                      strCityName = null;
+                                      controller.stateListApi(value);
+                                    });
+                                  },
+                                  customItemsHeight: 4,
+                                  iconEnabledColor: black_121212,
+                                  iconDisabledColor: Colors.grey,
+                                  buttonHeight: 60,
+                                  buttonWidth: double.infinity,
+                                  buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                  buttonDecoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: light_grey_f2f2f2,
+                                  ),
+                                  itemHeight: 35,
+                                  itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                  items: controller.countrylist
+                                      .map((CountryDatum value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value.id.toString(),
+                                      child: Text(value.name.toString()),
+                                    );
+                                  }).toList()),
                               ),
                             ),
                           ),
@@ -223,44 +231,52 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               height: 48.h,
                               decoration: EditTextDecoration,
                               child: DropdownButtonHideUnderline(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, right: 16.w),
-                                  child: DropdownButton(
-                                    dropdownColor: Colors.white,
-                                    value: strStateName,
-                                    hint: Text("State",
-                                        style: TextStyle(
-                                            color: grey_aaaaaa,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 14.sp),
-                                        textAlign: TextAlign.left),
-                                    icon: SvgPicture.asset(
-                                      icon_down_arrow_spinner,
-                                      width: 12.r,
-                                      height: 12.r,
-                                    ),
-                                    onChanged: (String? value) {
-                                      setState(() {
-                                        strStateName = value;
-                                        controller.strStateId.value = value!;
-                                        strCityName = null;
-                                        controller.cityListApi(
-                                            controller.strCountryId.value,
-                                            controller.strStateId.value);
-                                      });
-                                    },
-                                    items: controller.stateList
-                                        .map((StateDatum value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value.id.toString(),
-                                        child: Text(value.name.toString()),
-                                      );
-                                    }).toList(),
+                                child: DropdownButton2(
+                                  value: strStateName,
+                                  hint: Text("State",
+                                      style: TextStyle(
+                                          color: grey_aaaaaa,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily:
+                                              helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                                  icon: SvgPicture.asset(
+                                    icon_down_arrow_spinner,
+                                    width: 12.r,
+                                    height: 12.r,
                                   ),
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      strStateName = value;
+                                      controller.strStateId.value = value!;
+                                      strCityName = null;
+                                      controller.cityListApi(
+                                          controller.strCountryId.value,
+                                          controller.strStateId.value);
+                                    });
+                                  },
+                                  isExpanded: true,
+                                  customItemsHeight: 4,
+                                  iconEnabledColor: black_121212,
+                                  iconDisabledColor: Colors.grey,
+                                  buttonHeight: 60,
+                                  buttonWidth: double.infinity,
+                                  buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                  buttonDecoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: light_grey_f2f2f2,
+                                  ),
+                                  itemHeight: 35,
+                                  itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                  items: controller.stateList
+                                      .map((StateDatum value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value.id.toString(),
+                                      child: Text(value.name.toString()),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
                             ),
@@ -281,40 +297,48 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               width: MediaQuery.of(context).size.width,
                               decoration: EditTextDecoration,
                               child: DropdownButtonHideUnderline(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, right: 16.w),
-                                  child: DropdownButton(
-                                    dropdownColor: Colors.white,
-                                    value: strCityName,
-                                    hint: Text("City",
-                                        style: TextStyle(
-                                            color: grey_aaaaaa,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 14.sp),
-                                        textAlign: TextAlign.left),
-                                    icon: SvgPicture.asset(
-                                      icon_down_arrow_spinner,
-                                      width: 12.r,
-                                      height: 12.r,
-                                    ),
-                                    onChanged: (String? value) {
-                                      setState(() {
-                                        strCityName = value;
-                                        controller.strCityId.value = value!;
-                                      });
-                                    },
-                                    items: controller.cityList
-                                        .map((CityDatum value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value.id.toString(),
-                                        child: Text(value.name.toString()),
-                                      );
-                                    }).toList(),
+                                child: DropdownButton2(
+                                  value: strCityName,
+                                  hint: Text("City",
+                                      style: TextStyle(
+                                          color: grey_aaaaaa,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily:
+                                              helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                                  icon: SvgPicture.asset(
+                                    icon_down_arrow_spinner,
+                                    width: 12.r,
+                                    height: 12.r,
                                   ),
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      strCityName = value;
+                                      controller.strCityId.value = value!;
+                                    });
+                                  },
+                                  isExpanded: true,
+                                  customItemsHeight: 4,
+                                  iconEnabledColor: black_121212,
+                                  iconDisabledColor: Colors.grey,
+                                  buttonHeight: 60,
+                                  buttonWidth: double.infinity,
+                                  buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                  buttonDecoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: light_grey_f2f2f2,
+                                  ),
+                                  itemHeight: 35,
+                                  itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                  items: controller.cityList
+                                      .map((CityDatum value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value.id.toString(),
+                                      child: Text(value.name.toString()),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
                             ),

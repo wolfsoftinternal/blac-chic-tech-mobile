@@ -54,7 +54,7 @@ class PayoutList {
 
   int? id;
   int? userId;
-  String? bank_id;
+  dynamic bank_id;
   String? amount;
   String? commission;
   int? amount_to_pay;

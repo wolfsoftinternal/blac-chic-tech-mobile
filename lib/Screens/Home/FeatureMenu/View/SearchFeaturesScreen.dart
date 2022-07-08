@@ -80,7 +80,7 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
       body: Stack(
         children: [
           ImageFiltered(
-            imageFilter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+            imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
             child: CachedNetworkImage(
                 imageUrl: featuredController.featuredList[0].image??"",
                 fit: BoxFit.cover,

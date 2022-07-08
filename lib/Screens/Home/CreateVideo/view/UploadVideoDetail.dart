@@ -13,6 +13,7 @@ import 'package:blackchecktech/Widget/SpinnerDecorationBorder.dart';
 import 'package:blackchecktech/Widget/VideoSpeakerList.dart';
 import 'package:blackchecktech/Widget/search_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -147,36 +148,42 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   width: double.infinity,
                                   decoration: SpinnerDecorationBorder,
                                   child: DropdownButtonHideUnderline(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 10,
-                                        right: 10,
-                                      ),
-                                      child: DropdownButton(
-                                          dropdownColor: Colors.white,
-                                          value: controller.topicName.value,
-                                          hint: Text("Select Topic",
-                                              style: TextStyle(
-                                                  color: grey_aaaaaa,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily:
-                                                      helveticaNeueNeue_medium,
-                                                  fontStyle: FontStyle.normal,
-                                                  fontSize: 14.sp),
-                                              textAlign: TextAlign.left),
-                                          icon: SvgPicture.asset(
-                                            icon_down_arrow_spinner,
-                                            width: 12.w,
-                                            height: 12.h,
-                                          ),
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              controller.topicName.value =
-                                                  newValue!;
-                                            });
-                                          },
-                                          items: controller.dropDownTopicItems),
-                                    ),
+                                    child: DropdownButton2(
+                                        value: controller.topicName.value,
+                                        hint: Text("Select Topic",
+                                            style: TextStyle(
+                                                color: grey_aaaaaa,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 14.sp),
+                                            textAlign: TextAlign.left),
+                                        icon: SvgPicture.asset(
+                                          icon_down_arrow_spinner,
+                                          width: 12.w,
+                                          height: 12.h,
+                                        ),
+                                        isExpanded: true,
+                                        customItemsHeight: 4,
+                                        iconEnabledColor: black_121212,
+                                        iconDisabledColor: Colors.grey,
+                                        buttonHeight: 60,
+                                        buttonWidth: double.infinity,
+                                        buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                        buttonDecoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(4),
+                                          color: white,
+                                        ),
+                                        itemHeight: 42,
+                                        itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            controller.topicName.value =
+                                                newValue!;
+                                          });
+                                        },
+                                        items: controller.dropDownTopicItems),
                                   ),
                                 ),
 
@@ -203,36 +210,43 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   width: double.infinity,
                                   decoration: SpinnerDecorationBorder,
                                   child: DropdownButtonHideUnderline(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      child: DropdownButton(
-                                          //  validator: (value) => value == null ? "Select a country" : null,
-                                          dropdownColor: Colors.white,
-                                          value: controller.languageName.value,
-                                          hint: Text("Select Language",
-                                              style: TextStyle(
-                                                  color: grey_aaaaaa,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily:
-                                                      helveticaNeueNeue_medium,
-                                                  fontStyle: FontStyle.normal,
-                                                  fontSize: 14.sp),
-                                              textAlign: TextAlign.left),
-                                          icon: SvgPicture.asset(
-                                            icon_down_arrow_spinner,
-                                            width: 12.w,
-                                            height: 12.h,
-                                          ),
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              controller.languageName.value =
-                                                  newValue!;
-                                            });
-                                          },
-                                          items:
-                                              controller.dropDownLanguageItems),
-                                    ),
+                                    child: DropdownButton2(
+                                        //  validator: (value) => value == null ? "Select a country" : null,
+                                        value: controller.languageName.value,
+                                        hint: Text("Select Language",
+                                            style: TextStyle(
+                                                color: grey_aaaaaa,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 14.sp),
+                                            textAlign: TextAlign.left),
+                                        icon: SvgPicture.asset(
+                                          icon_down_arrow_spinner,
+                                          width: 12.w,
+                                          height: 12.h,
+                                        ),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            controller.languageName.value =
+                                                newValue!;
+                                          });
+                                        },
+                                        isExpanded: true,
+                                        customItemsHeight: 4,
+                                        iconEnabledColor: black_121212,
+                                        iconDisabledColor: Colors.grey,
+                                        buttonHeight: 60,
+                                        buttonWidth: double.infinity,
+                                        buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                        buttonDecoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(4),
+                                          color: white,
+                                        ),
+                                        itemHeight: 42,
+                                        itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                        items: controller.dropDownLanguageItems),
                                   ),
                                 ),
 

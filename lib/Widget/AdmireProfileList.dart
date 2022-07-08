@@ -197,7 +197,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                       children: [
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.80,
-                          height: MediaQuery.of(context).size.width * 0.10,
+                          height: MediaQuery.of(context).size.width * 0.13,
                           child: FittedBox(
                             child: setHelceticaBold(
                                 // widget.admireList.admireDetails!.fullName != null

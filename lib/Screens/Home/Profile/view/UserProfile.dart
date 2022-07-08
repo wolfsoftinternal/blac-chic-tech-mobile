@@ -638,8 +638,8 @@ class _UserProfileState extends State<UserProfile> {
                                     const Spacer(),
                                     GestureDetector(
                                       onTap: () {
-                                        displayBottomSheet(
-                                            context, videoController.userList[index].id);
+                                        displayBottomSheet(context,
+                                            videoController.userList[index].id);
                                       },
                                       child: Container(
                                         height: 48,
@@ -760,21 +760,23 @@ class _UserProfileState extends State<UserProfile> {
                             ],
                           ),
                         ),
-                  controller.otherAdmireList.isEmpty
-                      ? Container()
-                      : Padding(
-                          padding: EdgeInsets.only(left: 24.w, right: 24.w),
-                          child: Row(
-                            children: [
-                              setHelceticaBold(
-                                  '${videoController.userList[index].firstName.toString().capitalizeFirst} Admires',
-                                  14.sp,
-                                  black_121212,
-                                  FontWeight.w500,
-                                  FontStyle.normal,
-                                  -0.28),
-                              const Spacer(),
-                              GestureDetector(
+                  Padding(
+                    padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        setHelceticaBold(
+                            '${videoController.userList[index].firstName.toString().capitalizeFirst} Admires',
+                            14.sp,
+                            black_121212,
+                            FontWeight.w500,
+                            FontStyle.normal,
+                            -0.28),
+                        const Spacer(),
+                        controller.otherAdmireList.isEmpty
+                            ? Container()
+                            : GestureDetector(
                                 onTap: () {
                                   Get.to(SeeAllAdmires(type: 'other'));
                                 },
@@ -786,19 +788,38 @@ class _UserProfileState extends State<UserProfile> {
                                     FontStyle.normal,
                                     -0.24),
                               ),
-                              SizedBox(
+                        controller.otherAdmireList.isEmpty
+                            ? Container()
+                            : SizedBox(
                                 width: 5.w,
                               ),
-                              const Icon(
+                        controller.otherAdmireList.isEmpty
+                            ? Container()
+                            : const Icon(
                                 Icons.arrow_forward,
                                 color: grey_aaaaaa,
                                 size: 12,
                               )
+                      ],
+                    ),
+                  ),
+                  controller.otherAdmireList.isEmpty
+                      ? Container(
+                          height: MediaQuery.of(context).size.height * 0.13,
+                          width: double.infinity,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              setHelveticaBoldCenter(
+                                  'No Admires',
+                                  16.sp,
+                                  black,
+                                  FontWeight.w300,
+                                  FontStyle.normal,
+                                  TextAlign.center)
                             ],
                           ),
-                        ),
-                  controller.otherAdmireList.isEmpty
-                      ? Container()
+                        )
                       : Padding(
                           padding: EdgeInsets.only(top: 16.h),
                           child: SizedBox(

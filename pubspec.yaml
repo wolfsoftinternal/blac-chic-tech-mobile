@@ -86,6 +86,7 @@ dependencies:
   social_share: ^2.2.1
   flutter_social_content_share: ^1.0.2
   dropdown_button2: ^1.6.3
+  is_first_run: ^1.0.0
 
   flutter_draggable_gridview:
 

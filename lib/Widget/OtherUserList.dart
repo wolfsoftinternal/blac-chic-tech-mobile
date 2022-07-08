@@ -35,33 +35,33 @@ class _OtherUserListState extends State<OtherUserList> {
         widget.otherUser.image == null
             ? SvgPicture.asset(
                 placeholder,
-                height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+                height: MediaQuery.of(context).size.height * .83,
                 width: double.infinity,
                 fit: BoxFit.cover,
               )
             : CachedNetworkImage(
                 imageUrl: widget.otherUser.image!,
                 // widget.admireList.admireDetails!.image!,
-                height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+                height: MediaQuery.of(context).size.height * .83,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     SvgPicture.asset(
                   placeholder,
-                  height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+                  height: MediaQuery.of(context).size.height * .83,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
                 errorWidget: (context, url, error) => SvgPicture.asset(
                   placeholder,
-                  height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+                  height: MediaQuery.of(context).size.height * .83,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
         Container(
           color: Colors.black.withOpacity(0.3),
-          height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+          height: MediaQuery.of(context).size.height * .83,
         ),
         
         Padding(
@@ -97,7 +97,7 @@ class _OtherUserListState extends State<OtherUserList> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.80,
-                    height: MediaQuery.of(context).size.width * 0.10,
+                    height: MediaQuery.of(context).size.width * 0.13,
                     child: FittedBox(
                       child: setHelceticaBold(
                           widget.otherUser.firstName != null
@@ -135,7 +135,7 @@ class _OtherUserListState extends State<OtherUserList> {
                         fontSize: 16.sp,
                         fontFamily: helveticaNeueNeue_medium,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white70,
+                        color: Colors.white60,
                         fontStyle: FontStyle.normal,
                         letterSpacing: 6.4,
                       ),

@@ -3,6 +3,7 @@ import 'package:blackchecktech/Screens/Home/Event/controller/EventDetailControll
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -164,32 +165,32 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
 
                         checkNet(context).then((value) {
                           eventDetailController.pageNumber.value = 0;
-                            eventDetailController.pageNumber =
-                                eventDetailController.pageNumber + 1;
-                            String type = '';
-                    if(strType != null){
-                      if(strType == 'Free'){
-                        type = 'free';
-                      }else if(strType == 'Ticket'){
-                        type = 'ticket_price';
-                      }else{
-                        type = 'invite_only';
-                      }
-                    }
-                      
-                        eventDetailController.pageNumber.value = 0;
-                        eventDetailController.pageNumber =
-                            eventDetailController.pageNumber + 1;
-                        dynamic body = {
-                          'page': eventDetailController.pageNumber.toString(),
-                          'event_type': 'upcoming',
-                          'name':
-                              eventDetailController.searchController.value.text,
-                          'city': eventDetailController.strCityId.value,
-                          'date': strDate.toString(),
-                          'type': type.toString()
-                        };
-                        eventDetailController.allEventListApi(body);
+                          eventDetailController.pageNumber =
+                              eventDetailController.pageNumber + 1;
+                          String type = '';
+                          if (strType != null) {
+                            if (strType == 'Free') {
+                              type = 'free';
+                            } else if (strType == 'Ticket') {
+                              type = 'ticket_price';
+                            } else {
+                              type = 'invite_only';
+                            }
+                          }
+
+                          eventDetailController.pageNumber.value = 0;
+                          eventDetailController.pageNumber =
+                              eventDetailController.pageNumber + 1;
+                          dynamic body = {
+                            'page': eventDetailController.pageNumber.toString(),
+                            'event_type': 'upcoming',
+                            'name': eventDetailController
+                                .searchController.value.text,
+                            'city': eventDetailController.strCityId.value,
+                            'date': strDate.toString(),
+                            'type': type.toString()
+                          };
+                          eventDetailController.allEventListApi(body);
                         });
                       },
                       onFieldSubmitted: (String value) {
@@ -291,10 +292,9 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                 dynamic body = {
                                   'page': eventDetailController.pageNumber
                                       .toString(),
-                                      'event_type': 'upcoming',
+                                  'event_type': 'upcoming',
                                 };
-                                eventDetailController.initScrolling(
-                                    context);
+                                eventDetailController.initScrolling(context);
                                 eventDetailController.allEventListApi(body);
                               });
                             } else {
@@ -305,10 +305,9 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                     eventDetailController.pageNumber.toString(),
                                 'name': eventDetailController
                                     .searchController.value.text,
-                                    'event_type': 'upcoming',
+                                'event_type': 'upcoming',
                               };
-                              eventDetailController.initScrolling(
-                                  context);
+                              eventDetailController.initScrolling(context);
                               checkNet(context).then((value) {
                                 eventDetailController.allEventListApi(body);
                               });
@@ -341,33 +340,34 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                         children: [
                           Container(
                             height: 36.h,
-                            padding: EdgeInsets.only(right: 8.w, left: 35.w),
-                            margin: EdgeInsets.only(left: 0.w, right: 3.5.w),
                             decoration: BoxDecoration(
                               color: grey_f5f5f5,
                               borderRadius: BorderRadius.circular(4.r),
                               // border: Border.all(color: Colors.black,width: 1)
                             ),
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
+                              child: DropdownButton2<String>(
+                                buttonPadding: EdgeInsets.only(left: 36.5.w),
                                 hint: Text("City",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontFamily: helveticaNeueNeue_medium,
-                                        fontSize: 12.0.sp)),
+                                        fontSize: 14.0.sp)),
                                 value: strCityName,
                                 isExpanded: true,
-                                icon: SvgPicture.asset(
-                                  icon_down_arrow_spinner,
-                                  color: grey_aaaaaa,
-                                  height: 14.h,
-                                  width: 14.w,
+                                icon: Padding(
+                                  padding: EdgeInsets.only(right: 8.w),
+                                  child: SvgPicture.asset(
+                                    icon_down_arrow_spinner,
+                                    color: grey_aaaaaa,
+                                    height: 15.h,
+                                    width: 15.w,
+                                  ),
                                 ),
                                 iconSize: 20.sp,
-                                elevation: 16,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 12.sp,
+                                    fontSize: 14.sp,
                                     fontFamily: helveticaNeueNeue_medium),
                                 // underline: Container(
                                 //   height: 2,
@@ -380,18 +380,30 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                         newValue;
                                   });
                                 },
+                                customItemsHeight: 4,
+                                iconEnabledColor: black_121212,
+                                iconDisabledColor: Colors.grey,
+                                buttonHeight: 60,
+                                buttonWidth: double.infinity,
+                                buttonDecoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: light_grey_f2f2f2,
+                                ),
+                                itemHeight: 35,
+                                itemPadding:
+                                    const EdgeInsets.symmetric(horizontal: 15.0),
                                 items: eventDetailController.cityList
                                     .map((CityDatum value) {
                                   return DropdownMenuItem<String>(
                                     value: value.id.toString(),
-                                    child: Text(value.name.toString()),
+                                    child: Text(value.name.toString(), style: TextStyle(fontSize: 14.sp),),
                                   );
                                 }).toList(),
                               ),
                             ),
                           ),
                           Container(
-                              margin: EdgeInsets.only(top:12, left: 16.w),
+                              margin: EdgeInsets.only(top: 12, left: 16.w),
                               child: SvgPicture.asset(
                                 icon_location,
                                 height: 12.h,
@@ -403,8 +415,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                     Expanded(
                       flex: 1,
                       child: Container(
-                        height: 36.h,
-                          padding: EdgeInsets.only(right: 8.w,left: 16.w),
+                          height: 36.h,
+                          padding: EdgeInsets.only(right: 8.w, left: 16.w),
                           margin: EdgeInsets.only(left: 3.5.w, right: 0.w),
                           decoration: BoxDecoration(
                             color: grey_f5f5f5,
@@ -439,7 +451,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                           .textTheme
                                           .caption
                                           ?.copyWith(
-                                            fontSize: 12.sp,
+                                            fontSize: 14.sp,
                                             fontFamily:
                                                 helveticaNeueNeue_medium,
                                             color: Colors.black,
@@ -450,7 +462,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontFamily: helveticaNeueNeue_medium,
-                                        fontSize: 12.sp),
+                                        fontSize: 14.sp),
                                     onTap: () {
                                       selectDate();
                                     }),
@@ -473,33 +485,33 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                   children: [
                     Container(
                       height: 36.h,
-                      padding: EdgeInsets.only(right: 8.w, left: 36.w),
                       decoration: BoxDecoration(
                         color: grey_f5f5f5,
                         borderRadius: BorderRadius.circular(4.r),
                         // border: Border.all(color: Colors.black,width: 1)
                       ),
                       child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
+                        child: DropdownButton2<String>(
+                          buttonPadding: const EdgeInsets.only(left: 36.0),
                           hint: Text("Type of event",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontFamily: helveticaNeueNeue_medium,
-                                  fontSize: 12.sp)),
+                                  fontSize: 14.sp)),
 
                           value: strType,
-                          isExpanded: true,
-                          icon: SvgPicture.asset(
-                            icon_down_arrow_spinner,
-                            color: grey_aaaaaa,
-                            height: 15.h,
-                            width: 15.w,
+                          icon: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: SvgPicture.asset(
+                              icon_down_arrow_spinner,
+                              color: grey_aaaaaa,
+                              height: 15.h,
+                              width: 15.w,
+                            ),
                           ),
-                          iconSize: 24,
-                          elevation: 16,
                           style: TextStyle(
                               color: Colors.black,
-                              fontSize: 12.sp,
+                              fontSize: 14.sp,
                               fontFamily: helveticaNeueNeue_medium),
                           // underline: Container(
                           //   height: 2,
@@ -510,11 +522,30 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                               strType = newValue!;
                             });
                           },
+                          isExpanded: true,
+                          customItemsHeight: 4,
+                          iconEnabledColor: black_121212,
+                          iconDisabledColor: Colors.grey,
+                          buttonHeight: 60,
+                          buttonWidth: double.infinity,
+                          buttonDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: light_grey_f2f2f2,
+                          ),
+                          itemHeight: 35,
+                          itemPadding:
+                              const EdgeInsets.symmetric(horizontal: 8.0),
                           items: <String>['Ticket', 'Invite', 'Free']
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Padding(
+                                padding: EdgeInsets.zero,
+                                child: Text(
+                                  value,
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                              ),
                             );
                           }).toList(),
                         ),
@@ -533,31 +564,29 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                   margin: EdgeInsets.only(top: 15.h),
                   child: BlackButton("Apply Filter", Colors.white, () {
                     String type = '';
-                    if(strType != null){
-                      if(strType == 'Free'){
+                    if (strType != null) {
+                      if (strType == 'Free') {
                         type = 'free';
-                      }else if(strType == 'Ticket'){
+                      } else if (strType == 'Ticket') {
                         type = 'ticket_price';
-                      }else{
+                      } else {
                         type = 'invite_only';
                       }
                     }
                     checkNet(context).then((value) {
-                      
-                        eventDetailController.pageNumber.value = 0;
-                        eventDetailController.pageNumber =
-                            eventDetailController.pageNumber + 1;
-                        dynamic body = {
-                          'page': eventDetailController.pageNumber.toString(),
-                          'name':
-                              eventDetailController.searchController.value.text,
-                          'city': eventDetailController.strCityId.value,
-                          'date': strDate.toString(),
-                          'type': type.toString(),
-                          'event_type': 'upcoming',
-                        };
-                        eventDetailController.allEventListApi(body);
-                      
+                      eventDetailController.pageNumber.value = 0;
+                      eventDetailController.pageNumber =
+                          eventDetailController.pageNumber + 1;
+                      dynamic body = {
+                        'page': eventDetailController.pageNumber.toString(),
+                        'name':
+                            eventDetailController.searchController.value.text,
+                        'city': eventDetailController.strCityId.value,
+                        'date': strDate.toString(),
+                        'type': type.toString(),
+                        'event_type': 'upcoming',
+                      };
+                      eventDetailController.allEventListApi(body);
                     });
                     isLayoutFirst = false;
                     _hasBeenPressednBidNow = !_hasBeenPressednBidNow;
@@ -633,7 +662,8 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
     final String formattedDate = formatter.format(pickedDate!);
 
     eventDetailController.dateController.value.text = formattedDate;
-    strDate = eventDetailController.dateController.value.text.replaceAll('/', '-');
+    strDate =
+        eventDetailController.dateController.value.text.replaceAll('/', '-');
   }
 }
 

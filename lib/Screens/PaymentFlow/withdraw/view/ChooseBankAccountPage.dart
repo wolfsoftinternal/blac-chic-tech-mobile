@@ -251,18 +251,18 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
           boxShadow: [
             controller.selectedAccountIndex.value == index
               ? BoxShadow(
-                color: Color(0x17747796).withOpacity(0.07),
-                spreadRadius: 10,
+                color: Color(0x0fff5f5f5),
+                spreadRadius: 3,
                 blurRadius: 10,
-                offset: Offset(0, 20), // changes position of shadow
+                offset: Offset(0, 7), // changes position of shadow
           ) : BoxShadow(),
           ],
           color: controller.selectedAccountIndex.value == index
               ? Colors.white
-              : grey_e9ecec,
+              : grey_f5f5f5,
           border: controller.selectedAccountIndex.value == index
               ? Border.all(color: orange_ff881a)
-              : Border.all(color: grey_e9ecec),
+              : Border.all(color: grey_f5f5f5),
           borderRadius: BorderRadius.circular(10.r),
         ),
         padding: EdgeInsets.only(left: 24.w, top: 22.h, bottom: 22.h, right: 30.w),
@@ -312,7 +312,7 @@ class _WithdrawChooseBankAccountState extends State<WithdrawChooseBankAccount> {
             ),
             SvgPicture.asset(
               controller.selectedAccountIndex.value == index
-                  ? orange_circle_check
+                  ? orange_tick_icon
                   : oval_icon,
               width: 24.w,
               height: 24.h,
