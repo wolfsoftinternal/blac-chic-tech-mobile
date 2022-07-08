@@ -121,10 +121,6 @@ class _BcConnectState extends State<BcConnect> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
-
-                    
-
                       SizedBox(height: 12.h,),
                     // Rectangle 1363
 
@@ -210,8 +206,8 @@ class _BcConnectState extends State<BcConnect> {
                                                   begin: Alignment.topCenter,
                                                   end: Alignment.bottomCenter,
                                                   colors: [
-                                                    Color(0x00121212),
-                                                    Color(0xff121212)
+                                                    Color.fromARGB(0, 42, 41, 41),
+                                                    Color.fromARGB(255, 31, 31, 31)
                                                   ]),
                                             )),
 
@@ -403,18 +399,24 @@ class _BcConnectState extends State<BcConnect> {
                                                   right: 20.w,
                                                   top: 10.h,
                                                   bottom: 10.h),
-                                              child: Text("Follow",
-                                                  style: TextStyle(
-                                                      color: const Color(
-                                                          0xff1c2535),
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontFamily:
-                                                          "NeueHelvetica",
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 11.sp),
-                                                  textAlign: TextAlign.left),
+                                              child: Row(
+                                                children: [
+                                                  SvgPicture.asset(follow, height: 12.h, width: 11.h,),
+                                                  SizedBox(width: 4.w,),
+                                                  Text("Follow",
+                                                      style: TextStyle(
+                                                          color: const Color(
+                                                              0xff1c2535),
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontFamily:
+                                                              "NeueHelvetica",
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontSize: 11.sp),
+                                                      textAlign: TextAlign.left),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),

@@ -71,7 +71,7 @@ class _VideoTabState extends State<VideoTab> {
                               child: Stack(
                                 children: [
                                   SizedBox(
-                                    height: 220,
+                                    height: 250,
                                     width: MediaQuery.of(context).size.width,
                                     child: 
                                     FittedBox(
@@ -129,7 +129,7 @@ class _VideoTabState extends State<VideoTab> {
                                       });
                                     },
                                     child: Container(
-                                      height: 220,
+                                      height: 250,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5.r),
                                             gradient: LinearGradient(
@@ -137,7 +137,7 @@ class _VideoTabState extends State<VideoTab> {
                                                 end: Alignment.bottomCenter,
                                                 colors: [
                                                   Color(0x00121212),
-                                                  Color(0xff121212)
+                                                  Color(0xff121212).withOpacity(0.8)
                                                 ])),
                                     ),
                                   ),
@@ -197,7 +197,7 @@ class _VideoTabState extends State<VideoTab> {
                           },
 
                           staggeredTileBuilder: (int index) =>
-                              StaggeredTile.count(2, index.isEven ? 2.6 : 2),
+                              StaggeredTile.count(2, index.isEven ? 2.8 : 2.1),
                           mainAxisSpacing: 23.h,
                           crossAxisSpacing: 23.w,
                         )),

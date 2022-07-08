@@ -126,6 +126,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                             style: TextStyle(
                                 fontFamily: roboto_bold,
                                 fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
                                 color: opcity_white_ffffff),
                           ),
                           SizedBox(height: 5.h,),
@@ -162,6 +163,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                           style: TextStyle(
                               fontFamily: roboto_bold,
                               fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
                               color: Colors.white),
                         ),
                       ),
@@ -214,6 +216,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                               "Transactions",
                               style: TextStyle(
                                   fontSize: 16.sp,
+                                  fontWeight: FontWeight.w500,
                                   color: tv1 ? Colors.white : black_121212,
                                   fontFamily: roboto_bold),
                             ),
@@ -263,6 +266,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                               "Payouts",
                               style: TextStyle(
                                   fontSize: 16.sp,
+                                  fontWeight: FontWeight.w500,
                                   color: tv2 ? Colors.white : black_121212,
                                   fontFamily: roboto_bold),
                             ),
@@ -321,7 +325,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                       });
                                     },
                                     child: Padding(
-                                      padding: EdgeInsets.only(bottom: 16.h),
+                                      padding: EdgeInsets.only(bottom: 10.h),
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
                                             vertical: 16.h, horizontal: 16.w),
@@ -331,13 +335,13 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                           BorderRadius.circular(4.r),
                                           boxShadow: [
                                             BoxShadow(
-                                              color:  Color(0x0c121212).withOpacity(0.05),
+                                              color:  Color(0x0fff5f5f5),
                                               offset: const Offset(
                                                 0.0,
                                                 5.0,
                                               ),
                                               blurRadius: 10.0,
-                                              spreadRadius: 2.0,
+                                              spreadRadius: 5.0,
                                             ), //BoxShadow
                                           ],
                                         ),
@@ -489,7 +493,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                 padding: EdgeInsets.zero,
                                 itemBuilder: (context, i) {
                                   return Padding(
-                                    padding: EdgeInsets.only(bottom: 16.h),
+                                    padding: EdgeInsets.only(bottom: 10.h),
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 20.h, horizontal: 16.w),
@@ -499,13 +503,13 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                         BorderRadius.circular(4.r),
                                         boxShadow: [
                                           BoxShadow(
-                                            color:  Color(0x0c121212).withOpacity(0.05),
+                                            color: Color(0x0fff5f5f5),
                                             offset: const Offset(
                                               0.0,
                                               5.0,
                                             ),
                                             blurRadius: 10.0,
-                                            spreadRadius: 2.0,
+                                            spreadRadius: 5.0,
                                           ), //BoxShadow
                                         ],
                                       ),

@@ -86,7 +86,7 @@ class _A_TopicaListState extends State<A_TopicaList> {
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w700,
-                                        fontFamily: "NeueHelvetica",
+                                        fontFamily: robotoBlack,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 14.sp),
                                     textAlign: TextAlign.left),

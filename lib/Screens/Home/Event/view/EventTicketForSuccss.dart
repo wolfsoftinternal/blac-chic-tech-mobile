@@ -41,7 +41,7 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: const Color(0xfff5f5f5),
+      backgroundColor: light_grey_f2f2f2,
       body: SingleChildScrollView(
         child: Column(
           children: [

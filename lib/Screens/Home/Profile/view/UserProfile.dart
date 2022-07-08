@@ -9,6 +9,7 @@ import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/AdmireProfileList.dart';
 import 'package:blackchecktech/Widget/OtherUserList.dart';
+import 'package:blackchecktech/Widget/ReportBottomSheet.dart';
 import 'package:blackchecktech/Widget/UserProfileDetail.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
@@ -21,14 +22,11 @@ import '../../../../Utilities/Constant.dart';
 import '../../../../Widget/CreateBottomSheet.dart';
 import 'SelectedUserProfile.dart';
 
-
 // class UserProfile extends StatefulWidget {
 
 //   final String selectedUserId;
 //   const UserProfile({Key? key, required this.selectedUserId,
 //   }) : super(key: key);
-
-
 
 //   @override
 //   State<UserProfile> createState() => _UserProfileState();
@@ -56,7 +54,6 @@ import 'SelectedUserProfile.dart';
 //     controller.addListener(() {});
 //   }
 
-
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -67,7 +64,7 @@ import 'SelectedUserProfile.dart';
 //                 height: MediaQuery.of(context).size.height * 0.75,
 //                 child: Center(
 //                   child: CircularProgressIndicator(
-//                     color: black, 
+//                     color: black,
 //                     strokeWidth: 2
 //                   )
 //                 ),
@@ -368,7 +365,6 @@ import 'SelectedUserProfile.dart';
 //                       ],
 //                     ),
 
-
 //                     // Stack(
 //                     //   children: [
 //                     //     PageView.builder(
@@ -443,110 +439,110 @@ import 'SelectedUserProfile.dart';
 //                     //   ],
 //                     // ),
 //                   ),
-                  // controller.otherAdmireList.isEmpty ?  Container() : 
-                  // Padding(
-                  //   padding:  EdgeInsets.only(left: 24.w, right: 24.w),
-                  //   child: Row(
-                  //     children: [
-                  //       setHelceticaBold(
-                  //           '${controller.details.value.firstName.toString().capitalizeFirst} Admires',
-                  //           14.sp,
-                  //           black_121212,
-                  //           FontWeight.w500,
-                  //           FontStyle.normal,
-                  //           -0.28),
-                  //       const Spacer(),
-                  //       GestureDetector(
-                  //         onTap: () {
-                  //           Get.to( SeeAllAdmires(type: 'other'));
-                  //         },
-                  //         child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
-                  //             FontWeight.w500, FontStyle.normal, -0.24),
-                  //       ),
-                  //        SizedBox(
-                  //         width: 5.w,
-                  //       ),
-                  //       const Icon(
-                  //         Icons.arrow_forward,
-                  //         color: grey_aaaaaa,
-                  //         size: 12,
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                  // controller.otherAdmireList.isEmpty ?  Container() :
-                  // Padding(
-                  //   padding:
-                  //        EdgeInsets.only( top: 16.h),
-                  //   child: SizedBox(
-                  //     height: MediaQuery.of(context).size.height * 0.11,
-                  //     width: double.infinity,
-                  //     child: ListView.separated(
-                  //       primary: false,
-                  //       shrinkWrap: true,
-                  //       separatorBuilder: (context, index) => SizedBox(
-                  //         width: 16.w,
-                  //       ),
-                  //       padding: EdgeInsets.only(left: 24.w, right: 24.w,),
-                  //       scrollDirection: Axis.horizontal,
-                  //       itemCount: controller.otherAdmireList.length,
-                  //       itemBuilder: ((context, index) {
-                  //         return Column(
-                  //           mainAxisAlignment: MainAxisAlignment.start,
-                  //           crossAxisAlignment: CrossAxisAlignment.center,
-                  //           children: [
-                  //             CircularProfileAvatar(
-                  //               '',
-                  //               radius: 24,
-                  //               child: controller.otherAdmireList[index]
-                  //                           .admireDetails!.image ==
-                  //                       null
-                  //                   ? SvgPicture.asset(
-                  //                       placeholder,
-                  //                       height: 48.h,
-                  //                       width: 48.w,
-                  //                     )
-                  //                   : CachedNetworkImage(
-                  //                       imageUrl: controller
-                  //                           .otherAdmireList[index]
-                  //                           .admireDetails!
-                  //                           .image!,
-                  //                 height: 48.h,
-                  //                 width: 48.w,
-                  //                       fit: BoxFit.cover,
-                  //                       progressIndicatorBuilder: (context,
-                  //                               url, downloadProgress) =>
-                  //                           SvgPicture.asset(
-                  //                         placeholder,
-                  //                             height: 48.h,
-                  //                             width: 48.w,
-                  //                       ),
-                  //                       errorWidget: (context, url, error) =>
-                  //                           SvgPicture.asset(
-                  //                         placeholder,
-                  //                             height: 48.h,
-                  //                             width: 48.w,
-                  //                       ),
-                  //                     ),
-                  //             ),
-                  //              SizedBox(
-                  //               height: 4.h,
-                  //             ),
-                  //             setHelveticaMedium(
-                  //                 controller.otherAdmireList[index]
-                  //                         .admireDetails!.firstName ??
-                  //                     "",
-                  //                 12.sp,
-                  //                 black_121212,
-                  //                 FontWeight.w500,
-                  //                 FontStyle.normal,
-                  //                 -0.24),
-                  //           ],
-                  //         );
-                  //       }),
-                  //     ),
-                  //   ),
-                  // )
+// controller.otherAdmireList.isEmpty ?  Container() :
+// Padding(
+//   padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+//   child: Row(
+//     children: [
+//       setHelceticaBold(
+//           '${controller.details.value.firstName.toString().capitalizeFirst} Admires',
+//           14.sp,
+//           black_121212,
+//           FontWeight.w500,
+//           FontStyle.normal,
+//           -0.28),
+//       const Spacer(),
+//       GestureDetector(
+//         onTap: () {
+//           Get.to( SeeAllAdmires(type: 'other'));
+//         },
+//         child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
+//             FontWeight.w500, FontStyle.normal, -0.24),
+//       ),
+//        SizedBox(
+//         width: 5.w,
+//       ),
+//       const Icon(
+//         Icons.arrow_forward,
+//         color: grey_aaaaaa,
+//         size: 12,
+//       )
+//     ],
+//   ),
+// ),
+// controller.otherAdmireList.isEmpty ?  Container() :
+// Padding(
+//   padding:
+//        EdgeInsets.only( top: 16.h),
+//   child: SizedBox(
+//     height: MediaQuery.of(context).size.height * 0.11,
+//     width: double.infinity,
+//     child: ListView.separated(
+//       primary: false,
+//       shrinkWrap: true,
+//       separatorBuilder: (context, index) => SizedBox(
+//         width: 16.w,
+//       ),
+//       padding: EdgeInsets.only(left: 24.w, right: 24.w,),
+//       scrollDirection: Axis.horizontal,
+//       itemCount: controller.otherAdmireList.length,
+//       itemBuilder: ((context, index) {
+//         return Column(
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: [
+//             CircularProfileAvatar(
+//               '',
+//               radius: 24,
+//               child: controller.otherAdmireList[index]
+//                           .admireDetails!.image ==
+//                       null
+//                   ? SvgPicture.asset(
+//                       placeholder,
+//                       height: 48.h,
+//                       width: 48.w,
+//                     )
+//                   : CachedNetworkImage(
+//                       imageUrl: controller
+//                           .otherAdmireList[index]
+//                           .admireDetails!
+//                           .image!,
+//                 height: 48.h,
+//                 width: 48.w,
+//                       fit: BoxFit.cover,
+//                       progressIndicatorBuilder: (context,
+//                               url, downloadProgress) =>
+//                           SvgPicture.asset(
+//                         placeholder,
+//                             height: 48.h,
+//                             width: 48.w,
+//                       ),
+//                       errorWidget: (context, url, error) =>
+//                           SvgPicture.asset(
+//                         placeholder,
+//                             height: 48.h,
+//                             width: 48.w,
+//                       ),
+//                     ),
+//             ),
+//              SizedBox(
+//               height: 4.h,
+//             ),
+//             setHelveticaMedium(
+//                 controller.otherAdmireList[index]
+//                         .admireDetails!.firstName ??
+//                     "",
+//                 12.sp,
+//                 black_121212,
+//                 FontWeight.w500,
+//                 FontStyle.normal,
+//                 -0.24),
+//           ],
+//         );
+//       }),
+//     ),
+//   ),
+// )
 //                 ],
 //               ),
 //       ),
@@ -554,12 +550,12 @@ import 'SelectedUserProfile.dart';
 //   }
 // }
 
-
-
 class UserProfile extends StatefulWidget {
   final String selectedUserId;
   final isFrom;
-  const UserProfile({Key? key, required this.selectedUserId, required this.isFrom}) : super(key: key);
+  const UserProfile(
+      {Key? key, required this.selectedUserId, required this.isFrom})
+      : super(key: key);
 
   @override
   State<UserProfile> createState() => _UserProfileState();
@@ -576,7 +572,7 @@ class _UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();  
+    super.initState();
     checkNet(context).then(
       (value) {
         videoController.PageNumber.value = 0;
@@ -593,115 +589,182 @@ class _UserProfileState extends State<UserProfile> {
     return Scaffold(
       backgroundColor: white_ffffff,
       body: Obx(
-        () => 
-        videoController.userList.isEmpty
+        () => videoController.userList.isEmpty
             ? SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Center(
-                  child: CircularProgressIndicator(
-                    color: black, 
-                    strokeWidth: 2
-                  )
-                ),
+                    child: CircularProgressIndicator(
+                        color: black, strokeWidth: 2)),
               )
-            : 
-            Column(
+            : Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  videoController.userList.isEmpty ? Container() :
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        PageView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            controller: pageController,
-                            itemCount: widget.isFrom == true ? 1 : videoController.userList.length,
-                            onPageChanged: (v) {
-                              if (v == videoController.userList.length) {
-                                hadReachedEnd = true;
-                              }
-                            },
-                            itemBuilder: (BuildContext context, int index) {
-                              return OtherUserList(videoController.userList[index]);
-                            }),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 15.0, right: 15.0),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                widget.isFrom == true ? Container() :
-                                GestureDetector(
-                                  onTap: () {
-                                    if(index > 0){
-                                      index--;
-                                      // dynamic body = {'user_id': videoController.userList[index].id.toString()};
-                                      controller.admireListAPI(context, videoController.userList[index].id.toString());
+                  videoController.userList.isEmpty
+                      ? Container()
+                      : Expanded(
+                          child: Stack(
+                            children: [
+                              PageView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  controller: pageController,
+                                  itemCount: widget.isFrom == true
+                                      ? 1
+                                      : videoController.userList.length,
+                                  onPageChanged: (v) {
+                                    if (v == videoController.userList.length) {
+                                      hadReachedEnd = true;
                                     }
-                                    pageController.previousPage(
-                                        duration: Duration(milliseconds: 300),
-                                        curve: Curves.fastOutSlowIn);
                                   },
-                                  child: Container(
-                                    height: 80,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      color: white_ffffff,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return OtherUserList(
+                                        videoController.userList[index]);
+                                  }),
+                              Padding(
+                                padding: EdgeInsets.only(left: 24.w, top: 50.h),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    GestureDetector(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: SvgPicture.asset(
+                                          icon_back_black_arrow,
+                                          width: 24.w,
+                                          height: 24.h,
+                                          color: white_ffffff,
+                                        )),
+                                    const Spacer(),
+                                    GestureDetector(
+                                      onTap: () {
+                                        displayBottomSheet(context,
+                                            videoController.userList[index].id);
+                                      },
+                                      child: Container(
+                                        height: 48,
+                                        width: 48,
+                                        child: Icon(Icons.more_horiz,
+                                            color: Colors.white),
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Icons.arrow_back,
-                                      color: grey_aaaaaa,
-                                      size: 35,
-                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 15.0),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      widget.isFrom == true
+                                          ? Container()
+                                          : GestureDetector(
+                                              onTap: () {
+                                                if (index > 0) {
+                                                  index--;
+                                                  // dynamic body = {'user_id': videoController.userList[index].id.toString()};
+                                                  controller.admireListAPI(
+                                                      context,
+                                                      videoController
+                                                          .userList[index].id
+                                                          .toString());
+                                                }
+                                                pageController.previousPage(
+                                                    duration: Duration(
+                                                        milliseconds: 300),
+                                                    curve:
+                                                        Curves.fastOutSlowIn);
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                  color: grey_94ffffff,
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 6.w,
+                                                      right: 6.w,
+                                                      top: 16.h,
+                                                      bottom: 16.h),
+                                                  child: Icon(
+                                                    Icons
+                                                        .arrow_back_ios_new_rounded,
+                                                    color: black,
+                                                    size: 21,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                      widget.isFrom == true
+                                          ? Container()
+                                          : GestureDetector(
+                                              onTap: () {
+                                                if (hadReachedEnd == true) {
+                                                  pageController.jumpToPage(0);
+                                                  // dynamic body = {'user_id': widget.selectedUserId.toString()};
+                                                  controller.admireListAPI(
+                                                      context,
+                                                      widget.selectedUserId
+                                                          .toString());
+                                                  hadReachedEnd = false;
+                                                } else {
+                                                  if (index !=
+                                                      videoController
+                                                          .userList.length) {
+                                                    index++;
+                                                    // dynamic body = {'user_id': videoController.userList[index].id.toString()};
+                                                    controller.admireListAPI(
+                                                        context,
+                                                        videoController
+                                                            .userList[index].id
+                                                            .toString());
+                                                    pageController.nextPage(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        curve: Curves
+                                                            .fastOutSlowIn);
+                                                  }
+                                                }
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                  color: grey_94ffffff,
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 6.w,
+                                                      right: 6.w,
+                                                      top: 16.h,
+                                                      bottom: 16.h),
+                                                  child: Icon(
+                                                    Icons
+                                                        .arrow_forward_ios_rounded,
+                                                    color: black,
+                                                    size: 21,
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                    ],
                                   ),
                                 ),
-                                widget.isFrom == true ? Container() :
-                                GestureDetector(
-                                  onTap: () {
-                                    if (hadReachedEnd == true) {
-                                      pageController.jumpToPage(0);
-                                      // dynamic body = {'user_id': widget.selectedUserId.toString()};
-                                      controller.admireListAPI(context, widget.selectedUserId.toString());
-                                      hadReachedEnd = false;
-                                    } else {
-                                      if(index != videoController.userList.length){
-                                        index++;
-                                      // dynamic body = {'user_id': videoController.userList[index].id.toString()};
-                                      controller.admireListAPI(context, videoController.userList[index].id.toString());
-                                      pageController.nextPage(
-                                          duration: Duration(milliseconds: 300),
-                                          curve: Curves.fastOutSlowIn);
-                                    }
-                                      }
-                                      
-                                  },
-                                  child: Container(
-                                    height: 80,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      color: white_ffffff,
-                                    ),
-                                    child: Icon(
-                                      Icons.arrow_forward,
-                                      color: grey_aaaaaa,
-                                      size: 35,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                  controller.otherAdmireList.isEmpty ?  Container() : 
+                        ),
                   Padding(
-                    padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+                    padding: EdgeInsets.only(left: 24.w, right: 24.w),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         setHelceticaBold(
                             '${videoController.userList[index].firstName.toString().capitalizeFirst} Admires',
@@ -711,113 +774,149 @@ class _UserProfileState extends State<UserProfile> {
                             FontStyle.normal,
                             -0.28),
                         const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to( SeeAllAdmires(type: 'other'));
-                          },
-                          child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
-                              FontWeight.w500, FontStyle.normal, -0.24),
-                        ),
-                         SizedBox(
-                          width: 5.w,
-                        ),
-                        const Icon(
-                          Icons.arrow_forward,
-                          color: grey_aaaaaa,
-                          size: 12,
-                        )
+                        controller.otherAdmireList.isEmpty
+                            ? Container()
+                            : GestureDetector(
+                                onTap: () {
+                                  Get.to(SeeAllAdmires(type: 'other'));
+                                },
+                                child: setHelveticaMedium(
+                                    'See More',
+                                    12.sp,
+                                    grey_aaaaaa,
+                                    FontWeight.w500,
+                                    FontStyle.normal,
+                                    -0.24),
+                              ),
+                        controller.otherAdmireList.isEmpty
+                            ? Container()
+                            : SizedBox(
+                                width: 5.w,
+                              ),
+                        controller.otherAdmireList.isEmpty
+                            ? Container()
+                            : const Icon(
+                                Icons.arrow_forward,
+                                color: grey_aaaaaa,
+                                size: 12,
+                              )
                       ],
                     ),
                   ),
-                  controller.otherAdmireList.isEmpty ?  Container() :
-                  Padding(
-                    padding:
-                         EdgeInsets.only( top: 16.h),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.11,
-                      width: double.infinity,
-                      child: ListView.separated(
-                        primary: false,
-                        shrinkWrap: true,
-                        separatorBuilder: (context, index) => SizedBox(
-                          width: 16.w,
-                        ),
-                        padding: EdgeInsets.only(left: 24.w, right: 24.w,),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.otherAdmireList.length,
-                        itemBuilder: ((context, index) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                  controller.otherAdmireList.isEmpty
+                      ? Container(
+                          height: MediaQuery.of(context).size.height * 0.13,
+                          width: double.infinity,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              GestureDetector(
-                               onTap: (){
-                                  if (widget.selectedUserId == controller.otherAdmireList[index].admireDetails!.id.toString()) {
-                                controller.userProfileAPI(context, true);
-                              } else {
-                                controller.admireProfileAPI(
-                                    context, controller.otherAdmireList[index].admireDetails!.id);
-                              }
-                              },
-                                child: CircularProfileAvatar(
-                                  '',
-                                  radius: 24,
-                                  child: controller.otherAdmireList[index]
-                                              .admireDetails!.image ==
-                                          null
-                                      ? SvgPicture.asset(
-                                          placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
-                                        )
-                                      : CachedNetworkImage(
-                                          imageUrl: controller
-                                              .otherAdmireList[index]
-                                              .admireDetails!
-                                              .image!,
-                                    height: 48.h,
-                                    width: 48.w,
-                                          fit: BoxFit.cover,
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              SvgPicture.asset(
-                                            placeholder,
-                                                height: 48.h,
-                                                width: 48.w,
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              SvgPicture.asset(
-                                            placeholder,
-                                                height: 48.h,
-                                                width: 48.w,
-                                          ),
-                                        ),
-                                ),
-                              ),
-                               SizedBox(
-                                height: 4.h,
-                              ),
-                              setHelveticaMedium(
-                                  controller.otherAdmireList[index]
-                                          .admireDetails!.firstName ??
-                                      "",
-                                  12.sp,
-                                  black_121212,
-                                  FontWeight.w500,
+                              setHelveticaBoldCenter(
+                                  'No Admires',
+                                  16.sp,
+                                  black,
+                                  FontWeight.w300,
                                   FontStyle.normal,
-                                  -0.24),
+                                  TextAlign.center)
                             ],
-                          );
-                        }),
-                      ),
-                    ),
-                  )
+                          ),
+                        )
+                      : Padding(
+                          padding: EdgeInsets.only(top: 16.h),
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.11,
+                            width: double.infinity,
+                            child: ListView.separated(
+                              primary: false,
+                              shrinkWrap: true,
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: 16.w,
+                              ),
+                              padding: EdgeInsets.only(
+                                left: 24.w,
+                                right: 24.w,
+                              ),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.otherAdmireList.length,
+                              itemBuilder: ((context, index) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        if (widget.selectedUserId ==
+                                            controller.otherAdmireList[index]
+                                                .admireDetails!.id
+                                                .toString()) {
+                                          controller.userProfileAPI(
+                                              context, true);
+                                        } else {
+                                          controller.admireProfileAPI(
+                                              context,
+                                              controller.otherAdmireList[index]
+                                                  .admireDetails!.id);
+                                        }
+                                      },
+                                      child: CircularProfileAvatar(
+                                        '',
+                                        radius: 24,
+                                        child: controller.otherAdmireList[index]
+                                                    .admireDetails!.image ==
+                                                null
+                                            ? SvgPicture.asset(
+                                                placeholder,
+                                                height: 48.h,
+                                                width: 48.w,
+                                              )
+                                            : CachedNetworkImage(
+                                                imageUrl: controller
+                                                    .otherAdmireList[index]
+                                                    .admireDetails!
+                                                    .image!,
+                                                height: 48.h,
+                                                width: 48.w,
+                                                fit: BoxFit.cover,
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                            downloadProgress) =>
+                                                        SvgPicture.asset(
+                                                  placeholder,
+                                                  height: 48.h,
+                                                  width: 48.w,
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        SvgPicture.asset(
+                                                  placeholder,
+                                                  height: 48.h,
+                                                  width: 48.w,
+                                                ),
+                                              ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 4.h,
+                                    ),
+                                    setHelveticaMedium(
+                                        controller.otherAdmireList[index]
+                                                .admireDetails!.firstName ??
+                                            "",
+                                        12.sp,
+                                        black_121212,
+                                        FontWeight.w500,
+                                        FontStyle.normal,
+                                        -0.24),
+                                  ],
+                                );
+                              }),
+                            ),
+                          ),
+                        )
                 ],
               ),
       ),
     );
   }
-
 
   @override
   void dispose() {

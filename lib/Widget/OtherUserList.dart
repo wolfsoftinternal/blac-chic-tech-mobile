@@ -35,63 +35,35 @@ class _OtherUserListState extends State<OtherUserList> {
         widget.otherUser.image == null
             ? SvgPicture.asset(
                 placeholder,
-                height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+                height: MediaQuery.of(context).size.height * .83,
                 width: double.infinity,
                 fit: BoxFit.cover,
               )
             : CachedNetworkImage(
                 imageUrl: widget.otherUser.image!,
                 // widget.admireList.admireDetails!.image!,
-                height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+                height: MediaQuery.of(context).size.height * .83,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     SvgPicture.asset(
                   placeholder,
-                  height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+                  height: MediaQuery.of(context).size.height * .83,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
                 errorWidget: (context, url, error) => SvgPicture.asset(
                   placeholder,
-                  height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+                  height: MediaQuery.of(context).size.height * .83,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
         Container(
           color: Colors.black.withOpacity(0.3),
-          height: controller.otherAdmireList.isEmpty ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .83,
+          height: MediaQuery.of(context).size.height * .83,
         ),
-        Padding(
-          padding:  EdgeInsets.only(left: 24.w,top: 50.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: SvgPicture.asset(
-                    icon_back_black_arrow,
-                    width: 24.w,
-                    height: 24.h,
-                    color: white_ffffff,
-                  )),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {
-                  displayBottomSheet(context, widget.otherUser.id);
-                },
-                child: Container(
-                  height: 48,
-                  width: 48,
-                  child: Icon(Icons.more_horiz, color: Colors.white),
-                ),
-              ),
-            ],
-          ),
-        ),
+        
         Padding(
           padding:  EdgeInsets.only(top: 60.h),
           child: Row(
@@ -125,7 +97,7 @@ class _OtherUserListState extends State<OtherUserList> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.80,
-                    height: MediaQuery.of(context).size.width * 0.10,
+                    height: MediaQuery.of(context).size.width * 0.13,
                     child: FittedBox(
                       child: setHelceticaBold(
                           widget.otherUser.firstName != null
@@ -163,7 +135,7 @@ class _OtherUserListState extends State<OtherUserList> {
                         fontSize: 16.sp,
                         fontFamily: helveticaNeueNeue_medium,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white70,
+                        color: Colors.white60,
                         fontStyle: FontStyle.normal,
                         letterSpacing: 6.4,
                       ),
@@ -222,50 +194,41 @@ class _OtherUserListState extends State<OtherUserList> {
             ],
           ),
         ),
-        // Padding(
-        //   padding:  EdgeInsets.only(left: 24.w, right: 24.w),
-        //   child: Column(
-        //     children: [
-        //       SizedBox(
-        //         height: MediaQuery.of(context).size.height * .76,
-        //       ),
-        //       Row(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: [
-        //           widget.otherUser.cityDetails != null
-        //               ? const Icon(
-        //                   Icons.location_on,
-        //                   size: 12,
-        //                   color: orange_ff881a,
-        //                 )
-        //               : Container(),
-        //           setHelveticaMedium(
-        //             // widget.admireList.admireDetails!.cityDetails != null
-        //             //     ? widget.admireList.admireDetails!.cityDetails!.name! +
-        //             //         ', ' +
-        //             //         widget
-        //             //             .admireList.admireDetails!.stateDetails!.name! +
-        //             //         ', ' +
-        //             //         widget
-        //             //             .admireList.admireDetails!.countryDetails!.name!
-        //             //     : "",
-        //             myModel!.data!.cityDetails != null
-        //                 ? myModel!.data!.cityDetails!.name! +
-        //                     ', ' +
-        //                     myModel!.data!.stateDetails!.name! +
-        //                     ', ' +
-        //                     myModel!.data!.countryDetails!.name!
-        //                 : "",
-        //             10.sp,
-        //             Colors.white70,
-        //             FontWeight.w600,
-        //             FontStyle.normal,
-        //           ),
-        //         ],
-        //       )
-        //     ],
-        //   ),
-        // ),
+        Padding(
+          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .76,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  widget.otherUser.cityDetails != null
+                      ? const Icon(
+                          Icons.location_on,
+                          size: 12,
+                          color: orange_ff881a,
+                        )
+                      : Container(),
+                  setHelveticaMedium(
+                    widget.otherUser.cityDetails != null
+                        ? widget.otherUser.cityDetails!.name! +
+                            ', ' +
+                            widget.otherUser.stateDetails!.name! +
+                            ', ' +
+                            widget.otherUser.countryDetails!.name!
+                        : "",
+                    10.sp,
+                    Colors.white70,
+                    FontWeight.w600,
+                    FontStyle.normal,
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
       ],
     );
   }

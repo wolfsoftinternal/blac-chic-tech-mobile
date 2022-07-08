@@ -472,68 +472,76 @@ class _VideoListBctState extends State<VideoListBct> {
                                     width: double.infinity,
                                     decoration: SpinnerDecorationBorder,
                                     child: DropdownButtonHideUnderline(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 10.w, right: 10.w),
-                                        child: DropdownButton<TopicListModel>(
-                                            dropdownColor: Colors.white,
-                                            value: controller
-                                                        .selectedTopic.value.id ==
-                                                    -1
-                                                ? null
-                                                : controller.selectedTopic.value,
-                                            hint: Text("Topic",
-                                                style: TextStyle(
-                                                    color: grey_aaaaaa,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily:
-                                                        helveticaNeueNeue_medium,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 14.sp),
-                                                textAlign: TextAlign.left),
-                                            icon: SvgPicture.asset(
-                                              icon_down_arrow_spinner,
-                                              width: 12.r,
-                                              height: 12.r,
-                                            ),
-                                            onChanged: (TopicListModel? value) {
-                                              controller.selectedTopic.value =
-                                                  value!;
-                                              if (controller
-                                                      .selectedTopic.value.name !=
-                                                  "SEE ALL TOPICS") {
-                                                if (!controller.selectMutiTopicList
-                                                    .contains(value)) {
-                                                  controller.selectMutiTopicList
-                                                      .add(value);
-                                                }
-                                              } else {
-                                                controller.selectedTopic.value =
-                                                    TopicListModel(id: -1);
-                                                Get.to(FilterTopicList());
+                                      child: DropdownButton2<TopicListModel>(
+                                          value: controller
+                                                      .selectedTopic.value.id ==
+                                                  -1
+                                              ? null
+                                              : controller.selectedTopic.value,
+                                          hint: Text("Topic",
+                                              style: TextStyle(
+                                                  color: grey_aaaaaa,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 14.sp),
+                                              textAlign: TextAlign.left),
+                                          icon: SvgPicture.asset(
+                                            icon_down_arrow_spinner,
+                                            width: 12.r,
+                                            height: 12.r,
+                                          ),
+                                          onChanged: (TopicListModel? value) {
+                                            controller.selectedTopic.value =
+                                                value!;
+                                            if (controller
+                                                    .selectedTopic.value.name !=
+                                                "SEE ALL TOPICS") {
+                                              if (!controller.selectMutiTopicList
+                                                  .contains(value)) {
+                                                controller.selectMutiTopicList
+                                                    .add(value);
                                               }
-                                              controller.selectedTopic.value.id =
-                                                  -1;
-                                            },
-                                            items: controller.topicList
-                                                .map((TopicListModel value) {
-                                              return DropdownMenuItem<
-                                                  TopicListModel>(
-                                                value: value,
-                                                child: Text(value.name.toString(),
-                                                    style: TextStyle(
-                                                        color: value.name ==
-                                                                "SEE ALL TOPICS"
-                                                            ? grey_aaaaaa
-                                                            : black_121925,
-                                                        fontWeight: FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle: FontStyle.normal,
-                                                        fontSize: 14.sp)),
-                                              );
-                                            }).toList()),
-                                      ),
+                                            } else {
+                                              controller.selectedTopic.value =
+                                                  TopicListModel(id: -1);
+                                              Get.to(FilterTopicList());
+                                            }
+                                            controller.selectedTopic.value.id =
+                                                -1;
+                                          },
+                                          isExpanded: true,
+                                          customItemsHeight: 4,
+                                          iconEnabledColor: black_121212,
+                                          iconDisabledColor: Colors.grey,
+                                          buttonHeight: 60,
+                                          buttonWidth: double.infinity,
+                                          buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                          buttonDecoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(4),
+                                            color: white,
+                                          ),
+                                          itemHeight: 35,
+                                          itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                          items: controller.topicList
+                                              .map((TopicListModel value) {
+                                            return DropdownMenuItem<
+                                                TopicListModel>(
+                                              value: value,
+                                              child: Text(value.name.toString(),
+                                                  style: TextStyle(
+                                                      color: value.name ==
+                                                              "SEE ALL TOPICS"
+                                                          ? grey_aaaaaa
+                                                          : black_121925,
+                                                      fontWeight: FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontSize: 14.sp)),
+                                            );
+                                          }).toList()),
                                     ),
                                   ),
                                   SizedBox(
@@ -616,68 +624,76 @@ class _VideoListBctState extends State<VideoListBct> {
                                     width: double.infinity,
                                     decoration: SpinnerDecorationBorder,
                                     child: DropdownButtonHideUnderline(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 10.w, right: 10.w),
-                                        child: DropdownButton<TopicListModel>(
-                                            dropdownColor: Colors.white,
-                                            value: controller.selectedLanguage.value
-                                                        .id ==
-                                                    -1
-                                                ? null
-                                                : controller.selectedLanguage.value,
-                                            hint: Text("Language",
-                                                style: TextStyle(
-                                                    color: grey_aaaaaa,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily:
-                                                        helveticaNeueNeue_medium,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 14.sp),
-                                                textAlign: TextAlign.left),
-                                            icon: SvgPicture.asset(
-                                              icon_down_arrow_spinner,
-                                              width: 12.r,
-                                              height: 12.r,
-                                            ),
-                                            onChanged: (TopicListModel? value) {
-                                              controller.selectedLanguage.value =
-                                                  value!;
-                                              if (controller.selectedLanguage.value
-                                                      .name !=
-                                                  "SEE ALL LANGUAGE") {
-                                                if (!controller.selectMutiLanguList
-                                                    .contains(value)) {
-                                                  controller.selectMutiLanguList
-                                                      .add(value);
-                                                }
-                                              } else {
-                                                controller.selectedLanguage.value =
-                                                    TopicListModel(id: -1);
+                                      child: DropdownButton2<TopicListModel>(
+                                          value: controller.selectedLanguage.value
+                                                      .id ==
+                                                  -1
+                                              ? null
+                                              : controller.selectedLanguage.value,
+                                          hint: Text("Language",
+                                              style: TextStyle(
+                                                  color: grey_aaaaaa,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 14.sp),
+                                              textAlign: TextAlign.left),
+                                          icon: SvgPicture.asset(
+                                            icon_down_arrow_spinner,
+                                            width: 12.r,
+                                            height: 12.r,
+                                          ),
+                                          onChanged: (TopicListModel? value) {
+                                            controller.selectedLanguage.value =
+                                                value!;
+                                            if (controller.selectedLanguage.value
+                                                    .name !=
+                                                "SEE ALL LANGUAGE") {
+                                              if (!controller.selectMutiLanguList
+                                                  .contains(value)) {
+                                                controller.selectMutiLanguList
+                                                    .add(value);
                                               }
-                                              controller.selectedLanguage.value.id =
-                                                  -1;
-                                            },
-                                            items: controller.languageList
-                                                .map((TopicListModel value) {
-                                              return DropdownMenuItem<
-                                                  TopicListModel>(
-                                                value: value,
-                                                child: Text(value.name.toString(),
-                                                    style: TextStyle(
-                                                        color: value.name
-                                                                    .toString() ==
-                                                                "SEE ALL LANGUAGE"
-                                                            ? grey_aaaaaa
-                                                            : black_121925,
-                                                        fontWeight: FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle: FontStyle.normal,
-                                                        fontSize: 14.sp)),
-                                              );
-                                            }).toList()),
-                                      ),
+                                            } else {
+                                              controller.selectedLanguage.value =
+                                                  TopicListModel(id: -1);
+                                            }
+                                            controller.selectedLanguage.value.id =
+                                                -1;
+                                          },
+                                          isExpanded: true,
+                                          customItemsHeight: 4,
+                                          iconEnabledColor: black_121212,
+                                          iconDisabledColor: Colors.grey,
+                                          buttonHeight: 60,
+                                          buttonWidth: double.infinity,
+                                          buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                          buttonDecoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(4),
+                                            color: white,
+                                          ),
+                                          itemHeight: 35,
+                                          itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                          items: controller.languageList
+                                              .map((TopicListModel value) {
+                                            return DropdownMenuItem<
+                                                TopicListModel>(
+                                              value: value,
+                                              child: Text(value.name.toString(),
+                                                  style: TextStyle(
+                                                      color: value.name
+                                                                  .toString() ==
+                                                              "SEE ALL LANGUAGE"
+                                                          ? grey_aaaaaa
+                                                          : black_121925,
+                                                      fontWeight: FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontSize: 14.sp)),
+                                            );
+                                          }).toList()),
                                     ),
                                   ),
                                   SizedBox(

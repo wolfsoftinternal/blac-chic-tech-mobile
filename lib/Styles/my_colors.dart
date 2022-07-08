@@ -66,3 +66,4 @@ const white_ccffffff = Color(0xccffffff);
 
 const black_bg_1c2535 = Color(0xff1c2535);
 
+const deviderColors = Color.fromARGB(70, 83, 81, 81);

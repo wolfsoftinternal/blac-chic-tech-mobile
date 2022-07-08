@@ -1096,6 +1096,7 @@ class VideoMenuController extends GetxController {
           print(value.toString());
           DefaultModel defaultModel = defaultModelFromJson(value);
           myPlayList.removeAt(index!);
+          myPlayListAPI();
           snackBar(context!, defaultModel.message.toString());
         });
       } else {

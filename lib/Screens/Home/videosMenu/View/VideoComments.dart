@@ -336,11 +336,14 @@ class _VideoCommentsState extends State<VideoComments> {
                         ),
                         InkWell(
                             onTap: () {
-                              myFocusNode!.unfocus();
+                              setState(() {
+                                myFocusNode!.unfocus();
                               controller.addCommentApi(
                                   comment: controller.commentTxt.value.text,
                                   videoId: widget.videoId,
                                   context: context);
+                              });
+                              
                             },
                             child: controller.isLoadingButton.value == true
                                 ? const SizedBox(

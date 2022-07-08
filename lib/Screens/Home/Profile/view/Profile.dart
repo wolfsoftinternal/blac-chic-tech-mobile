@@ -774,10 +774,10 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                 color: Color(0x19121212),
                                 offset: Offset(
                                   0.0,
-                                  5.0,
+                                  2.0,
                                 ),
                                 blurRadius: 5.0,
-                                spreadRadius: 2.0,
+                                spreadRadius: 0.5,
                               ), //BoxShadow
                             ],
                           ),
@@ -828,7 +828,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
 
   Obx SeeAllAdmiresWidget(userId) {
     return Obx(() => Padding(
-        padding: EdgeInsets.only(left: 24.w, right: 24.w),
+        padding: EdgeInsets.only(left: 24.w, right: 15.w),
         child: Row(
           children: [
             setHelceticaBold(
@@ -1000,10 +1000,10 @@ class Admires extends StatelessWidget {
                   setHelveticaMedium(
                       userId != controller.details.value.id
                           ? controller.otherAdmireList[index].admireDetails!
-                                  .firstName ??
+                                  .firstName.toString().capitalizeFirst ??
                               ""
                           : controller
-                                  .admireList[index].admireDetails!.firstName ??
+                                  .admireList[index].admireDetails!.firstName.toString().capitalizeFirst ??
                               "",
                       12.sp,
                       black_121212,

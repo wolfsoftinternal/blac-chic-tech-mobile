@@ -81,7 +81,7 @@ class _PostTabState extends State<PostTab> {
                                                 child: SvgPicture.asset(
                                                   placeholder,
                                                   fit: BoxFit.cover,
-                                                  height: 220.h,
+                                                  height: 250.h,
                                                 ),
                                               )
                                             : ClipRRect(
@@ -91,27 +91,27 @@ class _PostTabState extends State<PostTab> {
                                                   imageUrl: controller
                                                       .postList[index].image!,
                                                   fit: BoxFit.cover,
-                                                  height: 220.h,
+                                                  height: 250.h,
                                                   progressIndicatorBuilder: (context,
                                                           url, downloadProgress) =>
                                                       SvgPicture.asset(
                                                     placeholder,
                                                     fit: BoxFit.cover,
-                                                    height: 220.h,
+                                                    height: 250.h,
                                                   ),
                                                   errorWidget:
                                                       (context, url, error) =>
                                                           SvgPicture.asset(
                                                     placeholder,
                                                     fit: BoxFit.cover,
-                                                    height: 220.h,
+                                                    height: 250.h,
                                                   ),
                                                 ),
                                               ),
                                       ),
                                       Container(
                                         width: MediaQuery.of(context).size.width,
-                                        height: 220.h,
+                                        height: 250.h,
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(5.r),
                                             gradient: LinearGradient(
@@ -119,7 +119,7 @@ class _PostTabState extends State<PostTab> {
                                                 end: Alignment.bottomCenter,
                                                 colors: [
                                                   Color(0x00121212),
-                                                  Color(0xff121212)
+                                                  Color(0xff121212).withOpacity(0.8)
                                                 ])),
                                       ),
                                     ],
@@ -146,7 +146,7 @@ class _PostTabState extends State<PostTab> {
                                 ),
                               ),
                               staggeredTileBuilder: (int index) =>
-                                  StaggeredTile.count(2, index.isEven ? 2.6 : 2),
+                                  StaggeredTile.count(2, index.isEven ? 2.8 : 2.1),
                               mainAxisSpacing: 23.h,
                               crossAxisSpacing: 23.w,
                             )),

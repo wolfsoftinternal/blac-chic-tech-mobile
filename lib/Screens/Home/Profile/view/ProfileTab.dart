@@ -67,7 +67,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         SizedBox(
                           height: 32.h,
                         ),
-                        controller.details.value.pastJobs!.length > 1
+                        controller.details.value.pastJobs!.isNotEmpty
                             ? Padding(
                           padding:  EdgeInsets.only(bottom: 16.h),
                           child: Container(
@@ -109,8 +109,8 @@ class _ProfileTabState extends State<ProfileTab> {
                                             child: Row(
                                               children: [
                                                 CircularProfileAvatar(
-                                '',
-                                radius: 20.5,
+                                                  '',
+                                                  radius: 20.5,
                                                   child: controller
                                                       .details
                                                       .value
@@ -185,7 +185,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                                   padding:
                                                   EdgeInsets
                                                       .only(
-                                                      left: 12.w),
+                                                      left: 12.w, right: 8.w),
                                                   child: setHelveticaMedium(
                                                       controller
                                                           .details
@@ -201,12 +201,12 @@ class _ProfileTabState extends State<ProfileTab> {
                                                               .pastJobs![
                                                           index]
                                                               .companyName!,
-                                                      16.sp,
+                                                      15.sp,
                                                       grey_aaaaaa,
                                                       FontWeight.w500,
                                                       FontStyle
                                                           .normal,
-                                                      -0.28),
+                                                      -0.28, 2),
                                                 )
                                                     : Container(),
                                               ],

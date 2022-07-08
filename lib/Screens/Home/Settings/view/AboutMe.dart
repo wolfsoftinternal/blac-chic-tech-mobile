@@ -447,9 +447,7 @@ class _AboutMeState extends State<AboutMe> {
                                           fontStyle: FontStyle.normal,
                                           fontSize: 12.sp),
                                       textAlign: TextAlign.left),
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+                                  
                                   ListView.builder(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
@@ -457,7 +455,7 @@ class _AboutMeState extends State<AboutMe> {
                                       itemBuilder: (context, index) {
                                         return pastJob[index] == true
                                             ? Padding(
-                                                padding: EdgeInsets.only(
+                                                padding: EdgeInsets.only(top: 16.h,
                                                     bottom: 12.h),
                                                 child: Row(
                                                   children: [
@@ -553,360 +551,447 @@ class _AboutMeState extends State<AboutMe> {
                                                   ],
                                                 ),
                                               )
-                                            : Column(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                          child: InputTextLayoutDemo(
-                                                              "Title",
-                                                              pastCompanyTitleController[
-                                                                  index],
-                                                              false,
-                                                              TextInputAction
-                                                                  .next,
-                                                              TextInputType
-                                                                  .text,
-                                                              false)),
-                                                      SizedBox(
-                                                        width: 15.w,
-                                                      ),
-                                                      // Expanded(
-                                                      //     child: InkWell(
-                                                      // onTap: () {
-                                                      //   Get.to(const CompanyList(
-                                                      //           isFrom:
-                                                      //               'past_job'))!
-                                                      //       .then((value) {
-                                                      //     pastCompanyNameController[
-                                                      //             index] =
-                                                      //         stepsController
-                                                      //             .pastJobName
-                                                      //             .value;
-                                                      //     pastJobImage[
-                                                      //             index] =
-                                                      //         stepsController
-                                                      //             .pastJobImage
-                                                      //             .value;
-                                                      //     setState(() {});
-                                                      //   });
-                                                      // },
-                                                      //   child:
-                                                      //       InputTextLayoutDemo(
-                                                      //     "Company name",
-                                                      // pastCompanyNameController[
-                                                      //     index],
-                                                      //     false,
-                                                      //     TextInputAction.done,
-                                                      //     TextInputType.text,
-                                                      //     true,
-                                                      //     Container(
-                                                      //       // padding: const EdgeInsets.all(8.0),
-                                                      //   child: pastJobImage[
-                                                      //               index]
-                                                      //           .isEmpty
-                                                      //       ? SvgPicture
-                                                      //           .asset(
-                                                      //           placeholder,
-                                                      //           width: 15.w,
-                                                      //           height:
-                                                      //               15.h,
-                                                      //           fit: BoxFit
-                                                      //               .cover,
-                                                      //         )
-                                                      //       : CachedNetworkImage(
-                                                      //           imageUrl:
-                                                      //               pastJobImage[
-                                                      //                   index],
-                                                      //           width: 15.w,
-                                                      //           height:
-                                                      //               15.h,
-                                                      //           fit: BoxFit
-                                                      //               .cover,
-                                                      //           progressIndicatorBuilder: (context,
-                                                      //                   url,
-                                                      //                   downloadProgress) =>
-                                                      //               SvgPicture
-                                                      //                   .asset(
-                                                      //             placeholder,
-                                                      //             width:
-                                                      //                 15.w,
-                                                      //             height:
-                                                      //                 15.h,
-                                                      //             fit: BoxFit
-                                                      //                 .cover,
-                                                      //           ),
-                                                      //           errorWidget: (context,
-                                                      //                   url,
-                                                      //                   error) =>
-                                                      //               SvgPicture
-                                                      //                   .asset(
-                                                      //             placeholder,
-                                                      //             width:
-                                                      //                 15.w,
-                                                      //             height:
-                                                      //                 15.h,
-                                                      //             fit: BoxFit
-                                                      //                 .cover,
-                                                      //           ),
-                                                      //         ),
-                                                      // ),
-                                                      //   ),
-                                                      // )),
+                                            : Padding(
+                                              padding: EdgeInsets.only(top: 16.h),
+                                              child: Column(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                color:checkFillColor == false?
+                                                                checkColor == true?
+                                                                orange_ff881a:
+                                                                light_grey_f2f2f2:
+                                                                light_grey_f2f2f2,
+                                                              ),
+                                                              borderRadius:  BorderRadius.all(Radius.circular(4.r)),
+                                                              color: checkFillColor == false
+                                                                  ? checkColor == true
+                                                                  ? Colors.white
+                                                                  : light_grey_f2f2f2
+                                                                  : light_grey_f2f2f2,
+                                                            ),
+                                                            child: Padding(
+                                                              padding:  EdgeInsets.only(
+                                                                left: 16.w,
+                                                                right: 16.w,
+                                                                top: 8.h,
+                                                                  bottom: 7.h
+                                                              ),
+                                                              child: TextFormField(
+                                                                style:   TextStyle(
+                                                                    color: black_121212,
+                                                                    fontFamily: helveticaNeueNeue_medium,
+                                                                    fontSize: 14.sp,
+                                                                  fontWeight: FontWeight.w500,
+                                                                ),
+                                                                keyboardType: TextInputType.text,
+                                                                readOnly: false,
+                                                                decoration: InputDecoration(
+                                                                  contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                                                                  isDense: true,
+                                                                  // you can change this with the top text like you want
+                                                                  labelText: "Title",
+                                                                  labelStyle: const TextStyle(color: grey_aaaaaa,fontFamily: helveticaNeueNeue_medium,fontSize: 14),
+                                                                  hintStyle:  TextStyle(
+                                                                      color: black_121212, fontFamily: helveticaNeueNeue_medium,fontSize: 14.sp),
+                                                                  border: InputBorder.none,
+                                                                  filled: false,
+                                                                ),
+                                                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                                                // validator: (value) => validator(value),
+                                                                textInputAction: TextInputAction.next,
+                                                                controller: pastCompanyTitleController[index],
+                                                                cursorColor: black_121212,
+                                                                onEditingComplete: (){
+                                                                  FocusScope.of(context).unfocus();
+                                                                  FocusScope.of(context).nextFocus();
+                                                                },
+                                                                onChanged: (inputValue) {
+                                                                  if (inputValue.isNotEmpty) {
+                                                                    setState(() {
+                                                                      checkFillColor = false;
+                                                                      checkColor = true;
+                                                                    });
+                                                                  }
+                                                                  else {
+                                                                    setState(() {
+                                                                      checkFillColor = true;
+                                                                    });
+                                                                  }
+                                                                  for(int i = 0; i < pastJob.length; i++){
+                                                                    if(i != index){
+                                                                      pastJob[i] = true;
+                                                                    }
+                                                                  }
+                                                                },
+                                                                onFieldSubmitted : (String value) {
+                                                                  if(value.isNotEmpty){
+                                                                    setState(() {
+                                                                      checkFillColor = false;
+                                                                      checkColor = false;
+                                                                    });
+                                                                  }
+                                                                  else{
+                                                                    setState(() {
+                                                                      checkFillColor = true;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                ),
+                                                            ),
+                                                          ),
 
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            Get.to(const CompanyList(
-                                                                    isFrom:
-                                                                        'past_job'))!
-                                                                .then((value) {
-                                                              pastCompanyNameController[
-                                                                          index]
-                                                                      .text =
-                                                                  stepsController
-                                                                      .pastJobName
-                                                                      .value;
-                                                              pastJobImage[
-                                                                      index] =
-                                                                  stepsController
-                                                                      .pastJobImage
-                                                                      .value;
-                                                              setState(() {});
-                                                            });
-                                                          },
-                                                          child: Align(
-                                                            alignment: Alignment
-                                                                .centerLeft,
-                                                            child: Container(
-                                                              height:48.h,
-                                                              decoration: BoxDecoration(
-                                                                  color:
-                                                                      light_grey_f2f2f2,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4.r)),
-                                                              child: Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        left: 16
-                                                                            .w,
-                                                                        right: 16
-                                                                            .w,
-                                                                        ),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Column(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        // Company name
-                                                                        Text(
-                                                                            "Company name",
-                                                                            style: TextStyle(
-                                                                                color: grey_aaaaaa,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                fontFamily: helveticaNeueNeue_medium,
-                                                                                fontStyle: FontStyle.normal,
-                                                                                fontSize: 10.sp),
-                                                                            textAlign: TextAlign.left),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              5.h,
-                                                                        ),
-                                                                        // Netflix
-                                                                        Container(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width * 0.20.w,
-                                                                          child: Text(
-                                                                              pastCompanyNameController[index].text,
-                                                                              style: TextStyle(
-                                                                                color: black_121212,
-                                                                                fontFamily: helveticaNeueNeue_medium,
-                                                                                fontStyle: FontStyle.normal,
-                                                                                fontSize: 14.sp,
-                                                                                overflow: TextOverflow.ellipsis,
-                                                                              ),
-                                                                              textAlign: TextAlign.left),
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                    pastJobImage[index]
-                                                                            .isEmpty
-                                                                        ? SvgPicture
-                                                                            .asset(
-                                                                            placeholder,
-                                                                            width:
-                                                                                25.w,
-                                                                            height:
-                                                                                25.h,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          )
-                                                                        : CachedNetworkImage(
-                                                                            imageUrl:
-                                                                                pastJobImage[index],
-                                                                            width:
-                                                                                25.w,
-                                                                            height:
-                                                                                25.h,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                                                                SvgPicture.asset(
-                                                                              placeholder,
-                                                                              width: 25.w,
-                                                                              height: 25.h,
-                                                                              fit: BoxFit.cover,
-                                                                            ),
-                                                                            errorWidget: (context, url, error) =>
-                                                                                SvgPicture.asset(
-                                                                              placeholder,
-                                                                              width: 25.w,
-                                                                              height: 25.h,
-                                                                              fit: BoxFit.cover,
-                                                                            ),
+                                                          
+                                                        ),
+                                                        SizedBox(
+                                                          width: 15.w,
+                                                        ),
+                                                        // Expanded(
+                                                        //     child: InkWell(
+                                                        // onTap: () {
+                                                        //   Get.to(const CompanyList(
+                                                        //           isFrom:
+                                                        //               'past_job'))!
+                                                        //       .then((value) {
+                                                        //     pastCompanyNameController[
+                                                        //             index] =
+                                                        //         stepsController
+                                                        //             .pastJobName
+                                                        //             .value;
+                                                        //     pastJobImage[
+                                                        //             index] =
+                                                        //         stepsController
+                                                        //             .pastJobImage
+                                                        //             .value;
+                                                        //     setState(() {});
+                                                        //   });
+                                                        // },
+                                                        //   child:
+                                                        //       InputTextLayoutDemo(
+                                                        //     "Company name",
+                                                        // pastCompanyNameController[
+                                                        //     index],
+                                                        //     false,
+                                                        //     TextInputAction.done,
+                                                        //     TextInputType.text,
+                                                        //     true,
+                                                        //     Container(
+                                                        //       // padding: const EdgeInsets.all(8.0),
+                                                        //   child: pastJobImage[
+                                                        //               index]
+                                                        //           .isEmpty
+                                                        //       ? SvgPicture
+                                                        //           .asset(
+                                                        //           placeholder,
+                                                        //           width: 15.w,
+                                                        //           height:
+                                                        //               15.h,
+                                                        //           fit: BoxFit
+                                                        //               .cover,
+                                                        //         )
+                                                        //       : CachedNetworkImage(
+                                                        //           imageUrl:
+                                                        //               pastJobImage[
+                                                        //                   index],
+                                                        //           width: 15.w,
+                                                        //           height:
+                                                        //               15.h,
+                                                        //           fit: BoxFit
+                                                        //               .cover,
+                                                        //           progressIndicatorBuilder: (context,
+                                                        //                   url,
+                                                        //                   downloadProgress) =>
+                                                        //               SvgPicture
+                                                        //                   .asset(
+                                                        //             placeholder,
+                                                        //             width:
+                                                        //                 15.w,
+                                                        //             height:
+                                                        //                 15.h,
+                                                        //             fit: BoxFit
+                                                        //                 .cover,
+                                                        //           ),
+                                                        //           errorWidget: (context,
+                                                        //                   url,
+                                                        //                   error) =>
+                                                        //               SvgPicture
+                                                        //                   .asset(
+                                                        //             placeholder,
+                                                        //             width:
+                                                        //                 15.w,
+                                                        //             height:
+                                                        //                 15.h,
+                                                        //             fit: BoxFit
+                                                        //                 .cover,
+                                                        //           ),
+                                                        //         ),
+                                                        // ),
+                                                        //   ),
+                                                        // )),
+
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: InkWell(
+                                                            onTap: () {
+                                                              for(int i = 0; i < pastJob.length; i++){
+                                                                if(i != index){
+                                                                  pastJob[i] = true;
+                                                                }
+                                                              }
+                                                              Get.to(const CompanyList(
+                                                                      isFrom:
+                                                                          'past_job'))!
+                                                                  .then((value) {
+                                                                pastCompanyNameController[
+                                                                            index]
+                                                                        .text =
+                                                                    stepsController
+                                                                        .pastJobName
+                                                                        .value;
+                                                                pastJobImage[
+                                                                        index] =
+                                                                    stepsController
+                                                                        .pastJobImage
+                                                                        .value;
+                                                                setState(() {});
+                                                              });
+                                                            },
+                                                            child: Align(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              child: Container(
+                                                                height:48.h,
+                                                                decoration: BoxDecoration(
+                                                                    color:
+                                                                        light_grey_f2f2f2,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                4.r)),
+                                                                child: Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          left: 16
+                                                                              .w,
+                                                                          right: 16
+                                                                              .w,
                                                                           ),
-                                                                  ],
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment
+                                                                                .center,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          // Company name
+                                                                          Text(
+                                                                              "Company name",
+                                                                              style: TextStyle(
+                                                                                  color: grey_aaaaaa,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  fontFamily: helveticaNeueNeue_medium,
+                                                                                  fontStyle: FontStyle.normal,
+                                                                                  fontSize: 10.sp),
+                                                                              textAlign: TextAlign.left),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                5.h,
+                                                                          ),
+                                                                          // Netflix
+                                                                          Container(
+                                                                            width:
+                                                                                MediaQuery.of(context).size.width * 0.20.w,
+                                                                            child: Text(
+                                                                                pastCompanyNameController[index].text,
+                                                                                style: TextStyle(
+                                                                                  color: black_121212,
+                                                                                  fontFamily: helveticaNeueNeue_medium,
+                                                                                  fontStyle: FontStyle.normal,
+                                                                                  fontSize: 14.sp,
+                                                                                  overflow: TextOverflow.ellipsis,
+                                                                                ),
+                                                                                textAlign: TextAlign.left),
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                      pastJobImage[index]
+                                                                              .isEmpty
+                                                                          ? SvgPicture
+                                                                              .asset(
+                                                                              placeholder,
+                                                                              width:
+                                                                                  25.w,
+                                                                              height:
+                                                                                  25.h,
+                                                                              fit:
+                                                                                  BoxFit.cover,
+                                                                            )
+                                                                          : CachedNetworkImage(
+                                                                              imageUrl:
+                                                                                  pastJobImage[index],
+                                                                              width:
+                                                                                  25.w,
+                                                                              height:
+                                                                                  25.h,
+                                                                              fit:
+                                                                                  BoxFit.cover,
+                                                                              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                                                                  SvgPicture.asset(
+                                                                                placeholder,
+                                                                                width: 25.w,
+                                                                                height: 25.h,
+                                                                                fit: BoxFit.cover,
+                                                                              ),
+                                                                              errorWidget: (context, url, error) =>
+                                                                                  SvgPicture.asset(
+                                                                                placeholder,
+                                                                                width: 25.w,
+                                                                                height: 25.h,
+                                                                                fit: BoxFit.cover,
+                                                                              ),
+                                                                            ),
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 16.h,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      cards.length > 1
-                                                          ? Expanded(
-                                                              flex: 1,
-                                                              child:
-                                                                  GestureDetector(
-                                                                onTap: () {
-                                                                  cards.removeAt(
-                                                                      index);
-                                                                  pastCompanyNameController
-                                                                      .removeAt(
-                                                                          index);
-                                                                  pastCompanyTitleController
-                                                                      .removeAt(
-                                                                          index);
-                                                                  pastCompanyWebsiteController
-                                                                      .removeAt(
-                                                                          index);
-                                                                  pastJobImage
-                                                                      .removeAt(
-                                                                          index);
-                                                                  pastJob
-                                                                      .removeAt(
-                                                                          index);
-                                                                  setState(
-                                                                      () {});
-                                                                },
+                                                        )
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 16.h,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        cards.length > 1
+                                                            ? Expanded(
+                                                                flex: 1,
                                                                 child:
-                                                                    Container(
-                                                                  height: 40.h,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    border: Border.all(
-                                                                        width:
-                                                                            1,
-                                                                        color:
-                                                                            black_121212),
-                                                                    color:
-                                                                        white_ffffff,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            4.r),
-                                                                  ),
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                        "DELETE",
-                                                                        style: TextStyle(
-                                                                            color: const Color(
-                                                                                0xff121212),
-                                                                            fontWeight: FontWeight
-                                                                                .w700,
-                                                                            fontFamily:
-                                                                                "NeueHelvetica",
-                                                                            fontStyle: FontStyle
-                                                                                .normal,
-                                                                            fontSize: 12
-                                                                                .sp),
-                                                                        textAlign:
-                                                                            TextAlign.left),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                      cards.length > 1
-                                                          ? SizedBox(
-                                                              width: 15.w,
-                                                            )
-                                                          : Container(),
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            pastJob[index] =
-                                                                !pastJob[index];
-                                                            setState(() {});
-                                                          },
-                                                          child: Container(
-                                                            height: 40.h,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  black_121212,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4.r),
-                                                            ),
-                                                            child: Center(
-                                                              child: Text(
-                                                                  "SAVE",
-                                                                  style: TextStyle(
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    cards.removeAt(
+                                                                        index);
+                                                                    pastCompanyNameController
+                                                                        .removeAt(
+                                                                            index);
+                                                                    pastCompanyTitleController
+                                                                        .removeAt(
+                                                                            index);
+                                                                    pastCompanyWebsiteController
+                                                                        .removeAt(
+                                                                            index);
+                                                                    pastJobImage
+                                                                        .removeAt(
+                                                                            index);
+                                                                    pastJob
+                                                                        .removeAt(
+                                                                            index);
+                                                                    setState(
+                                                                        () {});
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    height: 40.h,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      border: Border.all(
+                                                                          width:
+                                                                              1,
+                                                                          color:
+                                                                              black_121212),
                                                                       color:
                                                                           white_ffffff,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
-                                                                      fontFamily:
-                                                                          "NeueHelvetica",
-                                                                      fontStyle:
-                                                                          FontStyle
-                                                                              .normal,
-                                                                      fontSize: 12
-                                                                          .sp),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              4.r),
+                                                                    ),
+                                                                    child: Center(
+                                                                      child: Text(
+                                                                          "DELETE",
+                                                                          style: TextStyle(
+                                                                              color: const Color(
+                                                                                  0xff121212),
+                                                                              fontWeight: FontWeight
+                                                                                  .w700,
+                                                                              fontFamily:
+                                                                                  "NeueHelvetica",
+                                                                              fontStyle: FontStyle
+                                                                                  .normal,
+                                                                              fontSize: 12
+                                                                                  .sp),
+                                                                          textAlign:
+                                                                              TextAlign.left),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Container(),
+                                                        cards.length > 1
+                                                            ? SizedBox(
+                                                                width: 15.w,
+                                                              )
+                                                            : Container(),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: GestureDetector(
+                                                            onTap: () {
+                                                              pastJob[index] =
+                                                                  !pastJob[index];
+                                                              setState(() {});
+                                                            },
+                                                            child: Container(
+                                                              height: 40.h,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color:
+                                                                    black_121212,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4.r),
+                                                              ),
+                                                              child: Center(
+                                                                child: Text(
+                                                                    "DONE",
+                                                                    style: TextStyle(
+                                                                        color:
+                                                                            white_ffffff,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w700,
+                                                                        fontFamily:
+                                                                            "NeueHelvetica",
+                                                                        fontStyle:
+                                                                            FontStyle
+                                                                                .normal,
+                                                                        fontSize: 12
+                                                                            .sp),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  // SizedBox(
-                                                  //   height: 16.h,
-                                                  // )
-                                                ],
-                                              );
+                                                      ],
+                                                    ),
+                                                    // SizedBox(
+                                                    //   height: 16.h,
+                                                    // )
+                                                  ],
+                                                ),
+                                            );
                                       }),
                                   SizedBox(
                                     height: 16.h,
@@ -1019,9 +1104,7 @@ class _AboutMeState extends State<AboutMe> {
                                           fontStyle: FontStyle.normal,
                                           fontSize: 12.sp),
                                       textAlign: TextAlign.left),
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+                                  
                                   ListView.builder(
                                     physics:
                                         const NeverScrollableScrollPhysics(),
@@ -1033,7 +1116,7 @@ class _AboutMeState extends State<AboutMe> {
                                       return education[index] == true
                                           ? Padding(
                                               padding:
-                                                  EdgeInsets.only(bottom: 12.h),
+                                                  EdgeInsets.only(bottom: 12.h, top: 16.h),
                                               child: Row(
                                                 children: [
                                                   // Project Manager @ Apple Inc
@@ -1073,227 +1156,106 @@ class _AboutMeState extends State<AboutMe> {
                                                 ],
                                               ),
                                             )
-                                          : Container(
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    height:
-                                                        48.h,
-                                                    decoration:
-                                                        EditTextDecoration,
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                        left: 12.w,
-                                                        right: 12.w,
-                                                      ),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(5.r),
-                                                              child:
-                                                                  setTextFieldNext(
-                                                                universityController[
-                                                                    index],
-                                                                "University/School",
-                                                                false,
-                                                                TextInputType
-                                                                    .name,
-                                                                false,
-                                                                "",
-                                                                TextInputAction
-                                                                    .next,
-                                                                (value) => {
-                                                                  // on Chnages
-                                                                },
-                                                                () {},
+                                          : Padding(
+                                            padding: EdgeInsets.only(top: 16.h),
+                                            child: Container(
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      height:
+                                                          48.h,
+                                                      decoration:
+                                                          EditTextDecoration,
+                                                      child: Padding(
+                                                        padding: EdgeInsets.only(
+                                                          left: 12.w,
+                                                          right: 12.w,
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(5.r),
+                                                                child:
+                                                                    setTextFieldNext(
+                                                                  universityController[
+                                                                      index],
+                                                                  "University/School",
+                                                                  false,
+                                                                  TextInputType
+                                                                      .name,
+                                                                  false,
+                                                                  "",
+                                                                  TextInputAction
+                                                                      .next,
+                                                                  (value) => {
+                                                                    // on Chnages
+                                                                    for(int i = 0; i < education.length; i++){
+                                                                    if(i != index){
+                                                                      education[i] = true
+                                                                    }
+                                                                  }
+
+                                                                  },
+                                                                  () {},
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 16.h,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: Container(
-                                                          height: 48.h,
-                                                          decoration:
-                                                              EditTextDecoration,
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 12.w,
-                                                                    right:
-                                                                        12.w),
-                                                            child: Row(
-                                                              children: [
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets
-                                                                        .all(5
-                                                                            .r),
-                                                                    child:
-                                                                        setDobTextFieldNext(
-                                                                      startyearController[
-                                                                          index],
-                                                                      "Start year",
-                                                                      false,
-                                                                      TextInputType
-                                                                          .name,
-                                                                      false,
-                                                                      "",
-                                                                      TextInputAction
-                                                                          .next,
-                                                                      (value) {},
-                                                                      () async {
-                                                                        DateTime?
-                                                                            pickedDate =
-                                                                            await showModalBottomSheet<DateTime>(
-                                                                          context:
-                                                                              context,
-                                                                          builder:
-                                                                              (context) {
-                                                                            DateTime?
-                                                                                tempPickedDate =
-                                                                                DateTime.now();
-                                                                            return SizedBox(
-                                                                              height: 250.h,
-                                                                              child: Column(
-                                                                                children: <Widget>[
-                                                                                  Container(
-                                                                                    child: Row(
-                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                      children: <Widget>[
-                                                                                        Padding(
-                                                                                          padding: EdgeInsets.only(left: 5.w),
-                                                                                          child: CupertinoButton(
-                                                                                            child: const Text(
-                                                                                              'Cancel',
-                                                                                              style: TextStyle(color: orange_ff881a),
-                                                                                            ),
-                                                                                            onPressed: () {
-                                                                                              Navigator.of(context).pop();
-                                                                                            },
-                                                                                          ),
-                                                                                        ),
-                                                                                        Padding(
-                                                                                          padding: EdgeInsets.only(right: 5.w),
-                                                                                          child: CupertinoButton(
-                                                                                            child: const Text('Done', style: TextStyle(color: orange_ff881a)),
-                                                                                            onPressed: () {
-                                                                                              Navigator.of(context).pop(tempPickedDate);
-                                                                                            },
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ),
-                                                                                  const Divider(
-                                                                                    height: 0,
-                                                                                    thickness: 1,
-                                                                                  ),
-                                                                                  Expanded(
-                                                                                    child: Container(
-                                                                                      child: YearPicker(
-                                                                                        firstDate: DateTime(DateTime.now().year - 100),
-                                                                                        lastDate: DateTime.now(),
-                                                                                        selectedDate: DateTime.now(),
-                                                                                        onChanged: (DateTime dateTime) {
-                                                                                          tempPickedDate = dateTime;
-                                                                                          startDate = dateTime;
-                                                                                          Navigator.of(context).pop(tempPickedDate);
-                                                                                        },
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            );
-                                                                          },
-                                                                        );
-                                                                        final DateFormat
-                                                                            formatter =
-                                                                            DateFormat('yyyy');
-                                                                        final String
-                                                                            formattedDate =
-                                                                            formatter.format(pickedDate!);
-
-                                                                        startyearController[index].text =
-                                                                            formattedDate;
-                                                                      },
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                SvgPicture
-                                                                    .asset(
-                                                                  icon_down_arrow_spinner,
-                                                                  width: 12.r,
-                                                                  height: 12.r,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
+                                                          ],
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 16.w,
-                                                      ),
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: Container(
-                                                          height: 48.h,
-                                                          decoration:
-                                                              EditTextDecoration,
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 12.w,
-                                                                    right:
-                                                                        12.w),
-                                                            child: Row(
-                                                              children: [
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets
-                                                                        .all(5
-                                                                            .r),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 16.h,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Container(
+                                                            height: 48.h,
+                                                            decoration:
+                                                                EditTextDecoration,
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsets.only(
+                                                                      left: 12.w,
+                                                                      right:
+                                                                          12.w),
+                                                              child: Row(
+                                                                children: [
+                                                                  Expanded(
+                                                                    flex: 1,
                                                                     child:
-                                                                        setDobTextFieldNext(
-                                                                      endyearController[
-                                                                          index],
-                                                                      "End year",
-                                                                      false,
-                                                                      TextInputType
-                                                                          .name,
-                                                                      false,
-                                                                      "",
-                                                                      TextInputAction
-                                                                          .next,
-                                                                      (value) {},
-                                                                      () async {
-                                                                        if (startyearController[index]
-                                                                            .text
-                                                                            .isEmpty) {
-                                                                          snackBar(
-                                                                              context,
-                                                                              'Enter start year');
-                                                                        } else {
+                                                                        Padding(
+                                                                      padding: EdgeInsets
+                                                                          .all(5
+                                                                              .r),
+                                                                      child:
+                                                                          setDobTextFieldNext(
+                                                                        startyearController[
+                                                                            index],
+                                                                        "Start year",
+                                                                        false,
+                                                                        TextInputType
+                                                                            .name,
+                                                                        false,
+                                                                        "",
+                                                                        TextInputAction
+                                                                            .next,
+                                                                        (value) {},
+                                                                        () async {
+                                                                          for(int i = 0; i < education.length; i++){
+                                                                            if(i != index){
+                                                                              education[i] = true;
+                                                                            }
+                                                                          }
                                                                           DateTime?
                                                                               pickedDate =
                                                                               await showModalBottomSheet<DateTime>(
@@ -1301,7 +1263,9 @@ class _AboutMeState extends State<AboutMe> {
                                                                                 context,
                                                                             builder:
                                                                                 (context) {
-                                                                              DateTime? tempPickedDate = DateTime.now();
+                                                                              DateTime?
+                                                                                  tempPickedDate =
+                                                                                  DateTime.now();
                                                                               return SizedBox(
                                                                                 height: 250.h,
                                                                                 child: Column(
@@ -1341,11 +1305,12 @@ class _AboutMeState extends State<AboutMe> {
                                                                                     Expanded(
                                                                                       child: Container(
                                                                                         child: YearPicker(
-                                                                                          firstDate: startDate == null ? DateTime.parse('${startyearController[index].value.text}-01-02') : startDate!,
-                                                                                          lastDate: DateTime(DateTime.now().year + 10),
+                                                                                          firstDate: DateTime(DateTime.now().year - 100),
+                                                                                          lastDate: DateTime.now(),
                                                                                           selectedDate: DateTime.now(),
-                                                                                          onChanged: (DateTime value) {
-                                                                                            tempPickedDate = value;
+                                                                                          onChanged: (DateTime dateTime) {
+                                                                                            tempPickedDate = dateTime;
+                                                                                            startDate = dateTime;
                                                                                             Navigator.of(context).pop(tempPickedDate);
                                                                                           },
                                                                                         ),
@@ -1363,148 +1328,286 @@ class _AboutMeState extends State<AboutMe> {
                                                                               formattedDate =
                                                                               formatter.format(pickedDate!);
 
-                                                                          endyearController[index].text =
+                                                                          startyearController[index].text =
                                                                               formattedDate;
-                                                                        }
-                                                                      },
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  SvgPicture
+                                                                      .asset(
+                                                                    icon_down_arrow_spinner,
+                                                                    width: 12.r,
+                                                                    height: 12.r,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 16.w,
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Container(
+                                                            height: 48.h,
+                                                            decoration:
+                                                                EditTextDecoration,
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsets.only(
+                                                                      left: 12.w,
+                                                                      right:
+                                                                          12.w),
+                                                              child: Row(
+                                                                children: [
+                                                                  Expanded(
+                                                                    flex: 1,
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsets
+                                                                          .all(5
+                                                                              .r),
+                                                                      child:
+                                                                          setDobTextFieldNext(
+                                                                        endyearController[
+                                                                            index],
+                                                                        "End year",
+                                                                        false,
+                                                                        TextInputType
+                                                                            .name,
+                                                                        false,
+                                                                        "",
+                                                                        TextInputAction
+                                                                            .next,
+                                                                        (value) {
+                                                                          for(int i = 0; i < education.length; i++){
+                                                                            if(i != index){
+                                                                              education[i] = true;
+                                                                            }
+                                                                          }
+                                                                        },
+                                                                        () async {
+                                                                          if (startyearController[index]
+                                                                              .text
+                                                                              .isEmpty) {
+                                                                            snackBar(
+                                                                                context,
+                                                                                'Enter start year');
+                                                                          } else {
+                                                                            DateTime?
+                                                                                pickedDate =
+                                                                                await showModalBottomSheet<DateTime>(
+                                                                              context:
+                                                                                  context,
+                                                                              builder:
+                                                                                  (context) {
+                                                                                DateTime? tempPickedDate = DateTime.now();
+                                                                                return SizedBox(
+                                                                                  height: 250.h,
+                                                                                  child: Column(
+                                                                                    children: <Widget>[
+                                                                                      Container(
+                                                                                        child: Row(
+                                                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                          children: <Widget>[
+                                                                                            Padding(
+                                                                                              padding: EdgeInsets.only(left: 5.w),
+                                                                                              child: CupertinoButton(
+                                                                                                child: const Text(
+                                                                                                  'Cancel',
+                                                                                                  style: TextStyle(color: orange_ff881a),
+                                                                                                ),
+                                                                                                onPressed: () {
+                                                                                                  Navigator.of(context).pop();
+                                                                                                },
+                                                                                              ),
+                                                                                            ),
+                                                                                            Padding(
+                                                                                              padding: EdgeInsets.only(right: 5.w),
+                                                                                              child: CupertinoButton(
+                                                                                                child: const Text('Done', style: TextStyle(color: orange_ff881a)),
+                                                                                                onPressed: () {
+                                                                                                  Navigator.of(context).pop(tempPickedDate);
+                                                                                                },
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                      const Divider(
+                                                                                        height: 0,
+                                                                                        thickness: 1,
+                                                                                      ),
+                                                                                      Expanded(
+                                                                                        child: Container(
+                                                                                          child: YearPicker(
+                                                                                            firstDate: startDate == null ? DateTime.parse('${startyearController[index].value.text}-01-02') : startDate!,
+                                                                                            lastDate: DateTime(DateTime.now().year + 10),
+                                                                                            selectedDate: DateTime.now(),
+                                                                                            onChanged: (DateTime value) {
+                                                                                              tempPickedDate = value;
+                                                                                              Navigator.of(context).pop(tempPickedDate);
+                                                                                            },
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                            );
+                                                                            final DateFormat
+                                                                                formatter =
+                                                                                DateFormat('yyyy');
+                                                                            final String
+                                                                                formattedDate =
+                                                                                formatter.format(pickedDate!);
+
+                                                                            endyearController[index].text =
+                                                                                formattedDate;
+                                                                          }
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  SvgPicture
+                                                                      .asset(
+                                                                    icon_down_arrow_spinner,
+                                                                    width: 12.r,
+                                                                    height: 12.r,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 16.h,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        cardsEducation.length > 1
+                                                            ? Expanded(
+                                                                flex: 1,
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    cardsEducation
+                                                                        .removeAt(
+                                                                            index);
+                                                                    universityController
+                                                                        .removeAt(
+                                                                            index);
+                                                                    startyearController
+                                                                        .removeAt(
+                                                                            index);
+                                                                    endyearController
+                                                                        .removeAt(
+                                                                            index);
+                                                                    education
+                                                                        .removeAt(
+                                                                            index);
+                                                                    setState(
+                                                                        () {});
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    height: 40,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      border: Border.all(
+                                                                          width:
+                                                                              1,
+                                                                          color:
+                                                                              black_121212),
+                                                                      color:
+                                                                          white_ffffff,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              4.r),
+                                                                    ),
+                                                                    child: Center(
+                                                                      child: Text(
+                                                                          "DELETE",
+                                                                          style: TextStyle(
+                                                                              color: const Color(
+                                                                                  0xff121212),
+                                                                              fontWeight: FontWeight
+                                                                                  .w700,
+                                                                              fontFamily:
+                                                                                  "NeueHelvetica",
+                                                                              fontStyle: FontStyle
+                                                                                  .normal,
+                                                                              fontSize: 12
+                                                                                  .sp),
+                                                                          textAlign:
+                                                                              TextAlign.left),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                SvgPicture
-                                                                    .asset(
-                                                                  icon_down_arrow_spinner,
-                                                                  width: 12.r,
-                                                                  height: 12.r,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 16.h,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      cardsEducation.length > 1
-                                                          ? Expanded(
-                                                              flex: 1,
-                                                              child:
-                                                                  GestureDetector(
-                                                                onTap: () {
-                                                                  cardsEducation
-                                                                      .removeAt(
-                                                                          index);
-                                                                  universityController
-                                                                      .removeAt(
-                                                                          index);
-                                                                  startyearController
-                                                                      .removeAt(
-                                                                          index);
-                                                                  endyearController
-                                                                      .removeAt(
-                                                                          index);
-                                                                  education
-                                                                      .removeAt(
-                                                                          index);
-                                                                  setState(
-                                                                      () {});
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  height: 40,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    border: Border.all(
-                                                                        width:
-                                                                            1,
-                                                                        color:
-                                                                            black_121212),
-                                                                    color:
-                                                                        white_ffffff,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
+                                                              )
+                                                            : Container(),
+                                                        cardsEducation.length > 1
+                                                            ? SizedBox(
+                                                                width: 15.w,
+                                                              )
+                                                            : Container(),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: GestureDetector(
+                                                            onTap: () {
+                                                              education[index] =
+                                                                  !education[
+                                                                      index];
+                                                              setState(() {});
+                                                            },
+                                                            child: Container(
+                                                              height: 40.h,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color:
+                                                                    black_121212,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
                                                                             4.r),
-                                                                  ),
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                        "DELETE",
-                                                                        style: TextStyle(
-                                                                            color: const Color(
-                                                                                0xff121212),
-                                                                            fontWeight: FontWeight
-                                                                                .w700,
-                                                                            fontFamily:
-                                                                                "NeueHelvetica",
-                                                                            fontStyle: FontStyle
-                                                                                .normal,
-                                                                            fontSize: 12
-                                                                                .sp),
-                                                                        textAlign:
-                                                                            TextAlign.left),
-                                                                  ),
-                                                                ),
                                                               ),
-                                                            )
-                                                          : Container(),
-                                                      cardsEducation.length > 1
-                                                          ? SizedBox(
-                                                              width: 15.w,
-                                                            )
-                                                          : Container(),
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            education[index] =
-                                                                !education[
-                                                                    index];
-                                                            setState(() {});
-                                                          },
-                                                          child: Container(
-                                                            height: 40.h,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  black_121212,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4.r),
-                                                            ),
-                                                            child: Center(
-                                                              child: Text(
-                                                                  "SAVE",
-                                                                  style: TextStyle(
-                                                                      color:
-                                                                          white_ffffff,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
-                                                                      fontFamily:
-                                                                          "NeueHelvetica",
-                                                                      fontStyle:
-                                                                          FontStyle
-                                                                              .normal,
-                                                                      fontSize: 12
-                                                                          .sp),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left),
+                                                              child: Center(
+                                                                child: Text(
+                                                                    "DONE",
+                                                                    style: TextStyle(
+                                                                        color:
+                                                                            white_ffffff,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w700,
+                                                                        fontFamily:
+                                                                            "NeueHelvetica",
+                                                                        fontStyle:
+                                                                            FontStyle
+                                                                                .normal,
+                                                                        fontSize: 12
+                                                                            .sp),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  // SizedBox(
-                                                  //   height: 16.h,
-                                                  // )
-                                                ],
+                                                      ],
+                                                    ),
+                                                    // SizedBox(
+                                                    //   height: 16.h,
+                                                    // )
+                                                  ],
+                                                ),
                                               ),
-                                            );
+                                          );
                                     },
                                   ),
                                   SizedBox(
@@ -1642,8 +1745,13 @@ class _AboutMeState extends State<AboutMe> {
                                                               TextAlign.left)),
                                               InkWell(
                                                 onTap: () {
-                                                  controller.about.value =
-                                                      !controller.about.value;
+                                                  controller.about.value = !controller.about.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques2.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.additional.value = true;
                                                 },
                                                 child: SvgPicture.asset(
                                                   icon_edit_blue,
@@ -1794,9 +1902,13 @@ class _AboutMeState extends State<AboutMe> {
                                                                         .left)),
                                                     InkWell(
                                                       onTap: () {
-                                                        controller.ques1.value =
-                                                            !controller
-                                                                .ques1.value;
+                                                        controller.ques1.value = !controller.ques1.value;
+                                                        controller.ques2.value = true;
+                                                        controller.ques3.value = true;
+                                                        controller.ques4.value = true;
+                                                        controller.ques5.value = true;
+                                                        controller.additional.value = true;
+                                                        controller.about.value = true;
                                                       },
                                                       child: SvgPicture.asset(
                                                         icon_edit_blue,
@@ -1847,7 +1959,8 @@ class _AboutMeState extends State<AboutMe> {
                                                             fontStyle: FontStyle
                                                                 .normal,
                                                             fontSize: 14.sp),
-                                                        maxLines: null,
+                                                        maxLines: 10,
+                                                        minLines: 1,
                                                         decoration:
                                                             InputDecoration(
                                                           contentPadding:
@@ -1964,9 +2077,13 @@ class _AboutMeState extends State<AboutMe> {
                                                                         .left)),
                                                     InkWell(
                                                       onTap: () {
-                                                        controller.ques2.value =
-                                                            !controller
-                                                                .ques2.value;
+                                                        controller.ques2.value = !controller.ques2.value;
+                                                        controller.ques1.value = true;
+                                                        controller.ques3.value = true;
+                                                        controller.ques4.value = true;
+                                                        controller.ques5.value = true;
+                                                        controller.additional.value = true;
+                                                        controller.about.value = true;
                                                       },
                                                       child: SvgPicture.asset(
                                                         icon_edit_blue,
@@ -2017,7 +2134,8 @@ class _AboutMeState extends State<AboutMe> {
                                                             fontStyle: FontStyle
                                                                 .normal,
                                                             fontSize: 14.sp),
-                                                        maxLines: null,
+                                                        maxLines: 10,
+                                                        minLines: 1,
                                                         decoration:
                                                             InputDecoration(
                                                           contentPadding:
@@ -2137,6 +2255,12 @@ class _AboutMeState extends State<AboutMe> {
                                                         controller.ques3.value =
                                                             !controller
                                                                 .ques3.value;
+                                                        controller.ques1.value = true;
+                                                        controller.ques2.value = true;
+                                                        controller.ques4.value = true;
+                                                        controller.ques5.value = true;
+                                                        controller.additional.value = true;
+                                                        controller.about.value = true;
                                                       },
                                                       child: SvgPicture.asset(
                                                         icon_edit_blue,
@@ -2187,7 +2311,8 @@ class _AboutMeState extends State<AboutMe> {
                                                             fontStyle: FontStyle
                                                                 .normal,
                                                             fontSize: 14.sp),
-                                                        maxLines: null,
+                                                        maxLines: 10,
+                                                        minLines: 1,
                                                         decoration:
                                                             InputDecoration(
                                                           contentPadding:
@@ -2307,6 +2432,12 @@ class _AboutMeState extends State<AboutMe> {
                                                         controller.ques4.value =
                                                             !controller
                                                                 .ques4.value;
+                                                                controller.ques1.value = true;
+                                                        controller.ques3.value = true;
+                                                        controller.ques2.value = true;
+                                                        controller.ques5.value = true;
+                                                        controller.additional.value = true;
+                                                        controller.about.value = true;
                                                       },
                                                       child: SvgPicture.asset(
                                                         icon_edit_blue,
@@ -2357,7 +2488,8 @@ class _AboutMeState extends State<AboutMe> {
                                                             fontStyle: FontStyle
                                                                 .normal,
                                                             fontSize: 14.sp),
-                                                        maxLines: null,
+                                                        maxLines: 10,
+                                                        minLines: 1,
                                                         decoration:
                                                             InputDecoration(
                                                           contentPadding:
@@ -2477,6 +2609,12 @@ class _AboutMeState extends State<AboutMe> {
                                                         controller.ques5.value =
                                                             !controller
                                                                 .ques5.value;
+                                                                controller.ques1.value = true;
+                                                        controller.ques3.value = true;
+                                                        controller.ques4.value = true;
+                                                        controller.ques2.value = true;
+                                                        controller.additional.value = true;
+                                                        controller.about.value = true;
                                                       },
                                                       child: SvgPicture.asset(
                                                         icon_edit_blue,
@@ -2527,7 +2665,8 @@ class _AboutMeState extends State<AboutMe> {
                                                             fontStyle: FontStyle
                                                                 .normal,
                                                             fontSize: 14.sp),
-                                                        maxLines: null,
+                                                        maxLines: 10,
+                                                        minLines: 1,
                                                         decoration:
                                                             InputDecoration(
                                                           contentPadding:
@@ -2653,6 +2792,12 @@ class _AboutMeState extends State<AboutMe> {
                                                             !controller
                                                                 .additional
                                                                 .value;
+                                                                controller.ques1.value = true;
+                                                        controller.ques3.value = true;
+                                                        controller.ques4.value = true;
+                                                        controller.ques5.value = true;
+                                                        controller.ques2.value = true;
+                                                        controller.about.value = true;
                                                       },
                                                       child: SvgPicture.asset(
                                                         icon_edit_blue,
@@ -2703,7 +2848,8 @@ class _AboutMeState extends State<AboutMe> {
                                                             fontStyle: FontStyle
                                                                 .normal,
                                                             fontSize: 14.sp),
-                                                        maxLines: null,
+                                                        maxLines: 10,
+                                                        minLines: 1,
                                                         decoration:
                                                             InputDecoration(
                                                           contentPadding:

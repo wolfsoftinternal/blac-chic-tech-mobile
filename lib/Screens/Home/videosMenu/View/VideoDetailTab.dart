@@ -27,30 +27,37 @@ class VideoDetailTab extends StatefulWidget {
   _VideoDetailTabState createState() => _VideoDetailTabState();
 }
 
-class _VideoDetailTabState extends State<VideoDetailTab> {
+class _VideoDetailTabState extends State<VideoDetailTab>
+    with SingleTickerProviderStateMixin {
   VideoMenuController controller = Get.find<VideoMenuController>();
   bool? button1, button2;
   bool fullScreen = false;
+  bool isAdded = false;
+  TabController? tabController;
+  int activeIndex = 0;
 
   @override
   void initState() {
-     initScrolling(context);
+    initScrolling(context);
+    tabController = TabController(length: 2, vsync: this);
+    tabController!.addListener(() {
+      activeIndex = tabController!.index;
+    });
     if (mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         controller.playerController.clear();
         controller.videoDetailsList.clear();
         controller.isLoading.value = false;
         controller.videoDetailsAPI(id: widget.videoList.id);
-        controller.videoListDetailApi(videoListData: widget.videoList, id: widget.videoList.id);
+        controller.videoListDetailApi(
+            videoListData: widget.videoList, id: widget.videoList.id);
 
         controller.isLoadingButton.value = false;
-       
       });
     }
     // TODO: implement initState
     super.initState();
   }
-
 
   initScrolling(BuildContext context) {
     controller.scrollListDetailController.addListener(() async {
@@ -63,12 +70,11 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
       }
     });
   }
-  
 
   void scrollDown() {
-    controller.scrollListDetailController.jumpTo(controller.scrollListDetailController.position.maxScrollExtent);
+    controller.scrollListDetailController
+        .jumpTo(controller.scrollListDetailController.position.maxScrollExtent);
   }
-
 
   @override
   void dispose() {
@@ -99,7 +105,9 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 35.h,),
+            SizedBox(
+              height: 35.h,
+            ),
             if (fullScreen == false)
               SizedBox(
                 height: 5.h,
@@ -180,8 +188,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                     });
                                   },
                                   player: YoutubePlayer(
-                                    controller:
-                                        controller.playerController[0],
+                                    controller: controller.playerController[0],
                                   ),
                                   builder: (context, player) {
                                     return Column(
@@ -193,7 +200,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                             ),
                       if (fullScreen == false)
                         Container(
-                          margin:  EdgeInsets.all(24.r),
+                          margin: EdgeInsets.all(24.r),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.r),
                               gradient: const LinearGradient(
@@ -214,6 +221,8 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                               children: [
                                 SvgPicture.asset(
                                   icon_add_play_list,
+                                  color:
+                                      isAdded == true ? white : gray_b3ffffff,
                                   width: 24.w,
                                   height: 24.h,
                                 ),
@@ -230,8 +239,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                         ? const Align(
                                             alignment: Alignment.centerLeft,
                                             child: Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 8),
+                                              padding: EdgeInsets.only(left: 8),
                                               child: SizedBox(
                                                   width: 15,
                                                   height: 15,
@@ -247,20 +255,23 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                           )
                                         : InkWell(
                                             onTap: () {
-                                              controller.addToPlatList(
-                                                  context: context,
-                                                  videoId: controller
-                                                      .videoDetail.value.id);
+                                              setState(() {
+                                                isAdded = true;
+                                                controller.addToPlatList(
+                                                    context: context,
+                                                    videoId: controller
+                                                        .videoDetail.value.id);
+                                              });
                                             },
-                                            child: Text("Add to list",
+                                            child: Text(
+                                                isAdded == true
+                                                    ? "Added"
+                                                    : "Add to list",
                                                 style: TextStyle(
                                                     color: white_ffffff,
-                                                    fontWeight:
-                                                        FontWeight.w700,
-                                                    fontFamily:
-                                                        "NeueHelvetica",
-                                                    fontStyle:
-                                                        FontStyle.normal,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontFamily: roboto_bold,
+                                                    fontStyle: FontStyle.normal,
                                                     fontSize: 14.sp),
                                                 textAlign: TextAlign.left),
                                           ),
@@ -301,8 +312,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                     controller.videoDetail.value.likeCount ==
                                             null
                                         ? ""
-                                        : controller
-                                            .videoDetail.value.likeCount
+                                        : controller.videoDetail.value.likeCount
                                             .toString(),
                                     style: TextStyle(
                                         color: white_ffffff,
@@ -443,8 +453,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                     width: 24.w,
                                   ),
                                   Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -458,7 +467,8 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                               style: TextStyle(
                                                   color: black_121212,
                                                   fontWeight: FontWeight.w700,
-                                                  fontFamily: helvetica_neu_bold,
+                                                  fontFamily:
+                                                      helvetica_neu_bold,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 16.sp),
                                               textAlign: TextAlign.left),
@@ -497,7 +507,8 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                           style: TextStyle(
                                               color: const Color(0xff3f3f3f),
                                               fontWeight: FontWeight.w500,
-                                              fontFamily: helveticaNeueNeue_medium,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 12.sp),
                                           textAlign: TextAlign.left)
@@ -519,10 +530,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                       if (fullScreen == false)
                         Padding(
                           padding: EdgeInsets.only(
-                              left: 24.w,
-                              right: 24.w,
-                              top: 16.h,
-                              bottom: 16.h),
+                              left: 24.w, right: 24.w, top: 16.h, bottom: 16.h),
                           child: Text(
                               controller.videoDetail.value.embededCode == null
                                   ? ""
@@ -548,10 +556,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                         Container(
                           height: 200.h,
                           margin: EdgeInsets.only(
-                              left: 24.w,
-                              right: 24.w,
-                              top: 16.h,
-                              bottom: 16.h),
+                              left: 24.w, right: 24.w, top: 16.h, bottom: 16.h),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.r),
                               color: const Color(0x80f2f2f2),
@@ -571,6 +576,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                   unselectedLabelColor: grey_aaaaaa,
                                   labelPadding: EdgeInsets.symmetric(
                                       horizontal: 15.0, vertical: 0),
+                                  indicatorPadding: EdgeInsets.zero,
                                   tabs: <Widget>[
                                     Tab(
                                       child: // DETAILS
@@ -597,8 +603,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                 body: TabBarView(
                                   children: <Widget>[
                                     Container(
-                                      child: SafeArea(
-                                          child: Scaffold(
+                                      child: Scaffold(
                                         backgroundColor:
                                             const Color(0x80f2f2f2),
                                         body: Padding(
@@ -611,6 +616,10 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                // Container(
+                                                //   color: grey_e8e8e8,
+                                                //   height: 1,
+                                                // ),
                                                 SizedBox(
                                                   height: 24.h,
                                                 ),
@@ -619,39 +628,38 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                                     text: TextSpan(children: [
                                                   const TextSpan(
                                                       style: TextStyle(
-                                                          color: Color(
-                                                              0xff3f3f3f),
+                                                          color:
+                                                              Color(0xff3f3f3f),
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           fontFamily:
                                                               "NeueHelvetica",
-                                                          fontStyle: FontStyle
-                                                              .normal,
+                                                          fontStyle:
+                                                              FontStyle.normal,
                                                           fontSize: 12.0),
-                                                      text:
-                                                          "Black Chic Tech "),
+                                                      text: "Black Chic Tech "),
                                                   const TextSpan(
                                                       style: TextStyle(
-                                                          color: Color(
-                                                              0xff3f3f3f),
+                                                          color:
+                                                              Color(0xff3f3f3f),
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontFamily:
                                                               "NeueHelvetica",
-                                                          fontStyle: FontStyle
-                                                              .normal,
+                                                          fontStyle:
+                                                              FontStyle.normal,
                                                           fontSize: 12.0),
                                                       text: " "),
                                                   TextSpan(
                                                       style: const TextStyle(
-                                                          color: Color(
-                                                              0xffaaaaaa),
+                                                          color:
+                                                              Color(0xffaaaaaa),
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontFamily:
                                                               "NeueHelvetica",
-                                                          fontStyle: FontStyle
-                                                              .normal,
+                                                          fontStyle:
+                                                              FontStyle.normal,
                                                           fontSize: 12.0),
                                                       text: controller
                                                                   .videoDetail
@@ -661,8 +669,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                                               "null"
                                                           ? ""
                                                           : "| " +
-                                                              DateFormat
-                                                                      .yMMMM()
+                                                              DateFormat.yMMMM()
                                                                   .format(DateTime.parse(controller
                                                                       .videoDetail
                                                                       .value
@@ -677,16 +684,12 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
 
                                                 // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Elementum ut morbi nulla nisl montes, id pe
                                                 Text(
-                                                    controller
-                                                                .videoDetail
-                                                                .value
+                                                    controller.videoDetail.value
                                                                 .embededCode ==
                                                             null
                                                         ? ""
-                                                        : controller
-                                                            .videoDetail
-                                                            .value
-                                                            .description!
+                                                        : controller.videoDetail
+                                                            .value.description!
                                                             .toString(),
                                                     style: const TextStyle(
                                                         color:
@@ -703,7 +706,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                             ),
                                           ),
                                         ),
-                                      )),
+                                      ),
                                     ),
                                     Container(
                                       child: SafeArea(
@@ -718,47 +721,54 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                                     bottom: 16),
                                                 child: Wrap(
                                                   children: controller.result
-                                                      .map(
-                                                          (element) =>
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        8.0),
-                                                                child:
-                                                                    Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
+                                                      .map((element) => Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
                                                                             50.r),
-                                                                    color: const Color(
-                                                                        0xff1c2535),
-                                                                  ),
-                                                                  child: // Africans
-                                                                      Padding(
-                                                                    padding: EdgeInsets.only(
+                                                                color: const Color(
+                                                                    0xff1c2535),
+                                                              ),
+                                                              child: // Africans
+                                                                  Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
                                                                         left: 16
                                                                             .w,
                                                                         right: 16
                                                                             .w,
-                                                                        top: 8
-                                                                            .h,
+                                                                        top:
+                                                                            8.h,
                                                                         bottom:
                                                                             8.h),
-                                                                    child: Text(
-                                                                        element
-                                                                            .toString(),
-                                                                        style: TextStyle(
-                                                                            color: white_ffffff,
-                                                                            fontWeight: FontWeight.w700,
-                                                                            fontFamily: "NeueHelvetica",
-                                                                            fontStyle: FontStyle.normal,
-                                                                            fontSize: 12.sp),
-                                                                        textAlign: TextAlign.left),
-                                                                  ),
-                                                                ),
-                                                              ))
+                                                                child: Text(
+                                                                    element
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        color:
+                                                                            white_ffffff,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w700,
+                                                                        fontFamily:
+                                                                            "NeueHelvetica",
+                                                                        fontStyle:
+                                                                            FontStyle
+                                                                                .normal,
+                                                                        fontSize: 12
+                                                                            .sp),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left),
+                                                              ),
+                                                            ),
+                                                          ))
                                                       .toList(),
                                                 ))),
                                       ),
@@ -767,6 +777,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                 ),
                               )),
                         ),
+
                       if (fullScreen == false)
                         Container(
                             width: double.infinity,
@@ -775,7 +786,7 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                 const BoxDecoration(color: view_line_f4f6f6)),
                       if (fullScreen == false)
                         Padding(
-                          padding:  EdgeInsets.all(24.r),
+                          padding: EdgeInsets.all(24.r),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -799,8 +810,8 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                       ListView.builder(
                                           shrinkWrap: true,
                                           primary: false,
-                                          itemCount:
-                                              controller.videoDetailsList.length ,
+                                          itemCount: controller
+                                              .videoDetailsList.length,
                                           padding: EdgeInsets.zero,
                                           itemBuilder: (context, i) {
                                             // if (i <
@@ -808,208 +819,208 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                             //         .videoDetailsList.length) {
                                             //   print(
                                             //       "::::::::::::UPDATE 00:::::::::::");
-                                              return Padding(
-                                                padding:
-                                                    EdgeInsets.only(bottom: 20.h),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    controller.detailsVideoPage
-                                                        .value = 1;
-                                                    // Get.back();
-                                                    Navigator.pushReplacement<
-                                                        void, void>(
-                                                      context,
-                                                      MaterialPageRoute<void>(
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            VideoDetailTab(
-                                                                videoList: controller
-                                                                    .videoDetailsList[i]),
-                                                      ),
-                                                    );
-                                                  },
-                                                  child: SizedBox(
-                                                      width: double.infinity,
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Stack(
-                                                            alignment: Alignment
-                                                                .bottomRight,
-                                                            children: [
-                                                              SizedBox(
-                                                                height: 80.h,
-                                                                width: 120.w,
-                                                                child: FittedBox(
-                                                                  fit:
-                                                                      BoxFit.fill,
+                                            return Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 20.h),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  controller.detailsVideoPage
+                                                      .value = 1;
+                                                  // Get.back();
+                                                  Navigator.pushReplacement<
+                                                      void, void>(
+                                                    context,
+                                                    MaterialPageRoute<void>(
+                                                      builder: (BuildContext
+                                                              context) =>
+                                                          VideoDetailTab(
+                                                              videoList: controller
+                                                                  .videoDetailsList[i]),
+                                                    ),
+                                                  );
+                                                },
+                                                child: SizedBox(
+                                                    width: double.infinity,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Stack(
+                                                          alignment: Alignment
+                                                              .bottomRight,
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 66.h,
+                                                              width: 110.w,
+                                                              child: FittedBox(
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                                child:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              15.r)),
                                                                   child:
-                                                                      ClipRRect(
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(
-                                                                                15.r)),
-                                                                    child:
-                                                                        YoutubePlayerBuilder(
-                                                                            player:
-                                                                                YoutubePlayer(
-                                                                              controller:
-                                                                                  controller.videoDetailsNextController[i],
-                                                                            ),
-                                                                            builder:
-                                                                                (context, player) {
-                                                                              return Column(
-                                                                                children: [
-                                                                                  player,
-                                                                                ],
-                                                                              );
-                                                                            }),
-                                                                  ),
+                                                                      YoutubePlayerBuilder(
+                                                                          player:
+                                                                              YoutubePlayer(
+                                                                            controller:
+                                                                                controller.videoDetailsNextController[i],
+                                                                          ),
+                                                                          builder:
+                                                                              (context, player) {
+                                                                            return Column(
+                                                                              children: [
+                                                                                player,
+                                                                              ],
+                                                                            );
+                                                                          }),
                                                                 ),
                                                               ),
-                                                              Positioned(
-                                                                  top: 20,
-                                                                  right: 42,
-                                                                  child: SvgPicture
-                                                                      .asset(
-                                                                          icon_play)),
-                                                              // Positioned(
-                                                              //   bottom: 2,
-                                                              //   right: 3,
-                                                              //   child: Container(
-                                                              //     margin:
-                                                              //         EdgeInsets.only(
-                                                              //             right: 6.w,
-                                                              //             bottom: 6.h),
-                                                              //     padding: EdgeInsets
-                                                              //         .symmetric(
-                                                              //             vertical:
-                                                              //                 1.5.h,
-                                                              //             horizontal:
-                                                              //                 6.w),
-                                                              //     decoration:
-                                                              //         BoxDecoration(
-                                                              //       borderRadius:
-                                                              //           BorderRadius
-                                                              //               .circular(
-                                                              //                   4),
-                                                              //       gradient:
-                                                              //           const LinearGradient(
-                                                              //         begin: Alignment
-                                                              //             .topCenter,
-                                                              //         end: Alignment
-                                                              //             .bottomCenter,
-                                                              //         colors: [
-                                                              //           Color(
-                                                              //               0xff1c2535),
-                                                              //           Color(
-                                                              //               0xff04080f)
-                                                              //         ],
-                                                              //         stops: [0.0, 5.0],
-                                                              //       ),
-                                                              //     ),
-                                                              //     child: Text(
-                                                              //       "3.05",
-                                                              //       style: TextStyle(
-                                                              //           fontSize: 11.sp,
-                                                              //           color: Colors
-                                                              //               .white,
-                                                              //           fontFamily:
-                                                              //               helveticaNeueNeue_medium),
-                                                              //     ),
-                                                              //   ),
-                                                              // ),
-                                                            ],
-                                                          ),
-                                                          Expanded(
-                                                            child: Container(
-                                                              margin:
-                                                                  EdgeInsets.only(
-                                                                      left: 8.w,
-                                                                      right:
-                                                                          10.w),
-                                                              child: Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  SizedBox(
-                                                                    height: 3.h,
-                                                                  ),
-                                                                  Text(
-                                                                    controller
-                                                                        .videoDetailsList[
-                                                                            i]
-                                                                        .title
-                                                                        .toString(),
-                                                                    softWrap:
-                                                                        true,
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    maxLines: 2,
-                                                                    style: const TextStyle(
-                                                                        fontFamily:
-                                                                            helvetica_neu_bold,
-                                                                        color:
-                                                                            black_121212,
-                                                                        fontSize:
-                                                                            14),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 8.h,
-                                                                  ),
-                                                                  Text(
-                                                                    controller
-                                                                        .videoDetailsList[
-                                                                            i]
-                                                                        .userDetails!
-                                                                        .fullName
-                                                                        .toString(),
-                                                                    style: const TextStyle(
-                                                                        fontFamily:
-                                                                            helveticaNeueNeue_medium,
-                                                                        color:
-                                                                            opcity_black_121212,
-                                                                        fontSize:
-                                                                            10),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 2.h,
-                                                                  ),
-                                                                  Text(
-                                                                    "Posted " +
-                                                                        DateFormat
-                                                                                .yMMMM()
-                                                                            .format(DateTime.parse(controller
-                                                                                .videoDetailsList[i]
-                                                                                .createdAt
-                                                                                .toString()))
-                                                                            .toString(),
-                                                                    style: const TextStyle(
-                                                                        fontFamily:
-                                                                            helveticaNeueNeue_medium,
-                                                                        color:
-                                                                            opcity_black_121212,
-                                                                        fontSize:
-                                                                            8),
-                                                                  ),
-                                                                ],
-                                                              ),
+                                                            ),
+                                                            Positioned(
+                                                                top: 20,
+                                                                right: 42,
+                                                                child: SvgPicture
+                                                                    .asset(
+                                                                        icon_play)),
+                                                            // Positioned(
+                                                            //   bottom: 2,
+                                                            //   right: 3,
+                                                            //   child: Container(
+                                                            //     margin:
+                                                            //         EdgeInsets.only(
+                                                            //             right: 6.w,
+                                                            //             bottom: 6.h),
+                                                            //     padding: EdgeInsets
+                                                            //         .symmetric(
+                                                            //             vertical:
+                                                            //                 1.5.h,
+                                                            //             horizontal:
+                                                            //                 6.w),
+                                                            //     decoration:
+                                                            //         BoxDecoration(
+                                                            //       borderRadius:
+                                                            //           BorderRadius
+                                                            //               .circular(
+                                                            //                   4),
+                                                            //       gradient:
+                                                            //           const LinearGradient(
+                                                            //         begin: Alignment
+                                                            //             .topCenter,
+                                                            //         end: Alignment
+                                                            //             .bottomCenter,
+                                                            //         colors: [
+                                                            //           Color(
+                                                            //               0xff1c2535),
+                                                            //           Color(
+                                                            //               0xff04080f)
+                                                            //         ],
+                                                            //         stops: [0.0, 5.0],
+                                                            //       ),
+                                                            //     ),
+                                                            //     child: Text(
+                                                            //       "3.05",
+                                                            //       style: TextStyle(
+                                                            //           fontSize: 11.sp,
+                                                            //           color: Colors
+                                                            //               .white,
+                                                            //           fontFamily:
+                                                            //               helveticaNeueNeue_medium),
+                                                            //     ),
+                                                            //   ),
+                                                            // ),
+                                                          ],
+                                                        ),
+                                                        Expanded(
+                                                          child: Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    left: 8.w,
+                                                                    right:
+                                                                        10.w),
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                // SizedBox(
+                                                                //   height: 3.h,
+                                                                // ),
+                                                                Text(
+                                                                  controller
+                                                                      .videoDetailsList[
+                                                                          i]
+                                                                      .title
+                                                                      .toString(),
+                                                                  softWrap:
+                                                                      true,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  maxLines: 1,
+                                                                  style: const TextStyle(
+                                                                      fontFamily:
+                                                                          helvetica_neu_bold,
+                                                                      color:
+                                                                          black_121212,
+                                                                      fontSize:
+                                                                          14),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 8.h,
+                                                                ),
+                                                                Text(
+                                                                  controller
+                                                                      .videoDetailsList[
+                                                                          i]
+                                                                      .userDetails!
+                                                                      .fullName
+                                                                      .toString(),
+                                                                  style: const TextStyle(
+                                                                      fontFamily:
+                                                                          helveticaNeueNeue_medium,
+                                                                      color:
+                                                                          opcity_black_121212,
+                                                                      fontSize:
+                                                                          10),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 2.h,
+                                                                ),
+                                                                Text(
+                                                                  "Posted " +
+                                                                      DateFormat
+                                                                              .yMMMM()
+                                                                          .format(DateTime.parse(controller
+                                                                              .videoDetailsList[i]
+                                                                              .createdAt
+                                                                              .toString()))
+                                                                          .toString(),
+                                                                  style: const TextStyle(
+                                                                      fontFamily:
+                                                                          helveticaNeueNeue_medium,
+                                                                      color:
+                                                                          opcity_black_121212,
+                                                                      fontSize:
+                                                                          8),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
-                                                        ],
-                                                      )),
-                                                ),
-                                              );
+                                                        ),
+                                                      ],
+                                                    )),
+                                              ),
+                                            );
                                             // } else {
                                             //   return controller.hasMore.value ==
                                             //           true
@@ -1042,38 +1053,40 @@ class _VideoDetailTabState extends State<VideoDetailTab> {
                                             //                           0xff04080f),
                                             //                     ))),
                                             //       );
-                                                  // ? const SizedBox()
-                                                  // : Container(
-                                                  //     margin: EdgeInsets.only(
-                                                  //         bottom: 25.h),
-                                                  //     child: Center(
-                                                  //       child: TextButton(
-                                                  //         onPressed: () {
-                                                  //           controller
-                                                  //               .detailsVideoPage
-                                                  //               .value++;
-                                                  //           controller
-                                                  //               .videoDetailsListMethod(
-                                                  //                   videoListData:
-                                                  //                       widget
-                                                  //                           .videoList);
-                                                  //         },
-                                                  //         child: Text(
-                                                  //           "Load More",
-                                                  //           style: TextStyle(
-                                                  //               fontFamily:
-                                                  //                   roboto_bold,
-                                                  //               fontSize: 14.sp,
-                                                  //               color:
-                                                  //                   blue_0a84ff),
-                                                  //         ),
-                                                  //       ),
-                                                  //     ),
-                                                  //   );
+                                            // ? const SizedBox()
+                                            // : Container(
+                                            //     margin: EdgeInsets.only(
+                                            //         bottom: 25.h),
+                                            //     child: Center(
+                                            //       child: TextButton(
+                                            //         onPressed: () {
+                                            //           controller
+                                            //               .detailsVideoPage
+                                            //               .value++;
+                                            //           controller
+                                            //               .videoDetailsListMethod(
+                                            //                   videoListData:
+                                            //                       widget
+                                            //                           .videoList);
+                                            //         },
+                                            //         child: Text(
+                                            //           "Load More",
+                                            //           style: TextStyle(
+                                            //               fontFamily:
+                                            //                   roboto_bold,
+                                            //               fontSize: 14.sp,
+                                            //               color:
+                                            //                   blue_0a84ff),
+                                            //         ),
+                                            //       ),
+                                            //     ),
+                                            //   );
                                             // }
                                           }),
-                                      if (controller.isPaginationLoading.value == true)
-                                      PaginationUtils().loader(),
+                                      if (controller
+                                              .isPaginationLoading.value ==
+                                          true)
+                                        PaginationUtils().loader(),
                                     ],
                                   ),
                                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../Styles/my_colors.dart';
 import '../Styles/my_height.dart';
 import '../Utilities/TextUtilities.dart';
@@ -49,7 +50,7 @@ class CommonElevatedButtonSecond extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: 0, vertical: 21),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
-                side: BorderSide(color: skygreen_24d39e, width: 0),
+                side: BorderSide(color: black, width: 0),
               ),
             )),
       ),

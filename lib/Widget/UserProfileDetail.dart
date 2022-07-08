@@ -267,7 +267,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.circular(4.r),
-                        color: grey_94ffffff,
+                        color: Color(0x33121212),
                       ),
                       child: Padding(
                         padding:  EdgeInsets.only(top: 8.h, bottom: 8.h, left: 16.w, right: 16.w),
