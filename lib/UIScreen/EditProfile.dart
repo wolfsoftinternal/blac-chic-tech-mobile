@@ -81,7 +81,7 @@ class _EditProfileState extends State<EditProfile> {
                                     _firstnameController,
                                     false,
                                     TextInputAction.next,
-                                    TextInputType.text, false
+                                    TextInputType.text, false,
                                 )),
                             SizedBox(
                               width: 8.w,

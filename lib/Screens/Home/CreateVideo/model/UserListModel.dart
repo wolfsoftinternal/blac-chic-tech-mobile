@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+
 UserListModel userListModelFromJson(String str) => UserListModel.fromJson(json.decode(str));
 
 String userListModelToJson(UserListModel data) => json.encode(data.toJson());
@@ -62,6 +64,9 @@ class UserList {
         this.isSpeakerSelected,
         this.isHostSelected,
         this.is_invited,
+        this.cityDetails,
+        this.stateDetails,
+        this.countryDetails,
     });
 
     dynamic id;
@@ -88,6 +93,9 @@ class UserList {
     bool? isSpeakerSelected;
     bool? isHostSelected;
     int? is_invited;
+    Details? countryDetails;
+    Details? stateDetails;
+    Details? cityDetails;
 
     factory UserList.fromJson(Map<String, dynamic> json) => UserList(
         id: json["id"],
@@ -112,6 +120,9 @@ class UserList {
         isAdmire : json["is_admire"],
         currentJobs: json["current_jobs"] == null ? null : CurrentJobs.fromJson(json["current_jobs"]),
         is_invited: json["is_invited"] == null ? null : json["is_invited"],
+        countryDetails: json["country_details"] == null ? null : Details.fromJson(json["country_details"]),
+        stateDetails: json["state_details"] == null ? null : Details.fromJson(json["state_details"]),
+        cityDetails: json["city_details"] == null ? null : Details.fromJson(json["city_details"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -136,6 +147,9 @@ class UserList {
         "website": website,
         "current_jobs": currentJobs!.toJson(),
         "is_invited": is_invited,
+        "country_details": countryDetails == null ? null : countryDetails!.toJson(),
+        "state_details": stateDetails == null ? null : stateDetails!.toJson(),
+        "city_details": cityDetails == null ? null : cityDetails!.toJson(),
     };
 }
 
@@ -194,3 +208,4 @@ class CurrentJobs {
         "deleted_at": deletedAt,
     };
 }
+

@@ -828,7 +828,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
 
   Obx SeeAllAdmiresWidget(userId) {
     return Obx(() => Padding(
-        padding: EdgeInsets.only(left: 24.w, right: 24.w),
+        padding: EdgeInsets.only(left: 24.w, right: 15.w),
         child: Row(
           children: [
             setHelceticaBold(

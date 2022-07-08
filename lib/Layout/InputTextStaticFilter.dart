@@ -207,7 +207,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                     ),
                   ),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       if (_hasBeenPressednBidNow = !_hasBeenPressednBidNow) {

@@ -96,24 +96,24 @@ class _EventDetailState extends State<EventDetail> {
   }
 
   getLoc() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    // bool _serviceEnabled;
+    // PermissionStatus _permissionGranted;
 
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
+    // _serviceEnabled = await location.serviceEnabled();
+    // if (!_serviceEnabled) {
+    //   _serviceEnabled = await location.requestService();
+    //   if (!_serviceEnabled) {
+    //     return;
+    //   }
+    // }
 
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
+    // _permissionGranted = await location.hasPermission();
+    // if (_permissionGranted == PermissionStatus.denied) {
+    //   _permissionGranted = await location.requestPermission();
+    //   if (_permissionGranted != PermissionStatus.granted) {
+    //     return;
+    //   }
+    // }
 
     // checking internet
     checkNet(context).then((value) async {
@@ -398,7 +398,7 @@ class _EventDetailState extends State<EventDetail> {
                                    SizedBox(
                                     height: 24.h,
                                   ),
-                                  BlackButton('PAY \$${controller.finalTotal.value}',
+                                  BlackButton(controller.isWallet.value == true ? 'Pay Now' : 'PAY \$${controller.finalTotal.value}',
                                       white_ffffff, () {
                                     checkNet(context).then((value) {
                                       String eventId = controller
@@ -1235,7 +1235,7 @@ class _EventDetailState extends State<EventDetail> {
                                       child: setHelveticaMedium(
                                           '${DateFormat("MMM dd, yyyy").format(controller.eventDetails.value.startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventDetails.value.startDateTime!)}',
                                           10.sp,
-                                          grey_aaaaaa,
+                                          black_121212,
                                           FontWeight.w500,
                                           FontStyle.normal,
                                           -0.4),
@@ -1257,7 +1257,7 @@ class _EventDetailState extends State<EventDetail> {
                                       child: setHelveticaMedium(
                                           controller.eventDetails.value.venue!,
                                           10.sp,
-                                          grey_aaaaaa,
+                                          black_121212,
                                           FontWeight.w500,
                                           FontStyle.normal,
                                           -0.4),
@@ -1665,11 +1665,11 @@ class _EventDetailState extends State<EventDetail> {
                           const EdgeInsets.only(top: 15.0, left: 24, right: 24),
                       child: ReadMoreText(
                         controller.eventDetails.value.details!,
-                        trimLines: 2,
+                        trimLines: 4,
                         colorClickableText: orange_ff881a,
                         trimMode: TrimMode.Line,
-                        trimCollapsedText: '  Read More',
-                        trimExpandedText: '  Read Less',
+                        trimCollapsedText: '\nRead More...',
+                        trimExpandedText: '\nRead Less',
                         delimiter: '',
                         style: TextStyle(
                             height: 1.5,

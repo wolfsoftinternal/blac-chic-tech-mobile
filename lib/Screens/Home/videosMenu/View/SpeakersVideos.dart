@@ -173,8 +173,8 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                                   alignment: Alignment.center,
                                                   children: [
                                                     SizedBox(
-                                                                height: 56.h,
-                                                                width: 100.w,
+                                                                height: 66.h,
+                                                              width: 110.w,
                                                                 child: FittedBox(
                                                                   fit: BoxFit.fill,
                                                                   child: ClipRRect(
@@ -234,9 +234,9 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        SizedBox(
-                                                          height: 3.h,
-                                                        ),
+                                                        // SizedBox(
+                                                        //   height: 3.h,
+                                                        // ),
                                                         Text(
                                                           controller
                                                               .speakerList[
@@ -247,7 +247,7 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                                           overflow:
                                                               TextOverflow
                                                                   .ellipsis,
-                                                          maxLines: 2,
+                                                          maxLines: 1,
                                                           style: const TextStyle(
                                                               fontFamily:
                                                                   helvetica_neu_bold,
