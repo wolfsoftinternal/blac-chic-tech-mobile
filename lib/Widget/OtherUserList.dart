@@ -100,11 +100,14 @@ class _OtherUserListState extends State<OtherUserList> {
                     height: MediaQuery.of(context).size.width * 0.13,
                     child: FittedBox(
                       child: setHelceticaBold(
-                          widget.otherUser.firstName != null
+                          widget.otherUser.firstName != null && widget.otherUser.lastName != null
                               ? widget.otherUser.firstName!
                                   .toUpperCase()
-                              : ""  +  widget.otherUser.lastName!
-                                  .toUpperCase(),
+                                +  widget.otherUser.lastName!
+                                  .toUpperCase()  : widget.otherUser.firstName != null
+                          ? widget.otherUser.firstName!
+                              .toUpperCase() :  widget.otherUser.lastName != null ? widget.otherUser.lastName!
+                              .toUpperCase() : "",
                           40.sp,
                           white_ffffff,
                           FontWeight.w600,
@@ -124,11 +127,13 @@ class _OtherUserListState extends State<OtherUserList> {
                   Expanded(
                     child: Text(
                       widget.otherUser.currentJobs != null
-                          ? widget.otherUser.currentJobs!.title != null && widget.otherUser.currentJobs!.companyName != null ? "${widget.otherUser.currentJobs!.title!.toUpperCase()} - ${widget.otherUser.currentJobs!.companyName!.toUpperCase()}" : ""
+                          ? widget.otherUser.currentJobs!.title != null && widget.otherUser.currentJobs!.companyName != null ? "${widget.otherUser.currentJobs!.title!.toUpperCase()} - ${widget.otherUser.currentJobs!.companyName!.toUpperCase()}"
                               // widget.otherUser.currentJobs!
                               //     .companyName!
                               //     .toUpperCase()
-                          : "",
+                          : widget.otherUser.currentJobs!.title != null ? widget.otherUser.currentJobs!.title!.toUpperCase()
+                          : widget.otherUser.currentJobs!.companyName != null ? widget.otherUser.currentJobs!.companyName!.toUpperCase() : ""
+                      : "",
                       softWrap: true,
                       textAlign: TextAlign.center,
                       style:  TextStyle(

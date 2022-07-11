@@ -235,14 +235,11 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                             //             .toUpperCase()
                             //     : "",
                             myModel?.data?.currentJobs != null
-                                ? myModel?.data?.currentJobs?.title ??
-                                    "".toUpperCase() +
-                                        ' - ' +
-                                        (myModel?.data?.currentJobs
-                                                    ?.companyName ??
-                                                "")
-                                            .toUpperCase()
-                                : "",
+                            ? myModel?.data?.currentJobs?.title != null && myModel?.data?.currentJobs?.companyName != null
+                                ? myModel?.data?.currentJobs?.title.toUpperCase() + ' - ' + myModel?.data?.currentJobs?.companyName.toUpperCase()
+                                : myModel?.data?.currentJobs?.title != null ?  myModel?.data?.currentJobs?.title.toUpperCase()
+                                : myModel?.data?.currentJobs?.companyName != null ? myModel?.data?.currentJobs?.companyName.toUpperCase() : ""
+                            : "",
                             softWrap: true,
                             textAlign: TextAlign.center,
                             style: TextStyle(

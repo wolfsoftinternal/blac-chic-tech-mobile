@@ -108,6 +108,11 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
             padding: const EdgeInsets.only(top: 10.0, left: 24.0, right: 24.0),
             child: Align(alignment: Alignment.centerLeft, child: setHelveticaMedium("You've used all 20 admires. Replace one of\nyour admire with ${controller.details.value.fullName}", 14, black, FontWeight.w500, FontStyle.normal)),
           ) : Container(),
+          widget.type == 'user'
+          ? Padding(
+            padding: const EdgeInsets.only(top: 10.0, left: 24.0, right: 24.0),
+            child: Align(alignment: Alignment.centerLeft, child: setHelveticaMedium("Drag and Drop to re-arrange admires", 14, black, FontWeight.w500, FontStyle.normal)),
+          ) : Container()
           Expanded(
             flex: 1,
             child: SingleChildScrollView(

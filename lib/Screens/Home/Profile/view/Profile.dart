@@ -261,8 +261,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     controller.details.value.fullName != null ||
-                                            controller
-                                                    .details.value.firstName !=
+                                            controller.details.value.firstName !=
                                                 null
                                         ? Padding(
                                             padding: EdgeInsets.only(top: 16.h),
@@ -274,10 +273,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 setHelceticaBold(
+                                            controller.details.value.fullName != null ?
                                                     controller.details.value
-                                                            .fullName ??
-                                                        controller.details.value
-                                                            .firstName ??
+                                                            .fullName.toString().capitalizeFirst
+                                                       : controller.details.value.firstName != null
+                                                        ? controller.details.value
+                                                            .firstName.toString().capitalizeFirst :
                                                         "",
                                                     24.sp,
                                                     black_121212,
@@ -419,13 +420,13 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                               .details
                                                               .value
                                                               .currentJobs!
-                                                              .title! +
+                                                              .title!.toString().capitalizeFirst +
                                                           ' @' +
                                                           controller
                                                               .details
                                                               .value
                                                               .currentJobs!
-                                                              .companyName!,
+                                                              .companyName!.toString().capitalizeFirst,
                                                       16,
                                                       grey_3f3f3f,
                                                       FontWeight.w500,
@@ -436,8 +437,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                         : Container(),
                                     controller.details.value.currentJobs != null
                                         ? controller.details.value.currentJobs!
-                                                    .website !=
-                                                null
+                                                    .website != null
                                             ? Align(
                                                 alignment: Alignment.topLeft,
                                                 child: setHelveticaMedium(
@@ -445,8 +445,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                             .details
                                                             .value
                                                             .currentJobs!
-                                                            .website ??
-                                                        "",
+                                                            .website ?? "",
                                                     12.sp,
                                                     blue_0a84ff,
                                                     FontWeight.w500,
@@ -454,29 +453,29 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                               )
                                             : Container()
                                         : Container(),
-                                    controller.details.value.aboutUs != null
-                                        ? Padding(
-                                            padding: EdgeInsets.only(top: 5.h),
-                                            child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.85,
-                                                child: setHelveticaMedium(
-                                                    controller
-                                                        .details.value.aboutUs!,
-                                                    12.sp,
-                                                    grey_aaaaaa,
-                                                    FontWeight.w500,
-                                                    FontStyle.normal,
-                                                    0.1,
-                                                    3),
-                                              ),
-                                            ),
-                                          )
-                                        : Container(),
+                                    // controller.details.value.aboutUs != null
+                                    //     ? Padding(
+                                    //         padding: EdgeInsets.only(top: 5.h),
+                                    //         child: Align(
+                                    //           alignment: Alignment.topLeft,
+                                    //           child: Container(
+                                    //             width: MediaQuery.of(context)
+                                    //                     .size
+                                    //                     .width *
+                                    //                 0.85,
+                                    //             child: setHelveticaMedium(
+                                    //                 controller
+                                    //                     .details.value.aboutUs!,
+                                    //                 12.sp,
+                                    //                 grey_aaaaaa,
+                                    //                 FontWeight.w500,
+                                    //                 FontStyle.normal,
+                                    //                 0.1,
+                                    //                 3),
+                                    //           ),
+                                    //         ),
+                                    //       )
+                                    //     : Container(),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.86,
