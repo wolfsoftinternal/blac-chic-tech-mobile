@@ -49,7 +49,7 @@ class _PostGalleryPickerState extends State<PostGalleryPicker> {
                       textAlign: TextAlign.left),
                   Stack(children: [
                     Positioned(top: 4, child: Icon(Icons.expand_more_rounded)),
-                    SizedBox(height: 30, width: 30, child: MultiAssetsPage()),
+                    SizedBox(height: 30, width: 30, child: MultiAssetsPage(30)),
                   ]),
                   Spacer(),
                   Container(

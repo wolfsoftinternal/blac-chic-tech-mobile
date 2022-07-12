@@ -8,18 +8,22 @@ import 'package:blackchecktech/Screens/Home/CreatePost/view/PostLocation.dart';
 import 'package:blackchecktech/Screens/Home/CreatePost/view/TagPeople.dart';
 import 'package:blackchecktech/Screens/Home/CreatePost/view/multi_assets_page.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
+import 'package:blackchecktech/Styles/global.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/AddLocationView.dart';
 import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:provider/provider.dart';
 
@@ -33,14 +37,15 @@ class CreatePost extends StatefulWidget {
 class _CreatePostState extends State<CreatePost> {
   VideoController videoController = Get.put(VideoController());
   PostController controller = Get.put(PostController());
+    PageController pageController = PageController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     videoController.userListAPI(context, true);
-    for(var item in videoController.userList){
-      if(item.isSpeakerSelected == true){
+    for (var item in videoController.userList) {
+      if (item.isSpeakerSelected == true) {
         item.isSpeakerSelected = false;
       }
     }
@@ -57,7 +62,8 @@ class _CreatePostState extends State<CreatePost> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 50.0, bottom: 20.0),
+                padding: const EdgeInsets.only(
+                    left: 24.0, right: 24.0, top: 50.0, bottom: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,22 +75,19 @@ class _CreatePostState extends State<CreatePost> {
                       child: Icon(
                         Icons.close,
                         size: 24,
-
                       ),
                     ),
-
                     Expanded(
                       flex: 1,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 30),
                         child: Stack(
                           alignment: Alignment.center,
-
                           children: [
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text('ALL PHOTOS',
+                                Text('CREATE A POST',
                                     style: TextStyle(
                                         color: black_121212,
                                         fontFamily: helvetica_neu_bold,
@@ -93,119 +96,341 @@ class _CreatePostState extends State<CreatePost> {
                                         letterSpacing: 0.7,
                                         fontSize: 16.sp),
                                     textAlign: TextAlign.left),
-                                Icon(Icons.expand_more_rounded),
+                                // Icon(Icons.expand_more_rounded),
                               ],
                             ),
-                            Container(height: 30, width: 148, child: MultiAssetsPage()),
+                            // Container(height: 30, width: 148, child: MultiAssetsPage()),
                           ],
                         ),
                       ),
                     ),
-
-                    InkWell(
-                      onTap: () {
-                        if (controller.captionController.value.text.isEmpty) {
-                          snackBar(context, 'Enter Caption');
-                        } else if (controller.assetImages.isEmpty) {
-                          snackBar(context, 'Select image');
-                        } else {
-                          checkNet(context).then((value) {
-                            controller.createPostAPI(context);
-                          });
-                        }
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: orange_ff881a),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 16, top: 8, bottom: 8),
-                          child: Text('POST',
-                              style: const TextStyle(
-                                  color: Color(0xffffffff),
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: helveticaNeueNeue_medium,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12.0),
-                              textAlign: TextAlign.left),
-                        ),
-                      ),
-                    ),
+                    controller.assetImages.isEmpty
+                        ? Container(
+                            width: 48.w,
+                          )
+                        : InkWell(
+                            onTap: () {
+                              checkNet(context).then((value) {
+                                controller.createPostAPI(context);
+                              });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: orange_ff881a),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16, right: 16, top: 8, bottom: 8),
+                                child: Text('POST',
+                                    style: const TextStyle(
+                                        color: Color(0xffffffff),
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.0),
+                                    textAlign: TextAlign.left),
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),
-              
+
               Stack(
                 alignment: Alignment.bottomLeft,
                 children: [
-                  controller.assetImages.length > 0
-                      ?
-                      Image.file(
-                        File(
-                          controller.assetImages[0].relativePath.toString().contains('/storage/emulated/0/')
-                          ? (controller.assetImages[0].relativePath ?? "") + "/" + (controller.assetImages[0].title ?? "")
-                          : '/storage/emulated/0/' + (controller.assetImages[0].relativePath ?? "") + "/" + (controller.assetImages[0].title ?? "")
-                        ),
-                        width: double.infinity,
-                        height: 375.h,
-                        fit: BoxFit.cover,
-                      )
-                      : Image.asset(
-                          img_girl,
-                          height: 375.h,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(TagPeople());
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.all(24.r),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          gradient: LinearGradient(
-                              colors: const [
-                                Color(0xFF1c2535),
-                                Color(0xFF04080f),
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: const [0.0, 1.0],
-                              tileMode: TileMode.clamp),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(10.r),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.person_add,
-                                size: 15,
-                                color: Colors.white,
+                  Stack(
+                    children: [
+                      controller.assetImages.length > 0
+                      // ? PageView.builder(
+                      //             // physics: const NeverScrollableScrollPhysics(),
+                      //             controller: pageController,
+                      //             itemCount: controller.assetImages.length,
+                      //             itemBuilder:
+                      //                 (BuildContext context, int index) {
+                      //               return Container(
+                      //                 child: 
+                                      ?Image.file(
+                                            File(controller.assetImages[0].relativePath
+                                                    .toString()
+                                                    .contains(
+                                                        '/storage/emulated/0/')
+                                                ? (controller.assetImages[0]
+                                                            .relativePath ??
+                                                        "") +
+                                                    "/" +
+                                                    (controller.assetImages[0].title ??
+                                                        "")
+                                                : '/storage/emulated/0/' +
+                                                    (controller.assetImages[0]
+                                                            .relativePath ??
+                                                        "") +
+                                                    "/" +
+                                                    (controller.assetImages[0].title ??
+                                                        "")),
+                                            width: double.infinity,
+                                            height: 375.h,
+                                            fit: BoxFit.cover,
+                                          )
+                                  //   );
+                                  // })
+                          // ? Container(
+                          //   width: double.infinity,
+                          //   height: 375.h,
+                          //   child: PageView.builder(
+                          //     controller: _controller,
+                          //       itemCount: controller.assetImages.length,
+                          //       itemBuilder: (context, index) {
+                                  // return Container(
+                                  //     child: Image.file(
+                                  //           File(controller.assetImages[index].relativePath
+                                  //                   .toString()
+                                  //                   .contains(
+                                  //                       '/storage/emulated/0/')
+                                  //               ? (controller.assetImages[index]
+                                  //                           .relativePath ??
+                                  //                       "") +
+                                  //                   "/" +
+                                  //                   (controller.assetImages[index].title ??
+                                  //                       "")
+                                  //               : '/storage/emulated/0/' +
+                                  //                   (controller.assetImages[index]
+                                  //                           .relativePath ??
+                                  //                       "") +
+                                  //                   "/" +
+                                  //                   (controller.assetImages[index].title ??
+                                  //                       "")),
+                                  //           width: double.infinity,
+                                  //           height: 375.h,
+                                  //           fit: BoxFit.cover,
+                                  //         ),
+                                  //   );
+                          //       }
+                          //     ),
+                          // )
+                          : Container(
+                              height: 375.h,
+                              width: double.infinity,
+                              child: Image.asset(
+                                post_image,
                               ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              // Tag People
-                              Text("Tag People",
-                                  style: const TextStyle(
-                                      color: Color(0xffffffff),
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: "NeueHelvetica",
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 12.0),
-                                  textAlign: TextAlign.left)
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                            ),
+                      Center(
+                          child: Container(
+                              height: 375.h,
+                              width: double.infinity,
+                              child: MultiAssetsPage(375.h))),
+                    ],
                   ),
+                  controller.assetImages.isEmpty
+                      ? Container()
+                      : Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(TagPeople());
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 24.r,
+                                    bottom: 24.r,
+                                    top: 24.r,
+                                    right: 15.r),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    gradient: LinearGradient(
+                                        colors: const [
+                                          Color(0xFF1c2535),
+                                          Color(0xFF04080f),
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        stops: const [0.0, 1.0],
+                                        tileMode: TileMode.clamp),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10.r),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.person_add,
+                                          size: 15,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                        // Tag People
+                                        Text("Tag People",
+                                            style: const TextStyle(
+                                                color: Color(0xffffffff),
+                                                fontWeight: FontWeight.w900,
+                                                fontFamily: "NeueHelvetica",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.left)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Container(
+                                height: 35.h,
+                                width: getWidth(context) * 0.58,
+                                child: ListView.separated(
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                          width: 8.w,
+                                        ),
+                                    padding: EdgeInsets.only(
+                                      right: 24.w,
+                                    ),
+                                    itemCount: controller.selectedList.length,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, i) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(4.r),
+                                          gradient: LinearGradient(
+                                              colors: [
+                                                Color(0xFF1c2535)
+                                                    .withOpacity(0.5),
+                                                Color(0xFF04080f)
+                                                    .withOpacity(0.5),
+                                              ],
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                  controller.selectedList[i]
+                                                              .userName !=
+                                                          null
+                                                      ? controller
+                                                          .selectedList[i]
+                                                          .userName!
+                                                      : controller
+                                                          .selectedList[i]
+                                                          .firstName!,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontFamily:
+                                                          helvetica_neu_bold,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 12.sp),
+                                                  textAlign: TextAlign.left),
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              GestureDetector(
+                                                  onTap: () {
+                                                    if (controller.selectedList
+                                                            .length ==
+                                                        1) {
+                                                      controller.selectedList
+                                                          .clear();
+                                                      for (var item
+                                                          in videoController
+                                                              .userList) {
+                                                        if (item.isSpeakerSelected ==
+                                                            true) {
+                                                          item.isSpeakerSelected =
+                                                              false;
+                                                        }
+                                                      }
+                                                    } else {
+                                                      if (controller
+                                                              .selectedList[i]
+                                                              .id ==
+                                                          null) {
+                                                        controller.selectedList
+                                                            .remove(controller
+                                                                .selectedList[i]);
+                                                      } else {
+                                                        var selectedIndex =
+                                                            controller
+                                                                .selectedList[i]
+                                                                .id;
+                                                        for (var item
+                                                            in videoController
+                                                                .userList) {
+                                                          if (selectedIndex ==
+                                                              item.id) {
+                                                            controller
+                                                                .selectedList
+                                                                .remove(item);
+                                                            item.isSpeakerSelected =
+                                                                false;
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  child: Icon(
+                                                    Icons.close,
+                                                    size: 15,
+                                                    color: white_ffffff,
+                                                  ))
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              ),
+                            ),
+                          ],
+                        ),
                 ],
               ),
+              controller.assetImages.isNotEmpty
+                  ? Container()
+                  : Padding(
+                      padding: EdgeInsets.only(bottom: 24.h),
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Container(
+                              height: 40.h,
+                              width: 150.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  color: orange),
+                              child: Center(
+                                  child: setHelveticaMedium(
+                                      'Upload Image',
+                                      14.sp,
+                                      white,
+                                      FontWeight.w500,
+                                      FontStyle.normal)),
+                            ),
+                          ),
+                          Center(
+                              child: Container(
+                                  height: 40.h,
+                                  width: 150.w,
+                                  child: MultiAssetsPage(40.h))),
+                        ],
+                      ),
+                    ),
+              controller.assetImages.isNotEmpty
+                  ? Container()
+                  : Container(
+                      height: 1,
+                      color: grey_f5f5f5,
+                    ),
               Padding(
                 padding: EdgeInsets.all(24.0),
                 child: Column(

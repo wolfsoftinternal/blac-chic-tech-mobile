@@ -102,7 +102,7 @@ class _OtherUserListState extends State<OtherUserList> {
                       child: setHelceticaBold(
                           widget.otherUser.firstName != null && widget.otherUser.lastName != null
                               ? widget.otherUser.firstName!
-                                  .toUpperCase()
+                                  .toUpperCase() + " "
                                 +  widget.otherUser.lastName!
                                   .toUpperCase()  : widget.otherUser.firstName != null
                           ? widget.otherUser.firstName!

@@ -112,7 +112,7 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
           ? Padding(
             padding: const EdgeInsets.only(top: 10.0, left: 24.0, right: 24.0),
             child: Align(alignment: Alignment.centerLeft, child: setHelveticaMedium("Drag and Drop to re-arrange admires", 14, black, FontWeight.w500, FontStyle.normal)),
-          ) : Container()
+          ) : Container(),
           Expanded(
             flex: 1,
             child: SingleChildScrollView(
