@@ -95,3 +95,4 @@ const green_circle_check = 'assets/images/green_circle_check.svg';
 const orange_circle_check = 'assets/images/orange_circle_check.svg';
 const oval_icon = 'assets/images/oval_icon.svg';
 const follow = 'assets/images/follow.svg';
+const post_image = 'assets/images/post_image.gif';

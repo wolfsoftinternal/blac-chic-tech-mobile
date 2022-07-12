@@ -273,13 +273,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 setHelceticaBold(
-                                            controller.details.value.fullName != null ?
-                                                    controller.details.value
-                                                            .fullName.toString().capitalizeFirst
-                                                       : controller.details.value.firstName != null
-                                                        ? controller.details.value
-                                                            .firstName.toString().capitalizeFirst :
-                                                        "",
+                                                  controller.details.value.fullName != null ?
+                                                  '${controller.details.value.fullName.toString().capitalize}':
+                                                  controller.details.value.firstName != null ? '${controller.details.value.firstName.toString().capitalizeFirst}' : "",
                                                     24.sp,
                                                     black_121212,
                                                     FontWeight.w500,
@@ -416,17 +412,15 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                 child: Align(
                                                   alignment: Alignment.topLeft,
                                                   child: setHelveticaMedium(
-                                                      controller
+                                                      '${controller
                                                               .details
                                                               .value
                                                               .currentJobs!
-                                                              .title!.toString().capitalizeFirst +
-                                                          ' @' +
-                                                          controller
+                                                              .title!.toString().capitalize} @${controller
                                                               .details
                                                               .value
                                                               .currentJobs!
-                                                              .companyName!.toString().capitalizeFirst,
+                                                              .companyName.toString().capitalize}',
                                                       16,
                                                       grey_3f3f3f,
                                                       FontWeight.w500,
@@ -436,21 +430,29 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                             : Container()
                                         : Container(),
                                     controller.details.value.currentJobs != null
-                                        ? controller.details.value.currentJobs!
-                                                    .website != null
-                                            ? Align(
-                                                alignment: Alignment.topLeft,
-                                                child: setHelveticaMedium(
-                                                    controller
-                                                            .details
-                                                            .value
-                                                            .currentJobs!
-                                                            .website ?? "",
-                                                    12.sp,
-                                                    blue_0a84ff,
-                                                    FontWeight.w500,
-                                                    FontStyle.normal),
-                                              )
+                                        ? controller.details.value.currentJobs!.website != null
+                                            ? GestureDetector(
+                                              onTap: (){
+                                                launchURL(controller
+                                                              .details
+                                                              .value
+                                                              .currentJobs!
+                                                              .website!);
+                                              },
+                                              child: Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: setHelveticaMedium(
+                                                      controller
+                                                              .details
+                                                              .value
+                                                              .currentJobs!
+                                                              .website ?? "",
+                                                      12.sp,
+                                                      blue_0a84ff,
+                                                      FontWeight.w500,
+                                                      FontStyle.normal),
+                                                ),
+                                            )
                                             : Container()
                                         : Container(),
                                     // controller.details.value.aboutUs != null

@@ -174,41 +174,43 @@ class _ProfileTabState extends State<ProfileTab> {
                                                         ),
                                                   ),
                                                 ),
-                                                controller
-                                                    .details
-                                                    .value
-                                                    .pastJobs![
-                                                index]
-                                                    .title !=
-                                                    null
-                                                    ? Padding(
-                                                  padding:
-                                                  EdgeInsets
-                                                      .only(
-                                                      left: 12.w, right: 8.w),
-                                                  child: setHelveticaMedium(
-                                                      controller
-                                                          .details
-                                                          .value
-                                                          .pastJobs![
-                                                      index]
-                                                          .title!
-                                                          .toUpperCase() +
-                                                          " @" +
-                                                          controller
-                                                              .details
-                                                              .value
-                                                              .pastJobs![
-                                                          index]
-                                                              .companyName!,
-                                                      15.sp,
-                                                      grey_aaaaaa,
-                                                      FontWeight.w500,
-                                                      FontStyle
-                                                          .normal,
-                                                      -0.28, 2),
-                                                )
-                                                    : Container(),
+                                                Flexible(
+                                                  child: controller
+                                                      .details
+                                                      .value
+                                                      .pastJobs![
+                                                  index]
+                                                      .title !=
+                                                      null
+                                                      ? Padding(
+                                                    padding:
+                                                    EdgeInsets
+                                                        .only(
+                                                        left: 12.w, right: 8.w),
+                                                    child: setHelveticaMedium(
+                                                        controller
+                                                            .details
+                                                            .value
+                                                            .pastJobs![
+                                                        index]
+                                                            .title!
+                                                            .toUpperCase() +
+                                                            " @" +
+                                                            controller
+                                                                .details
+                                                                .value
+                                                                .pastJobs![
+                                                            index]
+                                                                .companyName!,
+                                                        15.sp,
+                                                        grey_aaaaaa,
+                                                        FontWeight.w500,
+                                                        FontStyle
+                                                            .normal,
+                                                        -0.28, 2),
+                                                  )
+                                                      : Container(),
+                                                ),
                                               ],
                                             ),
                                           );

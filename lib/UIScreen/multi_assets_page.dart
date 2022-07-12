@@ -29,4 +29,8 @@ class _MultiAssetsPageState extends State<MultiAssetsPage>
 
   @override
   bool get wantKeepAlive => true;
+  
+  @override
+  // TODO: implement height
+  get height => 40;
 }

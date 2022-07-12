@@ -205,7 +205,7 @@ class PickMethod {
           print("image full path " + assets[0].relativePath! + "/"+assets[0].title!);
           image = assets;
           PostController controller = Get.put(PostController());
-          controller.assetImages.value = picker;
+          controller.assetImages.addAll(picker);
           controller.assetImages.refresh();
         }
 

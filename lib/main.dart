@@ -44,10 +44,11 @@ class _MyAppState extends State<MyApp> {
   checkFirstCall() async {
     // setState(() async {
       bool ifc = await IsFirstRun.isFirstCall();
-      if(ifc == true){
-        var preferences = MySharedPref();
-        preferences.clear();  
-      }
+      print(ifc);
+      // if(ifc == true){
+      //   var preferences = MySharedPref();
+      //   preferences.clear();  
+      // }
     // });
   }
 

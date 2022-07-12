@@ -32,6 +32,8 @@ mixin ExamplePageMixin<T extends StatefulWidget> on State<T> {
 
   List<PickMethod> get pickMethods;
 
+  get height;
+
   /// These fields are for the keep scroll position feature.
   late DefaultAssetPickerProvider keepScrollProvider =
       DefaultAssetPickerProvider();
@@ -74,6 +76,7 @@ mixin ExamplePageMixin<T extends StatefulWidget> on State<T> {
           child: MethodListView(
             pickMethods: pickMethods,
             onSelectMethod: selectAssets,
+            height: height,
           ),
         ),
         if (assets.isNotEmpty)
