@@ -7,8 +7,11 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
+import 'package:blackchecktech/Widget/BlurIcon.dart';
+import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
@@ -150,7 +153,7 @@ class _VideoTabState extends State<VideoTab> {
                                         };
                                         controller.videoListAPI(context, videoBody);
                                       });
-                                    },child: Center(child: SvgPicture.asset(icon_play))),
+                                    },child: BlurIcon()),
                                   // Align(
                                   //   alignment: Alignment.topRight,
                                   //   child: Padding(
@@ -180,7 +183,7 @@ class _VideoTabState extends State<VideoTab> {
                                     child: Align(
                                       alignment: Alignment.bottomLeft,
                                       child: Text(
-                                        controller.videoList[index].description ?? "",
+                                        controller.videoList[index].description.toString().capitalizeFirst ?? "",
                                         softWrap: true,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 3,

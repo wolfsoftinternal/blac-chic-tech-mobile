@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     "VIDEOS",
     "FEATURE",
     "EVENTS",
-    "TRXNS & PAYOUTS",
+    "TRXNS. & PAYOUTS",
   ];
   SignupModel signupModel = SignupModel();
 

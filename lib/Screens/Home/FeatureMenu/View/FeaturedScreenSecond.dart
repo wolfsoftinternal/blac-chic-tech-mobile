@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 
 
@@ -37,7 +38,7 @@ class _FeaturedScreenOneState extends State<FeaturedScreenSecond> {
             style: TextStyle(
             color:  Color(0xffffffff),
             fontWeight: FontWeight.w900,
-            fontFamily: "NeueHelvetica",
+            fontFamily: helveticaNeue,
             fontStyle:  FontStyle.normal,
             fontSize: 40.0
       ),

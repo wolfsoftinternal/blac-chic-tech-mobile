@@ -130,7 +130,7 @@ class _PostTabState extends State<PostTab> {
                                     child: Align(
                                       alignment: Alignment.bottomLeft,
                                       child: Text(
-                                        controller.postList[index].caption!,
+                                        controller.postList[index].caption!.capitalizeFirst!,
                                         softWrap: true,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 3,

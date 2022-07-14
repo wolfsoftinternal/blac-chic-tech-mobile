@@ -681,7 +681,7 @@ class _EventDetailState extends State<EventDetail> {
                                                           .value
                                                           .admissionData![
                                                               index]
-                                                          .category!,
+                                                          .category!.capitalize!,
                                                       style: TextStyle(
                                                           color: widget.type == 'upcoming'
                                                               ? white_ffffff
@@ -1215,7 +1215,7 @@ class _EventDetailState extends State<EventDetail> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               setHelveticaMedium(
-                                  controller.eventDetails.value.title!,
+                                  controller.eventDetails.value.title!.capitalize!,
                                   24.sp,
                                   black_121212,
                                   FontWeight.w900,
@@ -1255,7 +1255,7 @@ class _EventDetailState extends State<EventDetail> {
                                     Padding(
                                       padding:  EdgeInsets.only(left: 4.w),
                                       child: setHelveticaMedium(
-                                          controller.eventDetails.value.venue!,
+                                          controller.eventDetails.value.venue!.capitalize!,
                                           10.sp,
                                           black_121212,
                                           FontWeight.w500,
@@ -1369,7 +1369,7 @@ class _EventDetailState extends State<EventDetail> {
                                           ),
                                         ),
                                         setHelveticaMedium(
-                                            "Hosted by ",
+                                            "Hosted By ",
                                             11.sp,
                                             grey_3f3f3f,
                                             FontWeight.w500,

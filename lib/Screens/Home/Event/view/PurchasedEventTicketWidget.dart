@@ -473,7 +473,7 @@ class _PurchasedEventTicketWidgetState extends State<PurchasedEventTicketWidget>
                                   style: TextStyle(
                                       color: const Color(0xffaaaaaa),
                                       fontWeight: FontWeight.w700,
-                                      fontFamily: "NeueHelvetica",
+                                      fontFamily: helveticaNeue,
                                       fontStyle: FontStyle.normal,
                                       fontSize: 8.sp),
                                   textAlign: TextAlign.left),

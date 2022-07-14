@@ -177,7 +177,7 @@ setTextFieldHelveticaMediumOrangeBorder(
           hintStyle: TextStyle(
               color: grey_aaaaaa,
               fontWeight: FontWeight.w500,
-              fontFamily: helvetica_neu_bold,
+              fontFamily: helveticaNeueNeue_medium,
               fontStyle: FontStyle.normal,
               fontSize: 14.sp),
           border: const OutlineInputBorder(

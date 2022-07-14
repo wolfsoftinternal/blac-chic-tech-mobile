@@ -53,15 +53,15 @@ class _TextInputState extends State<InputTextLayoutDemo> {
           color:checkFillColor == false?
           checkColor == true?
           orange_ff881a:
-          light_grey_f2f2f2:
-          light_grey_f2f2f2,
+          grey_f5f5f5:
+          grey_f5f5f5,
         ),
         borderRadius:  BorderRadius.all(Radius.circular(4.r)),
         color: checkFillColor == false
             ? checkColor == true
             ? Colors.white
-            : light_grey_f2f2f2
-            : light_grey_f2f2f2,
+            : grey_f5f5f5
+            : grey_f5f5f5,
       ),
       child: Padding(
         padding:  EdgeInsets.only(

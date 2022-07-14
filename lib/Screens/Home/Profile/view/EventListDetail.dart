@@ -453,18 +453,18 @@ class _EventListDetailState extends State<EventListDetail> {
                                                               ),
                                                             ),
                                                             setHelceticaBold(
-                                                          "Hosted by ", 11.sp, grey_aaaaaa, FontWeight.w500, FontStyle.normal),
+                                                          "Hosted By ", 11.sp, grey_aaaaaa, FontWeight.w500, FontStyle.normal),
                                                             setHelceticaBold(
                                                                 controller
                                                                         .eventList[
                                                                             index]
                                                                         .hosts![0]
-                                                                        .firstName! +
+                                                                        .firstName!.toString().capitalizeFirst! + ' ' +
                                                                     controller
                                                                         .eventList[
                                                                             index]
                                                                         .hosts![0]
-                                                                        .lastName!,
+                                                                        .lastName!.capitalizeFirst!,
                                                                 11.sp,
                                                                 white_ffffff,
                                                                 FontWeight.w500,
@@ -515,7 +515,7 @@ class _EventListDetailState extends State<EventListDetail> {
                                                         EdgeInsets.only(right: 4.w),
                                                     child: setHelveticaMedium(
                                                         controller.eventList[index]
-                                                            .venue!,
+                                                            .venue!.capitalize!,
                                                         10.sp,
                                                         white_ffffff,
                                                         FontWeight.w100,
@@ -536,7 +536,7 @@ class _EventListDetailState extends State<EventListDetail> {
                                               padding: EdgeInsets.only(left: 16.w),
                                               child: setHelceticaBold(
                                                   controller
-                                                      .eventList[index].title!,
+                                                      .eventList[index].title!.capitalize!,
                                                   22.sp,
                                                   white_ffffff,
                                                   FontWeight.w500,

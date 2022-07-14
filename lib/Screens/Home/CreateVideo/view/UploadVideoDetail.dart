@@ -126,7 +126,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 16.h,
+                                  height: 20.h,
                                 ),
 
                                 Text("TOPIC",
@@ -149,7 +149,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   decoration: SpinnerDecorationBorder,
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton2(
-                                        value: controller.topicName.value,
+                                        value: controller.topicName,
                                         hint: Text("Select Topic",
                                             style: TextStyle(
                                                 color: grey_aaaaaa,
@@ -179,7 +179,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                         itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
                                         onChanged: (String? newValue) {
                                           setState(() {
-                                            controller.topicName.value =
+                                            controller.topicName =
                                                 newValue!;
                                           });
                                         },
@@ -188,7 +188,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 16.h,
+                                  height: 20.h,
                                 ),
 
                                 Text("LANGUAGE",
@@ -212,7 +212,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton2(
                                         //  validator: (value) => value == null ? "Select a country" : null,
-                                        value: controller.languageName.value,
+                                        value: controller.languageName,
                                         hint: Text("Select Language",
                                             style: TextStyle(
                                                 color: grey_aaaaaa,
@@ -229,7 +229,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                         ),
                                         onChanged: (String? newValue) {
                                           setState(() {
-                                            controller.languageName.value =
+                                            controller.languageName =
                                                 newValue!;
                                           });
                                         },
@@ -251,7 +251,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 16.h,
+                                  height: 20.h,
                                 ),
 
                                 Text("VIDEO LINK",
@@ -289,13 +289,13 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 //   ),
                                 //   child: // <iframe width="560" height="315" src="https://www.youtube.com/embed/yfwNi4aK1_w" title="YouTube vide
                                 //       Padding(
-                                //     padding: const EdgeInsets.all(16.0),
+                                //     padding: const EdgeInsets.all(20.0),
                                 //     child: Text(
                                 //         "<iframe width=560 height=315 src=https:www.youtube.com/embed/yfwNi4aK1_w title=YouTube video player frameborder=0 allow=accelerometer autoplay clipboard-write encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>",
                                 //         style: const TextStyle(
                                 //             color: const Color(0xff121212),
                                 //             fontWeight: FontWeight.w500,
-                                //             fontFamily: "NeueHelvetica",
+                                //             fontFamily: helveticaNeue,
                                 //             fontStyle: FontStyle.normal,
                                 //             fontSize: 11.0),
                                 //         textAlign: TextAlign.left),
@@ -303,7 +303,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 // ),
 
                                 SizedBox(
-                                  height: 16.h,
+                                  height: 20.h,
                                 ),
 
                                 Text("DESCRIPTION",
@@ -376,7 +376,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 16.h,
+                                  height: 20.h,
                                 ),
 
                                 Text("RELATED TAGS",
@@ -409,7 +409,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
 
                                     //       Padding(
                                     //     padding: const EdgeInsets.only(
-                                    //         left: 16, right: 16, top: 8, bottom: 8),
+                                    //         left: 20, right: 20, top: 8, bottom: 8),
                                     //     child: Text("Tag name",
                                     //         style: TextStyle(
                                     //             color: Color(0xff3f3f3f),
@@ -481,7 +481,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 ),
 
                                 SizedBox(
-                                  height: 16.h,
+                                  height: 20.h,
                                 ),
 
                                 GestureDetector(
@@ -527,10 +527,9 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 12.sp),
                                             textAlign: TextAlign.left),
-                                        const Icon(
-                                          Icons.add,
-                                          size: 15,
-                                          color: orange_ff881a,
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 18.5),
+                                          child: Text('+', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: orange_ff881a),),
                                         )
                                       ],
                                     ),

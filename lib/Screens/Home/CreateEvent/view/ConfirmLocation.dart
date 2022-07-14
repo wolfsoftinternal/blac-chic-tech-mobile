@@ -226,7 +226,7 @@ class _ConfirmLocationState extends State<ConfirmLocation> {
             Padding(
               padding:  EdgeInsets.all(24.r),
               child: BlackButton(
-                "Save Address",
+                "Done",
                 Colors.white,
                 () {
                   if(controller.landmarkController.value.text == ""){

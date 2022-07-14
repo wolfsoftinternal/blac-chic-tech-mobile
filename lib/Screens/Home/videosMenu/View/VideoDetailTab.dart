@@ -317,7 +317,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                     style: TextStyle(
                                         color: white_ffffff,
                                         fontWeight: FontWeight.w700,
-                                        fontFamily: "NeueHelvetica",
+                                        fontFamily: helveticaNeue,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 14.sp),
                                     textAlign: TextAlign.left),
@@ -463,7 +463,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                           Text(
                                               widget.videoList.userDetails!
                                                   .fullName
-                                                  .toString(),
+                                                  .toString().capitalize!,
                                               style: TextStyle(
                                                   color: black_121212,
                                                   fontWeight: FontWeight.w700,
@@ -495,7 +495,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                       .userDetails!
                                                       .currentJobs!
                                                       .title
-                                                      .toString() +
+                                                      .toString().capitalize! +
                                                   "\n@" +
                                                   controller
                                                       .videoDetail
@@ -503,7 +503,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                       .userDetails!
                                                       .currentJobs!
                                                       .companyName
-                                                      .toString(),
+                                                      .toString().capitalize!,
                                           style: TextStyle(
                                               color: const Color(0xff3f3f3f),
                                               fontWeight: FontWeight.w500,
@@ -540,7 +540,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                               style: TextStyle(
                                   color: const Color(0xff3f3f3f),
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "NeueHelvetica",
+                                  fontFamily: helveticaNeue,
                                   fontStyle: FontStyle.normal,
                                   fontSize: 12.sp,
                                   height: 1.5),
@@ -583,7 +583,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                           Text("DETAILS",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w700,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helveticaNeue,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 12.sp),
                                               textAlign: TextAlign.left),
@@ -593,7 +593,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                           Text("RELATED TAGS",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w700,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helveticaNeue,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 12.sp),
                                               textAlign: TextAlign.left),
@@ -633,7 +633,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           fontFamily:
-                                                              "NeueHelvetica",
+                                                              helveticaNeue,
                                                           fontStyle:
                                                               FontStyle.normal,
                                                           fontSize: 12.0),
@@ -645,7 +645,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontFamily:
-                                                              "NeueHelvetica",
+                                                              helveticaNeue,
                                                           fontStyle:
                                                               FontStyle.normal,
                                                           fontSize: 12.0),
@@ -657,7 +657,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontFamily:
-                                                              "NeueHelvetica",
+                                                              helveticaNeue,
                                                           fontStyle:
                                                               FontStyle.normal,
                                                           fontSize: 12.0),
@@ -697,7 +697,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                         fontWeight:
                                                             FontWeight.w500,
                                                         fontFamily:
-                                                            "NeueHelvetica",
+                                                            helveticaNeue,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 12.0),
@@ -757,7 +757,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                                             FontWeight
                                                                                 .w700,
                                                                         fontFamily:
-                                                                            "NeueHelvetica",
+                                                                            helveticaNeue,
                                                                         fontStyle:
                                                                             FontStyle
                                                                                 .normal,

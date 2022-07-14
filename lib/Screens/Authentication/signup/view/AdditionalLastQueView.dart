@@ -144,7 +144,7 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                                     style:  TextStyle(
                                         color:  const Color(0xff121212),
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "NeueHelvetica",
+                                        fontFamily: helveticaNeue,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 12.sp),
                                     textAlign: TextAlign.left),

@@ -127,7 +127,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                           style: TextStyle(
                                               color:  Color(0xff121212),
                                               fontWeight: FontWeight.w900,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeue,
                                               fontStyle:  FontStyle.normal,
                                               fontSize: 16.0
                                           ),
@@ -447,7 +447,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                         style: TextStyle(
                         color:  Color(0xff121212),
                           fontWeight: FontWeight.w500,
-                          fontFamily: "NeueHelvetica",
+                          fontFamily: helveticaNeue,
                           fontStyle:  FontStyle.normal,
                           fontSize: 11.0
                     ),

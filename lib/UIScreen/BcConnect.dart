@@ -68,7 +68,7 @@ class _BcConnectState extends State<BcConnect> {
                          style:  TextStyle(
                              color:  black_121212,
                              fontWeight: FontWeight.w900,
-                             fontFamily: "NeueHelvetica",
+                             fontFamily: helveticaNeue,
                              fontStyle:  FontStyle.normal,
                              fontSize: 16.sp
                          ),
@@ -107,7 +107,7 @@ class _BcConnectState extends State<BcConnect> {
                             style:  TextStyle(
                                 color:  black_121212,
                                 fontWeight: FontWeight.w900,
-                                fontFamily: "NeueHelvetica",
+                                fontFamily: helveticaNeue,
                                 fontStyle:  FontStyle.normal,
                                 fontSize: 16.sp
                             ),
@@ -186,7 +186,7 @@ class _BcConnectState extends State<BcConnect> {
                                                     style:  TextStyle(
                                                         color:  white_ffffff,
                                                         fontWeight: FontWeight.w500,
-                                                        fontFamily: "NeueHelvetica",
+                                                        fontFamily: helveticaNeue,
                                                         fontStyle:  FontStyle.normal,
                                                         fontSize: 12.sp
                                                     ),
@@ -200,7 +200,7 @@ class _BcConnectState extends State<BcConnect> {
                                                       style:  TextStyle(
                                                           color:  white_ffffff,
                                                           fontWeight: FontWeight.w500,
-                                                          fontFamily: "NeueHelvetica",
+                                                          fontFamily: helveticaNeue,
                                                           fontStyle:  FontStyle.normal,
                                                           fontSize: 8.sp
                                                       ),
@@ -231,7 +231,7 @@ class _BcConnectState extends State<BcConnect> {
                                               style:  TextStyle(
                                                   color:  grey_aaaaaa,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helveticaNeue,
                                                   fontStyle:  FontStyle.normal,
                                                   fontSize: 8.sp
                                               ),
@@ -244,7 +244,7 @@ class _BcConnectState extends State<BcConnect> {
                                               style:  TextStyle(
                                                   color:  black_121212,
                                                   fontWeight: FontWeight.w700,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helveticaNeue,
                                                   fontStyle:  FontStyle.normal,
                                                   fontSize: 10.sp
                                               ),
@@ -295,7 +295,7 @@ class _BcConnectState extends State<BcConnect> {
                                                 style:  TextStyle(
                                                     color:  const Color(0xffffffff),
                                                     fontWeight: FontWeight.w700,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle:  FontStyle.normal,
                                                     fontSize: 11.sp
                                                 ),

@@ -72,7 +72,7 @@ class _CreatPostState extends State<CreatPost> {
                                   style: TextStyle(
                                       color:  Color(0xffffffff),
                                       fontWeight: FontWeight.w900,
-                                      fontFamily: "NeueHelvetica",
+                                      fontFamily: helveticaNeue,
                                       fontStyle:  FontStyle.normal,
                                       fontSize: 12.0
                                   ),
@@ -99,7 +99,7 @@ class _CreatPostState extends State<CreatPost> {
                           style:  TextStyle(
                               color:  black_121212,
                               fontWeight: FontWeight.w900,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helveticaNeue,
                               fontStyle:  FontStyle.normal,
                               fontSize: 12.0
                           ),
@@ -165,7 +165,7 @@ class _CreatPostState extends State<CreatPost> {
                               style:  TextStyle(
                                   color:  black_121212,
                                   fontWeight: FontWeight.w900,
-                                  fontFamily: "NeueHelvetica",
+                                  fontFamily: helveticaNeue,
                                   fontStyle:  FontStyle.normal,
                                   fontSize: 12.0
                               ),

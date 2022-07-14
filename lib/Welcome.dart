@@ -66,7 +66,7 @@ class _WelcomeState extends State<Welcome> {
                           text: TextSpan(children: [
                         TextSpan(
                             style:  TextStyle(
-                                color: white_ffffff,
+                                color: grey_94ffffff.withOpacity(0.70),
                                 fontFamily: helveticaNeueNeue_medium,
                                 fontStyle: FontStyle.normal,
                                 fontSize: 12.0.sp),

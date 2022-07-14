@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -42,7 +43,7 @@ class _EventTicketState extends State<EventTicket> {
                             style:  TextStyle(
                                 color:  black_121212,
                                 fontWeight: FontWeight.w900,
-                                fontFamily: "NeueHelvetica",
+                                fontFamily: helveticaNeue,
                                 fontStyle:  FontStyle.normal,
                                 fontSize: 20.sp
                             ),
@@ -59,7 +60,7 @@ class _EventTicketState extends State<EventTicket> {
                             style:  TextStyle(
                                 color:  const Color(0xff5d5d5d),
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "NeueHelvetica",
+                                fontFamily: helveticaNeue,
                                 fontStyle:  FontStyle.normal,
                                 fontSize: 14.sp
                             ),
@@ -99,7 +100,7 @@ class _EventTicketState extends State<EventTicket> {
                                           style:  TextStyle(
                                               color:  black_121212,
                                               fontWeight: FontWeight.w900,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeue,
                                               fontStyle:  FontStyle.normal,
                                               fontSize: 18.sp
                                           ),
@@ -132,7 +133,7 @@ class _EventTicketState extends State<EventTicket> {
                                                         style:  TextStyle(
                                                             color:  grey_aaaaaa,
                                                             fontWeight: FontWeight.w700,
-                                                            fontFamily: "NeueHelvetica",
+                                                            fontFamily: helveticaNeue,
                                                             fontStyle:  FontStyle.normal,
                                                             fontSize: 11.sp
                                                         ),
@@ -145,7 +146,7 @@ class _EventTicketState extends State<EventTicket> {
                                                         style:  TextStyle(
                                                             color:  black_121212,
                                                             fontWeight: FontWeight.w700,
-                                                            fontFamily: "NeueHelvetica",
+                                                            fontFamily: helveticaNeue,
                                                             fontStyle:  FontStyle.normal,
                                                             fontSize: 12.sp
                                                         ),
@@ -177,7 +178,7 @@ class _EventTicketState extends State<EventTicket> {
                                                         style:  TextStyle(
                                                             color:  grey_aaaaaa,
                                                             fontWeight: FontWeight.w700,
-                                                            fontFamily: "NeueHelvetica",
+                                                            fontFamily: helveticaNeue,
                                                             fontStyle:  FontStyle.normal,
                                                             fontSize: 11.sp
                                                         ),
@@ -190,7 +191,7 @@ class _EventTicketState extends State<EventTicket> {
                                                         style:  TextStyle(
                                                             color:  black_121212,
                                                             fontWeight: FontWeight.w700,
-                                                            fontFamily: "NeueHelvetica",
+                                                            fontFamily: helveticaNeue,
                                                             fontStyle:  FontStyle.normal,
                                                             fontSize: 12.sp
                                                         ),
@@ -222,7 +223,7 @@ class _EventTicketState extends State<EventTicket> {
                                                         style:  TextStyle(
                                                             color:  grey_aaaaaa,
                                                             fontWeight: FontWeight.w700,
-                                                            fontFamily: "NeueHelvetica",
+                                                            fontFamily: helveticaNeue,
                                                             fontStyle:  FontStyle.normal,
                                                             fontSize: 11.sp
                                                         ),
@@ -235,7 +236,7 @@ class _EventTicketState extends State<EventTicket> {
                                                         style:  TextStyle(
                                                             color:  black_121212,
                                                             fontWeight: FontWeight.w700,
-                                                            fontFamily: "NeueHelvetica",
+                                                            fontFamily: helveticaNeue,
                                                             fontStyle:  FontStyle.normal,
                                                             fontSize: 12.sp
                                                         ),
@@ -257,7 +258,7 @@ class _EventTicketState extends State<EventTicket> {
                                           style:  TextStyle(
                                               color:  const Color(0xffaaaaaa),
                                               fontWeight: FontWeight.w700,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeue,
                                               fontStyle:  FontStyle.normal,
                                               fontSize: 8.sp
                                           ),

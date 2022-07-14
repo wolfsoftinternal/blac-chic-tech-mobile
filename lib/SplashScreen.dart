@@ -12,6 +12,7 @@ import 'package:blackchecktech/Welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:is_first_run/is_first_run.dart';
 
 import 'Screens/Authentication/login/model/SignupModel.dart';
 
@@ -86,6 +87,17 @@ class _SplashScreenState extends State<SplashScreen> {
         }
       } else {
         Get.offAll(HomePage());
+      }
+    });
+    checkFirstCall();
+  }
+
+  checkFirstCall() async {
+    bool ifc = await IsFirstRun.isFirstCall();
+    setState(() {
+      if(ifc == true){
+        var preferences = MySharedPref();
+        preferences.clear();  
       }
     });
   }

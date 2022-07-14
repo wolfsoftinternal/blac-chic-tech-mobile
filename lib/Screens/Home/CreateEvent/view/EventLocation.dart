@@ -410,7 +410,7 @@ class _EventLocationState extends State<EventLocation> {
                                 height: 16.h,
                               ),
                               BlackButton(
-                                "Confirm Location",
+                                "Next",
                                 Colors.white,
                                 () {
                                   saveAddress(context);

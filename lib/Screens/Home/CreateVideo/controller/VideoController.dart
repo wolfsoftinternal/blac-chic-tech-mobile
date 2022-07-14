@@ -29,12 +29,12 @@ class VideoController extends GetxController {
 
   RxList<TopicList> topicList = <TopicList>[].obs;
   List topicNameList = [].obs;
-  RxString topicName = "Select Topic".obs;
+  String? topicName;
   List<DropdownMenuItem<String>>? dropDownTopicItems;
 
   RxList<TopicList> languageList = <TopicList>[].obs;
   List languageNameList = [].obs;
-  RxString languageName = "Select Language".obs;
+  String? languageName;
   List<DropdownMenuItem<String>>? dropDownLanguageItems;
 
   RxList<UserList> userList = <UserList>[].obs;
@@ -94,7 +94,7 @@ class VideoController extends GetxController {
                 topicNameList.add(item.name);
               }
               dropDownTopicItems = getDropDownTopicItems();
-              topicName.value = dropDownTopicItems![0].value!;
+              // topicName.value = dropDownTopicItems![0].value!;
             }
           }
         });
@@ -110,7 +110,7 @@ class VideoController extends GetxController {
       items.add(DropdownMenuItem(
           value: topicName,
           child: Text(
-            topicName,
+            topicName.toString().capitalize!,
             style: const TextStyle(
                 color: black_121212,
                 fontWeight: FontWeight.w500,
@@ -154,7 +154,7 @@ class VideoController extends GetxController {
                 languageNameList.add(item.name);
               }
               dropDownLanguageItems = getDropDownLanguageItems();
-              languageName.value = dropDownLanguageItems![0].value!;
+              // languageName.value = dropDownLanguageItems![0].value!;
             }
           }
         });
@@ -170,7 +170,7 @@ class VideoController extends GetxController {
       items.add(DropdownMenuItem(
           value: languageName,
           child: Text(
-            languageName,
+            languageName.toString().capitalize!,
             style: const TextStyle(
                 color: black_121212,
                 fontWeight: FontWeight.w500,
@@ -264,8 +264,8 @@ class VideoController extends GetxController {
 
     dynamic body = {
       'description': descController.value.text,
-      'topic': topicName.value,
-      'language': languageName.value,
+      'topic': topicName.toString(),
+      'language': languageName.toString(),
       'speakers': speaker.join(','),
       'title': titleController.value.text,
       'tags': tagValues.join(','),
@@ -308,7 +308,13 @@ class VideoController extends GetxController {
     if (titleController.value.text.isEmpty) {
       snackBar(context, "Enter video title");
       return false;
-    } else if (linkController.value.text.isEmpty) {
+    } else if(topicName == null){
+      snackBar(context, 'Enter Topic');
+      return false;
+    }else if(languageName == null){
+      snackBar(context, 'Enter Language');
+      return false;
+    }else if (linkController.value.text.isEmpty) {
       snackBar(context, "Enter video link");
       return false;
     } else if (!RegExp(r'^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$')
@@ -318,7 +324,10 @@ class VideoController extends GetxController {
     } else if (descController.value.text.isEmpty) {
       snackBar(context, "Enter video description");
       return false;
-    } else if (selectedList.toString() == '[]') {
+    } else if(tagValues.isEmpty){
+      snackBar(context, 'Enter related tags');
+      return false;
+    }else if (selectedList.toString() == '[]') {
       snackBar(context, "Tag Speaker");
       return false;
     } else {

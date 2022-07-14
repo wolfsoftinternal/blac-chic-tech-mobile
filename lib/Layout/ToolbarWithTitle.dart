@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +26,7 @@ class ToolbarWithTitle extends StatelessWidget {
                 style: TextStyle(
                     color: black_121212,
                     fontWeight: FontWeight.w900,
-                    fontFamily: "NeueHelvetica",
+                    fontFamily: helveticaNeue,
                     fontStyle: FontStyle.normal,
                     fontSize: 16.sp),
                 textAlign: TextAlign.right),

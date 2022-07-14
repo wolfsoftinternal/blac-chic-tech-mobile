@@ -784,7 +784,7 @@ class _UserProfileState extends State<UserProfile> {
                                     'See More',
                                     12.sp,
                                     grey_aaaaaa,
-                                    FontWeight.w500,
+                                    FontWeight.w500,  
                                     FontStyle.normal,
                                     -0.24),
                               ),

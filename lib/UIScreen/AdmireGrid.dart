@@ -1,5 +1,6 @@
 import 'package:blackchecktech/Layout/ToolbarAdmire.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -79,7 +80,7 @@ class _AdmireGridState extends State<AdmireGrid> {
                           style:  TextStyle(
                               color:   const Color(0xff273433),
                               fontWeight: FontWeight.w700,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helveticaNeue,
                               fontStyle:  FontStyle.normal,
                               fontSize: 10.sp
                           ),
@@ -92,7 +93,7 @@ class _AdmireGridState extends State<AdmireGrid> {
                           style:  TextStyle(
                               color:  grey_aaaaaa,
                               fontWeight: FontWeight.w500,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helveticaNeue,
                               fontStyle:  FontStyle.normal,
                               fontSize: 10.sp
                           ),
