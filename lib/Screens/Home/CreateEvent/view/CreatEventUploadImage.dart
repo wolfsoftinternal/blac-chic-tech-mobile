@@ -159,7 +159,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                                 style: TextStyle(
                                                     color: Color(0xff273433),
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle: FontStyle.normal,
                                                     fontSize: 14.sp),
                                                 textAlign: TextAlign.center),
@@ -188,7 +188,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                             // Text("+ Add more photos",
                             //     style: const TextStyle(
                             //         color: const Color(0xffff881a),
-                            //         fontFamily: "NeueHelvetica",
+                            //         fontFamily: helveticaNeue,
                             //         fontStyle: FontStyle.normal,
                             //         fontSize: 14.0),
                             //     textAlign: TextAlign.center),
@@ -217,11 +217,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                             fontStyle: FontStyle.normal,
                                             fontSize: 12.sp),
                                         textAlign: TextAlign.left),
-                                    Icon(
-                                      Icons.add,
-                                      size: 15,
-                                      color: orange_ff881a,
-                                    )
+                                    Text("+", style: TextStyle(fontSize: 16, color: orange_ff881a, fontWeight: FontWeight.w700))
                                   ],
                                 ),
                               ),
@@ -422,11 +418,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                             fontStyle: FontStyle.normal,
                                             fontSize: 12.sp),
                                         textAlign: TextAlign.left),
-                                    Icon(
-                                      Icons.add,
-                                      size: 15,
-                                      color: orange_ff881a,
-                                    )
+                                    Text("+", style: TextStyle(fontSize: 16, color: orange_ff881a, fontWeight: FontWeight.w700))
                                   ],
                                 ),
                               ),

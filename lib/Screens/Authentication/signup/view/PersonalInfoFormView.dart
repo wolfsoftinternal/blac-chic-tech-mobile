@@ -216,7 +216,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                       .map((CountryDatum value) {
                                     return DropdownMenuItem<String>(
                                       value: value.id.toString(),
-                                      child: Text(value.name.toString()),
+                                      child: Text(value.name.toString().capitalizeFirst!),
                                     );
                                   }).toList()),
                               ),
@@ -274,7 +274,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                       .map((StateDatum value) {
                                     return DropdownMenuItem<String>(
                                       value: value.id.toString(),
-                                      child: Text(value.name.toString()),
+                                      child: Text(value.name.toString().capitalizeFirst!),
                                     );
                                   }).toList(),
                                 ),
@@ -336,7 +336,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                       .map((CityDatum value) {
                                     return DropdownMenuItem<String>(
                                       value: value.id.toString(),
-                                      child: Text(value.name.toString()),
+                                      child: Text(value.name.toString().capitalizeFirst!),
                                     );
                                   }).toList(),
                                 ),

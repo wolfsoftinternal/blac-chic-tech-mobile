@@ -95,7 +95,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                             style: TextStyle(
                                                 color:  Color(0xff121212),
                                                 fontWeight: FontWeight.w900,
-                                                fontFamily: "NeueHelvetica",
+                                                fontFamily: helveticaNeue,
                                                 fontStyle:  FontStyle.normal,
                                                 fontSize: 16.0
                                             ),
@@ -299,7 +299,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                       style: TextStyle(
                                           color:  Color(0xff121212),
                                           fontWeight: FontWeight.w900,
-                                          fontFamily: "NeueHelvetica",
+                                          fontFamily: helveticaNeue,
                                           fontStyle:  FontStyle.normal,
                                           fontSize: 16.0
                                       ),
@@ -484,7 +484,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                                     style:  TextStyle(
                                         color:   const Color(0xff273433),
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: "NeueHelvetica",
+                                        fontFamily: helveticaNeue,
                                         fontStyle:  FontStyle.normal,
                                         fontSize: 14.sp
                                     ),
@@ -514,7 +514,7 @@ class _UploadVideosState extends State<CreatEventUploadImage> {
                             "+ Add more photos",
                             style: TextStyle(
                                 color:  Color(0xffff881a),
-                                fontFamily: "NeueHelvetica",
+                                fontFamily: helveticaNeue,
                                 fontStyle:  FontStyle.normal,
                                 fontSize: 14.0
                             ),

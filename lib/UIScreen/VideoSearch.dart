@@ -89,7 +89,7 @@ class _VideoSearchState extends State<VideoSearch> {
                                 style: TextStyle(
                                     color: Color(0xff121212),
                                     fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
+                                    fontFamily: helveticaNeue,
                                     fontStyle: FontStyle.normal,
                                     fontSize: 16.0),
                                 textAlign: TextAlign.left)),

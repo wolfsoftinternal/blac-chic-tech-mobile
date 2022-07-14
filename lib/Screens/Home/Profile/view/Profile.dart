@@ -517,23 +517,19 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                         alignment:
                                                             Alignment.topLeft,
                                                         child: setHelveticaMedium(
-                                                            controller
+                                                            "${controller
                                                                     .details
                                                                     .value
                                                                     .cityDetails!
-                                                                    .name! +
-                                                                "," +
-                                                                controller
+                                                                    .name!.capitalizeFirst}, ${controller
                                                                     .details
                                                                     .value
                                                                     .stateDetails!
-                                                                    .name! +
-                                                                "," +
-                                                                controller
+                                                                    .name!.capitalizeFirst}, ${controller
                                                                     .details
                                                                     .value
                                                                     .countryDetails!
-                                                                    .name!,
+                                                                    .name!.capitalizeFirst}",
                                                             10,
                                                             grey_aaaaaa,
                                                             FontWeight.w500,
@@ -772,13 +768,13 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(80),
                             boxShadow: [
                               BoxShadow(
-                                color: Color(0x19121212),
+                                color: Color(0x19121212).withOpacity(0.10),
                                 offset: Offset(
                                   0.0,
-                                  2.0,
+                                  10.0,
                                 ),
-                                blurRadius: 5.0,
-                                spreadRadius: 0.5,
+                                blurRadius: 10.0,
+                                spreadRadius: 0
                               ), //BoxShadow
                             ],
                           ),

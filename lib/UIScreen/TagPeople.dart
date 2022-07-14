@@ -74,7 +74,7 @@ class _TagPeopleState extends State<TagPeople> {
                                   style: TextStyle(
                                       color:  Color(0xffffffff),
                                       fontWeight: FontWeight.w900,
-                                      fontFamily: "NeueHelvetica",
+                                      fontFamily: helveticaNeue,
                                       fontStyle:  FontStyle.normal,
                                       fontSize: 12.0
                                   ),

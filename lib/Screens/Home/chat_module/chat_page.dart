@@ -346,7 +346,7 @@ class _ChatPageState extends State<ChatPage> {
     // type 0 = text, 1= image, 2 = pin id (Pin Detail)
     if (myData["type"] != null && myData["type"] == 0) {
       return Container(
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
+        padding: const EdgeInsets.only(left: 16, right: 16),
         child: messageBubble(chatDocs[index]),
       );
     } else if (myData["type"] != null && myData["type"] == 1) {

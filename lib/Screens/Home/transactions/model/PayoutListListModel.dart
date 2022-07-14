@@ -50,6 +50,7 @@ class PayoutList {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
+    this.bankDetails,
   });
 
   int? id;
@@ -63,6 +64,7 @@ class PayoutList {
   DateTime? createdAt;
   DateTime? updatedAt;
   dynamic deletedAt;
+  BankDetails? bankDetails;
 
   factory PayoutList.fromJson(Map<String, dynamic> json) =>
       PayoutList(
@@ -77,6 +79,7 @@ class PayoutList {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
+        bankDetails: json["bank_details"] == null ? null : BankDetails.fromJson(json["bank_details"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -98,6 +101,75 @@ class PayoutList {
 
 
 }
+
+class BankDetails {
+    BankDetails({
+        this.id,
+        this.userId,
+        this.bankName,
+        this.accountName,
+        this.accountNumber,
+        this.routingNumber,
+        this.swiftCode,
+        this.bankAddress,
+        this.accountType,
+        this.image,
+        this.saveAs,
+        this.createdAt,
+        this.updatedAt,
+        this.deletedAt,
+    });
+
+    int? id;
+    int? userId;
+    String? bankName;
+    String? accountName;
+    String? accountNumber;
+    String? routingNumber;
+    dynamic swiftCode;
+    String? bankAddress;
+    int? accountType;
+    dynamic image;
+    String? saveAs;
+    DateTime? createdAt;
+    DateTime? updatedAt;
+    dynamic deletedAt;
+
+    factory BankDetails.fromJson(Map<String, dynamic> json) => BankDetails(
+        id: json["id"],
+        userId: json["user_id"],
+        bankName: json["bank_name"],
+        accountName: json["account_name"],
+        accountNumber: json["account_number"],
+        routingNumber: json["routing_number"],
+        swiftCode: json["swift_code"],
+        bankAddress: json["bank_address"],
+        accountType: json["account_type"],
+        image: json["image"],
+        saveAs: json["save_as"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        deletedAt: json["deleted_at"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
+        "bank_name": bankName,
+        "account_name": accountName,
+        "account_number": accountNumber,
+        "routing_number": routingNumber,
+        "swift_code": swiftCode,
+        "bank_address": bankAddress,
+        "account_type": accountType,
+        "image": image,
+        "save_as": saveAs,
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
+        "deleted_at": deletedAt,
+    };
+}
+
 
 class TransactionEventDetails {
   TransactionEventDetails({

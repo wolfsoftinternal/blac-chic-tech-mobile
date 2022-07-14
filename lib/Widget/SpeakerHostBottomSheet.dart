@@ -127,7 +127,7 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                     style: TextStyle(
                                         color: Color(0xff121212),
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: "NeueHelvetica",
+                                        fontFamily: helveticaNeue,
                                         fontStyle: FontStyle.normal,
                                         fontSize: 16.0),
                                     textAlign: TextAlign.left),
@@ -452,7 +452,7 @@ class _SpeakerHostBottomSheetState extends State<SpeakerHostBottomSheet> {
                                                             null
                                                         ? videoController
                                                             .userList[i]
-                                                            .firstName!
+                                                            .firstName!.capitalizeFirst!
                                                         : "",
                                                     style: TextStyle(
                                                         color: black,

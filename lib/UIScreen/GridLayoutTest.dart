@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -55,7 +56,7 @@ class _GridLayoutTestState extends State<GridLayoutTest> {
                                 style: const TextStyle(
                                     color:  Colors.white,
                                     fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
+                                    fontFamily: helveticaNeue,
                                     fontStyle:  FontStyle.normal,
                                     fontSize: 18.0
                                 ),

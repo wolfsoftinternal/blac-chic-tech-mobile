@@ -537,8 +537,9 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                 SizedBox(
                                                   height: 2.h,
                                                 ),
-                                                Text(
-                                                  "kjgjgjkgkjg",
+                                                Text(transactionController.payoutList[i].bankDetails == null ? ""
+                                                  : transactionController.payoutList[i].bankDetails!.accountNumber == null ? ""
+                                                  : "****" + transactionController.payoutList[i].bankDetails!.accountNumber!.substring(10),
                                                   style: TextStyle(
                                                       fontFamily:
                                                       roboto_bold,

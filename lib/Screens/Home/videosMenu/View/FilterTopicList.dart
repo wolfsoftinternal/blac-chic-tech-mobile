@@ -3,6 +3,7 @@ import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuContr
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/A_TopicaList.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Widget/search_bar_demo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -85,7 +86,7 @@ class _FilterTopicListState extends State<FilterTopicList> {
                           style: TextStyle(
                               color: Color(0xff121212),
                               fontWeight: FontWeight.w900,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helveticaNeue,
                               fontStyle: FontStyle.normal,
                               fontSize: 16.0),
                           textAlign: TextAlign.left)),
@@ -135,7 +136,7 @@ class _FilterTopicListState extends State<FilterTopicList> {
                                       ? orange_ff881a
                                       : const Color(0xff000000),
                               fontWeight: FontWeight.w700,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helveticaNeue,
                               fontStyle: FontStyle.normal,
                               fontSize: 14.0),
                           textAlign: TextAlign.left),

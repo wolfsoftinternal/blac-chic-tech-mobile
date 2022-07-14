@@ -67,6 +67,7 @@ class UserList {
         this.cityDetails,
         this.stateDetails,
         this.countryDetails,
+        this.questions,
     });
 
     dynamic id;
@@ -96,6 +97,7 @@ class UserList {
     Details? countryDetails;
     Details? stateDetails;
     Details? cityDetails;
+    List<Question>? questions;
 
     factory UserList.fromJson(Map<String, dynamic> json) => UserList(
         id: json["id"],
@@ -123,6 +125,7 @@ class UserList {
         countryDetails: json["country_details"] == null ? null : Details.fromJson(json["country_details"]),
         stateDetails: json["state_details"] == null ? null : Details.fromJson(json["state_details"]),
         cityDetails: json["city_details"] == null ? null : Details.fromJson(json["city_details"]),
+        questions: json["questions"] != null ? List<Question>.from(json["questions"].map((x) => Question.fromJson(x))) : null,
     );
 
     Map<String, dynamic> toJson() => {
@@ -150,6 +153,7 @@ class UserList {
         "country_details": countryDetails == null ? null : countryDetails!.toJson(),
         "state_details": stateDetails == null ? null : stateDetails!.toJson(),
         "city_details": cityDetails == null ? null : cityDetails!.toJson(),
+        "questions": questions!= null ? List<dynamic>.from(questions!.map((x) => x.toJson())) : null,
     };
 }
 

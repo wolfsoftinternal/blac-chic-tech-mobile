@@ -160,7 +160,7 @@ class _VideoListBctState extends State<VideoListBct> {
         Expanded(
           flex: 1,
           child: NestedScrollView(
-
+            controller: controller.scrollListController,
             headerSliverBuilder: (context, value) {
               return [
                 SliverToBoxAdapter(
@@ -280,8 +280,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                       begin: Alignment.topCenter,
                                       end: Alignment.bottomCenter,
                                       colors: [
-                                        Color(0xff1c2535),
-                                        Color(0xff04080f)
+                                        Color.fromARGB(255, 36, 48, 69),  Color(0xff04080f)
                                       ],
                                       stops: [0.0, 1.0],
                                     ),
@@ -825,7 +824,12 @@ class _VideoListBctState extends State<VideoListBct> {
                                           child: Container(
                                             height: 50.h,
                                             decoration: BoxDecoration(
-                                              color: black_121212,
+                                              gradient: const LinearGradient(
+                                                begin: Alignment.topCenter,
+                                                end: Alignment.bottomCenter,
+                                                colors: [ Color.fromARGB(255, 36, 48, 69),  Color(0xff04080f)],
+                                                stops: [0.0, 1.0],
+                                              ),
                                               borderRadius:
                                                   BorderRadius.circular(4.r),
                                             ),
@@ -834,7 +838,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                                   style: TextStyle(
                                                       color: white_ffffff,
                                                       fontWeight: FontWeight.w700,
-                                                      fontFamily: "NeueHelvetica",
+                                                      fontFamily: helveticaNeue,
                                                       fontStyle: FontStyle.normal,
                                                       fontSize: 12.sp),
                                                   textAlign: TextAlign.left),
@@ -878,7 +882,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                                       color:
                                                           const Color(0xff121212),
                                                       fontWeight: FontWeight.w700,
-                                                      fontFamily: "NeueHelvetica",
+                                                      fontFamily: helveticaNeue,
                                                       fontStyle: FontStyle.normal,
                                                       fontSize: 12.sp),
                                                   textAlign: TextAlign.left),
@@ -897,7 +901,6 @@ class _VideoListBctState extends State<VideoListBct> {
                 Expanded(
                   flex: 1,
                   child: SingleChildScrollView(
-                     // controller: controller.scrollListController,
                     child: Column(
                       children: [
                         FilterList(),

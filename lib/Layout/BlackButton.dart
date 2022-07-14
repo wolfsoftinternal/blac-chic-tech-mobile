@@ -40,7 +40,7 @@ class BlackButton extends StatelessWidget {
             gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [ Color(0xff1c2535),  Color(0xff04080f)],
+              colors: [ Color.fromARGB(255, 36, 48, 69),  Color(0xff04080f)],
               stops: [0.0, 1.0],
             ),
           ),
