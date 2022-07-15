@@ -89,17 +89,21 @@ class _SplashScreenState extends State<SplashScreen> {
         Get.offAll(HomePage());
       }
     });
-    checkFirstCall();
+    // checkFirstCall();
   }
 
   checkFirstCall() async {
     bool ifc = await IsFirstRun.isFirstCall();
+    var preferences = MySharedPref();
+    bool val = await preferences.getStringValue(SharePreData.strIfc);
     setState(() {
-      if(ifc == true){
-        var preferences = MySharedPref();
-        preferences.clear();  
+      if(val == true){
+         
+      }else if(ifc == true){
+        preferences.clear();
       }
     });
+    preferences.setString(SharePreData.strIfc, 'true');
   }
 
   @override

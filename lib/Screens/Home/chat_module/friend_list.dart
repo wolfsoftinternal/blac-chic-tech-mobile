@@ -636,7 +636,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
                 ),
                 Expanded(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -649,12 +649,15 @@ class _FriendListScreenState extends State<FriendListScreen> {
                             fontStyle: FontStyle.normal,
                             fontSize: 14.sp),
                       ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      if (lastMessageType == "0" ||
+                      // lastMessageType == "0" ||
+                      //     lastMessageType == "1" ||
+                      //     lastMessageType == "2" ?
+                      // SizedBox(
+                      //   height: 6.h,
+                      // ) : Container(),
+                      lastMessageType == "0" ||
                           lastMessageType == "1" ||
-                          lastMessageType == "2")
+                          lastMessageType == "2" ?
                         Text(
                           user["last_message"] ?? "",
                           maxLines: 1,
@@ -665,7 +668,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
                             fontFamily: helveticaNeueNeue_medium,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ) : Container(),
                       // if (lastMessageType == "1" || lastMessageType == "2")
                       //   Row(
                       //       mainAxisAlignment: MainAxisAlignment.start,

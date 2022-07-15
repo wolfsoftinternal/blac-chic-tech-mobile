@@ -40,7 +40,7 @@ class _CreatePostState extends State<CreatePost> {
   VideoController videoController = Get.put(VideoController());
   PostController controller = Get.put(PostController());
   PageController pageController = PageController();
-  int activeIndex = 1;
+  int activeIndex = 0;
   @override
   void initState() {
     // TODO: implement initState

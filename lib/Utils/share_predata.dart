@@ -28,4 +28,5 @@ class SharePreData {
   static String strQues4 = "Come to me for - what are you good at ?";
   static String strQues5 = "What are you working on right now ?";
 
+  static String strIfc = "ifc";
 }

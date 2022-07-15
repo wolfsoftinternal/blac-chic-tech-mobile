@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
@@ -47,7 +48,8 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: SplashScreen(),
+          // home: SplashScreen(),
+          home: PersonalInfoFormView(),
         );
       },
     );

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
+import 'package:blackchecktech/Screens/Networks/api_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
