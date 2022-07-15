@@ -27,163 +27,163 @@ class PickMethod {
     this.onLongPress,
   });
 
-  factory PickMethod.image(int maxAssetsCount) {
-    return PickMethod(
-      icon: '🖼️',
-      name: 'Image picker',
-      description: 'Only pick image from device.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            requestType: RequestType.image,
-          ),
-        );
-      },
-    );
-  }
+  // factory PickMethod.image(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '🖼️',
+  //     name: 'Image picker',
+  //     description: 'Only pick image from device.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           requestType: RequestType.image,
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  factory PickMethod.video(int maxAssetsCount) {
-    return PickMethod(
-      icon: '🎞',
-      name: 'Video picker',
-      description: 'Only pick video from device.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            requestType: RequestType.video,
-          ),
-        );
-      },
-    );
-  }
+  // factory PickMethod.video(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '🎞',
+  //     name: 'Video picker',
+  //     description: 'Only pick video from device.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           requestType: RequestType.video,
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  factory PickMethod.audio(int maxAssetsCount) {
-    return PickMethod(
-      icon: '🎶',
-      name: 'Audio picker',
-      description: 'Only pick audio from device.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            requestType: RequestType.audio,
-          ),
-        );
-      },
-    );
-  }
-
-  factory PickMethod.camera({
-    required int maxAssetsCount,
-    required Function(BuildContext, AssetEntity) handleResult,
-  }) {
-    return PickMethod(
-      icon: '📷',
-      name: 'Pick from camera',
-      description: 'Allow pick an asset through camera.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        const AssetPickerTextDelegate textDelegate = AssetPickerTextDelegate();
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            specialItemPosition: SpecialItemPosition.prepend,
-            specialItemBuilder: (
-              BuildContext context,
-              AssetPathEntity? path,
-              int length,
-            ) {
-              if (path?.isAll != true) {
-                return null;
-              }
-              return Semantics(
-                label: textDelegate.sActionUseCameraHint,
-                button: true,
-                onTapHint: textDelegate.sActionUseCameraHint,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () async {
-                    Feedback.forTap(context);
-                    final AssetEntity? result = await _pickFromCamera(context);
-                    if (result != null) {
-                      handleResult(context, result);
-                    }
-                  },
-                  child: const Center(
-                    child: Icon(Icons.camera_enhance, size: 42.0),
-                  ),
-                ),
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
-
-  factory PickMethod.cameraAndStay({required int maxAssetsCount}) {
-    return PickMethod(
-      icon: '📸',
-      name: 'Pick from camera and stay',
-      description: 'Take a photo or video with the camera picker, '
-          'select the result and stay in the entities list.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        const AssetPickerTextDelegate textDelegate = AssetPickerTextDelegate();
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            specialItemPosition: SpecialItemPosition.prepend,
-            specialItemBuilder: (
-              BuildContext context,
-              AssetPathEntity? path,
-              int length,
-            ) {
-              if (path?.isAll != true) {
-                return null;
-              }
-              return Semantics(
-                label: textDelegate.sActionUseCameraHint,
-                button: true,
-                onTapHint: textDelegate.sActionUseCameraHint,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () async {
-                    final AssetEntity? result = await _pickFromCamera(context);
-                    if (result == null) {
-                      return;
-                    }
-                    final AssetPicker<AssetEntity, AssetPathEntity> picker =
-                        context.findAncestorWidgetOfExactType()!;
-                    final DefaultAssetPickerBuilderDelegate builder =
-                        picker.builder as DefaultAssetPickerBuilderDelegate;
-                    final DefaultAssetPickerProvider p = builder.provider;
-                    p.currentPath =
-                        await p.currentPath!.obtainForNewProperties();
-                    await p.switchPath(p.currentPath);
-                    p.selectAsset(result);
-                  },
-                  child: const Center(
-                    child: Icon(Icons.camera_enhance, size: 42.0),
-                  ),
-                ),
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
+  // factory PickMethod.audio(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '🎶',
+  //     name: 'Audio picker',
+  //     description: 'Only pick audio from device.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           requestType: RequestType.audio,
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+  //
+  // factory PickMethod.camera({
+  //   required int maxAssetsCount,
+  //   required Function(BuildContext, AssetEntity) handleResult,
+  // }) {
+  //   return PickMethod(
+  //     icon: '📷',
+  //     name: 'Pick from camera',
+  //     description: 'Allow pick an asset through camera.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       const AssetPickerTextDelegate textDelegate = AssetPickerTextDelegate();
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           specialItemPosition: SpecialItemPosition.prepend,
+  //           specialItemBuilder: (
+  //             BuildContext context,
+  //             AssetPathEntity? path,
+  //             int length,
+  //           ) {
+  //             if (path?.isAll != true) {
+  //               return null;
+  //             }
+  //             return Semantics(
+  //               label: textDelegate.sActionUseCameraHint,
+  //               button: true,
+  //               onTapHint: textDelegate.sActionUseCameraHint,
+  //               child: GestureDetector(
+  //                 behavior: HitTestBehavior.opaque,
+  //                 onTap: () async {
+  //                   Feedback.forTap(context);
+  //                   final AssetEntity? result = await _pickFromCamera(context);
+  //                   if (result != null) {
+  //                     handleResult(context, result);
+  //                   }
+  //                 },
+  //                 child: const Center(
+  //                   child: Icon(Icons.camera_enhance, size: 42.0),
+  //                 ),
+  //               ),
+  //             );
+  //           },
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+  //
+  // factory PickMethod.cameraAndStay({required int maxAssetsCount}) {
+  //   return PickMethod(
+  //     icon: '📸',
+  //     name: 'Pick from camera and stay',
+  //     description: 'Take a photo or video with the camera picker, '
+  //         'select the result and stay in the entities list.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       const AssetPickerTextDelegate textDelegate = AssetPickerTextDelegate();
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           specialItemPosition: SpecialItemPosition.prepend,
+  //           specialItemBuilder: (
+  //             BuildContext context,
+  //             AssetPathEntity? path,
+  //             int length,
+  //           ) {
+  //             if (path?.isAll != true) {
+  //               return null;
+  //             }
+  //             return Semantics(
+  //               label: textDelegate.sActionUseCameraHint,
+  //               button: true,
+  //               onTapHint: textDelegate.sActionUseCameraHint,
+  //               child: GestureDetector(
+  //                 behavior: HitTestBehavior.opaque,
+  //                 onTap: () async {
+  //                   final AssetEntity? result = await _pickFromCamera(context);
+  //                   if (result == null) {
+  //                     return;
+  //                   }
+  //                   final AssetPicker<AssetEntity, AssetPathEntity> picker =
+  //                       context.findAncestorWidgetOfExactType()!;
+  //                   final DefaultAssetPickerBuilderDelegate builder =
+  //                       picker.builder as DefaultAssetPickerBuilderDelegate;
+  //                   final DefaultAssetPickerProvider p = builder.provider;
+  //                   p.currentPath =
+  //                       await p.currentPath!.obtainForNewProperties();
+  //                   await p.switchPath(p.currentPath);
+  //                   p.selectAsset(result);
+  //                 },
+  //                 child: const Center(
+  //                   child: Icon(Icons.camera_enhance, size: 42.0),
+  //                 ),
+  //               ),
+  //             );
+  //           },
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   factory PickMethod.common(int maxAssetsCount) {
     return PickMethod(
