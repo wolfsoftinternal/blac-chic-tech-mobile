@@ -304,8 +304,8 @@ class _PastFeature1State extends State<PastFeature1> {
                         // trimLength: 10,
                         // colorClickableText: Colors.pink,
                         trimMode: TrimMode.Line,
-                        trimCollapsedText: 'See full article',
-                        trimExpandedText: 'See less article',
+                        trimCollapsedText: 'See Full Article',
+                        trimExpandedText: '\nSee Less Article',
                         moreStyle: TextStyle(
                             fontSize: 12.sp,
                             color: black_121212,

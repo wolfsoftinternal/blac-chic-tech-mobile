@@ -107,7 +107,7 @@ class _BcConnectState extends State<BcConnect> {
                           style: TextStyle(
                               color: black_121212,
                               fontWeight: FontWeight.w900,
-                              fontFamily: "NeueHelvetica",
+                              fontFamily: helveticaNeue,
                               fontStyle: FontStyle.normal,
                               fontSize: 16.sp),
                           textAlign: TextAlign.left),
@@ -227,7 +227,7 @@ class _BcConnectState extends State<BcConnect> {
                                                         fontWeight:
                                                             FontWeight.w500,
                                                         fontFamily:
-                                                            "NeueHelvetica",
+                                                            helveticaNeue,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 12.sp),
@@ -237,14 +237,14 @@ class _BcConnectState extends State<BcConnect> {
                                                   child: Text(
                                                       videoController
                                                               .userList[i]
-                                                              .firstName ??
+                                                              .firstName.toString().capitalize ??
                                                           "",
                                                       style: TextStyle(
                                                           color: white_ffffff,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontFamily:
-                                                              "NeueHelvetica",
+                                                              helveticaNeue,
                                                           fontStyle:
                                                               FontStyle.normal,
                                                           fontSize: 8.sp),
@@ -277,7 +277,7 @@ class _BcConnectState extends State<BcConnect> {
                                               style: TextStyle(
                                                   color: grey_aaaaaa,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helveticaNeue,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 8.sp),
                                               textAlign: TextAlign.left),
@@ -285,12 +285,13 @@ class _BcConnectState extends State<BcConnect> {
                                             height: 2.h,
                                           ),
                                           // UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk
-                                          Text(
-                                              "UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk",
+                                          Text(videoController.userList[i].questions!.isEmpty ? "UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk" :
+                                              videoController.userList[i].questions!.length < 4 ? "UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk" :
+                                              videoController.userList[i].questions![3].answer!.capitalizeFirst!.replaceAll(',', ' |'),
                                               style: TextStyle(
                                                   color: black_121212,
                                                   fontWeight: FontWeight.w700,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helveticaNeue,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 10.sp),
                                               textAlign: TextAlign.left)
@@ -360,7 +361,7 @@ class _BcConnectState extends State<BcConnect> {
                                                       fontWeight:
                                                           FontWeight.w700,
                                                       fontFamily:
-                                                          "NeueHelvetica",
+                                                          helveticaNeue,
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 11.sp),
@@ -410,7 +411,7 @@ class _BcConnectState extends State<BcConnect> {
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           fontFamily:
-                                                              "NeueHelvetica",
+                                                              helveticaNeue,
                                                           fontStyle:
                                                               FontStyle.normal,
                                                           fontSize: 11.sp),

@@ -17,6 +17,7 @@ import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Widget/AddLocationView.dart';
 import 'package:blackchecktech/Widget/EditTextDecorationBorder.dart';
+import 'package:blackchecktech/Widget/PostImage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CreatePost extends StatefulWidget {
   const CreatePost({Key? key}) : super(key: key);
@@ -37,8 +39,8 @@ class CreatePost extends StatefulWidget {
 class _CreatePostState extends State<CreatePost> {
   VideoController videoController = Get.put(VideoController());
   PostController controller = Get.put(PostController());
-    PageController pageController = PageController();
-
+  PageController pageController = PageController();
+  int activeIndex = 1;
   @override
   void initState() {
     // TODO: implement initState
@@ -136,263 +138,230 @@ class _CreatePostState extends State<CreatePost> {
                 ),
               ),
 
-              Stack(
-                alignment: Alignment.bottomLeft,
+              Column(
                 children: [
                   Stack(
+                    alignment: Alignment.bottomLeft,
                     children: [
                       controller.assetImages.length > 0
-                      // ? PageView.builder(
-                      //             // physics: const NeverScrollableScrollPhysics(),
-                      //             controller: pageController,
-                      //             itemCount: controller.assetImages.length,
-                      //             itemBuilder:
-                      //                 (BuildContext context, int index) {
-                      //               return Container(
-                      //                 child: 
-                                      ?Image.file(
-                                            File(controller.assetImages[0].relativePath
-                                                    .toString()
-                                                    .contains(
-                                                        '/storage/emulated/0/')
-                                                ? (controller.assetImages[0]
-                                                            .relativePath ??
-                                                        "") +
-                                                    "/" +
-                                                    (controller.assetImages[0].title ??
-                                                        "")
-                                                : '/storage/emulated/0/' +
-                                                    (controller.assetImages[0]
-                                                            .relativePath ??
-                                                        "") +
-                                                    "/" +
-                                                    (controller.assetImages[0].title ??
-                                                        "")),
-                                            width: double.infinity,
-                                            height: 375.h,
-                                            fit: BoxFit.cover,
-                                          )
-                                  //   );
-                                  // })
-                          // ? Container(
-                          //   width: double.infinity,
-                          //   height: 375.h,
-                          //   child: PageView.builder(
-                          //     controller: _controller,
-                          //       itemCount: controller.assetImages.length,
-                          //       itemBuilder: (context, index) {
-                                  // return Container(
-                                  //     child: Image.file(
-                                  //           File(controller.assetImages[index].relativePath
-                                  //                   .toString()
-                                  //                   .contains(
-                                  //                       '/storage/emulated/0/')
-                                  //               ? (controller.assetImages[index]
-                                  //                           .relativePath ??
-                                  //                       "") +
-                                  //                   "/" +
-                                  //                   (controller.assetImages[index].title ??
-                                  //                       "")
-                                  //               : '/storage/emulated/0/' +
-                                  //                   (controller.assetImages[index]
-                                  //                           .relativePath ??
-                                  //                       "") +
-                                  //                   "/" +
-                                  //                   (controller.assetImages[index].title ??
-                                  //                       "")),
-                                  //           width: double.infinity,
-                                  //           height: 375.h,
-                                  //           fit: BoxFit.cover,
-                                  //         ),
-                                  //   );
-                          //       }
-                          //     ),
-                          // )
-                          : Container(
-                              height: 375.h,
-                              width: double.infinity,
-                              child: Image.asset(
-                                post_image,
-                              ),
+                      ? Container(
+                        height: 375.h,
+                        width: double.infinity,
+                        child: PageView.builder(
+                          controller: pageController,
+                          itemCount: controller.assetImages.length,
+                          onPageChanged: (v){
+                            setState(() {
+                              activeIndex = v;
+                            });
+                          },
+                          itemBuilder:
+                              (BuildContext context, int index) {
+                            return PostImage(index: index,);
+                          }
+                        ),
+                      )
+                      : Stack(
+                        children: [
+                          Container(
+                            height: 375.h,
+                            width: double.infinity,
+                            child: Image.asset(
+                              post_image,
                             ),
-                      Center(
-                          child: Container(
+                          ),
+                          Container(
                               height: 375.h,
                               width: double.infinity,
-                              child: MultiAssetsPage(375.h))),
-                    ],
-                  ),
-                  controller.assetImages.isEmpty
-                      ? Container()
-                      : Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(TagPeople());
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 24.r,
-                                    bottom: 24.r,
-                                    top: 24.r,
-                                    right: 15.r),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    gradient: LinearGradient(
-                                        colors: const [
-                                          Color(0xFF1c2535),
-                                          Color(0xFF04080f),
-                                        ],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        stops: const [0.0, 1.0],
-                                        tileMode: TileMode.clamp),
-                                  ),
+                              child: MultiAssetsPage(375.h)),
+                        ],
+                      ),
+                      controller.assetImages.isEmpty
+                          ? Container()
+                          : Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(TagPeople());
+                                  },
                                   child: Padding(
-                                    padding: EdgeInsets.all(10.r),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(
-                                          Icons.person_add,
-                                          size: 15,
-                                          color: Colors.white,
+                                    padding: EdgeInsets.only(
+                                        left: 24.r,
+                                        bottom: 24.r,
+                                        top: 24.r,
+                                        right: 15.r),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        gradient: LinearGradient(
+                                            colors: const [
+                                              Color(0xFF1c2535),
+                                              Color(0xFF04080f),
+                                            ],
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            stops: const [0.0, 1.0],
+                                            tileMode: TileMode.clamp),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10.r),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              Icons.person_add,
+                                              size: 15,
+                                              color: Colors.white,
+                                            ),
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                            // Tag People
+                                            Text("Tag People",
+                                                style: const TextStyle(
+                                                    color: Color(0xffffffff),
+                                                    fontWeight: FontWeight.w900,
+                                                    fontFamily: helveticaNeue,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 12.0),
+                                                textAlign: TextAlign.left)
+                                          ],
                                         ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        // Tag People
-                                        Text("Tag People",
-                                            style: const TextStyle(
-                                                color: Color(0xffffffff),
-                                                fontWeight: FontWeight.w900,
-                                                fontFamily: "NeueHelvetica",
-                                                fontStyle: FontStyle.normal,
-                                                fontSize: 12.0),
-                                            textAlign: TextAlign.left)
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            Center(
-                              child: Container(
-                                height: 35.h,
-                                width: getWidth(context) * 0.58,
-                                child: ListView.separated(
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                          width: 8.w,
+                                Center(
+                                  child: Container(
+                                    height: 35.h,
+                                    width: getWidth(context) * 0.58,
+                                    child: ListView.separated(
+                                        primary: false,
+                                        shrinkWrap: true,
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                        padding: EdgeInsets.only(
+                                          right: 24.w,
                                         ),
-                                    padding: EdgeInsets.only(
-                                      right: 24.w,
-                                    ),
-                                    itemCount: controller.selectedList.length,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, i) {
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4.r),
-                                          gradient: LinearGradient(
-                                              colors: [
-                                                Color(0xFF1c2535)
-                                                    .withOpacity(0.5),
-                                                Color(0xFF04080f)
-                                                    .withOpacity(0.5),
-                                              ],
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomCenter),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                  controller.selectedList[i]
-                                                              .userName !=
-                                                          null
-                                                      ? controller
-                                                          .selectedList[i]
-                                                          .userName!
-                                                      : controller
-                                                          .selectedList[i]
-                                                          .firstName!,
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontFamily:
-                                                          helvetica_neu_bold,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 12.sp),
-                                                  textAlign: TextAlign.left),
-                                              SizedBox(
-                                                width: 5.w,
-                                              ),
-                                              GestureDetector(
-                                                  onTap: () {
-                                                    if (controller.selectedList
-                                                            .length ==
-                                                        1) {
-                                                      controller.selectedList
-                                                          .clear();
-                                                      for (var item
-                                                          in videoController
-                                                              .userList) {
-                                                        if (item.isSpeakerSelected ==
-                                                            true) {
-                                                          item.isSpeakerSelected =
-                                                              false;
-                                                        }
-                                                      }
-                                                    } else {
-                                                      if (controller
+                                        itemCount: controller.selectedList.length,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, i) {
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(4.r),
+                                              gradient: LinearGradient(
+                                                  colors: [
+                                                    Color(0xFF1c2535)
+                                                        .withOpacity(0.5),
+                                                    Color(0xFF04080f)
+                                                        .withOpacity(0.5),
+                                                  ],
+                                                  begin: Alignment.topCenter,
+                                                  end: Alignment.bottomCenter),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                      controller.selectedList[i]
+                                                                  .userName !=
+                                                              null
+                                                          ? controller
                                                               .selectedList[i]
-                                                              .id ==
-                                                          null) {
-                                                        controller.selectedList
-                                                            .remove(controller
-                                                                .selectedList[i]);
-                                                      } else {
-                                                        var selectedIndex =
-                                                            controller
-                                                                .selectedList[i]
-                                                                .id;
-                                                        for (var item
-                                                            in videoController
-                                                                .userList) {
-                                                          if (selectedIndex ==
-                                                              item.id) {
-                                                            controller
-                                                                .selectedList
-                                                                .remove(item);
-                                                            item.isSpeakerSelected =
-                                                                false;
+                                                              .userName!
+                                                          : controller
+                                                              .selectedList[i]
+                                                              .firstName!,
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontFamily:
+                                                              helvetica_neu_bold,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontSize: 12.sp),
+                                                      textAlign: TextAlign.left),
+                                                  SizedBox(
+                                                    width: 5.w,
+                                                  ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        if (controller.selectedList
+                                                                .length ==
+                                                            1) {
+                                                          controller.selectedList
+                                                              .clear();
+                                                          for (var item
+                                                              in videoController
+                                                                  .userList) {
+                                                            if (item.isSpeakerSelected ==
+                                                                true) {
+                                                              item.isSpeakerSelected =
+                                                                  false;
+                                                            }
+                                                          }
+                                                        } else {
+                                                          if (controller
+                                                                  .selectedList[i]
+                                                                  .id ==
+                                                              null) {
+                                                            controller.selectedList
+                                                                .remove(controller
+                                                                    .selectedList[i]);
+                                                          } else {
+                                                            var selectedIndex =
+                                                                controller
+                                                                    .selectedList[i]
+                                                                    .id;
+                                                            for (var item
+                                                                in videoController
+                                                                    .userList) {
+                                                              if (selectedIndex ==
+                                                                  item.id) {
+                                                                controller
+                                                                    .selectedList
+                                                                    .remove(item);
+                                                                item.isSpeakerSelected =
+                                                                    false;
+                                                              }
+                                                            }
                                                           }
                                                         }
-                                                      }
-                                                    }
-                                                  },
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    size: 15,
-                                                    color: white_ffffff,
-                                                  ))
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                              ),
+                                                      },
+                                                      child: Icon(
+                                                        Icons.close,
+                                                        size: 15,
+                                                        color: white_ffffff,
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        }),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                    ],
+                  ),
+                  controller.assetImages.length > 1 
+                  ? Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: AnimatedSmoothIndicator(
+                      activeIndex: activeIndex,
+                      count: controller.assetImages.length,
+                      effect: ScrollingDotsEffect(
+                        dotHeight: 5.2.h,
+                        dotWidth: 5.2.w,
+                        activeDotColor: orange,
+                      ),
+                    ),
+                  ) : Container()
                 ],
               ),
               controller.assetImages.isNotEmpty

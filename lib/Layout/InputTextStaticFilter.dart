@@ -88,15 +88,15 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                 color: checkFillColor == false
                     ? checkColor == true
                         ? orange_ff881a
-                        : light_grey_f2f2f2
-                    : light_grey_f2f2f2,
+                        : grey_f5f5f5
+                    : grey_f5f5f5,
               ),
               borderRadius: const BorderRadius.all(Radius.circular(4)),
               color: checkFillColor == false
                   ? checkColor == true
                       ? Colors.white
-                      : light_grey_f2f2f2
-                  : light_grey_f2f2f2,
+                      : grey_f5f5f5
+                  : grey_f5f5f5,
             ),
             child: Row(
               children: [
@@ -387,7 +387,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                 buttonWidth: double.infinity,
                                 buttonDecoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4),
-                                  color: light_grey_f2f2f2,
+                                  color: grey_f5f5f5,
                                 ),
                                 itemHeight: 35,
                                 itemPadding:
@@ -530,7 +530,7 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                           buttonWidth: double.infinity,
                           buttonDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            color: light_grey_f2f2f2,
+                            color: grey_f5f5f5,
                           ),
                           itemHeight: 35,
                           itemPadding:

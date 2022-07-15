@@ -327,7 +327,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Remove ${admireList.admireDetails!.firstName ?? ""}",
+                                        "Remove ${admireList.admireDetails!.firstName.toString().capitalizeFirst ?? ""}",
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontFamily: roboto_medium,
@@ -442,7 +442,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
                 height: 6.h,
               ),
               setHelceticaBold(
-                  admireList.admireDetails!.firstName ?? "",
+                  admireList.admireDetails!.firstName.toString().capitalizeFirst ?? "",
                   12.sp,
                   black_121212,
                   FontWeight.w500,
@@ -453,7 +453,7 @@ class _AdmiresGridViewState extends State<AdmiresGridView> {
               ),
               setHelveticaMedium(
                   admireList.admireDetails!.currentJobs != null
-                      ? admireList.admireDetails!.currentJobs!.companyName ?? ""
+                      ? admireList.admireDetails!.currentJobs!.companyName.toString().capitalizeFirst ?? ""
                       : "",
                   12.sp,
                   grey_aaaaaa,

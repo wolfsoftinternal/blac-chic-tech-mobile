@@ -399,7 +399,7 @@ class _EventListState extends State<EventList> {
                                                             ),
                                                           ),
                                                           setHelveticaMedium(
-                                                              "Hosted by",
+                                                              "Hosted By",
                                                               11.sp,
                                                               gray_b3ffffff,
                                                               FontWeight.w500,
@@ -417,7 +417,7 @@ class _EventListState extends State<EventList> {
                                                                       .eventList[
                                                                           i]
                                                                       .hosts![0]
-                                                                      .firstName!,
+                                                                      .firstName!.capitalizeFirst!,
                                                               11.sp,
                                                               white_ffffff,
                                                               FontWeight.w500,
@@ -469,7 +469,7 @@ class _EventListState extends State<EventList> {
                                                       child: setHelveticaMedium(
                                                           controller
                                                               .eventList[i]
-                                                              .venue!,
+                                                              .venue!.capitalize!,
                                                           10.sp,
                                                           white_ffffff,
                                                           FontWeight.w100,
@@ -491,7 +491,7 @@ class _EventListState extends State<EventList> {
                                                     EdgeInsets.only(left: 16.w),
                                                 child: setHelceticaBold(
                                                     controller
-                                                        .eventList[i].title!,
+                                                        .eventList[i].title!.capitalize!,
                                                     22.sp,
                                                     white_ffffff,
                                                     FontWeight.w500,

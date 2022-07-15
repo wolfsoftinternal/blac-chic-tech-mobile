@@ -66,15 +66,15 @@ class _InputTextStaicState extends State<InputTextStaic> {
               color: checkFillColor == false?
               checkColor == true?
               orange_ff881a:
-              light_grey_f2f2f2:
-              light_grey_f2f2f2,
+              grey_f5f5f5:
+              grey_f5f5f5,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(4)),
             color: checkFillColor == false
                 ? checkColor == true
                 ? Colors.white
-                : light_grey_f2f2f2
-                : light_grey_f2f2f2,
+                : grey_f5f5f5
+                : grey_f5f5f5,
           ),
           child: Row(
             children: [

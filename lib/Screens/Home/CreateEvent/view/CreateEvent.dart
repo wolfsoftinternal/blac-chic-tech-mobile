@@ -377,7 +377,7 @@ class _CreateEventState extends State<CreateEvent> {
                                               color: grey_aaaaaa,
                                               fontWeight: FontWeight.w500,
                                               fontFamily:
-                                              helvetica_neu_bold,
+                                              helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 14.sp),
                                           border: OutlineInputBorder(

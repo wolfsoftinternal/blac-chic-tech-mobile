@@ -114,7 +114,9 @@ class _AboutMeState extends State<AboutMe> {
         myModel!.data!.questions![4].answer ?? "";
     stepsController.addtionalController.value.text =
         myModel!.data!.questions![5].answer ?? "";
-
+    setState(() {
+      
+    });
     if (myModel != null) {
       for (var element in myModel!.data!.pastJobs!) {
         var image = element.logo ?? "";
@@ -129,17 +131,18 @@ class _AboutMeState extends State<AboutMe> {
         pastCompanyWebsiteController.add(websiteController);
         pastJob.add(job);
 
-        if (element.toString() == "") {
-          pastCompanyTitleController.remove(element);
+        if (pastCompanyTitleController[0].text == "") {
+          cards.removeAt(0);
+          pastCompanyNameController.removeAt(0);
+          pastCompanyTitleController.removeAt(0);
+          pastCompanyWebsiteController.removeAt(0);
+          pastJobImage.removeAt(0);
+          pastJob.removeAt(0);
         }
-        cards.removeAt(0);
-        pastCompanyNameController.removeAt(0);
-        pastCompanyTitleController.removeAt(0);
-        pastCompanyWebsiteController.removeAt(0);
-        pastJobImage.removeAt(0);
-        pastJob.removeAt(0);
+        
+        cards.add("");
       }
-      cards.add("");
+      
 
       for (var element in myModel!.data!.educations!) {
         var university = TextEditingController(text: element.schoolUniversity);
@@ -152,16 +155,17 @@ class _AboutMeState extends State<AboutMe> {
         endyearController.add(endyear);
         education.add(edu);
 
-        if (element.toString() == "") {
-          universityController.remove(element);
+        if (universityController[0].text == "") {
+          cardsEducation.removeAt(0);
+          universityController.removeAt(0);
+          startyearController.removeAt(0);
+          endyearController.removeAt(0);
+          education.removeAt(0);
         }
-        cardsEducation.removeAt(0);
-        universityController.removeAt(0);
-        startyearController.removeAt(0);
-        endyearController.removeAt(0);
-        education.removeAt(0);
+        
+        cardsEducation.add("");
       }
-      cardsEducation.add("");
+      
     }
 
     setState(() {});
@@ -265,7 +269,7 @@ class _AboutMeState extends State<AboutMe> {
                                                       style: TextStyle(
                                                           color: stepsController
                                                                       .companyName
-                                                                      .value ==
+                                                                      .value.toString().capitalize ==
                                                                   'Company Name'
                                                               ? grey_aaaaaa
                                                               : black_121212,
@@ -323,7 +327,7 @@ class _AboutMeState extends State<AboutMe> {
                                             style: TextStyle(
                                                 color: const Color(0xff0a84ff),
                                                 fontWeight: FontWeight.w500,
-                                                fontFamily: "NeueHelvetica",
+                                                fontFamily: helveticaNeue,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 12.sp),
                                             textAlign: TextAlign.left),
@@ -925,7 +929,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                               fontWeight: FontWeight
                                                                                   .w700,
                                                                               fontFamily:
-                                                                                  "NeueHelvetica",
+                                                                                  helveticaNeue,
                                                                               fontStyle: FontStyle
                                                                                   .normal,
                                                                               fontSize: 12
@@ -971,7 +975,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                             FontWeight
                                                                                 .w700,
                                                                         fontFamily:
-                                                                            "NeueHelvetica",
+                                                                            helveticaNeue,
                                                                         fontStyle:
                                                                             FontStyle
                                                                                 .normal,
@@ -1068,7 +1072,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style: TextStyle(
                                                     color: Color(0xff121212),
                                                     fontWeight: FontWeight.w700,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle: FontStyle.normal,
                                                     fontSize: 12.0),
                                                 textAlign: TextAlign.left)
@@ -1539,7 +1543,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                               fontWeight: FontWeight
                                                                                   .w700,
                                                                               fontFamily:
-                                                                                  "NeueHelvetica",
+                                                                                  helveticaNeue,
                                                                               fontStyle: FontStyle
                                                                                   .normal,
                                                                               fontSize: 12
@@ -1586,7 +1590,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                             FontWeight
                                                                                 .w700,
                                                                         fontFamily:
-                                                                            "NeueHelvetica",
+                                                                            helveticaNeue,
                                                                         fontStyle:
                                                                             FontStyle
                                                                                 .normal,
@@ -1670,7 +1674,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style: TextStyle(
                                                     color: Color(0xff121212),
                                                     fontWeight: FontWeight.w700,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle: FontStyle.normal,
                                                     fontSize: 12.0),
                                                 textAlign: TextAlign.left)
@@ -1736,7 +1740,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                   FontWeight
                                                                       .w900,
                                                               fontFamily:
-                                                                  "NeueHelvetica",
+                                                                  helveticaNeue,
                                                               fontStyle:
                                                                   FontStyle
                                                                       .normal,
@@ -1891,7 +1895,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                         FontWeight
                                                                             .w900,
                                                                     fontFamily:
-                                                                        "NeueHelvetica",
+                                                                        helveticaNeue,
                                                                     fontStyle:
                                                                         FontStyle
                                                                             .normal,
@@ -2066,7 +2070,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                         FontWeight
                                                                             .w900,
                                                                     fontFamily:
-                                                                        "NeueHelvetica",
+                                                                        helveticaNeue,
                                                                     fontStyle:
                                                                         FontStyle
                                                                             .normal,
@@ -2241,7 +2245,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                         FontWeight
                                                                             .w900,
                                                                     fontFamily:
-                                                                        "NeueHelvetica",
+                                                                        helveticaNeue,
                                                                     fontStyle:
                                                                         FontStyle
                                                                             .normal,
@@ -2418,7 +2422,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                         FontWeight
                                                                             .w900,
                                                                     fontFamily:
-                                                                        "NeueHelvetica",
+                                                                        helveticaNeue,
                                                                     fontStyle:
                                                                         FontStyle
                                                                             .normal,
@@ -2595,7 +2599,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                         FontWeight
                                                                             .w900,
                                                                     fontFamily:
-                                                                        "NeueHelvetica",
+                                                                        helveticaNeue,
                                                                     fontStyle:
                                                                         FontStyle
                                                                             .normal,
@@ -2776,7 +2780,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                         FontWeight
                                                                             .w900,
                                                                     fontFamily:
-                                                                        "NeueHelvetica",
+                                                                        helveticaNeue,
                                                                     fontStyle:
                                                                         FontStyle
                                                                             .normal,
@@ -2909,6 +2913,15 @@ class _AboutMeState extends State<AboutMe> {
                                   ),
                                   BlackButton("Save", white_ffffff, () {
                                     var status;
+                                    if(pastCompanyNameController.last.text == '' && pastCompanyTitleController.last.text == ''){
+                                      pastCompanyNameController.removeLast();
+                                      pastCompanyTitleController.removeLast();
+                                    }
+                                    if(universityController.last.text == '' && startyearController.last.text == '' && endyearController.last.text == ''){
+                                      universityController.removeLast();
+                                      startyearController.removeLast();
+                                      endyearController.removeLast();
+                                    }
                                     for(var item in pastCompanyNameController){
                                       if(item.text == ''){
                                         snackBar(context, 'Enter company name');
@@ -2980,7 +2993,7 @@ class _AboutMeState extends State<AboutMe> {
 
                                     details.clear();
 
-                                    for (int i = 0; i < cards.length; i++) {
+                                    for (int i = 0; i < cardsEducation.length; i++) {
                                       details.add({
                                         '"university_school_name"':
                                             '"${universityController[i].text}"',

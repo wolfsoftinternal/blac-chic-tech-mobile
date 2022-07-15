@@ -285,7 +285,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         height: 32.h,
                       ),
 
-                      Text("YOUR PAST JOB",
+                      Text("YOUR PAST JOBS",
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w900,
@@ -441,6 +441,9 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                   onTap: () {
                                     setState(() {
                                       cards.removeLast();
+                                      pastCompanyNameController.removeLast();
+                                      pastCompanyTitleController.removeLast();
+                                      pastCompanyWebsiteController.removeLast();
                                         if (cards.length == 1) {
                                           isDeleteLast = false;
                                         }
@@ -509,6 +512,8 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
 
                                   if (element.toString() == "") {
                                     pastCompanyTitleController.remove(element);
+                                    pastCompanyNameController.remove(element);
+                                    pastCompanyWebsiteController.remove(element);
                                   }
                                 }
                                 cards.add("");

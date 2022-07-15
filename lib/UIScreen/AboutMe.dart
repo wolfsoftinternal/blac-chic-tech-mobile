@@ -56,7 +56,7 @@ class _AboutMeState extends State<AboutMe> {
                                 style:  TextStyle(
                                     color:  black_121212,
                                     fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
+                                    fontFamily: helveticaNeue,
                                     fontStyle:  FontStyle.normal,
                                     fontSize: 12.sp
                                 ),
@@ -95,7 +95,7 @@ class _AboutMeState extends State<AboutMe> {
                                 style:  TextStyle(
                                     color:  black_121212,
                                     fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
+                                    fontFamily: helveticaNeue,
                                     fontStyle:  FontStyle.normal,
                                     fontSize: 12.sp
                                 ),
@@ -116,7 +116,7 @@ class _AboutMeState extends State<AboutMe> {
                                       style:  TextStyle(
                                           color:  const Color(0xff0a84ff),
                                           fontWeight: FontWeight.w500,
-                                          fontFamily: "NeueHelvetica",
+                                          fontFamily: helveticaNeue,
                                           fontStyle:  FontStyle.normal,
                                           fontSize: 12.sp
                                       ),
@@ -156,7 +156,7 @@ class _AboutMeState extends State<AboutMe> {
                                 style:  TextStyle(
                                     color:  black_121212,
                                     fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
+                                    fontFamily: helveticaNeue,
                                     fontStyle:  FontStyle.normal,
                                     fontSize: 12.sp
                                 ),
@@ -237,7 +237,7 @@ class _AboutMeState extends State<AboutMe> {
                                         style: TextStyle(
                                             color:  Color(0xff121212),
                                             fontWeight: FontWeight.w700,
-                                            fontFamily: "NeueHelvetica",
+                                            fontFamily: helveticaNeue,
                                             fontStyle:  FontStyle.normal,
                                             fontSize: 12.0
                                         ),
@@ -295,7 +295,7 @@ class _AboutMeState extends State<AboutMe> {
                                           style:  TextStyle(
                                               color:  const Color(0xff121212),
                                               fontWeight: FontWeight.w700,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeue,
                                               fontStyle:  FontStyle.normal,
                                               fontSize: 12.sp
                                           ),
@@ -320,7 +320,7 @@ class _AboutMeState extends State<AboutMe> {
                                           style:  TextStyle(
                                               color:  white_ffffff,
                                               fontWeight: FontWeight.w700,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeue,
                                               fontStyle:  FontStyle.normal,
                                               fontSize: 12.sp
                                           ),
@@ -357,7 +357,7 @@ class _AboutMeState extends State<AboutMe> {
                                 style:  TextStyle(
                                     color:  black_121212,
                                     fontWeight: FontWeight.w900,
-                                    fontFamily: "NeueHelvetica",
+                                    fontFamily: helveticaNeue,
                                     fontStyle:  FontStyle.normal,
                                     fontSize: 12.sp
                                 ),
@@ -393,7 +393,7 @@ class _AboutMeState extends State<AboutMe> {
                                               style:  TextStyle(
                                                   color:  black_121212,
                                                   fontWeight: FontWeight.w900,
-                                                  fontFamily: "NeueHelvetica",
+                                                  fontFamily: helveticaNeue,
                                                   fontStyle:  FontStyle.normal,
                                                   fontSize: 12.sp
                                               ),
@@ -445,7 +445,7 @@ class _AboutMeState extends State<AboutMe> {
                                         style: TextStyle(
                                             color:  Color(0xff121212),
                                             fontWeight: FontWeight.w700,
-                                            fontFamily: "NeueHelvetica",
+                                            fontFamily: helveticaNeue,
                                             fontStyle:  FontStyle.normal,
                                             fontSize: 12.0
                                         ),
@@ -619,7 +619,7 @@ class _AboutMeState extends State<AboutMe> {
                                           style:  TextStyle(
                                               color:  const Color(0xff121212),
                                               fontWeight: FontWeight.w700,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeue,
                                               fontStyle:  FontStyle.normal,
                                               fontSize: 12.sp
                                           ),
@@ -644,7 +644,7 @@ class _AboutMeState extends State<AboutMe> {
                                           style:  TextStyle(
                                               color:  white_ffffff,
                                               fontWeight: FontWeight.w700,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeue,
                                               fontStyle:  FontStyle.normal,
                                               fontSize: 12.sp
                                           ),
@@ -704,7 +704,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style:  TextStyle(
                                                     color:  black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle:  FontStyle.normal,
                                                     fontSize: 12.sp
                                                 ),
@@ -765,7 +765,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style:  TextStyle(
                                                     color:  black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle:  FontStyle.normal,
                                                     fontSize: 12.sp
                                                 ),
@@ -826,7 +826,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style:  TextStyle(
                                                     color:  black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle:  FontStyle.normal,
                                                     fontSize: 12.sp
                                                 ),
@@ -887,7 +887,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style:  TextStyle(
                                                     color:  black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle:  FontStyle.normal,
                                                     fontSize: 12.sp
                                                 ),
@@ -948,7 +948,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style:  TextStyle(
                                                     color:  black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle:  FontStyle.normal,
                                                     fontSize: 12.sp
                                                 ),
@@ -1009,7 +1009,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style:  TextStyle(
                                                     color:  black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle:  FontStyle.normal,
                                                     fontSize: 12.sp
                                                 ),
@@ -1071,7 +1071,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style:  TextStyle(
                                                     color:  black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle:  FontStyle.normal,
                                                     fontSize: 12.sp
                                                 ),
@@ -1132,7 +1132,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 style:  TextStyle(
                                                     color:  black_121212,
                                                     fontWeight: FontWeight.w900,
-                                                    fontFamily: "NeueHelvetica",
+                                                    fontFamily: helveticaNeue,
                                                     fontStyle:  FontStyle.normal,
                                                     fontSize: 12.sp
                                                 ),

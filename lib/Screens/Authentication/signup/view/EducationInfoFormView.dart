@@ -488,6 +488,9 @@ class _EducationState extends State<EducationInfoFormView> {
                                 onTap: () {
                                   setState(() {
                                     cards.removeLast();
+                                    universityController.removeLast();
+                                    startyearController.removeLast();
+                                    endyearController.removeLast();
                                     if (cards.length == 1) {
                                       isDeleteLast = false;
                                     }

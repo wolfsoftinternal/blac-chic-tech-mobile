@@ -57,6 +57,14 @@ class PostController extends GetxController {
     print(longitude.value.toString());
 
     if (assetImages.length > 0) {
+      List image = [];
+      for(int i = 0; i < assetImages.length; i++){
+        if(assetImages[i].relativePath.toString().contains('/storage/emulated/0/')){
+          image.add(assetImages[i].relativePath + "/" + assetImages[i].title);
+        }else{
+          image.add('/storage/emulated/0/' + assetImages[i].relativePath + "/" + assetImages[i].title);
+        }
+      }
       request.files.add(await http.MultipartFile.fromPath(
           'image',
           assetImages[0]

@@ -422,8 +422,26 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                     child: Text(
                                       _isFirstLayout == true
                                           ? controller
-                                              .upcomingEventList[i].type!
-                                          : controller.pastEventList[i].type!,
+                                              .upcomingEventList[i].type! ==
+                                                                'ticket_price'
+                                                            ? 'Paid'
+                                                            : controller
+                                                                        .eventList[
+                                                                            i]
+                                                                        .type! ==
+                                                                    'free'
+                                                                ? 'Free'
+                                                                : 'Invite Only'
+                                          : controller.pastEventList[i].type! ==
+                                                                'ticket_price'
+                                                            ? 'Paid'
+                                                            : controller
+                                                                        .eventList[
+                                                                            i]
+                                                                        .type! ==
+                                                                    'free'
+                                                                ? 'Free'
+                                                                : 'Invite Only',
                                       style: TextStyle(
                                           fontSize: 12.sp,
                                           color: Colors.white,
@@ -560,7 +578,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                           ),
                                         ),
                                         setHelveticaMedium(
-                                            "Hosted by",
+                                            "Hosted By",
                                             11.sp,
                                             gray_b3ffffff,
                                             FontWeight.w500,
@@ -582,17 +600,12 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                                                     i]
                                                                 .hosts ==
                                                             null
-                                                    ? controller
+                                                    ? "" : controller
                                                             .upcomingEventList[
                                                                 i]
                                                             .hosts![0]
-                                                            .firstName! +
-                                                        controller
-                                                            .upcomingEventList[
-                                                                i]
-                                                            .hosts![0]
-                                                            .lastName!
-                                                    : ""
+                                                            .firstName!.capitalizeFirst!
+                                                    
                                                 : controller.pastEventList[i]
                                                                 .hosts
                                                                 .toString() ==
@@ -602,15 +615,11 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                                                     i]
                                                                 .hosts ==
                                                             null
-                                                    ? controller
+                                                    ? "" : controller
                                                             .pastEventList[i]
                                                             .hosts![0]
-                                                            .firstName! +
-                                                        controller
-                                                            .pastEventList[i]
-                                                            .hosts![0]
-                                                            .lastName!
-                                                    : "",
+                                                            .firstName!.capitalizeFirst!
+                                                    ,
                                             11.sp,
                                             white_ffffff,
                                             FontWeight.w500,
@@ -662,7 +671,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                             ? controller
                                                 .upcomingEventList[i].venue!
                                             : controller
-                                                .pastEventList[i].venue!,
+                                                .pastEventList[i].venue!.capitalize!,
                                         10.sp,
                                         white_ffffff,
                                         FontWeight.w100,
@@ -684,7 +693,7 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                               child: setHelceticaBold(
                                   _isFirstLayout == true
                                       ? controller.upcomingEventList[i].title!
-                                      : controller.pastEventList[i].title!,
+                                      : controller.pastEventList[i].title!.capitalize!,
                                   22.sp,
                                   white_ffffff,
                                   FontWeight.w500,

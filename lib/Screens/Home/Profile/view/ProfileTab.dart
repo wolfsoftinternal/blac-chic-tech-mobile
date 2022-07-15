@@ -188,20 +188,18 @@ class _ProfileTabState extends State<ProfileTab> {
                                                         .only(
                                                         left: 12.w, right: 8.w),
                                                     child: setHelveticaMedium(
-                                                        controller
+                                                        "${controller
                                                             .details
                                                             .value
                                                             .pastJobs![
                                                         index]
                                                             .title!
-                                                            .toUpperCase() +
-                                                            " @" +
-                                                            controller
+                                                            .toUpperCase()} @${controller
                                                                 .details
                                                                 .value
                                                                 .pastJobs![
                                                             index]
-                                                                .companyName!,
+                                                                .companyName!.toString().capitalize}",
                                                         15.sp,
                                                         grey_aaaaaa,
                                                         FontWeight.w500,
@@ -263,26 +261,22 @@ class _ProfileTabState extends State<ProfileTab> {
                                             EdgeInsets.only(
                                                 bottom: 12.h),
                                             child: setHelveticaMedium(
-                                                controller
+                                                "${controller
                                                     .details
                                                     .value
                                                     .educations![
                                                 index]
-                                                    .schoolUniversity! +
-                                                    " / " +
-                                                    controller
+                                                    .schoolUniversity!.capitalize} / ${controller
                                                         .details
                                                         .value
                                                         .educations![
                                                     index]
-                                                        .startYear! +
-                                                    ' - ' +
-                                                    controller
+                                                        .startYear!}  - ${controller
                                                         .details
                                                         .value
                                                         .educations![
                                                     index]
-                                                        .endYear!,
+                                                        .endYear!}",
                                                 16.sp,
                                                 grey_aaaaaa,
                                                 FontWeight.w500,
@@ -401,7 +395,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     child: Container(
                                         child: setHelveticaMedium(
                                             controller.details.value
-                                                .questions![0].answer!,
+                                                .questions![0].answer!.capitalizeFirst!,
                                             16.sp,
                                             grey_aaaaaa,
                                             FontWeight.w500,
@@ -461,7 +455,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     child: Container(
                                         child: setHelveticaMedium(
                                             controller.details.value
-                                                .questions![1].answer!,
+                                                .questions![1].answer!.capitalizeFirst!,
                                             16.sp,
                                             grey_aaaaaa,
                                             FontWeight.w500,
@@ -523,7 +517,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     child: Container(
                                         child: setHelveticaMedium(
                                             controller.details.value
-                                                .questions![2].answer!,
+                                                .questions![2].answer!.capitalizeFirst!,
                                             16.sp,
                                             grey_aaaaaa,
                                             FontWeight.w500,
@@ -582,7 +576,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     child: Container(
                                         child: setHelveticaMedium(
                                             controller.details.value
-                                                .questions![3].answer!,
+                                                .questions![3].answer!.capitalizeFirst!,
                                             16.sp,
                                             grey_aaaaaa,
                                             FontWeight.w500,
@@ -641,7 +635,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     child: Container(
                                         child: setHelveticaMedium(
                                             controller.details.value
-                                                .questions![4].answer!,
+                                                .questions![4].answer!.capitalizeFirst!,
                                             16.sp,
                                             grey_aaaaaa,
                                             FontWeight.w500,

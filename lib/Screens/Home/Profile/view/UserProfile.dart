@@ -605,15 +605,14 @@ class _UserProfileState extends State<UserProfile> {
                           child: Stack(
                             children: [
                               PageView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
+                                  // physics: const NeverScrollableScrollPhysics(),
                                   controller: pageController,
                                   itemCount: widget.isFrom == true
                                       ? 1
                                       : videoController.userList.length,
                                   onPageChanged: (v) {
-                                    if (v == videoController.userList.length) {
-                                      hadReachedEnd = true;
-                                    }
+                                    index = v;
+                                    controller.admireListAPI(context, videoController.userList[index].id.toString());
                                   },
                                   itemBuilder:
                                       (BuildContext context, int index) {
@@ -663,15 +662,15 @@ class _UserProfileState extends State<UserProfile> {
                                           ? Container()
                                           : GestureDetector(
                                               onTap: () {
-                                                if (index > 0) {
-                                                  index--;
+                                                // if (index > 0) {
+                                                  // index--;
                                                   // dynamic body = {'user_id': videoController.userList[index].id.toString()};
                                                   controller.admireListAPI(
                                                       context,
                                                       videoController
                                                           .userList[index].id
                                                           .toString());
-                                                }
+                                                // }
                                                 pageController.previousPage(
                                                     duration: Duration(
                                                         milliseconds: 300),
@@ -704,19 +703,18 @@ class _UserProfileState extends State<UserProfile> {
                                           ? Container()
                                           : GestureDetector(
                                               onTap: () {
-                                                if (hadReachedEnd == true) {
+                                                if (index + 1 == videoController.userList.length) {
                                                   pageController.jumpToPage(0);
                                                   // dynamic body = {'user_id': widget.selectedUserId.toString()};
                                                   controller.admireListAPI(
                                                       context,
                                                       widget.selectedUserId
                                                           .toString());
-                                                  hadReachedEnd = false;
                                                 } else {
-                                                  if (index !=
-                                                      videoController
-                                                          .userList.length) {
-                                                    index++;
+                                                  // if (index !=
+                                                  //     videoController
+                                                  //         .userList.length) {
+                                                  //   index++;
                                                     // dynamic body = {'user_id': videoController.userList[index].id.toString()};
                                                     controller.admireListAPI(
                                                         context,
@@ -728,7 +726,7 @@ class _UserProfileState extends State<UserProfile> {
                                                             milliseconds: 300),
                                                         curve: Curves
                                                             .fastOutSlowIn);
-                                                  }
+                                                  // }
                                                 }
                                               },
                                               child: Container(
@@ -784,7 +782,7 @@ class _UserProfileState extends State<UserProfile> {
                                     'See More',
                                     12.sp,
                                     grey_aaaaaa,
-                                    FontWeight.w500,
+                                    FontWeight.w500,  
                                     FontStyle.normal,
                                     -0.24),
                               ),

@@ -230,8 +230,8 @@ class _AdmireProfileState extends State<AdmireProfile> {
                                               .admireList[index]
                                               .admireDetails!
                                               .image!,
-                                    height: 48.h,
-                                    width: 48.w,
+                                          height: 48.h,
+                                          width: 48.w,
                                           fit: BoxFit.cover,
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
@@ -254,7 +254,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
                               ),
                               setHelveticaMedium(
                                   controller.admireList[index]
-                                          .admireDetails!.firstName ??
+                                          .admireDetails!.firstName.toString().capitalizeFirst ??
                                       "",
                                   12.sp,
                                   black_121212,

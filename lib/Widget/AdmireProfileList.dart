@@ -70,22 +70,24 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                       width: double.infinity,
                       fit: BoxFit.cover,
                       progressIndicatorBuilder:
-                          (context, url, downloadProgress) => SvgPicture.asset(
-                        placeholder,
-                        height: controller.admireList.isEmpty
-                            ? MediaQuery.of(context).size.height
-                            : MediaQuery.of(context).size.height * .83,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      errorWidget: (context, url, error) => SvgPicture.asset(
-                        placeholder,
-                        height: controller.admireList.isEmpty
-                            ? MediaQuery.of(context).size.height
-                            : MediaQuery.of(context).size.height * .83,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                          (context, url, downloadProgress) => SizedBox(
+                                              height: MediaQuery.of(context).size.height * 0.75,
+                                              child: Center(
+                                                child: CircularProgressIndicator(
+                                                  color: black, 
+                                                  strokeWidth: 2
+                                                )
+                                              ),
+                                            ),
+                      errorWidget: (context, url, error) => SizedBox(
+                                              height: MediaQuery.of(context).size.height * 0.75,
+                                              child: Center(
+                                                child: CircularProgressIndicator(
+                                                  color: black, 
+                                                  strokeWidth: 2
+                                                )
+                                              ),
+                                            ),
                     ),
               Container(
                 color: Colors.black.withOpacity(0.3),
@@ -337,11 +339,11 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                           //             .admireList.admireDetails!.countryDetails!.name!
                           //     : "",
                           myModel?.data?.cityDetails != null
-                              ? (myModel?.data?.cityDetails?.name ?? "") +
+                              ? (myModel?.data?.cityDetails?.name.toString().capitalizeFirst ?? "") +
                                   ', ' +
-                                  (myModel!.data!.stateDetails!.name ?? "") +
+                                  (myModel!.data!.stateDetails!.name.toString().capitalizeFirst ?? "") +
                                   ', ' +
-                                  (myModel?.data?.countryDetails?.name ?? "")
+                                  (myModel?.data?.countryDetails?.name.toString().capitalizeFirst ?? "")
                               : "",
                           10.sp,
                           Colors.white70,

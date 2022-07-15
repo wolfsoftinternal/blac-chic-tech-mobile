@@ -172,13 +172,13 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                           // Edinburgh, United Kingdom
                                           Text(
                                               myModel!.data!.cityDetails!
-                                                      .name! +
+                                                      .name!.capitalizeFirst! +
                                                   ', ' +
                                                   myModel!.data!.stateDetails!
-                                                      .name! +
+                                                      .name!.capitalizeFirst! +
                                                   ', ' +
                                                   myModel!.data!.countryDetails!
-                                                      .name!,
+                                                      .name!.capitalizeFirst!,
                                               style: TextStyle(
                                                   color: grey_aaaaaa,
                                                   fontWeight: FontWeight.w500,
@@ -281,7 +281,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                       Text("Edit Profile",
                                           style: TextStyle(
                                               color: white_ffffff,
-                                              fontFamily: "NeueHelvetica",
+                                              fontFamily: helveticaNeue,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 16.sp),
                                           textAlign: TextAlign.left)
@@ -357,7 +357,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                                 FontWeight
                                                                     .w700,
                                                             fontFamily:
-                                                                "NeueHelvetica",
+                                                                helveticaNeue,
                                                             fontStyle:
                                                                 FontStyle
                                                                     .normal,
@@ -377,7 +377,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                                 FontWeight
                                                                     .w500,
                                                             fontFamily:
-                                                                "NeueHelvetica",
+                                                                helveticaNeue,
                                                             fontStyle:
                                                                 FontStyle
                                                                     .normal,
@@ -477,13 +477,13 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             // Go Incognito
-                                            Text("About me",
+                                            Text("About Me",
                                                 style: TextStyle(
                                                     color: black_121212,
                                                     fontWeight:
                                                         FontWeight.w700,
                                                     fontFamily:
-                                                        "NeueHelvetica",
+                                                        helveticaNeue,
                                                     fontStyle:
                                                         FontStyle.normal,
                                                     fontSize: 16.sp),
@@ -499,7 +499,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                     fontWeight:
                                                         FontWeight.w500,
                                                     fontFamily:
-                                                        "NeueHelvetica",
+                                                        helveticaNeue,
                                                     fontStyle:
                                                         FontStyle.normal,
                                                     fontSize: 14.sp),
@@ -565,7 +565,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 //                     fontWeight:
                                 //                         FontWeight.w700,
                                 //                     fontFamily:
-                                //                         "NeueHelvetica",
+                                //                         helveticaNeue,
                                 //                     fontStyle:
                                 //                         FontStyle.normal,
                                 //                     fontSize: 16.sp),
@@ -632,7 +632,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 //                     fontWeight:
                                 //                         FontWeight.w700,
                                 //                     fontFamily:
-                                //                         "NeueHelvetica",
+                                //                         helveticaNeue,
                                 //                     fontStyle:
                                 //                         FontStyle.normal,
                                 //                     fontSize: 16.sp),
@@ -699,13 +699,13 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               // Go Incognito
-                                              Text("Logout account",
+                                              Text("Logout Account",
                                                   style: TextStyle(
                                                       color: black_121212,
                                                       fontWeight:
                                                           FontWeight.w700,
                                                       fontFamily:
-                                                          "NeueHelvetica",
+                                                          helveticaNeue,
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 16.sp),

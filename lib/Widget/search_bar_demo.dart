@@ -48,7 +48,7 @@ class _SearchBarDemoState extends State<SearchBarDemo> {
         hintStyle: TextStyle(
           fontSize: 14.sp,
           // fontWeight: FontWeight.w500,
-          color: const Color(0xff96A6A3),
+          color: grey_aaaaaa,
           fontFamily: helveticaNeueNeue_medium
         ),
         border: OutlineInputBorder(

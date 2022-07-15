@@ -35,24 +35,6 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    checkFirstCall();
-  }
-
-  checkFirstCall() async {
-    // setState(() async {
-      bool ifc = await IsFirstRun.isFirstCall();
-      print(ifc);
-      // if(ifc == true){
-      //   var preferences = MySharedPref();
-      //   preferences.clear();  
-      // }
-    // });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),

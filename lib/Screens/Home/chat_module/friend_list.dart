@@ -171,7 +171,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff5f5f5),
+      backgroundColor: white,
       body: Column(
     mainAxisSize: MainAxisSize.max,
     children: [
@@ -212,7 +212,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
           fontSize: 15.sp,
           fontFamily: AppFont.mediumFont,
           fontWeight: FontWeight.normal,
-          color: Colors.white,
+          color: grey_aaaaaa,
           height: 1,
           fontStyle: FontStyle.normal),
     );
@@ -414,7 +414,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
       return ListView.builder(
         // reverse: true,
         // shrinkWrap: true,
-
+        padding: EdgeInsets.zero,
         // physics: NeverScrollableScrollPhysics(),
         itemCount: myRooms.length,
         itemBuilder: (BuildContext context, int index) {
@@ -453,7 +453,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
       return ListView.builder(
         // reverse: true,
         // shrinkWrap: true,
-
+        padding: EdgeInsets.zero,
         // physics: NeverScrollableScrollPhysics(),
         itemCount: myRooms.length,
         itemBuilder: (BuildContext context, int index) {
@@ -498,7 +498,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(6.7.r)),
-          color: white_ffffff),
+          color: grey_f5f5f5),
       child: Row(
         children: [
           SizedBox(
@@ -590,160 +590,163 @@ class _FriendListScreenState extends State<FriendListScreen> {
     String lastMessageType = user["last_message_type"] ?? "0";
     print("lastMessageType $lastMessageType");
 
-    return GestureDetector(
-      onTap: () {
-        sendMessageToFriend({
-          "id": user["id"].toString(),
-          "name": user["name"].toString(),
-          "image": user["image"].toString()
-        });
-      },
-      child: Container(
-          margin: EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
-          padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 12.w),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.r),
-            // boxShadow: [
-            //   BoxShadow(
-            //       color: Color(0x144343b2),
-            //       offset: Offset(0, 0),
-            //       blurRadius: 20,
-            //       spreadRadius: 2)
-            // ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              CircleAvatar(
-                radius: 26.r,
-                backgroundImage: _isImageAvailable
-                    ? NetworkImage(user["image"] ?? "")
-                    : null,
-                backgroundColor: grey_f4f6f6,
-                child: _isImageAvailable
-                    ? Container()
-                    : Icon(
-                        Icons.person,
-                        size: 30.r,
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: GestureDetector(
+        onTap: () {
+          sendMessageToFriend({
+            "id": user["id"].toString(),
+            "name": user["name"].toString(),
+            "image": user["image"].toString()
+          });
+        },
+        child: Container(
+            margin: EdgeInsets.only(bottom: 0.h, left: 16.w, right: 16.w),
+            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 12.w),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              // borderRadius: BorderRadius.circular(8.r),
+              // boxShadow: [
+              //   BoxShadow(
+              //       color: Color(0x144343b2),
+              //       offset: Offset(0, 0),
+              //       blurRadius: 20,
+              //       spreadRadius: 2)
+              // ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                CircleAvatar(
+                  radius: 26.r,
+                  backgroundImage: _isImageAvailable
+                      ? NetworkImage(user["image"] ?? "")
+                      : null,
+                  backgroundColor: grey_f4f6f6,
+                  child: _isImageAvailable
+                      ? Container()
+                      : Icon(
+                          Icons.person,
+                          size: 30.r,
+                        ),
+                ),
+                SizedBox(
+                  width: 16.w,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        user["name"].toString().capitalize ?? "",
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: txt_color,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: helveticaNeueNeue_medium,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 14.sp),
                       ),
-              ),
-              SizedBox(
-                width: 16.w,
-              ),
-              Expanded(
-                child: Column(
+                      SizedBox(
+                        height: 6.h,
+                      ),
+                      if (lastMessageType == "0" ||
+                          lastMessageType == "1" ||
+                          lastMessageType == "2")
+                        Text(
+                          user["last_message"] ?? "",
+                          maxLines: 1,
+                          style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: grey_aaaaaa,
+                            fontSize: 12.sp,
+                            fontFamily: helveticaNeueNeue_medium,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      // if (lastMessageType == "1" || lastMessageType == "2")
+                      //   Row(
+                      //       mainAxisAlignment: MainAxisAlignment.start,
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       mainAxisSize: MainAxisSize.min,
+                      //       children: [
+                      //         // if (lastMessageType == "1")
+                      //         Icon(
+                      //           Icons.audio_file,
+                      //           size: 12,
+                      //           color: EdTxtBg,
+                      //           // height: 12,
+                      //           // width: 12,
+                      //         ),
+                      //         SizedBox(
+                      //           width: 4,
+                      //         ),
+                      //         Text(
+                      //           // lastMessageType == "1" ? "Mix" : "Mix",
+                      //           "Mix",
+                      //           maxLines: 1,
+                      //           style: TextStyle(
+                      //             overflow: TextOverflow.ellipsis,
+                      //             fontFamily: AppFont.mediumFont,
+                      //             fontSize: 12,
+                      //             color: EdTxtBg,
+                      //             fontWeight: FontWeight.w500,
+                      //             fontStyle: FontStyle.normal,
+                      //           ),
+                      //         ),
+                      //       ]),
+                    ],
+                  ),
+                  flex: 1,
+                ),
+                Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      user["name"] ?? "",
-                      maxLines: 1,
+                      user["timeStamp"] ?? "",
                       style: TextStyle(
-                          color: txt_color,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 14.sp),
+                        fontFamily: helveticaNeueNeue_medium,
+                        fontSize: 12.sp,
+                        color: grey_aaaaaa,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                      ),
                     ),
                     SizedBox(
                       height: 6.h,
                     ),
-                    if (lastMessageType == "0" ||
-                        lastMessageType == "1" ||
-                        lastMessageType == "2")
-                      Text(
-                        user["last_message"] ?? "",
-                        maxLines: 1,
-                        style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          color: grey_aaaaaa,
-                          fontSize: 12.sp,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    // if (lastMessageType == "1" || lastMessageType == "2")
-                    //   Row(
-                    //       mainAxisAlignment: MainAxisAlignment.start,
-                    //       crossAxisAlignment: CrossAxisAlignment.start,
-                    //       mainAxisSize: MainAxisSize.min,
-                    //       children: [
-                    //         // if (lastMessageType == "1")
-                    //         Icon(
-                    //           Icons.audio_file,
-                    //           size: 12,
-                    //           color: EdTxtBg,
-                    //           // height: 12,
-                    //           // width: 12,
-                    //         ),
-                    //         SizedBox(
-                    //           width: 4,
-                    //         ),
-                    //         Text(
-                    //           // lastMessageType == "1" ? "Mix" : "Mix",
-                    //           "Mix",
-                    //           maxLines: 1,
-                    //           style: TextStyle(
-                    //             overflow: TextOverflow.ellipsis,
-                    //             fontFamily: AppFont.mediumFont,
-                    //             fontSize: 12,
-                    //             color: EdTxtBg,
-                    //             fontWeight: FontWeight.w500,
-                    //             fontStyle: FontStyle.normal,
-                    //           ),
-                    //         ),
-                    //       ]),
-                  ],
-                ),
-                flex: 1,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    user["timeStamp"] ?? "",
-                    style: TextStyle(
-                      fontFamily: helveticaNeueNeue_medium,
-                      fontSize: 12.sp,
-                      color: grey_aaaaaa,
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 6.h,
-                  ),
-                  user["unread_message_count"]!.isEmpty ||
-                          user["unread_message_count"].toString() == "0"
-                      ? Container()
-                      : Container(
-                          height: 21.h,
-                          width: 21.w,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.green,
-                            // borderRadius: BorderRadius.circular(
-                            //   25.0,
-                            // ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              user["unread_message_count"] ?? "",
-                              style: TextStyle(
-                                  fontSize: 11.sp,
-                                  fontFamily: helveticaNeueNeue_medium,
-                                  fontWeight: FontWeight.w700,
-                                  fontStyle: FontStyle.normal,
-                                  color: Colors.white),
+                    user["unread_message_count"]!.isEmpty ||
+                            user["unread_message_count"].toString() == "0"
+                        ? Container()
+                        : Container(
+                            height: 21.h,
+                            width: 21.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.green,
+                              // borderRadius: BorderRadius.circular(
+                              //   25.0,
+                              // ),
                             ),
-                          ),
-                        )
-                ],
-              )
-            ],
-          )),
+                            child: Center(
+                              child: Text(
+                                user["unread_message_count"] ?? "",
+                                style: TextStyle(
+                                    fontSize: 11.sp,
+                                    fontFamily: helveticaNeueNeue_medium,
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          )
+                  ],
+                )
+              ],
+            )),
+      ),
     );
   }
 

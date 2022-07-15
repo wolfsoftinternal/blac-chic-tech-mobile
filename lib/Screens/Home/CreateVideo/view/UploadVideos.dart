@@ -6,6 +6,7 @@ import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoControll
 import 'package:blackchecktech/Screens/Home/CreateVideo/view/UploadVideoDetail.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:chewie/chewie.dart';
@@ -111,7 +112,7 @@ class _UploadVideosState extends State<UploadVideos> {
                                   style:  TextStyle(
                                       color:   const Color(0xff273433),
                                       fontWeight: FontWeight.w900,
-                                      fontFamily: "NeueHelvetica",
+                                      fontFamily: helveticaNeue,
                                       fontStyle:  FontStyle.normal,
                                       fontSize: 14.sp
                                   ),

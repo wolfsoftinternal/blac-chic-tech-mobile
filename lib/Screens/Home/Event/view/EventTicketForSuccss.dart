@@ -70,7 +70,7 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
                         style: TextStyle(
                             color: black_121212,
                             fontWeight: FontWeight.w900,
-                            fontFamily: "NeueHelvetica",
+                            fontFamily: helveticaNeue,
                             fontStyle: FontStyle.normal,
                             fontSize: 20.sp),
                         textAlign: TextAlign.center),
@@ -87,7 +87,7 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
                         style: TextStyle(
                             color: const Color(0xff5d5d5d),
                             fontWeight: FontWeight.w500,
-                            fontFamily: "NeueHelvetica",
+                            fontFamily: helveticaNeue,
                             fontStyle: FontStyle.normal,
                             fontSize: 14.sp),
                         textAlign: TextAlign.center),
@@ -201,7 +201,7 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
                                                         fontWeight:
                                                             FontWeight.w700,
                                                         fontFamily:
-                                                            "NeueHelvetica",
+                                                            helveticaNeue,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         overflow: TextOverflow
@@ -249,7 +249,7 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
                                                         fontWeight:
                                                             FontWeight.w700,
                                                         fontFamily:
-                                                            "NeueHelvetica",
+                                                            helveticaNeue,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 12.sp),
@@ -296,7 +296,7 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
                                                         fontWeight:
                                                             FontWeight.w700,
                                                         fontFamily:
-                                                            "NeueHelvetica",
+                                                            helveticaNeue,
                                                         fontStyle:
                                                             FontStyle.normal,
                                                         fontSize: 12.sp),
@@ -529,7 +529,7 @@ class _EventTicketForSuccessState extends State<EventTicketForSuccess> {
                                       style: TextStyle(
                                           color: const Color(0xffaaaaaa),
                                           fontWeight: FontWeight.w700,
-                                          fontFamily: "NeueHelvetica",
+                                          fontFamily: helveticaNeue,
                                           fontStyle: FontStyle.normal,
                                           fontSize: 8.sp),
                                       textAlign: TextAlign.left),

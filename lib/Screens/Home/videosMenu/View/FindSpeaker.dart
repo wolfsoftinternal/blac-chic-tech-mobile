@@ -228,7 +228,7 @@ class _FindSpeakerState extends State<FindSpeaker> {
                                                                 .findSpeakerList[
                                                                     i]
                                                                 .fullName
-                                                                .toString(),
+                                                                .toString().capitalize!,
                                                         style: const TextStyle(
                                                             fontFamily:
                                                                 helveticaNeueNeue_medium,

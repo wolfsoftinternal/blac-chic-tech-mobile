@@ -37,7 +37,7 @@ class SearchBarTag extends StatelessWidget {
           fontSize: 14.sp,
           // fontWeight: FontWeight.w500,
           fontFamily: helveticaNeueNeue_medium,
-          color: const Color(0xff96A6A3),
+          color: grey_aaaaaa
         ),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,

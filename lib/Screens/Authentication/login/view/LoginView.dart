@@ -212,7 +212,7 @@ class _LoginState extends State<LoginView> {
                           fontFamily: helveticaNeueNeue_medium,
                           fontStyle: FontStyle.normal,
                           fontSize: 14.0.sp),
-                      text: "Dont have an account yet? "),
+                      text: "Don't have an account yet? "),
                   TextSpan(
                     style: TextStyle(
                         color: const Color(0xffff881a),
