@@ -60,12 +60,15 @@ class _VideoTabState extends State<VideoTab> {
                   children: [
                     Padding(
                         padding:  EdgeInsets.only(left: 16.w, right: 16.w),
-                        child: StaggeredGridView.countBuilder(
-                          crossAxisCount: 4,
-                        //  physics : NeverScrollableScrollPhysics(),
+                        child: GridView.builder(
                           itemCount: controller.videoList.length >= 6
                                 ? 6
                                 : controller.videoList.length,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.905.h,
+                          mainAxisSpacing: 0.0,
+                          crossAxisSpacing: 23.0.w),
                           shrinkWrap: true,
                           primary: false,
                           padding: EdgeInsets.zero,
@@ -74,7 +77,7 @@ class _VideoTabState extends State<VideoTab> {
                               child: Stack(
                                 children: [
                                   SizedBox(
-                                    height: 250,
+                                    height: 173.h,
                                     width: MediaQuery.of(context).size.width,
                                     child: 
                                     FittedBox(
@@ -132,7 +135,7 @@ class _VideoTabState extends State<VideoTab> {
                                       });
                                     },
                                     child: Container(
-                                      height: 250,
+                                      height: 173.h,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5.r),
                                             gradient: LinearGradient(
@@ -144,16 +147,19 @@ class _VideoTabState extends State<VideoTab> {
                                                 ])),
                                     ),
                                   ),
-                                  InkWell(
-                                    onTap: () {
-                                      Get.to(VideoDetail(id: controller.videoList[index].id, userId: widget.id,))!.then((value) {
-                                        dynamic videoBody = {
-                                          'user_id': widget.id.toString(),
-                                          'page': controller.videoPageNumber.toString()
-                                        };
-                                        controller.videoListAPI(context, videoBody);
-                                      });
-                                    },child: BlurIcon()),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 20.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Get.to(VideoDetail(id: controller.videoList[index].id, userId: widget.id,))!.then((value) {
+                                          dynamic videoBody = {
+                                            'user_id': widget.id.toString(),
+                                            'page': controller.videoPageNumber.toString()
+                                          };
+                                          controller.videoListAPI(context, videoBody);
+                                        });
+                                      },child: BlurIcon()),
+                                  ),
                                   // Align(
                                   //   alignment: Alignment.topRight,
                                   //   child: Padding(
@@ -179,14 +185,14 @@ class _VideoTabState extends State<VideoTab> {
                               ),
                               footer: Padding(
                                     padding: EdgeInsets.only(
-                                        bottom: 12.w, left: 12.w, right: 12.w),
+                                        bottom: 28.w, left: 12.w, right: 12.w),
                                     child: Align(
                                       alignment: Alignment.bottomLeft,
                                       child: Text(
                                         controller.videoList[index].description.toString().capitalizeFirst ?? "",
                                         softWrap: true,
                                         overflow: TextOverflow.ellipsis,
-                                        maxLines: 3,
+                                        maxLines: 2,
                                         style: TextStyle(
                                             fontSize: 12.sp,
                                             fontFamily: helvetica_neu_bold,
@@ -198,12 +204,152 @@ class _VideoTabState extends State<VideoTab> {
                                   ),
                             );
                           },
+                        ),
+                        // child: StaggeredGridView.countBuilder(
+                        //   crossAxisCount: 4,
+                        // //  physics : NeverScrollableScrollPhysics(),
+                        //   itemCount: controller.videoList.length >= 6
+                        //         ? 6
+                        //         : controller.videoList.length,
+                        //   shrinkWrap: true,
+                        //   primary: false,
+                        //   padding: EdgeInsets.zero,
+                        //   itemBuilder: (BuildContext context, int index) {
+                        //     return GridTile(
+                        //       child: Stack(
+                        //         children: [
+                        //           SizedBox(
+                        //             height: 250,
+                        //             width: MediaQuery.of(context).size.width,
+                        //             child: 
+                        //             FittedBox(
+                        //               fit: BoxFit.fill,
+                        //               child: ClipRRect(
+                        //                 borderRadius: BorderRadius.all(
+                        //                             Radius.circular(8.r)),
+                        //                 child: YoutubePlayerBuilder(
+                        //                         player: YoutubePlayer(
+                        //                           showVideoProgressIndicator: false,
+                        //                           // thumbnail: Image.network(controller.thumbnail[index]),
+                        //                           controller: YoutubePlayerController(initialVideoId: controller.videoId[index], flags: YoutubePlayerFlags(hideControls: true, autoPlay: false))
+                        //                           // controller
+                        //                           //     .videoController.value[index],
+                        //                         ),
+                        //                         builder: (context, player) {
+                        //                           return Column(
+                        //                             children: [
+                        //                               player,
+                        //                             ],
+                        //                           );
+                        //                         }
+                        //                         ),
+                        //               ),
+                        //             )
+                        //           ),
+                        //           //   controller
+                        //           //               .videoList[index].embededCode ==
+                        //           //           null
+                        //           //       ? Center(
+                        //           //           child: SizedBox(
+                        //           //           height: 20,
+                        //           //           width: 20,
+                        //           //           child: CircularProgressIndicator(
+                        //           //             strokeWidth: 2,
+                        //           //             valueColor:
+                        //           //                 AlwaysStoppedAnimation<Color>(
+                        //           //                     Color(0xff04080f)),
+                        //           //           ),
+                        //           //         ))
+                        //           //       : FittedBox(
+                        //           //         fit: BoxFit.fill,
+                        //           //         child: Html(
+                        //           //             data: controller.videoList[index].embededCode
+                        //           //         ),
+                        //           //       ),
+                        //           InkWell(
+                        //             onTap: () {
+                        //               Get.to(VideoDetail(id: controller.videoList[index].id, userId: widget.id,))!.then((value) {
+                        //                 dynamic videoBody = {
+                        //                   'user_id': widget.id.toString(),
+                        //                   'page': controller.videoPageNumber.toString()
+                        //                 };
+                        //                 controller.videoListAPI(context, videoBody);
+                        //               });
+                        //             },
+                        //             child: Container(
+                        //               height: 250,
+                        //               decoration: BoxDecoration(
+                        //                 borderRadius: BorderRadius.circular(5.r),
+                        //                     gradient: LinearGradient(
+                        //                         begin: Alignment.topCenter,
+                        //                         end: Alignment.bottomCenter,
+                        //                         colors: [
+                        //                           Color(0x00121212),
+                        //                           Color(0xff121212).withOpacity(0.8)
+                        //                         ])),
+                        //             ),
+                        //           ),
+                        //           InkWell(
+                        //             onTap: () {
+                        //               Get.to(VideoDetail(id: controller.videoList[index].id, userId: widget.id,))!.then((value) {
+                        //                 dynamic videoBody = {
+                        //                   'user_id': widget.id.toString(),
+                        //                   'page': controller.videoPageNumber.toString()
+                        //                 };
+                        //                 controller.videoListAPI(context, videoBody);
+                        //               });
+                        //             },child: BlurIcon()),
+                        //           // Align(
+                        //           //   alignment: Alignment.topRight,
+                        //           //   child: Padding(
+                        //           //     padding: const EdgeInsets.all(8.0),
+                        //           //     child: Container(
+                        //           //       color: transparent,
+                        //           //       height: 32,
+                        //           //       width: 47,
+                        //           //       child: Center(
+                        //           //         child: setHelceticaBold(
+                        //           //            "00:00",
+                        //           //            12.0,
+                        //           //            white_ffffff,
+                        //           //            FontWeight.w500,
+                        //           //            FontStyle.normal
+                        //           //         ),
+                        //           //       ),
+                        //           //     ),
+                        //           //   ),
+                        //           // ),
+                                  
+                        //         ],
+                        //       ),
+                        //       footer: Padding(
+                        //             padding: EdgeInsets.only(
+                        //                 bottom: 12.w, left: 12.w, right: 12.w),
+                        //             child: Align(
+                        //               alignment: Alignment.bottomLeft,
+                        //               child: Text(
+                        //                 controller.videoList[index].description.toString().capitalizeFirst ?? "",
+                        //                 softWrap: true,
+                        //                 overflow: TextOverflow.ellipsis,
+                        //                 maxLines: 3,
+                        //                 style: TextStyle(
+                        //                     fontSize: 12.sp,
+                        //                     fontFamily: helvetica_neu_bold,
+                        //                     fontWeight: FontWeight.w600,
+                        //                     color: white_ffffff,
+                        //                     fontStyle: FontStyle.normal),
+                        //               ),
+                        //             ),
+                        //           ),
+                        //     );
+                        //   },
 
-                          staggeredTileBuilder: (int index) =>
-                              StaggeredTile.count(2, index.isEven ? 2.8 : 2.1),
-                          mainAxisSpacing: 23.h,
-                          crossAxisSpacing: 23.w,
-                        )),
+                        //   staggeredTileBuilder: (int index) =>
+                        //       StaggeredTile.count(2, index.isEven ? 2.8 : 2.1),
+                        //   mainAxisSpacing: 23.h,
+                        //   crossAxisSpacing: 23.w,
+                        // )
+                    ),
                   ],
                 ),
                 controller.videoList.length > 6 ?

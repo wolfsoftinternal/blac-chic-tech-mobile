@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/BottomNavigation.dart';
 import 'package:blackchecktech/Screens/Home/Event/view/EventList.dart';
+import 'package:blackchecktech/Screens/Home/MarketPlace/Marketplace.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoListBct.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
@@ -8,6 +9,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Screens/Home/BCConnect/view/BcConnect.dart';
 import 'package:blackchecktech/Screens/Home/transactions/view/TransactionsPayoutsTabs.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -95,7 +97,11 @@ class _HomePageState extends State<HomePage> {
                                 onTap: () {
                                   if (index == 0) {
                                     Get.to(AdmireProfile());
-                                  } else if (index == 3) {
+                                  } else if(index == 1){
+                                    Get.to(Marketplace());
+                                  } else if(index == 2){
+                                    launchURL('https://peerboard.com/1875702146');
+                                  }else if (index == 3) {
                                     Get.to(BcConnect());
                                   } else if (index == 6) {
                                     Get.to(EventList());

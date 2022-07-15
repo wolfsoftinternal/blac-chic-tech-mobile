@@ -220,6 +220,7 @@ class VideoController extends GetxController {
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       if (PageNumber == 1) {
         userList.clear();
+        print("clear");
       }
       http.StreamedResponse res = value;
 

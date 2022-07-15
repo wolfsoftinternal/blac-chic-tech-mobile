@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+import 'package:blackchecktech/Screens/Home/Feed/Feed.dart';
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/AdmireProfile.dart';
 import 'package:blackchecktech/Screens/Home/chat_module/friend_list.dart';
@@ -155,7 +156,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
       if(index == 0){
         Get.to(HomePage());
       }else if(index == 1){
-        Get.to(HomePage());
+        _currentIndex = 0;
+        Get.to(Feed());
       }else if(index == 2){
         _currentIndex = 0;
         Get.to(FriendListScreen());
