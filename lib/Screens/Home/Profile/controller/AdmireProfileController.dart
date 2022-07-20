@@ -384,7 +384,7 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-  admireProfileAPI(BuildContext context, id, [isFrom]) async {
+  admireProfileAPI(BuildContext context, id, [isFrom, status]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -414,7 +414,9 @@ class AdmireProfileController extends GetxController {
 
             details.value = admireListModel;
             print(details);
-            if(isFrom != null){
+            if(status == 'transaction'){
+              
+            }else if(isFrom != null){
               Get.back();
               Get.to(Profile());
             }else{          

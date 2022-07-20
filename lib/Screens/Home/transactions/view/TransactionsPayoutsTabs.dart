@@ -1,8 +1,10 @@
 import 'package:blackchecktech/Model/PayoutsModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/transactions/view/TransactionStatus.dart';
 import 'package:blackchecktech/Screens/PaymentFlow/withdraw/view/ChooseBankAccountPage.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,6 +54,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
       (value) {
         transactionController.getUserDetails(context);
         transactionController.allTransactionListApi(context);
+        transactionController.allPayoutListApi(context);
       },
     );
     transactionController.addListener(() {});
@@ -145,17 +148,19 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(WithdrawChooseBankAccount(
-                          walletAmount: transactionController
-                                  .userDetails.value.wallet ??
-                              "0",
-                        ));
+                        if(transactionController.isPaid.value != true){
+                          Get.to(WithdrawChooseBankAccount(
+                            walletAmount: transactionController
+                                    .userDetails.value.wallet ??
+                                "0",
+                          ));
+                        }
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 16.w, vertical: 8.h),
                         decoration: BoxDecoration(
-                          color: orange_ff881a,
+                          color: transactionController.isPaid.value == true ? orange.withOpacity(0.5) : orange_ff881a,
                           borderRadius: BorderRadius.circular(4.r),
                         ),
                         child: Text(
@@ -288,7 +293,17 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                     _isFirstLayout
                         ? Visibility(
                       visible: _isFirstLayout,
-                      child: Column(
+                      child: transactionController.isTransactionLoading.value == true
+                      ? Container(height: MediaQuery.of(context).size.height * 0.60,
+                      child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,)))
+                      : transactionController.transactionList.isEmpty
+                      ? Container(
+                        height: MediaQuery.of(context).size.height * 0.60,
+                        child: Center(
+                          child: setHelveticaMedium("No Transactions Yet", 14.sp, grey_aaaaaa, FontWeight.w500, FontStyle.normal),
+                        )
+                      )
+                      : Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -299,7 +314,6 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                               autoFocus: false,
                               onSubmit: (value) {
                                 checkNet(context).then((value) {
-
                                   transactionController.PageNumberOfTransactions.value = 0;
                                   transactionController.allTransactionListApi(context);
                                 });
@@ -320,9 +334,10 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                 itemBuilder: (context, i) {
                                   return InkWell(
                                     onTap: (){
-                                      checkNet(context).then((value) {
-                                        admireProfileController.eventDetailAPI(context, transactionController.transactionList[i].event_details!.id);
-                                      });
+                                      // checkNet(context).then((value) {
+                                      //   admireProfileController.eventDetailAPI(context, transactionController.transactionList[i].event_details!.id);
+                                      // });
+                                      Get.to(TransactionStatus(transactionController.transactionList[i]));
                                     },
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 10.h),
@@ -464,7 +479,16 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                     _isSecondLayout
                         ? Visibility(
                       visible: _isSecondLayout,
-                      child: Column(
+                      child: transactionController.isPayoutsLoading.value == true
+                      ? Container(height: MediaQuery.of(context).size.height * 0.60,
+                      child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,)))
+                      : transactionController.payoutList.isEmpty
+                      ? Container(
+                        height: MediaQuery.of(context).size.height * 0.60,
+                        child: Center(
+                          child: setHelveticaMedium("No Payouts Yet", 14.sp, grey_aaaaaa, FontWeight.w500, FontStyle.normal),
+                        )
+                      ): Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -539,7 +563,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                 ),
                                                 Text(transactionController.payoutList[i].bankDetails == null ? ""
                                                   : transactionController.payoutList[i].bankDetails!.accountNumber == null ? ""
-                                                  : "****" + transactionController.payoutList[i].bankDetails!.accountNumber!.substring(10),
+                                                  : "****" + transactionController.payoutList[i].bankDetails!.accountNumber!.substring(transactionController.payoutList[i].bankDetails!.accountNumber!.length - 4),
                                                   style: TextStyle(
                                                       fontFamily:
                                                       roboto_bold,
@@ -573,10 +597,9 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                                   height: 2.h,
                                                 ),
                                                 Text(
-                                                  transactionController
+                                                  DateFormat('MMM dd yyyy, hh:mm a').format(transactionController
                                                       .payoutList[i]
-                                                      .createdAt
-                                                      .toString(),
+                                                      .createdAt!),
                                                   style: TextStyle(
                                                       fontFamily:
                                                       roboto_regular,
@@ -594,12 +617,12 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                             CrossAxisAlignment.end,
                                             children: [
                                               Text(
-                                                "Requested",
+                                                transactionController.payoutList[i].paid_date == null ? "Requested" : "Received",
                                                 style: TextStyle(
                                                     fontFamily:
                                                     roboto_regular,
                                                     fontSize: 11.sp,
-                                                    color: orange_ff881a),
+                                                    color: transactionController.payoutList[i].paid_date == null ? orange_ff881a : green),
                                               ),
                                               SizedBox(
                                                 height: 2.h,

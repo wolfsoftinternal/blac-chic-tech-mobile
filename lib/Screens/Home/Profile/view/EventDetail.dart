@@ -21,7 +21,6 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_social_content_share/flutter_social_content_share.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -65,6 +64,7 @@ class _EventDetailState extends State<EventDetail> {
     super.initState();
     lat = double.parse(controller.eventDetails.value.latitude!);
     lng = double.parse(controller.eventDetails.value.longitude!);
+    eventController.selectedList.clear();
     if (controller.eventDetails.value.type == 'invite_only') {
       if (controller.eventDetails.value.invitedUsers != null) {
         for (var item in controller.eventDetails.value.invitedUsers!) {
@@ -89,6 +89,7 @@ class _EventDetailState extends State<EventDetail> {
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel?.data!.id;
+    setState(() {});
   }
 
   void _onMapCreated(GoogleMapController _cntlr) {
@@ -1095,10 +1096,7 @@ class _EventDetailState extends State<EventDetail> {
                                                             top: 2,
                                                             left: 5.0),
                                                     child: setRoboto(
-                                                        eventController
-                                                                .selectedList
-                                                                .length
-                                                                .toString() +
+                                                        eventController.selectedList.length.toString() +
                                                             " People Invited",
                                                         14.sp,
                                                         Color(0xff04080f),
@@ -1107,9 +1105,8 @@ class _EventDetailState extends State<EventDetail> {
                                                   const Spacer(),
                                                   InkWell(
                                                     onTap: () {
-                                                      Get.to(
-                                                              const InvitePeople(
-                                                        fromView: true,
+                                                      Get.to(InvitePeople(
+                                                        true, eventController.selectedList,
                                                       ))!
                                                           .then((value) =>
                                                               setState(
@@ -1157,7 +1154,7 @@ class _EventDetailState extends State<EventDetail> {
 
 
                                               Get.to(InvitePeople(
-                                                fromView: false, id: widget.id,
+                                                false, eventController.selectedList,  widget.id
                                               ))!
                                                   .then((value) =>
                                                       setState(() {}));

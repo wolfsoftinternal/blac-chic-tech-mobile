@@ -256,11 +256,11 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
             Padding(
               padding:  EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
-                if (controller.q1Controller.value.text.isEmpty &&
-                    controller.q2Controller.value.text.isEmpty &&
-                    controller.q3Controller.value.text.isEmpty &&
-                    controller.q4Controller.value.text.isEmpty &&
-                    controller.q5Controller.value.text.isEmpty) {
+                if (controller.q1Controller.value.text == "" || controller.q1Controller.value.text.isEmpty &&
+                    controller.q2Controller.value.text == "" || controller.q2Controller.value.text.isEmpty &&
+                    controller.q3Controller.value.text == "" || controller.q3Controller.value.text.isEmpty &&
+                    controller.q4Controller.value.text == "" || controller.q4Controller.value.text.isEmpty &&
+                    controller.q5Controller.value.text == "" || controller.q5Controller.value.text.isEmpty) {
                   snackBar(context, 'Please answer the questions');
                 } else {
                   List ques = [{}];

@@ -20,8 +20,9 @@ import 'package:get/get.dart';
 
 class InvitePeople extends StatefulWidget {
   final fromView;
+  List<UserList> selectedList;
   final id;
-  const InvitePeople({Key? key, this.fromView, this.id}) : super(key: key);
+  InvitePeople(this.fromView, this.selectedList, [this.id]);
 
   @override
   State<InvitePeople> createState() => _InvitePeopleState();
@@ -45,8 +46,7 @@ class _InvitePeopleState extends State<InvitePeople> {
     }
     
     if (widget.fromView == true) {
-      // controller.searchList.clear();
-      controller.searchList = controller.selectedList;
+      controller.searchList.value = widget.selectedList;
     }
     list = controller.selectedList;
     setState(() {});

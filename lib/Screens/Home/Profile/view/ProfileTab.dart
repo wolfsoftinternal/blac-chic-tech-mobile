@@ -19,7 +19,21 @@ class ProfileTab extends StatefulWidget {
 
 class _ProfileTabState extends State<ProfileTab> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
+  List list = [];
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (controller.details.value.questions![3].answer!.isNotEmpty) {
+      if (controller.details.value.questions![3].answer!.length > 1) {
+        list.clear();
+        list = controller.details.value.questions![3].answer!.split(', ');
+      } else {
+        list.add(controller.details.value.questions![3].answer);
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,6 +116,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                         shrinkWrap: true,
                                         itemCount: controller
                                             .details.value.pastJobs!.length,
+                                        physics: ScrollPhysics(),
                                         itemBuilder: (context, index) {
                                           return Padding(
                                             padding:  EdgeInsets.only(
@@ -255,6 +270,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                         shrinkWrap: true,
                                         itemCount: controller.details
                                             .value.educations!.length,
+                                        physics: ScrollPhysics(),
                                         itemBuilder: (context, index) {
                                           return Padding(
                                             padding:

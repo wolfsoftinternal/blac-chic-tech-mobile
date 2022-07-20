@@ -242,10 +242,13 @@ class VideoController extends GetxController {
             if(pagination == false){
               userList.value = detail.data!;
             }else{
+              if (PageNumber == 1) {
+                userList.clear();
+                print("clear");
+              }
               userList.addAll(detail.data!);
-
             }
-            print(userList.length);
+            print("clear" + userList.length.toString());
           }
         });
       } else {

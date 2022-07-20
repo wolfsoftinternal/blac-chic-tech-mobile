@@ -48,8 +48,7 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          // home: SplashScreen(),
-          home: PersonalInfoFormView(),
+          home: SplashScreen(),
         );
       },
     );

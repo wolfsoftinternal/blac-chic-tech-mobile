@@ -26,6 +26,13 @@ String? validateStartTime(String? value) {
   return null;
 }
 
+String? validateEndTime(String? value) {
+  if (value == "") {
+    return 'Select end time';
+  }
+  return null;
+}
+
 String? validateVenue(String? value) {
   if (value == "") {
     return 'Enter venue';

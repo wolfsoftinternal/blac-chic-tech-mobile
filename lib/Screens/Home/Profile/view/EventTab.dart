@@ -219,8 +219,8 @@ class _EventTabState extends State<EventTab> {
                                                 decoration: BoxDecoration(
                                                   gradient: LinearGradient(
                                                       colors: [
-                                                        Color(0xff1c2535),
-                                                        Color(0xff04080f)
+                                                        Color(0xff1c2535).withOpacity(0.7),
+                                                        Color(0xff04080f).withOpacity(0.7)
                                                       ]),
                                                   borderRadius:
                                                       BorderRadius.all(

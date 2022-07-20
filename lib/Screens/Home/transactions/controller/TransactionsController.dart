@@ -32,6 +32,11 @@ class TransactionsController extends GetxController {
   ScrollController scrollControllerForPayouts = ScrollController();
   RxInt PageNumberForPayouts = 0.obs;
   RxBool isPaginationLoadingForPayouts = false.obs;
+  RxBool isPaid = false.obs;
+  RxBool isTransactionLoading = false.obs;
+  RxBool isPayoutsLoading = false.obs;
+
+
 
   initScrolling(BuildContext context) {
     scrollControllerForTransactions.addListener(() async {
@@ -78,7 +83,12 @@ class TransactionsController extends GetxController {
   }
 
   allTransactionListApi(BuildContext context) async {
-
+    if(isPaginationLoadingForTransactions.value == true)
+    {
+      isTransactionLoading.value = false;
+    }else{
+      isTransactionLoading.value = true;
+    }
       dynamic body;
       PageNumberOfTransactions = PageNumberOfTransactions + 1;
       body = {
@@ -110,6 +120,8 @@ class TransactionsController extends GetxController {
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 500) {
+                isTransactionLoading.value = false;
+
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
@@ -118,11 +130,12 @@ class TransactionsController extends GetxController {
             TransactionListModel transactionListModel = TransactionListModel.fromJson(userModel);
 
             transactionList.addAll(transactionListModel.data!);
-
+            isTransactionLoading.value = false;
           } else if(model.statusCode == 101){
 
-
+isTransactionLoading.value = false;
           }else {
+            isTransactionLoading.value = false;
             print(res.reasonPhrase);
           }
 
@@ -134,7 +147,13 @@ class TransactionsController extends GetxController {
   }
 
   allPayoutListApi(BuildContext context) async {
+    if(isPaginationLoadingForPayouts.value == true)
+    {
+      isPayoutsLoading.value = false;
+    }else{
+      isPayoutsLoading.value = true;
 
+    }
     dynamic body;
     PageNumberForPayouts = PageNumberForPayouts + 1;
     body = {
@@ -165,6 +184,8 @@ class TransactionsController extends GetxController {
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 500) {
+            isPayoutsLoading.value = false;
+
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
@@ -173,11 +194,18 @@ class TransactionsController extends GetxController {
             PayoutListModel payoutListModel = PayoutListModel.fromJson(userModel);
 
             payoutList.addAll(payoutListModel.data!);
-
+            for(var i=0; i<payoutList.length; i++){
+              if(payoutList[i].paid_date == null){
+                isPaid.value = true;
+              }
+            }
+            isPayoutsLoading.value = false;
           } else if(model.statusCode == 101){
           //  payoutList.clear();
+          isPayoutsLoading.value = false;
           }else {
             print(res.reasonPhrase);
+            isPayoutsLoading.value = false;
           }
         });
       }
