@@ -82,6 +82,7 @@ class StepsController extends GetxController {
   ScrollController scrollController = ScrollController();
   RxInt pageNumber = 1.obs;
   RxBool isPaginationLoading = false.obs;
+  RxBool isImageSelected = false.obs;
 
   initScrolling(BuildContext context) {
     scrollController.addListener(() async {

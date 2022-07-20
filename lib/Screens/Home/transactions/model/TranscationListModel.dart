@@ -46,6 +46,9 @@ class TransactionList {
     this.per_ticket_price,
     this.total_tickets,
     this.total_price,
+    this.walletAmount,
+    this.transAmount,
+    this.walletId,
     this.transaction_id,
     this.barcode,
     this.status,
@@ -63,6 +66,9 @@ class TransactionList {
   String? per_ticket_price;
   int? total_tickets;
   String? total_price;
+  String? walletAmount;
+  String? transAmount;
+  dynamic walletId;
   String? transaction_id;
   String? barcode;
   int? status;
@@ -80,6 +86,9 @@ class TransactionList {
         per_ticket_price: json["per_ticket_price"],
         total_tickets: json["total_tickets"],
         total_price: json["total_price"],
+        walletAmount: json["wallet_amount"] == null ? null : json["wallet_amount"],
+        transAmount: json["trans_amount"] == null ? null : json["trans_amount"],
+        walletId: json["wallet_id"],
         transaction_id: json["transaction_id"],
         barcode: json["barcode"],
         status: json["status"],
@@ -99,6 +108,9 @@ class TransactionList {
         "per_ticket_price": per_ticket_price,
         "total_tickets": total_tickets,
         "total_price": total_price,
+        "wallet_amount": walletAmount == null ? null : walletAmount,
+        "trans_amount": transAmount == null ? null : transAmount,
+        "wallet_id": walletId,
         "transaction_id": transaction_id,
         "barcode": barcode,
         "payment_type": payment_type,
@@ -107,10 +119,6 @@ class TransactionList {
         "deleted_at": deletedAt,
         "event_details": event_details!.toJson(),
       };
-
-
-
-
 }
 
 class TransactionEventDetails {

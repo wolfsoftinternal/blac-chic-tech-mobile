@@ -347,9 +347,10 @@ class _PostDetailState extends State<PostDetail> {
                               child: Text.rich(
                                 TextSpan(
                                   children: [
+                                    for (int i = 0; i < controller.postList[index].taggedUsers!.length; i++)
                                     TextSpan(
                                       text:
-                                          "@${username } ",
+                                          "${"@" + controller.postList[index].taggedUsers![i].userDetails!.userName!.replaceAll("@", '') + " "}",
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         fontFamily: helvetica_neu_bold,

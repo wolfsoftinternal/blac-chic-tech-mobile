@@ -334,10 +334,10 @@ class _EventListState extends State<EventList> {
                                                       height: 29.h,
                                                       decoration: BoxDecoration(
                                                         gradient:
-                                                            const LinearGradient(
+                                                            LinearGradient(
                                                                 colors: [
-                                                              Color(0xff1c2535),
-                                                              Color(0xff04080f)
+                                                              Color(0xff1c2535).withOpacity(0.7),
+                                                              Color(0xff04080f).withOpacity(0.7)
                                                             ]),
                                                         borderRadius:
                                                             BorderRadius.all(

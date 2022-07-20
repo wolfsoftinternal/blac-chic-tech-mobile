@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -10,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 File imagePath = File("");
 List<AssetEntity>? image;
+StepsController controller = Get.put(StepsController());
 
 snackBar(BuildContext context, String message) {
   return ScaffoldMessenger.of(context).showSnackBar(
@@ -83,15 +86,22 @@ Future showImagePicker(context) {
                   leading: const Icon(Icons.photo_library),
                   title: const Text('Gallery'),
                   onTap: () {
+                    
                     _getFile(ImageSource.gallery)
-                        .then((value) => Navigator.of(context).pop());
+                        .then((value) {
+                          controller.isImageSelected.value = true;
+                          Navigator.of(context).pop();
+                        });
                   }),
               ListTile(
                 leading: const Icon(Icons.photo_camera),
                 title: const Text('Camera'),
                 onTap: () {
                   _getFile(ImageSource.camera)
-                      .then((value) => Navigator.of(context).pop());
+                      .then((value) {
+                          controller.isImageSelected.value = true;
+                          Navigator.of(context).pop();
+                        });
                 },
               ),
             ],

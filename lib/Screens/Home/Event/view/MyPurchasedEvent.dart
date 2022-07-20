@@ -453,9 +453,9 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                     padding: EdgeInsets.only(right: 6.w),
                                     height: 29.h,
                                     decoration: BoxDecoration(
-                                      gradient: const LinearGradient(colors: [
-                                        Color(0xff1c2535),
-                                        Color(0xff04080f)
+                                      gradient: LinearGradient(colors: [
+                                        Color(0xff1c2535).withOpacity(0.7),
+                                        Color(0xff04080f).withOpacity(0.7)
                                       ]),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(4.r)),

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/PostDetail.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
@@ -44,11 +46,13 @@ class _PostTabState extends State<PostTab> {
                 ),
               )
             : SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 13.h,),
-                  ListView(
-                    primary: false,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 13.h,
+                    ),
+                    ListView(
+                      primary: false,
                       shrinkWrap: true,
                       padding: EdgeInsets.zero,
                       children: [
@@ -73,7 +77,8 @@ class _PostTabState extends State<PostTab> {
                                   child: Stack(
                                     children: [
                                       Container(
-                                        child: controller.postList[index].image ==
+                                        child: controller
+                                                    .postList[index].image ==
                                                 null
                                             ? ClipRRect(
                                                 borderRadius: BorderRadius.all(
@@ -92,9 +97,10 @@ class _PostTabState extends State<PostTab> {
                                                       .postList[index].image!,
                                                   fit: BoxFit.cover,
                                                   height: 250.h,
-                                                  progressIndicatorBuilder: (context,
-                                                          url, downloadProgress) =>
-                                                      SvgPicture.asset(
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                              downloadProgress) =>
+                                                          SvgPicture.asset(
                                                     placeholder,
                                                     fit: BoxFit.cover,
                                                     height: 250.h,
@@ -110,16 +116,19 @@ class _PostTabState extends State<PostTab> {
                                               ),
                                       ),
                                       Container(
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         height: 250.h,
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5.r),
+                                            borderRadius:
+                                                BorderRadius.circular(5.r),
                                             gradient: LinearGradient(
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter,
                                                 colors: [
                                                   Color(0x00121212),
-                                                  Color(0xff121212).withOpacity(0.8)
+                                                  Color(0xff121212)
+                                                      .withOpacity(0.8)
                                                 ])),
                                       ),
                                     ],
@@ -129,52 +138,95 @@ class _PostTabState extends State<PostTab> {
                                         bottom: 12.w, left: 12.w, right: 12.w),
                                     child: Align(
                                       alignment: Alignment.bottomLeft,
-                                      child: Text(
-                                        controller.postList[index].caption!.capitalizeFirst!,
-                                        softWrap: true,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 3,
-                                        style: TextStyle(
-                                            fontSize: 12.sp,
-                                            fontFamily: helvetica_neu_bold,
-                                            fontWeight: FontWeight.w600,
-                                            color: white_ffffff,
-                                            fontStyle: FontStyle.normal),
-                                      ),
+                                      child: controller.postList[index].taggedUsers == null
+                                          ? Text(
+                                            controller.postList[index].caption!.capitalizeFirst!,
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
+                                            style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontFamily: helvetica_neu_bold,
+                                              fontWeight: FontWeight.w600,
+                                              color: white_ffffff,
+                                              fontStyle: FontStyle.normal
+                                            ),
+                                          )
+                                          : Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      for (int i = 0; i < controller.postList[index].taggedUsers!.length; i++)
+                                                      Text(
+                                                        "@" + controller.postList[index].taggedUsers![i].userDetails!.userName!.replaceAll("@", '') + "  ",
+                                                        softWrap: true,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        maxLines: 1,
+                                                        style: TextStyle(
+                                                          fontSize: 12.sp,
+                                                          fontFamily: helvetica_neu_bold,
+                                                          fontWeight: FontWeight.w900,
+                                                          color: white_ffffff.withOpacity(0.7),
+                                                          fontStyle: FontStyle.normal
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                SizedBox(width: 10.w,),
+                                                Text(
+                                                  controller.postList[index].caption!.capitalizeFirst!,
+                                                  softWrap: true,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                    fontSize: 12.sp,
+                                                    fontFamily: helvetica_neu_bold,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: white_ffffff,
+                                                    fontStyle: FontStyle.normal
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                     ),
                                   ),
                                 ),
                               ),
                               staggeredTileBuilder: (int index) =>
-                                  StaggeredTile.count(2, index.isEven ? 2.8 : 2.1),
+                                  StaggeredTile.count(
+                                      2, index.isEven ? 2.8 : 2.1),
                               mainAxisSpacing: 23.h,
                               crossAxisSpacing: 23.w,
                             )),
                       ],
                     ),
-                    controller.postList.length > 6 ?
-                    GestureDetector(
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(top: 8.0, bottom: 18.0),
-                        child: InkWell(
-                            onTap: () {
-                             Get.to(PostDetail(
-                                  userId: widget.id,
-                                  id: controller.postList[0].id));
-                            },
-                            child: Center(
-                                child: setHelceticaBold(
-                                    'See More',
-                                    16,
-                                    blue_0A84FF,
-                                    FontWeight.w400,
-                                    FontStyle.normal))),
-                      ),
-                    ) : Container()
-                ],
+                    controller.postList.length > 6
+                        ? GestureDetector(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 18.0),
+                              child: InkWell(
+                                  onTap: () {
+                                    Get.to(PostDetail(
+                                        userId: widget.id,
+                                        id: controller.postList[0].id));
+                                  },
+                                  child: Center(
+                                      child: setHelceticaBold(
+                                          'See More',
+                                          16,
+                                          blue_0A84FF,
+                                          FontWeight.w400,
+                                          FontStyle.normal))),
+                            ),
+                          )
+                        : Container()
+                  ],
+                ),
               ),
-            ),
       ),
     );
   }
