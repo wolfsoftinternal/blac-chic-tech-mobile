@@ -615,14 +615,6 @@ PODS:
   - connectivity (0.0.1):
     - Flutter
     - Reachability
-  - FBAEMKit (14.0.0):
-    - FBSDKCoreKit_Basics (= 14.0.0)
-  - FBSDKCoreKit (14.0.0):
-    - FBAEMKit (= 14.0.0)
-    - FBSDKCoreKit_Basics (= 14.0.0)
-  - FBSDKCoreKit_Basics (14.0.0)
-  - FBSDKShareKit (14.0.0):
-    - FBSDKCoreKit (= 14.0.0)
   - Firebase/CoreOnly (9.2.0):
     - FirebaseCore (= 9.2.0)
   - Firebase/Firestore (9.2.0):
@@ -682,10 +674,6 @@ PODS:
     - Flutter
     - OrderedSet (~> 5.0)
   - flutter_paystack (0.0.1):
-    - Flutter
-  - flutter_social_content_share (0.0.1):
-    - FBSDKCoreKit
-    - FBSDKShareKit
     - Flutter
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
@@ -818,7 +806,6 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - flutter_paystack (from `.symlinks/plugins/flutter_paystack/ios`)
-  - flutter_social_content_share (from `.symlinks/plugins/flutter_social_content_share/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
@@ -840,10 +827,6 @@ SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
-    - FBAEMKit
-    - FBSDKCoreKit
-    - FBSDKCoreKit_Basics
-    - FBSDKShareKit
     - Firebase
     - FirebaseAppCheckInterop
     - FirebaseAuthInterop
@@ -887,8 +870,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_inappwebview/ios"
   flutter_paystack:
     :path: ".symlinks/plugins/flutter_paystack/ios"
-  flutter_social_content_share:
-    :path: ".symlinks/plugins/flutter_social_content_share/ios"
   geocoding:
     :path: ".symlinks/plugins/geocoding/ios"
   google_maps_flutter:
@@ -929,10 +910,6 @@ SPEC CHECKSUMS:
   cloud_firestore: c20e7669edfa9e4b47dc8f322f6184bc62b1ed52
   cloud_functions: 9b4ffae577de4855d60d9e61cd7ec0896d27b919
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
-  FBAEMKit: d00064597439e75885c70d9adbcb5f3e9ad84f5d
-  FBSDKCoreKit: e5d3acfffe5063a9d0b967ba2ad1f5afc460cf43
-  FBSDKCoreKit_Basics: 1ff46a12e80f0b66e6c00e1ef32d6a5b5b9008a5
-  FBSDKShareKit: 2f6a6a1445cc1b8ea0f733e60d02d2f7c4ebf8be
   Firebase: 4ba896cb8e5105d4b9e247e1c1b6222b548df55a
   firebase_core: 9e09bbfbf5467e459822850732f5fb648f5b1927
   FirebaseAppCheckInterop: 003b4882460c2827d1e2a1a81b65e88440eb01fa
@@ -948,7 +925,6 @@ SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
   flutter_paystack: 50021637b71e7712780744f69d2843e71b65175d
-  flutter_social_content_share: b2546c98605e3e90b7f8e46f932e7df82725d684
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58
   google_maps_flutter: c59fc576c0d0c7f4dc4bd63832c862d22d5a7c6d

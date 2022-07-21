@@ -131,7 +131,7 @@ class _BcConnectState extends State<BcConnect> {
                           left: 8.w, right: 8.w, bottom: 10.h, top: 16.h),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 0.78.h,
+                          childAspectRatio: 0.70.h,
                           mainAxisSpacing: 0.0,
                           crossAxisSpacing: 0.0),
                       itemCount: videoController.userList.length,

@@ -78,20 +78,22 @@ class _BottomNavigationState extends State<BottomNavigation> {
                       type: BottomNavigationBarType.fixed,
                       showSelectedLabels: false,
                       showUnselectedLabels: false,
+                      selectedLabelStyle: TextStyle(fontSize: 0),
+                      unselectedLabelStyle: TextStyle(fontSize: 0),
                       backgroundColor: const Color.fromARGB(255, 27, 25, 35),
                       onTap: onTabTapped,
                       currentIndex: _currentIndex,
                       items: [
                         BottomNavigationBarItem(
-                            activeIcon: SvgPicture.asset(home_icon, color: white,), 
+                            activeIcon: SvgPicture.asset(home_icon, color: white,),
                             icon : SvgPicture.asset(home_icon, color: Colors.grey[600],),
                             label: ''),
                         BottomNavigationBarItem(
-                            activeIcon: SvgPicture.asset(feed_icon, color: white,), 
+                            activeIcon: SvgPicture.asset(feed_icon, color: white,),
                             icon : SvgPicture.asset(feed_icon, color: Colors.grey[600],),
                             label: ''),
                         BottomNavigationBarItem(
-                            activeIcon: SvgPicture.asset(chat_icon, color: white, height: 28, width: 28,), 
+                            activeIcon: SvgPicture.asset(chat_icon, color: white, height: 28, width: 28,),
                             icon : SvgPicture.asset(chat_icon, color: Colors.grey[600], height: 28, width: 28,),
                             label: ''),
                         BottomNavigationBarItem(
@@ -104,7 +106,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                               ),
                               child: CircularProfileAvatar(
                                 '',
-                                radius: 40,
+                                radius: 10,
                                 borderColor: Colors.transparent,
                                 child: myModel?.data?.image == null
                                     ? SvgPicture.asset(
