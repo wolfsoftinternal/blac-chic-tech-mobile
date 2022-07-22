@@ -650,111 +650,111 @@ class _UserProfileState extends State<UserProfile> {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 15.0, right: 15.0),
-                                child: Center(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      widget.isFrom == true
-                                          ? Container()
-                                          : GestureDetector(
-                                              onTap: () {
-                                                // if (index > 0) {
-                                                  // index--;
-                                                  // dynamic body = {'user_id': videoController.userList[index].id.toString()};
-                                                  controller.admireListAPI(
-                                                      context,
-                                                      videoController
-                                                          .userList[index].id
-                                                          .toString());
-                                                // }
-                                                pageController.previousPage(
-                                                    duration: Duration(
-                                                        milliseconds: 300),
-                                                    curve:
-                                                        Curves.fastOutSlowIn);
-                                              },
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                  color: grey_94ffffff,
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 6.w,
-                                                      right: 6.w,
-                                                      top: 16.h,
-                                                      bottom: 16.h),
-                                                  child: Icon(
-                                                    Icons
-                                                        .arrow_back_ios_new_rounded,
-                                                    color: black,
-                                                    size: 21,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                      widget.isFrom == true
-                                          ? Container()
-                                          : GestureDetector(
-                                              onTap: () {
-                                                if (index + 1 == videoController.userList.length) {
-                                                  pageController.jumpToPage(0);
-                                                  // dynamic body = {'user_id': widget.selectedUserId.toString()};
-                                                  controller.admireListAPI(
-                                                      context,
-                                                      widget.selectedUserId
-                                                          .toString());
-                                                } else {
-                                                  // if (index !=
-                                                  //     videoController
-                                                  //         .userList.length) {
-                                                  //   index++;
-                                                    // dynamic body = {'user_id': videoController.userList[index].id.toString()};
-                                                    controller.admireListAPI(
-                                                        context,
-                                                        videoController
-                                                            .userList[index].id
-                                                            .toString());
-                                                    pageController.nextPage(
-                                                        duration: Duration(
-                                                            milliseconds: 300),
-                                                        curve: Curves
-                                                            .fastOutSlowIn);
-                                                  // }
-                                                }
-                                              },
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                  color: grey_94ffffff,
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 6.w,
-                                                      right: 6.w,
-                                                      top: 16.h,
-                                                      bottom: 16.h),
-                                                  child: Icon(
-                                                    Icons
-                                                        .arrow_forward_ios_rounded,
-                                                    color: black,
-                                                    size: 21,
-                                                  ),
-                                                ),
-                                              ),
-                                            )
-                                    ],
-                                  ),
-                                ),
-                              )
+                              // Padding(
+                              //   padding: const EdgeInsets.only(
+                              //       left: 15.0, right: 15.0),
+                              //   child: Center(
+                              //     child: Row(
+                              //       mainAxisAlignment:
+                              //           MainAxisAlignment.spaceBetween,
+                              //       children: [
+                              //         widget.isFrom == true
+                              //             ? Container()
+                              //             : GestureDetector(
+                              //                 onTap: () {
+                              //                   // if (index > 0) {
+                              //                     // index--;
+                              //                     // dynamic body = {'user_id': videoController.userList[index].id.toString()};
+                              //                     controller.admireListAPI(
+                              //                         context,
+                              //                         videoController
+                              //                             .userList[index].id
+                              //                             .toString());
+                              //                   // }
+                              //                   pageController.previousPage(
+                              //                       duration: Duration(
+                              //                           milliseconds: 300),
+                              //                       curve:
+                              //                           Curves.fastOutSlowIn);
+                              //                 },
+                              //                 child: Container(
+                              //                   decoration: BoxDecoration(
+                              //                     borderRadius:
+                              //                         BorderRadius.circular(
+                              //                             4.0),
+                              //                     color: grey_94ffffff,
+                              //                   ),
+                              //                   child: Padding(
+                              //                     padding: EdgeInsets.only(
+                              //                         left: 6.w,
+                              //                         right: 6.w,
+                              //                         top: 16.h,
+                              //                         bottom: 16.h),
+                              //                     child: Icon(
+                              //                       Icons
+                              //                           .arrow_back_ios_new_rounded,
+                              //                       color: black,
+                              //                       size: 21,
+                              //                     ),
+                              //                   ),
+                              //                 ),
+                              //               ),
+                              //         widget.isFrom == true
+                              //             ? Container()
+                              //             : GestureDetector(
+                              //                 onTap: () {
+                              //                   if (index + 1 == videoController.userList.length) {
+                              //                     pageController.jumpToPage(0);
+                              //                     // dynamic body = {'user_id': widget.selectedUserId.toString()};
+                              //                     controller.admireListAPI(
+                              //                         context,
+                              //                         widget.selectedUserId
+                              //                             .toString());
+                              //                   } else {
+                              //                     // if (index !=
+                              //                     //     videoController
+                              //                     //         .userList.length) {
+                              //                     //   index++;
+                              //                       // dynamic body = {'user_id': videoController.userList[index].id.toString()};
+                              //                       controller.admireListAPI(
+                              //                           context,
+                              //                           videoController
+                              //                               .userList[index].id
+                              //                               .toString());
+                              //                       pageController.nextPage(
+                              //                           duration: Duration(
+                              //                               milliseconds: 300),
+                              //                           curve: Curves
+                              //                               .fastOutSlowIn);
+                              //                     // }
+                              //                   }
+                              //                 },
+                              //                 child: Container(
+                              //                   decoration: BoxDecoration(
+                              //                     borderRadius:
+                              //                         BorderRadius.circular(
+                              //                             4.0),
+                              //                     color: grey_94ffffff,
+                              //                   ),
+                              //                   child: Padding(
+                              //                     padding: EdgeInsets.only(
+                              //                         left: 6.w,
+                              //                         right: 6.w,
+                              //                         top: 16.h,
+                              //                         bottom: 16.h),
+                              //                     child: Icon(
+                              //                       Icons
+                              //                           .arrow_forward_ios_rounded,
+                              //                       color: black,
+                              //                       size: 21,
+                              //                     ),
+                              //                   ),
+                              //                 ),
+                              //               )
+                              //       ],
+                              //     ),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),

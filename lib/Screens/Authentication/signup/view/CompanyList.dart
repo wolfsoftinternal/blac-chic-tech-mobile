@@ -174,9 +174,12 @@ class _CompanyListState extends State<CompanyList> {
                                     'experience_pastjob') {
                                   controller.pastJobController.value = 
                                       controller.companyList[index]['name'];
+                                  controller.pastJobImage.value =
+                                      controller.companyList[index]['logo'];
                                 } else {
                                   controller.companyName.value =
                                       controller.companyList[index]['name'];
+                                  controller.companyImage.value = controller.companyList[index]['logo'];
                                 }
                                 Get.back();
                               },

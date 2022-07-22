@@ -12,6 +12,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfo
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Screens/Home/Settings/controller/SettingsController.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
+import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,9 +52,9 @@ class StepsController extends GetxController {
   RxString pastJobController = ''.obs;
 
   RxBool boolComapnyLogo = false.obs;
-  Rx<TextEditingController> searchCompanyController =
-      TextEditingController().obs;
+  Rx<TextEditingController> searchCompanyController = TextEditingController().obs;
   RxString companyName = "Company Name".obs;
+  RxString companyImage = ''.obs;
   RxList pastCompanyDetails = [].obs;
   RxList educationalDetails = [].obs;
 
@@ -83,6 +84,12 @@ class StepsController extends GetxController {
   RxInt pageNumber = 1.obs;
   RxBool isPaginationLoading = false.obs;
   RxBool isImageSelected = false.obs;
+
+  RxList industryList = [].obs;
+  List industryNameList = [].obs;
+  String? industryName;
+  List<DropdownMenuItem<String>>? dropDownIndustryItems;
+  Rx<TextEditingController> industryController = TextEditingController().obs;
 
   initScrolling(BuildContext context) {
     scrollController.addListener(() async {
@@ -217,6 +224,8 @@ class StepsController extends GetxController {
         'current_job_title': currentTitleController.value.text,
         'current_job_company_name': companyName.value,
         'current_job_website': currentCompanyWebsiteController.value.text,
+        'company_logo': companyImage.value.toString(),
+        'industry': industryName.toString(),
         'past_jobs': pastCompanyDetails.toJson().toString(),
         'education': educationalDetails.toJson().toString(),
         'questions': questions.toJson().toString(),
@@ -276,7 +285,9 @@ class StepsController extends GetxController {
 
           var preferences = MySharedPref();
           await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
+          SignupModel? myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
 
+          print(myModel?.data!.questions![0].answer);
           if (visibility != null) {
             settingsController.visible.value = signUp.data!.isVisible!;
           } else {
@@ -406,16 +417,78 @@ class StepsController extends GetxController {
     }
   }
 
+  industryListAPI(BuildContext context) async {
+    industryList.value = ['Data Science','Artificial Intelligence','Cloud Computing','other'];
+    if (industryList.isNotEmpty) {
+      for (var item in industryList) {
+        industryNameList.add(item);
+      }
+      dropDownIndustryItems = getDropDownIndustryItems();
+    }
+    // var preferences = MySharedPref();
+    // var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    // String url = urlBase + urlIndustryList;
+    // final apiReq = Request();
+    // await apiReq.postAPI(url, null, token.toString()).then((value) {
+    //   http.StreamedResponse res = value;
+
+    //   if (res.statusCode == 200) {
+    //     res.stream.bytesToString().then((value) async {
+    //       String strData = value;
+    //       Map<String, dynamic> userModel = json.decode(strData);
+    //       BaseModel model = BaseModel.fromJson(userModel);
+
+    //       if (model.statusCode == 500) {
+    //         final tokenUpdate = TokenUpdateRequest();
+    //         await tokenUpdate.updateToken();
+
+    //         industryListAPI(context, body);
+    //       } else if (model.statusCode == 200) {
+            // industryList.value = userModel['data'];
+
+      //       if (industryList.isNotEmpty) {
+      //         for (var item in industryList) {
+      //           industryNameList.add(item.name);
+      //         }
+      //         dropDownIndustryItems = getDropDownIndustryItems();
+      //       }
+      //     }
+      //   });
+      // } else {
+      //   print(res.reasonPhrase);
+      // }
+    // });
+  }
+
+  List<DropdownMenuItem<String>> getDropDownIndustryItems() {
+    List<DropdownMenuItem<String>> items = [];
+    for (var industryName in industryNameList) {
+      items.add(DropdownMenuItem(
+          value: industryName,
+          child: Text(
+            industryName.toString().capitalize!,
+            style: const TextStyle(
+                color: black_121212,
+                fontStyle: FontStyle.normal,
+                fontSize: 14.0),
+          )));
+    }
+    return items;
+  }
+
   experienceInfoAPI(BuildContext context) async {
     var preferences = MySharedPref();
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = await preferences.getStringValue(SharePreData.keytoken);
-
+    
     dynamic body = {
       'current_job_title': currentTitleController.value.text,
       'current_job_company_name': companyName.value,
+      'current_job_logo': companyImage.toString(),
       'current_job_website': currentCompanyWebsiteController.value.text,
+      'industry': industryName.toString(),
       'past_jobs': pastCompanyDetails.toJson().toString(),
     };
 
@@ -646,6 +719,9 @@ class StepsController extends GetxController {
       return false;
     } else if (companyName.value == 'Company Name') {
       snackBar(context, "Enter current company name");
+      return false;
+    } else if (industryName == null || industryName == '' && industryController.value.text.isEmpty) {
+      snackBar(context, "Enter Industry");
       return false;
     } else {
       return true;

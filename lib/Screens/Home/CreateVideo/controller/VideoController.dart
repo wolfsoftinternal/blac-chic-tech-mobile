@@ -183,7 +183,7 @@ class VideoController extends GetxController {
   }
 
   //Speaker List / Host List
-  userListAPI(BuildContext context, bool pagination, [userId]) async {
+  userListAPI(BuildContext context, bool pagination, [userId, data]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
     dynamic body;
@@ -201,18 +201,20 @@ class VideoController extends GetxController {
     }
     }else{
       PageNumber = PageNumber + 1;
-    if (userId != null) {
-      body = {
-        'user_id': userId.toString(),
-        'search': searchController.value.text.toString(),
-        'page': PageNumber.toString(),
-      };
-    } else {
-      body = {
-        'search': searchController.value.text.toString(),
-        'page': PageNumber.toString(),
-      };
-    }
+      if (userId != null) {
+        body = {
+          'user_id': userId.toString(),
+          'search': searchController.value.text.toString(),
+          'page': PageNumber.toString(),
+        };
+      } else if(userId == null && data != null){
+        body = data;
+      } else {
+        body = {
+          'search': searchController.value.text.toString(),
+          'page': PageNumber.toString(),
+        };
+      }
     }
 
     String url = urlBase + urlUserList;

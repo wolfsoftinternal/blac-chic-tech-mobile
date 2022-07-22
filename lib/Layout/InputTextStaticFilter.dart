@@ -34,8 +34,7 @@ class InputTextStaicFilter extends StatefulWidget {
 }
 
 class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
-  EventDetailController eventDetailController =
-      Get.put(EventDetailController());
+  EventDetailController eventDetailController = Get.put(EventDetailController());
   String? strCityName;
   String? strType;
   String? strDate = '';

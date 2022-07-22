@@ -136,7 +136,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                               style: TextStyle(
                                                   color: black_121212,
                                                   fontWeight: FontWeight.w900,
-                                                  fontFamily: helvetica_neu_bold,
+                                                  fontFamily:
+                                                      helvetica_neu_bold,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 18.sp),
                                               textAlign: TextAlign.left),
@@ -155,7 +156,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                           style: TextStyle(
                                               color: const Color(0xff3f3f3f),
                                               fontWeight: FontWeight.w500,
-                                              fontFamily: helveticaNeueNeue_medium,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 14.sp),
                                           textAlign: TextAlign.left),
@@ -171,8 +173,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                           ),
                                           // Edinburgh, United Kingdom
                                           Text(
-                                              myModel!.data!.cityDetails!
-                                                      .name!.capitalizeFirst! +
+                                              myModel!.data!.cityDetails!.name!
+                                                      .capitalizeFirst! +
                                                   ', ' +
                                                   myModel!.data!.stateDetails!
                                                       .name!.capitalizeFirst! +
@@ -182,7 +184,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                               style: TextStyle(
                                                   color: grey_aaaaaa,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: helveticaNeueNeue_medium,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium,
                                                   fontStyle: FontStyle.normal,
                                                   fontSize: 10.sp),
                                               textAlign: TextAlign.left)
@@ -298,16 +301,16 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 height: 1,
                                 decoration: const BoxDecoration(
                                     color: view_line_f4f6f6)),
-
-                            SizedBox(height: 26.h,),
+                            SizedBox(
+                              height: 26.h,
+                            ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
                                       width: 42.w,
@@ -345,22 +348,18 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     // Go Incognito
                                                     Text("Go Incognito",
                                                         style: TextStyle(
-                                                            color:
-                                                                black_121212,
+                                                            color: black_121212,
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .w700,
+                                                                FontWeight.w700,
                                                             fontFamily:
                                                                 helveticaNeue,
-                                                            fontStyle:
-                                                                FontStyle
-                                                                    .normal,
+                                                            fontStyle: FontStyle
+                                                                .normal,
                                                             fontSize: 16.sp),
                                                         textAlign:
                                                             TextAlign.left),
@@ -371,16 +370,13 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                     Text(
                                                         "Hide yourself for a while",
                                                         style: TextStyle(
-                                                            color:
-                                                                grey_aaaaaa,
+                                                            color: grey_aaaaaa,
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .w500,
+                                                                FontWeight.w500,
                                                             fontFamily:
                                                                 helveticaNeue,
-                                                            fontStyle:
-                                                                FontStyle
-                                                                    .normal,
+                                                            fontStyle: FontStyle
+                                                                .normal,
                                                             fontSize: 14.sp),
                                                         textAlign:
                                                             TextAlign.left),
@@ -396,29 +392,29 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                     const Color(0xffe9ecec),
                                                 valueFontSize: 0.0,
                                                 toggleSize: 15.0,
-                                                value: controller
-                                                            .visible.value ==
-                                                        1
-                                                    ? false
-                                                    : true,
+                                                value:
+                                                    controller.visible.value ==
+                                                            1
+                                                        ? false
+                                                        : true,
                                                 borderRadius: 15.0,
                                                 padding: 2.0,
                                                 showOnOff: true,
                                                 onToggle: (val) {
                                                   setState(() {
                                                     if (val == false) {
-                                                      controller
-                                                          .visible.value = 1;
+                                                      controller.visible.value =
+                                                          1;
                                                     } else {
-                                                      controller
-                                                          .visible.value = 0;
+                                                      controller.visible.value =
+                                                          0;
                                                     }
                                                     stepsController
                                                         .personalInfoAPI(
                                                             context,
                                                             'profile_setting',
-                                                            controller.visible
-                                                                .value);
+                                                            controller
+                                                                .visible.value);
                                                   });
                                                 },
                                               ),
@@ -445,8 +441,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                     Get.to(AboutMe());
                                   },
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -480,12 +475,9 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                             Text("About Me",
                                                 style: TextStyle(
                                                     color: black_121212,
-                                                    fontWeight:
-                                                        FontWeight.w700,
-                                                    fontFamily:
-                                                        helveticaNeue,
-                                                    fontStyle:
-                                                        FontStyle.normal,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontFamily: helveticaNeue,
+                                                    fontStyle: FontStyle.normal,
                                                     fontSize: 16.sp),
                                                 textAlign: TextAlign.left),
                                             SizedBox(
@@ -496,12 +488,9 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                 "Edit your personal information",
                                                 style: TextStyle(
                                                     color: grey_aaaaaa,
-                                                    fontWeight:
-                                                        FontWeight.w500,
-                                                    fontFamily:
-                                                        helveticaNeue,
-                                                    fontStyle:
-                                                        FontStyle.normal,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: helveticaNeue,
+                                                    fontStyle: FontStyle.normal,
                                                     fontSize: 14.sp),
                                                 textAlign: TextAlign.left),
                                             SizedBox(
@@ -511,10 +500,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                             Container(
                                                 width: double.infinity,
                                                 height: 1,
-                                                decoration:
-                                                    const BoxDecoration(
-                                                        color:
-                                                            view_line_f4f6f6)),
+                                                decoration: const BoxDecoration(
+                                                    color: view_line_f4f6f6)),
                                           ],
                                         ),
                                       )
@@ -655,13 +642,9 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 //     )
                                 //   ],
                                 // ),
-                                // SizedBox(
-                                //   height: 28.h,
-                                // ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
                                       width: 42.w,
@@ -684,7 +667,114 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                     Expanded(
                                       flex: 1,
                                       child: InkWell(
-                                        onTap: (){
+                                        onTap: () {
+                                          setState(() {
+                                            Widget cancelButton = TextButton(
+                                              child: const Text("Yes"),
+                                              onPressed: () {
+                                                setState(() {
+                                                  checkNet(context)
+                                                      .then((value) {
+                                                    controller
+                                                        .deleteAccount(context);
+                                                  });
+                                                });
+                                              },
+                                            );
+                                            Widget continueButton = TextButton(
+                                              child: const Text("No"),
+                                              onPressed: () {
+                                                setState(() {
+                                                  Get.back();
+                                                });
+                                              },
+                                            );
+
+                                            AlertDialog alert = AlertDialog(
+                                              content: const Text(
+                                                  "Are you sure you want to delete this account?"),
+                                              actions: [
+                                                cancelButton,
+                                                continueButton,
+                                              ],
+                                            );
+
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return alert;
+                                              },
+                                            );
+                                          });
+                                        },
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 8),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              // Go Incognito
+                                              Text("Delete Account",
+                                                  style: TextStyle(
+                                                      color: black_121212,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontFamily: helveticaNeue,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 16.sp),
+                                                  textAlign: TextAlign.left),
+
+                                              SizedBox(
+                                                height: 28.h,
+                                              ),
+
+                                              Container(
+                                                  width: double.infinity,
+                                                  height: 1,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          color:
+                                                              view_line_f4f6f6)),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 28.h,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 42.w,
+                                      height: 42.h,
+                                      decoration: const BoxDecoration(
+                                          color: Color(0xfff5f5f5),
+                                          shape: BoxShape.circle),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10.r),
+                                        child: SvgPicture.asset(
+                                          icon_logout,
+                                          width: 24.w,
+                                          height: 24.h,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 16.w,
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: InkWell(
+                                        onTap: () {
                                           checkNet(context).then((value) {
                                             controller.userLogout(context);
                                           });
@@ -704,8 +794,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                                       color: black_121212,
                                                       fontWeight:
                                                           FontWeight.w700,
-                                                      fontFamily:
-                                                          helveticaNeue,
+                                                      fontFamily: helveticaNeue,
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 16.sp),

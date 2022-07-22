@@ -30,211 +30,220 @@ class _OtherUserListState extends State<OtherUserList> {
   
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        widget.otherUser.image == null
-            ? SvgPicture.asset(
-                placeholder,
-                height: MediaQuery.of(context).size.height * .83,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              )
-            : CachedNetworkImage(
-                imageUrl: widget.otherUser.image!,
-                // widget.admireList.admireDetails!.image!,
-                height: MediaQuery.of(context).size.height * .83,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    SvgPicture.asset(
+    return GestureDetector(
+      onTap: (){
+        setState(() {});
+        controller.admireProfileAPI(
+          context, widget.otherUser.id
+        );
+      },
+      child: Stack(
+        children: [
+          widget.otherUser.image == null
+              ? SvgPicture.asset(
                   placeholder,
                   height: MediaQuery.of(context).size.height * .83,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                ),
-                errorWidget: (context, url, error) => SvgPicture.asset(
-                  placeholder,
+                )
+              : CachedNetworkImage(
+                  imageUrl: widget.otherUser.image!,
+                  // widget.admireList.admireDetails!.image!,
                   height: MediaQuery.of(context).size.height * .83,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                ),
-              ),
-        Container(
-          color: Colors.black.withOpacity(0.3),
-          height: MediaQuery.of(context).size.height * .83,
-        ),
-        
-        Padding(
-          padding:  EdgeInsets.only(top: 60.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.50,
-                height: MediaQuery.of(context).size.width * 0.068,
-                child: FittedBox(
-                  child: setHelceticaBold(
-                      widget.otherUser.userName != null
-                          ? "@" + widget.otherUser.userName!
-                          : "@" + widget.otherUser.firstName!,
-                      20.sp,
-                      white_ffffff,
-                      FontWeight.w600,
-                      FontStyle.normal,
-                      -0.8),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
-          child: Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height * .52),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.80,
-                    height: MediaQuery.of(context).size.width * 0.13,
-                    child: FittedBox(
-                      child: setHelceticaBold(
-                          widget.otherUser.firstName != null && widget.otherUser.lastName != null
-                              ? widget.otherUser.firstName!
-                                  .toUpperCase() + " "
-                                +  widget.otherUser.lastName!
-                                  .toUpperCase()  : widget.otherUser.firstName != null
-                          ? widget.otherUser.firstName!
-                              .toUpperCase() :  widget.otherUser.lastName != null ? widget.otherUser.lastName!
-                              .toUpperCase() : "",
-                          40.sp,
-                          white_ffffff,
-                          FontWeight.w600,
-                          FontStyle.normal,
-                          -1.6),
-                    ),
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      SvgPicture.asset(
+                    placeholder,
+                    height: MediaQuery.of(context).size.height * .83,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
-                ],
-              ),
-               SizedBox(
-                height: 24.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.otherUser.currentJobs != null
-                          ? widget.otherUser.currentJobs!.title != null && widget.otherUser.currentJobs!.companyName != null ? "${widget.otherUser.currentJobs!.title!.toUpperCase()} - ${widget.otherUser.currentJobs!.companyName!.toUpperCase()}"
-                              // widget.otherUser.currentJobs!
-                              //     .companyName!
-                              //     .toUpperCase()
-                          : widget.otherUser.currentJobs!.title != null ? widget.otherUser.currentJobs!.title!.toUpperCase()
-                          : widget.otherUser.currentJobs!.companyName != null ? widget.otherUser.currentJobs!.companyName!.toUpperCase() : ""
-                      : "",
-                      softWrap: true,
-                      textAlign: TextAlign.center,
-                      style:  TextStyle(
-                        fontSize: 16.sp,
-                        fontFamily: helveticaNeueNeue_medium,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white60,
-                        fontStyle: FontStyle.normal,
-                        letterSpacing: 6.4,
-                      ),
-                    ),
+                  errorWidget: (context, url, error) => SvgPicture.asset(
+                    placeholder,
+                    height: MediaQuery.of(context).size.height * .83,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
-                ],
-              ),
-            ],
+                ),
+          Container(
+            color: Colors.black.withOpacity(0.3),
+            height: MediaQuery.of(context).size.height * .83,
           ),
-        ),
-        Padding(
-          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .69,
-              ),
-              GestureDetector(
-                onTap: (){
-                  // var preferences = MySharedPref();
-                  // SignupModel? modelM =
-                  //     await preferences.getSignupModel(SharePreData.keySignupModel);
-
-                  // if (modelM!.data!.id == widget.admireList.admireId) {
-                    // controller.userProfileAPI(context);
-                  // }
-                  //  else {
-                    setState(() {});
-                    controller.admireProfileAPI(
-                      context, widget.otherUser.id
-                    );
-                  // }
-                },
-                child: Row(
+          
+          Padding(
+            padding:  EdgeInsets.only(top: 60.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.50,
+                  height: MediaQuery.of(context).size.width * 0.068,
+                  child: FittedBox(
+                    child: setHelceticaBold(
+                        widget.otherUser.userName != null
+                            ? "@" + widget.otherUser.userName!
+                            : "@" + widget.otherUser.firstName!,
+                        20.sp,
+                        white_ffffff,
+                        FontWeight.w600,
+                        FontStyle.normal,
+                        -0.8),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+            child: Column(
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height * .52),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(4.r),
-                        color: grey_94ffffff,
-                      ),
-                      child: Padding(
-                        padding:  EdgeInsets.only(top: 8.h, bottom: 8.h, left: 16.w, right: 16.w),
-                        child: setHelveticaMedium(
-                            'View Profile',
-                            16.sp,
-                            black_121212,
-                            FontWeight.w500,
-                            FontStyle.normal),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.80,
+                      height: MediaQuery.of(context).size.width * 0.13,
+                      child: FittedBox(
+                        child: setHelceticaBold(
+                            widget.otherUser.firstName != null && widget.otherUser.lastName != null
+                                ? widget.otherUser.firstName!
+                                    .toUpperCase() + " "
+                                  +  widget.otherUser.lastName!
+                                    .toUpperCase()  : widget.otherUser.firstName != null
+                            ? widget.otherUser.firstName!
+                                .toUpperCase() :  widget.otherUser.lastName != null ? widget.otherUser.lastName!
+                                .toUpperCase() : "",
+                            40.sp,
+                            white_ffffff,
+                            FontWeight.w600,
+                            FontStyle.normal,
+                            -1.6),
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .76,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  widget.otherUser.cityDetails != null
-                      ? const Icon(
-                          Icons.location_on,
-                          size: 12,
-                          color: orange_ff881a,
-                        )
-                      : Container(),
-                  setHelveticaMedium(
-                    widget.otherUser.cityDetails != null
-                        ? widget.otherUser.cityDetails!.name! +
-                            ', ' +
-                            widget.otherUser.stateDetails!.name! +
-                            ', ' +
-                            widget.otherUser.countryDetails!.name!
+                 SizedBox(
+                  height: 24.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.otherUser.currentJobs != null
+                            ? widget.otherUser.currentJobs!.title != null && widget.otherUser.currentJobs!.companyName != null ? "${widget.otherUser.currentJobs!.title!.toUpperCase()} - ${widget.otherUser.currentJobs!.companyName!.toUpperCase()}"
+                                // widget.otherUser.currentJobs!
+                                //     .companyName!
+                                //     .toUpperCase()
+                            : widget.otherUser.currentJobs!.title != null ? widget.otherUser.currentJobs!.title!.toUpperCase()
+                            : widget.otherUser.currentJobs!.companyName != null ? widget.otherUser.currentJobs!.companyName!.toUpperCase() : ""
                         : "",
-                    10.sp,
-                    Colors.white70,
-                    FontWeight.w600,
-                    FontStyle.normal,
-                  ),
-                ],
-              )
-            ],
+                        softWrap: true,
+                        textAlign: TextAlign.center,
+                        style:  TextStyle(
+                          fontSize: 16.sp,
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white60,
+                          fontStyle: FontStyle.normal,
+                          letterSpacing: 6.4,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+          // Padding(
+          //   padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+          //   child: Column(
+          //     children: [
+          //       SizedBox(
+          //         height: MediaQuery.of(context).size.height * .69,
+          //       ),
+          //       GestureDetector(
+          //         onTap: (){
+          //           // var preferences = MySharedPref();
+          //           // SignupModel? modelM =
+          //           //     await preferences.getSignupModel(SharePreData.keySignupModel);
+
+          //           // if (modelM!.data!.id == widget.admireList.admireId) {
+          //             // controller.userProfileAPI(context);
+          //           // }
+          //           //  else {
+          //             setState(() {});
+          //             controller.admireProfileAPI(
+          //               context, widget.otherUser.id
+          //             );
+          //           // }
+          //         },
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           children: [
+          //             Container(
+          //               decoration: BoxDecoration(
+          //                 borderRadius:
+          //                     BorderRadius.circular(4.r),
+          //                 color: grey_94ffffff,
+          //               ),
+          //               child: Padding(
+          //                 padding:  EdgeInsets.only(top: 8.h, bottom: 8.h, left: 16.w, right: 16.w),
+          //                 child: setHelveticaMedium(
+          //                     'View Profile',
+          //                     16.sp,
+          //                     black_121212,
+          //                     FontWeight.w500,
+          //                     FontStyle.normal),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          Padding(
+            padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * .76,
+                  // height: MediaQuery.of(context).size.height * .69,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    widget.otherUser.cityDetails != null
+                        ? const Icon(
+                            Icons.location_on,
+                            size: 12,
+                            color: orange_ff881a,
+                          )
+                        : Container(),
+                    setHelveticaMedium(
+                      widget.otherUser.cityDetails != null
+                          ? widget.otherUser.cityDetails!.name! +
+                              ', ' +
+                              widget.otherUser.stateDetails!.name! +
+                              ', ' +
+                              widget.otherUser.countryDetails!.name!
+                          : "",
+                      10.sp,
+                      Colors.white70,
+                      FontWeight.w600,
+                      FontStyle.normal,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

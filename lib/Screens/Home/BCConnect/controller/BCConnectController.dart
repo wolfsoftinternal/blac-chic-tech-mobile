@@ -43,8 +43,6 @@ class BCConnectController extends GetxController {
   RxString languageName = "Select Language".obs;
   List<DropdownMenuItem<String>>? dropDownLanguageItems;
 
-
-
   RxList<UserList> userList = <UserList>[].obs;
   RxList<UserList> selectedList = <UserList>[].obs;
   VideoController controller = Get.put(VideoController());

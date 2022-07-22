@@ -214,9 +214,10 @@ setTextFieldNext(
   bool validtion,
   String errorMSg,
   TextInputAction textInputAction,
-  Function onchange,
+  Function(String)? onchange,
   Function()? ontap, [
   bool read = false,
+  bool autoFocus = false
 ]) {
   return Theme(
       data: ThemeData(
@@ -227,6 +228,7 @@ setTextFieldNext(
         controller: controller,
         readOnly: read,
         onTap: ontap,
+        autofocus: autoFocus,
         style: TextStyle(
             color: black_121212,
             fontWeight: FontWeight.w500,
@@ -248,6 +250,7 @@ setTextFieldNext(
         textInputAction: textInputAction,
         keyboardType: inputType,
         cursorColor: black_121212,
+        onChanged: onchange,
       ));
 }
 
