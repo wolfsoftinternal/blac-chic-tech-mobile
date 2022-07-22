@@ -20,6 +20,7 @@ import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/EditTextDecoration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -59,9 +60,16 @@ class _AboutMeState extends State<AboutMe> {
   List<bool> education = [];
 
   DateTime? startDate;
+
+  List ques = [{}];
+  
   @override
   void initState() {
     super.initState();
+    stepsController.industryList.clear();
+    stepsController.industryNameList.clear();
+    stepsController.industryName = null;
+    stepsController.industryListAPI(context);
 
     for (var element in cards) {
       var image = element;
@@ -223,75 +231,294 @@ class _AboutMeState extends State<AboutMe> {
                                   width: 15.w,
                                 ),
                                 Expanded(
-                                  child: Container(
-                                    height: 48.h,
-                                    decoration: EditTextDecoration,
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 12.w, right: 12.w, ),
+                                  flex: 1,
+                                  child: SizedBox(
+                                    child: Container(
+                                      height: 48.h,
+                                      decoration: EditTextDecoration,
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
                                         child: Padding(
-                                          padding: EdgeInsets.all(5.r),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                  'Company',
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                      color: grey_aaaaaa,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 11.sp),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 4.h,
-                                              ),
-                                              GestureDetector(
-                                                  onTap: () {
-                                                    Get.to(const CompanyList());
-                                                  },
-                                                  child: Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Text(
-                                                      stepsController
-                                                          .companyName.value,
-                                                      style: TextStyle(
-                                                          color: stepsController
-                                                                      .companyName
-                                                                      .value.toString().capitalize ==
-                                                                  'Company Name'
-                                                              ? grey_aaaaaa
-                                                              : black_121212,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          fontSize: 14.sp),
+                                          padding: EdgeInsets.only(
+                                              left: 17.w,
+                                              right: 17.w,
+                                              top: 5.h,
+                                              bottom: 5.h),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.to(const CompanyList());
+                                            },
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    child: Column(
+                                                      children: [
+                                                        Align(
+                                                          alignment: Alignment.centerLeft,
+                                                          child: Text(
+                                                            'Company',
+                                                            textAlign: TextAlign.left,
+                                                            style: TextStyle(
+                                                                color: grey_aaaaaa,
+                                                                fontWeight:
+                                                                    FontWeight.w500,
+                                                                fontFamily:
+                                                                    helveticaNeueNeue_medium,
+                                                                fontStyle:
+                                                                    FontStyle.normal,
+                                                                fontSize: 11.sp),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 4.h,
+                                                        ),
+                                                        Text(
+                                                            stepsController.companyName.value,
+                                                            overflow:
+                                                                TextOverflow.ellipsis,
+                                                            style: TextStyle(
+                                                                color: stepsController
+                                                                            .companyName
+                                                                            .value ==
+                                                                        'Company Name'
+                                                                    ? grey_aaaaaa
+                                                                    : black_121212,
+                                                                fontWeight:
+                                                                    FontWeight.w500,
+                                                                fontFamily:
+                                                                    helveticaNeueNeue_medium,
+                                                                fontStyle:
+                                                                    FontStyle.normal,
+                                                                fontSize: 14.sp)),
+                                                      ],
                                                     ),
-                                                  )),
-                                            ],
+                                                  ),
+                                                  stepsController.companyName.value ==
+                                                          'Company Name'
+                                                      ? Container()
+                                                      : Flexible(
+                                                          flex: 1,
+                                                          child: stepsController
+                                                                  .companyImage
+                                                                  .isEmpty
+                                                              ? ClipRRect(
+                                                                borderRadius: BorderRadius.circular(4.r),
+                                                                child: SvgPicture.asset(
+                                                                  placeholder,
+                                                                  width: 25.w,
+                                                                  height: 25.h,
+                                                                  fit: BoxFit.fill,
+                                                                ),
+                                                              )
+                                                              : ClipRRect(
+                                                                borderRadius: BorderRadius.circular(4.r),
+                                                                child: CachedNetworkImage(
+                                                                    imageUrl: stepsController
+                                                                        .companyImage
+                                                                        .value,
+                                                                    width: 25.w,
+                                                                    height: 25.h,
+                                                                    fit: BoxFit.fill,
+                                                                    progressIndicatorBuilder:
+                                                                        (context, url,
+                                                                                downloadProgress) =>
+                                                                            SvgPicture
+                                                                                .asset(
+                                                                      placeholder,
+                                                                      width: 25.w,
+                                                                      height: 25.h,
+                                                                      fit: BoxFit.fill,
+                                                                    ),
+                                                                    errorWidget:
+                                                                        (context, url,
+                                                                                error) =>
+                                                                            SvgPicture
+                                                                                .asset(
+                                                                      placeholder,
+                                                                      width: 25.w,
+                                                                      height: 25.h,
+                                                                      fit: BoxFit.fill,
+                                                                    ),
+                                                                  ),
+                                                              ),
+                                                        ),
+                                                ],
+                                              ),
+                                            ),
                                           ),
+                                          // child: GestureDetector(
+                                          //     onTap: () {
+                                          //       Get.to(const CompanyList());
+                                          //     },
+                                          // child: Text(
+                                          //   controller.companyName.value,
+                                          //   style: TextStyle(
+                                          //       color: controller.companyName
+                                          //                   .value ==
+                                          //               'Company Name'
+                                          //           ? grey_aaaaaa
+                                          //           : black_121212,
+                                          //       fontWeight: FontWeight.w500,
+                                          //       fontFamily:
+                                          //           helveticaNeueNeue_medium,
+                                          //       fontStyle: FontStyle.normal,
+                                          //       fontSize: 14.sp),
+                                          //     )),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
+                                // Expanded(
+                                //   child: Container(
+                                //     height: 48.h,
+                                //     decoration: EditTextDecoration,
+                                //     child: Align(
+                                //       alignment: Alignment.centerLeft,
+                                //       child: Padding(
+                                //         padding: EdgeInsets.only(
+                                //             left: 12.w, right: 12.w, ),
+                                //         child: Padding(
+                                //           padding: EdgeInsets.all(5.r),
+                                //           child: Column(
+                                //             mainAxisAlignment: MainAxisAlignment.center,
+                                //             crossAxisAlignment: CrossAxisAlignment.center,
+                                //             children: [
+                                //               Align(
+                                //                 alignment: Alignment.centerLeft,
+                                //                 child: Text(
+                                //                   'Company',
+                                //                   textAlign: TextAlign.left,
+                                //                   style: TextStyle(
+                                //                       color: grey_aaaaaa,
+                                //                       fontWeight:
+                                //                           FontWeight.w500,
+                                //                       fontFamily:
+                                //                           helveticaNeueNeue_medium,
+                                //                       fontStyle:
+                                //                           FontStyle.normal,
+                                //                       fontSize: 11.sp),
+                                //                 ),
+                                //               ),
+                                //               SizedBox(
+                                //                 height: 4.h,
+                                //               ),
+                                //               GestureDetector(
+                                //                   onTap: () {
+                                //                     Get.to(const CompanyList());
+                                //                   },
+                                //                   child: Align(
+                                //                     alignment:
+                                //                         Alignment.centerLeft,
+                                //                     child: Text(
+                                //                       stepsController
+                                //                           .companyName.value,
+                                //                       style: TextStyle(
+                                //                           color: stepsController
+                                //                                       .companyName
+                                //                                       .value.toString().capitalize ==
+                                //                                   'Company Name'
+                                //                               ? grey_aaaaaa
+                                //                               : black_121212,
+                                //                           fontWeight:
+                                //                               FontWeight.w500,
+                                //                           fontFamily:
+                                //                               helveticaNeueNeue_medium,
+                                //                           fontStyle:
+                                //                               FontStyle.normal,
+                                //                           overflow: TextOverflow
+                                //                               .ellipsis,
+                                //                           fontSize: 14.sp),
+                                //                     ),
+                                //                   )),
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
+                            ),
+
+                            SizedBox(
+                              height: 16.h,
+                            ),
+
+                            Container(
+                              height: 48.h,
+                              decoration: EditTextDecoration,
+                              child: stepsController.industryName != null && stepsController.industryName == 'other'
+                              ? Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: EdgeInsets.zero,
+                                      child: Center(
+                                        child: InputTextLayoutDemo(
+                                        "Enter Industry",
+                                        stepsController.industryController.value,
+                                        false,
+                                        TextInputAction.next,
+                                        TextInputType.text,
+                                        false, null, (val) => {
+                                          if (val.isNotEmpty) {
+                                            setState(() {
+                                              checkFillColor = false;
+                                              checkColor = true;
+                                            }),
+                                          }
+                                          else {
+                                            setState(() {
+                                              checkFillColor = true;
+                                            }),
+                                          },
+                                          if(val == ''){
+                                            stepsController.industryName = null,
+                                            setState((){})
+                                          }
+                                        },true),
+                                      ),
+                                    ),
+                              )
+                              : DropdownButtonHideUnderline(
+                              child: DropdownButton2(
+                                  value: stepsController.industryName,
+                                  hint: Text("Select Industry",
+                                      style: TextStyle(
+                                          color: grey_aaaaaa,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily:
+                                              helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                                  icon: SvgPicture.asset(
+                                    icon_down_arrow_spinner,
+                                    width: 12.w,
+                                    height: 12.h,
+                                  ),
+                                  isExpanded: true,
+                                  customItemsHeight: 4,
+                                  iconEnabledColor: black_121212,
+                                  iconDisabledColor: Colors.grey,
+                                  // buttonHeight: 60,
+                                  buttonWidth: double.infinity,
+                                  buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                  buttonDecoration: EditTextDecoration,
+                                  itemHeight: 42,
+                                  itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      stepsController.industryName =
+                                          newValue!;
+                                    });
+                                  },
+                                  items: stepsController.dropDownIndustryItems),
+                              )
                             ),
 
                             SizedBox(
@@ -453,6 +680,7 @@ class _AboutMeState extends State<AboutMe> {
                                       textAlign: TextAlign.left),
                                   
                                   ListView.builder(
+                                      physics: ScrollPhysics(),
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
                                       itemCount: cards.length,
@@ -1110,8 +1338,7 @@ class _AboutMeState extends State<AboutMe> {
                                       textAlign: TextAlign.left),
                                   
                                   ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
+                                    physics: ScrollPhysics(),
                                     itemCount: cardsEducation.length,
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
@@ -1812,10 +2039,7 @@ class _AboutMeState extends State<AboutMe> {
                                                             maxHeight: 21.h,
                                                             maxWidth: 38.w),
                                                     isDense: true,
-                                                    hintText: stepsController
-                                                        .aboutController
-                                                        .value
-                                                        .text,
+                                                    hintText: 'Please type here..',
                                                     hintStyle: TextStyle(
                                                         color: grey_aaaaaa,
                                                         fontWeight:
@@ -1845,14 +2069,16 @@ class _AboutMeState extends State<AboutMe> {
                                       ),
                                     ),
                                   ),
-                                  stepsController.q1Controller.value.text == ""
-                                      ? Container()
-                                      : SizedBox(
+                                  // stepsController.q1Controller.value.text == ""
+                                  //     ? Container()
+                                  //     :
+                                       SizedBox(
                                           height: 16.h,
                                         ),
-                                  stepsController.q1Controller.value.text == ""
-                                      ? Container()
-                                      : Container(
+                                  // stepsController.q1Controller.value.text == ""
+                                  //     ? Container()
+                                  //     :
+                                       Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(4.r),
@@ -1980,11 +2206,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                   maxWidth:
                                                                       38.w),
                                                           isDense: true,
-                                                          hintText:
-                                                              stepsController
-                                                                  .q1Controller
-                                                                  .value
-                                                                  .text,
+                                                          hintText: 'Please type here..',
                                                           hintStyle: TextStyle(
                                                               color:
                                                                   grey_aaaaaa,
@@ -2020,14 +2242,16 @@ class _AboutMeState extends State<AboutMe> {
                                             ),
                                           ),
                                         ),
-                                  stepsController.q2Controller.value.text == ""
-                                      ? Container()
-                                      : SizedBox(
+                                  // stepsController.q2Controller.value.text == ""
+                                  //     ? Container()
+                                  //     : 
+                                      SizedBox(
                                           height: 16.h,
                                         ),
-                                  stepsController.q2Controller.value.text == ""
-                                      ? Container()
-                                      : Container(
+                                  // stepsController.q2Controller.value.text == ""
+                                  //     ? Container()
+                                  //     :
+                                       Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(4.r),
@@ -2155,11 +2379,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                   maxWidth:
                                                                       38.w),
                                                           isDense: true,
-                                                          hintText:
-                                                              stepsController
-                                                                  .q2Controller
-                                                                  .value
-                                                                  .text,
+                                                          hintText: 'Please type here..',
                                                           hintStyle: TextStyle(
                                                               color:
                                                                   grey_aaaaaa,
@@ -2195,14 +2415,16 @@ class _AboutMeState extends State<AboutMe> {
                                             ),
                                           ),
                                         ),
-                                  stepsController.q3Controller.value.text == ""
-                                      ? Container()
-                                      : SizedBox(
+                                  // stepsController.q3Controller.value.text == ""
+                                  //     ? Container()
+                                  //     :
+                                       SizedBox(
                                           height: 16.h,
                                         ),
-                                  stepsController.q3Controller.value.text == ""
-                                      ? Container()
-                                      : Container(
+                                  // stepsController.q3Controller.value.text == ""
+                                  //     ? Container()
+                                  //     : 
+                                      Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(4.r),
@@ -2332,11 +2554,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                   maxWidth:
                                                                       38.w),
                                                           isDense: true,
-                                                          hintText:
-                                                              stepsController
-                                                                  .q3Controller
-                                                                  .value
-                                                                  .text,
+                                                          hintText: 'Please type here..',
                                                           hintStyle: TextStyle(
                                                               color:
                                                                   grey_aaaaaa,
@@ -2372,14 +2590,16 @@ class _AboutMeState extends State<AboutMe> {
                                             ),
                                           ),
                                         ),
-                                  stepsController.q4Controller.value.text == ""
-                                      ? Container()
-                                      : SizedBox(
+                                  // stepsController.q4Controller.value.text == ""
+                                  //     ? Container()
+                                  //     :
+                                      SizedBox(
                                           height: 16.h,
                                         ),
-                                  stepsController.q4Controller.value.text == ""
-                                      ? Container()
-                                      : Container(
+                                  // stepsController.q4Controller.value.text == ""
+                                  //     ? Container()
+                                  //     :
+                                      Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(4.r),
@@ -2509,11 +2729,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                   maxWidth:
                                                                       38.w),
                                                           isDense: true,
-                                                          hintText:
-                                                              stepsController
-                                                                  .q4Controller
-                                                                  .value
-                                                                  .text,
+                                                          hintText: 'Please type here..',
                                                           hintStyle: TextStyle(
                                                               color:
                                                                   grey_aaaaaa,
@@ -2549,14 +2765,16 @@ class _AboutMeState extends State<AboutMe> {
                                             ),
                                           ),
                                         ),
-                                  stepsController.q5Controller.value.text == ""
-                                      ? Container()
-                                      : SizedBox(
+                                  // stepsController.q5Controller.value.text == ""
+                                  //     ? Container()
+                                  //     :
+                                       SizedBox(
                                           height: 16.h,
                                         ),
-                                  stepsController.q5Controller.value.text == ""
-                                      ? Container()
-                                      : Container(
+                                  // stepsController.q5Controller.value.text == ""
+                                  //     ? Container()
+                                  //     : 
+                                      Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(4.r),
@@ -2686,11 +2904,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                   maxWidth:
                                                                       38.w),
                                                           isDense: true,
-                                                          hintText:
-                                                              stepsController
-                                                                  .q5Controller
-                                                                  .value
-                                                                  .text,
+                                                          hintText: 'Please type here..',
                                                           hintStyle: TextStyle(
                                                               color:
                                                                   grey_aaaaaa,
@@ -2726,18 +2940,20 @@ class _AboutMeState extends State<AboutMe> {
                                             ),
                                           ),
                                         ),
-                                  stepsController
-                                              .addtionalController.value.text ==
-                                          ""
-                                      ? Container()
-                                      : SizedBox(
+                                  // stepsController
+                                  //             .addtionalController.value.text ==
+                                  //         ""
+                                  //     ? Container()
+                                  //     : 
+                                      SizedBox(
                                           height: 16.h,
                                         ),
-                                  stepsController
-                                              .addtionalController.value.text ==
-                                          ""
-                                      ? Container()
-                                      : Container(
+                                  // stepsController
+                                  //             .addtionalController.value.text ==
+                                  //         ""
+                                  //     ? Container()
+                                  //     : 
+                                      Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(4.r),
@@ -2869,10 +3085,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                   maxWidth:
                                                                       38.w),
                                                           isDense: true,
-                                                          hintText: stepsController
-                                                              .addtionalController
-                                                              .value
-                                                              .text,
+                                                          hintText:  'Please type here..',
                                                           hintStyle: TextStyle(
                                                               color:
                                                                   grey_aaaaaa,
@@ -2911,195 +3124,83 @@ class _AboutMeState extends State<AboutMe> {
                                   SizedBox(
                                     height: 16.h,
                                   ),
-                                  BlackButton("Save", white_ffffff, () {
-                                    var status;
-                                    if(pastCompanyNameController.last.text == '' && pastCompanyTitleController.last.text == ''){
-                                      pastCompanyNameController.removeLast();
-                                      pastCompanyTitleController.removeLast();
-                                    }
-                                    if(universityController.last.text == '' && startyearController.last.text == '' && endyearController.last.text == ''){
-                                      universityController.removeLast();
-                                      startyearController.removeLast();
-                                      endyearController.removeLast();
-                                    }
-                                    for(var item in pastCompanyNameController){
-                                      if(item.text == ''){
-                                        snackBar(context, 'Enter company name');
-                                        status = 'pending';
-                                      }else{
-                                        status = 'done';
+                                  BlackButton("Save", white_ffffff, () {                                  
+                                    if (checkValidation()) {
+                                      if(stepsController.industryController.value.text != ''){
+                                        stepsController.industryName = stepsController.industryController.value.text;
                                       }
-                                    }
-
-                                    for(var item in pastCompanyTitleController){
-                                      if(item.text == ''){
-                                        snackBar(context, 'Enter company title');
-                                        status = 'pending';
-                                      }else{
-                                        status = 'done';
-                                      }
-                                    }
-
-                                    for(var item in universityController){
-                                      if(item.text == ''){
-                                        snackBar(context, 'Enter university');
-                                        status = 'pending';
-                                      }else{
-                                        status = 'done';
-                                      }
-                                    }
-
-                                    for(var item in startyearController){
-                                      if(item.text == ''){
-                                        snackBar(context, 'Enter start year');
-                                        status = 'pending';
-                                      }else{
-                                        status = 'done';
-                                      }
-                                    }
-
-                                    for(var item in endyearController){
-                                      if(item.text == ''){
-                                        snackBar(context, 'Enter end year');
-                                        status = 'pending';
-                                      }else{
-                                        status = 'done';
-                                      }
-                                    }
-
-                                    if(status == 'done'){
+                                      
                                       companyDetails.clear();
-                                    for (int i = 0; i < cards.length; i++) {
-                                      companyDetails.add({
-                                        '"title"':
-                                            '"${pastCompanyTitleController[i].text}"',
-                                        '"company_name"':
-                                            '"${pastCompanyNameController[i].text}"',
-                                        '"website"':
-                                            '"${pastCompanyWebsiteController[i].text}"',
-                                      });
-                                    }
-
-                                    List itemList = [];
-
-                                    itemList.clear();
-                                    for (var item in companyDetails) {
-                                      itemList.add(item);
-                                    }
-                                    stepsController.pastCompanyDetails.value =
-                                        itemList;
-                                    print(stepsController
-                                        .pastCompanyDetails.value);
-
-                                    details.clear();
-
-                                    for (int i = 0; i < cardsEducation.length; i++) {
-                                      details.add({
-                                        '"university_school_name"':
-                                            '"${universityController[i].text}"',
-                                        '"start_year"':
-                                            '"${startyearController[i].text}"',
-                                        '"end_year"':
-                                            '"${endyearController[i].text}"',
-                                      });
-                                    }
-
-                                    if (!details.toString().contains("[{"
-                                        '"university_school_name"'
-                                        ": "
-                                        '""'
-                                        ", "
-                                        '"start_year"'
-                                        ": "
-                                        '""'
-                                        ", "
-                                        '"end_year"'
-                                        ": "
-                                        '""'
-                                        "}]")) {
-                                      List itemeduList = [];
-
-                                      itemeduList.clear();
-                                      for (var item in details) {
-                                        itemeduList.add(item);
-                                      }
-                                      stepsController.educationalDetails
-                                          .clear();
-                                      stepsController.educationalDetails.value =
-                                          itemeduList;
-                                      print(stepsController
-                                          .educationalDetails.value);
-
-                                      List ques = [{}];
-                                      if (ques[0].toString() == "{}") {
-                                        ques.removeAt(0);
-                                      }
-
-                                      if (stepsController
-                                          .q1Controller.value.text.isNotEmpty) {
-                                        ques.add({
-                                          '"question"':
-                                              '"${myModel!.data!.questions![0].question!}"',
-                                          '"answer"':
-                                              '"${stepsController.q1Controller.value.text}"',
-                                        });
-                                      }
-                                      if (stepsController
-                                          .q2Controller.value.text.isNotEmpty) {
-                                        ques.add({
-                                          '"question"':
-                                              '"${myModel!.data!.questions![1].question!}"',
-                                          '"answer"':
-                                              '"${stepsController.q2Controller.value.text}"',
-                                        });
-                                      }
-                                      if (stepsController
-                                          .q3Controller.value.text.isNotEmpty) {
-                                        ques.add({
-                                          '"question"':
-                                              '"${myModel!.data!.questions![2].question!}"',
-                                          '"answer"':
-                                              '"${stepsController.q3Controller.value.text}"',
-                                        });
-                                      }
-                                      if (stepsController
-                                          .q4Controller.value.text.isNotEmpty) {
-                                        ques.add({
-                                          '"question"':
-                                              '"${myModel!.data!.questions![3].question!}"',
-                                          '"answer"':
-                                              '"${stepsController.q4Controller.value.text}"',
-                                        });
-                                      }
-                                      if (stepsController
-                                          .q5Controller.value.text.isNotEmpty) {
-                                        ques.add({
-                                          '"question"':
-                                              '"${myModel!.data!.questions![4].question!}"',
-                                          '"answer"':
-                                              '"${stepsController.q5Controller.value.text}"',
+                                      for (int i = 0; i < cards.length; i++) {
+                                        companyDetails.add({
+                                          '"title"':
+                                              '"${pastCompanyTitleController[i].text}"',
+                                          '"company_name"':
+                                              '"${pastCompanyNameController[i].text}"',
+                                          '"website"':
+                                              '"${pastCompanyWebsiteController[i].text}"',
                                         });
                                       }
 
-                                      print(ques);
+                                      List itemList = [];
 
-                                      List itemQuesList = [];
-
-                                      itemQuesList.clear();
-                                      for (var item in ques) {
-                                        itemQuesList.add(item);
+                                      itemList.clear();
+                                      for (var item in companyDetails) {
+                                        itemList.add(item);
                                       }
-                                      stepsController.questions.clear();
-                                      stepsController.questions.value =
-                                          itemQuesList;
+                                      stepsController.pastCompanyDetails.value = itemList;
+                                      print(stepsController.pastCompanyDetails.value);
 
-                                      checkNet(context).then((value) {
-                                        stepsController.personalInfoAPI(
-                                            context, 'about_us');
-                                      });
+                                      details.clear();
+
+                                      for (int i = 0; i < cardsEducation.length; i++) {
+                                        details.add({
+                                          '"university_school_name"':
+                                              '"${universityController[i].text}"',
+                                          '"start_year"':
+                                              '"${startyearController[i].text}"',
+                                          '"end_year"':
+                                              '"${endyearController[i].text}"',
+                                        });
+                                      }
+
+                                      if (!details.toString().contains("[{"
+                                          '"university_school_name"'
+                                          ": "
+                                          '""'
+                                          ", "
+                                          '"start_year"'
+                                          ": "
+                                          '""'
+                                          ", "
+                                          '"end_year"'
+                                          ": "
+                                          '""'
+                                          "}]")) {
+                                        List itemeduList = [];
+
+                                        itemeduList.clear();
+                                        for (var item in details) {
+                                          itemeduList.add(item);
+                                        }
+                                        stepsController.educationalDetails.clear();
+                                        stepsController.educationalDetails.value = itemeduList;
+                                        print(stepsController.educationalDetails.value);
+
+                                        List itemQuesList = [];
+                                        itemQuesList.clear();
+                                        for (var item in ques) {
+                                          itemQuesList.add(item);
+                                        }
+                                        stepsController.questions.clear();
+                                        stepsController.questions.value = itemQuesList;
+
+                                        checkNet(context).then((value) {
+                                          stepsController.personalInfoAPI(
+                                              context, 'about_us');
+                                        });
+                                      }
                                     }
-                                    }
-                                    
                                   })
                                 ],
                               ),
@@ -3113,5 +3214,172 @@ class _AboutMeState extends State<AboutMe> {
         ),
       ),
     );
+  }
+
+  bool checkValidation(){
+    bool nameStatus = true;
+    bool titleStatus = true;
+    bool universityStatus = true;
+    bool startYearStatus = true;
+    bool endYearStatus = true;
+    bool q1 = true;
+    bool q2 = true;
+    bool q3 = true;
+    bool q4 = true;
+    bool q5 = true;
+    if (ques[0].toString() == "{}") {
+      ques.removeAt(0);
+    }
+    
+    if(pastCompanyNameController.last.text == '' && pastCompanyTitleController.last.text == ''){
+      pastCompanyNameController.removeLast();
+      pastCompanyTitleController.removeLast();
+      pastJobImage.removeLast();
+      pastJob.removeLast();
+      cards.removeLast();                                    
+    }
+
+    if(universityController.last.text == '' && startyearController.last.text == '' && endyearController.last.text == ''){
+      universityController.removeLast();
+      startyearController.removeLast();
+      endyearController.removeLast();
+      education.removeLast();
+      cardsEducation.removeLast();
+    }
+
+    for(var item in pastCompanyNameController){
+      if(item.text == ''){
+        nameStatus = false;
+      }
+    }
+
+    for(var item in pastCompanyTitleController){
+      if(item.text == ''){
+        titleStatus = false;
+      }
+    }
+
+    for(var item in universityController){
+      if(item.text == ''){
+        universityStatus = false;
+      }
+    }
+
+    for(var item in startyearController){
+      if(item.text == ''){
+        startYearStatus = false;
+      }
+    }
+
+    for(var item in endyearController){
+      if(item.text == ''){
+        endYearStatus = false;
+      }
+    }
+
+    if (stepsController.q1Controller.value.text.isNotEmpty) {
+      ques.add({
+        '"question"':
+            '"${myModel!.data!.questions![0].question!}"',
+        '"answer"':
+            '"${stepsController.q1Controller.value.text}"',
+      });
+    }else{
+      q1 = false;
+    }
+
+    if (stepsController.q2Controller.value.text.isNotEmpty) {
+      ques.add({
+        '"question"':
+            '"${myModel!.data!.questions![1].question!}"',
+        '"answer"':
+            '"${stepsController.q2Controller.value.text}"',
+      });
+    }else{
+      q2 = false;
+    }
+    
+    if (stepsController.q3Controller.value.text.isNotEmpty) {
+      ques.add({
+        '"question"':
+            '"${myModel!.data!.questions![2].question!}"',
+        '"answer"':
+            '"${stepsController.q3Controller.value.text}"',
+      });
+    }else{
+      q3 = false;
+    }
+    
+    if (stepsController.q4Controller.value.text.isNotEmpty) {
+      ques.add({
+        '"question"':
+            '"${myModel!.data!.questions![3].question!}"',
+        '"answer"':
+            '"${stepsController.q4Controller.value.text}"',
+      });
+    }else{
+      q4 = false;
+    }
+    
+    if (stepsController.q5Controller.value.text.isNotEmpty) {
+      ques.add({
+        '"question"':
+            '"${myModel!.data!.questions![4].question!}"',
+        '"answer"':
+            '"${stepsController.q5Controller.value.text}"',
+      });
+    }else{
+      q5 = false;
+    }
+    
+
+    if(stepsController.currentTitleController.value.text.isEmpty){
+      snackBar(context, 'Enter current job title');
+      return false;
+    }else if(stepsController.companyName.isEmpty){
+      snackBar(context, 'Enter current company name');
+      return false;
+    }else if(stepsController.industryName == null || stepsController.industryName.toString() == '' && stepsController.industryController.value.text.isEmpty){
+      snackBar(context, 'Enter industry');
+      return false;
+    }else if(stepsController.currentCompanyWebsiteController.value.text.isEmpty){
+      snackBar(context, 'Enter current website');
+      return false;
+    }else if(nameStatus == false){
+      snackBar(context, 'Enter company name');
+      return false;
+    }else if(titleStatus == false){
+      snackBar(context, 'Enter company title');
+      return false;
+    }else if(universityStatus == false){
+      snackBar(context, 'Enter university');
+      return false;
+    }else if(startYearStatus == false){
+      snackBar(context, 'Select start year');
+      return false;
+    }else if(endYearStatus == false){
+      snackBar(context, 'Select end year');
+      return false;
+    }else if(stepsController.aboutController.value.text.isEmpty){
+      snackBar(context, 'Enter about me');
+      return false;
+    }else if(q1 == false){
+      snackBar(context, 'Answer ${myModel!.data!.questions![0].question!.replaceAll('?', '')}');
+      return false;
+    }else if(q2 == false){
+      snackBar(context, 'Answer ${myModel!.data!.questions![1].question!.replaceAll('?', '')}');
+      return false;
+    }else if(q3 == false){
+      snackBar(context, 'Answer ${myModel!.data!.questions![2].question!.replaceAll('?', '')}');
+      return false;
+    }else if(q4 == false){
+      snackBar(context, 'Answer ${myModel!.data!.questions![3].question!.replaceAll('?', '')}');
+      return false;
+    }else if(q5 == false){
+      snackBar(context, 'Answer ${myModel!.data!.questions![4].question!.replaceAll('?', '')}');
+      return false;
+    }else{
+      return true;
+    }    
   }
 }

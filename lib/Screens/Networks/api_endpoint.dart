@@ -4,6 +4,7 @@ const urlBase = 'http://54.92.129.168/blac-chic-tech/api';
 const urlAutoLogin = '';
 const urlGetLogin = '/mobile/login';
 const urlLogout = '/mobile/logout';
+const urlDeleteAccount = '/mobile/delete-account';
 const urlForgotPassword = '/mobile/forgot-password';
 const urlResetPassword = '/mobile/reset-password';
 const urlSignup = '/mobile/register';
@@ -15,6 +16,8 @@ const urlPersonalInfo = '/mobile/edit-profile';
 const urlExperienceInfo = '/mobile/experience-edit';
 const urlCompanyList = '/mobile/company-list';
 const urlCreateCompany = '/mobile/company-create';
+const urlIndustryList = '/mobile/industry-list';
+const urlCreateIndustry = '/mobile/industry-create';
 const urlEducationalInfo = '/mobile/education-edit';
 const urlQuestion = '/mobile/question-edit';
 

@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:blackchecktech/Screens/Home/FeatureMenu/View/PastFeatureDetail.dart';
 import 'package:blackchecktech/Screens/Home/FeatureMenu/View/SearchFeaturesScreen.dart';
 import 'package:blackchecktech/Screens/Home/FeatureMenu/controller/FeaturedController.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
+import 'package:blackchecktech/Utilities/TextUtilities.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +44,6 @@ class _PastFeature1State extends State<PastFeature1> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    // height: MediaQuery.of(context).size.height - 0.50.h,
                     height: 500.h,
                     child: Stack(
                       fit: StackFit.expand,
@@ -267,207 +268,219 @@ class _PastFeature1State extends State<PastFeature1> {
                       ],
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(right: 24.w, left: 24.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                transform: Matrix4.translationValues(0, -10, 0),
-                                child: Text(
-                                  featuredController
-                                          .featuredList[widget
-                                              .selectedPositionFromPrevious]
-                                          .writer_name ??
-                                      "",
-                                  style: TextStyle(
-                                    fontFamily: helvetica_neu_bold,
-                                    fontSize: 100.sp,
-                                    color: orange_ff881a,
-                                    letterSpacing: -10,
-                                    height: 0.8,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              // transform: Matrix4.translationValues(0, -35, 0),
-                              height: 45,
-                              padding: EdgeInsets.symmetric(horizontal: 17.5.w),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(4.r),
-                                    bottomLeft: Radius.circular(4.r)),
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Color(0x331c2535),
-                                    Color(0x4d04080f)
-                                  ],
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                  GestureDetector(
+                    onVerticalDragStart: (val){
+                      Navigator.of(context).push(_createRoute());
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height - 500.h,
+                      color: white,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 24.w, left: 24.w),
+                            child: Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // GestureDetector(
-                                  //   onTap: () {
-                                  //     Share.share(
-                                  //     'Hey checkout this feature' +
-                                  //       featuredController.featuredList[widget.selectedPositionFromPrevious].link!,
-                                  //     );
-                                  //   },
-                                  //   child: SvgPicture.asset(
-                                  //     icon_share,
-                                  //     width: 22.w,
-                                  //     height: 22.h,
-                                  //   ),
-                                  // ),
-                                  // SizedBox(
-                                  //   height: 25.h,
-                                  // ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      if (featuredController
-                                              .featuredList[widget
-                                                  .selectedPositionFromPrevious]
-                                              .is_like ==
-                                          0) {
-                                        featuredController.likeFeatureAPI(
-                                            context,
-                                            featuredController
+                                  Expanded(
+                                    child: Container(
+                                      transform: Matrix4.translationValues(0, -10, 0),
+                                      child: Text(
+                                        featuredController
                                                 .featuredList[widget
                                                     .selectedPositionFromPrevious]
-                                                .id,
-                                            widget
-                                                .selectedPositionFromPrevious);
-                                      } else {
-                                        featuredController.DisLikeFeatureAPI(
-                                            context,
-                                            featuredController
-                                                .featuredList[widget
-                                                    .selectedPositionFromPrevious]
-                                                .id,
-                                            widget
-                                                .selectedPositionFromPrevious);
-                                      }
-                                    },
-                                    child: featuredController
-                                                .featuredList[widget
-                                                    .selectedPositionFromPrevious]
-                                                .is_like ==
-                                            0
-                                        ? SvgPicture.asset(
-                                            icon_heart,
-                                            width: 22.w,
-                                            height: 22.h,
-                                          )
-                                        : SvgPicture.asset(
-                                            icon_heart,
-                                            width: 22.w,
-                                            height: 22.h,
-                                            color: Colors.red,
-                                          ),
+                                                .writer_name ??
+                                            "",
+                                        style: TextStyle(
+                                          fontFamily: helvetica_neu_bold,
+                                          fontSize: 100.sp,
+                                          color: orange_ff881a,
+                                          letterSpacing: -10,
+                                          height: 0.8,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    // transform: Matrix4.translationValues(0, -35, 0),
+                                    height: 45,
+                                    padding: EdgeInsets.symmetric(horizontal: 17.5.w),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                          bottomRight: Radius.circular(4.r),
+                                          bottomLeft: Radius.circular(4.r)),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Color(0x331c2535),
+                                          Color(0x4d04080f)
+                                        ],
+                                      ),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        // GestureDetector(
+                                        //   onTap: () {
+                                        //     Share.share(
+                                        //     'Hey checkout this feature' +
+                                        //       featuredController.featuredList[widget.selectedPositionFromPrevious].link!,
+                                        //     );
+                                        //   },
+                                        //   child: SvgPicture.asset(
+                                        //     icon_share,
+                                        //     width: 22.w,
+                                        //     height: 22.h,
+                                        //   ),
+                                        // ),
+                                        // SizedBox(
+                                        //   height: 25.h,
+                                        // ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            if (featuredController
+                                                    .featuredList[widget
+                                                        .selectedPositionFromPrevious]
+                                                    .is_like ==
+                                                0) {
+                                              featuredController.likeFeatureAPI(
+                                                  context,
+                                                  featuredController
+                                                      .featuredList[widget
+                                                          .selectedPositionFromPrevious]
+                                                      .id,
+                                                  widget
+                                                      .selectedPositionFromPrevious);
+                                            } else {
+                                              featuredController.DisLikeFeatureAPI(
+                                                  context,
+                                                  featuredController
+                                                      .featuredList[widget
+                                                          .selectedPositionFromPrevious]
+                                                      .id,
+                                                  widget
+                                                      .selectedPositionFromPrevious);
+                                            }
+                                          },
+                                          child: featuredController
+                                                      .featuredList[widget
+                                                          .selectedPositionFromPrevious]
+                                                      .is_like ==
+                                                  0
+                                              ? SvgPicture.asset(
+                                                  icon_heart,
+                                                  width: 22.w,
+                                                  height: 22.h,
+                                                )
+                                              : SvgPicture.asset(
+                                                  icon_heart,
+                                                  width: 22.w,
+                                                  height: 22.h,
+                                                  color: Colors.red,
+                                                ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
+                          ),
 
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 2.h, left: 24.w, right: 24.w),
-                        child: Text(
-                          featuredController
-                                  .featuredList[
-                                      widget.selectedPositionFromPrevious]
-                                  .title ??
-                              "",
-                          style: TextStyle(
-                              fontFamily: helvetica_neu_bold,
-                              fontSize: 24.sp,
-                              color: black_121212),
-                        ),
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: 2.h, left: 24.w, right: 24.w),
+                            child: Text(
+                              featuredController
+                                      .featuredList[
+                                          widget.selectedPositionFromPrevious]
+                                      .title ??
+                                  "",
+                              style: TextStyle(
+                                  fontFamily: helvetica_neu_bold,
+                                  fontSize: 24.sp,
+                                  color: black_121212),
+                            ),
+                          ),
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: 12.h, left: 24.w, right: 24.w),
+                            child: Text(
+                              featuredController
+                                      .featuredList[
+                                          widget.selectedPositionFromPrevious]
+                                      .sub_text ??
+                                  "",
+                              style: TextStyle(
+                                  fontFamily: poppins_BoldItalic,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.italic,
+                                  color: orange_ff881a),
+                            ),
+                          ),
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
+                            child: ReadMoreText(
+                              featuredController
+                                      .featuredList[
+                                          widget.selectedPositionFromPrevious]
+                                      .description ??
+                                  "",
+                              style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: opcity_black_B3121212,
+                                  fontFamily: roboto_medium),
+                              trimLines: 3,
+                              // trimLength: 10,
+                              // colorClickableText: Colors.pink,
+                              trimMode: TrimMode.Line,
+                              trimCollapsedText: 'See Full Article',
+                              trimExpandedText: '\nSee Less Article',
+                              moreStyle: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: black_121212,
+                                  fontFamily: helvetica_neu_bold),
+                              lessStyle: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: black_121212,
+                                  fontFamily: helvetica_neu_bold),
+                            ),
+                          ),
+                          // Container(
+                          //   margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w),
+                          //   child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies ",
+                          //     style: TextStyle(
+                          //         height: 1.3.h,
+                          //         fontWeight: FontWeight.w500,
+                          //         fontFamily: roboto_medium,fontSize: 12.sp,
+                          //         color:opcity_black_B3121212
+                          //     ),),
+                          // ),
+                          // Container(
+                          //   margin: EdgeInsets.only(left: 24.w,top: 10.h,bottom: 10.h),
+                          //   child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                          //     mainAxisSize: MainAxisSize.max,
+                          //     children: [
+                          //       Text("See full article",
+                          //         style: TextStyle(
+                          //             fontFamily: helvetica_neu_bold,fontSize: 12.sp,
+                          //             color:black_121212
+                          //         ),),
+                          //       SizedBox(width: 6.w,),
+                          //       SvgPicture.asset(icon_next_arrow,color: black_121212,)
+                          //     ],),
+                          // ),
+                        ],
                       ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 12.h, left: 24.w, right: 24.w),
-                        child: Text(
-                          featuredController
-                                  .featuredList[
-                                      widget.selectedPositionFromPrevious]
-                                  .sub_text ??
-                              "",
-                          style: TextStyle(
-                              fontFamily: poppins_BoldItalic,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.italic,
-                              color: orange_ff881a),
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
-                        child: ReadMoreText(
-                          featuredController
-                                  .featuredList[
-                                      widget.selectedPositionFromPrevious]
-                                  .description ??
-                              "",
-                          style: TextStyle(
-                              fontSize: 12.sp,
-                              color: opcity_black_B3121212,
-                              fontFamily: roboto_medium),
-                          trimLines: 3,
-                          // trimLength: 10,
-                          // colorClickableText: Colors.pink,
-                          trimMode: TrimMode.Line,
-                          trimCollapsedText: 'See Full Article',
-                          trimExpandedText: '\nSee Less Article',
-                          moreStyle: TextStyle(
-                              fontSize: 12.sp,
-                              color: black_121212,
-                              fontFamily: helvetica_neu_bold),
-                          lessStyle: TextStyle(
-                              fontSize: 12.sp,
-                              color: black_121212,
-                              fontFamily: helvetica_neu_bold),
-                        ),
-                      ),
-                      // Container(
-                      //   margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w),
-                      //   child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies ",
-                      //     style: TextStyle(
-                      //         height: 1.3.h,
-                      //         fontWeight: FontWeight.w500,
-                      //         fontFamily: roboto_medium,fontSize: 12.sp,
-                      //         color:opcity_black_B3121212
-                      //     ),),
-                      // ),
-                      // Container(
-                      //   margin: EdgeInsets.only(left: 24.w,top: 10.h,bottom: 10.h),
-                      //   child: Row(mainAxisAlignment: MainAxisAlignment.start,
-                      //     mainAxisSize: MainAxisSize.max,
-                      //     children: [
-                      //       Text("See full article",
-                      //         style: TextStyle(
-                      //             fontFamily: helvetica_neu_bold,fontSize: 12.sp,
-                      //             color:black_121212
-                      //         ),),
-                      //       SizedBox(width: 6.w,),
-                      //       SvgPicture.asset(icon_next_arrow,color: black_121212,)
-                      //     ],),
-                      // ),
-                    ],
+                    ),
                   )
                 ],
               ),
@@ -475,4 +488,28 @@ class _PastFeature1State extends State<PastFeature1> {
       ),
     );
   }
+
+  Route _createRoute() {
+  return PageRouteBuilder(
+    transitionDuration: Duration(milliseconds: 1000),
+      pageBuilder: (context, animation, secondaryAnimation) => PastFeatureDetail(title: featuredController
+                                      .featuredList[
+                                          widget.selectedPositionFromPrevious]
+                                      .title, theme: 'white'),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+  
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+  
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
 }
+
+

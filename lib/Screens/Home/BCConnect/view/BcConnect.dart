@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Layout/BcConnectFilter.dart';
 import 'package:blackchecktech/Layout/BlackButton.dart';
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
 import 'package:blackchecktech/Layout/InputTextLayout.dart';
@@ -6,6 +7,7 @@ import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Layout/ToolbarCreatePost.dart';
 import 'package:blackchecktech/Layout/ToolbarLocation.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/controller/StepsController.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/TagPeopleModel.dart';
 import 'package:blackchecktech/Screens/Home/BCConnect/controller/BCConnectController.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
@@ -43,6 +45,7 @@ class BcConnect extends StatefulWidget {
 class _BcConnectState extends State<BcConnect> {
   BCConnectController bcConnectController = Get.put(BCConnectController());
   VideoController videoController = Get.put(VideoController());
+  StepsController stepsController = Get.put(StepsController());
 
   String? dropdownValue;
 
@@ -65,8 +68,11 @@ class _BcConnectState extends State<BcConnect> {
     // TODO: implement initState
     super.initState();
     videoController.initScrolling(context, true);
-    checkNet(context)
-        .then((value) => {videoController.userListAPI(context, true)});
+    checkNet(context).then((value) {
+      videoController.userListAPI(context, true);
+      stepsController.countryListApi();
+      stepsController.industryListAPI(context);
+    });
   }
 
   @override
@@ -88,41 +94,41 @@ class _BcConnectState extends State<BcConnect> {
             ),
             Padding(
                 padding: EdgeInsets.only(left: 16.w, right: 16.w),
-                child: TextField(
-                  style: TextStyle(
-                      fontFamily: helveticaNeueNeue_medium,
-                      fontSize: 14.sp,
-                      color: black_121212),
-                  controller: videoController.searchController.value,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                    filled: true,
-                    hintText: "Search people",
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-                    suffixIcon: Icon(
-                      IconlyLight.search,
-                      color: black_121212,
-                      size: 16.r,
-                    ),
-                    fillColor: const Color(0xfff5f5f5),
-                    hintStyle: TextStyle(
-                        fontSize: 14.sp,
-                        // fontWeight: FontWeight.w500,
-                        fontFamily: helveticaNeueNeue_medium,
-                        color: grey_aaaaaa),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(4.r),
-                    ),
-                  ),
-                  onChanged: (value){
-                      checkNet(context).then((value) {
-                        videoController.PageNumber.value = 0;
-                        videoController.userListAPI(context, true);
-                      });
-                  },
-                )
+                child: BcConnectFilter(),
+                // child: TextField(
+                //   style: TextStyle(
+                //       fontFamily: helveticaNeueNeue_medium,
+                //       fontSize: 14.sp,
+                //       color: black_121212),
+                //   controller: videoController.searchController.value,
+                //   autofocus: false,
+                //   decoration: InputDecoration(
+                //     filled: true,
+                //     hintText: "Search people",
+                //     contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
+                //     prefixIcon: Icon(
+                //       IconlyLight.search,
+                //       color: black_121212,
+                //       size: 16.r,
+                //     ),
+                //     fillColor: const Color(0xfff5f5f5),
+                //     hintStyle: TextStyle(
+                //         fontSize: 14.sp,
+                //         // fontWeight: FontWeight.w500,
+                //         fontFamily: helveticaNeueNeue_medium,
+                //         color: grey_aaaaaa),
+                //     border: OutlineInputBorder(
+                //       borderSide: BorderSide.none,
+                //       borderRadius: BorderRadius.circular(4.r),
+                //     ),
+                //   ),
+                //   onChanged: (value){
+                //       checkNet(context).then((value) {
+                //         videoController.PageNumber.value = 0;
+                //         videoController.userListAPI(context, true);
+                //       });
+                //   },
+                // )
                 // child: SearchBarTag(
                 //   placeholder: "Search people",
                 //   autoFocus: false,
@@ -150,14 +156,16 @@ class _BcConnectState extends State<BcConnect> {
                   textAlign: TextAlign.left),
             ),
             videoController.userList.isEmpty
-                ? Container(
-                    height: MediaQuery.of(context).size.height * 0.50,
-                    width: MediaQuery.of(context).size.width,
-                    child: Center(
-                        child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: black,
-                    )))
+                ? Expanded(
+                  child: Container(
+                      height: MediaQuery.of(context).size.height * 0.50,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: black,
+                      ))),
+                )
                 : Expanded(
                     flex: 1,
                     child: SingleChildScrollView(
@@ -184,7 +192,7 @@ class _BcConnectState extends State<BcConnect> {
                             itemBuilder: (context, i) => Wrap(
                               children: [
                                 Container(
-                                  height: 212.h,
+                                  height: 215.h,
                                   child: Padding(
                                     padding: EdgeInsets.only(
                                         left: 8.w, right: 8.w, bottom: 16.h),

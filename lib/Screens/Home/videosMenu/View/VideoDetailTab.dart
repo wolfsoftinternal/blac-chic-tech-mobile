@@ -6,6 +6,7 @@ import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/pagination_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -463,7 +464,8 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                           Text(
                                               widget.videoList.userDetails!
                                                   .fullName
-                                                  .toString().capitalize!,
+                                                  .toString()
+                                                  .capitalize!,
                                               style: TextStyle(
                                                   color: black_121212,
                                                   fontWeight: FontWeight.w700,
@@ -484,34 +486,119 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                       ),
 
                                       // Product manager and brand strategist @capitalone
-                                      Text(
-                                          controller.videoDetail.value
-                                                      .userDetails ==
-                                                  null
-                                              ? ""
-                                              : controller
-                                                      .videoDetail
-                                                      .value
-                                                      .userDetails!
-                                                      .currentJobs!
-                                                      .title
-                                                      .toString().capitalize! +
-                                                  "\n@" +
-                                                  controller
-                                                      .videoDetail
-                                                      .value
-                                                      .userDetails!
-                                                      .currentJobs!
-                                                      .companyName
-                                                      .toString().capitalize!,
-                                          style: TextStyle(
-                                              color: const Color(0xff3f3f3f),
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily:
-                                                  helveticaNeueNeue_medium,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: 12.sp),
-                                          textAlign: TextAlign.left)
+                                      Row(
+                                        children: [
+                                          CircularProfileAvatar(
+                                            '',
+                                            radius: 20.5,
+                                            child: controller
+                                                        .videoDetail
+                                                        .value
+                                                        .userDetails!
+                                                        .currentJobs!
+                                                        .logo ==
+                                                    null
+                                                ? SvgPicture.asset(
+                                                    placeholder,
+                                                    height: 32.h,
+                                                    width: 32.w,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : CachedNetworkImage(
+                                                    imageUrl: controller
+                                                        .videoDetail
+                                                        .value
+                                                        .userDetails!
+                                                        .currentJobs!
+                                                        .logo,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            .78,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                    progressIndicatorBuilder:
+                                                        (context, url,
+                                                                downloadProgress) =>
+                                                            SvgPicture.asset(
+                                                      placeholder,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              .78,
+                                                      width: double.infinity,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            SvgPicture.asset(
+                                                      placeholder,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              .78,
+                                                      width: double.infinity,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                          ),
+                                          SizedBox(width: 8.h,),
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  controller.videoDetail.value
+                                                              .userDetails ==
+                                                          null
+                                                      ? ""
+                                                      : controller
+                                                              .videoDetail
+                                                              .value
+                                                              .userDetails!
+                                                              .currentJobs!
+                                                              .title
+                                                              .toString()
+                                                              .capitalize!,
+                                                  style: TextStyle(
+                                                      color:
+                                                          const Color(0xff3f3f3f),
+                                                      fontWeight: FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontSize: 12.sp),
+                                                  textAlign: TextAlign.left),
+                                              SizedBox(height: 3.h,),
+                                              Text(
+                                                  controller.videoDetail.value
+                                                              .userDetails ==
+                                                          null
+                                                      ? ""
+                                                      : "@" + controller
+                                                              .videoDetail
+                                                              .value
+                                                              .userDetails!
+                                                              .currentJobs!
+                                                              .companyName
+                                                              .toString()
+                                                              .capitalize!,
+                                                  style: TextStyle(
+                                                      color:
+                                                          const Color(0xff3f3f3f),
+                                                      fontWeight: FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontSize: 12.sp),
+                                                  textAlign: TextAlign.left),
+                                            ],
+                                          ),
+                                        ],
+                                      )
                                     ],
                                   )
                                 ],

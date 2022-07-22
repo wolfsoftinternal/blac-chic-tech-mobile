@@ -77,6 +77,38 @@ class SettingsController extends GetxController {
     });
   }
 
+  deleteAccount(BuildContext context) async {
+    var preferences = MySharedPref();
+    SignupModel? myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
+    var token = await preferences.getStringValue(SharePreData.keytoken);
+
+    String url = urlBase + urlDeleteAccount;
+    final apiReq = Request();
+    await apiReq.postAPI(url, null, token.toString()).then((value) {
+      http.StreamedResponse res = value;
+
+      if (res.statusCode == 200) {
+        res.stream.bytesToString().then((value) async {
+          String strData = value;
+          Map<String, dynamic> userModel = json.decode(strData);
+          BaseModel model = BaseModel.fromJson(userModel);
+
+          if (model.statusCode == 500) {
+            final tokenUpdate = TokenUpdateRequest();
+            await tokenUpdate.updateToken();
+
+            userLogout(context);
+          } else if (model.statusCode == 200) {
+            await preferences.clear();
+            Get.offAll(Welcome());
+          }
+        });
+      } else {
+        print(res.reasonPhrase);
+      }
+    });
+  }
+
   bool checkValidation(context) {
     if (firstnameController.value.text.isEmpty) {
       snackBar(context, "Enter First Name");

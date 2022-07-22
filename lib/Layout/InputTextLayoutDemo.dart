@@ -14,9 +14,10 @@ class InputTextLayoutDemo extends StatefulWidget {
   TextInputAction textInputAction;
   bool readonly=false;
   dynamic suffix;
-  // Function validator;
+  Function(String)? onChange;
+  dynamic autofocus;
 
-  InputTextLayoutDemo(this.hintData,this.inputData,this.numKeypad,this.textInputAction,this.inputType, this.readonly, [this.suffix]);
+  InputTextLayoutDemo(this.hintData,this.inputData,this.numKeypad,this.textInputAction,this.inputType, this.readonly, [this.suffix, this.onChange, this.autofocus]);
 
   @override
   _TextInputState createState() => _TextInputState(hintData,inputData,numKeypad,textInputAction,inputType);
@@ -79,6 +80,7 @@ class _TextInputState extends State<InputTextLayoutDemo> {
           ),
           keyboardType: inputType ,
           readOnly: widget.readonly,
+          autofocus: widget.autofocus ?? false,
           inputFormatters: [
             numKeypad== true ? FilteringTextInputFormatter.digitsOnly : FilteringTextInputFormatter.singleLineFormatter ,
             numKeypad== true ? LengthLimitingTextInputFormatter(10) : LengthLimitingTextInputFormatter(200),
@@ -104,7 +106,7 @@ class _TextInputState extends State<InputTextLayoutDemo> {
             FocusScope.of(context).unfocus();
             FocusScope.of(context).nextFocus();
           },
-          onChanged: (inputValue) {
+          onChanged: widget.onChange ?? (inputValue) {
             if (inputValue.isNotEmpty) {
               setState(() {
                 checkFillColor = false;
