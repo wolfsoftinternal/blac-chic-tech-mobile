@@ -12,7 +12,8 @@ import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:transformer_page_view/transformer_page_view.dart';
+// import 'package:transformer_page_view/transformer_page_view.dart';
+// import 'package:transformer_page_view/transformer_page_view.dart';
 
 import '../model/FeaturedListModel.dart';
 import 'FeaturedMainScreen.dart';
@@ -54,13 +55,13 @@ class _PastFeaturesScreenState extends State<PastFeaturesScreen> {
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
-          TransformerPageView(
+          PageView.builder(
             // pageController: _controller,
             scrollDirection: Axis.horizontal,
             itemCount: widget.featureList.length,
-            loop: false,
-            curve: Curves.easeInBack,
-            transformer: transformers[1],
+            // loop: false,
+            // curve: Curves.easeInBack,
+            // transformer: transformers[1],
             itemBuilder: (BuildContext context, int index) {
             
               if(!isSet){

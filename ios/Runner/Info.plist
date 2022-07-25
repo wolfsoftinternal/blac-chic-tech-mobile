@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSCameraUsageDescription</key>
+    <string>This permission is required for access camera to capture photos.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This permission is required to use microphone.</string>
     <key>LSApplicationQueriesSchemes</key>
         <array>
         <string>instagram</string>
@@ -55,7 +59,7 @@
 		<true/>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Replace with your permission description.</string>
+	<string>This permission is required for Photo Library Access.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 </dict>
