@@ -268,6 +268,7 @@ class _PastFeature1State extends State<PastFeature1> {
                       ],
                     ),
                   ),
+
                   GestureDetector(
                     onVerticalDragStart: (val){
                       Navigator.of(context).push(_createRoute());
@@ -297,7 +298,7 @@ class _PastFeature1State extends State<PastFeature1> {
                                                 .writer_name ??
                                             "",
                                         style: TextStyle(
-                                          fontFamily: helvetica_neu_bold,
+                                          fontFamily: interExtraBold,
                                           fontSize: 100.sp,
                                           color: orange_ff881a,
                                           letterSpacing: -10,
@@ -403,7 +404,7 @@ class _PastFeature1State extends State<PastFeature1> {
                                       .title ??
                                   "",
                               style: TextStyle(
-                                  fontFamily: helvetica_neu_bold,
+                                  fontFamily: interBold,
                                   fontSize: 24.sp,
                                   color: black_121212),
                             ),
@@ -418,7 +419,7 @@ class _PastFeature1State extends State<PastFeature1> {
                                       .sub_text ??
                                   "",
                               style: TextStyle(
-                                  fontFamily: poppins_BoldItalic,
+                                  fontFamily: interExtraBoldItalic,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.italic,
@@ -437,7 +438,8 @@ class _PastFeature1State extends State<PastFeature1> {
                               style: TextStyle(
                                   fontSize: 12.sp,
                                   color: opcity_black_B3121212,
-                                  fontFamily: roboto_medium),
+                                  height: 1.4,
+                                  fontFamily: interSemiBold),
                               trimLines: 3,
                               // trimLength: 10,
                               // colorClickableText: Colors.pink,
@@ -447,11 +449,11 @@ class _PastFeature1State extends State<PastFeature1> {
                               moreStyle: TextStyle(
                                   fontSize: 12.sp,
                                   color: black_121212,
-                                  fontFamily: helvetica_neu_bold),
+                                  fontFamily: interExtraBold),
                               lessStyle: TextStyle(
                                   fontSize: 12.sp,
                                   color: black_121212,
-                                  fontFamily: helvetica_neu_bold),
+                                  fontFamily: interExtraBold),
                             ),
                           ),
                           // Container(

@@ -286,7 +286,7 @@ class _PastFeature2State extends State<PastFeature2> {
                                           .writer_name ??
                                       "",
                                   style: TextStyle(
-                                    fontFamily: helvetica_neu_bold,
+                                    fontFamily: interExtraBold,
                                     fontSize: 90.sp,
                                     color: Colors.white,
                                     letterSpacing: -10,
@@ -390,7 +390,7 @@ class _PastFeature2State extends State<PastFeature2> {
                                           .title ??
                                       "",
                                   style: TextStyle(
-                                      fontFamily: helvetica_neu_bold,
+                                      fontFamily: interBold,
                                       fontSize: 24.sp,
                                       color: Colors.white),
                                 ),
@@ -405,11 +405,12 @@ class _PastFeature2State extends State<PastFeature2> {
                                       .sub_text ??
                                   "",
                               style: TextStyle(
-                                  fontFamily: poppins_BoldItalic,
+                                  fontFamily: interExtraBoldItalic,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.italic,
                                   color: orange_ff881a),
+
                             ),
                           ),
                           Container(
@@ -423,8 +424,9 @@ class _PastFeature2State extends State<PastFeature2> {
                                   "",
                               style: TextStyle(
                                   fontSize: 12.sp,
+                                  height: 1.4,
                                   color: Colors.white,
-                                  fontFamily: roboto_medium),
+                                  fontFamily: interSemiBold),
                               trimLines: 3,
                               // trimLength: 10,
                               // colorClickableText: Colors.pink,
@@ -434,18 +436,19 @@ class _PastFeature2State extends State<PastFeature2> {
                               moreStyle: TextStyle(
                                   fontSize: 12.sp,
                                   color: Colors.white,
-                                  fontFamily: helvetica_neu_bold),
+                                  fontFamily: interExtraBold),
                               lessStyle: TextStyle(
                                   fontSize: 12.sp,
                                   color: Colors.white,
-                                  fontFamily: helvetica_neu_bold),
+                                  fontFamily: interExtraBold),
                             ),
                           ),
                             ],
                           ),
                         ),
                       ),
-                      
+
+
                       // Container(
                       //   margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w),
                       //   child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies ",
@@ -472,7 +475,9 @@ class _PastFeature2State extends State<PastFeature2> {
                       // ),
                     ],
                   ),
+
                 ),
+
               )
             ],
           ),

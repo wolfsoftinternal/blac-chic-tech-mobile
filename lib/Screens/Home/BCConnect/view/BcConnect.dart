@@ -143,6 +143,80 @@ class _BcConnectState extends State<BcConnect> {
                 // ),
                 ),
 
+// <<<<<<< HEAD
+//                     GridView.builder(
+//                       primary: false,
+//                       shrinkWrap: true,
+//                       padding: EdgeInsets.only(
+//                           left: 8.w, right: 8.w, bottom: 10.h, top: 16.h),
+//                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                           crossAxisCount: 2,
+//                           childAspectRatio: 0.70.h,
+//                           mainAxisSpacing: 0.0,
+//                           crossAxisSpacing: 0.0),
+//                       itemCount: videoController.userList.length,
+//                       itemBuilder: (context, i) => Padding(
+//                         padding: EdgeInsets.only(
+//                             left: 8.w, right: 8.w, bottom: 16.h),
+//                         child: Container(
+//                           width: double.infinity,
+//                           decoration: BoxDecoration(
+//                               borderRadius:
+//                                   BorderRadius.all(Radius.circular(4.r)),
+//                               boxShadow: [
+//                                 BoxShadow(
+//                                     color: Color(0x19121212),
+//                                     offset: Offset(0, 30),
+//                                     blurRadius: 60,
+//                                     spreadRadius: 0)
+//                               ],
+//                               color: white_ffffff),
+//                           child: Stack(
+//                             //    alignment: Alignment.center,
+//                             children: [
+//                               GestureDetector(
+//                                 onTap: () {
+//                                   Get.to(UserProfile(
+//                                           selectedUserId: videoController
+//                                               .userList[i].id
+//                                               .toString(), isFrom: false,))!
+//                                       .then((value) {
+//                                     checkNet(context).then((value) => {
+//                                           videoController.PageNumber.value = 0,
+//                                           videoController.userListAPI(
+//                                               context, true)
+//                                         });
+//                                   });
+//                                   videoController.userList.clear();
+//                                 },
+//                                 child: Column(
+//                                   mainAxisAlignment: MainAxisAlignment.start,
+//                                   crossAxisAlignment: CrossAxisAlignment.start,
+//                                   children: [
+//                                     Stack(
+//                                       alignment: Alignment.bottomCenter,
+//                                       children: [
+//                                         ClipRRect(
+//                                             borderRadius: BorderRadius.only(
+//                                                 topLeft: Radius.circular(4.r),
+//                                                 topRight: Radius.circular(4.r)),
+//                                             child: videoController
+//                                                         .userList[i].image !=
+//                                                     null
+//                                                 ? Image.network(
+//                                                     videoController
+//                                                         .userList[i].image!,
+//                                                     fit: BoxFit.cover,
+//                                                     height: 134.h,
+//                                                     width: double.infinity,
+//                                                   )
+//                                                 : SvgPicture.asset(
+//                                                     placeholder,
+//                                                     height: 134.h,
+//                                                     width: double.infinity,
+//                                                     fit: BoxFit.cover,
+//                                                   )),
+// =======
             // Recently Search
             Padding(
               padding: EdgeInsets.only(left: 16.w, top: 24.h, bottom: 12.h),
@@ -178,6 +252,7 @@ class _BcConnectState extends State<BcConnect> {
                             height: 12.h,
                           ),
                           // Rectangle 1363
+// >>>>>>> ce9bda8dfeefa0c18cb371d481e083741f95016a
 
                           GridView.builder(
                             primary: false,

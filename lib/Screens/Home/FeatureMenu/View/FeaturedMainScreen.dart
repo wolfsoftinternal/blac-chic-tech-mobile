@@ -89,7 +89,7 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
                   style: TextStyle(
                       color: Color(0xffffffff),
                       fontWeight: FontWeight.w900,
-                      fontFamily: helveticaNeue,
+                      fontFamily: interExtraBold,
                       fontStyle: FontStyle.normal,
                       fontSize: 40.0),
                   textAlign: TextAlign.center),
@@ -120,7 +120,7 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
                     style: TextStyle(
                         color: white_ffffff,
                         fontWeight: FontWeight.w900,
-                        fontFamily: helvetica_neu_bold,
+                        fontFamily: interSemiBold,
                         letterSpacing: 1.2,
                         fontStyle: FontStyle.normal,
                         fontSize: 20.sp),
