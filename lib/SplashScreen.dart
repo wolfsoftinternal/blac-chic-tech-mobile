@@ -6,6 +6,7 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFo
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Welcome.dart';
@@ -89,17 +90,21 @@ class _SplashScreenState extends State<SplashScreen> {
         Get.offAll(HomePage());
       }
     });
-    checkFirstCall();
+    // checkFirstCall();
   }
 
   checkFirstCall() async {
     bool ifc = await IsFirstRun.isFirstCall();
+    var preferences = MySharedPref();
+    bool val = await preferences.getStringValue(SharePreData.strIfc);
     setState(() {
-      if(ifc == true){
-        var preferences = MySharedPref();
-        preferences.clear();  
+      if(val == true){
+         
+      }else if(ifc == true){
+        preferences.clear();
       }
     });
+    preferences.setString(SharePreData.strIfc, 'true');
   }
 
   @override

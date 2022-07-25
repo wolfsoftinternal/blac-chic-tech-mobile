@@ -61,9 +61,11 @@ class EventController extends GetxController {
   RxList<dynamic> speakerNameList = <dynamic>[].obs;
   RxString speakerName = ''.obs;
   RxBool isSearched = false.obs;
+  RxBool isLoading = false.obs;
   VideoController videoController = Get.put(VideoController());
 
   Future<void> createEventAPI(BuildContext context) async {
+    isLoading.value = true;
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -151,6 +153,7 @@ class EventController extends GetxController {
         BaseModel model = BaseModel.fromJson(userModel);
 
         if (model.statusCode == 500) {
+          isLoading.value = false;
           final tokenUpdate = TokenUpdateRequest();
           await tokenUpdate.updateToken();
 
@@ -166,6 +169,7 @@ class EventController extends GetxController {
               item.isHostSelected = false;
             }
           }
+          // selectedList.clear();
           checkNet(context)
               .then((value) => controller.eventDetailAPI(context, id, null))
               .then((value) {
@@ -173,10 +177,11 @@ class EventController extends GetxController {
             Get.back();
             Get.back();
           });
+          isLoading.value = false;
         }
       });
     } else {
-      Navigator.pop(context); //pop
+      isLoading.value = false;
       print(response.reasonPhrase);
     }
   }

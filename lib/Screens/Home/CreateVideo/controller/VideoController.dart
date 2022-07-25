@@ -220,6 +220,7 @@ class VideoController extends GetxController {
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       if (PageNumber == 1) {
         userList.clear();
+        print("clear");
       }
       http.StreamedResponse res = value;
 
@@ -241,10 +242,13 @@ class VideoController extends GetxController {
             if(pagination == false){
               userList.value = detail.data!;
             }else{
+              if (PageNumber == 1) {
+                userList.clear();
+                print("clear");
+              }
               userList.addAll(detail.data!);
-
             }
-            print(userList.length);
+            print("clear" + userList.length.toString());
           }
         });
       } else {

@@ -50,6 +50,8 @@ class VideoMenuController extends GetxController {
   var filtterList = <TopicListModel>[].obs;
   RxBool isLayoutFirst = false.obs;
   RxBool isTextChange = false.obs;
+  RxBool clearFilter = false.obs;
+  RxString filter = 'More filters'.obs;
   var allTopicData = <TopicListModel>[].obs;
   var videoDetail = VideoDetail().obs;
 

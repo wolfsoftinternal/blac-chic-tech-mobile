@@ -215,23 +215,23 @@ class _SearchFeaturesScreenState extends State<SearchFeaturesScreen> {
                   Container(color: white.withOpacity(0.1),height: 1,),
 
                   // Recently Search
-                  Padding(
-                    padding: EdgeInsets.only(left: 30.w, top: 24.h),
-                    child: Text("Recently Search",
-                        style: TextStyle(
-                            color: white,
-                            fontWeight: FontWeight.w800,
-                            fontFamily: helvetica_neu_bold,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 16.sp),
-                        textAlign: TextAlign.left),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: 30.w, top: 24.h),
+                  //   child: Text("Recently Search",
+                  //       style: TextStyle(
+                  //           color: white,
+                  //           fontWeight: FontWeight.w800,
+                  //           fontFamily: helvetica_neu_bold,
+                  //           fontStyle: FontStyle.normal,
+                  //           fontSize: 16.sp),
+                  //       textAlign: TextAlign.left),
+                  // ),
 
                   Expanded(
                     flex: 1,
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: EdgeInsets.only(left: 30.w, right: 16.w),
+                        padding: EdgeInsets.only(top: 30.h, left: 30.w, right: 16.w),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,

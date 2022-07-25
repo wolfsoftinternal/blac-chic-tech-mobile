@@ -35,7 +35,8 @@ class CreateEvent extends StatefulWidget {
 class _CreateEventState extends State<CreateEvent> {
   EventController controller = Get.put(EventController());
   VideoController videoController = Get.put(VideoController());
-  AdmireProfileController admireProfileController = Get.put(AdmireProfileController());
+  AdmireProfileController admireProfileController =
+      Get.put(AdmireProfileController());
   final eventKey = GlobalKey<FormState>();
   TimeOfDay? startTime;
   TimeOfDay? endTime;
@@ -112,13 +113,13 @@ class _CreateEventState extends State<CreateEvent> {
     }
 
     admireProfileController.isSearched.value = true;
-    
-    for(var item in videoController.userList){
-      if(item.isSpeakerSelected == true){
+
+    for (var item in videoController.userList) {
+      if (item.isSpeakerSelected == true) {
         item.isSpeakerSelected = false;
       }
 
-      if(item.isHostSelected == true){
+      if (item.isHostSelected == true) {
         item.isHostSelected = false;
       }
     }
@@ -155,12 +156,12 @@ class _CreateEventState extends State<CreateEvent> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:  EdgeInsets.only(top: 20.h),
+                                    padding: EdgeInsets.only(top: 20.h),
                                     child: setRoboto('EVENT TITLE', 12.sp,
                                         grey_aaaaaa, FontWeight.w800),
                                   ),
                                   Padding(
-                                    padding:  EdgeInsets.only(top: 8.h),
+                                    padding: EdgeInsets.only(top: 8.h),
                                     child:
                                         setTextFieldHelveticaMediumOrangeBorder(
                                             controller.titleController.value,
@@ -254,34 +255,45 @@ class _CreateEventState extends State<CreateEvent> {
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               setRoboto('START TIME', 12.sp,
                                                   grey_aaaaaa, FontWeight.w800),
                                               Padding(
-                                                padding: EdgeInsets.only(top: 8.h),
+                                                padding:
+                                                    EdgeInsets.only(top: 8.h),
                                                 child:
                                                     setTextFieldHelveticaMediumOrangeBorder(
-                                                        controller.startTimeController
+                                                        controller
+                                                            .startTimeController
                                                             .value,
                                                         "Select start time",
                                                         false,
                                                         TextInputType.text,
                                                         TextInputAction.next,
-                                                        () => {
-                                                              // on Chnages
-                                                            },
-                                                        null,
+                                                        () => {},
+                                                        validateStartTime,
                                                         true, () async {
-                                                  startTime = await showTimePicker(
-                                                    initialTime: TimeOfDay.now(),
+                                                  startTime =
+                                                      await showTimePicker(
+                                                    initialTime:
+                                                        TimeOfDay.now(),
                                                     context: context,
+                                                    builder: (BuildContext context, Widget? child) {
+                                                        return MediaQuery(
+                                                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                                          child: child!,
+                                                        );
+                                                      },
                                                   );
                                                   if (startTime != null) {
-                                                    controller.startTimeController
-                                                            .value.text =
-                                                        startTime!.format(
-                                                            context); //set the value of text field.
+                                                    if (startTime!.hour >
+                                                        TimeOfDay.now().hour) {
+                                                      controller.startTimeController.value.text =
+                                                          startTime!.format(
+                                                              context); //set the value of text field.
+                                                    }
                                                   }
                                                 }),
                                               ),
@@ -295,32 +307,42 @@ class _CreateEventState extends State<CreateEvent> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              setRoboto('END TIME', 12.sp,
-                                                  grey_aaaaaa, FontWeight.w800),
+                                              setRoboto('END TIME', 12.sp, grey_aaaaaa, FontWeight.w800),
                                               Padding(
                                                 padding: EdgeInsets.only(top: 8.h),
-                                                child:
-                                                    setTextFieldHelveticaMediumOrangeBorder(
-                                                        controller.endTimeController
-                                                            .value,
-                                                        "Select end time",
-                                                        false,
-                                                        TextInputType.text,
-                                                        TextInputAction.next,
-                                                        () => {
-                                                              // on Chnages
-                                                            },
-                                                        null,
-                                                        true, () async {
-                                                  endTime = await showTimePicker(
-                                                    initialTime: TimeOfDay.now(),
-                                                    context: context,
-                                                  );
-                                                  if (endTime != null) {
-                                                    controller.endTimeController
-                                                            .value.text =
-                                                        endTime!.format(
-                                                            context); //set the value of text field.
+                                                child: setTextFieldHelveticaMediumOrangeBorder(
+                                                  controller.endTimeController.value,
+                                                  "Select end time",
+                                                  false,
+                                                  TextInputType.text,
+                                                  TextInputAction.next,
+                                                  () => {
+                                                    // on Chnages
+                                                  },
+                                                  validateEndTime,
+                                                  true, () async {
+                                                  if (controller.startTimeController.value.text != '') {
+                                                    endTime = await showTimePicker(
+                                                      initialTime: TimeOfDay.now(),
+                                                      context: context,
+                                                      builder: (BuildContext context, Widget? child) {
+                                                        return MediaQuery(
+                                                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                                          child: child!,
+                                                        );
+                                                      },
+                                                    );
+                                                    // if (endTime != null) {
+                                                    //   if(endTime!.period != startTime!.period){
+                                                    //     controller.endTimeController.value.text = endTime!.format(context);
+                                                    //   }else{
+                                                    //     if (endTime!.hour > startTime!.hour) {
+                                                          controller.endTimeController.value.text = endTime!.format(context);
+                                                    //     }
+                                                    //   }
+                                                    // }
+                                                  }else{
+                                                    snackBar(context, 'Please select start time');
                                                   }
                                                 }),
                                               ),
@@ -364,8 +386,7 @@ class _CreateEventState extends State<CreateEvent> {
                                         style: TextStyle(
                                             color: black_121212,
                                             fontWeight: FontWeight.w500,
-                                            fontFamily:
-                                            helvetica_neu_bold,
+                                            fontFamily: helvetica_neu_bold,
                                             fontStyle: FontStyle.normal,
                                             fontSize: 14.sp),
                                         readOnly: true,
@@ -377,7 +398,7 @@ class _CreateEventState extends State<CreateEvent> {
                                               color: grey_aaaaaa,
                                               fontWeight: FontWeight.w500,
                                               fontFamily:
-                                              helveticaNeueNeue_medium,
+                                                  helveticaNeueNeue_medium,
                                               fontStyle: FontStyle.normal,
                                               fontSize: 14.sp),
                                           border: OutlineInputBorder(
@@ -815,7 +836,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                                                 helveticaNeueNeue_medium,
                                                                             fontStyle: FontStyle
                                                                                 .normal,
-                                                                            fontSize: 14.sp
+                                                                            fontSize: 14
+                                                                                .sp
                                                                                 .sp),
                                                                         textAlign:
                                                                             TextAlign
@@ -829,8 +851,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                           12.h,
                                                                     ),
                                                                     onChanged:
-                                                                        (String?
-                                                                            newValue) async {
+                                                                        (String? newValue) async {
                                                                       setState(
                                                                           () {
                                                                         categoryController[i] =
@@ -961,7 +982,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                               4),
                                                                       bottomRight:
                                                                           Radius.circular(
-                                                                             4)),
+                                                                              4)),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color:
@@ -977,7 +998,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                               4),
                                                                       bottomRight:
                                                                           Radius.circular(
-                                                                             4)),
+                                                                              4)),
                                                                   borderSide:
                                                                       BorderSide(
                                                                           color:
@@ -995,12 +1016,14 @@ class _CreateEventState extends State<CreateEvent> {
                                                         1
                                                     ? Column(
                                                         children: [
-                                                          controller.selectedList.isNotEmpty
+                                                          controller
+                                                                  .selectedList
+                                                                  .isNotEmpty
                                                               ? Padding(
-                                                                  padding:  EdgeInsets
-                                                                          .only(
-                                                                      top:
-                                                                          8.h),
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          top: 8
+                                                                              .h),
                                                                   child: Row(
                                                                     children: [
                                                                       SizedBox(
@@ -1073,11 +1096,10 @@ class _CreateEventState extends State<CreateEvent> {
                                                                         ),
                                                                       ),
                                                                       Padding(
-                                                                        padding:  EdgeInsets.only(
+                                                                        padding: EdgeInsets.only(
                                                                             top:
                                                                                 2.h,
-                                                                            left:
-                                                                                1.w),
+                                                                            left: 1.w),
                                                                         child: setRoboto(
                                                                             controller.selectedList.length.toString() +
                                                                                 " People Invited",
@@ -1090,8 +1112,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                                         onTap:
                                                                             () {
                                                                           Get.to(InvitePeople(
-                                                                            fromView:
-                                                                                true,
+                                                                            true,
+                                                                            controller.selectedList,
                                                                           ))!
                                                                               .then((value) => setState(() {}));
                                                                         },
@@ -1112,35 +1134,60 @@ class _CreateEventState extends State<CreateEvent> {
                                                               : Container(),
                                                           Padding(
                                                             padding:
-                                                                 EdgeInsets
-                                                                        .only(
+                                                                EdgeInsets.only(
                                                                     top: 8.h),
                                                             child: InkWell(
                                                               onTap: () {
-                                                                if (admireProfileController.isSearched.value == true) {
-                                                                  admireProfileController.isSearched.value = false;
-                                                                
-                                                                checkNet(context).then((value) async {
-                                                                      videoController.PageNumber.value = 0;
-                                                                      videoController.userList.clear();
-                                                                      await videoController.userListAPI(context, true);
+                                                                if (admireProfileController
+                                                                        .isSearched
+                                                                        .value ==
+                                                                    true) {
+                                                                  admireProfileController
+                                                                      .isSearched
+                                                                      .value = false;
 
-                                                                      Future.delayed(Duration(milliseconds: 500), () {
-                                                                        for (var item in videoController.userList) {
-                                                                          for (var selectedItem in controller.selectedList) {
-                                                                            if (selectedItem.id == item.id) {
-                                                                              item.isSpeakerSelected = selectedItem.isSpeakerSelected;
-                                                                            }
+                                                                  checkNet(
+                                                                          context)
+                                                                      .then(
+                                                                          (value) async {
+                                                                    videoController
+                                                                        .PageNumber
+                                                                        .value = 0;
+                                                                    videoController
+                                                                        .userList
+                                                                        .clear();
+                                                                    await videoController
+                                                                        .userListAPI(
+                                                                            context,
+                                                                            true);
+
+                                                                    Future.delayed(
+                                                                        Duration(
+                                                                            milliseconds:
+                                                                                500),
+                                                                        () {
+                                                                      for (var item
+                                                                          in videoController
+                                                                              .userList) {
+                                                                        for (var selectedItem
+                                                                            in controller.selectedList) {
+                                                                          if (selectedItem.id ==
+                                                                              item.id) {
+                                                                            item.isSpeakerSelected =
+                                                                                selectedItem.isSpeakerSelected;
                                                                           }
                                                                         }
-                                                                        setState(() {});
-                                                                      });
+                                                                      }
+                                                                      setState(
+                                                                          () {});
                                                                     });
+                                                                  });
                                                                 }
                                                                 Get.to(
                                                                         InvitePeople(
-                                                                  fromView:
-                                                                      false,
+                                                                  false,
+                                                                  controller
+                                                                      .selectedList,
                                                                 ))!
                                                                     .then((value) =>
                                                                         setState(
@@ -1159,7 +1206,7 @@ class _CreateEventState extends State<CreateEvent> {
                                                                             width:
                                                                                 1,
                                                                             color:
-                                                                            Color(0xff3e5edc))),
+                                                                                Color(0xff3e5edc))),
                                                                 child: Padding(
                                                                   padding:
                                                                       EdgeInsets
@@ -1169,8 +1216,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                                     child: Text(
                                                                         "+ Invite People",
                                                                         style: TextStyle(
-                                                                            color:
-                                                                                Color(0xff3e5edc),
+                                                                            color: Color(
+                                                                                0xff3e5edc),
                                                                             fontWeight: FontWeight
                                                                                 .w500,
                                                                             fontFamily:
@@ -1190,8 +1237,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                       )
                                                     : Container(),
                                             Padding(
-                                              padding:  EdgeInsets.only(
-                                                  top: 16.h),
+                                              padding:
+                                                  EdgeInsets.only(top: 16.h),
                                               child: setRoboto(
                                                   'BENEFITS',
                                                   12.sp,
@@ -1199,8 +1246,8 @@ class _CreateEventState extends State<CreateEvent> {
                                                   FontWeight.w900),
                                             ),
                                             Padding(
-                                                padding:  EdgeInsets.only(
-                                                    top: 8.h),
+                                                padding:
+                                                    EdgeInsets.only(top: 8.h),
                                                 child: Column(
                                                   children: [
                                                     ListView.builder(
@@ -1367,9 +1414,16 @@ class _CreateEventState extends State<CreateEvent> {
                                                                   14.r),
                                                           child: Center(
                                                             child: Row(
-                                                              mainAxisSize: MainAxisSize.min,
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
                                                               children: [
-                                                                Icon(Icons.add,size: 16,color: orange_ff881a,),
+                                                                Icon(
+                                                                  Icons.add,
+                                                                  size: 16,
+                                                                  color:
+                                                                      orange_ff881a,
+                                                                ),
                                                                 Text(
                                                                     " ADD MORE",
                                                                     style: TextStyle(
@@ -1383,9 +1437,10 @@ class _CreateEventState extends State<CreateEvent> {
                                                                         fontStyle:
                                                                             FontStyle
                                                                                 .normal,
-                                                                        letterSpacing: 0.7,
-                                                                        fontSize:
-                                                                            12.sp),
+                                                                        letterSpacing:
+                                                                            0.7,
+                                                                        fontSize: 12
+                                                                            .sp),
                                                                     textAlign:
                                                                         TextAlign
                                                                             .left),

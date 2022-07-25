@@ -16,7 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:dio/dio.dart' as d;
 import '../../../../Model/BaseModel.dart';
 import '../../../../Utils/CommonWidget.dart';
 import '../../../../Utils/GeneralFunctions.dart';
@@ -82,6 +82,7 @@ class StepsController extends GetxController {
   ScrollController scrollController = ScrollController();
   RxInt pageNumber = 1.obs;
   RxBool isPaginationLoading = false.obs;
+  RxBool isImageSelected = false.obs;
 
   initScrolling(BuildContext context) {
     scrollController.addListener(() async {
@@ -93,9 +94,7 @@ class StepsController extends GetxController {
         isPaginationLoading.value = true;
         pageNumber = pageNumber + 1;
         print("pageNumber $pageNumber");
-        dynamic body = {
-          'page': pageNumber.toString()
-        };
+        dynamic body = {'page': pageNumber.toString()};
         await companyListAPI(context, body);
         isPaginationLoading.value = false;
       }
@@ -105,7 +104,6 @@ class StepsController extends GetxController {
   void _scrollDown() {
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
   }
-
 
   countryListApi() async {
     String url = urlBase + urlCountryList;
@@ -201,7 +199,8 @@ class StepsController extends GetxController {
     });
   }
 
-  Future<void> personalInfoAPI(BuildContext context, isFrom, [visibility]) async {
+  Future<void> personalInfoAPI(BuildContext context, isFrom,
+      [visibility]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -213,7 +212,7 @@ class StepsController extends GetxController {
       request.fields.addAll({
         'is_visible': visibility.toString(),
       });
-    } else if (isFrom == 'about_us'){
+    } else if (isFrom == 'about_us') {
       request.fields.addAll({
         'current_job_title': currentTitleController.value.text,
         'current_job_company_name': companyName.value,
@@ -223,7 +222,7 @@ class StepsController extends GetxController {
         'questions': questions.toJson().toString(),
         'about_us': aboutController.value.text,
       });
-    } else if(isFrom == 'edit_profile'){
+    } else if (isFrom == 'edit_profile') {
       if (imagePath.isNotEmpty) {
         request.files.add(await http.MultipartFile.fromPath(
             'image', imagePath.value.toString()));
@@ -241,7 +240,7 @@ class StepsController extends GetxController {
         'instagram_url': instagramController.value.text,
         'twitter_url': twitterController.value.text,
       });
-    }else {
+    } else {
       if (imagePath != "") {
         request.files.add(await http.MultipartFile.fromPath(
             'image', imagePath.value.toString()));
@@ -278,20 +277,20 @@ class StepsController extends GetxController {
           var preferences = MySharedPref();
           await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
 
-          if(visibility != null){
+          if (visibility != null) {
             settingsController.visible.value = signUp.data!.isVisible!;
-          }else{
-            if(isFrom == 'edit_profile'){
+          } else {
+            if (isFrom == 'edit_profile') {
               Get.back();
               snackBar(context, 'Profile edited successfully');
-            }else if(isFrom == 'about_us'){
+            } else if (isFrom == 'about_us') {
               Get.back();
               snackBar(context, 'Profile edited successfully');
-            }else{
-              Get.to(const ExperienceInfoFormView());
+            } else {
+              // Get.to(const ExperienceInfoFormView());
+              createPeerboardMember(context);
             }
           }
-          
         } else {
           Navigator.pop(context); //pop
           snackBar(context, model.message!);
@@ -303,6 +302,35 @@ class StepsController extends GetxController {
     }
   }
 
+  Future<dynamic> createPeerboardMember(BuildContext context) async {
+    var preferences = MySharedPref();
+    SignupModel? myModel;
+    myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
+
+    var header = d.Options(
+      headers: {
+        'Authorization': '2360d5f790268aa27fe70a28cc5548a3',
+      },
+    );
+    var response = await d.Dio().post(
+      'https://api.peerboard.com/v1/members',
+      data: {
+        "email": myModel!.data!.email.toString(),
+        "name": myModel.data!.firstName.toString(),
+        "last_name": myModel.data!.lastName.toString(),
+        "bio": aboutController.value.text.toString(),
+        "external_id": myModel.data!.id.toString(),
+        "profile_url": imagePath.value.toString(),
+        "groups": [
+          {"id": 551308707}
+        ]
+      },
+      options: header
+    );
+
+    Get.to(const ExperienceInfoFormView());
+  }
+
   companyListAPI(BuildContext context, body) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
@@ -310,7 +338,7 @@ class StepsController extends GetxController {
     String url = urlBase + urlCompanyList;
     final apiReq = Request();
     await apiReq.postAPI(url, body, token.toString()).then((value) {
-      if(pageNumber==1){
+      if (pageNumber == 1) {
         companyList.clear();
       }
       http.StreamedResponse res = value;

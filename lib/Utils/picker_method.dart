@@ -221,184 +221,184 @@ class PickMethod {
     );
   }
 
-  factory PickMethod.threeItemsGrid(int maxAssetsCount) {
-    return PickMethod(
-      icon: '🔲',
-      name: '3 items grid',
-      description: 'Picker will served as 3 items on cross axis. '
-          '(pageSize must be a multiple of gridCount)',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        var picker = AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            gridCount: 3,
-            pageSize: 120,
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            requestType: RequestType.all,
-          ),
-        );
+  // factory PickMethod.threeItemsGrid(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '🔲',
+  //     name: '3 items grid',
+  //     description: 'Picker will served as 3 items on cross axis. '
+  //         '(pageSize must be a multiple of gridCount)',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       var picker = AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           gridCount: 3,
+  //           pageSize: 120,
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           requestType: RequestType.all,
+  //         ),
+  //       );
 
-      },
-    );
-  }
+  //     },
+  //   );
+  // }
 
-  factory PickMethod.customFilterOptions(int maxAssetsCount) {
-    return PickMethod(
-      icon: '⏳',
-      name: 'Custom filter options',
-      description: 'Add filter options for the picker.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            requestType: RequestType.video,
-            filterOptions: FilterOptionGroup()
-              ..setOption(
-                AssetType.video,
-                const FilterOption(
-                  durationConstraint: DurationConstraint(
-                    max: Duration(minutes: 1),
-                  ),
-                ),
-              ),
-          ),
-        );
-      },
-    );
-  }
+  // factory PickMethod.customFilterOptions(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '⏳',
+  //     name: 'Custom filter options',
+  //     description: 'Add filter options for the picker.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           requestType: RequestType.video,
+  //           filterOptions: FilterOptionGroup()
+  //             ..setOption(
+  //               AssetType.video,
+  //               const FilterOption(
+  //                 durationConstraint: DurationConstraint(
+  //                   max: Duration(minutes: 1),
+  //                 ),
+  //               ),
+  //             ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  factory PickMethod.prependItem(int maxAssetsCount) {
-    return PickMethod(
-      icon: '➕',
-      name: 'Prepend special item',
-      description: 'A special item will prepend to the assets grid.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            specialItemPosition: SpecialItemPosition.prepend,
-            specialItemBuilder: (
-              BuildContext context,
-              AssetPathEntity? path,
-              int length,
-            ) {
-              return const Center(
-                child: Text('Custom Widget', textAlign: TextAlign.center),
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
+  // factory PickMethod.prependItem(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '➕',
+  //     name: 'Prepend special item',
+  //     description: 'A special item will prepend to the assets grid.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           specialItemPosition: SpecialItemPosition.prepend,
+  //           specialItemBuilder: (
+  //             BuildContext context,
+  //             AssetPathEntity? path,
+  //             int length,
+  //           ) {
+  //             return const Center(
+  //               child: Text('Custom Widget', textAlign: TextAlign.center),
+  //             );
+  //           },
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  factory PickMethod.noPreview(int maxAssetsCount) {
-    return PickMethod(
-      icon: '👁️‍🗨️',
-      name: 'No preview',
-      description: 'Pick assets like the WhatsApp/MegaTok pattern.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            specialPickerType: SpecialPickerType.noPreview,
-          ),
-        );
-      },
-    );
-  }
+  // factory PickMethod.noPreview(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '👁️‍🗨️',
+  //     name: 'No preview',
+  //     description: 'Pick assets like the WhatsApp/MegaTok pattern.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           specialPickerType: SpecialPickerType.noPreview,
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  factory PickMethod.keepScrollOffset({
-    required DefaultAssetPickerBuilderDelegate Function() delegate,
-    required Function(PermissionState state) onPermission,
-    GestureLongPressCallback? onLongPress,
-  }) {
-    return PickMethod(
-      icon: '💾',
-      name: 'Keep scroll offset',
-      description: 'Pick assets from same scroll position.',
-      method: (BuildContext context, List<AssetEntity> assets) async {
-        final PermissionState ps = await PhotoManager.requestPermissionExtend();
-        if (ps != PermissionState.authorized && ps != PermissionState.limited) {
-          throw StateError('Permission state error with $ps.');
-        }
-        onPermission(ps);
-        return AssetPicker.pickAssetsWithDelegate(
-          context,
-          delegate: delegate(),
-        );
-      },
-      onLongPress: onLongPress,
-    );
-  }
+  // factory PickMethod.keepScrollOffset({
+  //   required DefaultAssetPickerBuilderDelegate Function() delegate,
+  //   required Function(PermissionState state) onPermission,
+  //   GestureLongPressCallback? onLongPress,
+  // }) {
+  //   return PickMethod(
+  //     icon: '💾',
+  //     name: 'Keep scroll offset',
+  //     description: 'Pick assets from same scroll position.',
+  //     method: (BuildContext context, List<AssetEntity> assets) async {
+  //       final PermissionState ps = await PhotoManager.requestPermissionExtend();
+  //       if (ps != PermissionState.authorized && ps != PermissionState.limited) {
+  //         throw StateError('Permission state error with $ps.');
+  //       }
+  //       onPermission(ps);
+  //       return AssetPicker.pickAssetsWithDelegate(
+  //         context,
+  //         delegate: delegate(),
+  //       );
+  //     },
+  //     onLongPress: onLongPress,
+  //   );
+  // }
 
-  factory PickMethod.changeLanguages(int maxAssetsCount) {
-    return PickMethod(
-      icon: '🔤',
-      name: 'Change Languages',
-      description: 'Pass text delegates to change between languages. '
-          '(e.g. EnglishTextDelegate)',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            textDelegate: const EnglishAssetPickerTextDelegate(),
-          ),
-        );
-      },
-    );
-  }
+  // factory PickMethod.changeLanguages(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '🔤',
+  //     name: 'Change Languages',
+  //     description: 'Pass text delegates to change between languages. '
+  //         '(e.g. EnglishTextDelegate)',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           textDelegate: const EnglishAssetPickerTextDelegate(),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  factory PickMethod.preventGIFPicked(int maxAssetsCount) {
-    return PickMethod(
-      icon: '🈲',
-      name: 'Prevent GIF being picked',
-      description: 'Use selectPredicate to banned GIF picking when tapped.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            selectPredicate: (BuildContext c, AssetEntity a, bool isSelected) {
-              debugPrint('Asset title: ${a.title}');
-              return a.title?.endsWith('.gif') != true;
-            },
-          ),
-        );
-      },
-    );
-  }
+  // factory PickMethod.preventGIFPicked(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '🈲',
+  //     name: 'Prevent GIF being picked',
+  //     description: 'Use selectPredicate to banned GIF picking when tapped.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           selectPredicate: (BuildContext c, AssetEntity a, bool isSelected) {
+  //             debugPrint('Asset title: ${a.title}');
+  //             return a.title?.endsWith('.gif') != true;
+  //           },
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  factory PickMethod.customizableTheme(int maxAssetsCount) {
-    return PickMethod(
-      icon: '🎨',
-      name: 'Customizable theme',
-      description: 'Picking assets with the light theme with different color.',
-      method: (BuildContext context, List<AssetEntity> assets) {
-        return AssetPicker.pickAssets(
-          context,
-          pickerConfig: AssetPickerConfig(
-            maxAssets: maxAssetsCount,
-            selectedAssets: assets,
-            pickerTheme: AssetPicker.themeData(
-              Colors.lightBlueAccent,
-              light: true,
-            ),
-          ),
-        );
-      },
-    );
-  }
+  // factory PickMethod.customizableTheme(int maxAssetsCount) {
+  //   return PickMethod(
+  //     icon: '🎨',
+  //     name: 'Customizable theme',
+  //     description: 'Picking assets with the light theme with different color.',
+  //     method: (BuildContext context, List<AssetEntity> assets) {
+  //       return AssetPicker.pickAssets(
+  //         context,
+  //         pickerConfig: AssetPickerConfig(
+  //           maxAssets: maxAssetsCount,
+  //           selectedAssets: assets,
+  //           pickerTheme: AssetPicker.themeData(
+  //             Colors.lightBlueAccent,
+  //             light: true,
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   final String icon;
   final String name;

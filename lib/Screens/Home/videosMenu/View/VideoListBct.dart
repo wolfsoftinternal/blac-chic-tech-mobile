@@ -238,6 +238,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                 setState(() {
                                   controller.isTextChange.value = false;
                                   controller.isLayoutFirst.value = false;
+                                  controller.filter.value = 'More filters';
                                 });
                                 controller.selectedTopic.value =
                                     TopicListModel();
@@ -382,12 +383,32 @@ class _VideoListBctState extends State<VideoListBct> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          if (controller.isTextChange.value =
+                          if(controller.clearFilter.value == true){
+                            controller.selectedLanguage.value.id = -1;
+                            controller.selectedTopic.value.id = -1;
+                            controller.selectMutiTopicList.clear();
+                            controller.selectMutiLanguList.clear();
+                            controller.selectIdTopic.clear();
+                            controller.selectIdLanguage.clear();
+
+                            controller.videoList.clear();
+                            controller.pageNo.value = 1;
+                            controller.isLoadingBCT.value = true;
+                            controller.videoListApi();
+                            controller.filter.value = 'Close filters';
+                            controller.clearFilter.value = false;
+                            controller.isTextChange.value = true;
+                            controller.isLayoutFirst.value = true;
+                            setState(() {});
+                          }else if (controller.isTextChange.value =
                           !controller.isTextChange.value) {
                             controller.isLayoutFirst.value = true;
+                            controller.filter.value = 'Close filters';
                           } else {
                             controller.isLayoutFirst.value = false;
+                            controller.filter.value = 'More filters';
                           }
+                          
                         });
                       },
                       child: Row(
@@ -403,9 +424,7 @@ class _VideoListBctState extends State<VideoListBct> {
                           ),
                           // More filters
                           Text(
-                              controller.isTextChange.value
-                                  ? "Close filters"
-                                  : "More filters",
+                              controller.filter.value,
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   fontFamily: roboto_bold,
@@ -816,6 +835,8 @@ class _VideoListBctState extends State<VideoListBct> {
                                                       .selectIdLanguage
                                                       .toJson()
                                                       .toString());
+                                              controller.filter.value = 'Clear filters';
+                                              controller.clearFilter.value = true;
                                               controller.isTextChange.value = false;
                                               controller.isLayoutFirst.value = false;
                                               setState(() {});
@@ -865,6 +886,8 @@ class _VideoListBctState extends State<VideoListBct> {
                                             controller.pageNo.value = 1;
                                             controller.isLoadingBCT.value = true;
                                             controller.videoListApi();
+                                            controller.filter.value = 'More filters';
+                                            controller.clearFilter.value = false;
                                             controller.isTextChange.value = false;
                                             controller.isLayoutFirst.value = false;
                                             setState(() {});

@@ -125,7 +125,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                                   maxLines: 1,
                                   style:  TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: grey_aaaaaa,
+                                      color: controller.ques1.value.contains(SharePreData.strQues1) ? grey_aaaaaa : black_121212,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: helveticaNeueNeue_medium,
                                       fontStyle: FontStyle.normal,
@@ -154,7 +154,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                                   Text(controller.ques2.value,
                                       maxLines: 1,
                                       style:  TextStyle(
-                                          color: grey_aaaaaa,
+                                      color: controller.ques2.value.contains(SharePreData.strQues2) ? grey_aaaaaa : black_121212,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -182,7 +182,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                                   Text(controller.ques3.value,
                                       maxLines: 1,
                                       style:  TextStyle(
-                                          color: grey_aaaaaa,
+                                      color: controller.ques3.value.contains(SharePreData.strQues3) ? grey_aaaaaa : black_121212,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
                                           fontStyle: FontStyle.normal,
@@ -209,7 +209,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                                   Text(controller.ques4.value,
                                       maxLines: 1,
                                       style:  TextStyle(
-                                          color: grey_aaaaaa,
+                                      color: controller.ques4.value.contains(SharePreData.strQues4) ? grey_aaaaaa : black_121212,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -237,7 +237,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                                   Text(controller.ques5.value,
                                       maxLines: 1,
                                       style:  TextStyle(
-                                          color: grey_aaaaaa,
+                                      color: controller.ques5.value.contains(SharePreData.strQues5) ? grey_aaaaaa : black_121212,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -256,11 +256,11 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
             Padding(
               padding:  EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
-                if (controller.q1Controller.value.text.isEmpty &&
-                    controller.q2Controller.value.text.isEmpty &&
-                    controller.q3Controller.value.text.isEmpty &&
-                    controller.q4Controller.value.text.isEmpty &&
-                    controller.q5Controller.value.text.isEmpty) {
+                if (controller.q1Controller.value.text == "" || controller.q1Controller.value.text.isEmpty &&
+                    controller.q2Controller.value.text == "" || controller.q2Controller.value.text.isEmpty &&
+                    controller.q3Controller.value.text == "" || controller.q3Controller.value.text.isEmpty &&
+                    controller.q4Controller.value.text == "" || controller.q4Controller.value.text.isEmpty &&
+                    controller.q5Controller.value.text == "" || controller.q5Controller.value.text.isEmpty) {
                   snackBar(context, 'Please answer the questions');
                 } else {
                   List ques = [{}];

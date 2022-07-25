@@ -107,7 +107,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                       Row(
                         children: [
                           Container(
-                            width: 72.w,
+                            width: 68.w,
                             height: 72.h,
                             decoration: BoxDecoration(
                                 borderRadius:
@@ -126,7 +126,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                         profileImage,
                                         fit: BoxFit.fill,
                                         height: 72.r,
-                                        width: 72.r,
+                                        width: 68.r,
                                       ),
                                     ),
                                   )
@@ -140,7 +140,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                       padding: EdgeInsets.all(18.0.r),
                                       child: SvgPicture.asset(
                                         icon_upload_img,
-                                        width: 72.r,
+                                        width: 68.r,
                                         height: 72.r,
                                         color: grey_aaaaaa,
                                       ),
@@ -706,8 +706,11 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
     showImagePicker(context).then((value) {
       setState(() {
         if (imagePath.toString() != "File: ''") {
-          controller.boolComapnyLogo.value = true;
-          _cropImage();
+          if(controller.isImageSelected.value == true){
+            controller.boolComapnyLogo.value = true;
+            _cropImage();
+            controller.isImageSelected.value = false;
+          }
         }
       });
     });
