@@ -73,75 +73,80 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     borderRadius: const BorderRadius.all(
                       Radius.circular(40),
                     ),
-                    child: BottomNavigationBar(
-                      //selectedItemColor: Colors.red,
-                      //selectedIconTheme: IconThemeData(color: Colors.red),
-                      type: BottomNavigationBarType.fixed,
-                      showSelectedLabels: false,
-                      showUnselectedLabels: false,
-                      selectedLabelStyle: TextStyle(fontSize: 0),
-                      unselectedLabelStyle: TextStyle(fontSize: 0),
-                      backgroundColor: const Color.fromARGB(255, 27, 25, 35),
-                      onTap: onTabTapped,
-                      currentIndex: _currentIndex,
-                      items: [
-                        BottomNavigationBarItem(
-                            activeIcon: SvgPicture.asset(home_icon, color: white,),
-                            icon : SvgPicture.asset(home_icon, color: Colors.grey[600],),
-                            label: ''),
-                        BottomNavigationBarItem(
-                            activeIcon: SvgPicture.asset(feed_icon, color: white,),
-                            icon : SvgPicture.asset(feed_icon, color: Colors.grey[600],),
-                            label: ''),
-                        BottomNavigationBarItem(
-                            activeIcon: SvgPicture.asset(chat_icon, color: white, height: 28, width: 28,),
-                            icon : SvgPicture.asset(chat_icon, color: Colors.grey[600], height: 28, width: 28,),
-                            label: ''),
-                        BottomNavigationBarItem(
-                            icon: Container(
-                              height: 24.h,
-                              width: 23.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                                border: Border.all(color: gray_b3ffffff, width: 2),
-                              ),
-                              child: CircularProfileAvatar(
-                                '',
-                                radius: 10,
-                                borderColor: Colors.transparent,
-                                child: myModel?.data?.image == null
-                                    ? SvgPicture.asset(
-                                        placeholder,
-                                        height: 20.h,
-                                        width: 20.w,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : CachedNetworkImage(
-                                        imageUrl: myModel!.data!.image!,
-                                        height: 20.h,
-                                        width: 20.w,
-                                        fit: BoxFit.cover,
-                                        progressIndicatorBuilder: (context,
-                                                url, downloadProgress) =>
-                                            SvgPicture.asset(
+                    child: Column(
+                      children: [
+
+                        SizedBox(height: 5,),
+                        BottomNavigationBar(
+                        //selectedItemColor: Colors.red,
+                        //selectedIconTheme: IconThemeData(color: Colors.red),
+                        type: BottomNavigationBarType.fixed,
+                        showSelectedLabels: false,
+                        showUnselectedLabels: false,
+                        selectedLabelStyle: TextStyle(fontSize: 0),
+                        unselectedLabelStyle: TextStyle(fontSize: 0),
+                        backgroundColor: const Color.fromARGB(255, 27, 25, 35),
+                        onTap: onTabTapped,
+                        currentIndex: _currentIndex,
+                        items: [
+                          BottomNavigationBarItem(
+                              activeIcon: SvgPicture.asset(home_icon, color: white,),
+                              icon : SvgPicture.asset(home_icon, color: Colors.grey[600],),
+                              label: 'Home'),
+                          BottomNavigationBarItem(
+                              activeIcon: SvgPicture.asset(feed_icon, color: white,),
+                              icon : SvgPicture.asset(feed_icon, color: Colors.grey[600],),
+                              label: ''),
+                          BottomNavigationBarItem(
+                              activeIcon: SvgPicture.asset(chat_icon, color: white, height: 28, width: 28,),
+                              icon : SvgPicture.asset(chat_icon, color: Colors.grey[600], height: 28, width: 28,),
+                              label: ''),
+                          BottomNavigationBarItem(
+                              icon: Container(
+                                height: 24.h,
+                                width: 23.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                                  border: Border.all(color: gray_b3ffffff, width: 2),
+                                ),
+                                child: CircularProfileAvatar(
+                                  '',
+                                  radius: 10,
+                                  borderColor: Colors.transparent,
+                                  child: myModel?.data?.image == null
+                                      ? SvgPicture.asset(
+                                    placeholder,
+                                    height: 20.h,
+                                    width: 20.w,
+                                    fit: BoxFit.cover,
+                                  )
+                                      : CachedNetworkImage(
+                                    imageUrl: myModel!.data!.image!,
+                                    height: 20.h,
+                                    width: 20.w,
+                                    fit: BoxFit.cover,
+                                    progressIndicatorBuilder: (context,
+                                        url, downloadProgress) =>
+                                        SvgPicture.asset(
                                           placeholder,
                                           height: 20.h,
                                           width: 20.w,
                                           fit: BoxFit.cover,
                                         ),
-                                        errorWidget:
-                                            (context, url, error) =>
-                                                SvgPicture.asset(
+                                    errorWidget:
+                                        (context, url, error) =>
+                                        SvgPicture.asset(
                                           placeholder,
                                           height: 20.h,
                                           width: 20.w,
                                           fit: BoxFit.cover,
                                         ),
-                                      ),
+                                  ),
+                                ),
                               ),
-                            ),
-                            label: ''),
-                      ],
+                              label: ''),
+                        ],
+                      )],
                     ),
                   ),
                 ),

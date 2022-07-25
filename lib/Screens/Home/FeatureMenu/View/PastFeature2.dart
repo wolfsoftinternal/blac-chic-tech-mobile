@@ -277,7 +277,7 @@ class _PastFeature2State extends State<PastFeature2> {
                                       .writer_name ??
                                   "",
                               style: TextStyle(
-                                fontFamily: helvetica_neu_bold,
+                                fontFamily: interExtraBold,
                                 fontSize: 90.sp,
                                 color: Colors.white,
                                 letterSpacing: -10,
@@ -375,7 +375,7 @@ class _PastFeature2State extends State<PastFeature2> {
                               .title ??
                           "",
                       style: TextStyle(
-                          fontFamily: helvetica_neu_bold,
+                          fontFamily: interBold,
                           fontSize: 24.sp,
                           color: Colors.white),
                     ),
@@ -390,7 +390,7 @@ class _PastFeature2State extends State<PastFeature2> {
                               .sub_text ??
                           "",
                       style: TextStyle(
-                          fontFamily: poppins_BoldItalic,
+                          fontFamily: interExtraBoldItalic,
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
                           fontStyle: FontStyle.italic,
@@ -409,7 +409,8 @@ class _PastFeature2State extends State<PastFeature2> {
                       style: TextStyle(
                           fontSize: 12.sp,
                           color: Colors.white,
-                          fontFamily: roboto_medium),
+                          height: 1.4,
+                          fontFamily: interSemiBold),
                       trimLines: 3,
                       // trimLength: 10,
                       // colorClickableText: Colors.pink,
@@ -419,11 +420,11 @@ class _PastFeature2State extends State<PastFeature2> {
                       moreStyle: TextStyle(
                           fontSize: 12.sp,
                           color: Colors.white,
-                          fontFamily: helvetica_neu_bold),
+                          fontFamily: interExtraBold),
                       lessStyle: TextStyle(
                           fontSize: 12.sp,
                           color: Colors.white,
-                          fontFamily: helvetica_neu_bold),
+                          fontFamily: interExtraBold),
                     ),
                   ),
                   // Container(
