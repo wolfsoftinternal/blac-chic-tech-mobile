@@ -153,8 +153,8 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
-                    Get.to(PastFeaturesScreen(featureList: featuredController.featuredList.value,selectedPosition: 1,));
-
+                    // Get.to(PastFeaturesScreen(featureList: featuredController.featuredList.value,selectedPosition: 1,));
+                    Navigator.of(context).push(_createRoute());
                     // _controller.previousPage(
                     //     duration: _kDuration, curve: _kCurve);
                   },
@@ -240,6 +240,25 @@ class _FeaturedMainScreenState extends State<FeaturedMainScreen> {
     ):
     Text('No Data Found'):Container(height: MediaQuery.of(context).size.height,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),)),
       ),
+    );
+  }
+
+  Route _createRoute() {
+  return PageRouteBuilder(
+    transitionDuration: Duration(milliseconds: 800),
+      pageBuilder: (context, animation, secondaryAnimation) => PastFeaturesScreen(featureList: featuredController.featuredList.value,selectedPosition: 0,),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(-1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+  
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+  
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }

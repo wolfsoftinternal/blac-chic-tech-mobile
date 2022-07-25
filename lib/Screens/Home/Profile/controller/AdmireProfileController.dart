@@ -90,6 +90,12 @@ class AdmireProfileController extends GetxController {
   RxBool isSearched = false.obs;
   RxList<ReportList> report = <ReportList>[].obs;
   RxList videoId = [].obs; 
+  RxBool q0Expand = false.obs;
+  RxBool q1Expand = false.obs;
+  RxBool q2Expand = false.obs;
+  RxBool q3Expand = false.obs;
+  RxBool q4Expand = false.obs;
+
 
   initUserScrolling(BuildContext context, id) {
     userScrollController.addListener(() async {

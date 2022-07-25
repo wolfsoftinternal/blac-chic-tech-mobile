@@ -202,25 +202,37 @@ class _ProfileTabState extends State<ProfileTab> {
                                                     EdgeInsets
                                                         .only(
                                                         left: 12.w, right: 8.w),
-                                                    child: setHelveticaMedium(
-                                                        "${controller
-                                                            .details
-                                                            .value
-                                                            .pastJobs![
-                                                        index]
-                                                            .title!
-                                                            .toUpperCase()} @${controller
+                                                    child: Row(
+                                                      children: [
+                                                        setHelveticaMedium(
+                                                            "${controller
                                                                 .details
                                                                 .value
                                                                 .pastJobs![
                                                             index]
-                                                                .companyName!.toString().capitalize}",
-                                                        15.sp,
-                                                        grey_aaaaaa,
-                                                        FontWeight.w500,
-                                                        FontStyle
-                                                            .normal,
-                                                        -0.28, 2),
+                                                                .title!
+                                                                .toUpperCase()}",
+                                                            15.sp,
+                                                            grey_aaaaaa,
+                                                            FontWeight.w500,
+                                                            FontStyle
+                                                                .normal,
+                                                            -0.28, 2),
+                                                        setHelveticaMedium(
+                                                            " @${controller
+                                                                    .details
+                                                                    .value
+                                                                    .pastJobs![
+                                                                index]
+                                                                    .companyName!.toString().capitalize}",
+                                                            15.sp,
+                                                            grey_3f3f3f,
+                                                            FontWeight.w500,
+                                                            FontStyle
+                                                                .normal,
+                                                            -0.28, 2),
+                                                      ],
+                                                    ),
                                                   )
                                                       : Container(),
                                                 ),
@@ -365,305 +377,354 @@ class _ProfileTabState extends State<ProfileTab> {
                         controller.details.value.questions!.isNotEmpty
                             ? controller.details.value.questions![0].answer !=
                             null
-                            ? Padding(
+                            ? GestureDetector(
+                              onTap: (){
+                                controller.q0Expand.value = !controller.q0Expand.value;
+                                // controller.q1Expand.value = false;
+                                // controller.q2Expand.value = false;
+                                // controller.q3Expand.value = false;
+                                // controller.q4Expand.value = false;
+                              },
+                              child: Padding(
                           padding:  EdgeInsets.only(bottom: 16.h),
                           child: Container(
-                            decoration: BoxDecoration(
-                                color: white_ffffff,
-                                borderRadius: BorderRadius.circular(4.r),
-                                border: Border.all(
-                                    color: light_grey_f2f2f2)),
-                            child: Padding(
-                              padding:
-                              EdgeInsets.only(bottom: 4.h),
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 16.h, left: 16.w),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(question_icon),
-                                        SizedBox(
-                                          width: 8.w,
-                                        ),
-                                        setHelceticaBold(
-                                            controller.details.value
-                                                .questions![0].question!
-                                                .toUpperCase(),
-                                            12.sp,
-                                            black_121212,
-                                            FontWeight.w600,
-                                            FontStyle.normal,
-                                            -0.24),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 12.h,
-                                        left: 40.w,
-                                        bottom: 12.h),
-                                    child: Container(
-                                        child: setHelveticaMedium(
-                                            controller.details.value
-                                                .questions![0].answer!.capitalizeFirst!,
-                                            16.sp,
-                                            grey_aaaaaa,
-                                            FontWeight.w500,
-                                            FontStyle.normal,
-                                            -0.32,
-                                            5)),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                            : Container()
-                            : Container(),
-                        controller.details.value.questions!.length >= 2
-                            ? Padding(
-                          padding:  EdgeInsets.only(bottom: 16.h),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: white_ffffff,
-                                borderRadius: BorderRadius.circular(4.r),
-                                border:
-                                Border.all(color: light_grey_f2f2f2)),
-                            child: Padding(
-                              padding:  EdgeInsets.only(bottom: 4.h),
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 16.h, left: 16.w),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(question_icon),
-                                        SizedBox(
-                                          width: 8.w,
-                                        ),
-                                        setHelceticaBold(
-                                            controller.details.value
-                                                .questions![1].question!
-                                                .toUpperCase(),
-                                            12.sp,
-                                            black_121212,
-                                            FontWeight.w600,
-                                            FontStyle.normal,
-                                            -0.24),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 12.h,
-                                        left: 40.w,
-                                        bottom: 12.h),
-                                    child: Container(
-                                        child: setHelveticaMedium(
-                                            controller.details.value
-                                                .questions![1].answer!.capitalizeFirst!,
-                                            16.sp,
-                                            grey_aaaaaa,
-                                            FontWeight.w500,
-                                            FontStyle.normal,
-                                            -0.32,
-                                            5)),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                            : Container(),
-                        controller.details.value.questions!.length >= 3
-                            ? Padding(
-                          padding:  EdgeInsets.only(bottom: 16.h),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: white_ffffff,
-                                borderRadius: BorderRadius.circular(4.r),
-                                border:
-                                Border.all(color: light_grey_f2f2f2)),
-                            child: Padding(
-                              padding:  EdgeInsets.only(bottom: 4.h),
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 16.h, left: 16.w),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(question_icon),
-                                        SizedBox(
-                                          width: 8.w,
-                                        ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: setHelceticaBold(
+                              decoration: BoxDecoration(
+                                  color: white_ffffff,
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  border: Border.all(
+                                      color: light_grey_f2f2f2)),
+                              child: Padding(
+                                padding:
+                                EdgeInsets.only(bottom: 4.h),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 16.h, left: 16.w),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(question_icon),
+                                          SizedBox(
+                                            width: 8.w,
+                                          ),
+                                          setHelceticaBold(
                                               controller.details.value
-                                                  .questions![2].question!
+                                                  .questions![0].question!
                                                   .toUpperCase(),
                                               12.sp,
                                               black_121212,
                                               FontWeight.w600,
                                               FontStyle.normal,
                                               -0.24),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 12.h,
-                                        left: 40.w,
-                                        bottom: 12.w),
-                                    child: Container(
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 12.h,
+                                          left: 40.w,
+                                          bottom: 12.h),
+                                      child: Container(
                                         child: setHelveticaMedium(
-                                            controller.details.value
-                                                .questions![2].answer!.capitalizeFirst!,
-                                            16.sp,
-                                            grey_aaaaaa,
-                                            FontWeight.w500,
-                                            FontStyle.normal,
-                                            -0.32,
-                                            5)),
-                                  )
-                                ],
+                                          controller.details.value
+                                              .questions![0].answer!.capitalizeFirst!,
+                                          16.sp,
+                                          grey_aaaaaa,
+                                          FontWeight.w500,
+                                          FontStyle.normal,
+                                          -0.32,
+                                          controller.q0Expand.value == true ? null : 3
+                                        )
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
                           ),
-                        )
+                        ),
+                            )
+                            : Container()
+                            : Container(),
+                        controller.details.value.questions!.length >= 2
+                            ? GestureDetector(
+                              onTap: (){
+                                // controller.q0Expand.value = false;
+                                controller.q1Expand.value = !controller.q1Expand.value;
+                                // controller.q2Expand.value = false;
+                                // controller.q3Expand.value = false;
+                                // controller.q4Expand.value = false;
+                              },
+                              child: Padding(
+                          padding:  EdgeInsets.only(bottom: 16.h),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: white_ffffff,
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  border:
+                                  Border.all(color: light_grey_f2f2f2)),
+                              child: Padding(
+                                padding:  EdgeInsets.only(bottom: 4.h),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 16.h, left: 16.w),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(question_icon),
+                                          SizedBox(
+                                            width: 8.w,
+                                          ),
+                                          setHelceticaBold(
+                                              controller.details.value
+                                                  .questions![1].question!
+                                                  .toUpperCase(),
+                                              12.sp,
+                                              black_121212,
+                                              FontWeight.w600,
+                                              FontStyle.normal,
+                                              -0.24),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 12.h,
+                                          left: 40.w,
+                                          bottom: 12.h),
+                                      child: Container(
+                                          child: setHelveticaMedium(
+                                              controller.details.value
+                                                  .questions![1].answer!.capitalizeFirst!,
+                                              16.sp,
+                                              grey_aaaaaa,
+                                              FontWeight.w500,
+                                              FontStyle.normal,
+                                              -0.32,
+                                              controller.q1Expand.value == true ? null : 3)),
+                                    )
+                                  ],
+                                ),
+                              ),
+                          ),
+                        ),
+                            )
+                            : Container(),
+                        controller.details.value.questions!.length >= 3
+                            ? GestureDetector(
+                              onTap: (){
+                                // controller.q0Expand.value = false;
+                                // controller.q1Expand.value = false;
+                                controller.q2Expand.value = !controller.q2Expand.value;
+                                // controller.q3Expand.value = false;
+                                // controller.q4Expand.value = false;
+                              },
+                              child: Padding(
+                          padding:  EdgeInsets.only(bottom: 16.h),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: white_ffffff,
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  border:
+                                  Border.all(color: light_grey_f2f2f2)),
+                              child: Padding(
+                                padding:  EdgeInsets.only(bottom: 4.h),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 16.h, left: 16.w),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(question_icon),
+                                          SizedBox(
+                                            width: 8.w,
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: setHelceticaBold(
+                                                controller.details.value
+                                                    .questions![2].question!
+                                                    .toUpperCase(),
+                                                12.sp,
+                                                black_121212,
+                                                FontWeight.w600,
+                                                FontStyle.normal,
+                                                -0.24),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 12.h,
+                                          left: 40.w,
+                                          bottom: 12.w),
+                                      child: Container(
+                                          child: setHelveticaMedium(
+                                              controller.details.value
+                                                  .questions![2].answer!.capitalizeFirst!,
+                                              16.sp,
+                                              grey_aaaaaa,
+                                              FontWeight.w500,
+                                              FontStyle.normal,
+                                              -0.32,
+                                              controller.q2Expand.value == true ? null : 3)),
+                                    )
+                                  ],
+                                ),
+                              ),
+                          ),
+                        ),
+                            )
                             : Container(),
                         controller.details.value.questions!.length >= 4
-                            ? Padding(
+                            ? GestureDetector(
+                              onTap: (){
+                                // controller.q0Expand.value = false;
+                                // controller.q1Expand.value = false;
+                                // controller.q2Expand.value = false;
+                                controller.q3Expand.value = !controller.q3Expand.value;
+                                // controller.q4Expand.value = false;
+                              },
+                              child: Padding(
                           padding:  EdgeInsets.only(bottom: 16.h),
                           child: Container(
-                            decoration: BoxDecoration(
-                                color: white_ffffff,
-                                borderRadius: BorderRadius.circular(4.r),
-                                border:
-                                Border.all(color: light_grey_f2f2f2)),
-                            child: Padding(
-                              padding:  EdgeInsets.only(bottom: 4.h),
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 16.h, left: 16.w),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(question_icon),
-                                        SizedBox(
-                                          width: 8.w,
-                                        ),
-                                        setHelceticaBold(
-                                            controller.details.value
-                                                .questions![3].question!
-                                                .toUpperCase(),
-                                            12.sp,
-                                            black_121212,
-                                            FontWeight.w600,
-                                            FontStyle.normal,
-                                            -0.24),
-                                      ],
+                              decoration: BoxDecoration(
+                                  color: white_ffffff,
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  border:
+                                  Border.all(color: light_grey_f2f2f2)),
+                              child: Padding(
+                                padding:  EdgeInsets.only(bottom: 4.h),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 16.h, left: 16.w),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(question_icon),
+                                          SizedBox(
+                                            width: 8.w,
+                                          ),
+                                          setHelceticaBold(
+                                              controller.details.value
+                                                  .questions![3].question!
+                                                  .toUpperCase(),
+                                              12.sp,
+                                              black_121212,
+                                              FontWeight.w600,
+                                              FontStyle.normal,
+                                              -0.24),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 12.h,
-                                        left: 40.w,
-                                        bottom: 12.h),
-                                    child: Container(
-                                        child: setHelveticaMedium(
-                                            controller.details.value
-                                                .questions![3].answer!.capitalizeFirst!,
-                                            16.sp,
-                                            grey_aaaaaa,
-                                            FontWeight.w500,
-                                            FontStyle.normal,
-                                            -0.32,
-                                            5)),
-                                  )
-                                ],
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 12.h,
+                                          left: 40.w,
+                                          bottom: 12.h),
+                                      child: Container(
+                                          child: setHelveticaMedium(
+                                              controller.details.value
+                                                  .questions![3].answer!.capitalizeFirst!,
+                                              16.sp,
+                                              grey_aaaaaa,
+                                              FontWeight.w500,
+                                              FontStyle.normal,
+                                              -0.32,
+                                              null)),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
                           ),
-                        )
+                        ),
+                            )
                             : Container(),
                         controller.details.value.questions!.length >= 5
-                            ? Padding(
+                            ? GestureDetector(
+                              onTap: (){
+                                if(controller.details.value.questions![4].answer!.length > 3){
+                                  // controller.q0Expand.value = false;
+                                  // controller.q1Expand.value = false;
+                                  // controller.q2Expand.value = false;
+                                  // controller.q3Expand.value = false;
+                                  controller.q4Expand.value = !controller.q4Expand.value;
+                                }
+                              },
+                              child: Padding(
                           padding:  EdgeInsets.only(bottom: 16.h),
                           child: Container(
-                            decoration: BoxDecoration(
-                                color: white_ffffff,
-                                borderRadius: BorderRadius.circular(4.r),
-                                border:
-                                Border.all(color: light_grey_f2f2f2)),
-                            child: Padding(
-                              padding:  EdgeInsets.only(bottom: 4.h),
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 16.h, left: 16.w),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(question_icon),
-                                        SizedBox(
-                                          width: 8.w,
-                                        ),
-                                        setHelceticaBold(
-                                            controller.details.value
-                                                .questions![4].question!
-                                                .toUpperCase(),
-                                            12.sp,
-                                            black_121212,
-                                            FontWeight.w600,
-                                            FontStyle.normal,
-                                            -0.24),
-                                      ],
+                              decoration: BoxDecoration(
+                                  color: white_ffffff,
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  border:
+                                  Border.all(color: light_grey_f2f2f2)),
+                              child: Padding(
+                                padding:  EdgeInsets.only(bottom: 4.h),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 16.h, left: 16.w),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(question_icon),
+                                          SizedBox(
+                                            width: 8.w,
+                                          ),
+                                          setHelceticaBold(
+                                              controller.details.value
+                                                  .questions![4].question!
+                                                  .toUpperCase(),
+                                              12.sp,
+                                              black_121212,
+                                              FontWeight.w600,
+                                              FontStyle.normal,
+                                              -0.24),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding:  EdgeInsets.only(
-                                        top: 12.h,
-                                        left: 40.w,
-                                        bottom: 12.h),
-                                    child: Container(
-                                        child: setHelveticaMedium(
-                                            controller.details.value
-                                                .questions![4].answer!.capitalizeFirst!,
-                                            16.sp,
-                                            grey_aaaaaa,
-                                            FontWeight.w500,
-                                            FontStyle.normal,
-                                            -0.32,
-                                            5)),
-                                  )
-                                ],
+                                    Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 12.h,
+                                          left: 40.w,
+                                          bottom: 12.h),
+                                      child: Container(
+                                          child: setHelveticaMedium(
+                                              controller.details.value
+                                                  .questions![4].answer!.capitalizeFirst!,
+                                              16.sp,
+                                              grey_aaaaaa,
+                                              FontWeight.w500,
+                                              FontStyle.normal,
+                                              -0.32,
+                                              controller.q4Expand.value == true ? null : 3)),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
                           ),
-                        )
+                        ),
+                            )
                             : Container(),
                       ],
                     ),

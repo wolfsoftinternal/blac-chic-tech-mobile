@@ -7,13 +7,17 @@ import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueF
 import 'package:blackchecktech/Screens/Authentication/signup/view/CompanyList.dart';
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../Styles/my_height.dart';
@@ -37,6 +41,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
   List<TextEditingController> pastCompanyTitleController = [];
   List<TextEditingController> pastCompanyNameController = [];
   List<TextEditingController> pastCompanyWebsiteController = [];
+  List<String> pastJobImage = [];
 
   bool isDeleteLast = false;
 
@@ -44,11 +49,14 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller.industryListAPI(context);
     for (var element in cards) {
+      var image = element;
       var titleController = TextEditingController(text: element);
       var nameController = TextEditingController(text: element);
       var websiteController = TextEditingController(text: element);
 
+      pastJobImage.add(image);
       pastCompanyTitleController.add(titleController);
       pastCompanyNameController.add(nameController);
       pastCompanyWebsiteController.add(websiteController);
@@ -83,7 +91,9 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                     } else if (myModel.data!.questions == null ||
                         myModel.data!.questions.toString() == '[]') {
                       String lastQuestionsInfo = "";
-                      for (int i = 0; i < myModel.data!.questions!.length; i++) {
+                      for (int i = 0;
+                          i < myModel.data!.questions!.length;
+                          i++) {
                         if (myModel.data!.questions![i].type == "additional") {
                           lastQuestionsInfo = "Done";
                         }
@@ -163,15 +173,14 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                           Expanded(
                             flex: 1,
                             child: Container(
-                             height: 48.h,
+                              height: 48.h,
                               decoration: EditTextDecoration,
                               child: Padding(
                                 padding: EdgeInsets.only(
-                                  left: 17.w,
-                                  right: 17.w,
-                                  top: 5.h,
-                                  bottom: 5.h
-                                ),
+                                    left: 17.w,
+                                    right: 17.w,
+                                    top: 5.h,
+                                    bottom: 5.h),
                                 child: Center(
                                   child: setTextFieldNext(
                                       controller.currentTitleController.value,
@@ -181,7 +190,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                       false,
                                       "",
                                       TextInputAction.next,
-                                      () => {
+                                      (val) => {
                                             // on Chnages
                                           },
                                       () {}),
@@ -202,45 +211,111 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                   alignment: Alignment.centerLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(
-                                      left: 17.w,
-                                      right: 17.w,
-                                      top: 5.h,
-                                      bottom: 5.h
+                                        left: 17.w,
+                                        right: 17.w,
+                                        top: 5.h,
+                                        bottom: 5.h),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Get.to(const CompanyList());
+                                      },
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                  controller.companyName.value,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      color: controller
+                                                                  .companyName
+                                                                  .value ==
+                                                              'Company Name'
+                                                          ? grey_aaaaaa
+                                                          : black_121212,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 14.sp)),
+                                            ),
+                                            controller.companyName.value ==
+                                                    'Company Name'
+                                                ? Container()
+                                                : Flexible(
+                                                    flex: 1,
+                                                    child: controller
+                                                            .companyImage
+                                                            .isEmpty
+                                                        ? ClipRRect(
+                                                          borderRadius: BorderRadius.circular(4.r),
+                                                          child: SvgPicture.asset(
+                                                            placeholder,
+                                                            width: 25.w,
+                                                            height: 25.h,
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                        )
+                                                        : ClipRRect(
+                                                          borderRadius: BorderRadius.circular(4.r),
+                                                          child: CachedNetworkImage(
+                                                              imageUrl: controller
+                                                                  .companyImage
+                                                                  .value,
+                                                              width: 25.w,
+                                                              height: 25.h,
+                                                              fit: BoxFit.fill,
+                                                              progressIndicatorBuilder:
+                                                                  (context, url,
+                                                                          downloadProgress) =>
+                                                                      SvgPicture
+                                                                          .asset(
+                                                                placeholder,
+                                                                width: 25.w,
+                                                                height: 25.h,
+                                                                fit: BoxFit.fill,
+                                                              ),
+                                                              errorWidget:
+                                                                  (context, url,
+                                                                          error) =>
+                                                                      SvgPicture
+                                                                          .asset(
+                                                                placeholder,
+                                                                width: 25.w,
+                                                                height: 25.h,
+                                                                fit: BoxFit.fill,
+                                                              ),
+                                                            ),
+                                                        ),
+                                                  ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          Get.to(const CompanyList());
-                                        },
-                                        child: Text(
-                                          controller.companyName.value,
-                                          style: TextStyle(
-                                              color: controller.companyName
-                                                          .value ==
-                                                      'Company Name'
-                                                  ? grey_aaaaaa
-                                                  : black_121212,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily:
-                                                  helveticaNeueNeue_medium,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: 14.sp),
-                                        )),
-                                    // child: setTextFieldNext(
-                                    //   controller.currentCompanyNameController.value,
-                                    //   "Company Name",
-                                    //   false,
-                                    //   TextInputType.name,
-                                    //   false,
-                                    //   "",
-                                    //   TextInputAction.next,
-                                    //   () => {
-                                    //     // on Chnages
-                                    //   },
-                                    //   (){
-                                    //     Get.to(CompanyList());
-                                    //   },
-                                    //   true,
-                                    // ),
+                                    // child: GestureDetector(
+                                    //     onTap: () {
+                                    //       Get.to(const CompanyList());
+                                    //     },
+                                    // child: Text(
+                                    //   controller.companyName.value,
+                                    //   style: TextStyle(
+                                    //       color: controller.companyName
+                                    //                   .value ==
+                                    //               'Company Name'
+                                    //           ? grey_aaaaaa
+                                    //           : black_121212,
+                                    //       fontWeight: FontWeight.w500,
+                                    //       fontFamily:
+                                    //           helveticaNeueNeue_medium,
+                                    //       fontStyle: FontStyle.normal,
+                                    //       fontSize: 14.sp),
+                                    //     )),
                                   ),
                                 ),
                               ),
@@ -260,11 +335,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                  left: 17.w,
-                                  right: 17.w,
-                                  top: 5.h,
-                                  bottom: 5.h
-                                ),
+                                left: 17.w, right: 17.w, top: 5.h, bottom: 5.h),
                             child: setTextFieldNext(
                               controller.currentCompanyWebsiteController.value,
                               "Company Website",
@@ -275,10 +346,83 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                               TextInputAction.next,
                               (value) => {
                                 // on Chnages
-                              },(){},
+                              },
+                              () {},
                             ),
                           ),
                         ),
+                      ),
+
+                      SizedBox(
+                        height: 16.h,
+                      ),
+
+                      Container(
+                        height: 48.h,
+                        decoration: EditTextDecoration,
+                        child: controller.industryName != null && controller.industryName == 'other'
+                        ? Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              left: 17.w, right: 17.w, top: 5.h, bottom: 5.h),
+                                child: Center(
+                                  child: setTextFieldNext(
+                                    controller.industryController.value,
+                                    "Enter Industry",
+                                    false,
+                                    TextInputType.name,
+                                    false,
+                                    "",
+                                    TextInputAction.next,
+                                    (val) => {
+                                      if(val == ''){
+                                        controller.industryName = null,
+                                        setState((){})
+                                      }
+                                    },
+                                    () {},
+                                    false,
+                                    true
+                                  ),
+                                ),
+                              ),
+                        )
+                        : DropdownButtonHideUnderline(
+                        child: DropdownButton2(
+                            value: controller.industryName,
+                            hint: Text("Select Industry",
+                                style: TextStyle(
+                                    color: grey_aaaaaa,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily:
+                                        helveticaNeueNeue_medium,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 14.sp),
+                                textAlign: TextAlign.left),
+                            icon: SvgPicture.asset(
+                              icon_down_arrow_spinner,
+                              width: 12.w,
+                              height: 12.h,
+                            ),
+                            isExpanded: true,
+                            customItemsHeight: 4,
+                            iconEnabledColor: black_121212,
+                            iconDisabledColor: Colors.grey,
+                            // buttonHeight: 60,
+                            buttonWidth: double.infinity,
+                            buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                            buttonDecoration: EditTextDecoration,
+                            itemHeight: 42,
+                            itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                controller.industryName =
+                                    newValue!;
+                              });
+                            },
+                            items: controller.dropDownIndustryItems),
+                        )
                       ),
 
                       SizedBox(
@@ -307,7 +451,9 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                               letterSpacing: 0.04,
                               fontSize: 12.sp),
                           textAlign: TextAlign.left),
-                      SizedBox(height: 16.h,),
+                      SizedBox(
+                        height: 16.h,
+                      ),
                       Column(
                         children: [
                           ListView.builder(
@@ -329,22 +475,21 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                             child: Center(
                                               child: Padding(
                                                 padding: EdgeInsets.only(
-                                                  left: 17.w,
-                                                  right: 17.w,
-                                                  top: 5.h,
-                                                  bottom: 5.h
-                                                ),
+                                                    left: 17.w,
+                                                    right: 17.w,
+                                                    top: 5.h,
+                                                    bottom: 5.h),
                                                 child: setTextFieldNext(
-                                                  pastCompanyTitleController[
-                                                      index],
-                                                  "Title",
-                                                  false,
-                                                  TextInputType.name,
-                                                  false,
-                                                  "",
-                                                  TextInputAction.next,
-                                                  (value) {}, (){}
-                                                ),
+                                                    pastCompanyTitleController[
+                                                        index],
+                                                    "Title",
+                                                    false,
+                                                    TextInputType.name,
+                                                    false,
+                                                    "",
+                                                    TextInputAction.next,
+                                                    (value) {},
+                                                    () {}),
                                               ),
                                             ),
                                           ),
@@ -354,51 +499,150 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         ),
                                         Expanded(
                                           flex: 1,
-                                          child: Container(
-                                            height: 48.h,
-                                            decoration: EditTextDecoration,
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 17.w,
-                                                right: 17.w,
-                                                top: 14.h,
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.to(const CompanyList(
+                                                isFrom: 'experience_pastjob')
+                                              )!.then((value) {
+                                                pastCompanyNameController[index].text =
+                                                    controller.pastJobController.value;
+                                                pastJobImage[index] = controller.pastJobImage.value;
+                                                setState(() {});
+                                              });
+                                            },
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Container(
+                                                height:48.h,
+                                                decoration: BoxDecoration(
+                                                    color: light_grey_f2f2f2,
+                                                    borderRadius: BorderRadius.circular(4.r)),
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                    left: 16.w,
+                                                    right: 16.w,
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Container(
+                                                          width: MediaQuery.of(context).size.width * 0.20.w,
+                                                          child: Text(
+                                                            pastCompanyNameController[index].value.text == ''
+                                                            ? 'Company Name'
+                                                            : pastCompanyNameController[index].text,
+                                                            style: TextStyle(
+                                                              color: pastCompanyNameController[index].value.text == ''
+                                                                    ? grey_aaaaaa : black_121212,
+                                                              fontFamily: helveticaNeueNeue_medium,
+                                                              fontStyle: FontStyle.normal,
+                                                              fontSize: 14.sp,
+                                                              fontWeight: FontWeight.w500,
+                                                              overflow: TextOverflow.ellipsis,
+                                                            ),
+                                                            textAlign: TextAlign.left
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      pastCompanyNameController[index].value.text == '' 
+                                                      ? Container()
+                                                      : pastJobImage[index].isEmpty
+                                                      ? ClipRRect(
+                                                        borderRadius: BorderRadius.circular(4.r),
+                                                        child: SvgPicture.asset(
+                                                          placeholder,
+                                                          width: 25.w,
+                                                          height: 25.h,
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                      ) : ClipRRect(
+                                                        borderRadius: BorderRadius.circular(4.r),
+                                                        child: CachedNetworkImage(
+                                                          imageUrl: pastJobImage[index],
+                                                          width: 25.w,
+                                                          height: 25.h,
+                                                          fit: BoxFit.fill,
+                                                          progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                                              SvgPicture.asset(
+                                                            placeholder,
+                                                            width: 25.w,
+                                                            height: 25.h,
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                          errorWidget: (context, url, error) =>
+                                                              SvgPicture.asset(
+                                                            placeholder,
+                                                            width: 25.w,
+                                                            height: 25.h,
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
                                               ),
-                                              child: GestureDetector(
-                                              onTap: () {
-                                                Get.to(const CompanyList(
-                                                                isFrom:
-                                                                    'experience_pastjob'))!
-                                                            .then((value) {
-                                                          pastCompanyNameController[index].text = controller.pastJobController.value;
-                                                          setState(() {});
-                                                        });
-                                              },
-                                              child: Text(pastCompanyNameController[index].value.text == '' ? 'Company Name' :
-                                                pastCompanyNameController[index].value.text,
-                                                style: TextStyle(
-                                                    color: pastCompanyNameController[index].value.text == ''
-                                                        ? grey_aaaaaa
-                                                        : black_121212,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily:
-                                                        helveticaNeueNeue_medium,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 14.sp),
-                                              )),
-                                              // child: setTextFieldNext(
-                                              //   pastCompanyNameController[
-                                              //       index],
-                                              //   "Company Name",
-                                              //   false,
-                                              //   TextInputType.name,
-                                              //   false,
-                                              //   "",
-                                              //   TextInputAction.next,
-                                              //   (value) {},(){}
-                                              // ),
                                             ),
                                           ),
-                                        ),
+                                        )
+                                        // Expanded(
+                                        //   flex: 1,
+                                        //   child: Container(
+                                        //     height: 48.h,
+                                        //     decoration: EditTextDecoration,
+                                        //     child: Padding(
+                                        //       padding: EdgeInsets.only(
+                                        //         left: 17.w,
+                                        //         right: 17.w,
+                                        //         top: 14.h,
+                                        //       ),
+                                        //       child: GestureDetector(
+                                        //           onTap: () {
+                                                    // Get.to(const CompanyList(
+                                                    //         isFrom:
+                                                    //             'experience_pastjob'))!
+                                                    //     .then((value) {
+                                                    //   pastCompanyNameController[
+                                                    //               index]
+                                                    //           .text =
+                                                    //       controller
+                                                    //           .pastJobController
+                                                    //           .value;
+                                                    //   setState(() {});
+                                                    // });
+                                        //           },
+                                        //           child: Text(
+                                        //             pastCompanyNameController[
+                                        //                             index]
+                                        //                         .value
+                                        //                         .text ==
+                                        //                     ''
+                                        //                 ? 'Company Name'
+                                        //                 : pastCompanyNameController[
+                                        //                         index]
+                                        //                     .value
+                                        //                     .text,
+                                        //             style: TextStyle(
+                                        //                 color:
+                                        //                     pastCompanyNameController[
+                                        //                                     index]
+                                        //                                 .value
+                                        //                                 .text ==
+                                        //                             ''
+                                        //                         ? grey_aaaaaa
+                                        //                         : black_121212,
+                                        //                 fontWeight:
+                                        //                     FontWeight.w500,
+                                        //                 fontFamily:
+                                        //                     helveticaNeueNeue_medium,
+                                        //                 fontStyle:
+                                        //                     FontStyle.normal,
+                                        //                 fontSize: 14.sp),
+                                        //           )),
+                                        //     ),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                     SizedBox(
@@ -410,21 +654,21 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                       child: Center(
                                         child: Padding(
                                           padding: EdgeInsets.only(
-                                            left: 17.w,
-                                            right: 17.w,
-                                            top: 5.h,
-                                            bottom: 5.h
-                                          ),
+                                              left: 17.w,
+                                              right: 17.w,
+                                              top: 5.h,
+                                              bottom: 5.h),
                                           child: setTextFieldNext(
-                                            pastCompanyWebsiteController[index],
-                                            "Company Website",
-                                            false,
-                                            TextInputType.name,
-                                            false,
-                                            "",
-                                            TextInputAction.next,
-                                            (value) {}, () {}
-                                          ),
+                                              pastCompanyWebsiteController[
+                                                  index],
+                                              "Company Website",
+                                              false,
+                                              TextInputType.name,
+                                              false,
+                                              "",
+                                              TextInputAction.next,
+                                              (value) {},
+                                              () {}),
                                         ),
                                       ),
                                     ),
@@ -444,9 +688,10 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                       pastCompanyNameController.removeLast();
                                       pastCompanyTitleController.removeLast();
                                       pastCompanyWebsiteController.removeLast();
-                                        if (cards.length == 1) {
-                                          isDeleteLast = false;
-                                        }
+                                      pastJobImage.removeLast();
+                                      if (cards.length == 1) {
+                                        isDeleteLast = false;
+                                      }
                                     });
                                   },
                                   child: Container(
@@ -460,17 +705,17 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                     child: // Add More
                                         Padding(
                                       padding: EdgeInsets.only(
-                                            left: 17.w,
-                                            right: 17.w,
-                                            top: 5.h,
-                                            bottom: 5.h
-                                          ),
+                                          left: 17.w,
+                                          right: 17.w,
+                                          top: 5.h,
+                                          bottom: 5.h),
                                       child: Center(
                                         child: Text("Remove Last",
                                             style: TextStyle(
                                                 color: const Color(0xff121212),
                                                 fontWeight: FontWeight.w500,
-                                                fontFamily: helveticaNeueNeue_medium,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
                                                 fontStyle: FontStyle.normal,
                                                 letterSpacing: 0.04.sp,
                                                 fontSize: 12.sp),
@@ -488,35 +733,67 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                if(pastCompanyTitleController.last.value.text == ''){
-                                  snackBar(context, 'Enter Company Title');
-                                }else if(pastCompanyNameController.last.value.text == ''){
-                                  snackBar(context, 'Enter Company Name');
-                                }else if(pastCompanyWebsiteController.last.value.text == ''){
-                                  snackBar(context, 'Enter Company Website');
-                                }else{
-                                  isDeleteLast = true;
-                                  for (var element in cards) {
-                                  var titleController =
-                                      TextEditingController(text: element);
-                                  var nameController =
-                                      TextEditingController(text: element);
-                                  var websiteController =
-                                      TextEditingController(text: element);
-
-                                  pastCompanyTitleController
-                                      .add(titleController);
-                                  pastCompanyNameController.add(nameController);
-                                  pastCompanyWebsiteController
-                                      .add(websiteController);
-
-                                  if (element.toString() == "") {
-                                    pastCompanyTitleController.remove(element);
-                                    pastCompanyNameController.remove(element);
-                                    pastCompanyWebsiteController.remove(element);
+                                if(pastCompanyNameController.last.text == '' && pastCompanyTitleController.last.text == '' && pastCompanyWebsiteController.last.value.text == ''){
+                                  pastCompanyNameController.removeLast();
+                                  pastCompanyTitleController.removeLast();
+                                  pastCompanyWebsiteController.removeLast();
+                                  pastJobImage.removeLast();
+                                }
+                                String status = '';
+                                for(var item in pastCompanyNameController){
+                                  if(item.text == ''){
+                                    snackBar(context, 'Enter company name');
+                                    status = 'pending';
+                                  }else{
+                                    status = 'done';
                                   }
                                 }
-                                cards.add("");
+
+                                for(var item in pastCompanyTitleController){
+                                  if(item.text == ''){
+                                    snackBar(context, 'Enter company title');
+                                    status = 'pending';
+                                  }else{
+                                    status = 'done';
+                                  }
+                                }
+
+                                for(var item in pastCompanyWebsiteController){
+                                  if(item.text == ''){
+                                    snackBar(context, 'Enter company website');
+                                    status = 'pending';
+                                  }else{
+                                    status = 'done';
+                                  }
+                                }
+                                if(status == 'done'){
+                                  isDeleteLast = true;
+                                  for (var element in cards) {
+                                    var titleController =
+                                        TextEditingController(text: element);
+                                    var nameController =
+                                        TextEditingController(text: element);
+                                    var websiteController =
+                                        TextEditingController(text: element);
+                                    var image = element;
+
+                                    pastCompanyTitleController
+                                        .add(titleController);
+                                    pastCompanyNameController
+                                        .add(nameController);
+                                    pastCompanyWebsiteController
+                                        .add(websiteController);
+                                    pastJobImage.add(image);
+
+                                    if (element.toString() == "") {
+                                      pastCompanyTitleController
+                                          .remove(element);
+                                      pastCompanyNameController.remove(element);
+                                      pastCompanyWebsiteController
+                                          .remove(element);
+                                    }
+                                  }
+                                  cards.add("");
                                 }
                               });
                             },
@@ -532,17 +809,17 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                 child: // Add More
                                     Padding(
                                   padding: EdgeInsets.only(
-                                            left: 17.w,
-                                            right: 17.w,
-                                            top: 5.h,
-                                            bottom: 5.h
-                                          ),
+                                      left: 17.w,
+                                      right: 17.w,
+                                      top: 5.h,
+                                      bottom: 5.h),
                                   child: Center(
                                     child: Text("+ Add More",
                                         style: TextStyle(
                                             color: const Color(0xff121212),
                                             fontWeight: FontWeight.w500,
-                                            fontFamily: helveticaNeueNeue_medium,
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
                                             fontStyle: FontStyle.normal,
                                             fontSize: 12.sp),
                                         textAlign: TextAlign.left),
@@ -562,13 +839,44 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
               padding: EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
                 if (controller.checkExperienceValidation(context)) {
-                  if(pastCompanyTitleController.last.value.text == ''){
-                    snackBar(context, 'Enter Company Title');
-                  }else if(pastCompanyNameController.last.value.text == ''){
-                    snackBar(context, 'Enter Company Name');
-                  }else if(pastCompanyWebsiteController.last.value.text == ''){
-                    snackBar(context, 'Enter Company Website');
-                  }else{
+                  if(controller.industryController.value.text != ''){
+                    controller.industryName = controller.industryController.value.text;
+                  }
+                  if(pastCompanyNameController.last.text == '' && pastCompanyTitleController.last.text == '' && pastCompanyWebsiteController.last.value.text == ''){
+                    pastCompanyNameController.removeLast();
+                    pastCompanyTitleController.removeLast();
+                    pastCompanyWebsiteController.removeLast();
+                    pastJobImage.removeLast();
+                  }
+                  String status = '';
+                  for(var item in pastCompanyNameController){
+                    if(item.text == ''){
+                      snackBar(context, 'Enter company name');
+                      status = 'pending';
+                    }else{
+                      status = 'done';
+                    }
+                  }
+
+                  for(var item in pastCompanyTitleController){
+                    if(item.text == ''){
+                      snackBar(context, 'Enter company title');
+                      status = 'pending';
+                    }else{
+                      status = 'done';
+                    }
+                  }
+
+                  for(var item in pastCompanyWebsiteController){
+                    if(item.text == ''){
+                      snackBar(context, 'Enter company website');
+                      status = 'pending';
+                    }else{
+                      status = 'done';
+                    }
+                  }
+
+                  if(status == 'done'){
                     companyDetails.clear();
 
                     for (int i = 0; i < cards.length; i++) {
@@ -576,7 +884,9 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         '"title"': '"${pastCompanyTitleController[i].text}"',
                         '"company_name"':
                             '"${pastCompanyNameController[i].text}"',
-                        '"website"': '"${pastCompanyWebsiteController[i].text}"',
+                        '"website"':
+                            '"${pastCompanyWebsiteController[i].text}"',
+                        '"image"': '"${pastJobImage[i].toString()}"'
                       });
                     }
 
