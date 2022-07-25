@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+// import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:get/get.dart';
 
 class PastFeatureDetail extends StatefulWidget {
@@ -37,7 +38,7 @@ class _PastFeatureDetailState extends State<PastFeatureDetail> {
               fontFamily: helvetica_neu_bold
             ),
           ),
-          actions: [ 
+          actions: [
            Padding(
              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
              child: InkWell(
