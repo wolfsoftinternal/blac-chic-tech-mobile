@@ -447,7 +447,8 @@ class _PastFeature2State extends State<PastFeature2> {
                           ),
                         ),
                       ),
-                      
+
+
                       // Container(
                       //   margin: EdgeInsets.only(top: 24.h,left: 24.w,right: 24.w),
                       //   child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel vitae malesuada faucibus vitae cursus sed ultricies ",
