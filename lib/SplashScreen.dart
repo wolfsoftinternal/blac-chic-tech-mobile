@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Get.offAll(const AdditionalLastQueView());
         } else {
           Get.back();
-          Navigator.of(context).push(_createRoute());
+          Navigator.of(context).pushAndRemoveUntil(_createRoute(), (Route<dynamic> route) => false,);
         }
       } else {
         Get.offAll(HomePage());

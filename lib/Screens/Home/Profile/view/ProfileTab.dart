@@ -25,12 +25,14 @@ class _ProfileTabState extends State<ProfileTab> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (controller.details.value.questions![3].answer!.isNotEmpty) {
-      if (controller.details.value.questions![3].answer!.length > 1) {
-        list.clear();
-        list = controller.details.value.questions![3].answer!.split(', ');
-      } else {
-        list.add(controller.details.value.questions![3].answer);
+    if(controller.details.value.questions!.isEmpty){
+      if (controller.details.value.questions![3].answer!.isNotEmpty) {
+        if (controller.details.value.questions![3].answer!.length > 1) {
+          list.clear();
+          list = controller.details.value.questions![3].answer!.split(', ');
+        } else {
+          list.add(controller.details.value.questions![3].answer);
+        }
       }
     }
   }
@@ -190,51 +192,32 @@ class _ProfileTabState extends State<ProfileTab> {
                                                   ),
                                                 ),
                                                 Flexible(
-                                                  child: controller
-                                                      .details
-                                                      .value
-                                                      .pastJobs![
-                                                  index]
-                                                      .title !=
-                                                      null
-                                                      ? Padding(
-                                                    padding:
-                                                    EdgeInsets
-                                                        .only(
-                                                        left: 12.w, right: 8.w),
+                                                  child: controller.details.value.pastJobs![index].title != null
+                                                    ? Padding(padding: EdgeInsets.only(left: 12.w, right: 8.w),
                                                     child: Row(
                                                       children: [
                                                         setHelveticaMedium(
-                                                            "${controller
-                                                                .details
-                                                                .value
-                                                                .pastJobs![
-                                                            index]
-                                                                .title!
-                                                                .toUpperCase()}",
-                                                            15.sp,
-                                                            grey_aaaaaa,
-                                                            FontWeight.w500,
-                                                            FontStyle
-                                                                .normal,
-                                                            -0.28, 2),
-                                                        setHelveticaMedium(
-                                                            " @${controller
-                                                                    .details
-                                                                    .value
-                                                                    .pastJobs![
-                                                                index]
-                                                                    .companyName!.toString().capitalize}",
+                                                          "${controller.details.value.pastJobs![index].title!.toUpperCase()}",
+                                                          15.sp,
+                                                          grey_aaaaaa,
+                                                          FontWeight.w500,
+                                                          FontStyle.normal,
+                                                          -0.28, 1
+                                                        ),
+                                                        Flexible(
+                                                          child: setHelveticaMedium(
+                                                            " @${controller.details.value.pastJobs![index].companyName!.toString().capitalize}",
                                                             15.sp,
                                                             grey_3f3f3f,
                                                             FontWeight.w500,
                                                             FontStyle
                                                                 .normal,
-                                                            -0.28, 2),
+                                                            -0.28, 1
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
-                                                  )
-                                                      : Container(),
+                                                  ) : Container(),
                                                 ),
                                               ],
                                             ),

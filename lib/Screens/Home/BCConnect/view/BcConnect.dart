@@ -455,13 +455,13 @@ class _BcConnectState extends State<BcConnect> {
                                                       Text(
                                                           videoController.userList[i]
                                                                   .questions!.isEmpty
-                                                              ? "UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk"
+                                                              ? ""
                                                               : videoController
                                                                           .userList[i]
                                                                           .questions!
                                                                           .length <
                                                                       4
-                                                                  ? "UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk"
+                                                                  ? ""
                                                                   : videoController
                                                                       .userList[i]
                                                                       .questions![3]

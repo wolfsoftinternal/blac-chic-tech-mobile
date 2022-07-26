@@ -88,10 +88,10 @@ class _BcConnectFilterState extends State<BcConnectFilter> {
                   controller: videoController.searchController.value,
                   autofocus: false,
                   decoration: InputDecoration(
-                    filled: true,
+                    filled: false,
                     hintText: "Search people",
                     contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
-                    fillColor: const Color(0xfff5f5f5),
+                    // fillColor: const Color(0xfff5f5f5),
                     hintStyle: TextStyle(
                       fontSize: 14.sp,
                       fontFamily: helveticaNeueNeue_medium,
@@ -114,18 +114,20 @@ class _BcConnectFilterState extends State<BcConnectFilter> {
                       });
                     }
 
-                    if(stepsController.industryController.value.text != '' && stepsController.industryName == '' || stepsController.industryName == null){
-                      stepsController.industryName = stepsController.industryController.value.text;
+                    if(stepsController.industryName == '' || stepsController.industryName == null){
+                      if(stepsController.industryController.value.text != ''){
+                        stepsController.industryName = stepsController.industryController.value.text;
+                      }
                     }
-
+                    
                     checkNet(context).then((value) {
                       videoController.PageNumber.value = 1;
                       dynamic data = {
                         'search': videoController.searchController.value.text.toString(),
                         'page': videoController.PageNumber.toString(),
-                        'country': stepsController.strCountryId.value,
-                        'industry': stepsController.industryName.toString(),
-                        'type': strRole.toString()
+                        // 'country': stepsController.strCountryId.value,
+                        // 'industry': stepsController.industryName.toString(),
+                        // 'type': strRole.toString()
                       };
                       videoController.userListAPI(context, true, null, data);
                     });
