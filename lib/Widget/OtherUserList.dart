@@ -106,7 +106,7 @@ class _OtherUserListState extends State<OtherUserList> {
                       width: MediaQuery.of(context).size.width * 0.80,
                       height: MediaQuery.of(context).size.width * 0.13,
                       child: FittedBox(
-                        child: setHelceticaBold(
+                        child: setInterExtraBold(
                             widget.otherUser.firstName != null && widget.otherUser.lastName != null
                                 ? widget.otherUser.firstName!
                                     .toUpperCase() + " "
@@ -145,7 +145,7 @@ class _OtherUserListState extends State<OtherUserList> {
                         textAlign: TextAlign.center,
                         style:  TextStyle(
                           fontSize: 16.sp,
-                          fontFamily: helveticaNeueNeue_medium,
+                          fontFamily: interMedium,
                           fontWeight: FontWeight.w600,
                           color: Colors.white60,
                           fontStyle: FontStyle.normal,
@@ -224,7 +224,7 @@ class _OtherUserListState extends State<OtherUserList> {
                             color: orange_ff881a,
                           )
                         : Container(),
-                    setHelveticaMedium(
+                    setInterRegular(
                       widget.otherUser.cityDetails != null
                           ? widget.otherUser.cityDetails!.name! +
                               ', ' +

@@ -13,5 +13,7 @@ const String interExtraBold = "Inter ExtraBold";
 const String interBold = "Inter Bold";
 const String interExtraBoldItalic = "Inter ExtraBoldItalic";
 const String interSemiBold = "Inter SemiBold";
+const String interMedium = "Inter Medium";
+const String interRegular = "Inter Regular";
 
 
