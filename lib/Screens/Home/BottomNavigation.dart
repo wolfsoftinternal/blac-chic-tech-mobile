@@ -162,13 +162,21 @@ class _BottomNavigationState extends State<BottomNavigation> {
         Get.to(HomePage());
       }else if(index == 1){
         _currentIndex = 0;
-        Get.to(Feed());
+        Get.to(Feed())!.then((value){
+          _currentIndex = 0;
+          Get.offAll(HomePage());
+        });
       }else if(index == 2){
         _currentIndex = 0;
-        Get.to(FriendListScreen());
+        Get.to(FriendListScreen())!.then((value){
+          _currentIndex = 0;
+          Get.offAll(HomePage());
+        });
       }else if(index == 3){
-        _currentIndex = 0;
-        Get.to(AdmireProfile());
+        Get.to(AdmireProfile())!.then((value){
+          _currentIndex = 0;
+          Get.offAll(HomePage());
+        });
       }
     });
   }
@@ -190,9 +198,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           IconButton(
             enableFeedback: false,
             onPressed: () {
-              setState(() {
-                _currentIndex = 0;
-              });
+              onTabTapped(0);
             },
             icon: _currentIndex == 0
                 ?  SvgPicture.asset(home_icon, color: white,)
@@ -201,9 +207,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           IconButton(
             enableFeedback: false,
             onPressed: () {
-              setState(() {
-                _currentIndex = 1;
-              });
+              onTabTapped(1);
             },
             icon: _currentIndex == 1
                 ? SvgPicture.asset(feed_icon, color: white,)
@@ -212,9 +216,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           IconButton(
             enableFeedback: false,
             onPressed: () {
-              setState(() {
-                _currentIndex = 2;
-              });
+              onTabTapped(2);
             },
             icon: _currentIndex == 2
                 ? SvgPicture.asset(chat_icon, color: white, height: 28, width: 28,)
@@ -223,9 +225,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           IconButton(
             enableFeedback: false,
             onPressed: () {
-              setState(() {
-                _currentIndex = 3;
-              });
+              onTabTapped(3);
             },
             icon: _currentIndex == 3
                 ? const Icon(

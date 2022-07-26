@@ -19,6 +19,7 @@ import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
+import 'package:blackchecktech/Widget/AllAdmireList.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
 import 'package:blackchecktech/Widget/ReportBottomSheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -104,6 +105,84 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       }).then((value) => setState(() {}));
     }
     setState(() {});
+  }
+
+  displayAdmireBottomSheet(){
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (ctx) {
+          return Container(
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16.0),
+                      topRight: Radius.circular(16.0))),
+              child: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height - 120.h,
+                  child: Wrap(
+                    children: [
+                      StatefulBuilder(builder: (context, setState) {
+                        return Column(
+                          children: [
+                            SizedBox(
+                              height: 12.h,
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: 50,
+                                height: 3,
+                                decoration: BoxDecoration(
+                                  color: grey_3f3f3f.withOpacity(0.4),
+                                  borderRadius:  BorderRadius.all(
+                                    Radius.circular(50.r),
+                                  )
+                                ),
+                              )
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                           LayoutBuilder(
+                            builder: (context, constraints) {
+                                return GridView.builder(
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.only(left: 20.w, right: 8.w, bottom: 10.h, top: 16.h),
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisSpacing: 10.w,
+                                    mainAxisSpacing: 0,
+                                    crossAxisCount: constraints.maxWidth == 310
+                                        ? 3
+                                        : constraints.maxWidth > 310 && constraints.maxWidth < 520
+                                            ? 4
+                                            : constraints.maxWidth > 520 && constraints.maxWidth < 720
+                                                ? 5
+                                                : 6,
+                                    childAspectRatio: constraints.maxWidth == 310
+                                        ? 0.85.w
+                                        : constraints.maxWidth > 310 && constraints.maxWidth < 520
+                                            ? 0.70.w
+                                            : constraints.maxWidth > 520 && constraints.maxWidth < 720
+                                                ? 0.75.w
+                                                : 0.9.w,
+                                  ),
+                                  itemCount: controller.otherAdmireList.length,
+                                  itemBuilder: (context, i) => AllAdmireList(controller.otherAdmireList[i], 'other', null, controller.details.value.id)
+                                );
+                              }
+                            ),
+                          ],
+                        );
+                      }),
+                    ],
+                  ),
+                ),
+              ));
+        });
   }
 
   @override
@@ -850,7 +929,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 if (userId == controller.details.value.id) {
                   Get.to(SeeAllAdmires(type: 'user'));
                 } else {
-                  Get.to(SeeAllAdmires(type: 'other'));
+                  // Get.to(SeeAllAdmires(type: 'other'));
+                  displayAdmireBottomSheet();
                 }
               },
               child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
