@@ -26,12 +26,14 @@ class _ProfileTabState extends State<ProfileTab> {
     // TODO: implement initState
     super.initState();
     if(controller.details.value.questions!.isEmpty){
-      if (controller.details.value.questions![3].answer!.isNotEmpty) {
-        if (controller.details.value.questions![3].answer!.length > 1) {
-          list.clear();
-          list = controller.details.value.questions![3].answer!.split(', ');
-        } else {
-          list.add(controller.details.value.questions![3].answer);
+      if(controller.details.value.questions!.length >= 4){
+        if (controller.details.value.questions![3].answer!.isNotEmpty) {
+          if (controller.details.value.questions![3].answer!.length > 1) {
+            list.clear();
+            list = controller.details.value.questions![3].answer!.split(', ');
+          } else {
+            list.add(controller.details.value.questions![3].answer);
+          }
         }
       }
     }

@@ -7,6 +7,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
+import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
 import 'package:blackchecktech/Widget/CreateBottomSheet.dart';
@@ -33,9 +34,9 @@ class _OtherUserListState extends State<OtherUserList> {
     return GestureDetector(
       onTap: (){
         setState(() {});
-        controller.admireProfileAPI(
+        checkNet(context).then((value) => controller.admireProfileAPI(
           context, widget.otherUser.id
-        );
+        ));
       },
       child: Stack(
         children: [

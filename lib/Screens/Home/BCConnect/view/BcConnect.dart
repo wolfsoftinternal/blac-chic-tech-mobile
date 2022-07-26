@@ -296,15 +296,16 @@ class _BcConnectState extends State<BcConnect> {
                                                     .userList[i].id
                                                     .toString(),
                                                 isFrom: false,
-                                              ))!
-                                                  .then((value) {
-                                                checkNet(context).then((value) => {
-                                                      videoController
-                                                          .PageNumber.value = 0,
-                                                      videoController.userListAPI(
-                                                          context, true)
-                                                    });
-                                              });
+                                                index: i,
+                                              ));
+                                              // !.then((value) {
+                                              //   checkNet(context).then((value) => {
+                                              //         videoController
+                                              //             .PageNumber.value = 0,
+                                              //         videoController.userListAPI(
+                                              //             context, true)
+                                              //       });
+                                              // });
                                               videoController.userList.clear();
                                             },
                                             child: Column(

@@ -1598,7 +1598,6 @@ class _EventDetailState extends State<EventDetail> {
                                     'Hey checkout this amazing event' +
                                         controller.eventDetails.value.link!,
                                   );
-
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 24.w),
