@@ -720,7 +720,13 @@ class StepsController extends GetxController {
     } else if (companyName.value == 'Company Name') {
       snackBar(context, "Enter current company name");
       return false;
-    } else if (industryName == null || industryName == '' && industryController.value.text.isEmpty) {
+    } else if(currentCompanyWebsiteController.value.text.isEmpty){
+      snackBar(context, 'Enter current website');
+      return false;
+    } else if(!RegExp('^(https?://(?:www.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|www.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|https?://(?:www.|(?!www))[a-zA-Z0-9]+.[^s]{2,}|www.[a-zA-Z0-9]+.[^s]{2,})').hasMatch(currentCompanyWebsiteController.value.text)){
+      snackBar(context, 'Enter valid website');
+      return false;
+    }else if (industryName == null || industryName == '' && industryController.value.text.isEmpty) {
       snackBar(context, "Enter Industry");
       return false;
     } else {

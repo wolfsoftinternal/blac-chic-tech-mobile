@@ -3345,6 +3345,9 @@ class _AboutMeState extends State<AboutMe> {
     }else if(stepsController.currentCompanyWebsiteController.value.text.isEmpty){
       snackBar(context, 'Enter current website');
       return false;
+    }else if(!RegExp('^(https?://(?:www.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|www.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|https?://(?:www.|(?!www))[a-zA-Z0-9]+.[^s]{2,}|www.[a-zA-Z0-9]+.[^s]{2,})').hasMatch(stepsController.currentCompanyWebsiteController.value.text)){
+      snackBar(context, 'Enter valid website');
+      return false;
     }else if(nameStatus == false){
       snackBar(context, 'Enter company name');
       return false;

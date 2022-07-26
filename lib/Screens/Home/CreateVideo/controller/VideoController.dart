@@ -188,18 +188,21 @@ class VideoController extends GetxController {
     var token = await preferences.getStringValue(SharePreData.keytoken);
     dynamic body;
 
-    if(pagination == false){
+    if (pagination == false) {
       if (userId != null) {
-      body = {
-        'user_id': userId.toString(),
-        'search': searchController.value.text.toString(),
-      };
+        body = {
+          'user_id': userId.toString(),
+          'search': searchController.value.text.toString(),
+        };
+      } else {
+        body = {
+          'search': searchController.value.text.toString(),
+        };
+      }
     } else {
-      body = {
-        'search': searchController.value.text.toString(),
-      };
-    }
-    }else{
+      if(userId == null && data != null){
+        PageNumber.value = 0;
+      }
       PageNumber = PageNumber + 1;
       if (userId != null) {
         body = {
@@ -207,7 +210,7 @@ class VideoController extends GetxController {
           'search': searchController.value.text.toString(),
           'page': PageNumber.toString(),
         };
-      } else if(userId == null && data != null){
+      } else if (userId == null && data != null) {
         body = data;
       } else {
         body = {
@@ -241,9 +244,9 @@ class VideoController extends GetxController {
             UserListModel detail = UserListModel.fromJson(userModel);
             userCount.value = detail.user_count!;
 
-            if(pagination == false){
+            if (pagination == false) {
               userList.value = detail.data!;
-            }else{
+            } else {
               if (PageNumber == 1) {
                 userList.clear();
                 print("clear");
@@ -314,26 +317,27 @@ class VideoController extends GetxController {
     if (titleController.value.text.isEmpty) {
       snackBar(context, "Enter video title");
       return false;
-    } else if(topicName == null){
+    } else if (topicName == null) {
       snackBar(context, 'Enter Topic');
       return false;
-    }else if(languageName == null){
+    } else if (languageName == null) {
       snackBar(context, 'Enter Language');
       return false;
-    }else if (linkController.value.text.isEmpty) {
+    } else if (linkController.value.text.isEmpty) {
       snackBar(context, "Enter video link");
       return false;
-    } else if (!RegExp(r'^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$')
+    } else if (!RegExp(
+            r'^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$')
         .hasMatch(linkController.value.text)) {
       snackBar(context, "Enter valid video link");
       return false;
     } else if (descController.value.text.isEmpty) {
       snackBar(context, "Enter video description");
       return false;
-    } else if(tagValues.isEmpty){
+    } else if (tagValues.isEmpty) {
       snackBar(context, 'Enter related tags');
       return false;
-    }else if (selectedList.toString() == '[]') {
+    } else if (selectedList.toString() == '[]') {
       snackBar(context, "Tag Speaker");
       return false;
     } else {

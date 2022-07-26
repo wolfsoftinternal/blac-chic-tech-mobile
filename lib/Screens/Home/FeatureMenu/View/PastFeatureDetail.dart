@@ -40,7 +40,7 @@ class _PastFeatureDetailState extends State<PastFeatureDetail> {
           ),
           actions: [
            Padding(
-             padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+             padding: const EdgeInsets.only(left: 8.0, right: 24.0),
              child: InkWell(
                onTap: () {
                  setState(() {
@@ -58,7 +58,10 @@ class _PastFeatureDetailState extends State<PastFeatureDetail> {
            ),
           ],
           leading: GestureDetector(
-            child: Icon(Icons.arrow_back_ios_new_rounded, color: black),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 12.0),
+              child: Icon(Icons.arrow_back_ios_new_rounded, color: black),
+            ),
             onTap: () {
               Navigator.pop(context);
               flutterWebViewPlugin.close();

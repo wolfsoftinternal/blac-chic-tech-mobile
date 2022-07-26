@@ -211,6 +211,7 @@ class _EventTabState extends State<EventTab> {
                                                   //     FontStyle.normal),
                                                 )),
                                           ),
+                                          controller.eventList[index].hosts!.isEmpty ? Container() :
                                           Padding(
                                             padding: EdgeInsets.only(
                                                 top: 8.h, right: 8.w),
@@ -313,7 +314,7 @@ class _EventTabState extends State<EventTab> {
                                                                 .eventList[
                                                                     index]
                                                                 .hosts!
-                                                                .first
+                                                                [0]
                                                                 .lastName!.capitalizeFirst}",
                                                         11.sp,
                                                         white_ffffff,

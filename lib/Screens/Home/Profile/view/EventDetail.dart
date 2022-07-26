@@ -1252,12 +1252,13 @@ class _EventDetailState extends State<EventDetail> {
                                     Padding(
                                       padding:  EdgeInsets.only(left: 4.w),
                                       child: setHelveticaMedium(
-                                          controller.eventDetails.value.venue!.capitalize!,
-                                          10.sp,
-                                          black_121212,
-                                          FontWeight.w500,
-                                          FontStyle.normal,
-                                          -0.4),
+                                        controller.eventDetails.value.venue!.capitalize!,
+                                        10.sp,
+                                        black_121212,
+                                        FontWeight.w500,
+                                        FontStyle.normal,
+                                        -0.4
+                                      ),
                                     ),
                                   ],
                                 ),

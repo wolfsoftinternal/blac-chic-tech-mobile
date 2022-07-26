@@ -433,11 +433,20 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                         ? controller.details.value.currentJobs!.website != null
                                             ? GestureDetector(
                                               onTap: (){
-                                                launchURL(controller
+                                                if(controller.details.value.currentJobs!.website!.contains("http")){
+                                                  launchURL(controller
                                                               .details
                                                               .value
                                                               .currentJobs!
                                                               .website!);
+                                                }else{
+                                                  var url = "https://www." + controller
+                                                              .details
+                                                              .value
+                                                              .currentJobs!
+                                                              .website!;
+                                                  launchURL(url);
+                                                }
                                               },
                                               child: Align(
                                                   alignment: Alignment.topLeft,
