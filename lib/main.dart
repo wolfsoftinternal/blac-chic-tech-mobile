@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:is_first_run/is_first_run.dart';
 
+import 'Screens/Home/DemoBottomNavigation.dart';
 import 'UIScreen/Demo.dart';
 
 GetIt getIt = GetIt.instance;
@@ -52,6 +53,7 @@ class _MyAppState extends State<MyApp> {
             primarySwatch: Colors.blue,
           ),
           home: SplashScreen(),
+        //  home: DemoBottomNavigation(),
         );
       },
     );
