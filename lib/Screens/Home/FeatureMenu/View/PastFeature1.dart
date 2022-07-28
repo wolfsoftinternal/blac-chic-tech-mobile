@@ -268,12 +268,12 @@ class _PastFeature1State extends State<PastFeature1> {
                   ),
                   GestureDetector(
                     onVerticalDragStart: (val) {
-                      // Navigator.of(context).push(_createRoute());
+                      Navigator.of(context).push(_createRoute());
                     },
                     child: Container(
                       transform: Matrix4.translationValues(0, -1, 0),
                       // width: double.infinity,
-                      // height: MediaQuery.of(context).size.height - 500.h,
+                      // height: MediaQuery.of(context).size.height - 480.h,
                       color: white,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
