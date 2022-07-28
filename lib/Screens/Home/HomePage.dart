@@ -21,6 +21,7 @@ import 'FeatureMenu/View/FeaturedMainScreen.dart';
 import 'FeatureMenu/View/PastFeaturesScreen.dart';
 import 'chat_module/my_db.dart';
 import 'dart:math' as math;
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -63,6 +64,12 @@ class _HomePageState extends State<HomePage> {
         alignment: Alignment.bottomCenter,
         children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // children: AnimationConfiguration.toStaggeredList(
+            //   duration: const Duration(milliseconds: 0),
+            //   childAnimationBuilder: (widget) => FadeInAnimation(
+            //     child: widget,
+            //   ),
             children: [
               Expanded(
                 child: SingleChildScrollView(
@@ -87,78 +94,95 @@ class _HomePageState extends State<HomePage> {
                           left: 16.w,
                           right: 16.w,
                         ),
-                        child: ListView.builder(
-                            primary: false,
-                            shrinkWrap: true,
-                            itemCount: values.length,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: ((context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  if (index == 0) {
-                                    Get.to(AdmireProfile());
-                                  } else if(index == 1){
-                                    Get.to(Marketplace());
-                                  } else if(index == 2){
-                                    launchURL('https://peerboard.com/1875702146');
-                                  }else if (index == 3) {
-                                    Get.to(BcConnect());
-                                  } else if (index == 6) {
-                                    Get.to(EventList());
-                                  } else if (index == 5) {
-                                    Get.to(FeaturedMainScreen());
-                                  } else if (index == 7) {
-                                    Get.to(TransactionsPayoutsTabs());
-                                  }
-                                  if (index == 4) {
-                                    Get.to(VideoListBct());
-                                  }
-                                },
-                                child: Container(
-                                  // height: 66,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: index % 2 != 0
-                                        ? black_121212
-                                        : white_ffffff,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(4.0)),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                             EdgeInsets.only(left: 16.0.w, top: 16.0.h, bottom: 16.0.h),
-                                        child: Text(
-                                          values[index],
-                                          style: TextStyle(
+                        child: AnimationLimiter(
+                          child: ListView.builder(
+                              primary: false,
+                              shrinkWrap: true,
+                              itemCount: values.length,
+                              padding: EdgeInsets.zero,
+                              itemBuilder: ((context, index) {
+                                return AnimationConfiguration.staggeredList(
+                                  position: index,
+                                  duration: const Duration(milliseconds: 500),
+                                  child: SlideAnimation(
+                                    verticalOffset: 44.0,
+                                    child: FadeInAnimation(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          if (index == 0) {
+                                            Get.to(AdmireProfile());
+                                          } else if (index == 1) {
+                                            Get.to(Marketplace());
+                                          } else if (index == 2) {
+                                            launchURL(
+                                                'https://peerboard.com/1875702146');
+                                          } else if (index == 3) {
+                                            Get.to(BcConnect());
+                                          } else if (index == 6) {
+                                            Get.to(EventList());
+                                          } else if (index == 5) {
+                                            Get.to(FeaturedMainScreen());
+                                          } else if (index == 7) {
+                                            Get.to(TransactionsPayoutsTabs());
+                                          }
+                                          if (index == 4) {
+                                            Get.to(VideoListBct());
+                                          }
+                                        },
+                                        child: Container(
+                                          // height: 66,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
                                             color: index % 2 != 0
-                                                ? white_ffffff
-                                                : black_121212,
-                                            fontSize: 28.sp,
-                                            letterSpacing: -1.12,
-                                            fontFamily: helvetica_neu_bold,
-                                            fontWeight: FontWeight.w500,
+                                                ? black_121212
+                                                : white_ffffff,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(4.0)),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 16.0.w,
+                                                    top: 16.0.h,
+                                                    bottom: 16.0.h),
+                                                child: Text(
+                                                  values[index],
+                                                  style: TextStyle(
+                                                    color: index % 2 != 0
+                                                        ? white_ffffff
+                                                        : black_121212,
+                                                    fontSize: 28.sp,
+                                                    letterSpacing: -1.12,
+                                                    fontFamily:
+                                                        helvetica_neu_bold,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    right: 12.0),
+                                                child: Transform.rotate(
+                                                  angle: 90 * math.pi / 375,
+                                                  child: Icon(
+                                                    Icons.arrow_forward,
+                                                    color: grey_aaaaaa,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
                                           ),
                                         ),
                                       ),
-                                       Padding(
-                                        padding: EdgeInsets.only(right: 12.0),
-                                        child: Transform.rotate(
-                                          angle: 90 * math.pi / 375,
-                                          child: Icon(
-                                            Icons.arrow_forward,
-                                            color: grey_aaaaaa,
-                                          ),
-                                        ),
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            })),
+                                );
+                              })),
+                        ),
                       ),
                       SizedBox(
                         height: 100.h,

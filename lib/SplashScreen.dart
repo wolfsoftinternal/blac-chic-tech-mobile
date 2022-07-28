@@ -86,9 +86,9 @@ class _SplashScreenState extends State<SplashScreen> {
         } else if (lastQuestionsInfo != "Done") {
           Get.offAll(const AdditionalLastQueView());
         } else {
-          // Get.offAll(HomePage());
-          Get.back();
-          Navigator.of(context).pushAndRemoveUntil(_createRoute(), (Route<dynamic> route) => false,);
+          Get.offAll(HomePage());
+          // Get.back();
+          // Navigator.of(context).pushAndRemoveUntil(_createRoute(), (Route<dynamic> route) => false,);
         }
       } else {
         Get.offAll(HomePage());

@@ -433,7 +433,7 @@ class _PastFeature2State extends State<PastFeature2> {
                         ),
                       ),
                       Container(
-                  margin: EdgeInsets.only(left: 24.w,top: 10.h,bottom: 10.h),
+                  margin: EdgeInsets.only(left: 24.w,top: 10.h,bottom: 20.h),
                   child: Row(mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
