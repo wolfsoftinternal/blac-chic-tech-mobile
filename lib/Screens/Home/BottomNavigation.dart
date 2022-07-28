@@ -139,7 +139,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           //                             ),
           //                       ),
           //                     ),
-          //                   ),
+          //                    ),
           //                   label: ''
           //                 ),
           //             ],
@@ -227,17 +227,59 @@ class _BottomNavigationState extends State<BottomNavigation> {
             onPressed: () {
               onTabTapped(3);
             },
-            icon: _currentIndex == 3
-                ? const Icon(
-              Icons.person,
-              color: Colors.white,
-              size: 28,
-            )
-                : const Icon(
-              Icons.person_outline,
-              color: Colors.grey,
-              size: 28,
+            icon: Container(
+              height: 24.h,
+              width: 23.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                border: Border.all(color: gray_b3ffffff, width: 2),
+              ),
+              child: CircularProfileAvatar(
+                '',
+                radius: 10,
+                borderColor: Colors.transparent,
+                child: myModel?.data?.image == null
+                    ? SvgPicture.asset(
+                  placeholder,
+                  height: 20.h,
+                  width: 20.w,
+                  fit: BoxFit.cover,
+                )
+                    : CachedNetworkImage(
+                  imageUrl: myModel!.data!.image!,
+                  height: 20.h,
+                  width: 20.w,
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context,
+                      url, downloadProgress) =>
+                      SvgPicture.asset(
+                        placeholder,
+                        height: 20.h,
+                        width: 20.w,
+                        fit: BoxFit.cover,
+                      ),
+                  errorWidget:
+                      (context, url, error) =>
+                      SvgPicture.asset(
+                        placeholder,
+                        height: 20.h,
+                        width: 20.w,
+                        fit: BoxFit.cover,
+                      ),
+                ),
+              ),
             ),
+
+            // const Icon(
+            //   Icons.person,
+            //   color: Colors.white,
+            //   size: 28,
+            // )
+            //     : const Icon(
+            //   Icons.person_outline,
+            //   color: Colors.grey,
+            //   size: 28,
+            // ),
           ),
         ],
       ),
