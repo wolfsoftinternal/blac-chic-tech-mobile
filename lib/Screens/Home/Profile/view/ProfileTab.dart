@@ -25,7 +25,7 @@ class _ProfileTabState extends State<ProfileTab> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(controller.details.value.questions!.isEmpty){
+    if(controller.details.value.questions != null){
       if(controller.details.value.questions!.length >= 4){
         if (controller.details.value.questions![3].answer!.isNotEmpty) {
           if (controller.details.value.questions![3].answer!.length > 1) {
@@ -137,8 +137,8 @@ class _ProfileTabState extends State<ProfileTab> {
                                                   index]
                                                       .logo ==
                                                       null
-                                                      ? SvgPicture.asset(
-                                                    placeholder,
+                                                      ? Image.asset(
+                                                    appleLogo,
                                                     height: 32.h,
                                                     width: 32.w,
                                                     fit: BoxFit.cover,

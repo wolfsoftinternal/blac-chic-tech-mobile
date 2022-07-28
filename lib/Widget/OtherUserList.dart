@@ -2,6 +2,7 @@ import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.da
 import 'package:blackchecktech/Screens/Home/CreateVideo/model/UserListModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
 import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -35,8 +36,14 @@ class _OtherUserListState extends State<OtherUserList> {
       onTap: (){
         setState(() {});
         checkNet(context).then((value) => controller.admireProfileAPI(
-          context, widget.otherUser.id
-        ));
+          context, widget.otherUser.id, null, 'transaction'
+        )).then((value) => 
+          Get.to(
+            Profile(), 
+            duration: Duration(milliseconds: 500),
+            transition: Transition.downToUp 
+          ),
+        );
       },
       child: Stack(
         children: [
@@ -83,7 +90,7 @@ class _OtherUserListState extends State<OtherUserList> {
                   child: FittedBox(
                     child: setHelceticaBold(
                         widget.otherUser.userName != null
-                            ? "@" + widget.otherUser.userName!
+                            ? "@" + widget.otherUser.userName!.replaceAll('@', '')
                             : "@" + widget.otherUser.firstName!,
                         20.sp,
                         white_ffffff,

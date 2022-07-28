@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/ExperienceInfoFormView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/PersonalInfoFormView.dart';
+import 'package:blackchecktech/Screens/Authentication/signup/view/RegisterInfoView.dart';
 import 'package:blackchecktech/Screens/Home/HomePage.dart';
 import 'package:blackchecktech/SplashScreen.dart';
 import 'package:blackchecktech/UIScreen/AdmireGrid.dart';

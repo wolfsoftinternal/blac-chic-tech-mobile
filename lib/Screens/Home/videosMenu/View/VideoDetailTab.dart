@@ -482,7 +482,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                         ],
                                       ),
                                       SizedBox(
-                                        height: 8.h,
+                                        height: 6.h,
                                       ),
 
                                       // Product manager and brand strategist @capitalone
@@ -490,7 +490,7 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                         children: [
                                           CircularProfileAvatar(
                                             '',
-                                            radius: 20.5,
+                                            radius: 10.5,
                                             child: controller
                                                         .videoDetail
                                                         .value
@@ -498,10 +498,10 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                         .currentJobs!
                                                         .logo ==
                                                     null
-                                                ? SvgPicture.asset(
-                                                    placeholder,
-                                                    height: 32.h,
-                                                    width: 32.w,
+                                                ? Image.asset(
+                                                    appleLogo,
+                                                    height: 28.h,
+                                                    width: 28.w,
                                                     fit: BoxFit.cover,
                                                   )
                                                 : CachedNetworkImage(
@@ -545,8 +545,8 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                     ),
                                                   ),
                                           ),
-                                          SizedBox(width: 8.h,),
-                                          Column(
+                                          SizedBox(width: 4.h,),
+                                          Row(
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
@@ -572,13 +572,12 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                                       fontStyle: FontStyle.normal,
                                                       fontSize: 12.sp),
                                                   textAlign: TextAlign.left),
-                                              SizedBox(height: 3.h,),
                                               Text(
                                                   controller.videoDetail.value
                                                               .userDetails ==
                                                           null
                                                       ? ""
-                                                      : "@" + controller
+                                                      : " @" + controller
                                                               .videoDetail
                                                               .value
                                                               .userDetails!
