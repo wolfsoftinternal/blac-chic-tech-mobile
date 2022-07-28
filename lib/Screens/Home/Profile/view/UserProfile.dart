@@ -573,7 +573,7 @@ class _UserProfileState extends State<UserProfile> {
   PageController pageController = PageController();
   List<Widget>? list;
   bool hadReachedEnd = false;
-  int index = 0;
+  int i = 0;
 
   @override
   void initState() {
@@ -581,13 +581,15 @@ class _UserProfileState extends State<UserProfile> {
     super.initState();
     checkNet(context).then(
       (value) {
-        // if (widget.index != null) {
-        //   index = widget.index;
-        // }
+        if (widget.index != null) {
+          i = widget.index;
+        }
         videoController.PageNumber.value = 0;
-        videoController.userListAPI(context, false, widget.selectedUserId);
-        // videoController.userListAPI(context, false);
+        // videoController.userListAPI(context, false, widget.selectedUserId);
+        videoController.userListAPI(context, false);
         controller.admireListAPI(context, widget.selectedUserId);
+        checkNet(context).then((value) => controller.admireProfileAPI(
+            context, widget.selectedUserId, null, 'transaction'));
       },
     );
     controller.addListener(() {});
@@ -613,76 +615,73 @@ class _UserProfileState extends State<UserProfile> {
                       : Expanded(
                           child: Stack(
                             children: [
-                              // GestureDetector(
-                              // onPanUpdate: (details) {
-                              //   if (details.delta.dx > 0)
-                              //     print("Dragging in +X direction");
-                              //   else
-                              //     print("Dragging in -X direction");
-
-                              //   if (details.delta.dy > 0)
-                              //     print("Dragging in +Y direction");
-                              //   else
-                              //     print("Dragging in -Y direction");
-                              // },
-                              // onHorizontalDragEnd: (DragEndDetails dragEndDetails){
-                              //   if(dragEndDetails.velocity.pixelsPerSecond.dx < 1){
-                              //     setState(() {
-                              //       if(index != videoController.userList.length){
-                              //         index++; //right swipe
-                              //         pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
-                              //         return;
-                              //       }
-                              //     });
-                              //   } else {
-                              //     setState(() {
-                              //       if(index != 0){
-                              //         index--; //left swipe
-                              //         pageController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
-                              //         return;
-                              //       }
-                              //     });
-                              //   }
-                              // },
-                              // Listener(
-                              //   onPointerHover: (moveEvent) {
-                              //     if (moveEvent.delta.dx > 0) {
-                              //       setState(() {
-                              //       if (index !=
-                              //           videoController.userList.length) {
-                              //         index++; //right swipe
-                              //         // pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
-                              //         return;
-                              //       }
-                              //       });
-                              //     } else {
-                              //       setState(() {
-                              //       if (index != 0) {
-                              //         index--; //left swipe
-                              //         // pageController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
-                              //         return;
-                              //       }
-                              //       });
-                              //     }
-                              //   },
-                                 PageView.builder(
-                                    // physics: const NeverScrollableScrollPhysics(),
+                              GestureDetector(
+                                onVerticalDragEnd: (dragEndDetails) {
+                                  if (i ==
+                                      videoController.userList.length - 1) {
+                                    i = 0;
+                                    controller.admireListAPI(
+                                        context,
+                                        videoController.userList[i].id
+                                            .toString());
+                                    checkNet(context).then((value) =>
+                                        controller.admireProfileAPI(
+                                            context,
+                                            videoController.userList[i].id,
+                                            null,
+                                            'transaction'));
+                                    return;
+                                  } else if (dragEndDetails
+                                          .velocity.pixelsPerSecond.dx <
+                                      1) {
+                                    setState(() {
+                                      if (i <=
+                                          videoController.userList.length) {
+                                        i++; //right swipe
+                                        controller.admireListAPI(
+                                            context,
+                                            videoController.userList[i].id
+                                                .toString());
+                                        checkNet(context).then((value) =>
+                                            controller.admireProfileAPI(
+                                                context,
+                                                videoController.userList[i].id,
+                                                null,
+                                                'transaction'));
+                                        return;
+                                      }
+                                    });
+                                  } else {
+                                    setState(() {
+                                      if (i != 0) {
+                                        i--; //left swipe
+                                        controller.admireListAPI(
+                                            context,
+                                            videoController.userList[i].id
+                                                .toString());
+                                        checkNet(context).then((value) =>
+                                            controller.admireProfileAPI(
+                                                context,
+                                                videoController.userList[i].id,
+                                                null,
+                                                'transaction'));
+                                        return;
+                                      }
+                                    });
+                                  }
+                                },
+                                child: PageView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     controller: pageController,
                                     itemCount: widget.isFrom == true
                                         ? 1
                                         : videoController.userList.length,
-                                    onPageChanged: (v) {
-                                      index = v;
-                                      controller.admireListAPI(
-                                          context,
-                                          videoController.userList[index].id
-                                              .toString());
-                                    },
                                     itemBuilder: (BuildContext context, index) {
                                       return OtherUserList(
-                                          videoController.userList[index]);
+                                          videoController.userList[i]);
                                     }),
-                              // ),
+                              ),
                               Padding(
                                 padding: EdgeInsets.only(left: 24.w, top: 50.h),
                                 child: Row(
@@ -702,7 +701,7 @@ class _UserProfileState extends State<UserProfile> {
                                     GestureDetector(
                                       onTap: () {
                                         displayBottomSheet(context,
-                                            videoController.userList[index].id);
+                                            videoController.userList[i].id);
                                       },
                                       child: Container(
                                         height: 48,
@@ -823,184 +822,241 @@ class _UserProfileState extends State<UserProfile> {
                           ),
                         ),
                   GestureDetector(
-                    onVerticalDragStart: (val){
-                      checkNet(context).then((value) => controller.admireProfileAPI(
-                        context, videoController.userList[index].id
-                      )).then((value) => 
-                        Get.to(
-                          Profile(), 
-                          duration: Duration(milliseconds: 1100),
-                          transition: Transition.downToUp 
-                        ),
-                      );
-                      
+                    onVerticalDragStart: (val) {
+                      Get.to(Profile(),
+                          duration: Duration(milliseconds: 500),
+                          transition: Transition.downToUp);
                     },
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 24.w, right: 24.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              setHelceticaBold(
-                                  '${videoController.userList[index].firstName.toString().capitalizeFirst} Admires',
-                                  14.sp,
-                                  black_121212,
-                                  FontWeight.w500,
-                                  FontStyle.normal,
-                                  -0.28),
-                              const Spacer(),
-                              controller.otherAdmireList.isEmpty
-                                  ? Container()
-                                  : GestureDetector(
-                                    onTap: () {
-                                      displayAdmireBottomSheet();
-                                    },
-                                    child: setHelveticaMedium(
-                                      'See More',
-                                      12.sp,
-                                      grey_aaaaaa,
-                                      FontWeight.w500,
-                                      FontStyle.normal,
-                                      -0.24
-                                    ),
-                                  ),
-                              controller.otherAdmireList.isEmpty
-                                  ? Container()
-                                  : SizedBox(
-                                      width: 5.w,
-                                    ),
-                              controller.otherAdmireList.isEmpty
-                                  ? Container()
-                                  : const Icon(
-                                    Icons.arrow_forward,
-                                    color: grey_aaaaaa,
-                                    size: 12,
-                                  )
-                            ],
+                    child: Container(
+                      color: white,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                setHelceticaBold(
+                                    '${videoController.userList[i].firstName.toString().capitalizeFirst} Admires',
+                                    14.sp,
+                                    black_121212,
+                                    FontWeight.w500,
+                                    FontStyle.normal,
+                                    -0.28),
+                                const Spacer(),
+                                controller.otherAdmireList.isEmpty
+                                    ? Container()
+                                    : GestureDetector(
+                                        onTap: () {
+                                          displayAdmireBottomSheet();
+                                        },
+                                        child: setHelveticaMedium(
+                                            'See More',
+                                            12.sp,
+                                            grey_aaaaaa,
+                                            FontWeight.w500,
+                                            FontStyle.normal,
+                                            -0.24),
+                                      ),
+                                controller.otherAdmireList.isEmpty
+                                    ? Container()
+                                    : SizedBox(
+                                        width: 5.w,
+                                      ),
+                                controller.otherAdmireList.isEmpty
+                                    ? Container()
+                                    : const Icon(
+                                        Icons.arrow_forward,
+                                        color: grey_aaaaaa,
+                                        size: 12,
+                                      )
+                              ],
+                            ),
                           ),
-                        ),
-                        controller.otherAdmireList.isEmpty
-                            ? Container(
-                                height: MediaQuery.of(context).size.height * 0.13,
-                                width: double.infinity,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    setHelveticaBoldCenter(
-                                        'No Admires',
-                                        16.sp,
-                                        black,
-                                        FontWeight.w300,
-                                        FontStyle.normal,
-                                        TextAlign.center)
-                                  ],
-                                ),
-                              )
-                            : Padding(
-                                padding: EdgeInsets.only(top: 16.h),
-                                child: SizedBox(
+                          controller.otherAdmireList.isEmpty
+                              ? Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.11,
+                                      MediaQuery.of(context).size.height * 0.13,
                                   width: double.infinity,
-                                  child: ListView.separated(
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                      width: 16.w,
-                                    ),
-                                    padding: EdgeInsets.only(
-                                      left: 24.w,
-                                      right: 24.w,
-                                    ),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: controller.otherAdmireList.length,
-                                    itemBuilder: ((context, index) {
-                                      return Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              if (widget.selectedUserId ==
-                                                  controller
-                                                      .otherAdmireList[index]
-                                                      .admireDetails!
-                                                      .id
-                                                      .toString()) {
-                                                controller.userProfileAPI(
-                                                    context, true);
-                                              } else {
-                                                controller.admireProfileAPI(
-                                                    context,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      setHelveticaBoldCenter(
+                                          'No Admires',
+                                          16.sp,
+                                          black,
+                                          FontWeight.w300,
+                                          FontStyle.normal,
+                                          TextAlign.center)
+                                    ],
+                                  ),
+                                )
+                              : Padding(
+                                  padding: EdgeInsets.only(top: 16.h),
+                                  child: SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.11,
+                                    width: double.infinity,
+                                    child: ListView.separated(
+                                      primary: false,
+                                      shrinkWrap: true,
+                                      separatorBuilder: (context, index) =>
+                                          SizedBox(
+                                        width: 16.w,
+                                      ),
+                                      padding: EdgeInsets.only(
+                                        left: 24.w,
+                                        right: 24.w,
+                                      ),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          controller.otherAdmireList.length,
+                                      itemBuilder: ((context, index) {
+                                        return Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                if (widget.selectedUserId ==
                                                     controller
                                                         .otherAdmireList[index]
                                                         .admireDetails!
-                                                        .id);
-                                              }
-                                            },
-                                            child: CircularProfileAvatar(
-                                              '',
-                                              radius: 24,
-                                              child: controller
-                                                          .otherAdmireList[index]
-                                                          .admireDetails!
-                                                          .image ==
-                                                      null
-                                                  ? SvgPicture.asset(
-                                                      placeholder,
-                                                      height: 48.h,
-                                                      width: 48.w,
-                                                    )
-                                                  : CachedNetworkImage(
-                                                      imageUrl: controller
-                                                          .otherAdmireList[index]
-                                                          .admireDetails!
-                                                          .image!,
-                                                      height: 48.h,
-                                                      width: 48.w,
-                                                      fit: BoxFit.cover,
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  downloadProgress) =>
-                                                              SvgPicture.asset(
+                                                        .id
+                                                        .toString()) {
+                                                  controller
+                                                      .userProfileAPI(
+                                                          context, false)
+                                                      .then((value) =>
+                                                          setState(() {
+                                                            Get.to(Profile(),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            1100),
+                                                                    transition:
+                                                                        Transition
+                                                                            .downToUp)!
+                                                                .then((value) {
+                                                              checkNet(context)
+                                                                  .then(
+                                                                      (value) {
+                                                                controller.admireListAPI(
+                                                                    context,
+                                                                    videoController
+                                                                        .userList[
+                                                                            i]
+                                                                        .id
+                                                                        .toString());
+                                                                setState(() {});
+                                                              }).then((value) =>
+                                                                      setState(
+                                                                          () {}));
+                                                            });
+                                                          }));
+                                                } else {
+                                                  controller
+                                                      .admireProfileAPI(
+                                                          context,
+                                                          controller
+                                                              .otherAdmireList[
+                                                                  index]
+                                                              .admireDetails!
+                                                              .id)
+                                                      .then((value) =>
+                                                          setState(() {
+                                                            Get.to(Profile(),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            1100),
+                                                                    transition:
+                                                                        Transition
+                                                                            .downToUp)!
+                                                                .then((value) {
+                                                              checkNet(context)
+                                                                  .then(
+                                                                      (value) {
+                                                                controller.admireListAPI(
+                                                                    context,
+                                                                    videoController
+                                                                        .userList[
+                                                                            i]
+                                                                        .id
+                                                                        .toString());
+                                                                setState(() {});
+                                                              }).then((value) =>
+                                                                      setState(
+                                                                          () {}));
+                                                            });
+                                                          }));
+                                                }
+                                              },
+                                              child: CircularProfileAvatar(
+                                                '',
+                                                radius: 24,
+                                                child: controller
+                                                            .otherAdmireList[
+                                                                index]
+                                                            .admireDetails!
+                                                            .image ==
+                                                        null
+                                                    ? SvgPicture.asset(
                                                         placeholder,
                                                         height: 48.h,
                                                         width: 48.w,
-                                                      ),
-                                                      errorWidget:
-                                                          (context, url, error) =>
-                                                              SvgPicture.asset(
-                                                        placeholder,
+                                                      )
+                                                    : CachedNetworkImage(
+                                                        imageUrl: controller
+                                                            .otherAdmireList[
+                                                                index]
+                                                            .admireDetails!
+                                                            .image!,
                                                         height: 48.h,
                                                         width: 48.w,
+                                                        fit: BoxFit.cover,
+                                                        progressIndicatorBuilder:
+                                                            (context, url,
+                                                                    downloadProgress) =>
+                                                                SvgPicture
+                                                                    .asset(
+                                                          placeholder,
+                                                          height: 48.h,
+                                                          width: 48.w,
+                                                        ),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            SvgPicture.asset(
+                                                          placeholder,
+                                                          height: 48.h,
+                                                          width: 48.w,
+                                                        ),
                                                       ),
-                                                    ),
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            height: 4.h,
-                                          ),
-                                          setHelveticaMedium(
-                                              controller.otherAdmireList[index]
-                                                      .admireDetails!.firstName ??
-                                                  "",
-                                              12.sp,
-                                              black_121212,
-                                              FontWeight.w500,
-                                              FontStyle.normal,
-                                              -0.24),
-                                        ],
-                                      );
-                                    }),
+                                            SizedBox(
+                                              height: 4.h,
+                                            ),
+                                            setHelveticaMedium(
+                                                controller
+                                                        .otherAdmireList[index]
+                                                        .admireDetails!
+                                                        .firstName ??
+                                                    "",
+                                                12.sp,
+                                                black_121212,
+                                                FontWeight.w500,
+                                                FontStyle.normal,
+                                                -0.24),
+                                          ],
+                                        );
+                                      }),
+                                    ),
                                   ),
-                                ),
-                              )
-                      ],
+                                )
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -1009,7 +1065,7 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
-  displayAdmireBottomSheet(){
+  displayAdmireBottomSheet() {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -1022,69 +1078,79 @@ class _UserProfileState extends State<UserProfile> {
                       topLeft: Radius.circular(16.0),
                       topRight: Radius.circular(16.0))),
               child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height - 120.h,
-                  child: Wrap(
-                    children: [
-                      StatefulBuilder(builder: (context, setState) {
-                        return Column(
-                          children: [
-                            SizedBox(
-                              height: 12.h,
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Container(
-                                width: 50,
-                                height: 3,
-                                decoration: BoxDecoration(
-                                  color: grey_3f3f3f.withOpacity(0.4),
-                                  borderRadius:  BorderRadius.all(
-                                    Radius.circular(50.r),
-                                  )
-                                ),
-                              )
-                            ),
-                            SizedBox(
-                              height: 24.h,
-                            ),
-                           LayoutBuilder(
-                            builder: (context, constraints) {
-                                return GridView.builder(
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  padding: EdgeInsets.only(left: 20.w, right: 8.w, bottom: 10.h, top: 16.h),
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisSpacing: 10.w,
-                                    mainAxisSpacing: 0,
-                                    crossAxisCount: constraints.maxWidth == 310
-                                        ? 3
-                                        : constraints.maxWidth > 310 && constraints.maxWidth < 520
-                                            ? 4
-                                            : constraints.maxWidth > 520 && constraints.maxWidth < 720
-                                                ? 5
-                                                : 6,
-                                    childAspectRatio: constraints.maxWidth == 310
-                                        ? 0.85.w
-                                        : constraints.maxWidth > 310 && constraints.maxWidth < 520
-                                            ? 0.70.w
-                                            : constraints.maxWidth > 520 && constraints.maxWidth < 720
-                                                ? 0.75.w
-                                                : 0.9.w,
-                                  ),
-                                  itemCount: controller.otherAdmireList.length,
-                                  itemBuilder: (context, i) => AllAdmireList(controller.otherAdmireList[i], 'other', null, controller.details.value.id)
-                                );
-                              }
-                            ),
-                          ],
-                        );
-                      }),
-                    ],
-                  ),
-                ),
+                child: controller.otherAdmireList.length >= 15
+                    ? Container(
+                        height: MediaQuery.of(context).size.height - 120.h,
+                        child: Admire(),
+                      )
+                    : Admire(),
               ));
         });
+  }
+
+  Wrap Admire() {
+    return Wrap(
+      children: [
+        StatefulBuilder(builder: (context, setState) {
+          return Column(
+            children: [
+              SizedBox(
+                height: 12.h,
+              ),
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 50,
+                    height: 3,
+                    decoration: BoxDecoration(
+                        color: grey_3f3f3f.withOpacity(0.4),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50.r),
+                        )),
+                  )),
+              SizedBox(
+                height: 24.h,
+              ),
+              LayoutBuilder(builder: (context, constraints) {
+                return GridView.builder(
+                    primary: false,
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(
+                        left: 8.w, right: 8.w, bottom: 10.h, top: 16.h),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: 10.w,
+                      mainAxisSpacing: 0,
+                      crossAxisCount: constraints.maxWidth == 310
+                          ? 3
+                          : constraints.maxWidth > 310 &&
+                                  constraints.maxWidth < 520
+                              ? 4
+                              : constraints.maxWidth > 520 &&
+                                      constraints.maxWidth < 720
+                                  ? 5
+                                  : 6,
+                      childAspectRatio: constraints.maxWidth == 310
+                          ? 0.85.w
+                          : constraints.maxWidth > 310 &&
+                                  constraints.maxWidth < 520
+                              ? 0.70.w
+                              : constraints.maxWidth > 520 &&
+                                      constraints.maxWidth < 720
+                                  ? 0.75.w
+                                  : 0.9.w,
+                    ),
+                    itemCount: controller.otherAdmireList.length,
+                    itemBuilder: (context, i) => AllAdmireList(
+                        controller.otherAdmireList[i],
+                        'other',
+                        null,
+                        controller.details.value.id));
+              }),
+            ],
+          );
+        }),
+      ],
+    );
   }
 
   @override

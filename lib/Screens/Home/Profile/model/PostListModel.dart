@@ -131,7 +131,7 @@ class TaggedUser {
       createdAt: DateTime.parse(json["created_at"]),
       updatedAt: DateTime.parse(json["updated_at"]),
       deletedAt: json["deleted_at"],
-      userDetails: UserDetails.fromJson(json["user_details"]),
+      userDetails: json["user_details"] == null ? null : UserDetails.fromJson(json["user_details"]),
   );
 
   Map<String, dynamic> toJson() => {

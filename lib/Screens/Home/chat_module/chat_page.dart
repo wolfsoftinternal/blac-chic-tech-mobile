@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/common_functions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 
@@ -149,26 +151,51 @@ class _ChatPageState extends State<ChatPage> {
     size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: white,
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
-        ),
-        title: Text(widget.receiver["name"], style: TextStyle(color: Colors.black,
+      body: Column(children: [
+        SizedBox(height: 50.h,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: Icon(
+                  Icons.arrow_back
+                ),
+              ),
+            ),
+            Text(widget.receiver["name"].toString().toUpperCase(), style: TextStyle(color: Colors.black,
           fontWeight: FontWeight.w600,
           fontFamily: AppFont.circularBookFont,
           fontStyle: FontStyle.normal,),),
-        backgroundColor: white,
-      ),
-      body: SafeArea(
-          child: Column(children: [
+          Padding(
+              padding: const EdgeInsets.only(right: 24.0),
+              child: Icon(
+                Icons.arrow_back,
+                color: white,
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 20.0.h),
+          child: Container(
+            width: double.infinity,
+            height: 1,
+            color: Color(0xffebebeb),
+          ),
+        ),
         Expanded(
-            child: roomId.isEmpty
-                ? Container()
-                // _isLoading ? myLoader() :
-                : chatStream()),
-            roomId.isEmpty || roomId == null ? Container() : _typingStatus(),
+        child: roomId.isEmpty
+            ? Container()
+            // _isLoading ? myLoader() :
+            : chatStream()),
+        roomId.isEmpty || roomId == null ? Container() : _typingStatus(),
         sendMessageForm2(),
-      ])),
+      ]),
     );
   }
 
@@ -201,7 +228,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget typingStatusBubble() {
     var decor = const BoxDecoration(
       borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(0),
+          topLeft: Radius.circular(10),
           topRight: Radius.circular(10),
           bottomRight: Radius.circular(10),
           bottomLeft: Radius.circular(10)),
@@ -394,7 +421,7 @@ class _ChatPageState extends State<ChatPage> {
         ? const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),
-              topRight: Radius.circular(0),
+              topRight: Radius.circular(10),
               bottomRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
             ),
@@ -402,7 +429,7 @@ class _ChatPageState extends State<ChatPage> {
           )
         : const BoxDecoration(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(0),
+              topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -412,60 +439,63 @@ class _ChatPageState extends State<ChatPage> {
 
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        decoration: decor,
-        child: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                constraints: BoxConstraints(
-                  maxWidth: size.width * 0.6,
-                ),
-                child: isMe?Text(
-                  message,
-                  softWrap: true,
-                  style: TextStyle(
-                    color: white,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: AppFont.circularBookFont,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 15.0,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: isMe? 4.0 : 8.0),
+        child: Container(
+          decoration: decor,
+          child: Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: size.width * 0.6,
                   ),
-                  textAlign: TextAlign.left,
-                ):Text(
-                  message,
-                  softWrap: true,
-                  style: TextStyle(
-                    color: black,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: AppFont.boldFont,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 15.0,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Opacity(
-                opacity: isMe ? 0.69 : 1,
-                child: Text(
-                  formattedTime,
-                  softWrap: true,
-                  style: TextStyle(
-                    color: isMe ? white : EdTxtBg,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: AppFont.sfProRegularFont,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 11.7,
+                  child: isMe?Text(
+                    message,
+                    softWrap: true,
+                    style: TextStyle(
+                      color: white,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: roboto_medium,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 15.0,
+                    ),
+                    textAlign: TextAlign.left,
+                  ):Text(
+                    message,
+                    softWrap: true,
+                    style: TextStyle(
+                      color: black,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: roboto_medium,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 15.0,
+                    ),
+                    textAlign: TextAlign.left,
                   ),
                 ),
-              )
-            ],
+                const SizedBox(
+                  height: 2,
+                ),
+                Opacity(
+                  opacity: isMe ? 0.69 : 1,
+                  child: Text(
+                    formattedTime,
+                    softWrap: true,
+                    style: TextStyle(
+                      color: isMe ? white : EdTxtBg,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: AppFont.sfProRegularFont,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 11.7,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

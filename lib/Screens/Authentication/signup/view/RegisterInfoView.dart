@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Layout/BlackNextButton.dart';
+import 'package:blackchecktech/Layout/RegisterBlackButton.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalLastQueView.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/view/AdditionalQueFormView.dart';
@@ -18,6 +19,7 @@ import 'package:get/get.dart';
 import '../../../../Styles/my_icons.dart';
 import '../../../../Styles/my_strings.dart';
 import '../../login/view/LoginView.dart';
+import 'dart:io' show Platform;
 
 class RegisterInfoView extends StatelessWidget {
   const RegisterInfoView({Key? key}) : super(key: key);
@@ -31,7 +33,7 @@ class RegisterInfoView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            flex: 9,
+            flex: 5,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -40,6 +42,7 @@ class RegisterInfoView extends StatelessWidget {
                     width: double.infinity,
                     child: FittedBox(
                         child: Image.asset(img_girl), fit: BoxFit.cover)),
+
                 Image.asset(
                   img_logo,
                   width: 70.r,
@@ -54,70 +57,191 @@ class RegisterInfoView extends StatelessWidget {
                 color: white_ffffff,
                 height: double.infinity,
                 width: double.infinity,
-                child: Padding(
-                  padding:  EdgeInsets.all(24.0.r),
+                child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        
-                        child: BlackNextButton(str_register, white_ffffff, () async {
-                          var preferences = MySharedPref();
-                          SignupModel? myModel = await preferences
-                              .getSignupModel(SharePreData.keySignupModel);
+                      Padding(
+                        padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r, top: 24.0.r),
+                        child: Container(
+                          
+                          child: RegisterBlackButton(str_register, white_ffffff, () async {
+                            var preferences = MySharedPref();
+                            SignupModel? myModel = await preferences
+                                .getSignupModel(SharePreData.keySignupModel);
 
-                          // String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
-                          // String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
-                          // String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
-                          // String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
-                          // String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
+                            // String personalInfo = await preferences.getStringValue(SharePreData.keyPersonalInfo);
+                            // String experienceInfo = await preferences.getStringValue(SharePreData.keyExperienceInfo);
+                            // String educationalInfo = await preferences.getStringValue(SharePreData.keyEducationalInfo);
+                            // String questionsInfo = await preferences.getStringValue(SharePreData.keyQuestionsInfo);
+                            // String lastQuestionsInfo = await preferences.getStringValue(SharePreData.keyLastQuestionsInfo);
 
-                          // if(myModel == null){
-                          //   Get.to(const SignupFormView());
-                          // }else if (personalInfo == "") {
-                          //   Get.to(const PersonalInfoFormView());
-                          // }else if (experienceInfo == "") {
-                          //   Get.to(const ExperienceInfoFormView());
-                          // }else if (educationalInfo == "") {
-                          //   Get.to(const EducationInfoFormView());
-                          // }else if (questionsInfo == "") {
-                          //   Get.to(const AdditionalQueFormView());
-                          // }else if(lastQuestionsInfo == ""){
-                          //   Get.to(AdditionalLastQueView());
-                          // }else{
-                          //   Get.offAll(BottomNavigation());
-                          // }
+                            // if(myModel == null){
+                            //   Get.to(const SignupFormView());
+                            // }else if (personalInfo == "") {
+                            //   Get.to(const PersonalInfoFormView());
+                            // }else if (experienceInfo == "") {
+                            //   Get.to(const ExperienceInfoFormView());
+                            // }else if (educationalInfo == "") {
+                            //   Get.to(const EducationInfoFormView());
+                            // }else if (questionsInfo == "") {
+                            //   Get.to(const AdditionalQueFormView());
+                            // }else if(lastQuestionsInfo == ""){
+                            //   Get.to(AdditionalLastQueView());
+                            // }else{
+                            //   Get.offAll(BottomNavigation());
+                            // }
 
-                          if (myModel == null) {
-                            Get.to(const SignupFormView());
-                          } else if (myModel.data!.aboutUs == "") {
-                            Get.to(const PersonalInfoFormView());
-                          } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
-                            Get.to(const ExperienceInfoFormView());
-                          } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
-                            Get.to(const EducationInfoFormView());
-                          } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
-                            Get.to(const AdditionalQueFormView());
-                          } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
-                            String lastQuestionsInfo = "";
-                            for (int i = 0;
-                                i < myModel.data!.questions!.length;
-                                i++) {
-                              if (myModel.data!.questions![i].type ==
-                                  "additional") {
-                                lastQuestionsInfo = "Done";
+                            if (myModel == null) {
+                              Get.to(const SignupFormView());
+                            } else if (myModel.data!.aboutUs == "") {
+                              Get.to(const PersonalInfoFormView());
+                            } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
+                              Get.to(const ExperienceInfoFormView());
+                            } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
+                              Get.to(const EducationInfoFormView());
+                            } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                              Get.to(const AdditionalQueFormView());
+                            } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                              String lastQuestionsInfo = "";
+                              for (int i = 0;
+                                  i < myModel.data!.questions!.length;
+                                  i++) {
+                                if (myModel.data!.questions![i].type ==
+                                    "additional") {
+                                  lastQuestionsInfo = "Done";
+                                }
                               }
-                            }
-                            if (lastQuestionsInfo != "Done") {
-                              Get.to(const AdditionalLastQueView());
+                              if (lastQuestionsInfo != "Done") {
+                                Get.to(const AdditionalLastQueView());
+                              } else {
+                                Get.offAll(HomePage());
+                              }
                             } else {
                               Get.offAll(HomePage());
                             }
-                          } else {
-                            Get.offAll(HomePage());
-                          }
-                        }),
+                          }),
+                        ),
+                      ),
+                      Platform.isIOS
+                      ? SizedBox(height: 16.h,) : Container(),
+                      Platform.isIOS
+                      ? Padding(
+                        padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
+                        child: Container(
+                          child: RegisterBlackButton('Continue with Apple', white_ffffff, () async {
+                            var preferences = MySharedPref();
+                            SignupModel? myModel = await preferences
+                                .getSignupModel(SharePreData.keySignupModel);
+                            if (myModel == null) {
+                              Get.to(const SignupFormView());
+                            } else if (myModel.data!.aboutUs == "") {
+                              Get.to(const PersonalInfoFormView());
+                            } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
+                              Get.to(const ExperienceInfoFormView());
+                            } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
+                              Get.to(const EducationInfoFormView());
+                            } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                              Get.to(const AdditionalQueFormView());
+                            } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                              String lastQuestionsInfo = "";
+                              for (int i = 0;
+                                  i < myModel.data!.questions!.length;
+                                  i++) {
+                                if (myModel.data!.questions![i].type ==
+                                    "additional") {
+                                  lastQuestionsInfo = "Done";
+                                }
+                              }
+                              if (lastQuestionsInfo != "Done") {
+                                Get.to(const AdditionalLastQueView());
+                              } else {
+                                Get.offAll(HomePage());
+                              }
+                            } else {
+                              Get.offAll(HomePage());
+                            }
+                          }),
+                        ),
+                      ) : Container(),
+                      SizedBox(height: 16.h,),
+                      Padding(
+                        padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
+                        child: Container(
+                          child: RegisterBlackButton('Continue with Google', white_ffffff, () async {
+                            var preferences = MySharedPref();
+                            SignupModel? myModel = await preferences
+                                .getSignupModel(SharePreData.keySignupModel);
+                            if (myModel == null) {
+                              Get.to(const SignupFormView());
+                            } else if (myModel.data!.aboutUs == "") {
+                              Get.to(const PersonalInfoFormView());
+                            } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
+                              Get.to(const ExperienceInfoFormView());
+                            } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
+                              Get.to(const EducationInfoFormView());
+                            } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                              Get.to(const AdditionalQueFormView());
+                            } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                              String lastQuestionsInfo = "";
+                              for (int i = 0;
+                                  i < myModel.data!.questions!.length;
+                                  i++) {
+                                if (myModel.data!.questions![i].type ==
+                                    "additional") {
+                                  lastQuestionsInfo = "Done";
+                                }
+                              }
+                              if (lastQuestionsInfo != "Done") {
+                                Get.to(const AdditionalLastQueView());
+                              } else {
+                                Get.offAll(HomePage());
+                              }
+                            } else {
+                              Get.offAll(HomePage());
+                            }
+                          }),
+                        ),
+                      ),
+                      SizedBox(height: 16.h,),
+                      Padding(
+                        padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
+                        child: Container(
+                          child: RegisterBlackButton('Continue with Facebook', white_ffffff, () async {
+                            var preferences = MySharedPref();
+                            SignupModel? myModel = await preferences
+                                .getSignupModel(SharePreData.keySignupModel);
+                            if (myModel == null) {
+                              Get.to(const SignupFormView());
+                            } else if (myModel.data!.aboutUs == "") {
+                              Get.to(const PersonalInfoFormView());
+                            } else if (myModel.data!.currentJobs == null || myModel.data!.currentJobs.toString() == '[]') {
+                              Get.to(const ExperienceInfoFormView());
+                            } else if (myModel.data!.educations == null || myModel.data!.educations.toString() == '[]') {
+                              Get.to(const EducationInfoFormView());
+                            } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                              Get.to(const AdditionalQueFormView());
+                            } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                              String lastQuestionsInfo = "";
+                              for (int i = 0;
+                                  i < myModel.data!.questions!.length;
+                                  i++) {
+                                if (myModel.data!.questions![i].type ==
+                                    "additional") {
+                                  lastQuestionsInfo = "Done";
+                                }
+                              }
+                              if (lastQuestionsInfo != "Done") {
+                                Get.to(const AdditionalLastQueView());
+                              } else {
+                                Get.offAll(HomePage());
+                              }
+                            } else {
+                              Get.offAll(HomePage());
+                            }
+                          }),
+                        ),
                       ),
                        SizedBox(
                         height: 16.h,
@@ -126,23 +250,26 @@ class RegisterInfoView extends StatelessWidget {
                         onTap: () {
                           Get.to(const LoginView());
                         },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color(0xfff2f2f2),
-                            borderRadius: BorderRadius.circular(4.0.r),
-                          ),
-                          child: // Already have an account
-                              Padding(
-                            padding: EdgeInsets.all(17.5.r),
-                            child: Center(
-                              child: Text(str_already_have_second,
-                                  style:  TextStyle(
-                                      color: black_121212,
-                                      fontFamily: helvetica_neu_bold,
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 16.0.sp),
-                                  textAlign: TextAlign.left),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: const Color(0xfff2f2f2),
+                              borderRadius: BorderRadius.circular(4.0.r),
+                            ),
+                            child: // Already have an account
+                                Padding(
+                              padding: EdgeInsets.all(17.5.r),
+                              child: Center(
+                                child: Text(str_already_have_second,
+                                    style:  TextStyle(
+                                        color: black_121212,
+                                        fontFamily: helvetica_neu_bold,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 16.0.sp),
+                                    textAlign: TextAlign.left),
+                              ),
                             ),
                           ),
                         ),
@@ -151,48 +278,51 @@ class RegisterInfoView extends StatelessWidget {
                         height: 24,
                       ),
                       // By continuing and signing up for an account, you confirm that you agree to Black Chic Tech User Agre
-                      RichText(
-                          textAlign: TextAlign.center,
-                          text:  TextSpan(children: [
-                            TextSpan(
-                                style: TextStyle(
-                                    color: const Color(0xff121212),
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "Roboto",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 10.0.sp,
-                                    height: 1.5.h),
-                                text:
-                                    "By continuing and signing up for an account, you confirm that you agree to Black Chic Tech "),
-                            TextSpan(
-                                style: TextStyle(
-                                    color: const Color(0xffff881a),
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "Roboto",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 10.0.sp,
-                                    height: 1.5.h),
-                                text: "User Agreement,"),
-                            TextSpan(
-                                style: TextStyle(
-                                    color: const Color(0xff121212),
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "Roboto",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 10.0.sp,
-                                    height: 1.5.h),
-                                text:
-                                    " and acknowledge that you have read Black Chic Tech "),
-                            const TextSpan(
-                                style: TextStyle(
-                                    color: Color(0xffff881a),
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "Roboto",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 10.0,
-                                    height: 1.5),
-                                text: "Privacy Notice."),
-                          ]))
+                      Padding(
+                        padding: EdgeInsets.only(left: 24.0.r, right: 24.0.r, bottom: 15.r),
+                        child: RichText(
+                            textAlign: TextAlign.center,
+                            text:  TextSpan(children: [
+                              TextSpan(
+                                  style: TextStyle(
+                                      color: const Color(0xff121212),
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "Roboto",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 10.0.sp,
+                                      height: 1.5.h),
+                                  text:
+                                      "By continuing and signing up for an account, you confirm that you agree to Black Chic Tech "),
+                              TextSpan(
+                                  style: TextStyle(
+                                      color: const Color(0xffff881a),
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "Roboto",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 10.0.sp,
+                                      height: 1.5.h),
+                                  text: "User Agreement,"),
+                              TextSpan(
+                                  style: TextStyle(
+                                      color: const Color(0xff121212),
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "Roboto",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 10.0.sp,
+                                      height: 1.5.h),
+                                  text:
+                                      " and acknowledge that you have read Black Chic Tech "),
+                              const TextSpan(
+                                  style: TextStyle(
+                                      color: Color(0xffff881a),
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "Roboto",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 10.0,
+                                      height: 1.5),
+                                  text: "Privacy Notice."),
+                            ])),
+                      )
                     ],
                   ),
                 )),

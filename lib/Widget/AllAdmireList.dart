@@ -282,35 +282,37 @@ class _AllAdmireListState extends State<AllAdmireList> {
                           ),
                         ])
                 : SizedBox(
-                    child: CircularProfileAvatar(
-                          '',
-                          radius: 32,
-                      child: widget.admireList.admireDetails!.image == null
-                          ? SvgPicture.asset(
-                              placeholder,
-                              height: 64.h,
-                              width: 64.w,
-                            )
-                          : CachedNetworkImage(
-                              imageUrl:
-                                  widget.admireList.admireDetails!.image!,
-                              height: 64.h,
-                              width: 62.w,
-                              fit: BoxFit.cover,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      SvgPicture.asset(
+                    child: Center(
+                      child: CircularProfileAvatar(
+                            '',
+                            radius: 32,
+                        child: widget.admireList.admireDetails!.image == null
+                            ? SvgPicture.asset(
                                 placeholder,
                                 height: 64.h,
                                 width: 64.w,
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  SvgPicture.asset(
-                                placeholder,
+                              )
+                            : CachedNetworkImage(
+                                imageUrl:
+                                    widget.admireList.admireDetails!.image!,
                                 height: 64.h,
-                                width: 64.w,
+                                width: 62.w,
+                                fit: BoxFit.cover,
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) =>
+                                        SvgPicture.asset(
+                                  placeholder,
+                                  height: 64.h,
+                                  width: 64.w,
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    SvgPicture.asset(
+                                  placeholder,
+                                  height: 64.h,
+                                  width: 64.w,
+                                ),
                               ),
-                            ),
+                      ),
                     ),
                   ),
             controller.isRearrange.value == true
@@ -388,15 +390,26 @@ class _AllAdmireListState extends State<AllAdmireList> {
         SizedBox(
           height: 2.h,
         ),
-        setHelveticaMedium(
-            widget.admireList.admireDetails!.currentJobs != null
-                ? widget.admireList.admireDetails!.currentJobs!.companyName.toString().capitalizeFirst ?? ""
-                : "",
-            12.sp,
-            grey_aaaaaa,
-            FontWeight.w500,
-            FontStyle.normal,
-            -0.1),
+        Container(
+          width: 100.w,
+          child: Text(
+           widget.admireList.admireDetails!.currentJobs != null
+                            ? widget.admireList.admireDetails!.currentJobs!.companyName.toString().capitalizeFirst ?? ""
+                            : "",
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 12.sp,
+              fontFamily: helveticaNeueNeue_medium,
+              fontWeight: FontWeight.w500,
+              color: grey_aaaaaa,
+              fontStyle: FontStyle.normal,
+              letterSpacing: -0.1
+            ),
+          ),
+        ),
       ],
     );
   }

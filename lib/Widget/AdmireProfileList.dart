@@ -1,6 +1,7 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
 import 'package:blackchecktech/Screens/Home/Settings/view/ProfileSetting.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -52,7 +53,13 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           )
         : GestureDetector(
           onTap: (){
-            controller.userProfileAPI(context, true);
+            controller.userProfileAPI(context, true).then((val){
+              Get.to(
+                Profile(), 
+                duration: Duration(milliseconds: 500),
+                transition: Transition.downToUp 
+              );
+            });
           },
           child: Stack(
               children: [

@@ -98,3 +98,4 @@ const follow = 'assets/images/follow.svg';
 const post_image = 'assets/images/post_image.gif';
 const feed = 'assets/images/feed.svg';
 const nft = 'assets/images/nft.svg';
+const appleLogo = 'assets/images/apple_logo.png';
