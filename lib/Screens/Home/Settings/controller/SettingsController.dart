@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Networks/token_update_request.dart';
 import 'package:blackchecktech/Welcome.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -99,12 +100,40 @@ class SettingsController extends GetxController {
 
             userLogout(context);
           } else if (model.statusCode == 200) {
+            // deletePeerboardMember(context);
             await preferences.clear();
             Get.offAll(Welcome());
           }
         });
       } else {
         print(res.reasonPhrase);
+      }
+    });
+  }
+
+  Future<dynamic> deletePeerboardMember(BuildContext context) async {
+    var preferences = MySharedPref();
+    SignupModel? myModel;
+    myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
+
+    var email = myModel!.data!.email.toString();
+
+    var header = Options(
+      headers: {
+        'Authorization': '2360d5f790268aa27fe70a28cc5548a3',
+      },
+    );
+    var response = await Dio().post(
+      'https://api.peerboard.com/v1/members/$email',
+      data: {
+        "external_id": myModel.data!.id.toString(),
+        "email": email,
+      },
+      options: header
+    ).then((value) async {
+      if(value.statusCode == 200){
+        await preferences.clear();
+        Get.offAll(Welcome());
       }
     });
   }

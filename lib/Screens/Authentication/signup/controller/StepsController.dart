@@ -287,7 +287,6 @@ class StepsController extends GetxController {
           await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
           SignupModel? myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
 
-          print(myModel?.data!.questions![0].answer);
           if (visibility != null) {
             settingsController.visible.value = signUp.data!.isVisible!;
           } else {
@@ -298,8 +297,8 @@ class StepsController extends GetxController {
               Get.back();
               snackBar(context, 'Profile edited successfully');
             } else {
-              // Get.to(const ExperienceInfoFormView());
-              createPeerboardMember(context);
+              Get.to(const ExperienceInfoFormView());
+              // createPeerboardMember(context);
             }
           }
         } else {
@@ -337,9 +336,15 @@ class StepsController extends GetxController {
         ]
       },
       options: header
-    );
-
-    Get.to(const ExperienceInfoFormView());
+    ).then((value) {
+      if(value.statusCode == 200){
+        Get.to(const ExperienceInfoFormView());
+      }else if(value.statusCode == 409){
+        Get.to(const ExperienceInfoFormView());
+      }
+    });
+    
+    
   }
 
   companyListAPI(BuildContext context, body) async {
@@ -486,9 +491,9 @@ class StepsController extends GetxController {
     dynamic body = {
       'current_job_title': currentTitleController.value.text,
       'current_job_company_name': companyName.value,
-      'current_job_logo': companyImage.toString(),
+      // 'current_job_logo': companyImage.toString(),
       'current_job_website': currentCompanyWebsiteController.value.text,
-      'industry': industryName.toString(),
+      // 'industry': industryName.toString(),
       'past_jobs': pastCompanyDetails.toJson().toString(),
     };
 
