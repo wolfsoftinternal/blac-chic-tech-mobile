@@ -7,6 +7,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/TextUtilities.dart';
+import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:readmore/readmore.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -44,7 +46,7 @@ class _PastFeature1State extends State<PastFeature1> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 480.h,
+                    height: 520.h,
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
@@ -103,9 +105,10 @@ class _PastFeature1State extends State<PastFeature1> {
                                       Text(
                                         "Past Features",
                                         style: TextStyle(
-                                            fontSize: 20.sp,
-                                            color: Colors.white,
-                                            fontFamily: helvetica_neu_bold),
+                                          fontSize: 20.sp,
+                                          color: Colors.white,
+                                          fontFamily: helvetica_neu_bold
+                                        ),
                                       ),
                                       GestureDetector(
                                         onTap: () {
@@ -164,6 +167,46 @@ class _PastFeature1State extends State<PastFeature1> {
                                         // ),
                                       ],
                                     )),
+                                // SizedBox(height: 24.h,),
+                                // Center(
+                                //   child: Container(
+                                //     width: MediaQuery.of(context).size.width * 0.48,
+                                //     child: setHelveticaMedium(DateFormat('dd MMMM').format(featuredController
+                                //                       .featuredList[widget
+                                //                           .selectedPositionFromPrevious].createdAt!), 12.sp, white, FontWeight.w500, FontStyle.normal),
+                                //   ),
+                                // ),
+                                // SizedBox(height: 8.h,),
+                                // Center(
+                                //   child: Container(
+                                //     width: MediaQuery.of(context).size.width * 0.50,
+                                //     child: Stack(
+                                //       children: [
+                                //         Center(
+                                //           child: Container(
+                                //             height: 5.h,
+                                //             width: MediaQuery.of(context).size.width * 0.50,
+                                //             decoration: BoxDecoration(
+                                //               color: grey_94ffffff,
+                                //               borderRadius: BorderRadius.circular(50.r)
+                                //             ),
+                                //           ),
+                                //         ),
+                                //         Positioned(
+                                //           left: MediaQuery.of(context).size.width * featureIndex,
+                                //           child: Container(
+                                //             height: 5.h,
+                                //             width: MediaQuery.of(context).size.width * 0.13,
+                                //             decoration: BoxDecoration(
+                                //               color: white,
+                                //               borderRadius: BorderRadius.circular(50.r)
+                                //             ),
+                                //           ),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // )
                               ],
                             ),
                           ),
@@ -466,7 +509,7 @@ class _PastFeature1State extends State<PastFeature1> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        "See full article",
+                                        "Swipe up to read article",
                                         style: TextStyle(
                                             fontFamily: helvetica_neu_bold,
                                             fontSize: 12.sp,
@@ -554,7 +597,8 @@ class _PastFeature1State extends State<PastFeature1> {
               title: featuredController
                   .featuredList[widget.selectedPositionFromPrevious]
                   .writer_name,
-              theme: 'white'),
+              theme: 'white',
+              url: featuredController.featuredList[widget.selectedPositionFromPrevious].link ?? 'https://www.google.com'),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;

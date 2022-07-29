@@ -362,15 +362,18 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                   controller.details.value.firstName != null ? '${controller.details.value.firstName.toString().capitalizeFirst}' : "",
                                                     24.sp,
                                                     black_121212,
-                                                    FontWeight.w500,
+                                                    FontWeight.w900,
                                                     FontStyle.normal,
-                                                    -0.96),
+                                                    0.2),
                                                 Expanded(
                                                     flex: 1,
-                                                    child: SvgPicture.asset(
-                                                      check_icon,
-                                                      alignment:
-                                                          Alignment.topLeft,
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(top: 2.0.h),
+                                                      child: SvgPicture.asset(
+                                                        check_icon,
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                      ),
                                                     )),
                                                 controller.details.value
                                                                 .instagramUrl !=
@@ -506,7 +509,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                               .currentJobs!
                                                               .companyName.toString().capitalize}',
                                                       16,
-                                                      grey_3f3f3f,
+                                                      Color(0xff787878),
                                                       FontWeight.w500,
                                                       FontStyle.normal),
                                                 ),
@@ -515,36 +518,39 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                         : Container(),
                                     controller.details.value.currentJobs != null
                                         ? controller.details.value.currentJobs!.website != null
-                                            ? GestureDetector(
-                                              onTap: (){
-                                                if(controller.details.value.currentJobs!.website!.contains("http")){
-                                                  launchURL(controller
-                                                              .details
-                                                              .value
-                                                              .currentJobs!
-                                                              .website!);
-                                                }else{
-                                                  var url = "https://www." + controller
-                                                              .details
-                                                              .value
-                                                              .currentJobs!
-                                                              .website!;
-                                                  launchURL(url);
-                                                }
-                                              },
-                                              child: Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: setHelveticaMedium(
-                                                      controller
-                                                              .details
-                                                              .value
-                                                              .currentJobs!
-                                                              .website ?? "",
-                                                      12.sp,
-                                                      blue_0a84ff,
-                                                      FontWeight.w500,
-                                                      FontStyle.normal),
-                                                ),
+                                            ? Padding(
+                                              padding: EdgeInsets.only(top: 2.h),
+                                              child: GestureDetector(
+                                                onTap: (){
+                                                  if(controller.details.value.currentJobs!.website!.contains("http")){
+                                                    launchURL(controller
+                                                                .details
+                                                                .value
+                                                                .currentJobs!
+                                                                .website!);
+                                                  }else{
+                                                    var url = "https://www." + controller
+                                                                .details
+                                                                .value
+                                                                .currentJobs!
+                                                                .website!;
+                                                    launchURL(url);
+                                                  }
+                                                },
+                                                child: Align(
+                                                    alignment: Alignment.topLeft,
+                                                    child: setHelveticaMedium(
+                                                        controller
+                                                                .details
+                                                                .value
+                                                                .currentJobs!
+                                                                .website ?? "",
+                                                        12.sp,
+                                                        blue_0a84ff,
+                                                        FontWeight.w500,
+                                                        FontStyle.normal),
+                                                  ),
+                                              ),
                                             )
                                             : Container()
                                         : Container(),

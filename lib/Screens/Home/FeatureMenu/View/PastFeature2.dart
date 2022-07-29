@@ -437,7 +437,7 @@ class _PastFeature2State extends State<PastFeature2> {
                   child: Row(mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                  Text("See full article",
+                  Text("Swipe up to read article",
                     style: TextStyle(
                         fontFamily: helvetica_neu_bold,fontSize: 12.sp,
                         color:white
@@ -507,7 +507,9 @@ class _PastFeature2State extends State<PastFeature2> {
       pageBuilder: (context, animation, secondaryAnimation) => PastFeatureDetail(title: featuredController
                                     .featuredList[
                                         widget.selectedPositionFromPrevious]
-                                    .writer_name, theme: 'black',),
+                                    .writer_name, theme: 'black', url: featuredController
+                                    .featuredList[
+                                        widget.selectedPositionFromPrevious].link ?? 'https://www.google.com'),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;

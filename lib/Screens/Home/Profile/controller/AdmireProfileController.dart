@@ -574,7 +574,7 @@ class AdmireProfileController extends GetxController {
                   isLive: false,
                   forceHD: false,
                   enableCaption: false,
-                  hideControls: false,
+                  hideControls: true,
                 ),
               );
               videoController.add(controller);

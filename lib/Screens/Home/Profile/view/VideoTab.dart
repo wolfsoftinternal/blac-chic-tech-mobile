@@ -119,7 +119,7 @@ class _VideoTabState extends State<VideoTab> {
                                           });
                                         },
                                         child: Container(
-                                          height: 210.h,
+                                          height: 213.h,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(5.r),
                                                 gradient: LinearGradient(

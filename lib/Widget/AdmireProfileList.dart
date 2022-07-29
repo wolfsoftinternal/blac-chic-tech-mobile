@@ -52,7 +52,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 child: CircularProgressIndicator(color: black, strokeWidth: 2)),
           )
         : GestureDetector(
-          onTap: (){
+          onVerticalDragEnd: (val){
             controller.userProfileAPI(context, true).then((val){
               Get.to(
                 Profile(), 

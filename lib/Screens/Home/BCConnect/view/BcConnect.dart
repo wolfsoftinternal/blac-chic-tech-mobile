@@ -185,94 +185,106 @@ class _BcConnectState extends State<BcConnect> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Stack(
-                                              alignment:
-                                                  Alignment.bottomCenter,
+                                              alignment: Alignment.bottomCenter,
                                               children: [
                                                 ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.only(
-                                                            topLeft: Radius
-                                                                .circular(
+                                                            topLeft:
+                                                                Radius.circular(
                                                                     4.r),
                                                             topRight: Radius
-                                                                .circular(
-                                                                    4.r)),
+                                                                .circular(4.r)),
                                                     child: videoController
                                                                 .userList[i]
                                                                 .image !=
                                                             null
-                                                        ? Image.network(
-                                                            videoController
-                                                                .userList[i]
-                                                                .image!,
-                                                            fit: BoxFit
-                                                                .cover,
+                                                        ? CachedNetworkImage(
+                                                            imageUrl:
+                                                                videoController
+                                                                    .userList[i]
+                                                                    .image!,
+                                                            fit: BoxFit.cover,
                                                             height: 134.h,
-                                                            width: double
-                                                                .infinity,
+                                                            width:
+                                                                double.infinity,
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    Image.asset(
+                                                              greyPlaceholder,
+                                                              height: 134.h,
+                                                              width: double
+                                                                  .infinity,
+                                                              fit: BoxFit.fill,
+                                                            ),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Image.asset(
+                                                              greyPlaceholder,
+                                                              height: 134.h,
+                                                              width: double
+                                                                  .infinity,
+                                                              fit: BoxFit.fill,
+                                                            ),
                                                           )
-                                                        : SvgPicture.asset(
-                                                            placeholder,
+                                                        : Image.asset(
+                                                            greyPlaceholder,
                                                             height: 134.h,
-                                                            width: double
-                                                                .infinity,
-                                                            fit: BoxFit
-                                                                .cover,
+                                                            width:
+                                                                double.infinity,
+                                                            fit: BoxFit.fill,
                                                           )),
-
+                                                videoController.userList[i]
+                                                            .image !=
+                                                        null
+                                                    ? Image.asset(
+                                                        bctShadow,
+                                                        fit: BoxFit.cover,
+                                                        height: 134.h,
+                                                        width: double.infinity,
+                                                      )
+                                                    : Container(),
                                                 // unsplash:27xbM3bF9_s
                                                 Container(
-                                                    width: double.infinity,
-                                                    height: 134.h,
-                                                    decoration:
-                                                        BoxDecoration(
-                                                      gradient: LinearGradient(
-                                                          begin: Alignment
-                                                              .topCenter,
-                                                          end: Alignment
-                                                              .bottomCenter,
-                                                          colors: [
-                                                            Color.fromARGB(
-                                                                    0,
-                                                                    42,
-                                                                    41,
-                                                                    41)
-                                                                .withOpacity(
-                                                                    0.0),
-                                                            Color.fromARGB(
-                                                                    255,
-                                                                    31,
-                                                                    31,
-                                                                    31)
-                                                                .withOpacity(
-                                                                    0.7)
-                                                          ]),
-                                                    )),
+                                                  width: double.infinity,
+                                                  height: 134.h,
+                                                  // decoration:
+                                                  //     BoxDecoration(
+                                                  //   gradient: LinearGradient(
+                                                  //       begin: Alignment
+                                                  //           .topCenter,
+                                                  //       end: Alignment
+                                                  //           .bottomCenter,
+                                                  //       colors: [
+                                                  //         Color.fromARGB(
+                                                  //                 0,
+                                                  //                 42,
+                                                  //                 41,
+                                                  //                 41)
+                                                  //             .withOpacity(
+                                                  //                 0.0),
+                                                  //         Color.fromARGB(
+                                                  //                 255,
+                                                  //                 31,
+                                                  //                 31,
+                                                  //                 31)
+                                                  //             .withOpacity(
+                                                  //                 0.7)
+                                                  //       ]),
+                                                  // )
+                                                ),
 
                                                 // Jessie J
                                                 Center(
                                                   child: Padding(
-                                                    padding:
-                                                        EdgeInsets.only(
-                                                            bottom: 15.h),
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 15.h),
                                                     child: Column(
                                                       children: [
                                                         Text(
-                                                            "${videoController
-                                                                    .userList[
-                                                                        i]
-                                                                    .firstName == null ? "" : videoController
-                                                                    .userList[
-                                                                        i]
-                                                                    .firstName!
-                                                                    .capitalizeFirst!} ${videoController
-                                                                    .userList[
-                                                                        i]
-                                                                    .lastName == null ? "" : videoController
-                                                                    .userList[
-                                                                        i]
-                                                                    .lastName!
-                                                                    .capitalizeFirst!}",
+                                                            "${videoController.userList[i].firstName == null ? "" : videoController.userList[i].firstName!.capitalizeFirst!} ${videoController.userList[i].lastName == null ? "" : videoController.userList[i].lastName!.capitalizeFirst!}",
                                                             style: TextStyle(
                                                                 color:
                                                                     white_ffffff,
@@ -287,56 +299,48 @@ class _BcConnectState extends State<BcConnect> {
                                                                 fontSize:
                                                                     13.sp),
                                                             textAlign:
-                                                                TextAlign
-                                                                    .left),
-                                                        SizedBox(height: 3.h,),
+                                                                TextAlign.left),
+                                                        SizedBox(
+                                                          height: 3.h,
+                                                        ),
                                                         Opacity(
-                                                          opacity:
-                                                              0.9,
+                                                          opacity: 0.9,
                                                           child: videoController
                                                                       .userList[
                                                                           i]
                                                                       .currentJobs ==
                                                                   null
                                                               ? Container()
-                                                              : Text(
-                                                                  "${videoController
-                                                                          .userList[
-                                                                              i]
-                                                                          .currentJobs!
-                                                                          .title == null ? "" : videoController
-                                                                          .userList[
-                                                                              i]
-                                                                          .currentJobs!
-                                                                          .title!} ${videoController
-                                                                          .userList[
-                                                                              i]
-                                                                          .currentJobs!
-                                                                          .companyName == null ? "" : "@"}${videoController
-                                                                          .userList[
-                                                                              i]
-                                                                          .currentJobs!
-                                                                          .companyName == null ? "" : videoController
-                                                                          .userList[
-                                                                              i]
-                                                                          .currentJobs!
-                                                                          .companyName!}",
-                                                                  maxLines: 2,
-                                                                  overflow: TextOverflow.ellipsis,
-                                                                  style: TextStyle(
-                                                                      color:
-                                                                          white_ffffff,
-                                                                      fontWeight: FontWeight
-                                                                          .w400,
-                                                                      fontFamily:
-                                                                          helveticaNeue,
-                                                                      fontStyle: FontStyle
-                                                                          .normal,
-                                                                          letterSpacing: 0.5,
-                                                                      fontSize: 9.sp),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center),
+                                                              : Padding(
+                                                                  padding: EdgeInsets.only(
+                                                                      left:
+                                                                          10.r,
+                                                                      right:
+                                                                          10.r),
+                                                                  child: Text(
+                                                                      "${videoController.userList[i].currentJobs!.title == null ? "" : videoController.userList[i].currentJobs!.title!} ${videoController.userList[i].currentJobs!.companyName == null ? "" : "@"}${videoController.userList[i].currentJobs!.companyName == null ? "" : videoController.userList[i].currentJobs!.companyName!}",
+                                                                      maxLines:
+                                                                          2,
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              white_ffffff,
+                                                                          fontWeight: FontWeight
+                                                                              .w400,
+                                                                          fontFamily:
+                                                                              helveticaNeue,
+                                                                          fontStyle: FontStyle
+                                                                              .normal,
+                                                                          letterSpacing:
+                                                                              0.5,
+                                                                          fontSize: 9
+                                                                              .sp),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center),
+                                                                ),
                                                         )
                                                       ],
                                                     ),
@@ -358,21 +362,17 @@ class _BcConnectState extends State<BcConnect> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .start,
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Text("Come to me for",
                                                       style: TextStyle(
-                                                          color:
-                                                              grey_aaaaaa,
+                                                          color: grey_aaaaaa,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w500,
+                                                              FontWeight.w500,
                                                           fontFamily:
                                                               helveticaNeue,
                                                           fontStyle:
-                                                              FontStyle
-                                                                  .normal,
+                                                              FontStyle.normal,
                                                           fontSize: 8.sp),
                                                       textAlign:
                                                           TextAlign.left),
@@ -394,32 +394,26 @@ class _BcConnectState extends State<BcConnect> {
                                                                   4
                                                               ? ""
                                                               : videoController
-                                                                  .userList[
-                                                                      i]
-                                                                  .questions![
-                                                                      3]
+                                                                  .userList[i]
+                                                                  .questions![3]
                                                                   .answer!
                                                                   .capitalizeFirst!
-                                                                  .replaceAll(',',
+                                                                  .replaceAll(
+                                                                      ',',
                                                                       ' |'),
                                                       overflow:
-                                                          TextOverflow
-                                                              .ellipsis,
+                                                          TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                          color:
-                                                              black_121212,
+                                                          color: black_121212,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w600,
+                                                              FontWeight.w600,
                                                           fontFamily:
                                                               helveticaNeue,
                                                           fontStyle:
-                                                              FontStyle
-                                                                  .normal,
+                                                              FontStyle.normal,
                                                           fontSize: 12.sp),
                                                       maxLines: 2,
-                                                      textAlign:
-                                                          TextAlign.left)
+                                                      textAlign: TextAlign.left)
                                                 ],
                                               ),
                                             )
@@ -575,18 +569,13 @@ class _BcConnectState extends State<BcConnect> {
                               ),
                             ),
                           ),
+                          if (videoController.isPaginationLoading.value == true)
+                            PaginationUtils().loader(),
                         ],
                       ),
                     ),
                   ),
-            SizedBox(
-              height: 3,
-            ),
-            if (videoController.isPaginationLoading.value == true)
-              PaginationUtils().loader(),
-            SizedBox(
-              height: 3,
-            ),
+            
           ],
         ),
       ),

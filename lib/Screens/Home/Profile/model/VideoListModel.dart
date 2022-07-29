@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
+
 VideoListModel videoListModelFromJson(String str) => VideoListModel.fromJson(json.decode(str));
 
 String videoListModelToJson(VideoListModel data) => json.encode(data.toJson());
@@ -48,6 +50,7 @@ class VideoList {
         this.createdAt,
         this.updatedAt,
         this.deletedAt,
+        this.userDetails,
         this.speakerList,
         this.isFocus,
         this.like_count,
@@ -68,6 +71,7 @@ class VideoList {
     DateTime? createdAt;
     DateTime? updatedAt;
     dynamic deletedAt;
+    UserDetails? userDetails;
     List<String>? speakerList;
     int? isFocus;
     int? like_count;
@@ -88,6 +92,9 @@ class VideoList {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
+        userDetails: json["user_details"] == null
+            ? null
+            : UserDetails.fromJson(json["user_details"]),
         speakerList: json["speaker_list"] == null ? null : List<String>.from(json["speaker_list"].map((x) => x)),
         isFocus: json["is_focus"],
         like_count: json["like_count"],
@@ -109,6 +116,7 @@ class VideoList {
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
+        "user_details": userDetails == null ? null : userDetails!.toJson(),
         "speaker_list": List<dynamic>.from(speakerList!.map((x) => x)),
         "is_focus": isFocus,
         "like_count": like_count,

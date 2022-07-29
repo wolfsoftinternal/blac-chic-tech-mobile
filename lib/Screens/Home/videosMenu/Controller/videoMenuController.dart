@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:blackchecktech/Model/BaseModel.dart';
 import 'package:blackchecktech/Model/FindSpeakerModel.dart';
 import 'package:blackchecktech/Model/SpeakersVideoModel.dart';
+import 'package:blackchecktech/Screens/Home/Profile/model/VideoListModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Model/CommentListModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Model/DefaultModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Model/FindSpeakerModel.dart';
