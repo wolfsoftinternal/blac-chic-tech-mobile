@@ -96,6 +96,7 @@ class _PostTabState extends State<PostTab> {
                                                   imageUrl: controller
                                                       .postList[index].image!,
                                                   fit: BoxFit.cover,
+                                                  width: double.infinity,
                                                   height: 250.h,
                                                   progressIndicatorBuilder:
                                                       (context, url,
@@ -103,6 +104,7 @@ class _PostTabState extends State<PostTab> {
                                                           SvgPicture.asset(
                                                     placeholder,
                                                     fit: BoxFit.cover,
+                                                     width: double.infinity,
                                                     height: 250.h,
                                                   ),
                                                   errorWidget:
@@ -110,6 +112,7 @@ class _PostTabState extends State<PostTab> {
                                                           SvgPicture.asset(
                                                     placeholder,
                                                     fit: BoxFit.cover,
+                                                     width: double.infinity,
                                                     height: 250.h,
                                                   ),
                                                 ),
@@ -159,7 +162,7 @@ class _PostTabState extends State<PostTab> {
                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
                                                       for (int i = 0; i < controller.postList[index].taggedUsers!.length; i++)
-                                                      Text(
+                                                      Text(controller.postList[index].taggedUsers![i].userDetails == null ? "" :
                                                         "@" + controller.postList[index].taggedUsers![i].userDetails!.userName!.replaceAll("@", '') + "  ",
                                                         softWrap: true,
                                                         overflow: TextOverflow.ellipsis,

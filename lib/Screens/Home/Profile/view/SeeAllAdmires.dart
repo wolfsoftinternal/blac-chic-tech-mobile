@@ -72,11 +72,13 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
                           padding: EdgeInsets.only(right: 6.w),
                           child: InkWell(
                             onTap: () {
-                              if (controller.isRearrange.value == false) {
-                                controller.isRearrange.value = true;
-                              } else {
-                                controller.isRearrange.value = false;
-                              }
+                              setState(() {
+                                if (controller.isRearrange.value == false) {
+                                  controller.isRearrange.value = true;
+                                } else {
+                                  controller.isRearrange.value = false;
+                                }
+                              });
                             },
                             child: Text(
                                 controller.isRearrange.value == false
@@ -100,24 +102,24 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
           ),
           widget.limit == 'completed' ?
           Padding(
-            padding: const EdgeInsets.only(top: 24.0, left: 24.0, right: 24.0),
+            padding: const EdgeInsets.only(top: 24.0, left: 15.0, right: 15.0),
             child: Align(alignment: Alignment.centerLeft, child: setHelceticaBold('Admire Limit', 14, Colors.red, FontWeight.w500, FontStyle.normal)),
           ) : Container(),
           widget.limit == 'completed' ?
           Padding(
-            padding: const EdgeInsets.only(top: 10.0, left: 24.0, right: 24.0),
+            padding: const EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
             child: Align(alignment: Alignment.centerLeft, child: setHelveticaMedium("You've used all 20 admires. Replace one of your\nadmire with ${controller.details.value.fullName}", 14, black, FontWeight.w500, FontStyle.normal)),
           ) : Container(),
           widget.type == 'user'
           ? Padding(
-            padding: EdgeInsets.only(top: widget.limit == 'completed' ? 10.0 : 24.0, left: 24.0, right: 24.0),
+            padding: EdgeInsets.only(top: widget.limit == 'completed' ? 10.0 : 24.0, left: 15.0, right: 15.0),
             child: Align(alignment: Alignment.center, child: setHelveticaMedium("Drag and drop to re-arrange admires", 14, grey_aaaaaa, FontWeight.w500, FontStyle.normal, 0.2)),
           ) : Container(),
           Expanded(
             flex: 1,
             child: SingleChildScrollView(
               child: Padding(
-                  padding: EdgeInsets.only(left: 24.w,right: 24.w,top: 24,bottom: 24),
+                  padding: EdgeInsets.only(left: 15.w,right: 15.w,top: 24,bottom: 24),
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       if (constraints.maxWidth < 310) {
@@ -130,7 +132,7 @@ class _SeeAllAdmiresState extends State<SeeAllAdmires> {
                         _crossAxisCount = 4;
                         return AdmiresGridView(
                             crossAxisCount: _crossAxisCount, type: widget.type, limit: widget.limit);
-                      } else if (constraints.maxWidth > 520 &&
+                      } else if (constraints.maxWidth > 520 && 
                           constraints.maxWidth < 720) {
                         _crossAxisCount = 5;
                         return AdmiresGridView(

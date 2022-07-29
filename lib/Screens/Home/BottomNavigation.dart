@@ -221,7 +221,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   )
                 : SvgPicture.asset(
                     feed_icon,
-                    color: Colors.grey[600],
+                    color: Color(0xffB7B9BD),
                   ),
           ),
           IconButton(
@@ -238,7 +238,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   )
                 : SvgPicture.asset(
                     chat_icon,
-                    color: Colors.grey[600],
+                    color: Color(0xffB7B9BD),
                     height: 28,
                     width: 28,
                   ),
@@ -253,7 +253,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               width: 23.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                border: Border.all(color: gray_b3ffffff, width: 2),
+                border: Border.all(color: Color(0xffB7B9BD), width: 2),
               ),
               child: CircularProfileAvatar(
                 '',

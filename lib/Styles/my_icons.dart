@@ -99,3 +99,6 @@ const post_image = 'assets/images/post_image.gif';
 const feed = 'assets/images/feed.svg';
 const nft = 'assets/images/nft.svg';
 const appleLogo = 'assets/images/apple_logo.png';
+const bctShadow = 'assets/images/BCconnect_image_shadow.png';
+const greyPlaceholder = 'assets/images/grey_placeholder.png';
+const paginationLoader= 'assets/images/paginationLoader.gif';

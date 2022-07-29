@@ -11,7 +11,8 @@ import 'package:get/get.dart';
 class PastFeatureDetail extends StatefulWidget {
   final title;
   final theme;
-  PastFeatureDetail({Key? key, this.title, this.theme}) : super(key: key);
+  final url;
+  PastFeatureDetail({Key? key, this.title, this.theme, this.url}) : super(key: key);
 
   @override
   State<PastFeatureDetail> createState() => _PastFeatureDetailState();
@@ -68,7 +69,7 @@ class _PastFeatureDetailState extends State<PastFeatureDetail> {
             child: Container(
               child: InAppWebView(
                   initialUrlRequest:
-                      URLRequest(url: Uri.parse("https://www.google.com")),
+                      URLRequest(url: Uri.parse(widget.url)),
                   initialOptions: InAppWebViewGroupOptions(
                     crossPlatform: InAppWebViewOptions(
                       mediaPlaybackRequiresUserGesture: false,

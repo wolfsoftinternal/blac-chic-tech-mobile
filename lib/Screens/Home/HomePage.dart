@@ -11,6 +11,7 @@ import 'package:blackchecktech/Screens/Home/transactions/view/TransactionsPayout
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -58,6 +59,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.white, // navigation bar color
+      statusBarColor: Colors.transparent, // status bar color
+      statusBarIconBrightness: Brightness.dark, // status bar icons' color
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ));
     return Scaffold(
       backgroundColor: white_ffffff,
       body: Stack(
@@ -103,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                               itemBuilder: ((context, index) {
                                 return AnimationConfiguration.staggeredList(
                                   position: index,
-                                  duration: const Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 700),
                                   child: SlideAnimation(
                                     verticalOffset: 44.0,
                                     child: FadeInAnimation(
@@ -133,13 +140,16 @@ class _HomePageState extends State<HomePage> {
                                           // height: 66,
                                           width: double.infinity,
                                           decoration: BoxDecoration(
-                                            color: index % 2 != 0
-                                                ? black_121212
-                                                : white_ffffff,
-                                            borderRadius:
+                                              gradient: LinearGradient(
+                                                begin: Alignment.topCenter,
+                                                end: Alignment.bottomCenter,
+                                                colors: index % 2 != 0 ? [ Color.fromARGB(255, 36, 48, 69),  Color(0xff04080f)] : [ white,  white],
+                                                stops: [0.0, 1.0],
+                                              ),
+                                              borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(4.0)),
-                                          ),
+                                            ),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -147,8 +157,8 @@ class _HomePageState extends State<HomePage> {
                                               Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 16.0.w,
-                                                    top: 16.0.h,
-                                                    bottom: 16.0.h),
+                                                    top: 19.5.h,
+                                                    bottom: 22.5.h),
                                                 child: Text(
                                                   values[index],
                                                   style: TextStyle(
@@ -156,10 +166,10 @@ class _HomePageState extends State<HomePage> {
                                                         ? white_ffffff
                                                         : black_121212,
                                                     fontSize: 28.sp,
-                                                    letterSpacing: -1.12,
+                                                    letterSpacing: -0.2.sp,
                                                     fontFamily:
                                                         helvetica_neu_bold,
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.w900,
                                                   ),
                                                 ),
                                               ),
@@ -170,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                                                   angle: 90 * math.pi / 375,
                                                   child: Icon(
                                                     Icons.arrow_forward,
-                                                    color: grey_aaaaaa,
+                                                    color: grey_aaaaaa.withOpacity(0.5),
                                                   ),
                                                 ),
                                               )

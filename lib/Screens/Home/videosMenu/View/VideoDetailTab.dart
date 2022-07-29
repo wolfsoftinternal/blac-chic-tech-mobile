@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Screens/Home/Profile/model/VideoListModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Controller/videoMenuController.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/Model/SpeakerVideoModel.dart';
 import 'package:blackchecktech/Screens/Home/videosMenu/View/VideoComments.dart';

@@ -13,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 File imagePath = File("");
 List<AssetEntity>? image;
 StepsController controller = Get.put(StepsController());
+double featureIndex = 0.0;
 
 snackBar(BuildContext context, String message) {
   return ScaffoldMessenger.of(context).showSnackBar(

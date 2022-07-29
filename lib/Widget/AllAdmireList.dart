@@ -35,39 +35,41 @@ class _AllAdmireListState extends State<AllAdmireList> {
             widget.type == 'user' && widget.limit == 'completed' ?
             PopupMenuButton(
               tooltip: '',
+              offset: Offset.zero,
+              elevation: 1,
                     child: SizedBox(
                       child: Center(
                         child: CircularProfileAvatar(
                           '',
-                          radius: 32,
+                          radius: 34,
                           child: widget.admireList.admireDetails!.image ==
                                   null
                               ? SvgPicture.asset(
                                   placeholder,
-                                  height: 64.h,
-                                  width: 64.w,
+                                  height: 65.h,
+                                  width: 65.w,
                                   fit: BoxFit.cover,
                                 )
                               : CachedNetworkImage(
                                   imageUrl: widget.admireList
                                       .admireDetails!.image!,
-                                  height: 64.h,
-                                  width: 62.w,
+                                  height: 65.h,
+                                  width: 63.w,
                                   fit: BoxFit.cover,
                                   progressIndicatorBuilder: (context,
                                           url, downloadProgress) =>
                                       SvgPicture.asset(
                                     placeholder,
-                                    height: 64.h,
-                                    width: 64.w,
+                                    height: 65.h,
+                                    width: 65.w,
                                     fit: BoxFit.cover,
                                   ),
                                   errorWidget:
                                       (context, url, error) =>
                                           SvgPicture.asset(
                                     placeholder,
-                                    height: 64.h,
-                                    width: 64.w,
+                                    height: 65.h,
+                                    width: 65.w,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -116,39 +118,48 @@ class _AllAdmireListState extends State<AllAdmireList> {
                 ? PopupMenuButton(
                     position: PopupMenuPosition.under,
                     tooltip: '',
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(8.0),
+                        bottomRight: Radius.circular(8.0),
+                        topLeft: Radius.circular(8.0),
+                        topRight: Radius.circular(8.0),
+                      ),
+                    ),
                     child: SizedBox(
                       child: Center(
                         child: CircularProfileAvatar(
                           '',
-                          radius: 32,
+                          radius: 34,
                           child: widget.admireList.admireDetails!.image ==
                                   null
                               ? SvgPicture.asset(
                                   placeholder,
-                                  height: 64.h,
-                                  width: 64.w,
+                                  height: 65.h,
+                                  width: 65.w,
                                   fit: BoxFit.cover,
                                 )
                               : CachedNetworkImage(
                                   imageUrl: widget.admireList
                                       .admireDetails!.image!,
-                                  height: 64.h,
-                                  width: 62.w,
+                                  height: 65.h,
+                                  width: 63.w,
                                   fit: BoxFit.cover,
                                   progressIndicatorBuilder: (context,
                                           url, downloadProgress) =>
                                       SvgPicture.asset(
                                     placeholder,
-                                    height: 64.h,
-                                    width: 64.w,
+                                    height: 65.h,
+                                    width: 65.w,
                                     fit: BoxFit.cover,
                                   ),
                                   errorWidget:
                                       (context, url, error) =>
                                           SvgPicture.asset(
                                     placeholder,
-                                    height: 64.h,
-                                    width: 64.w,
+                                    height: 65.h,
+                                    width: 65.w,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -223,7 +234,7 @@ class _AllAdmireListState extends State<AllAdmireList> {
                                       color: Colors.black,
                                       fontFamily: roboto_medium,
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 13.sp),
+                                      fontSize: 12.sp),
                                 ),
                                 Icon(
                                   Icons.person,
@@ -246,7 +257,7 @@ class _AllAdmireListState extends State<AllAdmireList> {
                                       color: Colors.black,
                                       fontFamily: roboto_medium,
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 13.sp),
+                                      fontSize: 12.sp),
                                 ),
                                 Icon(
                                   Icons.repeat,
@@ -269,7 +280,7 @@ class _AllAdmireListState extends State<AllAdmireList> {
                                       color: Colors.black,
                                       fontFamily: roboto_medium,
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 13.sp),
+                                      fontSize: 12.sp),
                                 ),
                                 const Icon(
                                   Icons.close,
@@ -285,31 +296,31 @@ class _AllAdmireListState extends State<AllAdmireList> {
                     child: Center(
                       child: CircularProfileAvatar(
                             '',
-                            radius: 32,
+                            radius: 34,
                         child: widget.admireList.admireDetails!.image == null
                             ? SvgPicture.asset(
                                 placeholder,
-                                height: 64.h,
-                                width: 64.w,
+                                height: 65.h,
+                                width: 65.w,
                               )
                             : CachedNetworkImage(
                                 imageUrl:
                                     widget.admireList.admireDetails!.image!,
-                                height: 64.h,
-                                width: 62.w,
+                                height: 65.h,
+                                width: 63.w,
                                 fit: BoxFit.cover,
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) =>
                                         SvgPicture.asset(
                                   placeholder,
-                                  height: 64.h,
-                                  width: 64.w,
+                                  height: 65.h,
+                                  width: 65.w,
                                 ),
                                 errorWidget: (context, url, error) =>
                                     SvgPicture.asset(
                                   placeholder,
-                                  height: 64.h,
-                                  width: 64.w,
+                                  height: 65.h,
+                                  width: 65.w,
                                 ),
                               ),
                       ),
@@ -383,8 +394,8 @@ class _AllAdmireListState extends State<AllAdmireList> {
         setHelceticaBold(
             widget.admireList.admireDetails!.firstName.toString().capitalizeFirst ?? "",
             12.sp,
-            black_121212,
-            FontWeight.w500,
+            Color(0xff273433),
+            FontWeight.w700,
             FontStyle.normal,
             -0.1),
         SizedBox(
@@ -401,7 +412,7 @@ class _AllAdmireListState extends State<AllAdmireList> {
             maxLines: 1,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 12.sp,
+              fontSize: 10.sp,
               fontFamily: helveticaNeueNeue_medium,
               fontWeight: FontWeight.w500,
               color: grey_aaaaaa,

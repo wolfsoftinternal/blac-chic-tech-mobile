@@ -167,7 +167,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                       Row(
                                         children: [
                                           SvgPicture.asset(
-                                            icon_location_yellow,
+                                            location_pin,
+                                            color: orange,
                                             width: 12.w,
                                             height: 12.h,
                                           ),

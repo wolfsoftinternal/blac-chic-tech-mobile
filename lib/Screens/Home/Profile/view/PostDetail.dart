@@ -248,7 +248,7 @@ class _PostDetailState extends State<PostDetail> {
                                             null
                                         ? SvgPicture.asset(
                                           placeholder,
-                                          fit: BoxFit.fill,
+                                          // fit: BoxFit.fill,
                                         )
                                         : ClipRRect(
                                             borderRadius: BorderRadius.all(
@@ -256,12 +256,12 @@ class _PostDetailState extends State<PostDetail> {
                                             child: CachedNetworkImage(
                                               imageUrl: controller
                                                   .postList[index].image!,
-                                              fit: BoxFit.fill,
+                                              // fit: BoxFit.fill,
                                               progressIndicatorBuilder: (context,
                                                       url, downloadProgress) =>
                                                   SvgPicture.asset(
                                                 placeholder,
-                                                fit: BoxFit.fill,
+                                                // fit: BoxFit.fill,
                                               ),
                                             )),
                                   ),
@@ -349,13 +349,14 @@ class _PostDetailState extends State<PostDetail> {
                                   children: [
                                     for (int i = 0; i < controller.postList[index].taggedUsers!.length; i++)
                                     TextSpan(
-                                      text:
+                                      text: controller.postList[index].taggedUsers![i].userDetails == null ? "" : 
                                           "${"@" + controller.postList[index].taggedUsers![i].userDetails!.userName!.replaceAll("@", '') + " "}",
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         fontFamily: helvetica_neu_bold,
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w700,
                                         color: black_121212,
+                                        height: 1.4,
                                       ),
                                     ),
                                     TextSpan(
@@ -366,13 +367,13 @@ class _PostDetailState extends State<PostDetail> {
                                             fontFamily:
                                                 helveticaNeueNeue_medium,
                                             fontWeight: FontWeight.w400,
-                                            color: grey_3f3f3f)),
+                                            color: grey_3f3f3f, height: 1.4)),
                                   ],
                                 ),
                               ),
                             ),
                             Padding(
-                                padding: const EdgeInsets.only(top: 5.0),
+                                padding: const EdgeInsets.only(top: 10.0),
                                 child: Row(
                                   children: [
                                     SvgPicture.asset(calendar_icon, color: grey_aaaaaa, height: 14.h, width: 14.w,),

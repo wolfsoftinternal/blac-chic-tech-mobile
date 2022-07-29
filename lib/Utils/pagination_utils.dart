@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Styles/my_colors.dart';
+import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utils/GeneralFunctions.dart';
 import 'package:flutter/material.dart';
 
@@ -55,13 +56,14 @@ class PaginationUtils {
   Widget loader() {
     return Center(
         child: Container(
-            padding: EdgeInsets.all(10),
-            height: 40,
-            width: 40,
+            height: 80,
+            width: 80,
             color: Colors.transparent,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: black_121212,
-            )));
+            child: Image.asset(paginationLoader)
+            // child: CircularProgressIndicator(
+            //   strokeWidth: 2,
+            //   color: black_121212,
+            // )
+            ));
   }
 }
