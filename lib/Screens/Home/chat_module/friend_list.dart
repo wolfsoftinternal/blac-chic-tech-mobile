@@ -233,14 +233,44 @@ class _FriendListScreenState extends State<FriendListScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  width: 48.r,
+                  height: 48.r,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 6,
+                        blurRadius: 10,
+                        offset: const Offset(1, 4), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0.r),
+                    child: SvgPicture.asset(
+                      icon_back_black_arrow,
+                      width: 24.w,
+                      height: 24.w,
+                    ),
+                  ),
+                ),
+              ),
               Text(
                 "Chats",
                 style: TextStyle(
                   color: black,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w800,
                   fontFamily: helvetica_neu_bold,
                   fontStyle: FontStyle.normal,
                   fontSize: 22.sp,
+                  letterSpacing: 0.5
                 ),
                 textAlign: TextAlign.left,
               ),
@@ -601,7 +631,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
           });
         },
         child: Container(
-            margin: EdgeInsets.only(bottom: 0.h, left: 16.w, right: 16.w),
+            margin: EdgeInsets.only(bottom: 0.h, left: 7.w, right: 7.w),
             padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 12.w),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -645,16 +675,16 @@ class _FriendListScreenState extends State<FriendListScreen> {
                         style: TextStyle(
                             color: txt_color,
                             fontWeight: FontWeight.w600,
-                            fontFamily: helveticaNeueNeue_medium,
+                            fontFamily: roboto_bold,
                             fontStyle: FontStyle.normal,
-                            fontSize: 14.sp),
+                            fontSize: 16.sp),
                       ),
                       // lastMessageType == "0" ||
                       //     lastMessageType == "1" ||
                       //     lastMessageType == "2" ?
-                      // SizedBox(
-                      //   height: 6.h,
-                      // ) : Container(),
+                      SizedBox(
+                        height: 4.h,
+                      ),
                       lastMessageType == "0" ||
                           lastMessageType == "1" ||
                           lastMessageType == "2" ?
@@ -663,9 +693,9 @@ class _FriendListScreenState extends State<FriendListScreen> {
                           maxLines: 1,
                           style: TextStyle(
                             overflow: TextOverflow.ellipsis,
-                            color: grey_aaaaaa,
-                            fontSize: 12.sp,
-                            fontFamily: helveticaNeueNeue_medium,
+                            color: Color(0xff595959),
+                            fontSize: 14.sp,
+                            fontFamily: roboto_medium,
                             fontWeight: FontWeight.w400,
                           ),
                         ) : Container(),

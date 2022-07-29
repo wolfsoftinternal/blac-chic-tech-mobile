@@ -120,69 +120,74 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                       topLeft: Radius.circular(16.0),
                       topRight: Radius.circular(16.0))),
               child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height - 120.h,
-                  child: Wrap(
-                    children: [
-                      StatefulBuilder(builder: (context, setState) {
-                        return Column(
-                          children: [
-                            SizedBox(
-                              height: 12.h,
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Container(
-                                width: 50,
-                                height: 3,
-                                decoration: BoxDecoration(
-                                  color: grey_3f3f3f.withOpacity(0.4),
-                                  borderRadius:  BorderRadius.all(
-                                    Radius.circular(50.r),
-                                  )
-                                ),
-                              )
-                            ),
-                            SizedBox(
-                              height: 24.h,
-                            ),
-                           LayoutBuilder(
-                            builder: (context, constraints) {
-                                return GridView.builder(
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  padding: EdgeInsets.only(left: 20.w, right: 8.w, bottom: 10.h, top: 16.h),
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisSpacing: 10.w,
-                                    mainAxisSpacing: 0,
-                                    crossAxisCount: constraints.maxWidth == 310
-                                        ? 3
-                                        : constraints.maxWidth > 310 && constraints.maxWidth < 520
-                                            ? 4
-                                            : constraints.maxWidth > 520 && constraints.maxWidth < 720
-                                                ? 5
-                                                : 6,
-                                    childAspectRatio: constraints.maxWidth == 310
-                                        ? 0.85.w
-                                        : constraints.maxWidth > 310 && constraints.maxWidth < 520
-                                            ? 0.70.w
-                                            : constraints.maxWidth > 520 && constraints.maxWidth < 720
-                                                ? 0.75.w
-                                                : 0.9.w,
-                                  ),
-                                  itemCount: controller.otherAdmireList.length,
-                                  itemBuilder: (context, i) => AllAdmireList(controller.otherAdmireList[i], 'other', null, controller.details.value.id)
-                                );
-                              }
-                            ),
-                          ],
-                        );
-                      }),
-                    ],
-                  ),
-                ),
+                child: controller.otherAdmireList.length >= 15
+                    ? Container(
+                      height: MediaQuery.of(context).size.height - 120.h,
+                      child: AdmireList(),
+                    ) : AdmireList(),
               ));
         });
+  }
+
+  Wrap AdmireList() {
+    return Wrap(
+                  children: [
+                    StatefulBuilder(builder: (context, setState) {
+                      return Column(
+                        children: [
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 50,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                color: grey_3f3f3f.withOpacity(0.4),
+                                borderRadius:  BorderRadius.all(
+                                  Radius.circular(50.r),
+                                )
+                              ),
+                            )
+                          ),
+                          SizedBox(
+                            height: 24.h,
+                          ),
+                         LayoutBuilder(
+                          builder: (context, constraints) {
+                              return GridView.builder(
+                                primary: false,
+                                shrinkWrap: true,
+                                padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 10.h, top: 16.h),
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisSpacing: 10.w,
+                                  mainAxisSpacing: 0,
+                                  crossAxisCount: constraints.maxWidth == 310
+                                      ? 3
+                                      : constraints.maxWidth > 310 && constraints.maxWidth < 520
+                                          ? 4
+                                          : constraints.maxWidth > 520 && constraints.maxWidth < 720
+                                              ? 5
+                                              : 6,
+                                  childAspectRatio: constraints.maxWidth == 310
+                                      ? 0.85.w
+                                      : constraints.maxWidth > 310 && constraints.maxWidth < 520
+                                          ? 0.70.w
+                                          : constraints.maxWidth > 520 && constraints.maxWidth < 720
+                                              ? 0.75.w
+                                              : 0.9.w,
+                                ),
+                                itemCount: controller.otherAdmireList.length,
+                                itemBuilder: (context, i) => AllAdmireList(controller.otherAdmireList[i], 'other', null, controller.details.value.id)
+                              );
+                            }
+                          ),
+                        ],
+                      );
+                    }),
+                  ],
+                );
   }
 
   @override

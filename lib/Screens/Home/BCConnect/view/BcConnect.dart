@@ -93,131 +93,9 @@ class _BcConnectState extends State<BcConnect> {
               height: 32.h,
             ),
             Padding(
-                padding: EdgeInsets.only(left: 16.w, right: 16.w),
-                child: BcConnectFilter(),
-                // child: TextField(
-                //   style: TextStyle(
-                //       fontFamily: helveticaNeueNeue_medium,
-                //       fontSize: 14.sp,
-                //       color: black_121212),
-                //   controller: videoController.searchController.value,
-                //   autofocus: false,
-                //   decoration: InputDecoration(
-                //     filled: true,
-                //     hintText: "Search people",
-                //     contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
-                //     prefixIcon: Icon(
-                //       IconlyLight.search,
-                //       color: black_121212,
-                //       size: 16.r,
-                //     ),
-                //     fillColor: const Color(0xfff5f5f5),
-                //     hintStyle: TextStyle(
-                //         fontSize: 14.sp,
-                //         // fontWeight: FontWeight.w500,
-                //         fontFamily: helveticaNeueNeue_medium,
-                //         color: grey_aaaaaa),
-                //     border: OutlineInputBorder(
-                //       borderSide: BorderSide.none,
-                //       borderRadius: BorderRadius.circular(4.r),
-                //     ),
-                //   ),
-                //   onChanged: (value){
-                //       checkNet(context).then((value) {
-                //         videoController.PageNumber.value = 0;
-                //         videoController.userListAPI(context, true);
-                //       });
-                //   },
-                // )
-                // child: SearchBarTag(
-                //   placeholder: "Search people",
-                //   autoFocus: false,
-                //   onSubmit: (value) {
-                //     checkNet(context).then((value) {
-                //       videoController.PageNumber.value = 0;
-                //       videoController.userListAPI(
-                //           context, true);
-                //     });
-                //   },
-                //   controller: videoController.searchController.value,
-                // ),
-                ),
-
-// <<<<<<< HEAD
-//                     GridView.builder(
-//                       primary: false,
-//                       shrinkWrap: true,
-//                       padding: EdgeInsets.only(
-//                           left: 8.w, right: 8.w, bottom: 10.h, top: 16.h),
-//                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                           crossAxisCount: 2,
-//                           childAspectRatio: 0.70.h,
-//                           mainAxisSpacing: 0.0,
-//                           crossAxisSpacing: 0.0),
-//                       itemCount: videoController.userList.length,
-//                       itemBuilder: (context, i) => Padding(
-//                         padding: EdgeInsets.only(
-//                             left: 8.w, right: 8.w, bottom: 16.h),
-//                         child: Container(
-//                           width: double.infinity,
-//                           decoration: BoxDecoration(
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(4.r)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: Color(0x19121212),
-//                                     offset: Offset(0, 30),
-//                                     blurRadius: 60,
-//                                     spreadRadius: 0)
-//                               ],
-//                               color: white_ffffff),
-//                           child: Stack(
-//                             //    alignment: Alignment.center,
-//                             children: [
-//                               GestureDetector(
-//                                 onTap: () {
-//                                   Get.to(UserProfile(
-//                                           selectedUserId: videoController
-//                                               .userList[i].id
-//                                               .toString(), isFrom: false,))!
-//                                       .then((value) {
-//                                     checkNet(context).then((value) => {
-//                                           videoController.PageNumber.value = 0,
-//                                           videoController.userListAPI(
-//                                               context, true)
-//                                         });
-//                                   });
-//                                   videoController.userList.clear();
-//                                 },
-//                                 child: Column(
-//                                   mainAxisAlignment: MainAxisAlignment.start,
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     Stack(
-//                                       alignment: Alignment.bottomCenter,
-//                                       children: [
-//                                         ClipRRect(
-//                                             borderRadius: BorderRadius.only(
-//                                                 topLeft: Radius.circular(4.r),
-//                                                 topRight: Radius.circular(4.r)),
-//                                             child: videoController
-//                                                         .userList[i].image !=
-//                                                     null
-//                                                 ? Image.network(
-//                                                     videoController
-//                                                         .userList[i].image!,
-//                                                     fit: BoxFit.cover,
-//                                                     height: 134.h,
-//                                                     width: double.infinity,
-//                                                   )
-//                                                 : SvgPicture.asset(
-//                                                     placeholder,
-//                                                     height: 134.h,
-//                                                     width: double.infinity,
-//                                                     fit: BoxFit.cover,
-//                                                   )),
-// =======
-            // Recently Search
+              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+              child: BcConnectFilter(),
+            ),
             Padding(
               padding: EdgeInsets.only(left: 16.w, top: 24.h, bottom: 12.h),
               child: Text("${videoController.userCount.toString()} Results",
@@ -231,15 +109,15 @@ class _BcConnectState extends State<BcConnect> {
             ),
             videoController.userList.isEmpty
                 ? Expanded(
-                  child: Container(
-                      height: MediaQuery.of(context).size.height * 0.50,
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: black,
-                      ))),
-                )
+                    child: Container(
+                        height: MediaQuery.of(context).size.height * 0.50,
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: black,
+                        ))),
+                  )
                 : Expanded(
                     flex: 1,
                     child: SingleChildScrollView(
@@ -248,403 +126,467 @@ class _BcConnectState extends State<BcConnect> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 12.h,
-                          ),
-                          // Rectangle 1363
-// >>>>>>> ce9bda8dfeefa0c18cb371d481e083741f95016a
-
                           GridView.builder(
                             primary: false,
                             shrinkWrap: true,
-                            padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 10.h, top: 16.h),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 25.r,
-                              crossAxisSpacing: 0.r
-                            ),
+                            padding: EdgeInsets.only(
+                                left: 8.w, right: 8.w, bottom: 10.h, top: 10.h),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 2.r,
+                                    childAspectRatio: 0.71.h,
+                                    crossAxisSpacing: 0.r),
                             itemCount: videoController.userList.length,
-                            itemBuilder: (context, i) => Wrap(
-                              children: [
-                                Container(
-                                  height: 215.h,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 8.w, right: 8.w, bottom: 16.h),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(4.r)),
-                                        boxShadow: [
-                                          BoxShadow(
+                            itemBuilder: (context, i) => Container(
+                              // height: 215.h,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 8.w, right: 8.w, bottom: 18.h),
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(4.r)),
+                                      boxShadow: [
+                                        BoxShadow(
                                             color: Color(0x19121212),
                                             offset: Offset(0, 30),
                                             blurRadius: 60,
-                                            spreadRadius: 0
-                                          )
-                                        ],
-                                        color: white_ffffff
-                                      ),
-                                      child: Stack(
-                                        //    alignment: Alignment.center,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              Get.to(UserProfile(
-                                                selectedUserId: videoController
-                                                    .userList[i].id
-                                                    .toString(),
-                                                isFrom: false,
-                                                index: i,
-                                              ));
-                                              // !.then((value) {
-                                              //   checkNet(context).then((value) => {
-                                              //         videoController
-                                              //             .PageNumber.value = 0,
-                                              //         videoController.userListAPI(
-                                              //             context, true)
-                                              //       });
-                                              // });
-                                              videoController.userList.clear();
-                                            },
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                            spreadRadius: 0)
+                                      ],
+                                      color: white_ffffff),
+                                  child: Stack(
+                                    //    alignment: Alignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.to(UserProfile(
+                                            selectedUserId: videoController
+                                                .userList[i].id
+                                                .toString(),
+                                            isFrom: false,
+                                            index: i,
+                                          ));
+                                          // !.then((value) {
+                                          //   checkNet(context).then((value) => {
+                                          //         videoController
+                                          //             .PageNumber.value = 0,
+                                          //         videoController.userListAPI(
+                                          //             context, true)
+                                          //       });
+                                          // });
+                                          videoController.userList.clear();
+                                        },
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Stack(
+                                              alignment:
+                                                  Alignment.bottomCenter,
                                               children: [
-                                                Stack(
-                                                  alignment: Alignment.bottomCenter,
-                                                  children: [
-                                                    ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                                topLeft:
-                                                                    Radius.circular(
-                                                                        4.r),
-                                                                topRight:
-                                                                    Radius.circular(
-                                                                        4.r)),
-                                                        child: videoController
-                                                                    .userList[i]
-                                                                    .image !=
-                                                                null
-                                                            ? Image.network(
-                                                                videoController
-                                                                    .userList[i]
-                                                                    .image!,
-                                                                fit: BoxFit.cover,
-                                                                height: 134.h,
-                                                                width:
-                                                                    double.infinity,
-                                                              )
-                                                            : SvgPicture.asset(
-                                                                placeholder,
-                                                                height: 134.h,
-                                                                width:
-                                                                    double.infinity,
-                                                                fit: BoxFit.cover,
-                                                              )),
+                                                ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topLeft: Radius
+                                                                .circular(
+                                                                    4.r),
+                                                            topRight: Radius
+                                                                .circular(
+                                                                    4.r)),
+                                                    child: videoController
+                                                                .userList[i]
+                                                                .image !=
+                                                            null
+                                                        ? Image.network(
+                                                            videoController
+                                                                .userList[i]
+                                                                .image!,
+                                                            fit: BoxFit
+                                                                .cover,
+                                                            height: 134.h,
+                                                            width: double
+                                                                .infinity,
+                                                          )
+                                                        : SvgPicture.asset(
+                                                            placeholder,
+                                                            height: 134.h,
+                                                            width: double
+                                                                .infinity,
+                                                            fit: BoxFit
+                                                                .cover,
+                                                          )),
 
-                                                    // unsplash:27xbM3bF9_s
-                                                    Container(
-                                                        width: double.infinity,
-                                                        height: 134.h,
-                                                        decoration: BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              begin:
-                                                                  Alignment.topCenter,
-                                                              end: Alignment
-                                                                  .bottomCenter,
-                                                              colors: [
-                                                                Color.fromARGB(
-                                                                    0, 42, 41, 41),
-                                                                Color.fromARGB(
-                                                                    255, 31, 31, 31)
-                                                              ]),
-                                                        )),
+                                                // unsplash:27xbM3bF9_s
+                                                Container(
+                                                    width: double.infinity,
+                                                    height: 134.h,
+                                                    decoration:
+                                                        BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                          begin: Alignment
+                                                              .topCenter,
+                                                          end: Alignment
+                                                              .bottomCenter,
+                                                          colors: [
+                                                            Color.fromARGB(
+                                                                    0,
+                                                                    42,
+                                                                    41,
+                                                                    41)
+                                                                .withOpacity(
+                                                                    0.0),
+                                                            Color.fromARGB(
+                                                                    255,
+                                                                    31,
+                                                                    31,
+                                                                    31)
+                                                                .withOpacity(
+                                                                    0.7)
+                                                          ]),
+                                                    )),
 
-                                                    // Jessie J
-                                                    Center(
-                                                      child: Padding(
-                                                        padding: EdgeInsets.only(
+                                                // Jessie J
+                                                Center(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.only(
                                                             bottom: 15.h),
-                                                        child: Column(
-                                                          children: [
-                                                            Text(
-                                                                videoController
-                                                                        .userList[i]
-                                                                        .userName ??
-                                                                    "",
-                                                                style: TextStyle(
-                                                                    color:
-                                                                        white_ffffff,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontFamily:
-                                                                        helveticaNeue,
-                                                                    fontStyle:
-                                                                        FontStyle
-                                                                            .normal,
-                                                                    fontSize: 12.sp),
-                                                                textAlign:
-                                                                    TextAlign.left),
-                                                            Opacity(
-                                                              opacity:
-                                                                  0.699999988079071,
-                                                              child: Text(
-                                                                  videoController
-                                                                          .userList[i]
-                                                                          .firstName
-                                                                          .toString()
-                                                                          .capitalize ??
-                                                                      "",
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                            "${videoController
+                                                                    .userList[
+                                                                        i]
+                                                                    .firstName == null ? "" : videoController
+                                                                    .userList[
+                                                                        i]
+                                                                    .firstName!
+                                                                    .capitalizeFirst!} ${videoController
+                                                                    .userList[
+                                                                        i]
+                                                                    .lastName == null ? "" : videoController
+                                                                    .userList[
+                                                                        i]
+                                                                    .lastName!
+                                                                    .capitalizeFirst!}",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    white_ffffff,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w800,
+                                                                fontFamily:
+                                                                    helveticaNeue,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                                fontSize:
+                                                                    13.sp),
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .left),
+                                                        SizedBox(height: 3.h,),
+                                                        Opacity(
+                                                          opacity:
+                                                              0.9,
+                                                          child: videoController
+                                                                      .userList[
+                                                                          i]
+                                                                      .currentJobs ==
+                                                                  null
+                                                              ? Container()
+                                                              : Text(
+                                                                  "${videoController
+                                                                          .userList[
+                                                                              i]
+                                                                          .currentJobs!
+                                                                          .title == null ? "" : videoController
+                                                                          .userList[
+                                                                              i]
+                                                                          .currentJobs!
+                                                                          .title!} ${videoController
+                                                                          .userList[
+                                                                              i]
+                                                                          .currentJobs!
+                                                                          .companyName == null ? "" : "@"}${videoController
+                                                                          .userList[
+                                                                              i]
+                                                                          .currentJobs!
+                                                                          .companyName == null ? "" : videoController
+                                                                          .userList[
+                                                                              i]
+                                                                          .currentJobs!
+                                                                          .companyName!}",
+                                                                  maxLines: 2,
+                                                                  overflow: TextOverflow.ellipsis,
                                                                   style: TextStyle(
                                                                       color:
                                                                           white_ffffff,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
+                                                                      fontWeight: FontWeight
+                                                                          .w400,
                                                                       fontFamily:
                                                                           helveticaNeue,
-                                                                      fontStyle:
-                                                                          FontStyle
-                                                                              .normal,
-                                                                      fontSize: 8.sp),
-                                                                  textAlign: TextAlign
-                                                                      .center),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
+                                                                      fontStyle: FontStyle
+                                                                          .normal,
+                                                                          letterSpacing: 0.5,
+                                                                      fontSize: 9.sp),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center),
+                                                        )
+                                                      ],
                                                     ),
-
-                                                    // Product manager and brand strategist @capitalone
-                                                  ],
+                                                  ),
                                                 ),
 
-                                                // Come to me for
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 16.w,
-                                                      top: 10.h,
-                                                      right: 16.w,
-                                                      bottom: 16.h),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text("Come to me for",
-                                                          style: TextStyle(
-                                                              color: grey_aaaaaa,
-                                                              fontWeight:
-                                                                  FontWeight.w500,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle.normal,
-                                                              fontSize: 8.sp),
-                                                          textAlign: TextAlign.left),
-                                                      SizedBox(
-                                                        height: 2.h,
-                                                      ),
-                                                      // UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk
-                                                      Text(
-                                                          videoController.userList[i]
-                                                                  .questions!.isEmpty
-                                                              ? ""
-                                                              : videoController
-                                                                          .userList[i]
-                                                                          .questions!
-                                                                          .length <
-                                                                      4
-                                                                  ? ""
-                                                                  : videoController
-                                                                      .userList[i]
-                                                                      .questions![3]
-                                                                      .answer!
-                                                                      .capitalizeFirst!
-                                                                      .replaceAll(
-                                                                          ',', ' |'),
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style: TextStyle(
-                                                              color: black_121212,
-                                                              fontWeight:
-                                                                  FontWeight.w700,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle.normal,
-                                                              fontSize: 10.sp),
-                                                          maxLines: 2,
-                                                          textAlign: TextAlign.left)
-                                                    ],
-                                                  ),
-                                                )
+                                                // Product manager and brand strategist @capitalone
                                               ],
                                             ),
-                                          ),
-                                          // Positioned(
-                                          //   top: 115.h,
-                                          //   left: 40.w,
-                                          //   child: GestureDetector(
-                                          //     onTap: () {
-                                          //       if (videoController
-                                          //               .userList[i].isAdmire ==
-                                          //           0) {
-                                          //         bcConnectController.createAdmireAPI(
-                                          //             context,
-                                          //             videoController.userList[i].id,
-                                          //             i);
-                                          //       } else if (videoController
-                                          //               .userList[i].isAdmire ==
-                                          //           1) {
-                                          //         bcConnectController.admireDeleteAPI(
-                                          //             context,
-                                          //             videoController.userList[i].id,
-                                          //             i);
-                                          //       }
-                                          //     },
-                                          //     child: videoController
-                                          //                 .userList[i].isAdmire ==
-                                          //             1
-                                          //         ? Padding(
-                                          //             padding:
-                                          //                 EdgeInsets.only(top: 0.h),
-                                          //             child: Container(
-                                          //               decoration: BoxDecoration(
-                                          //                 borderRadius:
-                                          //                     BorderRadius.circular(
-                                          //                         50.r),
-                                          //                 gradient: LinearGradient(
-                                          //                     begin: Alignment
-                                          //                         .bottomCenter,
-                                          //                     end:
-                                          //                         Alignment.topCenter,
-                                          //                     colors: [
-                                          //                       Color(0xff1c2535),
-                                          //                       Color(0xff04080f)
-                                          //                     ]),
-                                          //                 boxShadow: [
-                                          //                   BoxShadow(
-                                          //                     color: Color(0x26121212)
-                                          //                         .withOpacity(0.2),
-                                          //                     spreadRadius: 5,
-                                          //                     blurRadius: 7,
-                                          //                     offset: Offset(0,
-                                          //                         3), // changes position of shadow
-                                          //                   ),
-                                          //                 ],
-                                          //               ),
-                                          //               child: // Followed
-                                          //                   Padding(
-                                          //                 padding: EdgeInsets.only(
-                                          //                     left: 20.w,
-                                          //                     right: 20.w,
-                                          //                     top: 10.h,
-                                          //                     bottom: 10.h),
-                                          //                 child: Text("Followed",
-                                          //                     style: TextStyle(
-                                          //                         color: const Color(
-                                          //                             0xffffffff),
-                                          //                         fontWeight:
-                                          //                             FontWeight.w700,
-                                          //                         fontFamily:
-                                          //                             helveticaNeue,
-                                          //                         fontStyle: FontStyle
-                                          //                             .normal,
-                                          //                         fontSize: 11.sp),
-                                          //                     textAlign:
-                                          //                         TextAlign.left),
-                                          //               ),
-                                          //             ),
-                                          //           )
-                                          //         : Padding(
-                                          //             padding:
-                                          //                 EdgeInsets.only(top: 0.h),
-                                          //             child: Container(
-                                          //               decoration: BoxDecoration(
-                                          //                 borderRadius:
-                                          //                     BorderRadius.circular(
-                                          //                         50.r),
-                                          //                 gradient: LinearGradient(
-                                          //                     begin: Alignment
-                                          //                         .bottomCenter,
-                                          //                     end:
-                                          //                         Alignment.topCenter,
-                                          //                     colors: [
-                                          //                       Color(0xffffffff),
-                                          //                       Color(0xffffffff)
-                                          //                     ]),
-                                          //                 boxShadow: [
-                                          //                   BoxShadow(
-                                          //                     color: Color(0x26121212)
-                                          //                         .withOpacity(0.2),
-                                          //                     spreadRadius: 5,
-                                          //                     blurRadius: 7,
-                                          //                     offset: Offset(0,
-                                          //                         3), // changes position of shadow
-                                          //                   ),
-                                          //                 ],
-                                          //               ),
-                                          //               child: // Followed
-                                          //                   Padding(
-                                          //                 padding: EdgeInsets.only(
-                                          //                     left: 20.w,
-                                          //                     right: 20.w,
-                                          //                     top: 10.h,
-                                          //                     bottom: 10.h),
-                                          //                 child: Row(
-                                          //                   children: [
-                                          //                     SvgPicture.asset(
-                                          //                       follow,
-                                          //                       height: 12.h,
-                                          //                       width: 11.h,
-                                          //                     ),
-                                          //                     SizedBox(
-                                          //                       width: 4.w,
-                                          //                     ),
-                                          //                     Text("Follow",
-                                          //                         style: TextStyle(
-                                          //                             color: const Color(
-                                          //                                 0xff1c2535),
-                                          //                             fontWeight:
-                                          //                                 FontWeight
-                                          //                                     .w700,
-                                          //                             fontFamily:
-                                          //                                 helveticaNeue,
-                                          //                             fontStyle:
-                                          //                                 FontStyle
-                                          //                                     .normal,
-                                          //                             fontSize:
-                                          //                                 11.sp),
-                                          //                         textAlign:
-                                          //                             TextAlign.left),
-                                          //                   ],
-                                          //                 ),
-                                          //               ),
-                                          //             ),
-                                          //           ),
-                                          //   ),
-                                          // ),
-                                        ],
+
+                                            // Come to me for
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 16.w,
+                                                  top: 10.h,
+                                                  right: 16.w,
+                                                  bottom: 16.h),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start,
+                                                children: [
+                                                  Text("Come to me for",
+                                                      style: TextStyle(
+                                                          color:
+                                                              grey_aaaaaa,
+                                                          fontWeight:
+                                                              FontWeight
+                                                                  .w500,
+                                                          fontFamily:
+                                                              helveticaNeue,
+                                                          fontStyle:
+                                                              FontStyle
+                                                                  .normal,
+                                                          fontSize: 8.sp),
+                                                      textAlign:
+                                                          TextAlign.left),
+                                                  SizedBox(
+                                                    height: 3.5.h,
+                                                  ),
+                                                  // UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk
+                                                  Text(
+                                                      videoController
+                                                              .userList[i]
+                                                              .questions!
+                                                              .isEmpty
+                                                          ? ""
+                                                          : videoController
+                                                                      .userList[
+                                                                          i]
+                                                                      .questions!
+                                                                      .length <
+                                                                  4
+                                                              ? ""
+                                                              : videoController
+                                                                  .userList[
+                                                                      i]
+                                                                  .questions![
+                                                                      3]
+                                                                  .answer!
+                                                                  .capitalizeFirst!
+                                                                  .replaceAll(',',
+                                                                      ' |'),
+                                                      overflow:
+                                                          TextOverflow
+                                                              .ellipsis,
+                                                      style: TextStyle(
+                                                          color:
+                                                              black_121212,
+                                                          fontWeight:
+                                                              FontWeight
+                                                                  .w600,
+                                                          fontFamily:
+                                                              helveticaNeue,
+                                                          fontStyle:
+                                                              FontStyle
+                                                                  .normal,
+                                                          fontSize: 12.sp),
+                                                      maxLines: 2,
+                                                      textAlign:
+                                                          TextAlign.left)
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
+                                      // Positioned(
+                                      //   top: 115.h,
+                                      //   left: 40.w,
+                                      //   child: GestureDetector(
+                                      //     onTap: () {
+                                      //       if (videoController
+                                      //               .userList[i].isAdmire ==
+                                      //           0) {
+                                      //         bcConnectController.createAdmireAPI(
+                                      //             context,
+                                      //             videoController.userList[i].id,
+                                      //             i);
+                                      //       } else if (videoController
+                                      //               .userList[i].isAdmire ==
+                                      //           1) {
+                                      //         bcConnectController.admireDeleteAPI(
+                                      //             context,
+                                      //             videoController.userList[i].id,
+                                      //             i);
+                                      //       }
+                                      //     },
+                                      //     child: videoController
+                                      //                 .userList[i].isAdmire ==
+                                      //             1
+                                      //         ? Padding(
+                                      //             padding:
+                                      //                 EdgeInsets.only(top: 0.h),
+                                      //             child: Container(
+                                      //               decoration: BoxDecoration(
+                                      //                 borderRadius:
+                                      //                     BorderRadius.circular(
+                                      //                         50.r),
+                                      //                 gradient: LinearGradient(
+                                      //                     begin: Alignment
+                                      //                         .bottomCenter,
+                                      //                     end:
+                                      //                         Alignment.topCenter,
+                                      //                     colors: [
+                                      //                       Color(0xff1c2535),
+                                      //                       Color(0xff04080f)
+                                      //                     ]),
+                                      //                 boxShadow: [
+                                      //                   BoxShadow(
+                                      //                     color: Color(0x26121212)
+                                      //                         .withOpacity(0.2),
+                                      //                     spreadRadius: 5,
+                                      //                     blurRadius: 7,
+                                      //                     offset: Offset(0,
+                                      //                         3), // changes position of shadow
+                                      //                   ),
+                                      //                 ],
+                                      //               ),
+                                      //               child: // Followed
+                                      //                   Padding(
+                                      //                 padding: EdgeInsets.only(
+                                      //                     left: 20.w,
+                                      //                     right: 20.w,
+                                      //                     top: 10.h,
+                                      //                     bottom: 10.h),
+                                      //                 child: Text("Followed",
+                                      //                     style: TextStyle(
+                                      //                         color: const Color(
+                                      //                             0xffffffff),
+                                      //                         fontWeight:
+                                      //                             FontWeight.w700,
+                                      //                         fontFamily:
+                                      //                             helveticaNeue,
+                                      //                         fontStyle: FontStyle
+                                      //                             .normal,
+                                      //                         fontSize: 11.sp),
+                                      //                     textAlign:
+                                      //                         TextAlign.left),
+                                      //               ),
+                                      //             ),
+                                      //           )
+                                      //         : Padding(
+                                      //             padding:
+                                      //                 EdgeInsets.only(top: 0.h),
+                                      //             child: Container(
+                                      //               decoration: BoxDecoration(
+                                      //                 borderRadius:
+                                      //                     BorderRadius.circular(
+                                      //                         50.r),
+                                      //                 gradient: LinearGradient(
+                                      //                     begin: Alignment
+                                      //                         .bottomCenter,
+                                      //                     end:
+                                      //                         Alignment.topCenter,
+                                      //                     colors: [
+                                      //                       Color(0xffffffff),
+                                      //                       Color(0xffffffff)
+                                      //                     ]),
+                                      //                 boxShadow: [
+                                      //                   BoxShadow(
+                                      //                     color: Color(0x26121212)
+                                      //                         .withOpacity(0.2),
+                                      //                     spreadRadius: 5,
+                                      //                     blurRadius: 7,
+                                      //                     offset: Offset(0,
+                                      //                         3), // changes position of shadow
+                                      //                   ),
+                                      //                 ],
+                                      //               ),
+                                      //               child: // Followed
+                                      //                   Padding(
+                                      //                 padding: EdgeInsets.only(
+                                      //                     left: 20.w,
+                                      //                     right: 20.w,
+                                      //                     top: 10.h,
+                                      //                     bottom: 10.h),
+                                      //                 child: Row(
+                                      //                   children: [
+                                      //                     SvgPicture.asset(
+                                      //                       follow,
+                                      //                       height: 12.h,
+                                      //                       width: 11.h,
+                                      //                     ),
+                                      //                     SizedBox(
+                                      //                       width: 4.w,
+                                      //                     ),
+                                      //                     Text("Follow",
+                                      //                         style: TextStyle(
+                                      //                             color: const Color(
+                                      //                                 0xff1c2535),
+                                      //                             fontWeight:
+                                      //                                 FontWeight
+                                      //                                     .w700,
+                                      //                             fontFamily:
+                                      //                                 helveticaNeue,
+                                      //                             fontStyle:
+                                      //                                 FontStyle
+                                      //                                     .normal,
+                                      //                             fontSize:
+                                      //                                 11.sp),
+                                      //                         textAlign:
+                                      //                             TextAlign.left),
+                                      //                   ],
+                                      //                 ),
+                                      //               ),
+                                      //             ),
+                                      //           ),
+                                      //   ),
+                                      // ),
+                                    ],
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
                   ),
+            SizedBox(
+              height: 3,
+            ),
             if (videoController.isPaginationLoading.value == true)
               PaginationUtils().loader(),
+            SizedBox(
+              height: 3,
+            ),
           ],
         ),
       ),

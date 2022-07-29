@@ -25,6 +25,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool isSplash = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -55,6 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // }else{
       //   Get.offAll(BottomNavigation());
       // }
+      Future.delayed(Duration(milliseconds: 150), (){setState((){isSplash = false;});});
       if (myModel == null) {
         Get.offAll(const Welcome());
       } else if (myModel.data!.aboutUs == "" || myModel.data!.aboutUs == null) {
@@ -84,8 +86,9 @@ class _SplashScreenState extends State<SplashScreen> {
         } else if (lastQuestionsInfo != "Done") {
           Get.offAll(const AdditionalLastQueView());
         } else {
-          Get.back();
-          Navigator.of(context).pushAndRemoveUntil(_createRoute(), (Route<dynamic> route) => false,);
+          Get.offAll(HomePage());
+          // Get.back();
+          // Navigator.of(context).pushAndRemoveUntil(_createRoute(), (Route<dynamic> route) => false,);
         }
       } else {
         Get.offAll(HomePage());
@@ -131,13 +134,16 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white_ffffff,
-      body: Center(
+      body: Visibility(
+        visible: isSplash,
+        child: Center(
         child: SvgPicture.asset(
           logo,
           width: 126,
           height: 126,
         ),
-      ),
+      ),),
+      
     );
   }
 }

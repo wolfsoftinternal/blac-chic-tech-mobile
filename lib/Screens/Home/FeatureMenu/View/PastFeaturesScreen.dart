@@ -56,12 +56,9 @@ class _PastFeaturesScreenState extends State<PastFeaturesScreen> {
       body: Stack(
         children: <Widget>[
           PageView.builder(
-            controller: _controller,
+            controller: PageController(),
             scrollDirection: Axis.horizontal,
             itemCount: widget.featureList.length,
-            // loop: false,
-            // curve: Curves.easeInBack,
-            // transformer: transformers[1],
             itemBuilder: (BuildContext context, int index) {
               if(!isSet){
                 isSet = true;

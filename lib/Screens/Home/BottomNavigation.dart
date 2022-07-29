@@ -158,22 +158,22 @@ class _BottomNavigationState extends State<BottomNavigation> {
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
-      if(index == 0){
+      if (index == 0) {
         Get.to(HomePage());
-      }else if(index == 1){
+      } else if (index == 1) {
         _currentIndex = 0;
-        Get.to(Feed())!.then((value){
+        Get.to(Feed())!.then((value) {
           _currentIndex = 0;
           Get.offAll(HomePage());
         });
-      }else if(index == 2){
+      } else if (index == 2) {
         _currentIndex = 0;
-        Get.to(FriendListScreen())!.then((value){
+        Get.to(FriendListScreen())!.then((value) {
           _currentIndex = 0;
           Get.offAll(HomePage());
         });
-      }else if(index == 3){
-        Get.to(AdmireProfile())!.then((value){
+      } else if (index == 3) {
+        Get.to(AdmireProfile())!.then((value) {
           _currentIndex = 0;
           Get.offAll(HomePage());
         });
@@ -181,11 +181,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
     });
   }
 
-
   Container buildMyNavBar(BuildContext context) {
     return Container(
       height: 70.h,
-      margin:  EdgeInsets.only(left: 17.0.w, right: 17.0.w, bottom: 20.0.h),
+      margin: EdgeInsets.only(left: 17.0.w, right: 17.0.w, bottom: 20.0.h),
       decoration: BoxDecoration(
         color: black_121212,
         borderRadius: const BorderRadius.all(
@@ -201,8 +200,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
               onTabTapped(0);
             },
             icon: _currentIndex == 0
-                ?  SvgPicture.asset(home_icon, color: white,)
-                : SvgPicture.asset(home_icon, color: Colors.grey[600],),
+                ? SvgPicture.asset(
+                    home_icon,
+                    color: white,
+                  )
+                : SvgPicture.asset(
+                    home_icon,
+                    color: Colors.grey[600],
+                  ),
           ),
           IconButton(
             enableFeedback: false,
@@ -210,8 +215,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
               onTabTapped(1);
             },
             icon: _currentIndex == 1
-                ? SvgPicture.asset(feed_icon, color: white,)
-                : SvgPicture.asset(feed_icon, color: Colors.grey[600],),
+                ? SvgPicture.asset(
+                    feed_icon,
+                    color: white,
+                  )
+                : SvgPicture.asset(
+                    feed_icon,
+                    color: Colors.grey[600],
+                  ),
           ),
           IconButton(
             enableFeedback: false,
@@ -219,8 +230,18 @@ class _BottomNavigationState extends State<BottomNavigation> {
               onTabTapped(2);
             },
             icon: _currentIndex == 2
-                ? SvgPicture.asset(chat_icon, color: white, height: 28, width: 28,)
-                : SvgPicture.asset(chat_icon, color: Colors.grey[600], height: 28, width: 28,),
+                ? SvgPicture.asset(
+                    chat_icon,
+                    color: white,
+                    height: 28,
+                    width: 28,
+                  )
+                : SvgPicture.asset(
+                    chat_icon,
+                    color: Colors.grey[600],
+                    height: 28,
+                    width: 28,
+                  ),
           ),
           IconButton(
             enableFeedback: false,
@@ -267,6 +288,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         fit: BoxFit.cover,
                       ),
                 ),
+
               ),
             ),
 

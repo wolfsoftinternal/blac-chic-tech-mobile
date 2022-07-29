@@ -3,6 +3,7 @@
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/CreateVideo/controller/VideoController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
+import 'package:blackchecktech/Screens/Home/Profile/view/Profile.dart';
 import 'package:blackchecktech/Screens/Home/Profile/view/SeeAllAdmires.dart';
 import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
@@ -208,10 +209,22 @@ class _AdmireProfileState extends State<AdmireProfile> {
                               GestureDetector(
                                 onTap: (){
                                   if (myModel!.data!.id == controller.admireList[index].admireDetails!.id) {
-                                controller.userProfileAPI(context, true);
+                                controller.userProfileAPI(context, true).then((val){
+                                  Get.to(
+                                        Profile(), 
+                                        duration: Duration(milliseconds: 500),
+                                        transition: Transition.downToUp 
+                                      );
+                                });
                               } else {
                                 controller.admireProfileAPI(
-                                    context, controller.admireList[index].admireDetails!.id);
+                                    context, controller.admireList[index].admireDetails!.id).then((val){
+                                      Get.to(
+                                        Profile(), 
+                                        duration: Duration(milliseconds: 500),
+                                        transition: Transition.downToUp 
+                                      );
+                                    });
                               }
                                 },
                                 child: CircularProfileAvatar(

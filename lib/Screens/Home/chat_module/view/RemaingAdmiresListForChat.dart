@@ -1,3 +1,4 @@
+import 'package:blackchecktech/Layout/ToolbarBackOnly.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
 import 'package:blackchecktech/Screens/Home/Profile/controller/AdmireProfileController.dart';
 import 'package:blackchecktech/Screens/Home/Profile/model/AdmireListModel.dart';
@@ -66,7 +67,27 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
           SizedBox(
             height: 60.h,
           ),
-          ToolbarWithHeaderCenterTitle("Select Admires"),
+          Container(
+      color: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          BackLayout(),
+          const Spacer(),
+          Text('Select Admires',
+              style:  TextStyle(
+                  color: black_121212,
+                  fontWeight: FontWeight.w800,
+                  fontFamily: helvetica_neu_bold,
+                  fontStyle: FontStyle.normal,
+                  letterSpacing: 0.5,
+                  fontSize: 16.sp),
+              textAlign: TextAlign.center),
+              const Spacer(),
+             const SizedBox(height: 46, width: 46,)
+        ],
+      ),
+    ),
           SizedBox(
             height: 20.h,
           ),
@@ -98,7 +119,7 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(60.r),
                                           child: widget.admireList.isNotEmpty
                                               ? widget.admireList[i].admireDetails
                                               ?.image ==
@@ -160,8 +181,8 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
                                                       .admireDetails!.userName!
                                                       : "",
                                                   style: TextStyle(
-                                                      color: grey_aaaaaa,
-                                                      fontWeight: FontWeight.w500,
+                                                      color: Color(0xff595959),
+                                                      fontWeight: FontWeight.w400,
                                                       fontFamily:
                                                       helveticaNeueNeue_medium,
                                                       fontStyle: FontStyle.normal,
@@ -193,9 +214,9 @@ class _RemaingAdmiresListForChatState extends State<RemaingAdmiresListForChat> {
                                                       color: black_121212,
                                                       fontWeight: FontWeight.w700,
                                                       fontFamily:
-                                                      helveticaNeueNeue_medium,
+                                                      roboto_bold,
                                                       fontStyle: FontStyle.normal,
-                                                      fontSize: 14.sp),
+                                                      fontSize: 16.sp),
                                                   textAlign: TextAlign.left)
                                             ],
                                           ),
