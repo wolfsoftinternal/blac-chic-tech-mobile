@@ -12,6 +12,7 @@ class BackLayout extends StatelessWidget {
       margin: EdgeInsets.only(left: 24.w),
       child: GestureDetector(
         onTap: () {
+          FocusScope.of(context).unfocus();
           Get.back();
         },
         child: Container(

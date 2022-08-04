@@ -35,9 +35,10 @@ class SettingsController extends GetxController {
 
   userLogout(BuildContext context) async {
     var preferences = MySharedPref();
-    SignupModel? myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
+    SignupModel? myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = await preferences.getStringValue(SharePreData.keytoken);
-
+    print("token :: " + token.toString());
     String url = urlBase + urlLogout;
     final apiReq = Request();
     await apiReq.postAPI(url, null, token.toString()).then((value) {
@@ -46,6 +47,7 @@ class SettingsController extends GetxController {
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
           String strData = value;
+          print("Logout :: " + strData.toString());
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
@@ -55,10 +57,10 @@ class SettingsController extends GetxController {
 
             userLogout(context);
           } else if (model.statusCode == 200) {
-            bool boolRememberedUser =
-            await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
-            String pswd =
-            await preferences.getStringValue(SharePreData.keyRememberPassword);
+            bool boolRememberedUser = await preferences
+                .getBoolValue(SharePreData.keyRememberedUserInfo);
+            String pswd = await preferences
+                .getStringValue(SharePreData.keyRememberPassword);
 
             await preferences.clear();
 
@@ -66,7 +68,8 @@ class SettingsController extends GetxController {
               myModel!.data!.password = pswd;
               await preferences.setRememberModel(
                   myModel, SharePreData.key_UserInfoModel);
-              await preferences.setBool(SharePreData.keyRememberedUserInfo, true);
+              await preferences.setBool(
+                  SharePreData.keyRememberedUserInfo, true);
             }
 
             Get.offAll(Welcome());
@@ -80,7 +83,8 @@ class SettingsController extends GetxController {
 
   deleteAccount(BuildContext context) async {
     var preferences = MySharedPref();
-    SignupModel? myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
+    SignupModel? myModel =
+        await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
     String url = urlBase + urlDeleteAccount;
@@ -123,15 +127,15 @@ class SettingsController extends GetxController {
         'Authorization': '2360d5f790268aa27fe70a28cc5548a3',
       },
     );
-    var response = await Dio().post(
-      'https://api.peerboard.com/v1/members/$email',
-      data: {
-        "external_id": myModel.data!.id.toString(),
-        "email": email,
-      },
-      options: header
-    ).then((value) async {
-      if(value.statusCode == 200){
+    var response = await Dio()
+        .post('https://api.peerboard.com/v1/members/$email',
+            data: {
+              "external_id": myModel.data!.id.toString(),
+              "email": email,
+            },
+            options: header)
+        .then((value) async {
+      if (value.statusCode == 200) {
         await preferences.clear();
         Get.offAll(Welcome());
       }

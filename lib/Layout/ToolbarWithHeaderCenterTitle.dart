@@ -21,7 +21,7 @@ class ToolbarWithHeaderCenterTitle extends StatelessWidget {
           BackLayout(),
           const Spacer(),
           Text(title!,
-              style:  TextStyle(
+              style: TextStyle(
                   color: black_121212,
                   fontWeight: FontWeight.w900,
                   fontFamily: helvetica_neu_bold,
@@ -29,8 +29,11 @@ class ToolbarWithHeaderCenterTitle extends StatelessWidget {
                   letterSpacing: 1.2,
                   fontSize: 16.sp),
               textAlign: TextAlign.center),
-              const Spacer(),
-             const SizedBox(height: 46, width: 46,)
+          const Spacer(),
+          const SizedBox(
+            height: 46,
+            width: 46,
+          )
         ],
       ),
     );

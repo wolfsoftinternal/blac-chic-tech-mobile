@@ -140,16 +140,22 @@ class _HomePageState extends State<HomePage> {
                                           // height: 66,
                                           width: double.infinity,
                                           decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                begin: Alignment.topCenter,
-                                                end: Alignment.bottomCenter,
-                                                colors: index % 2 != 0 ? [ Color.fromARGB(255, 36, 48, 69),  Color(0xff04080f)] : [ white,  white],
-                                                stops: [0.0, 1.0],
-                                              ),
-                                              borderRadius:
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: index % 2 != 0
+                                                  ? [
+                                                      Color.fromARGB(
+                                                          255, 36, 48, 69),
+                                                      Color(0xff04080f)
+                                                    ]
+                                                  : [white, white],
+                                              stops: [0.0, 1.0],
+                                            ),
+                                            borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(4.0)),
-                                            ),
+                                          ),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -157,8 +163,8 @@ class _HomePageState extends State<HomePage> {
                                               Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 16.0.w,
-                                                    top: 19.5.h,
-                                                    bottom: 22.5.h),
+                                                    top: 15.5.h,
+                                                    bottom: 17.5.h),
                                                 child: Text(
                                                   values[index],
                                                   style: TextStyle(
@@ -180,7 +186,8 @@ class _HomePageState extends State<HomePage> {
                                                   angle: 90 * math.pi / 375,
                                                   child: Icon(
                                                     Icons.arrow_forward,
-                                                    color: grey_aaaaaa.withOpacity(0.5),
+                                                    color: grey_aaaaaa
+                                                        .withOpacity(0.5),
                                                   ),
                                                 ),
                                               )

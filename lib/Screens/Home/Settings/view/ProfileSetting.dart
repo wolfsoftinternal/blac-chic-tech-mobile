@@ -51,22 +51,22 @@ class _ProfileSettingState extends State<ProfileSetting> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Obx(
-        () => Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 60.h,
-            ),
-            ToolbarWithHeaderCenterTitle('SETTINGS'),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 44.h),
-                  child: myModel == null
-                      ? Container()
-                      : Column(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 60.h,
+          ),
+          ToolbarWithHeaderCenterTitle('SETTINGS'),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 44.h),
+                child: myModel == null
+                    ? Container()
+                    : Obx(
+                        () => Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -823,11 +823,11 @@ class _ProfileSettingState extends State<ProfileSetting> {
                             )
                           ],
                         ),
-                ),
+                      ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

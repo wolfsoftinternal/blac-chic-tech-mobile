@@ -22,8 +22,6 @@ GetIt getIt = GetIt.instance;
 const Color themeColor = Color(0xff00bc56);
 
 void main() async {
-
-
   print("main file");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -54,7 +52,7 @@ class _MyAppState extends State<MyApp> {
             primarySwatch: Colors.blue,
           ),
           home: SplashScreen(),
-        //  home: DemoBottomNavigation(),
+          //  home: DemoBottomNavigation(),
         );
       },
     );

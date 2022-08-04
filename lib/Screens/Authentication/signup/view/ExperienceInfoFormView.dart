@@ -10,6 +10,7 @@ import 'package:blackchecktech/Styles/my_colors.dart';
 import 'package:blackchecktech/Styles/my_icons.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utils/CommonWidget.dart';
+import 'package:blackchecktech/Utils/GeneralFunctions.dart';
 import 'package:blackchecktech/Utils/internet_connection.dart';
 import 'package:blackchecktech/Utils/preference_utils.dart';
 import 'package:blackchecktech/Utils/share_predata.dart';
@@ -42,6 +43,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
   List<TextEditingController> pastCompanyNameController = [];
   List<TextEditingController> pastCompanyWebsiteController = [];
   List<String> pastJobImage = [];
+  List<String> pastJobId = [];
 
   bool isDeleteLast = false;
 
@@ -51,15 +53,18 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
     super.initState();
     controller.industryListAPI(context);
     for (var element in cards) {
+      print("Card :: " + element.toString());
       var image = element;
       var titleController = TextEditingController(text: element);
       var nameController = TextEditingController(text: element);
       var websiteController = TextEditingController(text: element);
+      var imageId = element;
 
       pastJobImage.add(image);
       pastCompanyTitleController.add(titleController);
       pastCompanyNameController.add(nameController);
       pastCompanyWebsiteController.add(websiteController);
+      pastJobId.add(imageId);
     }
   }
 
@@ -245,55 +250,55 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                                           FontStyle.normal,
                                                       fontSize: 14.sp)),
                                             ),
-                                            controller.companyName.value ==
-                                                    'Company Name'
-                                                ? Container()
-                                                : Flexible(
-                                                    flex: 1,
-                                                    child: controller
-                                                            .companyImage
-                                                            .isEmpty
-                                                        ? ClipRRect(
-                                                          borderRadius: BorderRadius.circular(4.r),
-                                                          child: SvgPicture.asset(
-                                                            placeholder,
-                                                            width: 25.w,
-                                                            height: 25.h,
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                        )
-                                                        : ClipRRect(
-                                                          borderRadius: BorderRadius.circular(4.r),
-                                                          child: CachedNetworkImage(
-                                                              imageUrl: controller
-                                                                  .companyImage
-                                                                  .value,
-                                                              width: 25.w,
-                                                              height: 25.h,
-                                                              fit: BoxFit.fill,
-                                                              progressIndicatorBuilder:
-                                                                  (context, url,
-                                                                          downloadProgress) =>
-                                                                      SvgPicture
-                                                                          .asset(
-                                                                placeholder,
-                                                                width: 25.w,
-                                                                height: 25.h,
-                                                                fit: BoxFit.fill,
-                                                              ),
-                                                              errorWidget:
-                                                                  (context, url,
-                                                                          error) =>
-                                                                      SvgPicture
-                                                                          .asset(
-                                                                placeholder,
-                                                                width: 25.w,
-                                                                height: 25.h,
-                                                                fit: BoxFit.fill,
-                                                              ),
-                                                            ),
+                                            Flexible(
+                                              child: controller
+                                                      .companyImage.isEmpty
+                                                  ? SizedBox(
+                                                      width: 25.w,
+                                                      height: 25.h,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.r),
+                                                        child: SvgPicture.asset(
+                                                          placeholder,
+                                                          width: 25.w,
+                                                          height: 25.h,
+                                                          fit: BoxFit.fill,
                                                         ),
-                                                  ),
+                                                      ),
+                                                    )
+                                                  : ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.r),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl: controller
+                                                            .companyImage.value,
+                                                        width: 25.w,
+                                                        height: 25.h,
+                                                        fit: BoxFit.fill,
+                                                        progressIndicatorBuilder:
+                                                            (context, url,
+                                                                    downloadProgress) =>
+                                                                SvgPicture
+                                                                    .asset(
+                                                          placeholder,
+                                                          width: 25.w,
+                                                          height: 25.h,
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            SvgPicture.asset(
+                                                          placeholder,
+                                                          width: 25.w,
+                                                          height: 25.h,
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                      ),
+                                                    ),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -353,77 +358,82 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         ),
                       ),
 
-                      SizedBox(
-                        height: 16.h,
-                      ),
+                      // SizedBox(
+                      //   height: 16.h,
+                      // ),
 
-                      Container(
-                        height: 48.h,
-                        decoration: EditTextDecoration,
-                        child: controller.industryName != null && controller.industryName == 'other'
-                        ? Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: 17.w, right: 17.w, top: 5.h, bottom: 5.h),
-                                child: Center(
-                                  child: setTextFieldNext(
-                                    controller.industryController.value,
-                                    "Enter Industry",
-                                    false,
-                                    TextInputType.name,
-                                    false,
-                                    "",
-                                    TextInputAction.next,
-                                    (val) => {
-                                      if(val == ''){
-                                        controller.industryName = null,
-                                        setState((){})
-                                      }
-                                    },
-                                    () {},
-                                    false,
-                                    true
-                                  ),
-                                ),
-                              ),
-                        )
-                        : DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                            value: controller.industryName,
-                            hint: Text("Select Industry",
-                                style: TextStyle(
-                                    color: grey_aaaaaa,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily:
-                                        helveticaNeueNeue_medium,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 14.sp),
-                                textAlign: TextAlign.left),
-                            icon: SvgPicture.asset(
-                              icon_down_arrow_spinner,
-                              width: 12.w,
-                              height: 12.h,
-                            ),
-                            isExpanded: true,
-                            customItemsHeight: 4,
-                            iconEnabledColor: black_121212,
-                            iconDisabledColor: Colors.grey,
-                            // buttonHeight: 60,
-                            buttonWidth: double.infinity,
-                            buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                            buttonDecoration: EditTextDecoration,
-                            itemHeight: 42,
-                            itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                controller.industryName =
-                                    newValue!;
-                              });
-                            },
-                            items: controller.dropDownIndustryItems),
-                        )
-                      ),
+                      // Container(
+                      //     height: 48.h,
+                      //     decoration: EditTextDecoration,
+                      //     child: controller.industryName != null &&
+                      //             controller.industryName == 'other'
+                      //         ? Align(
+                      //             alignment: Alignment.centerLeft,
+                      //             child: Padding(
+                      //               padding: EdgeInsets.only(
+                      //                   left: 17.w,
+                      //                   right: 17.w,
+                      //                   top: 5.h,
+                      //                   bottom: 5.h),
+                      //               child: Center(
+                      //                 child: setTextFieldNext(
+                      //                     controller.industryController.value,
+                      //                     "Enter Industry",
+                      //                     false,
+                      //                     TextInputType.name,
+                      //                     false,
+                      //                     "",
+                      //                     TextInputAction.next,
+                      //                     (val) => {
+                      //                           if (val == '')
+                      //                             {
+                      //                               controller.industryName =
+                      //                                   null,
+                      //                               setState(() {})
+                      //                             }
+                      //                         },
+                      //                     () {},
+                      //                     false,
+                      //                     true),
+                      //               ),
+                      //             ),
+                      //           )
+                      //         : DropdownButtonHideUnderline(
+                      //             child: DropdownButton2(
+                      //                 value: controller.industryName,
+                      //                 hint: Text("Select Industry",
+                      //                     style: TextStyle(
+                      //                         color: grey_aaaaaa,
+                      //                         fontWeight: FontWeight.w500,
+                      //                         fontFamily:
+                      //                             helveticaNeueNeue_medium,
+                      //                         fontStyle: FontStyle.normal,
+                      //                         fontSize: 14.sp),
+                      //                     textAlign: TextAlign.left),
+                      //                 icon: SvgPicture.asset(
+                      //                   icon_down_arrow_spinner,
+                      //                   width: 12.w,
+                      //                   height: 12.h,
+                      //                 ),
+                      //                 isExpanded: true,
+                      //                 customItemsHeight: 4,
+                      //                 iconEnabledColor: black_121212,
+                      //                 iconDisabledColor: Colors.grey,
+                      //                 // buttonHeight: 60,
+                      //                 buttonWidth: double.infinity,
+                      //                 buttonPadding: const EdgeInsets.only(
+                      //                     left: 14, right: 14),
+                      //                 buttonDecoration: EditTextDecoration,
+                      //                 itemHeight: 42,
+                      //                 itemPadding: const EdgeInsets.symmetric(
+                      //                     horizontal: 15.0),
+                      //                 onChanged: (String? newValue) {
+                      //                   setState(() {
+                      //                     controller.industryName = newValue!;
+                      //                   });
+                      //                 },
+                      //                 items: controller.dropDownIndustryItems),
+                      //           )),
 
                       SizedBox(
                         height: 32.h,
@@ -502,83 +512,140 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                           child: InkWell(
                                             onTap: () {
                                               Get.to(const CompanyList(
-                                                isFrom: 'experience_pastjob')
-                                              )!.then((value) {
-                                                pastCompanyNameController[index].text =
-                                                    controller.pastJobController.value;
-                                                pastJobImage[index] = controller.pastJobImage.value;
+                                                      isFrom:
+                                                          'experience_pastjob'))!
+                                                  .then((value) {
+                                                pastCompanyNameController[index]
+                                                        .text =
+                                                    controller.pastJobController
+                                                        .value;
+                                                pastJobImage[index] = controller
+                                                    .pastJobImage.value;
+                                                pastJobId[index] = controller
+                                                    .pastJobId.value
+                                                    .toString();
+                                                print("pastJobId[index] ::" +
+                                                    pastJobId[index]
+                                                        .toString());
                                                 setState(() {});
                                               });
                                             },
                                             child: Align(
                                               alignment: Alignment.centerLeft,
                                               child: Container(
-                                                height:48.h,
+                                                height: 48.h,
                                                 decoration: BoxDecoration(
                                                     color: light_grey_f2f2f2,
-                                                    borderRadius: BorderRadius.circular(4.r)),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.r)),
                                                 child: Padding(
                                                   padding: EdgeInsets.only(
                                                     left: 16.w,
                                                     right: 16.w,
                                                   ),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
                                                       Expanded(
                                                         child: Container(
-                                                          width: MediaQuery.of(context).size.width * 0.20.w,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.20.w,
                                                           child: Text(
-                                                            pastCompanyNameController[index].value.text == ''
-                                                            ? 'Company Name'
-                                                            : pastCompanyNameController[index].text,
-                                                            style: TextStyle(
-                                                              color: pastCompanyNameController[index].value.text == ''
-                                                                    ? grey_aaaaaa : black_121212,
-                                                              fontFamily: helveticaNeueNeue_medium,
-                                                              fontStyle: FontStyle.normal,
-                                                              fontSize: 14.sp,
-                                                              fontWeight: FontWeight.w500,
-                                                              overflow: TextOverflow.ellipsis,
+                                                              pastCompanyNameController[
+                                                                              index]
+                                                                          .value
+                                                                          .text ==
+                                                                      ''
+                                                                  ? 'Company Name'
+                                                                  : pastCompanyNameController[
+                                                                          index]
+                                                                      .text,
+                                                              style: TextStyle(
+                                                                color: pastCompanyNameController[index]
+                                                                            .value
+                                                                            .text ==
+                                                                        ''
+                                                                    ? grey_aaaaaa
+                                                                    : black_121212,
+                                                                fontFamily:
+                                                                    helveticaNeueNeue_medium,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                                fontSize: 14.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                              ),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left),
+                                                        ),
+                                                      ),
+                                                      pastJobImage[index]
+                                                              .isEmpty
+                                                          ? ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4.r),
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                placeholder,
+                                                                width: 25.w,
+                                                                height: 25.h,
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                              ),
+                                                            )
+                                                          : ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4.r),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                imageUrl:
+                                                                    pastJobImage[
+                                                                        index],
+                                                                width: 25.w,
+                                                                height: 25.h,
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                                progressIndicatorBuilder:
+                                                                    (context,
+                                                                            url,
+                                                                            downloadProgress) =>
+                                                                        SvgPicture
+                                                                            .asset(
+                                                                  placeholder,
+                                                                  width: 25.w,
+                                                                  height: 25.h,
+                                                                  fit: BoxFit
+                                                                      .fill,
+                                                                ),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    SvgPicture
+                                                                        .asset(
+                                                                  placeholder,
+                                                                  width: 25.w,
+                                                                  height: 25.h,
+                                                                  fit: BoxFit
+                                                                      .fill,
+                                                                ),
+                                                              ),
                                                             ),
-                                                            textAlign: TextAlign.left
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pastCompanyNameController[index].value.text == '' 
-                                                      ? Container()
-                                                      : pastJobImage[index].isEmpty
-                                                      ? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(4.r),
-                                                        child: SvgPicture.asset(
-                                                          placeholder,
-                                                          width: 25.w,
-                                                          height: 25.h,
-                                                          fit: BoxFit.fill,
-                                                        ),
-                                                      ) : ClipRRect(
-                                                        borderRadius: BorderRadius.circular(4.r),
-                                                        child: CachedNetworkImage(
-                                                          imageUrl: pastJobImage[index],
-                                                          width: 25.w,
-                                                          height: 25.h,
-                                                          fit: BoxFit.fill,
-                                                          progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                                              SvgPicture.asset(
-                                                            placeholder,
-                                                            width: 25.w,
-                                                            height: 25.h,
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                          errorWidget: (context, url, error) =>
-                                                              SvgPicture.asset(
-                                                            placeholder,
-                                                            width: 25.w,
-                                                            height: 25.h,
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                        ),
-                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -599,18 +666,18 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         //       ),
                                         //       child: GestureDetector(
                                         //           onTap: () {
-                                                    // Get.to(const CompanyList(
-                                                    //         isFrom:
-                                                    //             'experience_pastjob'))!
-                                                    //     .then((value) {
-                                                    //   pastCompanyNameController[
-                                                    //               index]
-                                                    //           .text =
-                                                    //       controller
-                                                    //           .pastJobController
-                                                    //           .value;
-                                                    //   setState(() {});
-                                                    // });
+                                        // Get.to(const CompanyList(
+                                        //         isFrom:
+                                        //             'experience_pastjob'))!
+                                        //     .then((value) {
+                                        //   pastCompanyNameController[
+                                        //               index]
+                                        //           .text =
+                                        //       controller
+                                        //           .pastJobController
+                                        //           .value;
+                                        //   setState(() {});
+                                        // });
                                         //           },
                                         //           child: Text(
                                         //             pastCompanyNameController[
@@ -689,6 +756,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                       pastCompanyTitleController.removeLast();
                                       pastCompanyWebsiteController.removeLast();
                                       pastJobImage.removeLast();
+                                      pastJobId.removeLast();
                                       if (cards.length == 1) {
                                         isDeleteLast = false;
                                       }
@@ -733,40 +801,46 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                if(pastCompanyNameController.last.text == '' && pastCompanyTitleController.last.text == '' && pastCompanyWebsiteController.last.value.text == ''){
-                                  pastCompanyNameController.removeLast();
-                                  pastCompanyTitleController.removeLast();
-                                  pastCompanyWebsiteController.removeLast();
-                                  pastJobImage.removeLast();
-                                }
+                                // if (pastCompanyNameController.last.text == '' &&
+                                //     pastCompanyTitleController.last.text ==
+                                //         '' &&
+                                //     pastCompanyWebsiteController
+                                //             .last.value.text ==
+                                //         '') {
+                                //   pastCompanyNameController.removeLast();
+                                //   pastCompanyTitleController.removeLast();
+                                //   pastCompanyWebsiteController.removeLast();
+                                //   pastJobImage.removeLast();
+                                //   pastJobId.removeLast();
+                                // }
                                 String status = '';
-                                for(var item in pastCompanyNameController){
-                                  if(item.text == ''){
+                                for (var item in pastCompanyNameController) {
+                                  if (item.text == '') {
                                     snackBar(context, 'Enter company name');
                                     status = 'pending';
-                                  }else{
+                                  } else {
                                     status = 'done';
                                   }
                                 }
 
-                                for(var item in pastCompanyTitleController){
-                                  if(item.text == ''){
+                                for (var item in pastCompanyTitleController) {
+                                  if (item.text == '') {
                                     snackBar(context, 'Enter company title');
                                     status = 'pending';
-                                  }else{
+                                  } else {
                                     status = 'done';
                                   }
                                 }
 
-                                for(var item in pastCompanyWebsiteController){
-                                  if(item.text == ''){
+                                for (var item in pastCompanyWebsiteController) {
+                                  if (item.text == '') {
                                     snackBar(context, 'Enter company website');
                                     status = 'pending';
-                                  }else{
+                                  } else {
                                     status = 'done';
                                   }
                                 }
-                                if(status == 'done'){
+                                if (status == 'done') {
                                   isDeleteLast = true;
                                   for (var element in cards) {
                                     var titleController =
@@ -776,6 +850,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                     var websiteController =
                                         TextEditingController(text: element);
                                     var image = element;
+                                    var id = element;
 
                                     pastCompanyTitleController
                                         .add(titleController);
@@ -784,6 +859,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                     pastCompanyWebsiteController
                                         .add(websiteController);
                                     pastJobImage.add(image);
+                                    pastJobId.add(id);
 
                                     if (element.toString() == "") {
                                       pastCompanyTitleController
@@ -838,71 +914,76 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
             Padding(
               padding: EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
-                if (controller.checkExperienceValidation(context)) {
-                  if(controller.industryController.value.text != ''){
-                    controller.industryName = controller.industryController.value.text;
-                  }
-                  if(pastCompanyNameController.last.text == '' && pastCompanyTitleController.last.text == '' && pastCompanyWebsiteController.last.value.text == ''){
-                    pastCompanyNameController.removeLast();
-                    pastCompanyTitleController.removeLast();
-                    pastCompanyWebsiteController.removeLast();
-                    pastJobImage.removeLast();
-                  }
-                  String status = '';
-                  for(var item in pastCompanyNameController){
-                    if(item.text == ''){
-                      snackBar(context, 'Enter company name');
-                      status = 'pending';
-                    }else{
-                      status = 'done';
+                print("Card :: " + pastJobId.length.toString());
+                if (pastJobId.length != 0) {
+                  if (controller.checkExperienceValidation(context)) {
+                    if (pastCompanyNameController.last.text == '' &&
+                        pastCompanyTitleController.last.text == '' &&
+                        pastCompanyWebsiteController.last.value.text == '') {
+                      pastCompanyNameController.removeLast();
+                      pastCompanyTitleController.removeLast();
+                      pastCompanyWebsiteController.removeLast();
+                      pastJobImage.removeLast();
+                      pastJobId.removeLast();
                     }
-                  }
-
-                  for(var item in pastCompanyTitleController){
-                    if(item.text == ''){
-                      snackBar(context, 'Enter company title');
-                      status = 'pending';
-                    }else{
-                      status = 'done';
+                    String status = '';
+                    for (var item in pastCompanyNameController) {
+                      if (item.text == '') {
+                        snackBar(context, 'Enter company name');
+                        status = 'pending';
+                      } else {
+                        status = 'done';
+                      }
                     }
-                  }
 
-                  for(var item in pastCompanyWebsiteController){
-                    if(item.text == ''){
-                      snackBar(context, 'Enter company website');
-                      status = 'pending';
-                    }else{
-                      status = 'done';
+                    for (var item in pastCompanyTitleController) {
+                      if (item.text == '') {
+                        snackBar(context, 'Enter company title');
+                        status = 'pending';
+                      } else {
+                        status = 'done';
+                      }
                     }
-                  }
 
-                  if(status == 'done'){
-                    companyDetails.clear();
+                    for (var item in pastCompanyWebsiteController) {
+                      if (item.text == '') {
+                        snackBar(context, 'Enter company website');
+                        status = 'pending';
+                      } else {
+                        status = 'done';
+                      }
+                    }
 
-                    for (int i = 0; i < cards.length; i++) {
-                      companyDetails.add({
-                        '"title"': '"${pastCompanyTitleController[i].text}"',
-                        '"company_name"':
-                            '"${pastCompanyNameController[i].text}"',
-                        '"website"':
-                            '"${pastCompanyWebsiteController[i].text}"',
-                        '"image"': '"${pastJobImage[i].toString()}"'
+                    if (status == 'done') {
+                      companyDetails.clear();
+
+                      for (int i = 0; i < pastJobId.length; i++) {
+                        companyDetails.add({
+                          '"title"': '"${pastCompanyTitleController[i].text}"',
+                          '"company_name"':
+                              '"${pastCompanyNameController[i].text}"',
+                          '"website"':
+                              '"${pastCompanyWebsiteController[i].text}"',
+                          '"logo"': '"${pastJobId[i].toString()}"'
+                        });
+                      }
+
+                      List itemList = [];
+
+                      itemList.clear();
+                      for (var item in companyDetails) {
+                        itemList.add(item);
+                      }
+                      controller.pastCompanyDetails.value = itemList;
+                      print(controller.pastCompanyDetails.value);
+
+                      checkNet(context).then((value) {
+                        controller.experienceInfoAPI(context);
                       });
                     }
-
-                    List itemList = [];
-
-                    itemList.clear();
-                    for (var item in companyDetails) {
-                      itemList.add(item);
-                    }
-                    controller.pastCompanyDetails.value = itemList;
-                    print(controller.pastCompanyDetails.value);
-
-                    checkNet(context).then((value) {
-                      controller.experienceInfoAPI(context);
-                    });
                   }
+                } else {
+                  snackBar(context, 'Add Past Job');
                 }
               }),
             )

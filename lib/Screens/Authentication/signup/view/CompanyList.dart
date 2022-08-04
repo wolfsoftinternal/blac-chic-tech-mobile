@@ -58,7 +58,8 @@ class _CompanyListState extends State<CompanyList> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 40.h, bottom: 8.h),
+              padding: EdgeInsets.only(
+                  left: 24.w, right: 24.w, top: 40.h, bottom: 8.h),
               child: Container(
                 height: 48.h,
                 decoration: EditTextDecoration,
@@ -135,20 +136,26 @@ class _CompanyListState extends State<CompanyList> {
                               FontWeight.w500,
                               FontStyle.normal),
                           InkWell(
-                            onTap: (){
+                            onTap: () {
                               setState(() {
                                 imagePath = File("");
-                                controller.currentCompanyNameController.value.text = "";
+                                controller.currentCompanyNameController.value
+                                    .text = "";
                                 showGeneralDialog(
-                                  context: context,
-                                  pageBuilder: (BuildContext buildContext,
-                                      Animation animation, Animation secondaryAnimation) {
-                                    return const AddComapny();
-                                  });
-                                  });
+                                    context: context,
+                                    pageBuilder: (BuildContext buildContext,
+                                        Animation animation,
+                                        Animation secondaryAnimation) {
+                                      return const AddComapny();
+                                    });
+                              });
                             },
-                            child: setHelveticaMedium('+ ADD', 14.sp, orange_ff881a,
-                                FontWeight.w500, FontStyle.normal),
+                            child: setHelveticaMedium(
+                                '+ ADD',
+                                14.sp,
+                                orange_ff881a,
+                                FontWeight.w500,
+                                FontStyle.normal),
                           ),
                         ],
                       ),
@@ -165,6 +172,8 @@ class _CompanyListState extends State<CompanyList> {
                                 left: 24.w, right: 24.w, bottom: 20.h),
                             child: InkWell(
                               onTap: () {
+                                print("widget.isFrom :: " +
+                                    widget.isFrom.toString());
                                 if (widget.isFrom == 'past_job') {
                                   controller.pastJobName.value =
                                       controller.companyList[index]['name'];
@@ -172,14 +181,19 @@ class _CompanyListState extends State<CompanyList> {
                                       controller.companyList[index]['logo'];
                                 } else if (widget.isFrom ==
                                     'experience_pastjob') {
-                                  controller.pastJobController.value = 
+                                  controller.pastJobController.value =
                                       controller.companyList[index]['name'];
                                   controller.pastJobImage.value =
                                       controller.companyList[index]['logo'];
+                                  controller.pastJobId.value =
+                                      controller.companyList[index]['id'];
                                 } else {
                                   controller.companyName.value =
                                       controller.companyList[index]['name'];
-                                  controller.companyImage.value = controller.companyList[index]['logo'];
+                                  controller.companyImage.value =
+                                      controller.companyList[index]['logo'];
+                                  controller.companyImageId.value =
+                                      controller.companyList[index]['id'];
                                 }
                                 Get.back();
                               },

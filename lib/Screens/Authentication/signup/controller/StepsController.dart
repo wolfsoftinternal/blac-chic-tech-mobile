@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:blackchecktech/Screens/Authentication/signup/model/CityListModel.dart';
@@ -52,9 +53,11 @@ class StepsController extends GetxController {
   RxString pastJobController = ''.obs;
 
   RxBool boolComapnyLogo = false.obs;
-  Rx<TextEditingController> searchCompanyController = TextEditingController().obs;
+  Rx<TextEditingController> searchCompanyController =
+      TextEditingController().obs;
   RxString companyName = "Company Name".obs;
   RxString companyImage = ''.obs;
+  RxInt companyImageId = 0.obs;
   RxList pastCompanyDetails = [].obs;
   RxList educationalDetails = [].obs;
 
@@ -79,6 +82,7 @@ class StepsController extends GetxController {
   SettingsController settingsController = Get.put(SettingsController());
   RxString pastJobName = ''.obs;
   RxString pastJobImage = ''.obs;
+  RxInt pastJobId = 0.obs;
 
   ScrollController scrollController = ScrollController();
   RxInt pageNumber = 1.obs;
@@ -285,7 +289,8 @@ class StepsController extends GetxController {
 
           var preferences = MySharedPref();
           await preferences.setSignupModel(signUp, SharePreData.keySignupModel);
-          SignupModel? myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
+          SignupModel? myModel =
+              await preferences.getSignupModel(SharePreData.keySignupModel);
 
           if (visibility != null) {
             settingsController.visible.value = signUp.data!.isVisible!;
@@ -322,29 +327,27 @@ class StepsController extends GetxController {
         'Authorization': '2360d5f790268aa27fe70a28cc5548a3',
       },
     );
-    var response = await d.Dio().post(
-      'https://api.peerboard.com/v1/members',
-      data: {
-        "email": myModel!.data!.email.toString(),
-        "name": myModel.data!.firstName.toString(),
-        "last_name": myModel.data!.lastName.toString(),
-        "bio": aboutController.value.text.toString(),
-        "external_id": myModel.data!.id.toString(),
-        "profile_url": imagePath.value.toString(),
-        "groups": [
-          {"id": 551308707}
-        ]
-      },
-      options: header
-    ).then((value) {
-      if(value.statusCode == 200){
+    var response = await d.Dio()
+        .post('https://api.peerboard.com/v1/members',
+            data: {
+              "email": myModel!.data!.email.toString(),
+              "name": myModel.data!.firstName.toString(),
+              "last_name": myModel.data!.lastName.toString(),
+              "bio": aboutController.value.text.toString(),
+              "external_id": myModel.data!.id.toString(),
+              "profile_url": imagePath.value.toString(),
+              "groups": [
+                {"id": 551308707}
+              ]
+            },
+            options: header)
+        .then((value) {
+      if (value.statusCode == 200) {
         Get.to(const ExperienceInfoFormView());
-      }else if(value.statusCode == 409){
+      } else if (value.statusCode == 409) {
         Get.to(const ExperienceInfoFormView());
       }
     });
-    
-    
   }
 
   companyListAPI(BuildContext context, body) async {
@@ -410,7 +413,7 @@ class StepsController extends GetxController {
           createCompanyAPI(context, imagePath);
         } else if (model.statusCode == 200) {
           Get.back();
-          Get.back();
+          // Get.back();
         } else {
           Navigator.pop(context); //pop
           snackBar(context, model.message!);
@@ -423,7 +426,12 @@ class StepsController extends GetxController {
   }
 
   industryListAPI(BuildContext context) async {
-    industryList.value = ['Data Science','Artificial Intelligence','Cloud Computing','other'];
+    industryList.value = [
+      'Data Science',
+      'Artificial Intelligence',
+      'Cloud Computing',
+      'other'
+    ];
     if (industryList.isNotEmpty) {
       for (var item in industryList) {
         industryNameList.add(item);
@@ -450,19 +458,19 @@ class StepsController extends GetxController {
 
     //         industryListAPI(context, body);
     //       } else if (model.statusCode == 200) {
-            // industryList.value = userModel['data'];
+    // industryList.value = userModel['data'];
 
-      //       if (industryList.isNotEmpty) {
-      //         for (var item in industryList) {
-      //           industryNameList.add(item.name);
-      //         }
-      //         dropDownIndustryItems = getDropDownIndustryItems();
-      //       }
-      //     }
-      //   });
-      // } else {
-      //   print(res.reasonPhrase);
-      // }
+    //       if (industryList.isNotEmpty) {
+    //         for (var item in industryList) {
+    //           industryNameList.add(item.name);
+    //         }
+    //         dropDownIndustryItems = getDropDownIndustryItems();
+    //       }
+    //     }
+    //   });
+    // } else {
+    //   print(res.reasonPhrase);
+    // }
     // });
   }
 
@@ -487,15 +495,15 @@ class StepsController extends GetxController {
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     var token = await preferences.getStringValue(SharePreData.keytoken);
-    
+
     dynamic body = {
       'current_job_title': currentTitleController.value.text,
       'current_job_company_name': companyName.value,
-      // 'current_job_logo': companyImage.toString(),
       'current_job_website': currentCompanyWebsiteController.value.text,
-      // 'industry': industryName.toString(),
+      'current_job_logo': companyImageId.value.toString(),
       'past_jobs': pastCompanyDetails.toJson().toString(),
     };
+    print("Continue body ::" + body.toString());
 
     String url = urlBase + urlExperienceInfo;
     final apiReq = Request();
@@ -505,6 +513,7 @@ class StepsController extends GetxController {
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
           String strData = value;
+          print("Continue :: " + strData.toString());
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
@@ -725,14 +734,13 @@ class StepsController extends GetxController {
     } else if (companyName.value == 'Company Name') {
       snackBar(context, "Enter current company name");
       return false;
-    } else if(currentCompanyWebsiteController.value.text.isEmpty){
+    } else if (currentCompanyWebsiteController.value.text.isEmpty) {
       snackBar(context, 'Enter current website');
       return false;
-    } else if(!RegExp('^(https?://(?:www.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|www.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|https?://(?:www.|(?!www))[a-zA-Z0-9]+.[^s]{2,}|www.[a-zA-Z0-9]+.[^s]{2,})').hasMatch(currentCompanyWebsiteController.value.text)){
+    } else if (!RegExp(
+            '^(https?://(?:www.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|www.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|https?://(?:www.|(?!www))[a-zA-Z0-9]+.[^s]{2,}|www.[a-zA-Z0-9]+.[^s]{2,})')
+        .hasMatch(currentCompanyWebsiteController.value.text)) {
       snackBar(context, 'Enter valid website');
-      return false;
-    }else if (industryName == null || industryName == '' && industryController.value.text.isEmpty) {
-      snackBar(context, "Enter Industry");
       return false;
     } else {
       return true;
