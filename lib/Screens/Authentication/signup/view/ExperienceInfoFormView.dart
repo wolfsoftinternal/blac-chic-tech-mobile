@@ -222,6 +222,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                         bottom: 5.h),
                                     child: InkWell(
                                       onTap: () {
+                                        FocusScope.of(context).unfocus();
                                         Get.to(const CompanyList());
                                       },
                                       child: Align(
@@ -511,6 +512,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                           flex: 1,
                                           child: InkWell(
                                             onTap: () {
+                                              FocusScope.of(context).unfocus();
                                               Get.to(const CompanyList(
                                                       isFrom:
                                                           'experience_pastjob'))!

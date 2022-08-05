@@ -40,7 +40,7 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
     var preferences = MySharedPref();
     myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel?.data?.id?.toInt() ?? 0;
-    // setState(() {});
+    setState(() {});
   }
 
   @override
@@ -52,16 +52,14 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 child: CircularProgressIndicator(color: black, strokeWidth: 2)),
           )
         : GestureDetector(
-          onVerticalDragEnd: (val){
-            controller.userProfileAPI(context, true).then((val){
-              Get.to(
-                Profile(), 
-                duration: Duration(milliseconds: 500),
-                transition: Transition.downToUp 
-              );
-            });
-          },
-          child: Stack(
+            onVerticalDragEnd: (val) {
+              controller.userProfileAPI(context, true).then((val) {
+                Get.to(Profile(),
+                    duration: Duration(milliseconds: 500),
+                    transition: Transition.downToUp);
+              });
+            },
+            child: Stack(
               children: [
                 myModel?.data?.image == null
                     ? SvgPicture.asset(
@@ -82,23 +80,17 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                         fit: BoxFit.cover,
                         progressIndicatorBuilder:
                             (context, url, downloadProgress) => SizedBox(
-                                                height: MediaQuery.of(context).size.height * 0.75,
-                                                child: Center(
-                                                  child: CircularProgressIndicator(
-                                                    color: black, 
-                                                    strokeWidth: 2
-                                                  )
-                                                ),
-                                              ),
+                          height: MediaQuery.of(context).size.height * 0.75,
+                          child: Center(
+                              child: CircularProgressIndicator(
+                                  color: black, strokeWidth: 2)),
+                        ),
                         errorWidget: (context, url, error) => SizedBox(
-                                                height: MediaQuery.of(context).size.height * 0.75,
-                                                child: Center(
-                                                  child: CircularProgressIndicator(
-                                                    color: black, 
-                                                    strokeWidth: 2
-                                                  )
-                                                ),
-                                              ),
+                          height: MediaQuery.of(context).size.height * 0.75,
+                          child: Center(
+                              child: CircularProgressIndicator(
+                                  color: black, strokeWidth: 2)),
+                        ),
                       ),
                 Container(
                   color: Colors.black.withOpacity(0.3),
@@ -204,7 +196,8 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                   padding: EdgeInsets.only(left: 24.w, right: 24.w),
                   child: Column(
                     children: [
-                      SizedBox(height: MediaQuery.of(context).size.height * .52),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * .52),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -248,11 +241,20 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                               //             .toUpperCase()
                               //     : "",
                               myModel?.data?.currentJobs != null
-                              ? myModel?.data?.currentJobs?.title != null && myModel?.data?.currentJobs?.companyName != null
-                                  ? '${myModel?.data?.currentJobs?.title!.toUpperCase()} - ${myModel?.data?.currentJobs?.companyName!.toUpperCase()}'
-                                  : myModel?.data?.currentJobs?.title != null ?  '${myModel?.data?.currentJobs?.title!.toUpperCase()}'
-                                  : myModel?.data?.currentJobs?.companyName != null ? '${myModel?.data?.currentJobs?.companyName!.toUpperCase()}' : ""
-                              : "",
+                                  ? myModel?.data?.currentJobs?.title != null &&
+                                          myModel?.data?.currentJobs
+                                                  ?.companyName !=
+                                              null
+                                      ? '${myModel?.data?.currentJobs?.title!.toUpperCase()} - ${myModel?.data?.currentJobs?.companyName!.toUpperCase()}'
+                                      : myModel?.data?.currentJobs?.title !=
+                                              null
+                                          ? '${myModel?.data?.currentJobs?.title!.toUpperCase()}'
+                                          : myModel?.data?.currentJobs
+                                                      ?.companyName !=
+                                                  null
+                                              ? '${myModel?.data?.currentJobs?.companyName!.toUpperCase()}'
+                                              : ""
+                                  : "",
                               softWrap: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -351,11 +353,21 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                             //             .admireList.admireDetails!.countryDetails!.name!
                             //     : "",
                             myModel?.data?.cityDetails != null
-                                ? (myModel?.data?.cityDetails?.name.toString().capitalizeFirst ?? "") +
+                                ?
+                                // (myModel?.data?.cityDetails?.name
+                                //             .toString()
+                                //             .capitalizeFirst ??
+                                //         "") +
+                                //     ', ' +
+                                (myModel!.data!.stateDetails!.name
+                                            .toString()
+                                            .capitalizeFirst ??
+                                        "") +
                                     ', ' +
-                                    (myModel!.data!.stateDetails!.name.toString().capitalizeFirst ?? "") +
-                                    ', ' +
-                                    (myModel?.data?.countryDetails?.name.toString().capitalizeFirst ?? "")
+                                    (myModel?.data?.countryDetails?.name
+                                            .toString()
+                                            .toUpperCase() ??
+                                        "")
                                 : "",
                             10.sp,
                             Colors.white70,
@@ -369,6 +381,6 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                 ),
               ],
             ),
-        );
+          );
   }
 }

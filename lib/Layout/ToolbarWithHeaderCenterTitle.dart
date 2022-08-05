@@ -6,8 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ToolbarWithHeaderCenterTitle extends StatelessWidget {
   String? title;
+  String? argument;
 
-  ToolbarWithHeaderCenterTitle(_title, {Key? key}) : super(key: key) {
+  ToolbarWithHeaderCenterTitle(_title, {this.argument, Key? key})
+      : super(key: key) {
     title = _title;
   }
 
@@ -18,7 +20,7 @@ class ToolbarWithHeaderCenterTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          BackLayout(),
+          BackLayout(argument: argument),
           const Spacer(),
           Text(title!,
               style: TextStyle(

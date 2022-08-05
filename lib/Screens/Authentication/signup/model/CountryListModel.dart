@@ -1,8 +1,10 @@
 import 'dart:convert';
 
-CountryListModel countryListModelFromJson(String str) => CountryListModel.fromJson(json.decode(str));
+CountryListModel countryListModelFromJson(String str) =>
+    CountryListModel.fromJson(json.decode(str));
 
-String countryListModelToJson(CountryListModel data) => json.encode(data.toJson());
+String countryListModelToJson(CountryListModel data) =>
+    json.encode(data.toJson());
 
 class CountryListModel {
   CountryListModel({
@@ -17,19 +19,21 @@ class CountryListModel {
   String? message;
   List<CountryDatum>? data;
 
-  factory CountryListModel.fromJson(Map<String, dynamic> json) => CountryListModel(
-    success: json["success"],
-    statusCode: json["status_code"],
-    message: json["message"],
-    data: List<CountryDatum>.from(json["data"].map((x) => CountryDatum.fromJson(x))),
-  );
+  factory CountryListModel.fromJson(Map<String, dynamic> json) =>
+      CountryListModel(
+        success: json["success"],
+        statusCode: json["status_code"],
+        message: json["message"],
+        data: List<CountryDatum>.from(
+            json["data"].map((x) => CountryDatum.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "success": success,
-    "status_code": statusCode,
-    "message": message,
-    "data": List<dynamic>.from(data!.map((x) => x.toJson())),
-  };
+        "success": success,
+        "status_code": statusCode,
+        "message": message,
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
+      };
 }
 
 class CountryDatum {
@@ -54,24 +58,28 @@ class CountryDatum {
   dynamic deletedAt;
 
   factory CountryDatum.fromJson(Map<String, dynamic> json) => CountryDatum(
-    id: json["id"],
-    name: json["name"],
-    countryLogo: json["country_logo"],
-    countryCode: json["country_code"],
-    status: json["status"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-    deletedAt: json["deleted_at"],
-  );
+        id: json["id"],
+        name: json["name"],
+        countryLogo: json["country_logo"],
+        countryCode: json["country_code"],
+        status: json["status"],
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
+        deletedAt: json["deleted_at"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "country_logo": countryLogo,
-    "country_code": countryCode,
-    "status": status,
-    "created_at": createdAt!.toIso8601String(),
-    "updated_at": updatedAt!.toIso8601String(),
-    "deleted_at": deletedAt,
-  };
+        "id": id,
+        "name": name,
+        "country_logo": countryLogo,
+        "country_code": countryCode,
+        "status": status,
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
+        "deleted_at": deletedAt,
+      };
 }

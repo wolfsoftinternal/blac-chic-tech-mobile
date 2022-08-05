@@ -174,14 +174,15 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                           ),
                                           // Edinburgh, United Kingdom
                                           Text(
-                                              myModel!.data!.cityDetails!.name!
+                                              // myModel!.data!.cityDetails!.name!
+                                              //         .capitalizeFirst! +
+                                              //     ', ' +
+                                              myModel!.data!.stateDetails!.name!
                                                       .capitalizeFirst! +
                                                   ', ' +
-                                                  myModel!.data!.stateDetails!
-                                                      .name!.capitalizeFirst! +
-                                                  ', ' +
                                                   myModel!.data!.countryDetails!
-                                                      .name!.capitalizeFirst!,
+                                                      .name!
+                                                      .toUpperCase(),
                                               style: TextStyle(
                                                   color: grey_aaaaaa,
                                                   fontWeight: FontWeight.w500,

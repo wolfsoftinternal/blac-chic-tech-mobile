@@ -74,17 +74,22 @@ class _EditProfileState extends State<EditProfile> {
 
     stepsController.dobController.value.text = myModel!.data!.dateOfBirth ?? "";
     stepsController.aboutController.value.text = myModel!.data!.aboutUs ?? "";
-    stepsController.linkedinController.value.text = myModel!.data!.linkedinUrl ?? "";
-    stepsController.twitterController.value.text = myModel!.data!.twitterUrl ?? "";
-    stepsController.instagramController.value.text = myModel!.data!.instagramUrl ?? "";
+    stepsController.linkedinController.value.text =
+        myModel!.data!.linkedinUrl ?? "";
+    stepsController.twitterController.value.text =
+        myModel!.data!.twitterUrl ?? "";
+    stepsController.instagramController.value.text =
+        myModel!.data!.instagramUrl ?? "";
 
     strCountryName = myModel!.data!.countryDetails!.id.toString();
     strStateName = myModel!.data!.stateDetails!.id.toString();
     strCityName = myModel!.data!.cityDetails!.id.toString();
 
     checkNet(context).then((value) {
-      stepsController.stateListApi(myModel!.data!.countryDetails!.id.toString());
-      stepsController.cityListApi(myModel!.data!.countryDetails!.id.toString(), myModel!.data!.stateDetails!.id.toString());
+      stepsController
+          .stateListApi(myModel!.data!.countryDetails!.id.toString());
+      stepsController.cityListApi(myModel!.data!.countryDetails!.id.toString(),
+          myModel!.data!.stateDetails!.id.toString());
     });
 
     setState(() {});
@@ -119,7 +124,7 @@ class _EditProfileState extends State<EditProfile> {
                                 children: [
                                   SizedBox(
                                     child: Padding(
-                                      padding:  EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8.r),
                                       child: Container(
                                         decoration: const BoxDecoration(
                                           boxShadow: [
@@ -194,7 +199,8 @@ class _EditProfileState extends State<EditProfile> {
                                         controller.firstnameController.value,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text, false)),
+                                        TextInputType.text,
+                                        false)),
                                 SizedBox(
                                   width: 16.w,
                                 ),
@@ -204,7 +210,8 @@ class _EditProfileState extends State<EditProfile> {
                                         controller.lastnameController.value,
                                         false,
                                         TextInputAction.next,
-                                        TextInputType.text, false)),
+                                        TextInputType.text,
+                                        false)),
                               ],
                             ),
                             SizedBox(
@@ -215,7 +222,8 @@ class _EditProfileState extends State<EditProfile> {
                                 controller.usernameController.value,
                                 false,
                                 TextInputAction.next,
-                                TextInputType.text, false),
+                                TextInputType.text,
+                                false),
                             SizedBox(
                               height: 16.h,
                             ),
@@ -224,7 +232,8 @@ class _EditProfileState extends State<EditProfile> {
                                 controller.emailController.value,
                                 false,
                                 TextInputAction.next,
-                                TextInputType.emailAddress, false),
+                                TextInputType.emailAddress,
+                                false),
                             SizedBox(
                               height: 16.h,
                             ),
@@ -236,7 +245,7 @@ class _EditProfileState extends State<EditProfile> {
                                   flex: 1,
                                   child: Container(
                                     height: 48.h,
-                                    padding:  EdgeInsets.only(
+                                    padding: EdgeInsets.only(
                                         left: 16.w, right: 16.w),
                                     decoration: BoxDecoration(
                                       color: light_grey_f2f2f2,
@@ -290,7 +299,7 @@ class _EditProfileState extends State<EditProfile> {
                                   flex: 1,
                                   child: Container(
                                     height: 48.h,
-                                    padding:  EdgeInsets.only(
+                                    padding: EdgeInsets.only(
                                         left: 16.w, right: 16.w),
                                     decoration: BoxDecoration(
                                       color: light_grey_f2f2f2,
@@ -352,7 +361,7 @@ class _EditProfileState extends State<EditProfile> {
                                   flex: 1,
                                   child: Container(
                                     height: 48.h,
-                                    padding:  EdgeInsets.only(
+                                    padding: EdgeInsets.only(
                                         left: 16.w, right: 16.w),
                                     decoration: BoxDecoration(
                                       color: light_grey_f2f2f2,
@@ -491,10 +500,11 @@ class _EditProfileState extends State<EditProfile> {
                                       width: 1.w, color: light_grey_f2f2f2)),
                               child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: 16.w,),
+                                    left: 16.w,
+                                  ),
                                   child: TextField(
-                                    controller:
-                                        stepsController.linkedinController.value,
+                                    controller: stepsController
+                                        .linkedinController.value,
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w500,
@@ -550,7 +560,8 @@ class _EditProfileState extends State<EditProfile> {
                                       width: 1.w, color: light_grey_f2f2f2)),
                               child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: 16.w,),
+                                    left: 16.w,
+                                  ),
                                   child: TextField(
                                     controller:
                                         stepsController.twitterController.value,
@@ -609,10 +620,11 @@ class _EditProfileState extends State<EditProfile> {
                                       width: 1.w, color: light_grey_f2f2f2)),
                               child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: 16.w,),
+                                    left: 16.w,
+                                  ),
                                   child: TextField(
-                                    controller:
-                                        stepsController.instagramController.value,
+                                    controller: stepsController
+                                        .instagramController.value,
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w500,
@@ -667,7 +679,7 @@ class _EditProfileState extends State<EditProfile> {
               padding: const EdgeInsets.all(24.0),
               child: BlackButton("Save Profile", Colors.white, () {
                 if (controller.checkValidation(context)) {
-                  if(imagePath.path.isNotEmpty){
+                  if (imagePath.path.isNotEmpty) {
                     stepsController.imagePath.value = profilePath.toString();
                   }
                   checkNet(context).then((value) {

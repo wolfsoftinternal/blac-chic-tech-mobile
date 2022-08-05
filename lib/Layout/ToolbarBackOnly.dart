@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../Styles/my_icons.dart';
 
 class BackLayout extends StatelessWidget {
+  String? argument;
+  BackLayout({this.argument});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,7 +15,11 @@ class BackLayout extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
-          Get.back();
+          if (argument != null) {
+            Get.back(result: argument);
+          } else {
+            Get.back();
+          }
         },
         child: Container(
           width: 48.r,

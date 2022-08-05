@@ -23,6 +23,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:readmore/readmore.dart';
 
 class AboutMe extends StatefulWidget {
   const AboutMe({Key? key}) : super(key: key);
@@ -252,6 +253,7 @@ class _AboutMeState extends State<AboutMe> {
                                             bottom: 5.h),
                                         child: InkWell(
                                           onTap: () {
+                                            FocusScope.of(context).unfocus();
                                             Get.to(const CompanyList())!
                                                 .then((value) {
                                               setState(() {});
@@ -618,7 +620,9 @@ class _AboutMeState extends State<AboutMe> {
                                     ),
                                     InkWell(
                                         onTap: () {
-                                          controller.website.value = false;
+                                          setState(() {
+                                            controller.website.value = false;
+                                          });
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.only(right: 10.w),
@@ -793,25 +797,35 @@ class _AboutMeState extends State<AboutMe> {
                                                                   .value
                                                                   .text !=
                                                               ''
-                                                      ? Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 12.w),
-                                                          child: Text(
-                                                              '${pastCompanyTitleController[index].value.text.toString().capitalizeFirst ?? ""} @${pastCompanyNameController[index].value.text.toString().capitalizeFirst ?? ""}',
-                                                              style: TextStyle(
-                                                                  color:
-                                                                      grey_aaaaaa,
-                                                                  fontFamily:
-                                                                      helveticaNeueNeue_medium,
-                                                                  fontStyle:
-                                                                      FontStyle
-                                                                          .normal,
-                                                                  fontSize:
-                                                                      14.sp),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left),
+                                                      ? SizedBox(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.7,
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 12.w),
+                                                            child: Text(
+                                                                '${pastCompanyTitleController[index].value.text.toString().capitalizeFirst ?? ""} @${pastCompanyNameController[index].value.text.toString().capitalizeFirst ?? ""}',
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style: TextStyle(
+                                                                    color:
+                                                                        grey_aaaaaa,
+                                                                    fontFamily:
+                                                                        helveticaNeueNeue_medium,
+                                                                    fontStyle:
+                                                                        FontStyle
+                                                                            .normal,
+                                                                    fontSize:
+                                                                        14.sp),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left),
+                                                          ),
                                                         )
                                                       : Container(),
                                                   Spacer(),
@@ -1085,6 +1099,9 @@ class _AboutMeState extends State<AboutMe> {
                                                         flex: 1,
                                                         child: InkWell(
                                                           onTap: () {
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .unfocus();
                                                             for (int i = 0;
                                                                 i <
                                                                     pastJob
@@ -2137,20 +2154,45 @@ class _AboutMeState extends State<AboutMe> {
                                             ? Padding(
                                                 padding:
                                                     EdgeInsets.only(left: 24.w),
-                                                child: Text(
-                                                    stepsController
-                                                        .aboutController
-                                                        .value
-                                                        .text,
-                                                    style: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 15.sp),
-                                                    textAlign: TextAlign.left),
-                                              )
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .aboutController
+                                                      .value
+                                                      .text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Red_d32416),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: green_2cbea7),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
                                             : TextField(
                                                 controller: stepsController
                                                     .aboutController.value,
@@ -2297,21 +2339,43 @@ class _AboutMeState extends State<AboutMe> {
                                               ? Padding(
                                                   padding: EdgeInsets.only(
                                                       left: 24.w),
-                                                  child: Text(
-                                                      stepsController
-                                                          .q1Controller
-                                                          .value
-                                                          .text,
-                                                      style: TextStyle(
-                                                          color: grey_aaaaaa,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 15.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                )
+                                                  child: ReadMoreText(
+                                                    stepsController.q1Controller
+                                                        .value.text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Red_d32416),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: green_2cbea7),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
                                               : TextField(
                                                   controller: stepsController
                                                       .q1Controller.value,
@@ -2463,21 +2527,43 @@ class _AboutMeState extends State<AboutMe> {
                                               ? Padding(
                                                   padding: EdgeInsets.only(
                                                       left: 24.w),
-                                                  child: Text(
-                                                      stepsController
-                                                          .q2Controller
-                                                          .value
-                                                          .text,
-                                                      style: TextStyle(
-                                                          color: grey_aaaaaa,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 15.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                )
+                                                  child: ReadMoreText(
+                                                    stepsController.q2Controller
+                                                        .value.text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Red_d32416),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: green_2cbea7),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
                                               : TextField(
                                                   controller: stepsController
                                                       .q2Controller.value,
@@ -2630,21 +2716,43 @@ class _AboutMeState extends State<AboutMe> {
                                               ? Padding(
                                                   padding: EdgeInsets.only(
                                                       left: 24.w),
-                                                  child: Text(
-                                                      stepsController
-                                                          .q3Controller
-                                                          .value
-                                                          .text,
-                                                      style: TextStyle(
-                                                          color: grey_aaaaaa,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 15.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                )
+                                                  child: ReadMoreText(
+                                                    stepsController.q3Controller
+                                                        .value.text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Red_d32416),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: green_2cbea7),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
                                               : TextField(
                                                   controller: stepsController
                                                       .q3Controller.value,
@@ -2799,21 +2907,43 @@ class _AboutMeState extends State<AboutMe> {
                                               ? Padding(
                                                   padding: EdgeInsets.only(
                                                       left: 24.w),
-                                                  child: Text(
-                                                      stepsController
-                                                          .q4Controller
-                                                          .value
-                                                          .text,
-                                                      style: TextStyle(
-                                                          color: grey_aaaaaa,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 15.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                )
+                                                  child: ReadMoreText(
+                                                    stepsController.q4Controller
+                                                        .value.text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Red_d32416),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: green_2cbea7),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
                                               : TextField(
                                                   controller: stepsController
                                                       .q4Controller.value,
@@ -2965,21 +3095,43 @@ class _AboutMeState extends State<AboutMe> {
                                               ? Padding(
                                                   padding: EdgeInsets.only(
                                                       left: 24.w),
-                                                  child: Text(
-                                                      stepsController
-                                                          .q5Controller
-                                                          .value
-                                                          .text,
-                                                      style: TextStyle(
-                                                          color: grey_aaaaaa,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 15.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                )
+                                                  child: ReadMoreText(
+                                                    stepsController.q5Controller
+                                                        .value.text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Red_d32416),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: green_2cbea7),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
                                               : TextField(
                                                   controller: stepsController
                                                       .q5Controller.value,
@@ -3137,21 +3289,45 @@ class _AboutMeState extends State<AboutMe> {
                                               ? Padding(
                                                   padding: EdgeInsets.only(
                                                       left: 24.w),
-                                                  child: Text(
-                                                      stepsController
-                                                          .addtionalController
-                                                          .value
-                                                          .text,
-                                                      style: TextStyle(
-                                                          color: grey_aaaaaa,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 15.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                                )
+                                                  child: ReadMoreText(
+                                                    stepsController
+                                                        .addtionalController
+                                                        .value
+                                                        .text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Red_d32416),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: green_2cbea7),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
                                               : TextField(
                                                   controller: stepsController
                                                       .addtionalController
@@ -3214,6 +3390,7 @@ class _AboutMeState extends State<AboutMe> {
                                   height: 16.h,
                                 ),
                                 BlackButton("Save", white_ffffff, () {
+                                  FocusScope.of(context).unfocus();
                                   if (checkValidation()) {
                                     // if (stepsController
                                     //         .industryController.value.text !=
