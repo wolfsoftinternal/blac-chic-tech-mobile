@@ -443,7 +443,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: Red_d32416),
+                                                        color: Colors.black87),
                                                     moreStyle: const TextStyle(
                                                         height: 1.5,
                                                         fontWeight:
@@ -451,9 +451,9 @@ class _ProfileTabState extends State<ProfileTab> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: green_2cbea7),
+                                                        color: Colors.black87),
                                                     colorClickableText:
-                                                        Colors.red.shade300,
+                                                        Colors.black87,
                                                     trimMode: TrimMode.Line,
                                                     trimCollapsedText:
                                                         '  Read More',
@@ -555,7 +555,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                                     fontFamily:
                                                         helveticaNeueNeue_medium,
                                                     fontSize: 14,
-                                                    color: green_2cbea7),
+                                                    color: Colors.black87),
                                                 colorClickableText:
                                                     Colors.red.shade300,
                                                 trimMode: TrimMode.Line,
@@ -569,7 +569,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                                     fontFamily:
                                                         helveticaNeueNeue_medium,
                                                     fontSize: 16,
-                                                    color: grey_aaaaaa),
+                                                    color: Colors.black87),
                                               ),
                                               // child: Center(
                                               //   child: setHelveticaMedium(
@@ -765,14 +765,14 @@ class _ProfileTabState extends State<ProfileTab> {
                                                   fontFamily:
                                                       helveticaNeueNeue_medium,
                                                   fontSize: 14,
-                                                  color: Red_d32416),
+                                                  color: Colors.black87),
                                               moreStyle: const TextStyle(
                                                   height: 1.5,
                                                   fontWeight: FontWeight.w500,
                                                   fontFamily:
                                                       helveticaNeueNeue_medium,
                                                   fontSize: 14,
-                                                  color: green_2cbea7),
+                                                  color: Colors.black87),
                                               colorClickableText:
                                                   Colors.red.shade300,
                                               trimMode: TrimMode.Line,
@@ -868,14 +868,14 @@ class _ProfileTabState extends State<ProfileTab> {
                                                     fontFamily:
                                                         helveticaNeueNeue_medium,
                                                     fontSize: 14,
-                                                    color: Red_d32416),
+                                                    color: Colors.black87),
                                                 moreStyle: const TextStyle(
                                                     height: 1.5,
                                                     fontWeight: FontWeight.w500,
                                                     fontFamily:
                                                         helveticaNeueNeue_medium,
                                                     fontSize: 14,
-                                                    color: green_2cbea7),
+                                                    color: Colors.black87),
                                                 colorClickableText:
                                                     Colors.red.shade300,
                                                 trimMode: TrimMode.Line,

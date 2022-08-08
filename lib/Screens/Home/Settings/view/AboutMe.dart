@@ -2233,7 +2233,7 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontFamily:
                                                           helveticaNeueNeue_medium,
                                                       fontSize: 14,
-                                                      color: Red_d32416),
+                                                      color: Colors.black87),
                                                   moreStyle: const TextStyle(
                                                       height: 1.5,
                                                       fontWeight:
@@ -2241,7 +2241,7 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontFamily:
                                                           helveticaNeueNeue_medium,
                                                       fontSize: 14,
-                                                      color: green_2cbea7),
+                                                      color: Colors.black87),
                                                   colorClickableText:
                                                       Colors.red.shade300,
                                                   trimMode: TrimMode.Line,
@@ -2416,7 +2416,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: Red_d32416),
+                                                        color: Colors.black87),
                                                     moreStyle: const TextStyle(
                                                         height: 1.5,
                                                         fontWeight:
@@ -2424,9 +2424,9 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: green_2cbea7),
+                                                        color: Colors.black87),
                                                     colorClickableText:
-                                                        Colors.red.shade300,
+                                                        opcity_black_121212,
                                                     trimMode: TrimMode.Line,
                                                     trimCollapsedText:
                                                         '  Read More',
@@ -2604,7 +2604,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: Red_d32416),
+                                                        color: Colors.black87),
                                                     moreStyle: const TextStyle(
                                                         height: 1.5,
                                                         fontWeight:
@@ -2612,7 +2612,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: green_2cbea7),
+                                                        color: Colors.black87),
                                                     colorClickableText:
                                                         Colors.red.shade300,
                                                     trimMode: TrimMode.Line,
@@ -2793,7 +2793,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: Red_d32416),
+                                                        color: Colors.black87),
                                                     moreStyle: const TextStyle(
                                                         height: 1.5,
                                                         fontWeight:
@@ -2801,7 +2801,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: green_2cbea7),
+                                                        color: Colors.black87),
                                                     colorClickableText:
                                                         Colors.red.shade300,
                                                     trimMode: TrimMode.Line,
@@ -2984,7 +2984,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: Red_d32416),
+                                                        color: Colors.black87),
                                                     moreStyle: const TextStyle(
                                                         height: 1.5,
                                                         fontWeight:
@@ -2992,7 +2992,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: green_2cbea7),
+                                                        color: Colors.black87),
                                                     colorClickableText:
                                                         Colors.red.shade300,
                                                     trimMode: TrimMode.Line,
@@ -3172,7 +3172,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: Red_d32416),
+                                                        color: Colors.black87),
                                                     moreStyle: const TextStyle(
                                                         height: 1.5,
                                                         fontWeight:
@@ -3180,7 +3180,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: green_2cbea7),
+                                                        color: Colors.black87),
                                                     colorClickableText:
                                                         Colors.red.shade300,
                                                     trimMode: TrimMode.Line,
@@ -3368,7 +3368,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: Red_d32416),
+                                                        color: Colors.black87),
                                                     moreStyle: const TextStyle(
                                                         height: 1.5,
                                                         fontWeight:
@@ -3376,7 +3376,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontFamily:
                                                             helveticaNeueNeue_medium,
                                                         fontSize: 14,
-                                                        color: green_2cbea7),
+                                                        color: Colors.black87),
                                                     colorClickableText:
                                                         Colors.red.shade300,
                                                     trimMode: TrimMode.Line,

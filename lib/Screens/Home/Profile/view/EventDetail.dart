@@ -74,15 +74,15 @@ class _EventDetailState extends State<EventDetail> {
     }
     init();
     getLoc();
-    checkNet(context).then((value) async{
-     await controller.registeredUserApi(context, controller.eventDetails.value.id.toString());
-     await controller.userProfileAPI(context, false, false);
-     controller.userPageNumber.value = 0;
-     videoController.userList.clear();
-     await controller.eventInviteUsersList(context, widget.id);
+    checkNet(context).then((value) async {
+      await controller.registeredUserApi(
+          context, controller.eventDetails.value.id.toString());
+      await controller.userProfileAPI(context, false, false);
+      controller.userPageNumber.value = 0;
+      videoController.userList.clear();
+      await controller.eventInviteUsersList(context, widget.id);
     });
   }
-
 
   init() async {
     var preferences = MySharedPref();
@@ -154,7 +154,7 @@ class _EventDetailState extends State<EventDetail> {
                       return Obx(
                         () => Column(
                           children: [
-                             SizedBox(
+                            SizedBox(
                               height: 8.h,
                             ),
                             Align(
@@ -164,28 +164,27 @@ class _EventDetailState extends State<EventDetail> {
                                   height: 3,
                                   decoration: BoxDecoration(
                                       color: grey_3f3f3f.withOpacity(0.4),
-                                      borderRadius:  BorderRadius.all(
+                                      borderRadius: BorderRadius.all(
                                         Radius.circular(50.r),
                                       )),
                                 )),
-                             SizedBox(
+                            SizedBox(
                               height: 24.h,
                             ),
                             Padding(
-                              padding:  EdgeInsets.only(
-                                  left: 24.w, right: 24.w),
-                              child: setRoboto("CONFIRMATION", 16.sp, black_121212,
-                                  FontWeight.w900),
+                              padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                              child: setRoboto("CONFIRMATION", 16.sp,
+                                  black_121212, FontWeight.w900),
                             ),
-                             SizedBox(
+                            SizedBox(
                               height: 23.5.h,
                             ),
-                             Divider(
-                               height: 1,
-                               thickness: 1,
-                               color: Color(0xfff4f6f6),
-                             ),
-                             SizedBox(
+                            Divider(
+                              height: 1,
+                              thickness: 1,
+                              color: Color(0xfff4f6f6),
+                            ),
+                            SizedBox(
                               height: 23.5.h,
                             ),
                             Padding(
@@ -198,7 +197,7 @@ class _EventDetailState extends State<EventDetail> {
                                       14.sp,
                                       black_121212,
                                       FontWeight.w900),
-                                   SizedBox(
+                                  SizedBox(
                                     height: 24.h,
                                   ),
                                   Container(
@@ -207,7 +206,7 @@ class _EventDetailState extends State<EventDetail> {
                                       borderRadius: BorderRadius.circular(4.r),
                                     ),
                                     child: Padding(
-                                      padding:  EdgeInsets.only(
+                                      padding: EdgeInsets.only(
                                           top: 15.5.h,
                                           bottom: 15.5.h,
                                           left: 16.w,
@@ -219,7 +218,7 @@ class _EventDetailState extends State<EventDetail> {
                                               12.sp,
                                               black_121212,
                                               FontWeight.w900),
-                                           Spacer(),
+                                          Spacer(),
                                           Container(
                                             decoration: BoxDecoration(
                                               color: white_ffffff,
@@ -227,8 +226,7 @@ class _EventDetailState extends State<EventDetail> {
                                                   BorderRadius.circular(4.r),
                                             ),
                                             child: Padding(
-                                              padding:
-                                                   EdgeInsets.all(10.r),
+                                              padding: EdgeInsets.all(10.r),
                                               child: Row(
                                                 children: [
                                                   GestureDetector(
@@ -246,9 +244,7 @@ class _EventDetailState extends State<EventDetail> {
                                                                   int.parse(
                                                                       price);
 
-
                                                           setFinalValue();
-
                                                         });
                                                       },
                                                       child: const Icon(
@@ -256,7 +252,7 @@ class _EventDetailState extends State<EventDetail> {
                                                         color: grey_3f3f3f,
                                                         size: 12,
                                                       )),
-                                                   SizedBox(
+                                                  SizedBox(
                                                     width: 20.w,
                                                   ),
                                                   setRoboto(
@@ -265,7 +261,7 @@ class _EventDetailState extends State<EventDetail> {
                                                       12.sp,
                                                       black_121212,
                                                       FontWeight.w900),
-                                                   SizedBox(
+                                                  SizedBox(
                                                     width: 20.w,
                                                   ),
                                                   GestureDetector(
@@ -280,7 +276,6 @@ class _EventDetailState extends State<EventDetail> {
                                                                       price);
 
                                                           setFinalValue();
-
                                                         });
                                                       },
                                                       child: const Icon(
@@ -296,35 +291,53 @@ class _EventDetailState extends State<EventDetail> {
                                       ),
                                     ),
                                   ),
-                                   SizedBox(
+                                  SizedBox(
                                     height: 16.h,
                                   ),
-
                                   Visibility(
-                                    visible: controller.walletDetails.value.wallet != null && double.parse(controller.walletDetails.value.wallet??"0").toInt() > 0,
+                                    visible:
+                                        controller.walletDetails.value.wallet !=
+                                                null &&
+                                            double.parse(controller
+                                                            .walletDetails
+                                                            .value
+                                                            .wallet ??
+                                                        "0")
+                                                    .toInt() >
+                                                0,
                                     child: Column(
-                                      children: [  Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: setRoboto("Wallet", 14.sp, black_121212,
-                                            FontWeight.w800),
-                                      ),
-                                         SizedBox(
+                                      children: [
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: setRoboto("Wallet", 14.sp,
+                                              black_121212, FontWeight.w800),
+                                        ),
+                                        SizedBox(
                                           height: 10.h,
                                         ),
                                         Row(
-                                          
                                           children: [
                                             Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                setRoboto("Use Wallet Balance", 12.sp,
-                                                    black_121212, FontWeight.w500),
-
-                                                SizedBox(height: 10.h,),
-
                                                 setRoboto(
-                                                    SharePreData.strDollar + (controller.walletDetails.value.wallet??"0"),
+                                                    "Use Wallet Balance",
+                                                    12.sp,
+                                                    black_121212,
+                                                    FontWeight.w500),
+                                                SizedBox(
+                                                  height: 10.h,
+                                                ),
+                                                setRoboto(
+                                                    SharePreData.strDollar +
+                                                        (controller
+                                                                .walletDetails
+                                                                .value
+                                                                .wallet ??
+                                                            "0"),
                                                     14.sp,
                                                     orange_ff881a,
                                                     FontWeight.w600),
@@ -335,45 +348,50 @@ class _EventDetailState extends State<EventDetail> {
 
                                             // Expanded(
                                             //   flex: 1,
-                                              Theme(
-                                                data: ThemeData(
-                                                  primarySwatch: Colors.orange,
-                                                  unselectedWidgetColor: Colors.grey, // Your color
-                                                ),
-                                                child: Checkbox(
-
-                                                  shape: RoundedRectangleBorder(
+                                            Theme(
+                                              data: ThemeData(
+                                                primarySwatch: Colors.orange,
+                                                unselectedWidgetColor:
+                                                    Colors.grey, // Your color
+                                              ),
+                                              child: Checkbox(
+                                                shape: RoundedRectangleBorder(
                                                     side: BorderSide(
                                                       width: 0.5,
                                                       color: grey_96a6a3,
-
                                                     ),
-                                                      borderRadius: BorderRadius.circular(4)),
-                                                  value: controller.isWallet.value,
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      controller.isWallet.value = value ?? false;
-                                                      setFinalValue();
-                                                    });
-                                                  },
-                                                ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4)),
+                                                value:
+                                                    controller.isWallet.value,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    controller.isWallet.value =
+                                                        value ?? false;
+                                                    setFinalValue();
+                                                  });
+                                                },
                                               ),
+                                            ),
                                             // )
                                           ],
                                         ),
-                                         SizedBox(
+                                        SizedBox(
                                           height: 16.h,
                                         ),
                                         Align(
                                           alignment: Alignment.topLeft,
-                                          child: setRoboto("PAYMENT METHOD", 12.sp,
-                                              grey_aaaaaa, FontWeight.w900),
+                                          child: setRoboto(
+                                              "PAYMENT METHOD",
+                                              12.sp,
+                                              grey_aaaaaa,
+                                              FontWeight.w900),
                                         ),
                                       ],
                                     ),
                                   ),
-
-                                   SizedBox(
+                                  SizedBox(
                                     height: 16.h,
                                   ),
                                   Container(
@@ -396,10 +414,13 @@ class _EventDetailState extends State<EventDetail> {
                                       ),
                                     ),
                                   ),
-                                   SizedBox(
+                                  SizedBox(
                                     height: 24.h,
                                   ),
-                                  BlackButton(controller.isWallet.value == true ? 'Pay Now' : 'PAY \$${controller.finalTotal.value}',
+                                  BlackButton(
+                                      controller.isWallet.value == true
+                                          ? 'Pay Now'
+                                          : 'PAY \$${controller.finalTotal.value}',
                                       white_ffffff, () {
                                     checkNet(context).then((value) {
                                       String eventId = controller
@@ -470,7 +491,8 @@ class _EventDetailState extends State<EventDetail> {
                                   fit: BoxFit.cover,
                                 )
                               : CachedNetworkImage(
-                                  imageUrl: controller.eventDetails.value.poster!,
+                                  imageUrl:
+                                      controller.eventDetails.value.poster!,
                                   fit: BoxFit.cover,
                                   progressIndicatorBuilder:
                                       (context, url, downloadProgress) =>
@@ -485,9 +507,8 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
                                 ),
                         ),
-
                         Padding(
-                          padding:  EdgeInsets.only(top: 60.h),
+                          padding: EdgeInsets.only(top: 60.h),
                           child: BackLayout(),
                         ),
                       ],
@@ -495,112 +516,110 @@ class _EventDetailState extends State<EventDetail> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        controller.eventDetails.value.is_purchased == 0 ? Container() :
-                        Padding(
-                                    padding:  EdgeInsets.only(left: 24.w,right: 24.w, top: 16.h),
-                                    child: Container(
-                                        height: 61.h,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          gradient: const LinearGradient(
-                                              colors: [
-                                                Color(0xFF1c2535),
-                                                Color(0xFF04080f),
-                                              ],
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomCenter,
-                                              //    stops: [0.0, 1.0],
-                                              tileMode: TileMode.clamp),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0x26121212),
-                                              offset: Offset(
-                                                0.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 7.0,
-                                              spreadRadius: 2.0,
-                                            ), //BoxShadow
+                        controller.eventDetails.value.is_purchased == 0
+                            ? Container()
+                            : Padding(
+                                padding: EdgeInsets.only(
+                                    left: 24.w, right: 24.w, top: 16.h),
+                                child: Container(
+                                    height: 61.h,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      gradient: const LinearGradient(
+                                          colors: [
+                                            Color(0xFF1c2535),
+                                            Color(0xFF04080f),
                                           ],
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 24.w),
-                                              child: // Admission
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          //    stops: [0.0, 1.0],
+                                          tileMode: TileMode.clamp),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color(0x26121212),
+                                          offset: Offset(
+                                            0.0,
+                                            5.0,
+                                          ),
+                                          blurRadius: 7.0,
+                                          spreadRadius: 2.0,
+                                        ), //BoxShadow
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 24.w),
+                                          child: // Admission
 
-                                                  Text("Admission",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily:
-                                                              helvetica_neu_bold,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 16.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                            ),
-                                            GestureDetector(
-                                              onTap: (){
-                                                Get.to(AllPurchasedEventTicketList(
-                                                    eventId: controller.eventDetails.value.id));
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 12.w),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4.r),
-                                                    color: orange_ff881a,
-                                                  ),
-                                                  child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 32.w,
-                                                          right: 32.w,
-                                                          top: 9.h,
-                                                          bottom: 9.h),
-                                                      child: // Invite Only
-                                                          Text("View",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  fontFamily:
-                                                                      roboto_bold,
-                                                                  fontStyle:
-                                                                      FontStyle
-                                                                          .normal,
-                                                                  fontSize:
-                                                                      16.sp),
-                                                              textAlign: TextAlign
-                                                                  .left)),
-                                                ),
+                                              Text("Admission",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helvetica_neu_bold,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 16.sp),
+                                                  textAlign: TextAlign.left),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.to(AllPurchasedEventTicketList(
+                                                eventId: controller
+                                                    .eventDetails.value.id));
+                                          },
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 12.w),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(4.r),
+                                                color: orange_ff881a,
                                               ),
+                                              child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 32.w,
+                                                      right: 32.w,
+                                                      top: 9.h,
+                                                      bottom: 9.h),
+                                                  child: // Invite Only
+                                                      Text("View",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontFamily:
+                                                                  roboto_bold,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
+                                                              fontSize: 16.sp),
+                                                          textAlign:
+                                                              TextAlign.left)),
                                             ),
-                                          ],
-                                        )),
-                                  ),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                              ),
                         Padding(
                           padding: EdgeInsets.only(top: 16.h),
-                          child: controller.eventDetails.value.type == 'ticket_price'
+                          child: controller.eventDetails.value.type ==
+                                  'ticket_price'
                               ? Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     // Admission
                                     Padding(
-                                      padding:  EdgeInsets.only(left: 24.w),
+                                      padding: EdgeInsets.only(left: 24.w),
                                       child: Text("Admission Tickets",
                                           style: TextStyle(
                                               color: black_121212,
@@ -625,11 +644,14 @@ class _EventDetailState extends State<EventDetail> {
                                       child: ListView.separated(
                                           primary: false,
                                           shrinkWrap: true,
-                                          padding: EdgeInsets.only(left: 24.w,right: 24.w,bottom: 18.h),
-                                          separatorBuilder:
-                                              (context, index) => SizedBox(
-                                                    width: 10.w,
-                                                  ),
+                                          padding: EdgeInsets.only(
+                                              left: 24.w,
+                                              right: 24.w,
+                                              bottom: 18.h),
+                                          separatorBuilder: (context, index) =>
+                                              SizedBox(
+                                                width: 10.w,
+                                              ),
                                           //   padding: EdgeInsets.only(left: 24.w,right: 24.w),
                                           scrollDirection: Axis.horizontal,
                                           itemCount: controller.eventDetails
@@ -637,20 +659,19 @@ class _EventDetailState extends State<EventDetail> {
                                           itemBuilder: (context, index) {
                                             return Container(
                                               width: 120.w,
-                                            //  height: 100.h,
-                                       //       margin: EdgeInsets.only(bottom: 18,top: 10),
-                                              padding:
-                                                  widget.type == 'upcoming'
-                                                      ?  EdgeInsets.only(
-                                                          top: 8.h,
-                                                          bottom: 8.h,
-                                                          left: 12.w,
-                                                          right: 12.w)
-                                                      :  EdgeInsets.only(
-                                                          left: 25.w,
-                                                          right: 25.w,
-                                                          top: 10.h,
-                                                          bottom: 10.h),
+                                              //  height: 100.h,
+                                              //       margin: EdgeInsets.only(bottom: 18,top: 10),
+                                              padding: widget.type == 'upcoming'
+                                                  ? EdgeInsets.only(
+                                                      top: 8.h,
+                                                      bottom: 8.h,
+                                                      left: 12.w,
+                                                      right: 12.w)
+                                                  : EdgeInsets.only(
+                                                      left: 25.w,
+                                                      right: 25.w,
+                                                      top: 10.h,
+                                                      bottom: 10.h),
                                               decoration: BoxDecoration(
                                                   color:
                                                       widget.type == 'upcoming'
@@ -665,8 +686,7 @@ class _EventDetailState extends State<EventDetail> {
                                                           .withOpacity(0.05),
                                                       spreadRadius: 2,
                                                       blurRadius: 12,
-                                                      offset:
-                                                           Offset(0, 10),
+                                                      offset: Offset(0, 10),
                                                     )
                                                   ]),
                                               child: Column(
@@ -680,19 +700,20 @@ class _EventDetailState extends State<EventDetail> {
                                                       controller
                                                           .eventDetails
                                                           .value
-                                                          .admissionData![
-                                                              index]
-                                                          .category!.capitalize!,
+                                                          .admissionData![index]
+                                                          .category!
+                                                          .capitalize!,
                                                       style: TextStyle(
-                                                          color: widget.type == 'upcoming'
+                                                          color: widget.type ==
+                                                                  'upcoming'
                                                               ? white_ffffff
                                                               : black_121212,
                                                           fontWeight:
                                                               FontWeight.w400,
                                                           fontFamily:
                                                               roboto_regular,
-                                                          fontStyle: FontStyle
-                                                              .normal,
+                                                          fontStyle:
+                                                              FontStyle.normal,
                                                           fontSize: 16.sp),
                                                       textAlign:
                                                           TextAlign.center),
@@ -711,15 +732,16 @@ class _EventDetailState extends State<EventDetail> {
                                                   Text(
                                                       "\$${double.parse(controller.eventDetails.value.admissionData![index].price!).toInt()}",
                                                       style: TextStyle(
-                                                          color: widget.type == 'upcoming'
+                                                          color: widget.type ==
+                                                                  'upcoming'
                                                               ? white_ffffff
                                                               : orange_ff881a,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           fontFamily:
                                                               roboto_bold,
-                                                          fontStyle: FontStyle
-                                                              .normal,
+                                                          fontStyle:
+                                                              FontStyle.normal,
                                                           fontSize: 16.sp),
                                                       textAlign:
                                                           TextAlign.left),
@@ -769,15 +791,20 @@ class _EventDetailState extends State<EventDetail> {
                                                               child: Center(
                                                                 child:
                                                                     // Buy
-                                                                    Text(
-                                                                        "Buy",
+                                                                    Text("Buy",
                                                                         style: TextStyle(
-                                                                            color: Colors.white,
-                                                                            fontWeight: FontWeight.w600,
-                                                                            fontFamily: roboto_bold,
-                                                                            fontStyle: FontStyle.normal,
-                                                                            fontSize: 14.sp),
-                                                                        textAlign: TextAlign.center),
+                                                                            color: Colors
+                                                                                .white,
+                                                                            fontWeight: FontWeight
+                                                                                .w600,
+                                                                            fontFamily:
+                                                                                roboto_bold,
+                                                                            fontStyle: FontStyle
+                                                                                .normal,
+                                                                            fontSize: 14
+                                                                                .sp),
+                                                                        textAlign:
+                                                                            TextAlign.center),
 
                                                                 // setHelveticaMedium(
                                                                 //     'Buy',
@@ -799,180 +826,184 @@ class _EventDetailState extends State<EventDetail> {
                                 )
                               : controller.eventDetails.value.type == 'free'
                                   ? Padding(
-                                    padding:  EdgeInsets.only(left: 24.w,right: 24.w),
-                                    child: Container(
-                                        height: 61.h,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          gradient: const LinearGradient(
-                                              colors: [
-                                                Color(0xFF1c2535),
-                                                Color(0xFF04080f),
-                                              ],
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomCenter,
-                                              //    stops: [0.0, 1.0],
-                                              tileMode: TileMode.clamp),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0x26121212),
-                                              offset: Offset(
-                                                0.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 7.0,
-                                              spreadRadius: 2.0,
-                                            ), //BoxShadow
-                                          ],
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 24.w),
-                                              child: // Admission
+                                      padding: EdgeInsets.only(
+                                          left: 24.w, right: 24.w),
+                                      child: Container(
+                                          height: 61.h,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            gradient: const LinearGradient(
+                                                colors: [
+                                                  Color(0xFF1c2535),
+                                                  Color(0xFF04080f),
+                                                ],
+                                                begin: Alignment.topCenter,
+                                                end: Alignment.bottomCenter,
+                                                //    stops: [0.0, 1.0],
+                                                tileMode: TileMode.clamp),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color(0x26121212),
+                                                offset: Offset(
+                                                  0.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 7.0,
+                                                spreadRadius: 2.0,
+                                              ), //BoxShadow
+                                            ],
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: // Admission
 
-                                                  Text("Admission",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily:
-                                                              helvetica_neu_bold,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontSize: 16.sp),
-                                                      textAlign:
-                                                          TextAlign.left),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 12.w),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.r),
-                                                  color: orange_ff881a,
-                                                ),
-                                                child: Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 14.w,
-                                                        right: 14.w,
-                                                        top: 9.h,
-                                                        bottom: 9.h),
-                                                    child: // Invite Only
-                                                        Text("FREE",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                fontFamily:
-                                                                    roboto_bold,
-                                                                fontStyle:
-                                                                    FontStyle
-                                                                        .normal,
-                                                                fontSize:
-                                                                    16.sp),
-                                                            textAlign: TextAlign
-                                                                .left)),
+                                                    Text("Admission",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontFamily:
+                                                                helvetica_neu_bold,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 16.sp),
+                                                        textAlign:
+                                                            TextAlign.left),
                                               ),
-                                            ),
-                                          ],
-                                        )),
-                                  )
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    right: 12.w),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.r),
+                                                    color: orange_ff881a,
+                                                  ),
+                                                  child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 14.w,
+                                                          right: 14.w,
+                                                          top: 9.h,
+                                                          bottom: 9.h),
+                                                      child: // Invite Only
+                                                          Text("FREE",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontFamily:
+                                                                      roboto_bold,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .normal,
+                                                                  fontSize:
+                                                                      16.sp),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left)),
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                    )
                                   : Padding(
-                                     padding:  EdgeInsets.only(left: 24.w,right: 24.w),
-                                    child: Container(
-                                        height: 61.h,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4.r),
-                                          gradient: const LinearGradient(
-                                              colors: [
-                                                Color(0xFF1c2535),
-                                                Color(0xFF04080f),
-                                              ],
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomCenter,
-                                              //    stops: [0.0, 1.0],
-                                              tileMode: TileMode.clamp),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0x26121212),
-                                              offset: Offset(
-                                                0.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 7.0,
-                                              spreadRadius: 2.0,
-                                            ), //BoxShadow
-                                          ],
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 24.w),
-                                              child: Text("Admission",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily:
-                                                          helvetica_neu_bold,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 16.sp),
-                                                  textAlign: TextAlign.left),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 12.w),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.r),
-                                                  color: orange_ff881a,
+                                      padding: EdgeInsets.only(
+                                          left: 24.w, right: 24.w),
+                                      child: Container(
+                                          height: 61.h,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(4.r),
+                                            gradient: const LinearGradient(
+                                                colors: [
+                                                  Color(0xFF1c2535),
+                                                  Color(0xFF04080f),
+                                                ],
+                                                begin: Alignment.topCenter,
+                                                end: Alignment.bottomCenter,
+                                                //    stops: [0.0, 1.0],
+                                                tileMode: TileMode.clamp),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color(0x26121212),
+                                                offset: Offset(
+                                                  0.0,
+                                                  5.0,
                                                 ),
-                                                child: Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 14.w,
-                                                        right: 14.w,
-                                                        top: 9.h,
-                                                        bottom: 9.h),
-                                                    child: // Invite Only
-                                                        Text("Invite Only",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                fontFamily:
-                                                                    roboto_bold,
-                                                                fontStyle:
-                                                                    FontStyle
-                                                                        .normal,
-                                                                fontSize:
-                                                                    16.sp),
-                                                            textAlign: TextAlign
-                                                                .left)),
+                                                blurRadius: 7.0,
+                                                spreadRadius: 2.0,
+                                              ), //BoxShadow
+                                            ],
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: Text("Admission",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helvetica_neu_bold,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 16.sp),
+                                                    textAlign: TextAlign.left),
                                               ),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    right: 12.w),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.r),
+                                                    color: orange_ff881a,
+                                                  ),
+                                                  child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 14.w,
+                                                          right: 14.w,
+                                                          top: 9.h,
+                                                          bottom: 9.h),
+                                                      child: // Invite Only
+                                                          Text("Invite Only",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontFamily:
+                                                                      roboto_bold,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .normal,
+                                                                  fontSize:
+                                                                      16.sp),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left)),
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                    ),
                         ),
                         controller.eventDetails.value.type == 'invite_only'
                             ? widget.type != 'upcoming'
@@ -980,8 +1011,10 @@ class _EventDetailState extends State<EventDetail> {
                                     children: [
                                       eventController.selectedList.isNotEmpty
                                           ? Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
+                                              padding: EdgeInsets.only(
+                                                  top: 24.h,
+                                                  left: 24.w,
+                                                  right: 24.w),
                                               child: Row(
                                                 children: [
                                                   SizedBox(
@@ -998,8 +1031,8 @@ class _EventDetailState extends State<EventDetail> {
                                                             : 55,
                                                     height: 25.h,
                                                     child: Stack(
-                                                      alignment: Alignment
-                                                          .centerLeft,
+                                                      alignment:
+                                                          Alignment.centerLeft,
                                                       children: <Widget>[
                                                         if (eventController
                                                             .selectedList
@@ -1023,14 +1056,14 @@ class _EventDetailState extends State<EventDetail> {
                                                                   : Image
                                                                       .network(
                                                                       eventController
-                                                                          .selectedList[0]
+                                                                          .selectedList[
+                                                                              0]
                                                                           .image!,
                                                                       fit: BoxFit
                                                                           .cover,
                                                                     ),
                                                               borderColor:
-                                                                  Colors
-                                                                      .white,
+                                                                  Colors.white,
                                                               borderWidth: 1,
                                                               elevation: 2,
                                                               radius: 50,
@@ -1067,8 +1100,7 @@ class _EventDetailState extends State<EventDetail> {
                                                                 borderColor:
                                                                     Colors
                                                                         .white,
-                                                                borderWidth:
-                                                                    1,
+                                                                borderWidth: 1,
                                                                 elevation: 2,
                                                                 radius: 50,
                                                               ),
@@ -1093,10 +1125,12 @@ class _EventDetailState extends State<EventDetail> {
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
-                                                            top: 2,
-                                                            left: 5.0),
+                                                            top: 2, left: 5.0),
                                                     child: setRoboto(
-                                                        eventController.selectedList.length.toString() +
+                                                        eventController
+                                                                .selectedList
+                                                                .length
+                                                                .toString() +
                                                             " People Invited",
                                                         14.sp,
                                                         Color(0xff04080f),
@@ -1106,16 +1140,16 @@ class _EventDetailState extends State<EventDetail> {
                                                   InkWell(
                                                     onTap: () {
                                                       Get.to(InvitePeople(
-                                                        true, eventController.selectedList,
+                                                        true,
+                                                        eventController
+                                                            .selectedList,
                                                       ))!
                                                           .then((value) =>
-                                                              setState(
-                                                                  () {}));
+                                                              setState(() {}));
                                                     },
                                                     child: Padding(
-                                                      padding:
-                                                          EdgeInsets.only(
-                                                              top: 2.h),
+                                                      padding: EdgeInsets.only(
+                                                          top: 2.h),
                                                       child: setRoboto(
                                                           "VIEW",
                                                           12.sp,
@@ -1128,96 +1162,125 @@ class _EventDetailState extends State<EventDetail> {
                                             )
                                           : Container(),
                                       widget.type == null
-                                      ? Padding(
-                                        padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
-                                        child: InkWell(
-                                          onTap: () {
-                                          if (controller.isSearched.value == true) {
-                                                controller.isSearched.value = false;
-                                                checkNet(context).then((value) async {
-                                                    controller.userPageNumber.value = 0;
-                                                    videoController.userList.clear();
-                                                    await controller.eventInviteUsersList(context, widget.id);
+                                          ? Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 24.w,
+                                                  right: 24.w,
+                                                  top: 20.h),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  if (controller
+                                                          .isSearched.value ==
+                                                      true) {
+                                                    controller.isSearched
+                                                        .value = false;
+                                                    checkNet(context)
+                                                        .then((value) async {
+                                                      controller.userPageNumber
+                                                          .value = 0;
+                                                      videoController.userList
+                                                          .clear();
+                                                      await controller
+                                                          .eventInviteUsersList(
+                                                              context,
+                                                              widget.id);
 
-                                                    Future.delayed(Duration(milliseconds: 500), () {
-                                                      for (var item in videoController.userList) {
-                                                        for (var selectedItem in controller.selectedList) {
-                                                          if (selectedItem.id == item.id) {
-                                                            item.isSpeakerSelected = selectedItem.isSpeakerSelected;
+                                                      Future.delayed(
+                                                          Duration(
+                                                              milliseconds:
+                                                                  500), () {
+                                                        for (var item
+                                                            in videoController
+                                                                .userList) {
+                                                          for (var selectedItem
+                                                              in controller
+                                                                  .selectedList) {
+                                                            if (selectedItem
+                                                                    .id ==
+                                                                item.id) {
+                                                              item.isSpeakerSelected =
+                                                                  selectedItem
+                                                                      .isSpeakerSelected;
+                                                            }
                                                           }
                                                         }
-                                                      }
-                                                      setState(() {});
+                                                        setState(() {});
+                                                      });
                                                     });
-                                                  });
-                                              }
+                                                  }
 
-
-                                              Get.to(InvitePeople(
-                                                false, eventController.selectedList,  widget.id
-                                              ))!
-                                                  .then((value) =>
-                                                      setState(() {}));
-
-                                          },
-                                          child: Container(
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        4.r),
-                                                // color: grey_f5f5f5
-                                                border: Border.all(
-                                                    width: 1,
-                                                    color:
-                                                        Color(0xff2030be))),
-                                            child: Padding(
-                                              padding: EdgeInsets.all(16.r),
-                                              child: Center(
-                                                child: Text("+ Invite People",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xff2030be),
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontFamily:
-                                                            roboto_bold,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    textAlign:
-                                                        TextAlign.left),
+                                                  Get.to(InvitePeople(
+                                                          false,
+                                                          eventController
+                                                              .selectedList,
+                                                          widget.id))!
+                                                      .then((value) =>
+                                                          setState(() {}));
+                                                },
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.r),
+                                                      // color: grey_f5f5f5
+                                                      border: Border.all(
+                                                          width: 1,
+                                                          color: Color(
+                                                              0xff2030be))),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(16.r),
+                                                    child: Center(
+                                                      child: Text(
+                                                          "+ Invite People",
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xff2030be),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontFamily:
+                                                                  roboto_bold,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
+                                                              fontSize: 14.sp),
+                                                          textAlign:
+                                                              TextAlign.left),
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                      ) : Container()
+                                            )
+                                          : Container()
                                     ],
                                   )
                                 : Container()
                             : Container(),
-                            controller.eventDetails.value.type != 'ticket_price' ?
-                        SizedBox(
-                          height: 16.h,
-                        ) : Container(),
+                        controller.eventDetails.value.type != 'ticket_price'
+                            ? SizedBox(
+                                height: 16.h,
+                              )
+                            : Container(),
                         // Divider(
                         //   color: view_line_f4f6f6,
                         //   thickness: 1,
                         //   height: 1,
                         // ),
                         Padding(
-                          padding:  EdgeInsets.only(left: 24.w,right: 24.w),
+                          padding: EdgeInsets.only(left: 24.w, right: 24.w),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               setHelveticaMedium(
-                                  controller.eventDetails.value.title!.capitalize!,
+                                  controller
+                                      .eventDetails.value.title!.capitalize!,
                                   24.sp,
                                   black_121212,
                                   FontWeight.w900,
                                   FontStyle.normal),
-
                               Padding(
                                 padding: EdgeInsets.only(top: 16.h),
                                 child: Row(
@@ -1228,7 +1291,7 @@ class _EventDetailState extends State<EventDetail> {
                                       width: 12.w,
                                     ),
                                     Padding(
-                                      padding:  EdgeInsets.only(left: 4.w),
+                                      padding: EdgeInsets.only(left: 4.w),
                                       child: setHelveticaMedium(
                                           '${DateFormat("MMM dd, yyyy").format(controller.eventDetails.value.startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventDetails.value.startDateTime!)}',
                                           10.sp,
@@ -1250,15 +1313,15 @@ class _EventDetailState extends State<EventDetail> {
                                       width: 12.w,
                                     ),
                                     Padding(
-                                      padding:  EdgeInsets.only(left: 4.w),
+                                      padding: EdgeInsets.only(left: 4.w),
                                       child: setHelveticaMedium(
-                                        controller.eventDetails.value.venue!.capitalize!,
-                                        10.sp,
-                                        black_121212,
-                                        FontWeight.w500,
-                                        FontStyle.normal,
-                                        -0.4
-                                      ),
+                                          controller.eventDetails.value.venue!
+                                              .capitalize!,
+                                          10.sp,
+                                          black_121212,
+                                          FontWeight.w500,
+                                          FontStyle.normal,
+                                          -0.4),
                                     ),
                                   ],
                                 ),
@@ -1271,20 +1334,21 @@ class _EventDetailState extends State<EventDetail> {
                                       borderRadius: BorderRadius.circular(4.r)),
                                   height: 30.h,
                                   child: Padding(
-                                    padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                                    padding:
+                                        EdgeInsets.only(left: 8.w, right: 8.w),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SizedBox(
                                           width: controller.eventDetails.value
-                                              .hosts!.length ==
-                                              1
+                                                      .hosts!.length ==
+                                                  1
                                               ? 25
-                                              : controller.eventDetails.value.hosts!
-                                              .length ==
-                                              2
-                                              ? 35
-                                              : 55,
+                                              : controller.eventDetails.value
+                                                          .hosts!.length ==
+                                                      2
+                                                  ? 35
+                                                  : 55,
                                           height: 30,
                                           child: Stack(
                                             alignment: Alignment.centerLeft,
@@ -1298,21 +1362,21 @@ class _EventDetailState extends State<EventDetail> {
                                                     '',
                                                     imageFit: BoxFit.fill,
                                                     child: controller
-                                                        .eventDetails
-                                                        .value
-                                                        .hosts![0]
-                                                        .image ==
-                                                        null
+                                                                .eventDetails
+                                                                .value
+                                                                .hosts![0]
+                                                                .image ==
+                                                            null
                                                         ? SvgPicture.asset(
-                                                        placeholder)
+                                                            placeholder)
                                                         : Image.network(
-                                                      controller
-                                                          .eventDetails
-                                                          .value
-                                                          .hosts![0]
-                                                          .image!,
-                                                      fit: BoxFit.cover,
-                                                    ),
+                                                            controller
+                                                                .eventDetails
+                                                                .value
+                                                                .hosts![0]
+                                                                .image!,
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                     borderColor: Colors.white,
                                                     borderWidth: 1,
                                                     elevation: 2,
@@ -1320,31 +1384,32 @@ class _EventDetailState extends State<EventDetail> {
                                                   ),
                                                 ),
                                               if (controller.eventDetails.value
-                                                  .hosts!.length >=
+                                                      .hosts!.length >=
                                                   2)
                                                 Positioned(
                                                   left: 10.w,
                                                   child: SizedBox(
                                                     height: 17.h,
                                                     width: 17.w,
-                                                    child: CircularProfileAvatar(
+                                                    child:
+                                                        CircularProfileAvatar(
                                                       '',
                                                       child: controller
-                                                          .eventDetails
-                                                          .value
-                                                          .hosts![1]
-                                                          .image ==
-                                                          null
+                                                                  .eventDetails
+                                                                  .value
+                                                                  .hosts![1]
+                                                                  .image ==
+                                                              null
                                                           ? SvgPicture.asset(
-                                                          placeholder)
+                                                              placeholder)
                                                           : Image.network(
-                                                        controller
-                                                            .eventDetails
-                                                            .value
-                                                            .hosts![1]
-                                                            .image!,
-                                                        fit: BoxFit.cover,
-                                                      ),
+                                                              controller
+                                                                  .eventDetails
+                                                                  .value
+                                                                  .hosts![1]
+                                                                  .image!,
+                                                              fit: BoxFit.cover,
+                                                            ),
                                                       borderColor: Colors.white,
                                                       borderWidth: 1,
                                                       elevation: 2,
@@ -1353,7 +1418,7 @@ class _EventDetailState extends State<EventDetail> {
                                                   ),
                                                 ),
                                               if (controller.eventDetails.value
-                                                  .hosts!.length >
+                                                      .hosts!.length >
                                                   2)
                                                 Positioned(
                                                   left: 20.0,
@@ -1373,21 +1438,26 @@ class _EventDetailState extends State<EventDetail> {
                                             FontWeight.w500,
                                             FontStyle.normal),
                                         Flexible(
-                                             child: SizedBox(
+                                          child: SizedBox(
                                             height: 20,
                                             child: ListView.builder(
                                                 primary: false,
                                                 shrinkWrap: true,
                                                 padding: EdgeInsets.zero,
-                                                scrollDirection: Axis.horizontal,
+                                                scrollDirection:
+                                                    Axis.horizontal,
                                                 itemCount: controller
-                                                    .eventDetails.value.hosts!.length,
+                                                    .eventDetails
+                                                    .value
+                                                    .hosts!
+                                                    .length,
                                                 itemBuilder: (context, index) {
                                                   return Row(
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                        MainAxisAlignment.start,
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
                                                       setHelceticaBold(
                                                           "@${controller.eventDetails.value.hosts![index].userName!}",
@@ -1395,16 +1465,19 @@ class _EventDetailState extends State<EventDetail> {
                                                           black_121212,
                                                           FontWeight.w800,
                                                           FontStyle.normal),
-                                                      controller.eventDetails.value
-                                                          .hosts!.length ==
-                                                          (index + 1)
+                                                      controller
+                                                                  .eventDetails
+                                                                  .value
+                                                                  .hosts!
+                                                                  .length ==
+                                                              (index + 1)
                                                           ? Container()
                                                           : setHelceticaBold(
-                                                          ", ",
-                                                          11.sp,
-                                                          black_121212,
-                                                          FontWeight.w800,
-                                                          FontStyle.normal),
+                                                              ", ",
+                                                              11.sp,
+                                                              black_121212,
+                                                              FontWeight.w800,
+                                                              FontStyle.normal),
                                                     ],
                                                   );
                                                 }),
@@ -1416,27 +1489,29 @@ class _EventDetailState extends State<EventDetail> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 8.h, bottom: 24.h),
+                                padding:
+                                    EdgeInsets.only(top: 8.h, bottom: 24.h),
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: grey_f4f6f6,
                                       borderRadius: BorderRadius.circular(4.r)),
                                   height: 29.h,
                                   child: Padding(
-                                    padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                                    padding:
+                                        EdgeInsets.only(left: 8.w, right: 8.w),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SizedBox(
                                           width: controller.eventDetails.value
-                                              .speakers!.length ==
-                                              1
+                                                      .speakers!.length ==
+                                                  1
                                               ? 25
                                               : controller.eventDetails.value
-                                              .speakers!.length ==
-                                              2
-                                              ? 35
-                                              : 45,
+                                                          .speakers!.length ==
+                                                      2
+                                                  ? 35
+                                                  : 45,
                                           height: 30.h,
                                           child: Stack(
                                             alignment: Alignment.centerLeft,
@@ -1449,16 +1524,30 @@ class _EventDetailState extends State<EventDetail> {
                                                   child: CircularProfileAvatar(
                                                     '',
                                                     imageFit: BoxFit.fill,
-                                                    child: controller.eventDetails.value.speakers![0].image == null || controller.eventDetails.value.speakers![0].image == ""
-                                                        ? SvgPicture.asset(placeholder)
+                                                    child: controller
+                                                                    .eventDetails
+                                                                    .value
+                                                                    .speakers![
+                                                                        0]
+                                                                    .image ==
+                                                                null ||
+                                                            controller
+                                                                    .eventDetails
+                                                                    .value
+                                                                    .speakers![
+                                                                        0]
+                                                                    .image ==
+                                                                ""
+                                                        ? SvgPicture.asset(
+                                                            placeholder)
                                                         : Image.network(
-                                                      controller
-                                                          .eventDetails
-                                                          .value
-                                                          .speakers![0]
-                                                          .image!,
-                                                      fit: BoxFit.cover,
-                                                    ),
+                                                            controller
+                                                                .eventDetails
+                                                                .value
+                                                                .speakers![0]
+                                                                .image!,
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                     borderColor: Colors.white,
                                                     borderWidth: 1,
                                                     elevation: 2,
@@ -1466,31 +1555,40 @@ class _EventDetailState extends State<EventDetail> {
                                                   ),
                                                 ),
                                               if (controller.eventDetails.value
-                                                  .speakers!.length >=
+                                                      .speakers!.length >=
                                                   2)
                                                 Positioned(
                                                   left: 10.w,
                                                   child: SizedBox(
                                                     height: 17.h,
                                                     width: 17.w,
-                                                    child: CircularProfileAvatar(
+                                                    child:
+                                                        CircularProfileAvatar(
                                                       '',
                                                       child: controller
-                                                          .eventDetails
-                                                          .value
-                                                          .speakers![1]
-                                                          .image ==
-                                                          null || controller.eventDetails.value.speakers![1].image == ""
+                                                                      .eventDetails
+                                                                      .value
+                                                                      .speakers![
+                                                                          1]
+                                                                      .image ==
+                                                                  null ||
+                                                              controller
+                                                                      .eventDetails
+                                                                      .value
+                                                                      .speakers![
+                                                                          1]
+                                                                      .image ==
+                                                                  ""
                                                           ? SvgPicture.asset(
-                                                          placeholder)
+                                                              placeholder)
                                                           : Image.network(
-                                                        controller
-                                                            .eventDetails
-                                                            .value
-                                                            .speakers![1]
-                                                            .image!,
-                                                        fit: BoxFit.cover,
-                                                      ),
+                                                              controller
+                                                                  .eventDetails
+                                                                  .value
+                                                                  .speakers![1]
+                                                                  .image!,
+                                                              fit: BoxFit.cover,
+                                                            ),
                                                       borderColor: Colors.white,
                                                       borderWidth: 1,
                                                       elevation: 2,
@@ -1499,7 +1597,7 @@ class _EventDetailState extends State<EventDetail> {
                                                   ),
                                                 ),
                                               if (controller.eventDetails.value
-                                                  .speakers!.length >
+                                                      .speakers!.length >
                                                   2)
                                                 Positioned(
                                                   left: 20.w,
@@ -1521,45 +1619,59 @@ class _EventDetailState extends State<EventDetail> {
                                             FontStyle.normal),
                                         Flexible(
                                           child: Padding(
-                                            padding: const EdgeInsets.only(bottom: 2.0),
+                                            padding: const EdgeInsets.only(
+                                                bottom: 2.0),
                                             child: SizedBox(
                                               height: 20.h,
                                               child: ListView.builder(
                                                   primary: false,
                                                   shrinkWrap: true,
                                                   padding: EdgeInsets.zero,
-                                                  scrollDirection: Axis.horizontal,
-                                                  itemCount: controller.eventDetails.value.speakers!.length,
-                                                  itemBuilder: (context, index) {
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount: controller
+                                                      .eventDetails
+                                                      .value
+                                                      .speakers!
+                                                      .length,
+                                                  itemBuilder:
+                                                      (context, index) {
                                                     return Row(
                                                       mainAxisAlignment:
-                                                      MainAxisAlignment.start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                       crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
+                                                          CrossAxisAlignment
+                                                              .center,
                                                       children: [
                                                         setHelceticaBold(
                                                             controller
-                                                                .eventDetails
-                                                                .value
-                                                                .speakers![
-                                                            index]
-                                                                .fullName !=
-                                                                null
-                                                                ? "@${controller.eventDetails.value.speakers![index].fullName!}" : '',
+                                                                        .eventDetails
+                                                                        .value
+                                                                        .speakers![
+                                                                            index]
+                                                                        .fullName !=
+                                                                    null
+                                                                ? "@${controller.eventDetails.value.speakers![index].fullName!}"
+                                                                : '',
                                                             11.sp,
                                                             black_121212,
                                                             FontWeight.w800,
                                                             FontStyle.normal),
-                                                        controller.eventDetails.value
-                                                            .speakers!.length ==
-                                                            (index + 1)
+                                                        controller
+                                                                    .eventDetails
+                                                                    .value
+                                                                    .speakers!
+                                                                    .length ==
+                                                                (index + 1)
                                                             ? Container()
                                                             : setHelceticaBold(
-                                                            ", ",
-                                                            11.sp,
-                                                            black_121212,
-                                                            FontWeight.w800,
-                                                            FontStyle.normal),
+                                                                ", ",
+                                                                11.sp,
+                                                                black_121212,
+                                                                FontWeight.w800,
+                                                                FontStyle
+                                                                    .normal),
                                                       ],
                                                     );
                                                   }),
@@ -1574,7 +1686,6 @@ class _EventDetailState extends State<EventDetail> {
                             ],
                           ),
                         ),
-
                       ],
                     ),
                     Divider(
@@ -1583,8 +1694,8 @@ class _EventDetailState extends State<EventDetail> {
                       color: view_line_f4f6f6,
                     ),
                     Padding(
-                      padding:
-                           EdgeInsets.only(top: 18.h, left: 24.w, right: 24.w,bottom: 18.h),
+                      padding: EdgeInsets.only(
+                          top: 18.h, left: 24.w, right: 24.w, bottom: 18.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -1609,7 +1720,7 @@ class _EventDetailState extends State<EventDetail> {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   SocialShare.shareTwitter(
                                     'Hey checkout this amazing event',
                                     url: controller.eventDetails.value.link!,
@@ -1617,19 +1728,17 @@ class _EventDetailState extends State<EventDetail> {
                                     print(data);
                                   });
                                 },
-                                
-                                  child: Padding(
-                                    padding: EdgeInsets.only(right: 24.w),
-                                    child: Image.asset(
-                                      icon_twitter,
-                                      height: 24.h,
-                                      width: 24.w,
-                                    ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: 24.w),
+                                  child: Image.asset(
+                                    icon_twitter,
+                                    height: 24.h,
+                                    width: 24.w,
                                   ),
-                                
+                                ),
                               ),
                               GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   Share.share(
                                     'Hey checkout this amazing event' +
                                         controller.eventDetails.value.link!,
@@ -1687,8 +1796,7 @@ class _EventDetailState extends State<EventDetail> {
                       child: Container(
                         height: 170.h,
                         child: ClipRRect(
-                          borderRadius:
-                          BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10),
                           child: GoogleMap(
                             initialCameraPosition: CameraPosition(
                                 target: LatLng(lat, lng), zoom: 17),
@@ -1704,88 +1812,109 @@ class _EventDetailState extends State<EventDetail> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 25.h,
+                    SizedBox(
+                      height: 25.h,
                     ),
-                    controller.eventDetails.value.userId != userId ? Container() :
-                    ((controller.registerList.value.data?.registeredUsers != null) &&
-                        (controller.registerList.value.data!.registeredUsers!.isNotEmpty))?
-                    controller.eventDetails.value.type != 'ticket_price'
+                    controller.eventDetails.value.userId != userId
                         ? Container()
-                        : Padding(
-                            padding: const EdgeInsets.only(bottom: 25.0, left: 24, right: 24),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                      colors: [
-                                        Color(0xFF1c2535),
-                                        Color(0xFF04080f),
-                                      ],
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      stops: [0.0, 1.0],
-                                      tileMode: TileMode.clamp),
-                                  color: white_ffffff,
-                                  borderRadius: BorderRadius.circular(4),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color(0x26121212),
-                                      offset: Offset(
-                                        0.0,
-                                        5.0,
-                                      ),
-                                      blurRadius: 10.0,
-                                      spreadRadius: 4.0,
-                                    ),
-                                  ]),
-                              child: Padding(
-                                padding: const EdgeInsets.all(12),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    // Registered People
-                                    Text("Registered People",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w800,
-                                            fontFamily: roboto_bold,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 16.sp),
-                                        textAlign: TextAlign.left),
-                                    GestureDetector(
-                                      onTap: (){
-                                        Get.to(RegisteredPeople(id: controller.eventDetails.value.id.toString()));
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(4),
-                                          color: orange_ff881a,
+                        : ((controller.registerList.value.data
+                                        ?.registeredUsers !=
+                                    null) &&
+                                (controller.registerList.value.data!
+                                    .registeredUsers!.isNotEmpty))
+                            ? controller.eventDetails.value.type !=
+                                    'ticket_price'
+                                ? Container()
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 25.0, left: 24, right: 24),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                              colors: [
+                                                Color(0xFF1c2535),
+                                                Color(0xFF04080f),
+                                              ],
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              stops: [0.0, 1.0],
+                                              tileMode: TileMode.clamp),
+                                          color: white_ffffff,
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0x26121212),
+                                              offset: Offset(
+                                                0.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 10.0,
+                                              spreadRadius: 4.0,
+                                            ),
+                                          ]),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // Registered People
+                                            Text("Registered People",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w800,
+                                                    fontFamily: roboto_bold,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 16.sp),
+                                                textAlign: TextAlign.left),
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.to(RegisteredPeople(
+                                                    id: controller
+                                                        .eventDetails.value.id
+                                                        .toString()));
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  color: orange_ff881a,
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 8.0,
+                                                          bottom: 8.0,
+                                                          left: 16.0,
+                                                          right: 16.0),
+                                                  child:
+                                                      // View
+                                                      Text("View",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w800,
+                                                              fontFamily:
+                                                                  roboto_bold,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
+                                                              fontSize: 16.sp),
+                                                          textAlign:
+                                                              TextAlign.left),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8.0,
-                                              bottom: 8.0,
-                                              left: 16.0,
-                                              right: 16.0),
-                                          child:
-                                              // View
-                                              Text("View",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight: FontWeight.w800,
-                                                      fontFamily: roboto_bold,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontSize: 16.sp),
-                                                  textAlign: TextAlign.left),
-                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ) : Container(),
+                                  )
+                            : Container(),
                   ],
                 ),
               ),
@@ -1797,13 +1926,15 @@ class _EventDetailState extends State<EventDetail> {
   }
 
   void setFinalValue() {
-    if(controller.isWallet.value){
-      if(double.parse(controller.walletDetails.value.wallet??"0").toInt() < controller.total.value){
-        controller.finalTotal.value = controller.total.value - double.parse(controller.walletDetails.value.wallet??"0").toInt();
-      }else{
+    if (controller.isWallet.value) {
+      if (double.parse(controller.walletDetails.value.wallet ?? "0").toInt() <
+          controller.total.value) {
+        controller.finalTotal.value = controller.total.value -
+            double.parse(controller.walletDetails.value.wallet ?? "0").toInt();
+      } else {
         controller.finalTotal.value = 0;
       }
-    }else{
+    } else {
       controller.finalTotal.value = controller.total.value;
     }
   }
