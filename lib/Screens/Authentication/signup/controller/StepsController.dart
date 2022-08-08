@@ -48,6 +48,7 @@ class StepsController extends GetxController {
       TextEditingController().obs;
   Rx<TextEditingController> currentCompanyWebsiteController =
       TextEditingController().obs;
+  RxString currentCompanyLogo = "".obs;
   RxList companyList = [].obs;
   RxString companyCount = ''.obs;
   RxString pastJobController = ''.obs;

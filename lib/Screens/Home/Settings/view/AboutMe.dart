@@ -70,16 +70,18 @@ class _AboutMeState extends State<AboutMe> {
     stepsController.industryListAPI(context);
 
     for (var element in cards) {
-      var image = element;
       var titleController = TextEditingController(text: element);
       var nameController = TextEditingController(text: element);
       var websiteController = TextEditingController(text: element);
+      var image = element;
+      var id = element;
       var job = true;
 
-      pastJobImage.add(image);
       pastCompanyTitleController.add(titleController);
       pastCompanyNameController.add(nameController);
       pastCompanyWebsiteController.add(websiteController);
+      pastJobImage.add(image);
+      pastJobId.add(id);
       pastJob.add(job);
     }
 
@@ -103,6 +105,8 @@ class _AboutMeState extends State<AboutMe> {
 
     stepsController.currentTitleController.value.text =
         myModel!.data!.currentJobs!.title ?? "";
+    stepsController.currentCompanyLogo.value =
+        myModel!.data!.currentJobs!.logo ?? "";
     stepsController.companyName.value =
         myModel!.data!.currentJobs!.companyName ?? "";
     stepsController.currentCompanyWebsiteController.value.text =
@@ -137,13 +141,19 @@ class _AboutMeState extends State<AboutMe> {
     setState(() {});
     if (myModel != null) {
       for (var element in myModel!.data!.pastJobs!) {
+        print("Logo Data :: " + element.toJson().toString());
         var image = element.logo ?? "";
         var titleController = TextEditingController(text: element.title);
         var nameController = TextEditingController(text: element.companyName);
         var websiteController = TextEditingController(text: element.website);
+        var logoId = element.logoId ?? "";
         var job = true;
-
+        print("Logo Id :: " +
+            logoId.toString() +
+            " ::: Index :: " +
+            nameController.toString());
         pastJobImage.add(image);
+        pastJobId.add(logoId.toString());
         pastCompanyTitleController.add(titleController);
         pastCompanyNameController.add(nameController);
         pastCompanyWebsiteController.add(websiteController);
@@ -155,6 +165,7 @@ class _AboutMeState extends State<AboutMe> {
           pastCompanyTitleController.removeAt(0);
           pastCompanyWebsiteController.removeAt(0);
           pastJobImage.removeAt(0);
+          pastJobId.removeAt(0);
           pastJob.removeAt(0);
         }
 
@@ -331,9 +342,13 @@ class _AboutMeState extends State<AboutMe> {
                                                     : Flexible(
                                                         flex: 1,
                                                         child: stepsController
-                                                                .companyImage
-                                                                .value
-                                                                .isEmpty
+                                                                    .companyImage
+                                                                    .value
+                                                                    .isEmpty &&
+                                                                stepsController
+                                                                        .currentCompanyLogo
+                                                                        .value ==
+                                                                    ""
                                                             ? ClipRRect(
                                                                 borderRadius:
                                                                     BorderRadius
@@ -354,41 +369,80 @@ class _AboutMeState extends State<AboutMe> {
                                                                     BorderRadius
                                                                         .circular(
                                                                             4.r),
-                                                                child:
-                                                                    CachedNetworkImage(
-                                                                  imageUrl:
-                                                                      stepsController
-                                                                          .companyImage
-                                                                          .value,
-                                                                  width: 25.w,
-                                                                  height: 25.h,
-                                                                  fit: BoxFit
-                                                                      .fill,
-                                                                  progressIndicatorBuilder: (context,
-                                                                          url,
-                                                                          downloadProgress) =>
-                                                                      SvgPicture
-                                                                          .asset(
-                                                                    placeholder,
-                                                                    width: 25.w,
-                                                                    height:
-                                                                        25.h,
-                                                                    fit: BoxFit
-                                                                        .fill,
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      SvgPicture
-                                                                          .asset(
-                                                                    placeholder,
-                                                                    width: 25.w,
-                                                                    height:
-                                                                        25.h,
-                                                                    fit: BoxFit
-                                                                        .fill,
-                                                                  ),
-                                                                ),
+                                                                child: stepsController
+                                                                        .companyImage
+                                                                        .value
+                                                                        .isNotEmpty
+                                                                    ? CachedNetworkImage(
+                                                                        imageUrl: stepsController
+                                                                            .companyImage
+                                                                            .value,
+                                                                        width:
+                                                                            25.w,
+                                                                        height:
+                                                                            25.h,
+                                                                        fit: BoxFit
+                                                                            .fill,
+                                                                        progressIndicatorBuilder: (context,
+                                                                                url,
+                                                                                downloadProgress) =>
+                                                                            SvgPicture.asset(
+                                                                          placeholder,
+                                                                          width:
+                                                                              25.w,
+                                                                          height:
+                                                                              25.h,
+                                                                          fit: BoxFit
+                                                                              .fill,
+                                                                        ),
+                                                                        errorWidget: (context,
+                                                                                url,
+                                                                                error) =>
+                                                                            SvgPicture.asset(
+                                                                          placeholder,
+                                                                          width:
+                                                                              25.w,
+                                                                          height:
+                                                                              25.h,
+                                                                          fit: BoxFit
+                                                                              .fill,
+                                                                        ),
+                                                                      )
+                                                                    : CachedNetworkImage(
+                                                                        imageUrl: stepsController
+                                                                            .currentCompanyLogo
+                                                                            .value,
+                                                                        width:
+                                                                            25.w,
+                                                                        height:
+                                                                            25.h,
+                                                                        fit: BoxFit
+                                                                            .fill,
+                                                                        progressIndicatorBuilder: (context,
+                                                                                url,
+                                                                                downloadProgress) =>
+                                                                            SvgPicture.asset(
+                                                                          placeholder,
+                                                                          width:
+                                                                              25.w,
+                                                                          height:
+                                                                              25.h,
+                                                                          fit: BoxFit
+                                                                              .fill,
+                                                                        ),
+                                                                        errorWidget: (context,
+                                                                                url,
+                                                                                error) =>
+                                                                            SvgPicture.asset(
+                                                                          placeholder,
+                                                                          width:
+                                                                              25.w,
+                                                                          height:
+                                                                              25.h,
+                                                                          fit: BoxFit
+                                                                              .fill,
+                                                                        ),
+                                                                      ),
                                                               ),
                                                       ),
                                               ],
@@ -1116,6 +1170,11 @@ class _AboutMeState extends State<AboutMe> {
                                                                     isFrom:
                                                                         'past_job'))!
                                                                 .then((value) {
+                                                              print("Logo Id :: " +
+                                                                  stepsController
+                                                                      .pastJobId
+                                                                      .value
+                                                                      .toString());
                                                               pastCompanyNameController[
                                                                           index]
                                                                       .text =
@@ -1127,6 +1186,11 @@ class _AboutMeState extends State<AboutMe> {
                                                                   stepsController
                                                                       .pastJobImage
                                                                       .value;
+                                                              pastJobId[index] =
+                                                                  stepsController
+                                                                      .pastJobId
+                                                                      .value
+                                                                      .toString();
                                                               setState(() {});
                                                             });
                                                           },
@@ -1389,9 +1453,11 @@ class _AboutMeState extends State<AboutMe> {
                                           var websiteController =
                                               TextEditingController(
                                                   text: element);
+                                          var pastid = element;
                                           var job = false;
 
                                           pastJobImage.add(image);
+                                          pastJobId.add(pastid);
                                           pastCompanyTitleController
                                               .add(titleController);
                                           pastCompanyNameController
@@ -3409,6 +3475,7 @@ class _AboutMeState extends State<AboutMe> {
                                             '"${pastCompanyNameController[i].text}"',
                                         '"website"':
                                             '"${pastCompanyWebsiteController[i].text}"',
+                                        '"logo"': '"${pastJobId[i].toString()}"'
                                       });
                                     }
 
@@ -3513,6 +3580,7 @@ class _AboutMeState extends State<AboutMe> {
       pastCompanyNameController.removeLast();
       pastCompanyTitleController.removeLast();
       pastJobImage.removeLast();
+      pastJobId.removeLast();
       pastJob.removeLast();
       cards.removeLast();
     }

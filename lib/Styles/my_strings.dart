@@ -53,3 +53,4 @@ var str_long_description =
 var api_key = 'AIzaSyBU3Yss1x8PTNpcn6jbULqjfpiaB1joGyU';
 const fb_logo = 'assets/images/fb_logo.svg';
 const google_logo = 'assets/images/google_logo.svg';
+const apple_logo = 'assets/images/apple_logo.svg';

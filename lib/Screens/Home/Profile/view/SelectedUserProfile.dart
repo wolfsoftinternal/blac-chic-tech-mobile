@@ -33,7 +33,8 @@ class SelectedUserProfile extends StatefulWidget {
   State<SelectedUserProfile> createState() => _SelectedUserProfileState();
 }
 
-class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTickerProviderStateMixin {
+class _SelectedUserProfileState extends State<SelectedUserProfile>
+    with SingleTickerProviderStateMixin {
   AdmireProfileController controller = Get.put(AdmireProfileController());
   TabController? tabController;
   int activeIndex = 0;
@@ -62,7 +63,8 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
     if (widget.userDetails.id != controller.details.value.id) {
       // dynamic body = {'user_id': controller.details.value.id.toString()};
       checkNet(context).then((value) async {
-        await controller.admireListAPI(context, controller.details.value.id.toString());
+        await controller.admireListAPI(
+            context, controller.details.value.id.toString());
       });
 
       for (var item in controller.otherAdmireList) {
@@ -82,7 +84,7 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
       body: Obx(
         () => Column(
           children: [
-             SizedBox(
+            SizedBox(
               height: 60.h,
             ),
             Container(
@@ -93,17 +95,15 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                     height: 48.h,
                     width: 48.w,
                   ),
-
                   const Spacer(),
-
                   Center(
                     child: GestureDetector(
                       onTap: () {
                         Get.back();
                       },
-                      child:CircularProfileAvatar(
-                                '',
-                                radius: 32,
+                      child: CircularProfileAvatar(
+                        '',
+                        radius: 32,
                         child: controller.details.value.image == null
                             ? SvgPicture.asset(
                                 placeholder,
@@ -113,22 +113,22 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                               )
                             : CachedNetworkImage(
                                 imageUrl: controller.details.value.image!,
-                          height: 48.h,
-                          width: 48.w,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) =>
                                         SvgPicture.asset(
                                   placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                   fit: BoxFit.cover,
                                 ),
                                 errorWidget: (context, url, error) =>
                                     SvgPicture.asset(
                                   placeholder,
-                                      height: 48.h,
-                                      width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -139,7 +139,7 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                   widget.userDetails.id == controller.details.value.id
                       ? GestureDetector(
                           onTap: () {
-                            createBottomSheet(context,widget.userDetails.id);
+                            createBottomSheet(context, widget.userDetails.id);
                           },
                           child: Container(
                             width: 48.w,
@@ -168,10 +168,10 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                           child: GestureDetector(
                             onTap: () {
                               Get.to(ProfileSetting())!.then((value) {
-                              checkNet(context).then((value) {
-                                controller.userProfileAPI(context, false);
+                                checkNet(context).then((value) {
+                                  controller.userProfileAPI(context, false);
+                                });
                               });
-                            });
                             },
                             child: Container(
                               width: 48.w,
@@ -193,7 +193,8 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                           padding: const EdgeInsets.only(right: 10.0),
                           child: GestureDetector(
                             onTap: () {
-                              displayBottomSheet(context, controller.details.value.id);
+                              displayBottomSheet(
+                                  context, controller.details.value.id);
                             },
                             child: Container(
                               width: 55.w,
@@ -227,8 +228,7 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                           controller.details.value.firstName !=
                                               null
                                       ? Padding(
-                                          padding:
-                                               EdgeInsets.only(top: 16.h),
+                                          padding: EdgeInsets.only(top: 16.h),
                                           child: Row(
                                             children: [
                                               setHelceticaBold(
@@ -253,12 +253,15 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                               null
                                           ? Padding(
                                               padding:
-                                                   EdgeInsets.only(top: 12.h),
+                                                  EdgeInsets.only(top: 12.h),
                                               child: Align(
                                                 alignment: Alignment.topLeft,
                                                 child: setHelveticaMedium(
-                                                    controller.details.value
-                                                            .currentJobs!.title! +
+                                                    controller
+                                                            .details
+                                                            .value
+                                                            .currentJobs!
+                                                            .title! +
                                                         ' @' +
                                                         controller
                                                             .details
@@ -278,25 +281,24 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                                   .website !=
                                               null
                                           ? Align(
-                                            alignment: Alignment.topLeft,
-                                            child: setHelveticaMedium(
-                                                controller
-                                                        .details
-                                                        .value
-                                                        .currentJobs!
-                                                        .website ??
-                                                    "",
-                                                12.sp,
-                                                blue_0a84ff,
-                                                FontWeight.w500,
-                                                FontStyle.normal),
-                                          )
+                                              alignment: Alignment.topLeft,
+                                              child: setHelveticaMedium(
+                                                  controller
+                                                          .details
+                                                          .value
+                                                          .currentJobs!
+                                                          .website ??
+                                                      "",
+                                                  12.sp,
+                                                  blue_0a84ff,
+                                                  FontWeight.w500,
+                                                  FontStyle.normal),
+                                            )
                                           : Container()
                                       : Container(),
                                   controller.details.value.aboutUs != null
                                       ? Padding(
-                                          padding:
-                                               EdgeInsets.only(top: 5.h),
+                                          padding: EdgeInsets.only(top: 5.h),
                                           child: Align(
                                             alignment: Alignment.topLeft,
                                             child: Container(
@@ -318,8 +320,8 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                         )
                                       : Container(),
                                   Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.86,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.86,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -333,29 +335,33 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                                         .countryDetails !=
                                                     null
                                             ? Padding(
-                                                padding:  EdgeInsets.only(
-                                                    top: 18.h),
+                                                padding:
+                                                    EdgeInsets.only(top: 18.h),
                                                 child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
                                                   children: [
-                                                     Icon(
+                                                    Icon(
                                                       Icons.location_on,
                                                       color: orange_ff881a,
                                                       size: 12.r,
                                                     ),
-                                                    SizedBox(width: 2.w,),
+                                                    SizedBox(
+                                                      width: 2.w,
+                                                    ),
                                                     Align(
                                                       alignment:
                                                           Alignment.topLeft,
                                                       child: setHelveticaMedium(
+                                                          // controller
+                                                          //         .details
+                                                          //         .value
+                                                          //         .cityDetails!
+                                                          //         .name! +
+                                                          //     "," +
                                                           controller
-                                                                  .details
-                                                                  .value
-                                                                  .cityDetails!
-                                                                  .name! +
-                                                              "," +
-                                                              controller
                                                                   .details
                                                                   .value
                                                                   .stateDetails!
@@ -375,35 +381,36 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                                 ),
                                               )
                                             : Container(),
-                                        widget.userDetails.id != controller.details.value.id
+                                        widget.userDetails.id !=
+                                                controller.details.value.id
                                             ? InkWell(
                                                 onTap: () {
                                                   if (controller.admire.value ==
                                                       'Admire')
                                                     checkNet(context)
                                                         .then((value) {
-                                                      controller.createAdmireAPI(
-                                                          context,
-                                                          controller
-                                                              .details.value.id);
+                                                      controller
+                                                          .createAdmireAPI(
+                                                              context,
+                                                              controller.details
+                                                                  .value.id);
                                                     });
                                                 },
                                                 child: Padding(
-                                                  padding:  EdgeInsets.only(
-                                                      top: 5.h),
+                                                  padding:
+                                                      EdgeInsets.only(top: 5.h),
                                                   child: Container(
                                                     decoration: BoxDecoration(
                                                       color: Colors.grey
                                                           .withOpacity(0.1),
                                                       borderRadius:
                                                           BorderRadius.all(
-                                                               Radius
-                                                                  .circular(40.r)),
+                                                              Radius.circular(
+                                                                  40.r)),
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                           EdgeInsets.all(
-                                                              12.r),
+                                                          EdgeInsets.all(12.r),
                                                       child: Row(children: [
                                                         Icon(
                                                           Icons
@@ -434,15 +441,17 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                               controller.details.value.instagramUrl != null &&
                                       controller.details.value.twitterUrl !=
                                           null &&
-                                      controller.details.value.linkedinUrl != null
+                                      controller.details.value.linkedinUrl !=
+                                          null
                                   ? Padding(
-                                      padding:  EdgeInsets.only(top: 16.h),
+                                      padding: EdgeInsets.only(top: 16.h),
                                       child: Row(
                                         children: [
-                                          controller.details.value.instagramUrl !=
+                                          controller.details.value
+                                                      .instagramUrl !=
                                                   null
                                               ? Padding(
-                                                  padding:  EdgeInsets.only(
+                                                  padding: EdgeInsets.only(
                                                       right: 15.w),
                                                   child: Image.asset(
                                                     icon_instagram,
@@ -454,7 +463,7 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                           controller.details.value.twitterUrl !=
                                                   null
                                               ? Padding(
-                                                  padding:  EdgeInsets.only(
+                                                  padding: EdgeInsets.only(
                                                       right: 15.w),
                                                   child: Image.asset(
                                                     icon_twitter,
@@ -463,12 +472,13 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                                   ),
                                                 )
                                               : Container(),
-                                          controller.details.value.linkedinUrl !=
+                                          controller.details.value
+                                                      .linkedinUrl !=
                                                   null
                                               ? Image.asset(
                                                   icon_linkedin,
-                                            height: 24.h,
-                                            width: 24.w,
+                                                  height: 24.h,
+                                                  width: 24.w,
                                                 )
                                               : Container(),
                                         ],
@@ -480,7 +490,7 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                         ],
                       ),
                     ),
-                     SizedBox(
+                    SizedBox(
                       height: 20.h,
                     ),
                     const Divider(
@@ -507,10 +517,14 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                             : Container(),
                     widget.userDetails.id != controller.details.value.id
                         ? controller.otherAdmireList.length >= 1
-                            ? Admires(userId: widget.userDetails.id??0, controller: controller)
+                            ? Admires(
+                                userId: widget.userDetails.id ?? 0,
+                                controller: controller)
                             : Container()
                         : controller.admireList.length >= 1
-                            ? Admires(userId: widget.userDetails.id??0, controller: controller)
+                            ? Admires(
+                                userId: widget.userDetails.id ?? 0,
+                                controller: controller)
                             : Container(),
                     widget.userDetails.id != controller.details.value.id
                         ? controller.otherAdmireList.length >= 1
@@ -523,11 +537,9 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                             ? const Divider(
                                 color: grey_f4f6f6,
                                 thickness: 1,
-                      height: 1,
+                                height: 1,
                               )
                             : Container(),
-
-
                     SizedBox(
                       height: MediaQuery.of(context).size.height,
                       child: Column(
@@ -535,8 +547,8 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding:
-                            EdgeInsets.only(left: 16.w, right: 16.w, top: 22.h),
+                            padding: EdgeInsets.only(
+                                left: 16.w, right: 16.w, top: 22.h),
                             child: Container(
                               height: 66.h,
                               decoration: BoxDecoration(
@@ -544,14 +556,17 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                 color: grey_f5f5f5,
                               ),
                               child: Padding(
-                                padding:
-                                EdgeInsets.only(
-                                    left: 8.w, right: 8.w, bottom: 8.h, top: 8.h),
+                                padding: EdgeInsets.only(
+                                    left: 8.w,
+                                    right: 8.w,
+                                    bottom: 8.h,
+                                    top: 8.h),
                                 child: TabBar(
                                   tabs: [
                                     Tab(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             'Profile',
@@ -569,7 +584,8 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                     ),
                                     Tab(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             'Posts',
@@ -587,7 +603,8 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                     ),
                                     Tab(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             'Videos',
@@ -605,7 +622,8 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                     ),
                                     Tab(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             'Events',
@@ -628,17 +646,15 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                                     boxShadow: [
                                       BoxShadow(
                                         color: Color(0x19121212),
-                                        offset:  Offset(
+                                        offset: Offset(
                                           0.0,
                                           5.0,
                                         ),
                                         blurRadius: 5.0,
                                         spreadRadius: 2.0,
                                       ), //BoxShadow
-
                                     ],
                                   ),
-
                                   unselectedLabelColor: grey_aaaaaa,
                                   labelColor: black_121212,
                                   controller: tabController,
@@ -646,7 +662,6 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                               ),
                             ),
                           ),
-
                           Expanded(
                             child: TabBarView(
                               controller: tabController,
@@ -661,7 +676,6 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
                         ],
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -687,12 +701,11 @@ class _SelectedUserProfileState extends State<SelectedUserProfile> with SingleTi
           const Spacer(),
           GestureDetector(
             onTap: () {
-              if(userId == controller.details.value.id){
+              if (userId == controller.details.value.id) {
                 Get.to(SeeAllAdmires(type: 'user'));
-              }else{
+              } else {
                 Get.to(SeeAllAdmires(type: 'other'));
               }
-              
             },
             child: setHelveticaMedium('See More', 12.sp, grey_aaaaaa,
                 FontWeight.w500, FontStyle.normal, -0.24),
@@ -724,8 +737,7 @@ class Admires extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-           EdgeInsets.only(top: 16.h, bottom: 16.h),
+      padding: EdgeInsets.only(top: 16.h, bottom: 16.h),
       child: Container(
         height: MediaQuery.of(context).size.height * 0.09,
         width: double.infinity,
@@ -735,7 +747,10 @@ class Admires extends StatelessWidget {
           separatorBuilder: (context, index) => SizedBox(
             width: 16.w,
           ),
-          padding: EdgeInsets.only(left: 24.w, right: 24.w,),
+          padding: EdgeInsets.only(
+            left: 24.w,
+            right: 24.w,
+          ),
           scrollDirection: Axis.horizontal,
           itemCount: userId != controller.details.value.id
               ? controller.otherAdmireList.length == 0
@@ -749,10 +764,10 @@ class Admires extends StatelessWidget {
               children: [
                 userId != controller.details.value.id
                     ? CircularProfileAvatar(
-                                '',
-                                radius: 32,
-                        child: controller.otherAdmireList[index]
-                                    .admireDetails!.image ==
+                        '',
+                        radius: 32,
+                        child: controller.otherAdmireList[index].admireDetails!
+                                    .image ==
                                 null
                             ? SvgPicture.asset(
                                 placeholder,
@@ -760,61 +775,59 @@ class Admires extends StatelessWidget {
                                 width: 48.w,
                               )
                             : CachedNetworkImage(
-                                imageUrl: controller
-                                    .otherAdmireList[index]
-                                    .admireDetails!
-                                    .image!,
-                          height: 48.h,
-                          width: 48.w,
+                                imageUrl: controller.otherAdmireList[index]
+                                    .admireDetails!.image!,
+                                height: 48.h,
+                                width: 48.w,
                                 fit: BoxFit.cover,
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) =>
                                         SvgPicture.asset(
                                   placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                 ),
                                 errorWidget: (context, url, error) =>
                                     SvgPicture.asset(
                                   placeholder,
-                                      height: 48.h,
-                                      width: 48.w,
+                                  height: 48.h,
+                                  width: 48.w,
                                 ),
                               ),
                       )
                     : CircularProfileAvatar(
-                                '',
-                                radius: 24,
-                        child: controller.admireList[index].admireDetails!
-                                    .image ==
-                                null
-                            ? SvgPicture.asset(
-                                placeholder,
-                          height: 48.h,
-                          width: 48.w,
-                              )
-                            : CachedNetworkImage(
-                                imageUrl: controller.admireList[index]
-                                    .admireDetails!.image!,
-                          height: 48.h,
-                          width: 48.w,
-                                fit: BoxFit.cover,
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        SvgPicture.asset(
-                                  placeholder,
-                                          height: 48.h,
-                                          width: 48.w,
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    SvgPicture.asset(
-                                  placeholder,
+                        '',
+                        radius: 24,
+                        child:
+                            controller.admireList[index].admireDetails!.image ==
+                                    null
+                                ? SvgPicture.asset(
+                                    placeholder,
+                                    height: 48.h,
+                                    width: 48.w,
+                                  )
+                                : CachedNetworkImage(
+                                    imageUrl: controller.admireList[index]
+                                        .admireDetails!.image!,
+                                    height: 48.h,
+                                    width: 48.w,
+                                    fit: BoxFit.cover,
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            SvgPicture.asset(
+                                      placeholder,
                                       height: 48.h,
                                       width: 48.w,
-                                ),
-                              ),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        SvgPicture.asset(
+                                      placeholder,
+                                      height: 48.h,
+                                      width: 48.w,
+                                    ),
+                                  ),
                       ),
-                 SizedBox(
+                SizedBox(
                   height: 4.h,
                 ),
                 setHelveticaMedium(
@@ -822,8 +835,8 @@ class Admires extends StatelessWidget {
                         ? controller.otherAdmireList[index].admireDetails!
                                 .firstName ??
                             ""
-                        : controller.admireList[index].admireDetails!
-                                .firstName ??
+                        : controller
+                                .admireList[index].admireDetails!.firstName ??
                             "",
                     12.sp,
                     black_121212,

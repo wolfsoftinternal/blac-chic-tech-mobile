@@ -135,27 +135,29 @@ class _BcConnectState extends State<BcConnect> {
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
                                     mainAxisSpacing: 2.r,
-                                    childAspectRatio: 0.71.h,
+                                    childAspectRatio: 0.84,
                                     crossAxisSpacing: 0.r),
                             itemCount: videoController.userList.length,
                             itemBuilder: (context, i) => Container(
                               // height: 215.h,
                               child: Padding(
                                 padding: EdgeInsets.only(
-                                    left: 8.w, right: 8.w, bottom: 18.h),
+                                    left: 8.w, right: 8.w, bottom: 18),
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(4.r)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Color(0x19121212),
-                                            offset: Offset(0, 30),
-                                            blurRadius: 60,
-                                            spreadRadius: 0)
-                                      ],
-                                      color: white_ffffff),
+                                    color: white_ffffff,
+                                    // color: Colors.black,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(4.r)),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color(0x19121212),
+                                          offset: Offset(0, 30),
+                                          blurRadius: 60,
+                                          spreadRadius: 0)
+                                    ],
+                                  ),
                                   child: Stack(
                                     //    alignment: Alignment.center,
                                     children: [
@@ -205,7 +207,7 @@ class _BcConnectState extends State<BcConnect> {
                                                                     .userList[i]
                                                                     .image!,
                                                             fit: BoxFit.cover,
-                                                            height: 134.h,
+                                                            height: 134,
                                                             width:
                                                                 double.infinity,
                                                             progressIndicatorBuilder:
@@ -213,7 +215,7 @@ class _BcConnectState extends State<BcConnect> {
                                                                         downloadProgress) =>
                                                                     Image.asset(
                                                               greyPlaceholder,
-                                                              height: 134.h,
+                                                              height: 134,
                                                               width: double
                                                                   .infinity,
                                                               fit: BoxFit.fill,
@@ -223,7 +225,7 @@ class _BcConnectState extends State<BcConnect> {
                                                                         error) =>
                                                                     Image.asset(
                                                               greyPlaceholder,
-                                                              height: 134.h,
+                                                              height: 134,
                                                               width: double
                                                                   .infinity,
                                                               fit: BoxFit.fill,
@@ -231,7 +233,7 @@ class _BcConnectState extends State<BcConnect> {
                                                           )
                                                         : Image.asset(
                                                             greyPlaceholder,
-                                                            height: 134.h,
+                                                            height: 134,
                                                             width:
                                                                 double.infinity,
                                                             fit: BoxFit.fill,
@@ -242,45 +244,45 @@ class _BcConnectState extends State<BcConnect> {
                                                     ? Image.asset(
                                                         bctShadow,
                                                         fit: BoxFit.cover,
-                                                        height: 134.h,
+                                                        height: 134,
                                                         width: double.infinity,
                                                       )
                                                     : Container(),
                                                 // unsplash:27xbM3bF9_s
-                                                Container(
-                                                  width: double.infinity,
-                                                  height: 134.h,
-                                                  // decoration:
-                                                  //     BoxDecoration(
-                                                  //   gradient: LinearGradient(
-                                                  //       begin: Alignment
-                                                  //           .topCenter,
-                                                  //       end: Alignment
-                                                  //           .bottomCenter,
-                                                  //       colors: [
-                                                  //         Color.fromARGB(
-                                                  //                 0,
-                                                  //                 42,
-                                                  //                 41,
-                                                  //                 41)
-                                                  //             .withOpacity(
-                                                  //                 0.0),
-                                                  //         Color.fromARGB(
-                                                  //                 255,
-                                                  //                 31,
-                                                  //                 31,
-                                                  //                 31)
-                                                  //             .withOpacity(
-                                                  //                 0.7)
-                                                  //       ]),
-                                                  // )
-                                                ),
+                                                // Container(
+                                                //   width: double.infinity,
+                                                //   height: 134.h,
+                                                //   // decoration:
+                                                //   //     BoxDecoration(
+                                                //   //   gradient: LinearGradient(
+                                                //   //       begin: Alignment
+                                                //   //           .topCenter,
+                                                //   //       end: Alignment
+                                                //   //           .bottomCenter,
+                                                //   //       colors: [
+                                                //   //         Color.fromARGB(
+                                                //   //                 0,
+                                                //   //                 42,
+                                                //   //                 41,
+                                                //   //                 41)
+                                                //   //             .withOpacity(
+                                                //   //                 0.0),
+                                                //   //         Color.fromARGB(
+                                                //   //                 255,
+                                                //   //                 31,
+                                                //   //                 31,
+                                                //   //                 31)
+                                                //   //             .withOpacity(
+                                                //   //                 0.7)
+                                                //   //       ]),
+                                                //   // )
+                                                // ),
 
                                                 // Jessie J
                                                 Center(
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
-                                                        bottom: 15.h),
+                                                        bottom: 15),
                                                     child: Column(
                                                       children: [
                                                         Text(
@@ -301,7 +303,7 @@ class _BcConnectState extends State<BcConnect> {
                                                             textAlign:
                                                                 TextAlign.left),
                                                         SizedBox(
-                                                          height: 3.h,
+                                                          height: 3,
                                                         ),
                                                         Opacity(
                                                           opacity: 0.9,
@@ -355,9 +357,9 @@ class _BcConnectState extends State<BcConnect> {
                                             Padding(
                                               padding: EdgeInsets.only(
                                                   left: 16.w,
-                                                  top: 10.h,
+                                                  top: 10,
                                                   right: 16.w,
-                                                  bottom: 16.h),
+                                                  bottom: 16),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
@@ -376,8 +378,8 @@ class _BcConnectState extends State<BcConnect> {
                                                           fontSize: 8.sp),
                                                       textAlign:
                                                           TextAlign.left),
-                                                  SizedBox(
-                                                    height: 3.5.h,
+                                                  const SizedBox(
+                                                    height: 3.5,
                                                   ),
                                                   // UI/UX Design | Venture Capital Funding | Life Advice Kubernetes Talk
                                                   Text(
@@ -575,7 +577,6 @@ class _BcConnectState extends State<BcConnect> {
                       ),
                     ),
                   ),
-            
           ],
         ),
       ),

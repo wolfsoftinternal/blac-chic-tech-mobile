@@ -174,51 +174,54 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               decoration: EditTextDecoration,
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton2(
-                                  isExpanded: true,
-                                  value: strCountryName,
-                                  hint: Text("Country",
-                                      style: TextStyle(
-                                          color: grey_aaaaaa,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily:
-                                              helveticaNeueNeue_medium,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 14.sp),
-                                      textAlign: TextAlign.left),
-                                  icon: SvgPicture.asset(
-                                    icon_down_arrow_spinner,
-                                    width: 12.r,
-                                    height: 12.r,
-                                  ),
-                                  onChanged: (String? value) {
-                                    setState(() {
-                                      controller.strCountryId.value =
-                                          value!;
-                                      strCountryName = value;
-                                      strStateName = null;
-                                      strCityName = null;
-                                      controller.stateListApi(value);
-                                    });
-                                  },
-                                  customItemsHeight: 4,
-                                  iconEnabledColor: black_121212,
-                                  iconDisabledColor: Colors.grey,
-                                  buttonHeight: 60,
-                                  buttonWidth: double.infinity,
-                                  buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                                  buttonDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: light_grey_f2f2f2,
-                                  ),
-                                  itemHeight: 35,
-                                  itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                  items: controller.countrylist
-                                      .map((CountryDatum value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value.id.toString(),
-                                      child: Text(value.name.toString().capitalizeFirst!),
-                                    );
-                                  }).toList()),
+                                    isExpanded: true,
+                                    value: strCountryName,
+                                    hint: Text("Country",
+                                        style: TextStyle(
+                                            color: grey_aaaaaa,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 14.sp),
+                                        textAlign: TextAlign.left),
+                                    icon: SvgPicture.asset(
+                                      icon_down_arrow_spinner,
+                                      width: 12.r,
+                                      height: 12.r,
+                                    ),
+                                    onChanged: (String? value) {
+                                      setState(() {
+                                        controller.strCountryId.value = value!;
+                                        strCountryName = value;
+                                        strStateName = null;
+                                        strCityName = null;
+                                        controller.stateListApi(value);
+                                      });
+                                    },
+                                    customItemsHeight: 4,
+                                    iconEnabledColor: black_121212,
+                                    iconDisabledColor: Colors.grey,
+                                    buttonHeight: 60,
+                                    buttonWidth: double.infinity,
+                                    buttonPadding: const EdgeInsets.only(
+                                        left: 14, right: 14),
+                                    buttonDecoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      color: light_grey_f2f2f2,
+                                    ),
+                                    itemHeight: 35,
+                                    itemPadding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0),
+                                    items: controller.countrylist
+                                        .map((CountryDatum value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value.id.toString(),
+                                        child: Text(value.name
+                                            .toString()
+                                            .capitalizeFirst!),
+                                      );
+                                    }).toList()),
                               ),
                             ),
                           ),
@@ -237,8 +240,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                       style: TextStyle(
                                           color: grey_aaaaaa,
                                           fontWeight: FontWeight.w500,
-                                          fontFamily:
-                                              helveticaNeueNeue_medium,
+                                          fontFamily: helveticaNeueNeue_medium,
                                           fontStyle: FontStyle.normal,
                                           fontSize: 14.sp),
                                       textAlign: TextAlign.left),
@@ -263,18 +265,22 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                   iconDisabledColor: Colors.grey,
                                   buttonHeight: 60,
                                   buttonWidth: double.infinity,
-                                  buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                  buttonPadding: const EdgeInsets.only(
+                                      left: 14, right: 14),
                                   buttonDecoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4),
                                     color: light_grey_f2f2f2,
                                   ),
                                   itemHeight: 35,
-                                  itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                  itemPadding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
                                   items: controller.stateList
                                       .map((StateDatum value) {
                                     return DropdownMenuItem<String>(
                                       value: value.id.toString(),
-                                      child: Text(value.name.toString().capitalizeFirst!),
+                                      child: Text(value.name
+                                          .toString()
+                                          .capitalizeFirst!),
                                     );
                                   }).toList(),
                                 ),
@@ -303,8 +309,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                       style: TextStyle(
                                           color: grey_aaaaaa,
                                           fontWeight: FontWeight.w500,
-                                          fontFamily:
-                                              helveticaNeueNeue_medium,
+                                          fontFamily: helveticaNeueNeue_medium,
                                           fontStyle: FontStyle.normal,
                                           fontSize: 14.sp),
                                       textAlign: TextAlign.left),
@@ -325,18 +330,22 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                   iconDisabledColor: Colors.grey,
                                   buttonHeight: 60,
                                   buttonWidth: double.infinity,
-                                  buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                  buttonPadding: const EdgeInsets.only(
+                                      left: 14, right: 14),
                                   buttonDecoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4),
                                     color: light_grey_f2f2f2,
                                   ),
                                   itemHeight: 35,
-                                  itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                  itemPadding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
                                   items: controller.cityList
                                       .map((CityDatum value) {
                                     return DropdownMenuItem<String>(
                                       value: value.id.toString(),
-                                      child: Text(value.name.toString().capitalizeFirst!),
+                                      child: Text(value.name
+                                          .toString()
+                                          .capitalizeFirst!),
                                     );
                                   }).toList(),
                                 ),
@@ -427,7 +436,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                   horizontal: 0, vertical: 0),
                               isDense: true,
                               // you can change this with the top text like you want
-                              
+
                               labelStyle: TextStyle(
                                   color: grey_aaaaaa,
                                   fontFamily: helveticaNeueNeue_medium,
@@ -489,7 +498,6 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               color: Colors.black12,
                             ),
                           ),
-
                         ],
                       ),
                       SizedBox(
@@ -504,9 +512,9 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                left: 17.5.w,
-                                right: 17.5.w,
-                                ),
+                              left: 17.5.w,
+                              right: 17.5.w,
+                            ),
                             child: setSocialTextFieldNext(
                                 controller.linkedinController.value,
                                 "Linkedin Account",
@@ -553,8 +561,9 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                left: 17.5.w,
-                                right: 17.5.w,),
+                              left: 17.5.w,
+                              right: 17.5.w,
+                            ),
                             child: setSocialTextFieldNext(
                                 controller.twitterController.value,
                                 "Twitter Account",
@@ -581,9 +590,9 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                           alignment: Alignment.center,
                           child: Padding(
                             padding: EdgeInsets.only(
-                                left: 17.5.w,
-                                right: 17.5.w,
-                                ),
+                              left: 17.5.w,
+                              right: 17.5.w,
+                            ),
                             child: setSocialTextFieldNext(
                                 controller.instagramController.value,
                                 "Instagram Account",
@@ -596,24 +605,25 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                                 icon_instagram),
                           ),
                         ),
-                      ),   
-                      SizedBox(height: 30,),                   
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            
-            
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                boxShadow: [BoxShadow(
-                    color:  Color(0x14aabab7).withOpacity(0.15),
-                    offset: Offset(0,-20),
-                    blurRadius: 20,
-                    spreadRadius: 0
-                )] ,
+                boxShadow: [
+                  BoxShadow(
+                      color: Color(0x14aabab7).withOpacity(0.15),
+                      offset: Offset(0, -20),
+                      blurRadius: 20,
+                      spreadRadius: 0)
+                ],
               ),
               child: Padding(
                 padding: EdgeInsets.all(24.r),
@@ -706,7 +716,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
     showImagePicker(context).then((value) {
       setState(() {
         if (imagePath.toString() != "File: ''") {
-          if(controller.isImageSelected.value == true){
+          if (controller.isImageSelected.value == true) {
             controller.boolComapnyLogo.value = true;
             _cropImage();
             controller.isImageSelected.value = false;

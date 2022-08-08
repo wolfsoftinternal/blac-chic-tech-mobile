@@ -180,8 +180,8 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
                               //     ? "@" + widget.admireList.admireDetails!.userName!
                               //     : "@" + widget.admireList.admireDetails!.firstName!,
                               myModel?.data?.userName != null
-                                  ? "@" + (myModel?.data?.userName ?? "")
-                                  : "@" + (myModel?.data?.firstName ?? ""),
+                                  ? (myModel?.data?.userName ?? "")
+                                  : (myModel?.data?.firstName ?? ""),
                               20.sp,
                               white_ffffff,
                               FontWeight.w600,

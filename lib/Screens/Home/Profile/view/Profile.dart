@@ -107,7 +107,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     setState(() {});
   }
 
-  displayAdmireBottomSheet(){
+  displayAdmireBottomSheet() {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -122,72 +122,77 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               child: SingleChildScrollView(
                 child: controller.otherAdmireList.length >= 15
                     ? Container(
-                      height: MediaQuery.of(context).size.height - 120.h,
-                      child: AdmireList(),
-                    ) : AdmireList(),
+                        height: MediaQuery.of(context).size.height - 120.h,
+                        child: AdmireList(),
+                      )
+                    : AdmireList(),
               ));
         });
   }
 
   Wrap AdmireList() {
     return Wrap(
-                  children: [
-                    StatefulBuilder(builder: (context, setState) {
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 12.h,
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              width: 50,
-                              height: 3,
-                              decoration: BoxDecoration(
-                                color: grey_3f3f3f.withOpacity(0.4),
-                                borderRadius:  BorderRadius.all(
-                                  Radius.circular(50.r),
-                                )
-                              ),
-                            )
-                          ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-                         LayoutBuilder(
-                          builder: (context, constraints) {
-                              return GridView.builder(
-                                primary: false,
-                                shrinkWrap: true,
-                                padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 10.h, top: 16.h),
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisSpacing: 10.w,
-                                  mainAxisSpacing: 0,
-                                  crossAxisCount: constraints.maxWidth == 310
-                                      ? 3
-                                      : constraints.maxWidth > 310 && constraints.maxWidth < 520
-                                          ? 4
-                                          : constraints.maxWidth > 520 && constraints.maxWidth < 720
-                                              ? 5
-                                              : 6,
-                                  childAspectRatio: constraints.maxWidth == 310
-                                      ? 0.85.w
-                                      : constraints.maxWidth > 310 && constraints.maxWidth < 520
-                                          ? 0.70.w
-                                          : constraints.maxWidth > 520 && constraints.maxWidth < 720
-                                              ? 0.75.w
-                                              : 0.9.w,
-                                ),
-                                itemCount: controller.otherAdmireList.length,
-                                itemBuilder: (context, i) => AllAdmireList(controller.otherAdmireList[i], 'other', null, controller.details.value.id)
-                              );
-                            }
-                          ),
-                        ],
-                      );
-                    }),
-                  ],
-                );
+      children: [
+        StatefulBuilder(builder: (context, setState) {
+          return Column(
+            children: [
+              SizedBox(
+                height: 12.h,
+              ),
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 50,
+                    height: 3,
+                    decoration: BoxDecoration(
+                        color: grey_3f3f3f.withOpacity(0.4),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50.r),
+                        )),
+                  )),
+              SizedBox(
+                height: 24.h,
+              ),
+              LayoutBuilder(builder: (context, constraints) {
+                return GridView.builder(
+                    primary: false,
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(
+                        left: 8.w, right: 8.w, bottom: 10.h, top: 16.h),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: 10.w,
+                      mainAxisSpacing: 0,
+                      crossAxisCount: constraints.maxWidth == 310
+                          ? 3
+                          : constraints.maxWidth > 310 &&
+                                  constraints.maxWidth < 520
+                              ? 4
+                              : constraints.maxWidth > 520 &&
+                                      constraints.maxWidth < 720
+                                  ? 5
+                                  : 6,
+                      childAspectRatio: constraints.maxWidth == 310
+                          ? 0.85.w
+                          : constraints.maxWidth > 310 &&
+                                  constraints.maxWidth < 520
+                              ? 0.70.w
+                              : constraints.maxWidth > 520 &&
+                                      constraints.maxWidth < 720
+                                  ? 0.75.w
+                                  : 0.9.w,
+                    ),
+                    itemCount: controller.otherAdmireList.length,
+                    itemBuilder: (context, i) => AllAdmireList(
+                        controller.otherAdmireList[i],
+                        'other',
+                        null,
+                        controller.details.value.id));
+              }),
+            ],
+          );
+        }),
+      ],
+    );
   }
 
   @override
@@ -217,7 +222,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                         } else {
                           videoController.userList.clear();
                           Get.to(UserProfile(
-                            selectedUserId: controller.details.value.id.toString(),
+                            selectedUserId:
+                                controller.details.value.id.toString(),
                             isFrom: true,
                           ));
                         }
@@ -345,7 +351,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     controller.details.value.fullName != null ||
-                                            controller.details.value.firstName !=
+                                            controller
+                                                    .details.value.firstName !=
                                                 null
                                         ? Padding(
                                             padding: EdgeInsets.only(top: 16.h),
@@ -357,9 +364,17 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 setHelceticaBold(
-                                                  controller.details.value.fullName != null ?
-                                                  '${controller.details.value.fullName.toString().capitalize}':
-                                                  controller.details.value.firstName != null ? '${controller.details.value.firstName.toString().capitalizeFirst}' : "",
+                                                    controller.details.value
+                                                                .fullName !=
+                                                            null
+                                                        ? '${controller.details.value.fullName.toString().capitalize}'
+                                                        : controller
+                                                                    .details
+                                                                    .value
+                                                                    .firstName !=
+                                                                null
+                                                            ? '${controller.details.value.firstName.toString().capitalizeFirst}'
+                                                            : "",
                                                     24.sp,
                                                     black_121212,
                                                     FontWeight.w900,
@@ -368,7 +383,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                 Expanded(
                                                     flex: 1,
                                                     child: Padding(
-                                                      padding: EdgeInsets.only(top: 2.0.h),
+                                                      padding: EdgeInsets.only(
+                                                          top: 2.0.h),
                                                       child: SvgPicture.asset(
                                                         check_icon,
                                                         alignment:
@@ -499,15 +515,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                 child: Align(
                                                   alignment: Alignment.topLeft,
                                                   child: setHelveticaMedium(
-                                                      '${controller
-                                                              .details
-                                                              .value
-                                                              .currentJobs!
-                                                              .title!.toString().capitalize} @${controller
-                                                              .details
-                                                              .value
-                                                              .currentJobs!
-                                                              .companyName.toString().capitalize}',
+                                                      '${controller.details.value.currentJobs!.title!.toString().capitalize} @${controller.details.value.currentJobs!.companyName.toString().capitalize}',
                                                       16,
                                                       Color(0xff787878),
                                                       FontWeight.w500,
@@ -517,41 +525,49 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                             : Container()
                                         : Container(),
                                     controller.details.value.currentJobs != null
-                                        ? controller.details.value.currentJobs!.website != null
+                                        ? controller.details.value.currentJobs!
+                                                    .website !=
+                                                null
                                             ? Padding(
-                                              padding: EdgeInsets.only(top: 2.h),
-                                              child: GestureDetector(
-                                                onTap: (){
-                                                  if(controller.details.value.currentJobs!.website!.contains("http")){
-                                                    launchURL(controller
-                                                                .details
-                                                                .value
-                                                                .currentJobs!
-                                                                .website!);
-                                                  }else{
-                                                    var url = "https://www." + controller
-                                                                .details
-                                                                .value
-                                                                .currentJobs!
-                                                                .website!;
-                                                    launchURL(url);
-                                                  }
-                                                },
-                                                child: Align(
-                                                    alignment: Alignment.topLeft,
+                                                padding:
+                                                    EdgeInsets.only(top: 2.h),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    if (controller.details.value
+                                                        .currentJobs!.website!
+                                                        .contains("http")) {
+                                                      launchURL(controller
+                                                          .details
+                                                          .value
+                                                          .currentJobs!
+                                                          .website!);
+                                                    } else {
+                                                      var url = "https://www." +
+                                                          controller
+                                                              .details
+                                                              .value
+                                                              .currentJobs!
+                                                              .website!;
+                                                      launchURL(url);
+                                                    }
+                                                  },
+                                                  child: Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
                                                     child: setHelveticaMedium(
                                                         controller
                                                                 .details
                                                                 .value
                                                                 .currentJobs!
-                                                                .website ?? "",
+                                                                .website ??
+                                                            "",
                                                         12.sp,
                                                         blue_0a84ff,
                                                         FontWeight.w500,
                                                         FontStyle.normal),
                                                   ),
-                                              ),
-                                            )
+                                                ),
+                                              )
                                             : Container()
                                         : Container(),
                                     // controller.details.value.aboutUs != null
@@ -616,19 +632,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                                         alignment:
                                                             Alignment.topLeft,
                                                         child: setHelveticaMedium(
-                                                            "${controller
-                                                                    .details
-                                                                    .value
-                                                                    .cityDetails!
-                                                                    .name!.capitalizeFirst}, ${controller
-                                                                    .details
-                                                                    .value
-                                                                    .stateDetails!
-                                                                    .name!.capitalizeFirst}, ${controller
-                                                                    .details
-                                                                    .value
-                                                                    .countryDetails!
-                                                                    .name!.capitalizeFirst}",
+                                                            // "${controller
+                                                            //         .details
+                                                            //         .value
+                                                            //         .cityDetails!
+                                                            //         .name!.capitalizeFirst},
+                                                            "${controller.details.value.stateDetails!.name!.capitalizeFirst}, ${controller.details.value.countryDetails!.name!.capitalizeFirst}",
                                                             10,
                                                             grey_aaaaaa,
                                                             FontWeight.w500,
@@ -867,14 +876,13 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(80),
                             boxShadow: [
                               BoxShadow(
-                                color: Color(0x19121212).withOpacity(0.10),
-                                offset: Offset(
-                                  0.0,
-                                  10.0,
-                                ),
-                                blurRadius: 10.0,
-                                spreadRadius: 0
-                              ), //BoxShadow
+                                  color: Color(0x19121212).withOpacity(0.10),
+                                  offset: Offset(
+                                    0.0,
+                                    10.0,
+                                  ),
+                                  blurRadius: 10.0,
+                                  spreadRadius: 0), //BoxShadow
                             ],
                           ),
                           isScrollable: false,
@@ -1097,10 +1105,14 @@ class Admires extends StatelessWidget {
                   setHelveticaMedium(
                       userId != controller.details.value.id
                           ? controller.otherAdmireList[index].admireDetails!
-                                  .firstName.toString().capitalizeFirst ??
+                                  .firstName
+                                  .toString()
+                                  .capitalizeFirst ??
                               ""
                           : controller
-                                  .admireList[index].admireDetails!.firstName.toString().capitalizeFirst ??
+                                  .admireList[index].admireDetails!.firstName
+                                  .toString()
+                                  .capitalizeFirst ??
                               "",
                       12.sp,
                       black_121212,

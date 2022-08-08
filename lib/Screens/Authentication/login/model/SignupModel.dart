@@ -1,127 +1,128 @@
 import 'dart:convert';
 
-SignupModel signupModelFromJson(String str) => SignupModel.fromJson(json.decode(str));
+SignupModel signupModelFromJson(String str) =>
+    SignupModel.fromJson(json.decode(str));
 
 String signupModelToJson(SignupModel data) => json.encode(data.toJson());
 
 class SignupModel {
-    SignupModel({
-        this.success,
-        this.statusCode,
-        this.message,
-        this.data,
-    });
+  SignupModel({
+    this.success,
+    this.statusCode,
+    this.message,
+    this.data,
+  });
 
-    bool? success;
-    int? statusCode;
-    String? message;
-    UserDetails? data;
+  bool? success;
+  int? statusCode;
+  String? message;
+  UserDetails? data;
 
-    factory SignupModel.fromJson(Map<String, dynamic> json) => SignupModel(
+  factory SignupModel.fromJson(Map<String, dynamic> json) => SignupModel(
         success: json["success"],
         statusCode: json["status_code"],
         message: json["message"],
         data: UserDetails.fromJson(json["data"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "success": success,
         "status_code": statusCode,
         "message": message,
         "data": data!.toJson(),
-    };
+      };
 }
 
 class UserDetails {
-    UserDetails({
-        this.id,
-        this.firstName,
-        this.lastName,
-        this.fullName,
-        this.userName,
-        this.email,
-        this.password,
-        this.dateOfBirth,
-        this.countryId,
-        this.stateId,
-        this.cityId,
-        this.image,
-        this.linkedinUrl,
-        this.instagramUrl,
-        this.twitterUrl,
-        this.socialType,
-        this.socialId,
-        this.aboutUs,
-        this.address,
-        this.latitude,
-        this.longitude,
-        this.website,
-        this.otp,
-        this.role,
-        this.wallet,
-        this.emailVerifiedAt,
-        this.isActive,
-        this.isConfirm,
-        this.isVisible,
-        this.rememberToken,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-        this.currentJobs,
-        this.pastJobs,
-        this.token,
-        this.educations,
-        this.images,
-        this.questions,
-        this.countryDetails,
-        this.stateDetails,
-        this.cityDetails,
-    });
+  UserDetails({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.fullName,
+    this.userName,
+    this.email,
+    this.password,
+    this.dateOfBirth,
+    this.countryId,
+    this.stateId,
+    this.cityId,
+    this.image,
+    this.linkedinUrl,
+    this.instagramUrl,
+    this.twitterUrl,
+    this.socialType,
+    this.socialId,
+    this.aboutUs,
+    this.address,
+    this.latitude,
+    this.longitude,
+    this.website,
+    this.otp,
+    this.role,
+    this.wallet,
+    this.emailVerifiedAt,
+    this.isActive,
+    this.isConfirm,
+    this.isVisible,
+    this.rememberToken,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+    this.currentJobs,
+    this.pastJobs,
+    this.token,
+    this.educations,
+    this.images,
+    this.questions,
+    this.countryDetails,
+    this.stateDetails,
+    this.cityDetails,
+  });
 
-    int? id;
-    String? firstName;
-    String? lastName;
-    String? fullName;
-    String? userName;
-    String? email;
-    String? password;
-    dynamic dateOfBirth;
-    dynamic countryId;
-    dynamic stateId;
-    dynamic cityId;
-    String? image;
-    dynamic linkedinUrl;
-    dynamic instagramUrl;
-    dynamic twitterUrl;
-    dynamic socialType;
-    dynamic socialId;
-    String? aboutUs;
-    dynamic address;
-    dynamic latitude;
-    dynamic longitude;
-    dynamic website;
-    dynamic otp;
-    int? role;
-    String? wallet;
-    dynamic emailVerifiedAt;
-    int? isActive;
-    int? isConfirm;
-    int? isVisible;
-    dynamic rememberToken;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    dynamic deletedAt;
-    CurrentJobs? currentJobs;
-    List<CurrentJobs>? pastJobs;
-    String? token;
-    List<Education>? educations;
-    List<dynamic> ?images;
-    List<Question>? questions;
-    Details? countryDetails;
-    Details? stateDetails;
-    Details? cityDetails;
+  int? id;
+  String? firstName;
+  String? lastName;
+  String? fullName;
+  String? userName;
+  String? email;
+  String? password;
+  dynamic dateOfBirth;
+  dynamic countryId;
+  dynamic stateId;
+  dynamic cityId;
+  String? image;
+  dynamic linkedinUrl;
+  dynamic instagramUrl;
+  dynamic twitterUrl;
+  dynamic socialType;
+  dynamic socialId;
+  String? aboutUs;
+  dynamic address;
+  dynamic latitude;
+  dynamic longitude;
+  dynamic website;
+  dynamic otp;
+  int? role;
+  String? wallet;
+  dynamic emailVerifiedAt;
+  int? isActive;
+  int? isConfirm;
+  int? isVisible;
+  dynamic rememberToken;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  dynamic deletedAt;
+  CurrentJobs? currentJobs;
+  List<CurrentJobs>? pastJobs;
+  String? token;
+  List<Education>? educations;
+  List<dynamic>? images;
+  List<Question>? questions;
+  Details? countryDetails;
+  Details? stateDetails;
+  Details? cityDetails;
 
-    factory UserDetails.fromJson(Map<String, dynamic> json) => UserDetails(
+  factory UserDetails.fromJson(Map<String, dynamic> json) => UserDetails(
         id: json["id"],
         firstName: json["first_name"],
         lastName: json["last_name"],
@@ -152,21 +153,44 @@ class UserDetails {
         isConfirm: json["is_confirm"],
         isVisible: json["is_visible"],
         rememberToken: json["remember_token"],
-        createdAt: json["created_at"] != null ? DateTime.parse(json["created_at"]) : null,
-        updatedAt: json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null,
+        createdAt: json["created_at"] != null
+            ? DateTime.parse(json["created_at"])
+            : null,
+        updatedAt: json["updated_at"] != null
+            ? DateTime.parse(json["updated_at"])
+            : null,
         deletedAt: json["deleted_at"],
-        currentJobs: json["current_jobs"] != null ? CurrentJobs.fromJson(json["current_jobs"]) : null,
-        pastJobs: json["past_jobs"] == null ? null : List<CurrentJobs>.from(json["past_jobs"].map((x) => CurrentJobs.fromJson(x))),
+        currentJobs: json["current_jobs"] != null
+            ? CurrentJobs.fromJson(json["current_jobs"])
+            : null,
+        pastJobs: json["past_jobs"] == null
+            ? null
+            : List<CurrentJobs>.from(
+                json["past_jobs"].map((x) => CurrentJobs.fromJson(x))),
         token: json["token"],
-        educations: json["educations"] != null ? List<Education>.from(json["educations"].map((x) => Education.fromJson(x))) : null,
-        images: json["images"] != null ? List<dynamic>.from(json["images"].map((x) => x)) : null,
-        questions: json["questions"] != null ? List<Question>.from(json["questions"].map((x) => Question.fromJson(x))) : null,
-        countryDetails: json["country_details"] == null ? null : Details.fromJson(json["country_details"]),
-        stateDetails: json["state_details"] == null ? null : Details.fromJson(json["state_details"]),
-        cityDetails: json["city_details"] == null ? null : Details.fromJson(json["city_details"]),
-    );
+        educations: json["educations"] != null
+            ? List<Education>.from(
+                json["educations"].map((x) => Education.fromJson(x)))
+            : null,
+        images: json["images"] != null
+            ? List<dynamic>.from(json["images"].map((x) => x))
+            : null,
+        questions: json["questions"] != null
+            ? List<Question>.from(
+                json["questions"].map((x) => Question.fromJson(x)))
+            : null,
+        countryDetails: json["country_details"] == null
+            ? null
+            : Details.fromJson(json["country_details"]),
+        stateDetails: json["state_details"] == null
+            ? null
+            : Details.fromJson(json["state_details"]),
+        cityDetails: json["city_details"] == null
+            ? null
+            : Details.fromJson(json["city_details"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "first_name": firstName,
         "last_name": lastName,
@@ -201,39 +225,47 @@ class UserDetails {
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
         "current_jobs": currentJobs != null ? currentJobs!.toJson() : null,
-        "past_jobs": pastJobs != null ? List<dynamic>.from(pastJobs!.map((x) => x.toJson())) : null,
+        "past_jobs": pastJobs != null
+            ? List<dynamic>.from(pastJobs!.map((x) => x.toJson()))
+            : null,
         "token": token,
-        "educations": educations != null ? List<dynamic>.from(educations!.map((x) => x.toJson())) : null,
-        "images": images != null ? List<dynamic>.from(images!.map((x) => x)) : null,
-        "questions": questions!= null ? List<dynamic>.from(questions!.map((x) => x.toJson())) : null,
-        "country_details": countryDetails != null ? countryDetails!.toJson() : null,
+        "educations": educations != null
+            ? List<dynamic>.from(educations!.map((x) => x.toJson()))
+            : null,
+        "images":
+            images != null ? List<dynamic>.from(images!.map((x) => x)) : null,
+        "questions": questions != null
+            ? List<dynamic>.from(questions!.map((x) => x.toJson()))
+            : null,
+        "country_details":
+            countryDetails != null ? countryDetails!.toJson() : null,
         "state_details": stateDetails != null ? stateDetails!.toJson() : null,
         "city_details": cityDetails != null ? cityDetails!.toJson() : null,
-    };
+      };
 }
 
 class Details {
-    Details({
-        this.id,
-        this.countryId,
-        this.stateId,
-        this.name,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-    });
+  Details({
+    this.id,
+    this.countryId,
+    this.stateId,
+    this.name,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+  });
 
-    int? id;
-    int? countryId;
-    int? stateId;
-    String? name;
-    int? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    dynamic deletedAt;
+  int? id;
+  int? countryId;
+  int? stateId;
+  String? name;
+  int? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  dynamic deletedAt;
 
-    factory Details.fromJson(Map<String, dynamic> json) => Details(
+  factory Details.fromJson(Map<String, dynamic> json) => Details(
         id: json["id"],
         countryId: json["country_id"],
         stateId: json["state_id"],
@@ -242,9 +274,9 @@ class Details {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "country_id": countryId,
         "state_id": stateId,
@@ -253,38 +285,41 @@ class Details {
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
-    };
+      };
 }
 
 class CurrentJobs {
-    CurrentJobs({
-        this.id,
-        this.userId,
-        this.type,
-        this.title,
-        this.companyName,
-        this.logo,
-        this.website,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-    });
+  CurrentJobs({
+    this.id,
+    this.logoId,
+    this.userId,
+    this.type,
+    this.title,
+    this.companyName,
+    this.logo,
+    this.website,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+  });
 
-    int? id;
-    int? userId;
-    String? type;
-    String? title;
-    String? companyName;
-    dynamic logo;
-    String? website;
-    int? status;
-    String? createdAt;
-    String? updatedAt;
-    dynamic deletedAt;
+  int? id;
+  int? logoId;
+  int? userId;
+  String? type;
+  String? title;
+  String? companyName;
+  dynamic logo;
+  String? website;
+  int? status;
+  String? createdAt;
+  String? updatedAt;
+  dynamic deletedAt;
 
-    factory CurrentJobs.fromJson(Map<String, dynamic> json) => CurrentJobs(
+  factory CurrentJobs.fromJson(Map<String, dynamic> json) => CurrentJobs(
         id: json["id"],
+        logoId: json["logo_id"],
         userId: json["user_id"],
         type: json["type"],
         title: json["title"],
@@ -295,10 +330,11 @@ class CurrentJobs {
         createdAt: json["created_at"] == null ? "" : json["created_at"],
         updatedAt: json["updated_at"] == null ? "" : json["updated_at"],
         deletedAt: json["deleted_at"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
+        "logo_id": logoId,
         "user_id": userId,
         "type": type,
         "title": title,
@@ -309,33 +345,33 @@ class CurrentJobs {
         "created_at": createdAt,
         "updated_at": updatedAt,
         "deleted_at": deletedAt,
-    };
+      };
 }
 
 class Education {
-    Education({
-        this.id,
-        this.userId,
-        this.schoolUniversity,
-        this.startYear,
-        this.endYear,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-    });
+  Education({
+    this.id,
+    this.userId,
+    this.schoolUniversity,
+    this.startYear,
+    this.endYear,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+  });
 
-    int? id;
-    int? userId;
-    String? schoolUniversity;
-    String? startYear;
-    String? endYear;
-    int? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    dynamic deletedAt;
+  int? id;
+  int? userId;
+  String? schoolUniversity;
+  String? startYear;
+  String? endYear;
+  int? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  dynamic deletedAt;
 
-    factory Education.fromJson(Map<String, dynamic> json) => Education(
+  factory Education.fromJson(Map<String, dynamic> json) => Education(
         id: json["id"],
         userId: json["user_id"],
         schoolUniversity: json["school_university"],
@@ -345,9 +381,9 @@ class Education {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
         "school_university": schoolUniversity,
@@ -357,33 +393,33 @@ class Education {
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
-    };
+      };
 }
 
 class Question {
-    Question({
-        this.id,
-        this.userId,
-        this.question,
-        this.answer,
-        this.type,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-    });
+  Question({
+    this.id,
+    this.userId,
+    this.question,
+    this.answer,
+    this.type,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+  });
 
-    int? id;
-    int? userId;
-    String? question;
-    String? answer;
-    String? type;
-    int? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    dynamic deletedAt;
+  int? id;
+  int? userId;
+  String? question;
+  String? answer;
+  String? type;
+  int? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  dynamic deletedAt;
 
-    factory Question.fromJson(Map<String, dynamic> json) => Question(
+  factory Question.fromJson(Map<String, dynamic> json) => Question(
         id: json["id"],
         userId: json["user_id"],
         question: json["question"],
@@ -393,9 +429,9 @@ class Question {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
         "question": question,
@@ -405,5 +441,5 @@ class Question {
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
         "deleted_at": deletedAt,
-    };
+      };
 }

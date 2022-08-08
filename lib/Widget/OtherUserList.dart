@@ -29,21 +29,20 @@ class OtherUserList extends StatefulWidget {
 
 class _OtherUserListState extends State<OtherUserList> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
-  
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         setState(() {});
-        checkNet(context).then((value) => controller.admireProfileAPI(
-          context, widget.otherUser.id, null, 'transaction'
-        )).then((value) => 
-          Get.to(
-            Profile(), 
-            duration: Duration(milliseconds: 500),
-            transition: Transition.downToUp 
-          ),
-        );
+        checkNet(context)
+            .then((value) => controller.admireProfileAPI(
+                context, widget.otherUser.id, null, 'transaction'))
+            .then(
+              (value) => Get.to(Profile(),
+                  duration: Duration(milliseconds: 500),
+                  transition: Transition.downToUp),
+            );
       },
       child: Stack(
         children: [
@@ -78,9 +77,9 @@ class _OtherUserListState extends State<OtherUserList> {
             color: Colors.black.withOpacity(0.3),
             height: MediaQuery.of(context).size.height * .83,
           ),
-          
+
           Padding(
-            padding:  EdgeInsets.only(top: 60.h),
+            padding: EdgeInsets.only(top: 60.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -90,8 +89,8 @@ class _OtherUserListState extends State<OtherUserList> {
                   child: FittedBox(
                     child: setHelceticaBold(
                         widget.otherUser.userName != null
-                            ? "@" + widget.otherUser.userName!.replaceAll('@', '')
-                            : "@" + widget.otherUser.firstName!,
+                            ? widget.otherUser.userName!.replaceAll('@', '')
+                            : widget.otherUser.firstName!,
                         20.sp,
                         white_ffffff,
                         FontWeight.w600,
@@ -103,7 +102,7 @@ class _OtherUserListState extends State<OtherUserList> {
             ),
           ),
           Padding(
-            padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+            padding: EdgeInsets.only(left: 24.w, right: 24.w),
             child: Column(
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height * .52),
@@ -115,14 +114,17 @@ class _OtherUserListState extends State<OtherUserList> {
                       height: MediaQuery.of(context).size.width * 0.13,
                       child: FittedBox(
                         child: setInterExtraBold(
-                            widget.otherUser.firstName != null && widget.otherUser.lastName != null
-                                ? widget.otherUser.firstName!
-                                    .toUpperCase() + " "
-                                  +  widget.otherUser.lastName!
-                                    .toUpperCase()  : widget.otherUser.firstName != null
-                            ? widget.otherUser.firstName!
-                                .toUpperCase() :  widget.otherUser.lastName != null ? widget.otherUser.lastName!
-                                .toUpperCase() : "",
+                            widget.otherUser.firstName != null &&
+                                    widget.otherUser.lastName != null
+                                ? widget.otherUser.firstName!.toUpperCase() +
+                                    " " +
+                                    widget.otherUser.lastName!.toUpperCase()
+                                : widget.otherUser.firstName != null
+                                    ? widget.otherUser.firstName!.toUpperCase()
+                                    : widget.otherUser.lastName != null
+                                        ? widget.otherUser.lastName!
+                                            .toUpperCase()
+                                        : "",
                             40.sp,
                             white_ffffff,
                             FontWeight.w600,
@@ -132,7 +134,7 @@ class _OtherUserListState extends State<OtherUserList> {
                     ),
                   ],
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 24.h,
                 ),
                 Row(
@@ -142,16 +144,27 @@ class _OtherUserListState extends State<OtherUserList> {
                     Expanded(
                       child: Text(
                         widget.otherUser.currentJobs != null
-                            ? widget.otherUser.currentJobs!.title != null && widget.otherUser.currentJobs!.companyName != null ? "${widget.otherUser.currentJobs!.title!.toUpperCase()} - ${widget.otherUser.currentJobs!.companyName!.toUpperCase()}"
+                            ? widget.otherUser.currentJobs!.title != null &&
+                                    widget.otherUser.currentJobs!.companyName !=
+                                        null
+                                ? "${widget.otherUser.currentJobs!.title!.toUpperCase()} - ${widget.otherUser.currentJobs!.companyName!.toUpperCase()}"
                                 // widget.otherUser.currentJobs!
                                 //     .companyName!
                                 //     .toUpperCase()
-                            : widget.otherUser.currentJobs!.title != null ? widget.otherUser.currentJobs!.title!.toUpperCase()
-                            : widget.otherUser.currentJobs!.companyName != null ? widget.otherUser.currentJobs!.companyName!.toUpperCase() : ""
-                        : "",
+                                : widget.otherUser.currentJobs!.title != null
+                                    ? widget.otherUser.currentJobs!.title!
+                                        .toUpperCase()
+                                    : widget.otherUser.currentJobs!
+                                                .companyName !=
+                                            null
+                                        ? widget
+                                            .otherUser.currentJobs!.companyName!
+                                            .toUpperCase()
+                                        : ""
+                            : "",
                         softWrap: true,
                         textAlign: TextAlign.center,
-                        style:  TextStyle(
+                        style: TextStyle(
                           fontSize: 16.sp,
                           fontFamily: interMedium,
                           fontWeight: FontWeight.w600,
@@ -215,7 +228,7 @@ class _OtherUserListState extends State<OtherUserList> {
           //   ),
           // ),
           Padding(
-            padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+            padding: EdgeInsets.only(left: 24.w, right: 24.w),
             child: Column(
               children: [
                 SizedBox(
@@ -234,9 +247,10 @@ class _OtherUserListState extends State<OtherUserList> {
                         : Container(),
                     setInterRegular(
                       widget.otherUser.cityDetails != null
-                          ? widget.otherUser.cityDetails!.name! +
-                              ', ' +
-                              widget.otherUser.stateDetails!.name! +
+                          ?
+                          //  widget.otherUser.cityDetails!.name! +
+                          //     ', ' +
+                          widget.otherUser.stateDetails!.name! +
                               ', ' +
                               widget.otherUser.countryDetails!.name!
                           : "",

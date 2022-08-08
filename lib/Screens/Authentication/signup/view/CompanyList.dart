@@ -175,12 +175,18 @@ class _CompanyListState extends State<CompanyList> {
                                 print("widget.isFrom :: " +
                                     widget.isFrom.toString());
                                 if (widget.isFrom == 'past_job') {
+                                  print(
+                                      ("LOGO  :: " + widget.isFrom.toString()));
                                   controller.pastJobName.value =
                                       controller.companyList[index]['name'];
                                   controller.pastJobImage.value =
                                       controller.companyList[index]['logo'];
+                                  controller.pastJobId.value =
+                                      controller.companyList[index]['id'];
                                 } else if (widget.isFrom ==
                                     'experience_pastjob') {
+                                  print(
+                                      ("LOGO  :: " + widget.isFrom.toString()));
                                   controller.pastJobController.value =
                                       controller.companyList[index]['name'];
                                   controller.pastJobImage.value =

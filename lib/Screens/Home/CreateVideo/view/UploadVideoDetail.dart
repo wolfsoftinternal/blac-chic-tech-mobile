@@ -38,20 +38,18 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
       await controller.userListAPI(context, false);
       await controller.topicListAPI(context);
       await controller.languageListAPI(context);
-      
-    }); 
-
-    Future.delayed(Duration(seconds: 500), (){
-      for (var item in controller.userList) {
-      if (item.isSpeakerSelected == true) {
-        item.isSpeakerSelected = false;
-      }
-      setState(() {
-        
-      });
-    }
+    }).then((value) {
+      setState(() {});
     });
-    
+
+    Future.delayed(Duration(seconds: 500), () {
+      for (var item in controller.userList) {
+        if (item.isSpeakerSelected == true) {
+          item.isSpeakerSelected = false;
+        }
+        setState(() {});
+      }
+    });
   }
 
   /*Speaker bottom sheet*/
@@ -170,17 +168,19 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                         iconDisabledColor: Colors.grey,
                                         buttonHeight: 60,
                                         buttonWidth: double.infinity,
-                                        buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                        buttonPadding: const EdgeInsets.only(
+                                            left: 14, right: 14),
                                         buttonDecoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(4),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                           color: white,
                                         ),
                                         itemHeight: 42,
-                                        itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                        itemPadding: const EdgeInsets.symmetric(
+                                            horizontal: 15.0),
                                         onChanged: (String? newValue) {
                                           setState(() {
-                                            controller.topicName =
-                                                newValue!;
+                                            controller.topicName = newValue!;
                                           });
                                         },
                                         items: controller.dropDownTopicItems),
@@ -229,8 +229,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                         ),
                                         onChanged: (String? newValue) {
                                           setState(() {
-                                            controller.languageName =
-                                                newValue!;
+                                            controller.languageName = newValue!;
                                           });
                                         },
                                         isExpanded: true,
@@ -239,14 +238,18 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                         iconDisabledColor: Colors.grey,
                                         buttonHeight: 60,
                                         buttonWidth: double.infinity,
-                                        buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                                        buttonPadding: const EdgeInsets.only(
+                                            left: 14, right: 14),
                                         buttonDecoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(4),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                           color: white,
                                         ),
                                         itemHeight: 42,
-                                        itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                        items: controller.dropDownLanguageItems),
+                                        itemPadding: const EdgeInsets.symmetric(
+                                            horizontal: 15.0),
+                                        items:
+                                            controller.dropDownLanguageItems),
                                   ),
                                 ),
 
@@ -487,29 +490,37 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                 GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                          if (controller.isSearched.value == true) {
-                                            controller.isSearched.value = false;
-                                            checkNet(context).then((value) async {
-                                              controller.PageNumber.value = 0;
-                                              controller.userList.clear();
-                                              await controller.userListAPI(context, false);
+                                      if (controller.isSearched.value == true) {
+                                        controller.isSearched.value = false;
+                                        checkNet(context).then((value) async {
+                                          controller.PageNumber.value = 0;
+                                          controller.userList.clear();
+                                          await controller.userListAPI(
+                                              context, false);
 
-                                              Future.delayed(Duration(milliseconds: 500), () {
-                                                for (var item in controller.userList) {
-                                                  for (var selectedItem in controller.selectedList) {
-                                                    if (selectedItem.id == item.id) {
-                                                      item.isSpeakerSelected = selectedItem.isSpeakerSelected;
-                                                    }
-                                                  }
+                                          Future.delayed(
+                                              Duration(milliseconds: 500), () {
+                                            for (var item
+                                                in controller.userList) {
+                                              for (var selectedItem
+                                                  in controller.selectedList) {
+                                                if (selectedItem.id ==
+                                                    item.id) {
+                                                  item.isSpeakerSelected =
+                                                      selectedItem
+                                                          .isSpeakerSelected;
                                                 }
-                                                setState((){});
-                                                displayRecurringOrderBottomSheet(context);
-                                              });
-                                            });
-                                          }else{
-                                            displayRecurringOrderBottomSheet(context);
-                                          }
-                                      
+                                              }
+                                            }
+                                            setState(() {});
+                                            displayRecurringOrderBottomSheet(
+                                                context);
+                                          });
+                                        });
+                                      } else {
+                                        displayRecurringOrderBottomSheet(
+                                            context);
+                                      }
                                     });
                                   },
                                   child: Container(
@@ -528,8 +539,15 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                                 fontSize: 12.sp),
                                             textAlign: TextAlign.left),
                                         Padding(
-                                          padding: const EdgeInsets.only(right: 18.5),
-                                          child: Text('+', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: orange_ff881a),),
+                                          padding: const EdgeInsets.only(
+                                              right: 18.5),
+                                          child: Text(
+                                            '+',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                                color: orange_ff881a),
+                                          ),
                                         )
                                       ],
                                     ),

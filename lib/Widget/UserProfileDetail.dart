@@ -28,7 +28,6 @@ class UserProfileDetails extends StatefulWidget {
 class _UserProfileDetailsState extends State<UserProfileDetails> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -39,8 +38,6 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
   init() async {
     setState(() {});
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +75,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
           height: MediaQuery.of(context).size.height * .83,
         ),
         Padding(
-          padding:  EdgeInsets.only(left: 24.w,top: 50.h),
+          padding: EdgeInsets.only(left: 24.w, top: 50.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -97,49 +94,51 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                   onTap: () {
                     createBottomSheet(context, widget.userDetails.id);
                   },
-                  child: 
-                  // userId == widget.admireList.admireDetails!.id ?
+                  child:
+                      // userId == widget.admireList.admireDetails!.id ?
                       Container(
-                        height: 48.h,
+                          height: 48.h,
                           width: 48.w,
                           child: Padding(
-                            padding:  EdgeInsets.all(10.r),
+                            padding: EdgeInsets.all(10.r),
                             child: SvgPicture.asset(
-                                add_icon,width: 24.w,height: 24.h,),
+                              add_icon,
+                              width: 24.w,
+                              height: 24.h,
+                            ),
                           ))
-                      // : Container(
-                      //     height: 48,
-                      //     width: 48,
-                      //   )
-              ),
-
+                  // : Container(
+                  //     height: 48,
+                  //     width: 48,
+                  //   )
+                  ),
               GestureDetector(
-                onTap: () {
-                  // Get.to(ProfileSetting());
-                },
-                child: 
-                // userId == widget.admireList.admireDetails!.id ?
-                    SvgPicture.asset(
-                        settings_icon,
-                        height: 48.h,
-                        width: 48.w,
-                      )
-                    // : GestureDetector(
-                    //     onTap: () {
-                    //       displayBottomSheet(context);
-                    //     },
-                    //     child: Container(
-                    //       height: 48,
-                    //       width: 48,
-                    //       child: Icon(Icons.more_horiz, color: Colors.white),
-                    //     ),
-                    //   ),
-              ),
+                  onTap: () {
+                    // Get.to(ProfileSetting());
+                  },
+                  child:
+                      // userId == widget.admireList.admireDetails!.id ?
+                      SvgPicture.asset(
+                    settings_icon,
+                    height: 48.h,
+                    width: 48.w,
+                  )
+                  // : GestureDetector(
+                  //     onTap: () {
+                  //       displayBottomSheet(context);
+                  //     },
+                  //     child: Container(
+                  //       height: 48,
+                  //       width: 48,
+                  //       child: Icon(Icons.more_horiz, color: Colors.white),
+                  //     ),
+                  //   ),
+                  ),
             ],
           ),
         ),
         Padding(
-          padding:  EdgeInsets.only(top: 60.h),
+          padding: EdgeInsets.only(top: 60.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -152,8 +151,8 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                       //     ? "@" + widget.admireList.admireDetails!.userName!
                       //     : "@" + widget.admireList.admireDetails!.firstName!,
                       widget.userDetails.userName != null
-                          ? "@" + widget.userDetails.userName!
-                          : "@" + widget.userDetails.firstName!,
+                          ? widget.userDetails.userName!
+                          : widget.userDetails.firstName!,
                       20.sp,
                       white_ffffff,
                       FontWeight.w600,
@@ -165,7 +164,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
           ),
         ),
         Padding(
-          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+          padding: EdgeInsets.only(left: 24.w, right: 24.w),
           child: Column(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * .52),
@@ -181,9 +180,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                           //     ? widget.admireList.admireDetails!.fullName!
                           //         .toUpperCase()
                           //     : "",
-                          widget.userDetails.fullName??""
-                              .toUpperCase()
-                         ,
+                          widget.userDetails.fullName ?? "".toUpperCase(),
                           40.sp,
                           white_ffffff,
                           FontWeight.w600,
@@ -193,7 +190,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                   ),
                 ],
               ),
-               SizedBox(
+              SizedBox(
                 height: 24.h,
               ),
               Row(
@@ -214,13 +211,12 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                           ? widget.userDetails.currentJobs!.title!
                                   .toUpperCase() +
                               ' - ' +
-                          widget.userDetails.currentJobs!
-                                  .companyName!
+                              widget.userDetails.currentJobs!.companyName!
                                   .toUpperCase()
                           : "",
                       softWrap: true,
                       textAlign: TextAlign.center,
-                      style:  TextStyle(
+                      style: TextStyle(
                         fontSize: 16.sp,
                         fontFamily: helveticaNeueNeue_medium,
                         fontWeight: FontWeight.w600,
@@ -236,14 +232,14 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
           ),
         ),
         Padding(
-          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+          padding: EdgeInsets.only(left: 24.w, right: 24.w),
           child: Column(
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * .69,
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   // var preferences = MySharedPref();
                   // SignupModel? modelM =
                   //     await preferences.getSignupModel(SharePreData.keySignupModel);
@@ -255,9 +251,9 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
 
                   // }
                   //  else {
-                    // controller.admireProfileAPI(
-                    //   context, widget.admireList.admireDetails!.id
-                    // );
+                  // controller.admireProfileAPI(
+                  //   context, widget.admireList.admireDetails!.id
+                  // );
                   // }
                 },
                 child: Row(
@@ -265,18 +261,14 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(4.r),
+                        borderRadius: BorderRadius.circular(4.r),
                         color: Color(0x33121212),
                       ),
                       child: Padding(
-                        padding:  EdgeInsets.only(top: 8.h, bottom: 8.h, left: 16.w, right: 16.w),
-                        child: setHelveticaMedium(
-                            'View Profile',
-                            16.sp,
-                            black_121212,
-                            FontWeight.w500,
-                            FontStyle.normal),
+                        padding: EdgeInsets.only(
+                            top: 8.h, bottom: 8.h, left: 16.w, right: 16.w),
+                        child: setHelveticaMedium('View Profile', 16.sp,
+                            black_121212, FontWeight.w500, FontStyle.normal),
                       ),
                     ),
                   ],
@@ -286,7 +278,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
           ),
         ),
         Padding(
-          padding:  EdgeInsets.only(left: 24.w, right: 24.w),
+          padding: EdgeInsets.only(left: 24.w, right: 24.w),
           child: Column(
             children: [
               SizedBox(
@@ -314,9 +306,10 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                     //             .admireList.admireDetails!.countryDetails!.name!
                     //     : "",
                     widget.userDetails.cityDetails != null
-                        ? widget.userDetails.cityDetails!.name! +
-                            ', ' +
-                            widget.userDetails.stateDetails!.name! +
+                        ?
+                        // widget.userDetails.cityDetails!.name! +
+                        //     ', ' +
+                        widget.userDetails.stateDetails!.name! +
                             ', ' +
                             widget.userDetails.countryDetails!.name!
                         : "",
