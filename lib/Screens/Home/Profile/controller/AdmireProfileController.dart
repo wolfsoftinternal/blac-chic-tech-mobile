@@ -82,20 +82,26 @@ class AdmireProfileController extends GetxController {
   Rx<RegisterUserModel> registerList = RegisterUserModel().obs;
   RxBool isLimitReached = false.obs;
   RxList<UserList> userList = <UserList>[].obs;
-  RxList<YoutubePlayerController> videoController = <YoutubePlayerController>[].obs;
+  RxList<YoutubePlayerController> videoController =
+      <YoutubePlayerController>[].obs;
   RxList thumbnail = [].obs;
   RxList<UserList> inviteUser = <UserList>[].obs;
   VideoController controller = Get.put(VideoController());
   RxList selectedPeople = [].obs;
   RxBool isSearched = false.obs;
   RxList<ReportList> report = <ReportList>[].obs;
-  RxList videoId = [].obs; 
+  RxList videoId = [].obs;
   RxBool q0Expand = false.obs;
   RxBool q1Expand = false.obs;
   RxBool q2Expand = false.obs;
   RxBool q3Expand = false.obs;
   RxBool q4Expand = false.obs;
-
+  RxBool q5Expand = false.obs;
+  RxBool q6Expand = false.obs;
+  RxBool q7Expand = false.obs;
+  RxBool q8Expand = false.obs;
+  RxBool q9Expand = false.obs;
+  RxBool q10Expand = false.obs;
 
   initUserScrolling(BuildContext context, id) {
     userScrollController.addListener(() async {
@@ -113,7 +119,6 @@ class AdmireProfileController extends GetxController {
     userScrollController.jumpTo(userScrollController.position.maxScrollExtent);
   }
 
-
   initScrolling(BuildContext context, userId, [postId]) {
     postScrollController.addListener(() async {
       if (postScrollController.position.maxScrollExtent ==
@@ -122,13 +127,13 @@ class AdmireProfileController extends GetxController {
         isPostPaginationLoading.value = true;
         postPageNumber = postPageNumber + 1;
 
-        if(postId == null){
+        if (postId == null) {
           dynamic body = {
             'user_id': userId.toString(),
             'page': postPageNumber.toString()
           };
           await postListAPI(context, body);
-        }else{
+        } else {
           dynamic body = {
             'user_id': userId.toString(),
             'post_id': postId.toString(),
@@ -153,13 +158,13 @@ class AdmireProfileController extends GetxController {
         isVideoPaginationLoading.value = true;
         videoPageNumber = videoPageNumber + 1;
 
-        if(videoId == null){
+        if (videoId == null) {
           dynamic body = {
             'user_id': userId.toString(),
             'page': videoPageNumber.toString()
           };
           await videoListAPI(context, body);
-        }else{
+        } else {
           dynamic body = {
             'user_id': userId.toString(),
             'video_id': videoId.toString(),
@@ -173,7 +178,8 @@ class AdmireProfileController extends GetxController {
   }
 
   void _videoScrollDown() {
-    videoScrollController.jumpTo(videoScrollController.position.maxScrollExtent);
+    videoScrollController
+        .jumpTo(videoScrollController.position.maxScrollExtent);
   }
 
   initEventScrolling(BuildContext context, userId, [eventId]) {
@@ -184,13 +190,13 @@ class AdmireProfileController extends GetxController {
         isEventPaginationLoading.value = true;
         eventPageNumber = eventPageNumber + 1;
 
-        if(eventId == null){
+        if (eventId == null) {
           dynamic body = {
             'user_id': userId.toString(),
             'page': eventPageNumber.toString()
           };
           await eventListAPI(context, body);
-        }else{
+        } else {
           dynamic body = {
             'user_id': userId.toString(),
             'event_id': eventId.toString(),
@@ -198,14 +204,15 @@ class AdmireProfileController extends GetxController {
           };
           await eventListAPI(context, body, 'detail');
         }
-       
+
         isEventPaginationLoading.value = false;
       }
     });
   }
 
   void _eventScrollDown() {
-    eventScrollController.jumpTo(eventScrollController.position.maxScrollExtent);
+    eventScrollController
+        .jumpTo(eventScrollController.position.maxScrollExtent);
   }
 
   ownAdmireListAPI(BuildContext context) async {
@@ -213,7 +220,6 @@ class AdmireProfileController extends GetxController {
     var token = await preferences.getStringValue(SharePreData.keytoken);
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
-    
 
     String url = urlBase + urladmireList;
     final apiReq = Request();
@@ -243,7 +249,7 @@ class AdmireProfileController extends GetxController {
   }
 
   admireListAPI(BuildContext context, userId) async {
-    if(admireList.toString() == '[]' || admireList.isEmpty){
+    if (admireList.toString() == '[]' || admireList.isEmpty) {
       ownAdmireListAPI(context);
     }
     var preferences = MySharedPref();
@@ -251,10 +257,9 @@ class AdmireProfileController extends GetxController {
     SignupModel? myModel =
         await preferences.getSignupModel(SharePreData.keySignupModel);
     dynamic body = null;
-    if(userId != null){
+    if (userId != null) {
       body = {'user_id': userId.toString()};
     }
-    
 
     String url = urlBase + urladmireList;
     final apiReq = Request();
@@ -283,9 +288,9 @@ class AdmireProfileController extends GetxController {
                 }
               }
 
-              if(admireValue == 'Admired'){
+              if (admireValue == 'Admired') {
                 admire.value = 'Admired';
-              }else{
+              } else {
                 admire.value = 'Admire';
               }
             }
@@ -328,10 +333,10 @@ class AdmireProfileController extends GetxController {
 
             admireDeleteAPI(context, id);
           } else if (model.statusCode == 200) {
-            if(isFrom == 'profile'){
+            if (isFrom == 'profile') {
               snackBar(context, 'Admire Deleted');
-            }else{
-              admireListAPI(context, null); 
+            } else {
+              admireListAPI(context, null);
             }
           }
         });
@@ -368,17 +373,17 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             SignupModel admireListModel = SignupModel.fromJson(userModel);
 
-            if(isFrom == false){
+            if (isFrom == false) {
               walletDetails.value = admireListModel.data!;
-            }else{
+            } else {
               details.value = admireListModel.data!;
             }
-            
-            if(goToProfileScreen){
-              if(isFrom != null){
+
+            if (goToProfileScreen) {
+              if (isFrom != null) {
                 Get.back();
                 Get.to(Profile());
-              }else{
+              } else {
                 Get.to(Profile());
               }
             }
@@ -420,15 +425,13 @@ class AdmireProfileController extends GetxController {
 
             details.value = admireListModel;
             print(details);
-            if(status == 'transaction'){
-              
-            }else if(isFrom != null){
+            if (status == 'transaction') {
+            } else if (isFrom != null) {
               Get.back();
               Get.to(Profile());
-            }else{          
+            } else {
               Get.to(Profile());
             }
-            
           }
         });
       } else {
@@ -484,9 +487,9 @@ class AdmireProfileController extends GetxController {
     final apiReq = Request();
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
-      if(postPageNumber == 1){
+      if (postPageNumber == 1) {
         // if(isFrom == null){
-          postList.clear();
+        postList.clear();
         // }else{
         //   postDetailList.clear();
         // }
@@ -508,7 +511,7 @@ class AdmireProfileController extends GetxController {
             PostListModel detail = PostListModel.fromJson(userModel);
 
             // if (isFrom == null) {
-              postList.addAll(detail.data!);
+            postList.addAll(detail.data!);
             // } else {
             //   postDetailList.addAll(detail.data!);
             // }
@@ -528,8 +531,8 @@ class AdmireProfileController extends GetxController {
     final apiReq = Request();
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
-      if(videoPageNumber == 1){
-          videoList.clear();
+      if (videoPageNumber == 1) {
+        videoList.clear();
       }
       http.StreamedResponse res = value;
 
@@ -549,20 +552,20 @@ class AdmireProfileController extends GetxController {
             videoList.addAll(detail.data!);
 
             YoutubePlayerController controller;
-            for(var item in videoList){
-              if(item.embededCode.toString().contains("iframe")){
+            for (var item in videoList) {
+              if (item.embededCode.toString().contains("iframe")) {
                 String src = item.embededCode.toString().split('=')[3];
                 src = src.replaceAll(' title', '');
                 src = src.replaceAll('"', '');
                 videoId.add(YoutubePlayer.convertUrlToId(src));
-              }else{
+              } else {
                 String src = item.embededCode.toString();
                 src = src.replaceAll('"', '');
                 videoId.add(YoutubePlayer.convertUrlToId(src));
-              }          
+              }
             }
 
-            for(int i = 0; i < videoList.length; i++){
+            for (int i = 0; i < videoList.length; i++) {
               // thumbnail.add("http://img.youtube.com/vi/" + videoId[i] + "/0" + ".jpg");
               controller = YoutubePlayerController(
                 initialVideoId: videoId[i],
@@ -588,7 +591,7 @@ class AdmireProfileController extends GetxController {
   }
 
   eventListAPI(BuildContext context, body, [isFrom]) async {
-    if(eventPageNumber == 1){
+    if (eventPageNumber == 1) {
       // if(isFrom == null){
       eventList.clear();
       // }else{
@@ -751,10 +754,7 @@ class AdmireProfileController extends GetxController {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
-    dynamic body = {
-      'admire_id': id.toString(),
-      'number': num2.toString()
-    };
+    dynamic body = {'admire_id': id.toString(), 'number': num2.toString()};
 
     String url = urlBase + urlRearrangeAdmire;
     final apiReq = Request();
@@ -809,8 +809,7 @@ class AdmireProfileController extends GetxController {
 
             replaceUserList(context, id);
           } else if (model.statusCode == 200) {
-            UserListModel detail =
-            UserListModel.fromJson(userModel);
+            UserListModel detail = UserListModel.fromJson(userModel);
             userList.value = detail.data!;
           }
         });
@@ -848,8 +847,8 @@ class AdmireProfileController extends GetxController {
           } else if (model.statusCode == 200) {
             admire.value = 'Admired';
             snackBar(context, model.message!);
-          }else if(model.statusCode == 101){
-            if(model.message == 'Admire Limit has been reached'){
+          } else if (model.statusCode == 101) {
+            if (model.message == 'Admire Limit has been reached') {
               isLimitReached.value = true;
               Get.to(SeeAllAdmires(type: 'user', limit: 'completed'));
             }
@@ -943,9 +942,8 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-
-  OrderCreateAPI(BuildContext context, body,selectedPositionOfAdmission) async {
-
+  OrderCreateAPI(
+      BuildContext context, body, selectedPositionOfAdmission) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -977,7 +975,7 @@ class AdmireProfileController extends GetxController {
                 detail.data!.total_price.toString());
 
             var debitedFromWallet = 0;
-            if(isWallet.value) {
+            if (isWallet.value) {
               if (finalTotal.value > 0) {
                 debitedFromWallet = int.parse(details.value.wallet ?? "0");
               } else {
@@ -985,19 +983,17 @@ class AdmireProfileController extends GetxController {
               }
             }
 
-            if(finalTotal.value > 0){
-              chargeCardAndMakePayment(
-                  context, selectedPositionOfAdmission, detail, debitedFromWallet);
-            }else{
-
+            if (finalTotal.value > 0) {
+              chargeCardAndMakePayment(context, selectedPositionOfAdmission,
+                  detail, debitedFromWallet);
+            } else {
               // Here if user check the wallet
               // If ticket value is less than wallet balance, that time final value will be 0.
               // So direct order api will be call
 
-
               dynamic bodyForOrderUpdate;
 
-              if(isWallet.value){
+              if (isWallet.value) {
                 bodyForOrderUpdate = {
                   'transaction_id': detail.data!.id!.toString(),
                   'payment_transaction_id': "wallet",
@@ -1006,8 +1002,7 @@ class AdmireProfileController extends GetxController {
                   'wallet_amount': debitedFromWallet.toString(),
                   'trans_amount': finalTotal.value.toString(),
                 };
-
-              }else{
+              } else {
                 bodyForOrderUpdate = {
                   'transaction_id': detail.data!.id!.toString(),
                   'payment_transaction_id': "wallet",
@@ -1020,8 +1015,6 @@ class AdmireProfileController extends GetxController {
               OrderUpdateAPI(
                   context, bodyForOrderUpdate, selectedPositionOfAdmission);
             }
-
-
           }
         });
       } else {
@@ -1030,8 +1023,8 @@ class AdmireProfileController extends GetxController {
     });
   }
 
-
-  OrderUpdateAPI(BuildContext context, body,selectedPositionOfAdmission) async {
+  OrderUpdateAPI(
+      BuildContext context, body, selectedPositionOfAdmission) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -1060,28 +1053,26 @@ class AdmireProfileController extends GetxController {
 
             var debitedFromWallet = 0;
 
-            if(isWallet.value){
-              if(finalTotal.value > 0){
-                debitedFromWallet = int.parse(details.value.wallet??"0");
-              }else{
+            if (isWallet.value) {
+              if (finalTotal.value > 0) {
+                debitedFromWallet = int.parse(details.value.wallet ?? "0");
+              } else {
                 debitedFromWallet = total.value - finalTotal.value;
               }
             }
 
             Navigator.pop(context);
 
-
-
             // Get.off(() => EventTicket(
             // ));
 
             Get.off(() => EventTicketForSuccess(
-              eventDetails: eventDetails.value,
-              selectedAdmissionPosition: selectedPositionOfAdmission,
-              orderDetails: detail,
-              debitedFromWallet: debitedFromWallet,
-              debitedFromPayStack: finalTotal.value,
-            ));
+                  eventDetails: eventDetails.value,
+                  selectedAdmissionPosition: selectedPositionOfAdmission,
+                  orderDetails: detail,
+                  debitedFromWallet: debitedFromWallet,
+                  debitedFromPayStack: finalTotal.value,
+                ));
 
             //  chargeCardAndMakePayment(context,selectedPositionOfAdmission, orderListModel);
           }
@@ -1099,9 +1090,9 @@ class AdmireProfileController extends GetxController {
     String url = urlBase + urlRegisteredUser;
     final apiReq = Request();
     dynamic body = {
-        'event_id': id.toString(),
-        'search': registeredUserSearch.value.text,
-      };
+      'event_id': id.toString(),
+      'search': registeredUserSearch.value.text,
+    };
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       http.StreamedResponse res = value;
@@ -1266,7 +1257,8 @@ class AdmireProfileController extends GetxController {
             controller.userList.clear();
             UserListModel detail = UserListModel.fromJson(userModel);
             controller.userList.addAll(detail.data!);
-            controller.userList.removeWhere((element) => element.is_invited == 1);
+            controller.userList
+                .removeWhere((element) => element.is_invited == 1);
           }
         });
       } else {

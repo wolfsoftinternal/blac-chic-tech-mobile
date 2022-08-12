@@ -31,6 +31,12 @@ class SettingsController extends GetxController {
   RxBool ques3 = true.obs;
   RxBool ques4 = true.obs;
   RxBool ques5 = true.obs;
+  RxBool ques6 = true.obs;
+  RxBool ques7 = true.obs;
+  RxBool ques8 = true.obs;
+  RxBool ques9 = true.obs;
+  RxBool ques10 = true.obs;
+  RxBool ques11 = true.obs;
   RxBool additional = true.obs;
 
   userLogout(BuildContext context) async {

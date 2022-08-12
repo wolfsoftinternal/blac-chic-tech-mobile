@@ -37,8 +37,8 @@ Text setHelveticaRegular(String text, double size, Color color,
   );
 }
 
-Text setInterRegular(String text, double size, Color color,
-    FontWeight weight, FontStyle fontStyle) {
+Text setInterRegular(String text, double size, Color color, FontWeight weight,
+    FontStyle fontStyle) {
   return Text(
     text,
     softWrap: true,
@@ -52,8 +52,8 @@ Text setInterRegular(String text, double size, Color color,
   );
 }
 
-Text setBoldSfProDisplayTextAlign(String text, double size, Color color, FontWeight weight,
-    FontStyle fontStyle,TextAlign textAlign) {
+Text setBoldSfProDisplayTextAlign(String text, double size, Color color,
+    FontWeight weight, FontStyle fontStyle, TextAlign textAlign) {
   return Text(
     text,
     softWrap: true,
@@ -73,8 +73,10 @@ Text setHelceticaBold(String text, double size, Color color, FontWeight weight,
   return Text(
     text,
     softWrap: true,
+    maxLines: 2,
     overflow: TextOverflow.ellipsis,
     style: TextStyle(
+        overflow: TextOverflow.ellipsis,
         fontSize: size,
         fontFamily: helvetica_neu_bold,
         fontWeight: weight,
@@ -100,7 +102,6 @@ Text setInterExtraBold(String text, double size, Color color, FontWeight weight,
         fontStyle: fontStyle),
   );
 }
-
 
 Text setHelveticaLight(String text, double size, Color color, FontWeight weight,
     FontStyle fontStyle) {

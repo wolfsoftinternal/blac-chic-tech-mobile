@@ -24,6 +24,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:readmore/readmore.dart';
+import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
 class AboutMe extends StatefulWidget {
   const AboutMe({Key? key}) : super(key: key);
@@ -111,33 +112,50 @@ class _AboutMeState extends State<AboutMe> {
         myModel!.data!.currentJobs!.companyName ?? "";
     stepsController.currentCompanyWebsiteController.value.text =
         myModel!.data!.currentJobs!.website ?? "";
-    stepsController.aboutController.value.text = myModel!.data!.aboutUs ?? "";
+    stepsController.q1Controller.value.text = myModel!.data!.aboutUs ?? "";
     stepsController.q1Controller.value.text =
-        myModel!.data!.questions!.length > 0
+        myModel!.data!.questions!.length > 1
             ? myModel!.data!.questions![0].answer ?? ""
             : "";
     stepsController.q2Controller.value.text =
-        myModel!.data!.questions!.length > 1
+        myModel!.data!.questions!.length > 2
             ? myModel!.data!.questions![1].answer ?? ""
+            : "";
+    stepsController.q3Controller.value.text =
+        myModel!.data!.questions!.length > 3
+            ? myModel!.data!.questions![2].answer ?? ""
             : "";
     // print("stepsController.q3Controller.value :: " +
     //     myModel!.data!.questions![2].answer.toString());
-    stepsController.q3Controller.value.text =
-        myModel!.data!.questions!.length > 2
-            ? myModel!.data!.questions![2].answer ?? ""
-            : "";
     stepsController.q4Controller.value.text =
-        myModel!.data!.questions!.length > 3
+        myModel!.data!.questions!.length > 4
             ? myModel!.data!.questions![3].answer ?? ""
             : "";
     stepsController.q5Controller.value.text =
-        myModel!.data!.questions!.length > 4
+        myModel!.data!.questions!.length > 5
             ? myModel!.data!.questions![4].answer ?? ""
             : "";
-    stepsController.addtionalController.value.text =
-        myModel!.data!.questions!.length > 5
+    stepsController.q6Controller.value.text =
+        myModel!.data!.questions!.length > 6
             ? myModel!.data!.questions![5].answer ?? ""
             : "";
+    stepsController.q7Controller.value.text =
+        myModel!.data!.questions!.length > 7
+            ? myModel!.data!.questions![6].answer ?? ""
+            : "";
+    stepsController.q8Controller.value.text =
+        myModel!.data!.questions!.length > 8
+            ? myModel!.data!.questions![7].answer ?? ""
+            : "";
+    stepsController.q9Controller.value.text =
+        myModel!.data!.questions!.length > 9
+            ? myModel!.data!.questions![8].answer ?? ""
+            : "";
+    stepsController.q10Controller.value.text =
+        myModel!.data!.questions!.length > 10
+            ? myModel!.data!.questions![9].answer ?? ""
+            : "";
+
     setState(() {});
     if (myModel != null) {
       for (var element in myModel!.data!.pastJobs!) {
@@ -680,10 +698,16 @@ class _AboutMeState extends State<AboutMe> {
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.only(right: 10.w),
-                                          child: SvgPicture.asset(
-                                            icon_edit_blue,
-                                            width: 12.w,
-                                            height: 12.h,
+                                          child: SizedBox(
+                                            width: 24.w,
+                                            height: 24.w,
+                                            child: Center(
+                                              child: SvgPicture.asset(
+                                                icon_edit_blue,
+                                                width: 12.w,
+                                                height: 12.h,
+                                              ),
+                                            ),
                                           ),
                                         )),
                                   ],
@@ -892,10 +916,17 @@ class _AboutMeState extends State<AboutMe> {
                                                     child: Padding(
                                                       padding: EdgeInsets.only(
                                                           right: 10.w),
-                                                      child: SvgPicture.asset(
-                                                        icon_edit_blue,
-                                                        width: 12.w,
-                                                        height: 12.w,
+                                                      child: SizedBox(
+                                                        width: 24.w,
+                                                        height: 24.w,
+                                                        child: Center(
+                                                          child:
+                                                              SvgPicture.asset(
+                                                            icon_edit_blue,
+                                                            width: 12.w,
+                                                            height: 12.w,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   )
@@ -1577,10 +1608,16 @@ class _AboutMeState extends State<AboutMe> {
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
                                                         right: 10.w),
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
+                                                    child: SizedBox(
+                                                      width: 24.w,
+                                                      height: 24.w,
+                                                      child: Center(
+                                                        child: SvgPicture.asset(
+                                                          icon_edit_blue,
+                                                          width: 12.w,
+                                                          height: 12.w,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 )
@@ -2152,175 +2189,6 @@ class _AboutMeState extends State<AboutMe> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4.r),
-                                      color: white_ffffff,
-                                      border: Border.all(
-                                          width: 1, color: light_grey_f2f2f2)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SvgPicture.asset(
-                                              question_icon,
-                                              width: 16.w,
-                                              height: 16.h,
-                                            ),
-                                            SizedBox(
-                                              width: 8.w,
-                                            ),
-                                            Expanded(
-                                                flex: 1,
-                                                child: // EDUCATION
-                                                    Text("ABOUT ME",
-                                                        style: TextStyle(
-                                                            color: black_121212,
-                                                            fontWeight:
-                                                                FontWeight.w900,
-                                                            fontFamily:
-                                                                helveticaNeue,
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                            fontSize: 12.sp),
-                                                        textAlign:
-                                                            TextAlign.left)),
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  controller.about.value =
-                                                      !controller.about.value;
-                                                  controller.ques1.value = true;
-                                                  controller.ques2.value = true;
-                                                  controller.ques3.value = true;
-                                                  controller.ques4.value = true;
-                                                  controller.ques5.value = true;
-                                                  controller.additional.value =
-                                                      true;
-                                                });
-                                              },
-                                              child: SvgPicture.asset(
-                                                icon_edit_blue,
-                                                width: 12.w,
-                                                height: 12.w,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 8.h,
-                                        ),
-                                        controller.about.value == true
-                                            ? Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 24.w),
-                                                child: ReadMoreText(
-                                                  stepsController
-                                                      .aboutController
-                                                      .value
-                                                      .text,
-                                                  trimLines: 2,
-                                                  lessStyle: const TextStyle(
-                                                      height: 1.5,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontSize: 14,
-                                                      color: Colors.black87),
-                                                  moreStyle: const TextStyle(
-                                                      height: 1.5,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontSize: 14,
-                                                      color: Colors.black87),
-                                                  colorClickableText:
-                                                      Colors.red.shade300,
-                                                  trimMode: TrimMode.Line,
-                                                  trimCollapsedText:
-                                                      '  Read More',
-                                                  trimExpandedText:
-                                                      '  Read Less',
-                                                  delimiter: '',
-                                                  style: const TextStyle(
-                                                      height: 1.5,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontSize: 16,
-                                                      color: grey_aaaaaa),
-                                                ))
-                                            : TextField(
-                                                controller: stepsController
-                                                    .aboutController.value,
-                                                autofocus: true,
-                                                style: TextStyle(
-                                                    color: black_121212,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily:
-                                                        helveticaNeueNeue_medium,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 14.sp),
-                                                maxLines: null,
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 15,
-                                                          vertical: 15),
-                                                  prefixIconConstraints:
-                                                      BoxConstraints(
-                                                          maxHeight: 21.h,
-                                                          maxWidth: 38.w),
-                                                  isDense: true,
-                                                  hintText:
-                                                      'Please type here..',
-                                                  hintStyle: TextStyle(
-                                                      color: grey_aaaaaa,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 14.sp),
-                                                  border: InputBorder.none,
-                                                ),
-                                                cursorColor: black_121212,
-                                                onEditingComplete: () {
-                                                  controller.about.value = true;
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  FocusScope.of(context)
-                                                      .nextFocus();
-                                                },
-                                                onSubmitted: (String value) {
-                                                  controller.about.value = true;
-                                                },
-                                              ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                // stepsController.q1Controller.value.text == ""
-                                //     ? Container()
-                                //     :
-                                if (myModel!.data!.questions!.length > 1)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
-                                // stepsController.q1Controller.value.text == ""
-                                //     ? Container()
-                                //     :
                                 if (myModel!.data!.questions!.length > 1)
                                   Container(
                                     decoration: BoxDecoration(
@@ -2352,10 +2220,7 @@ class _AboutMeState extends State<AboutMe> {
                                                   flex: 1,
                                                   child: // EDUCATION
                                                       Text(
-                                                          myModel!
-                                                              .data!
-                                                              .questions![0]
-                                                              .question!
+                                                          SharePreData.strQues1
                                                               .toUpperCase(),
                                                           style: TextStyle(
                                                               color:
@@ -2373,6 +2238,7 @@ class _AboutMeState extends State<AboutMe> {
                                                               TextAlign.left)),
                                               InkWell(
                                                 onTap: () {
+                                                  print("QC Click");
                                                   setState(() {
                                                     controller.ques1.value =
                                                         !controller.ques1.value;
@@ -2384,16 +2250,28 @@ class _AboutMeState extends State<AboutMe> {
                                                         true;
                                                     controller.ques5.value =
                                                         true;
-                                                    controller.additional
-                                                        .value = true;
-                                                    controller.about.value =
+                                                    controller.ques6.value =
+                                                        true;
+                                                    controller.ques7.value =
+                                                        true;
+                                                    controller.ques8.value =
+                                                        true;
+                                                    controller.ques9.value =
+                                                        true;
+                                                    controller.ques10.value =
                                                         true;
                                                   });
                                                 },
-                                                child: SvgPicture.asset(
-                                                  icon_edit_blue,
-                                                  width: 12.w,
-                                                  height: 12.w,
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
                                                 ),
                                               )
                                             ],
@@ -2426,7 +2304,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontSize: 14,
                                                         color: Colors.black87),
                                                     colorClickableText:
-                                                        opcity_black_121212,
+                                                        Colors.red.shade300,
                                                     trimMode: TrimMode.Line,
                                                     trimCollapsedText:
                                                         '  Read More',
@@ -2455,8 +2333,7 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
+                                                  maxLines: null,
                                                   decoration: InputDecoration(
                                                     contentPadding:
                                                         const EdgeInsets
@@ -2499,17 +2376,17 @@ class _AboutMeState extends State<AboutMe> {
                                       ),
                                     ),
                                   ),
-                                // stepsController.q2Controller.value.text == ""
+                                // stepsController.q1Controller.value.text == ""
                                 //     ? Container()
                                 //     :
                                 if (myModel!.data!.questions!.length > 1)
                                   SizedBox(
                                     height: 16.h,
                                   ),
-                                // stepsController.q2Controller.value.text == ""
+                                // stepsController.q1Controller.value.text == ""
                                 //     ? Container()
                                 //     :
-                                if (myModel!.data!.questions!.length > 1)
+                                if (myModel!.data!.questions!.length > 2)
                                   Container(
                                     decoration: BoxDecoration(
                                         borderRadius:
@@ -2540,10 +2417,7 @@ class _AboutMeState extends State<AboutMe> {
                                                   flex: 1,
                                                   child: // EDUCATION
                                                       Text(
-                                                          myModel!
-                                                              .data!
-                                                              .questions![1]
-                                                              .question!
+                                                          SharePreData.strQues2
                                                               .toUpperCase(),
                                                           style: TextStyle(
                                                               color:
@@ -2572,16 +2446,28 @@ class _AboutMeState extends State<AboutMe> {
                                                         true;
                                                     controller.ques5.value =
                                                         true;
-                                                    controller.additional
-                                                        .value = true;
-                                                    controller.about.value =
+                                                    controller.ques6.value =
+                                                        true;
+                                                    controller.ques7.value =
+                                                        true;
+                                                    controller.ques8.value =
+                                                        true;
+                                                    controller.ques9.value =
+                                                        true;
+                                                    controller.ques10.value =
                                                         true;
                                                   });
                                                 },
-                                                child: SvgPicture.asset(
-                                                  icon_edit_blue,
-                                                  width: 12.w,
-                                                  height: 12.w,
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
                                                 ),
                                               )
                                             ],
@@ -2614,7 +2500,7 @@ class _AboutMeState extends State<AboutMe> {
                                                         fontSize: 14,
                                                         color: Colors.black87),
                                                     colorClickableText:
-                                                        Colors.red.shade300,
+                                                        opcity_black_121212,
                                                     trimMode: TrimMode.Line,
                                                     trimCollapsedText:
                                                         '  Read More',
@@ -2687,18 +2573,17 @@ class _AboutMeState extends State<AboutMe> {
                                       ),
                                     ),
                                   ),
-                                // stepsController.q3Controller.value.text == ""
+                                // stepsController.q2Controller.value.text == ""
                                 //     ? Container()
                                 //     :
                                 if (myModel!.data!.questions!.length > 2)
                                   SizedBox(
                                     height: 16.h,
                                   ),
-                                // stepsController.q3Controller.value.text == ""
+                                // stepsController.q2Controller.value.text == ""
                                 //     ? Container()
-                                //
-                                //  :
-                                if (myModel!.data!.questions!.length > 2)
+                                //     :
+                                if (myModel!.data!.questions!.length > 3)
                                   Container(
                                     decoration: BoxDecoration(
                                         borderRadius:
@@ -2729,10 +2614,7 @@ class _AboutMeState extends State<AboutMe> {
                                                   flex: 1,
                                                   child: // EDUCATION
                                                       Text(
-                                                          myModel!
-                                                              .data!
-                                                              .questions![2]
-                                                              .question!
+                                                          SharePreData.strQues3
                                                               .toUpperCase(),
                                                           style: TextStyle(
                                                               color:
@@ -2761,16 +2643,28 @@ class _AboutMeState extends State<AboutMe> {
                                                         true;
                                                     controller.ques5.value =
                                                         true;
-                                                    controller.additional
-                                                        .value = true;
-                                                    controller.about.value =
+                                                    controller.ques6.value =
+                                                        true;
+                                                    controller.ques7.value =
+                                                        true;
+                                                    controller.ques8.value =
+                                                        true;
+                                                    controller.ques9.value =
+                                                        true;
+                                                    controller.ques10.value =
                                                         true;
                                                   });
                                                 },
-                                                child: SvgPicture.asset(
-                                                  icon_edit_blue,
-                                                  width: 12.w,
-                                                  height: 12.w,
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
                                                 ),
                                               )
                                             ],
@@ -2876,17 +2770,18 @@ class _AboutMeState extends State<AboutMe> {
                                       ),
                                     ),
                                   ),
-                                // stepsController.q4Controller.value.text == ""
+                                // stepsController.q3Controller.value.text == ""
                                 //     ? Container()
                                 //     :
                                 if (myModel!.data!.questions!.length > 3)
                                   SizedBox(
                                     height: 16.h,
                                   ),
-                                // stepsController.q4Controller.value.text == ""
+                                // stepsController.q3Controller.value.text == ""
                                 //     ? Container()
-                                //     :
-                                if (myModel!.data!.questions!.length > 3)
+                                //
+                                //  :
+                                if (myModel!.data!.questions!.length > 4)
                                   Container(
                                     decoration: BoxDecoration(
                                         borderRadius:
@@ -2910,20 +2805,14 @@ class _AboutMeState extends State<AboutMe> {
                                                 width: 16.w,
                                                 height: 16.h,
                                               ),
-                                              if (myModel!
-                                                      .data!.questions!.length >
-                                                  3)
-                                                SizedBox(
-                                                  width: 8.w,
-                                                ),
+                                              SizedBox(
+                                                width: 8.w,
+                                              ),
                                               Expanded(
                                                   flex: 1,
                                                   child: // EDUCATION
                                                       Text(
-                                                          myModel!
-                                                              .data!
-                                                              .questions![3]
-                                                              .question!
+                                                          SharePreData.strQues4
                                                               .toUpperCase(),
                                                           style: TextStyle(
                                                               color:
@@ -2952,16 +2841,28 @@ class _AboutMeState extends State<AboutMe> {
                                                         true;
                                                     controller.ques5.value =
                                                         true;
-                                                    controller.additional
-                                                        .value = true;
-                                                    controller.about.value =
+                                                    controller.ques6.value =
+                                                        true;
+                                                    controller.ques7.value =
+                                                        true;
+                                                    controller.ques8.value =
+                                                        true;
+                                                    controller.ques9.value =
+                                                        true;
+                                                    controller.ques10.value =
                                                         true;
                                                   });
                                                 },
-                                                child: SvgPicture.asset(
-                                                  icon_edit_blue,
-                                                  width: 12.w,
-                                                  height: 12.w,
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
                                                 ),
                                               )
                                             ],
@@ -3067,17 +2968,17 @@ class _AboutMeState extends State<AboutMe> {
                                       ),
                                     ),
                                   ),
-                                // stepsController.q5Controller.value.text == ""
+                                // stepsController.q4Controller.value.text == ""
                                 //     ? Container()
                                 //     :
                                 if (myModel!.data!.questions!.length > 4)
                                   SizedBox(
                                     height: 16.h,
                                   ),
-                                // stepsController.q5Controller.value.text == ""
+                                // stepsController.q4Controller.value.text == ""
                                 //     ? Container()
                                 //     :
-                                if (myModel!.data!.questions!.length > 4)
+                                if (myModel!.data!.questions!.length > 5)
                                   Container(
                                     decoration: BoxDecoration(
                                         borderRadius:
@@ -3101,17 +3002,17 @@ class _AboutMeState extends State<AboutMe> {
                                                 width: 16.w,
                                                 height: 16.h,
                                               ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
+                                              if (myModel!
+                                                      .data!.questions!.length >
+                                                  5)
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
                                               Expanded(
                                                   flex: 1,
                                                   child: // EDUCATION
                                                       Text(
-                                                          myModel!
-                                                              .data!
-                                                              .questions![4]
-                                                              .question!
+                                                          SharePreData.strQues5
                                                               .toUpperCase(),
                                                           style: TextStyle(
                                                               color:
@@ -3140,16 +3041,28 @@ class _AboutMeState extends State<AboutMe> {
                                                         true;
                                                     controller.ques2.value =
                                                         true;
-                                                    controller.additional
-                                                        .value = true;
-                                                    controller.about.value =
+                                                    controller.ques6.value =
+                                                        true;
+                                                    controller.ques7.value =
+                                                        true;
+                                                    controller.ques8.value =
+                                                        true;
+                                                    controller.ques9.value =
+                                                        true;
+                                                    controller.ques10.value =
                                                         true;
                                                   });
                                                 },
-                                                child: SvgPicture.asset(
-                                                  icon_edit_blue,
-                                                  width: 12.w,
-                                                  height: 12.w,
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
                                                 ),
                                               )
                                             ],
@@ -3239,7 +3152,7 @@ class _AboutMeState extends State<AboutMe> {
                                                   ),
                                                   cursorColor: black_121212,
                                                   onEditingComplete: () {
-                                                    controller.ques4.value =
+                                                    controller.ques5.value =
                                                         true;
                                                     FocusScope.of(context)
                                                         .unfocus();
@@ -3255,21 +3168,13 @@ class _AboutMeState extends State<AboutMe> {
                                       ),
                                     ),
                                   ),
-                                // stepsController
-                                //             .addtionalController.value.text ==
-                                //         ""
-                                //     ? Container()
-                                //     :
+
                                 if (myModel!.data!.questions!.length > 5)
                                   SizedBox(
                                     height: 16.h,
                                   ),
-                                // stepsController
-                                //             .addtionalController.value.text ==
-                                //         ""
-                                //     ? Container()
-                                //     :
-                                if (myModel!.data!.questions!.length > 5)
+
+                                if (myModel!.data!.questions!.length > 6)
                                   Container(
                                     decoration: BoxDecoration(
                                         borderRadius:
@@ -3293,17 +3198,17 @@ class _AboutMeState extends State<AboutMe> {
                                                 width: 16.w,
                                                 height: 16.h,
                                               ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
+                                              if (myModel!
+                                                      .data!.questions!.length >
+                                                  6)
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
                                               Expanded(
                                                   flex: 1,
                                                   child: // EDUCATION
                                                       Text(
-                                                          myModel!
-                                                              .data!
-                                                              .questions![5]
-                                                              .question!
+                                                          SharePreData.strQues6
                                                               .toUpperCase(),
                                                           style: TextStyle(
                                                               color:
@@ -3322,10 +3227,8 @@ class _AboutMeState extends State<AboutMe> {
                                               InkWell(
                                                 onTap: () {
                                                   setState(() {
-                                                    controller
-                                                            .additional.value =
-                                                        !controller
-                                                            .additional.value;
+                                                    controller.ques6.value =
+                                                        !controller.ques6.value;
                                                     controller.ques1.value =
                                                         true;
                                                     controller.ques3.value =
@@ -3336,14 +3239,26 @@ class _AboutMeState extends State<AboutMe> {
                                                         true;
                                                     controller.ques2.value =
                                                         true;
-                                                    controller.about.value =
+                                                    controller.ques7.value =
+                                                        true;
+                                                    controller.ques8.value =
+                                                        true;
+                                                    controller.ques9.value =
+                                                        true;
+                                                    controller.ques10.value =
                                                         true;
                                                   });
                                                 },
-                                                child: SvgPicture.asset(
-                                                  icon_edit_blue,
-                                                  width: 12.w,
-                                                  height: 12.w,
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
                                                 ),
                                               )
                                             ],
@@ -3351,15 +3266,13 @@ class _AboutMeState extends State<AboutMe> {
                                           SizedBox(
                                             height: 8.h,
                                           ),
-                                          controller.additional.value == true
+                                          controller.ques6.value == true
                                               ? Padding(
                                                   padding: EdgeInsets.only(
                                                       left: 24.w),
                                                   child: ReadMoreText(
-                                                    stepsController
-                                                        .addtionalController
-                                                        .value
-                                                        .text,
+                                                    stepsController.q6Controller
+                                                        .value.text,
                                                     trimLines: 2,
                                                     lessStyle: const TextStyle(
                                                         height: 1.5,
@@ -3396,8 +3309,7 @@ class _AboutMeState extends State<AboutMe> {
                                                   ))
                                               : TextField(
                                                   controller: stepsController
-                                                      .addtionalController
-                                                      .value,
+                                                      .q6Controller.value,
                                                   autofocus: true,
                                                   style: TextStyle(
                                                       color: black_121212,
@@ -3436,25 +3348,813 @@ class _AboutMeState extends State<AboutMe> {
                                                   ),
                                                   cursorColor: black_121212,
                                                   onEditingComplete: () {
-                                                    controller.additional
-                                                        .value = true;
+                                                    controller.ques6.value =
+                                                        true;
                                                     FocusScope.of(context)
                                                         .unfocus();
                                                     FocusScope.of(context)
                                                         .nextFocus();
                                                   },
                                                   onSubmitted: (String value) {
-                                                    controller.additional
-                                                        .value = true;
+                                                    controller.ques6.value =
+                                                        true;
                                                   },
                                                 ),
                                         ],
                                       ),
                                     ),
                                   ),
-                                SizedBox(
-                                  height: 16.h,
-                                ),
+
+                                if (myModel!.data!.questions!.length > 6)
+                                  SizedBox(
+                                    height: 16.h,
+                                  ),
+
+                                if (myModel!.data!.questions!.length > 7)
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        color: white_ffffff,
+                                        border: Border.all(
+                                            width: 1,
+                                            color: light_grey_f2f2f2)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                question_icon,
+                                                width: 16.w,
+                                                height: 16.h,
+                                              ),
+                                              if (myModel!
+                                                      .data!.questions!.length >
+                                                  7)
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: // EDUCATION
+                                                      Text(
+                                                          SharePreData.strQues7
+                                                              .toUpperCase(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  black_121212,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w900,
+                                                              fontFamily:
+                                                                  helveticaNeue,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
+                                                              fontSize: 12.sp),
+                                                          textAlign:
+                                                              TextAlign.left)),
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    controller.ques7.value =
+                                                        !controller.ques7.value;
+                                                    controller.ques1.value =
+                                                        true;
+                                                    controller.ques3.value =
+                                                        true;
+                                                    controller.ques4.value =
+                                                        true;
+                                                    controller.ques5.value =
+                                                        true;
+                                                    controller.ques6.value =
+                                                        true;
+                                                    controller.ques2.value =
+                                                        true;
+                                                    controller.ques8.value =
+                                                        true;
+                                                    controller.ques9.value =
+                                                        true;
+                                                    controller.ques10.value =
+                                                        true;
+                                                  });
+                                                },
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          controller.ques7.value == true
+                                              ? Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 24.w),
+                                                  child: ReadMoreText(
+                                                    stepsController.q7Controller
+                                                        .value.text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Colors.black87),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Colors.black87),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
+                                              : TextField(
+                                                  controller: stepsController
+                                                      .q7Controller.value,
+                                                  autofocus: true,
+                                                  style: TextStyle(
+                                                      color: black_121212,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 14.sp),
+                                                  maxLines: 10,
+                                                  minLines: 1,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                                .symmetric(
+                                                            horizontal: 15,
+                                                            vertical: 15),
+                                                    prefixIconConstraints:
+                                                        BoxConstraints(
+                                                            maxHeight: 21.h,
+                                                            maxWidth: 38.w),
+                                                    isDense: true,
+                                                    hintText:
+                                                        'Please type here..',
+                                                    hintStyle: TextStyle(
+                                                        color: grey_aaaaaa,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 14.sp),
+                                                    border: InputBorder.none,
+                                                  ),
+                                                  cursorColor: black_121212,
+                                                  onEditingComplete: () {
+                                                    controller.ques7.value =
+                                                        true;
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusScope.of(context)
+                                                        .nextFocus();
+                                                  },
+                                                  onSubmitted: (String value) {
+                                                    controller.ques7.value =
+                                                        true;
+                                                  },
+                                                ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
+                                if (myModel!.data!.questions!.length > 7)
+                                  SizedBox(
+                                    height: 16.h,
+                                  ),
+                                if (myModel!.data!.questions!.length > 8)
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        color: white_ffffff,
+                                        border: Border.all(
+                                            width: 1,
+                                            color: light_grey_f2f2f2)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                question_icon,
+                                                width: 16.w,
+                                                height: 16.h,
+                                              ),
+                                              if (myModel!
+                                                      .data!.questions!.length >
+                                                  8)
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: // EDUCATION
+                                                      Text(
+                                                          SharePreData.strQues8
+                                                              .toUpperCase(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  black_121212,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w900,
+                                                              fontFamily:
+                                                                  helveticaNeue,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
+                                                              fontSize: 12.sp),
+                                                          textAlign:
+                                                              TextAlign.left)),
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    controller.ques8.value =
+                                                        !controller.ques8.value;
+                                                    controller.ques1.value =
+                                                        true;
+                                                    controller.ques3.value =
+                                                        true;
+                                                    controller.ques4.value =
+                                                        true;
+                                                    controller.ques5.value =
+                                                        true;
+                                                    controller.ques6.value =
+                                                        true;
+                                                    controller.ques7.value =
+                                                        true;
+                                                    controller.ques2.value =
+                                                        true;
+                                                    controller.ques9.value =
+                                                        true;
+                                                    controller.ques10.value =
+                                                        true;
+                                                  });
+                                                },
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          controller.ques8.value == true
+                                              ? Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 24.w),
+                                                  child: ReadMoreText(
+                                                    stepsController.q8Controller
+                                                        .value.text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Colors.black87),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Colors.black87),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
+                                              : TextField(
+                                                  controller: stepsController
+                                                      .q8Controller.value,
+                                                  autofocus: true,
+                                                  style: TextStyle(
+                                                      color: black_121212,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 14.sp),
+                                                  maxLines: 10,
+                                                  minLines: 1,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                                .symmetric(
+                                                            horizontal: 15,
+                                                            vertical: 15),
+                                                    prefixIconConstraints:
+                                                        BoxConstraints(
+                                                            maxHeight: 21.h,
+                                                            maxWidth: 38.w),
+                                                    isDense: true,
+                                                    hintText:
+                                                        'Please type here..',
+                                                    hintStyle: TextStyle(
+                                                        color: grey_aaaaaa,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 14.sp),
+                                                    border: InputBorder.none,
+                                                  ),
+                                                  cursorColor: black_121212,
+                                                  onEditingComplete: () {
+                                                    controller.ques8.value =
+                                                        true;
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusScope.of(context)
+                                                        .nextFocus();
+                                                  },
+                                                  onSubmitted: (String value) {
+                                                    controller.ques8.value =
+                                                        true;
+                                                  },
+                                                ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
+                                if (myModel!.data!.questions!.length > 8)
+                                  SizedBox(
+                                    height: 16.h,
+                                  ),
+                                if (myModel!.data!.questions!.length > 9)
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        color: white_ffffff,
+                                        border: Border.all(
+                                            width: 1,
+                                            color: light_grey_f2f2f2)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                question_icon,
+                                                width: 16.w,
+                                                height: 16.h,
+                                              ),
+                                              if (myModel!
+                                                      .data!.questions!.length >
+                                                  9)
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: // EDUCATION
+                                                      Text(
+                                                          SharePreData.strQues9
+                                                              .toUpperCase(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  black_121212,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w900,
+                                                              fontFamily:
+                                                                  helveticaNeue,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
+                                                              fontSize: 12.sp),
+                                                          textAlign:
+                                                              TextAlign.left)),
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    controller.ques9.value =
+                                                        !controller.ques9.value;
+                                                    controller.ques1.value =
+                                                        true;
+                                                    controller.ques3.value =
+                                                        true;
+                                                    controller.ques4.value =
+                                                        true;
+                                                    controller.ques5.value =
+                                                        true;
+                                                    controller.ques6.value =
+                                                        true;
+                                                    controller.ques7.value =
+                                                        true;
+                                                    controller.ques8.value =
+                                                        true;
+                                                    controller.ques2.value =
+                                                        true;
+                                                    controller.ques10.value =
+                                                        true;
+                                                  });
+                                                },
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          controller.ques9.value == true
+                                              ? Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 24.w),
+                                                  child: ReadMoreText(
+                                                    stepsController.q9Controller
+                                                        .value.text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Colors.black87),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Colors.black87),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
+                                              : TextField(
+                                                  controller: stepsController
+                                                      .q9Controller.value,
+                                                  autofocus: true,
+                                                  style: TextStyle(
+                                                      color: black_121212,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 14.sp),
+                                                  maxLines: 10,
+                                                  minLines: 1,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                                .symmetric(
+                                                            horizontal: 15,
+                                                            vertical: 15),
+                                                    prefixIconConstraints:
+                                                        BoxConstraints(
+                                                            maxHeight: 21.h,
+                                                            maxWidth: 38.w),
+                                                    isDense: true,
+                                                    hintText:
+                                                        'Please type here..',
+                                                    hintStyle: TextStyle(
+                                                        color: grey_aaaaaa,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 14.sp),
+                                                    border: InputBorder.none,
+                                                  ),
+                                                  cursorColor: black_121212,
+                                                  onEditingComplete: () {
+                                                    controller.ques9.value =
+                                                        true;
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusScope.of(context)
+                                                        .nextFocus();
+                                                  },
+                                                  onSubmitted: (String value) {
+                                                    controller.ques9.value =
+                                                        true;
+                                                  },
+                                                ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                if (myModel!.data!.questions!.length > 9)
+                                  SizedBox(
+                                    height: 16.h,
+                                  ),
+
+                                if (myModel!.data!.questions!.length > 10)
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        color: white_ffffff,
+                                        border: Border.all(
+                                            width: 1,
+                                            color: light_grey_f2f2f2)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                question_icon,
+                                                width: 16.w,
+                                                height: 16.h,
+                                              ),
+                                              if (myModel!
+                                                      .data!.questions!.length >
+                                                  10)
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: // EDUCATION
+                                                      Text(
+                                                          SharePreData
+                                                              .strQues10
+                                                              .toUpperCase(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  black_121212,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w900,
+                                                              fontFamily:
+                                                                  helveticaNeue,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
+                                                              fontSize: 12.sp),
+                                                          textAlign:
+                                                              TextAlign.left)),
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    controller.ques10.value =
+                                                        !controller
+                                                            .ques10.value;
+                                                    controller.ques1.value =
+                                                        true;
+                                                    controller.ques3.value =
+                                                        true;
+                                                    controller.ques4.value =
+                                                        true;
+                                                    controller.ques5.value =
+                                                        true;
+                                                    controller.ques6.value =
+                                                        true;
+                                                    controller.ques7.value =
+                                                        true;
+                                                    controller.ques8.value =
+                                                        true;
+                                                    controller.ques9.value =
+                                                        true;
+                                                    controller.ques2.value =
+                                                        true;
+                                                  });
+                                                },
+                                                child: SizedBox(
+                                                  width: 24.w,
+                                                  height: 24.w,
+                                                  child: Center(
+                                                    child: SvgPicture.asset(
+                                                      icon_edit_blue,
+                                                      width: 12.w,
+                                                      height: 12.w,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          controller.ques10.value == true
+                                              ? Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 24.w),
+                                                  child: ReadMoreText(
+                                                    stepsController
+                                                        .q10Controller
+                                                        .value
+                                                        .text,
+                                                    trimLines: 2,
+                                                    lessStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Colors.black87),
+                                                    moreStyle: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 14,
+                                                        color: Colors.black87),
+                                                    colorClickableText:
+                                                        Colors.red.shade300,
+                                                    trimMode: TrimMode.Line,
+                                                    trimCollapsedText:
+                                                        '  Read More',
+                                                    trimExpandedText:
+                                                        '  Read Less',
+                                                    delimiter: '',
+                                                    style: const TextStyle(
+                                                        height: 1.5,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontSize: 16,
+                                                        color: grey_aaaaaa),
+                                                  ))
+                                              : TextField(
+                                                  controller: stepsController
+                                                      .q10Controller.value,
+                                                  autofocus: true,
+                                                  style: TextStyle(
+                                                      color: black_121212,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 14.sp),
+                                                  maxLines: 10,
+                                                  minLines: 1,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                                .symmetric(
+                                                            horizontal: 15,
+                                                            vertical: 15),
+                                                    prefixIconConstraints:
+                                                        BoxConstraints(
+                                                            maxHeight: 21.h,
+                                                            maxWidth: 38.w),
+                                                    isDense: true,
+                                                    hintText:
+                                                        'Please type here..',
+                                                    hintStyle: TextStyle(
+                                                        color: grey_aaaaaa,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 14.sp),
+                                                    border: InputBorder.none,
+                                                  ),
+                                                  cursorColor: black_121212,
+                                                  onEditingComplete: () {
+                                                    controller.ques10.value =
+                                                        true;
+                                                    FocusScope.of(context)
+                                                        .unfocus();
+                                                    FocusScope.of(context)
+                                                        .nextFocus();
+                                                  },
+                                                  onSubmitted: (String value) {
+                                                    controller.ques10.value =
+                                                        true;
+                                                  },
+                                                ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
+                                if (myModel!.data!.questions!.length > 10)
+                                  SizedBox(
+                                    height: 16.h,
+                                  ),
+
                                 BlackButton("Save", white_ffffff, () {
                                   FocusScope.of(context).unfocus();
                                   if (checkValidation()) {
@@ -3571,6 +4271,11 @@ class _AboutMeState extends State<AboutMe> {
     bool q3 = true;
     bool q4 = true;
     bool q5 = true;
+    bool q6 = true;
+    bool q7 = true;
+    bool q8 = true;
+    bool q9 = true;
+    bool q10 = true;
     if (ques[0].toString() == "{}") {
       ques.removeAt(0);
     }
@@ -3707,9 +4412,6 @@ class _AboutMeState extends State<AboutMe> {
     } else if (endYearStatus == false) {
       snackBar(context, 'Select end year');
       return false;
-    } else if (stepsController.aboutController.value.text.isEmpty) {
-      snackBar(context, 'Enter about me');
-      return false;
     } else if (q1 == false) {
       snackBar(context,
           'Answer ${myModel!.data!.questions![0].question!.replaceAll('?', '')}');
@@ -3729,6 +4431,26 @@ class _AboutMeState extends State<AboutMe> {
     } else if (q5 == false) {
       snackBar(context,
           'Answer ${myModel!.data!.questions![4].question!.replaceAll('?', '')}');
+      return false;
+    } else if (q6 == false) {
+      snackBar(context,
+          'Answer ${myModel!.data!.questions![5].question!.replaceAll('?', '')}');
+      return false;
+    } else if (q7 == false) {
+      snackBar(context,
+          'Answer ${myModel!.data!.questions![6].question!.replaceAll('?', '')}');
+      return false;
+    } else if (q8 == false) {
+      snackBar(context,
+          'Answer ${myModel!.data!.questions![7].question!.replaceAll('?', '')}');
+      return false;
+    } else if (q9 == false) {
+      snackBar(context,
+          'Answer ${myModel!.data!.questions![8].question!.replaceAll('?', '')}');
+      return false;
+    } else if (q10 == false) {
+      snackBar(context,
+          'Answer ${myModel!.data!.questions![9].question!.replaceAll('?', '')}');
       return false;
     } else {
       return true;

@@ -21,12 +21,17 @@ class SharePreData {
   //American dollar currency
   static String strDollar = "\$";
 
-
-  static String strQues1 = "What have you done ?";
-  static String strQues2 = "What will you be doing in the future ?";
-  static String strQues3 = "What hill are you 1000% willing to die on ?";
-  static String strQues4 = "Come to me for - what are you good at ?";
-  static String strQues5 = "What are you working on right now ?";
+  static String strQues1 = "WHAT\'S YOUR STORY ?";
+  static String strQues2 = "WHAT WILL YOU BE DOING IN THE FUTURE ?";
+  static String strQues3 = "WHAT'S ON YOUR PRODUCT LIST ?";
+  static String strQues4 =
+      "WHAT HILL ARE YOU WILLING TO DIE ON ? (UNPOPULAR OPINION)";
+  static String strQues5 = "WHAT ARE YOU MOST PROUD OF ?";
+  static String strQues6 = "WHAT OPPOTUNITIES ARE YOU SEEKING ?";
+  static String strQues7 = "WHAT AREAS DO YOU NEED SUPPORT ?";
+  static String strQues8 = "WHAT CAUSES DO YOU CARE ABOUT ?";
+  static String strQues9 = "WHAT ARE YOU AFRAID TO TRY ?";
+  static String strQues10 = "YOU DREAM COLLABORATION ?";
 
   static String strIfc = "ifc";
 }

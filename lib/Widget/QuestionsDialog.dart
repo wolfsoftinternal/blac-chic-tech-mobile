@@ -54,7 +54,29 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                                   ? SharePreData.strQues3.toUpperCase()
                                   : widget.quesIndex == 'q4'
                                       ? SharePreData.strQues4.toUpperCase()
-                                      : SharePreData.strQues5.toUpperCase(),
+                                      : widget.quesIndex == 'q5'
+                                          ? SharePreData.strQues5.toUpperCase()
+                                          : widget.quesIndex == 'q6'
+                                              ? SharePreData.strQues6
+                                                  .toUpperCase()
+                                              : widget.quesIndex == 'q7'
+                                                  ? SharePreData.strQues7
+                                                      .toUpperCase()
+                                                  : widget.quesIndex == 'q8'
+                                                      ? SharePreData.strQues8
+                                                          .toUpperCase()
+                                                      : widget.quesIndex == 'q9'
+                                                          ? SharePreData
+                                                              .strQues9
+                                                              .toUpperCase()
+                                                          : widget.quesIndex ==
+                                                                  'q10'
+                                                              ? SharePreData
+                                                                  .strQues10
+                                                                  .toUpperCase()
+                                                              : SharePreData
+                                                                  .strQues1
+                                                                  .toUpperCase(),
                       style: TextStyle(
                           color: black_121212,
                           fontWeight: FontWeight.w900,
@@ -135,7 +157,31 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                                       ? controller.q3Controller.value
                                       : widget.quesIndex == 'q4'
                                           ? controller.q4Controller.value
-                                          : controller.q5Controller.value,
+                                          : widget.quesIndex == 'q5'
+                                              ? controller.q5Controller.value
+                                              : widget.quesIndex == 'q6'
+                                                  ? controller
+                                                      .q6Controller.value
+                                                  : widget.quesIndex == 'q7'
+                                                      ? controller
+                                                          .q7Controller.value
+                                                      : widget.quesIndex == 'q8'
+                                                          ? controller
+                                                              .q8Controller
+                                                              .value
+                                                          : widget.quesIndex ==
+                                                                  'q9'
+                                                              ? controller
+                                                                  .q9Controller
+                                                                  .value
+                                                              : widget.quesIndex ==
+                                                                      'q10'
+                                                                  ? controller
+                                                                      .q10Controller
+                                                                      .value
+                                                                  : controller
+                                                                      .q1Controller
+                                                                      .value,
                           minLines: 2,
                           maxLines: 10,
                           keyboardType: TextInputType.multiline,
@@ -198,12 +244,52 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                     } else {
                       controller.ques4.value = SharePreData.strQues4;
                     }
-                  } else {
+                  } else if (widget.quesIndex == 'q5') {
                     if (controller.q5Controller.value.text == '') {
                       controller.ques5.value = SharePreData.strQues5;
                     } else {
                       controller.ques5.value =
                           controller.q5Controller.value.text;
+                    }
+                  }
+                  if (widget.quesIndex == 'q6') {
+                    if (controller.q6Controller.value.text == '') {
+                      controller.ques6.value = SharePreData.strQues6;
+                    } else {
+                      controller.ques6.value =
+                          controller.q6Controller.value.text;
+                    }
+                  }
+                  if (widget.quesIndex == 'q7') {
+                    if (controller.q7Controller.value.text == '') {
+                      controller.ques7.value = SharePreData.strQues7;
+                    } else {
+                      controller.ques7.value =
+                          controller.q7Controller.value.text;
+                    }
+                  }
+                  if (widget.quesIndex == 'q8') {
+                    if (controller.q8Controller.value.text == '') {
+                      controller.ques8.value = SharePreData.strQues8;
+                    } else {
+                      controller.ques8.value =
+                          controller.q8Controller.value.text;
+                    }
+                  }
+                  if (widget.quesIndex == 'q9') {
+                    if (controller.q9Controller.value.text == '') {
+                      controller.ques9.value = SharePreData.strQues9;
+                    } else {
+                      controller.ques9.value =
+                          controller.q9Controller.value.text;
+                    }
+                  }
+                  if (widget.quesIndex == 'q10') {
+                    if (controller.q10Controller.value.text == '') {
+                      controller.ques10.value = SharePreData.strQues10;
+                    } else {
+                      controller.ques10.value =
+                          controller.q10Controller.value.text;
                     }
                   }
 

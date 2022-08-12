@@ -41,7 +41,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
       body: Obx(
         () => Column(
           children: [
-             SizedBox(
+            SizedBox(
               height: 60.h,
             ),
             ToolbarWithHeader(
@@ -50,9 +50,11 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                   var preferences = MySharedPref();
                   SignupModel? myModel = await preferences
                       .getSignupModel(SharePreData.keySignupModel);
-                  if (myModel!.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                  if (myModel!.data!.questions == null ||
+                      myModel.data!.questions.toString() == '[]') {
                     Get.to(const AdditionalLastQueView());
-                  } else if (myModel.data!.questions == null || myModel.data!.questions.toString() == '[]') {
+                  } else if (myModel.data!.questions == null ||
+                      myModel.data!.questions.toString() == '[]') {
                     String lastQuestionsInfo = "";
                     for (int i = 0; i < myModel.data!.questions!.length; i++) {
                       if (myModel.data!.questions![i].type == "additional") {
@@ -72,7 +74,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
               flex: 1,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding:  EdgeInsets.only(left: 24.w, right: 24.w, top: 32.h),
+                  padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 32.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,9 +125,12 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                               padding: EdgeInsets.only(left: 16.w, right: 16.w),
                               child: Text(controller.ques1.value,
                                   maxLines: 1,
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: controller.ques1.value.contains(SharePreData.strQues1) ? grey_aaaaaa : black_121212,
+                                      color: controller.ques1.value
+                                              .contains(SharePreData.strQues1)
+                                          ? grey_aaaaaa
+                                          : black_121212,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: helveticaNeueNeue_medium,
                                       fontStyle: FontStyle.normal,
@@ -153,8 +158,12 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                               child: // What have you done?
                                   Text(controller.ques2.value,
                                       maxLines: 1,
-                                      style:  TextStyle(
-                                      color: controller.ques2.value.contains(SharePreData.strQues2) ? grey_aaaaaa : black_121212,
+                                      style: TextStyle(
+                                          color: controller.ques2.value
+                                                  .contains(
+                                                      SharePreData.strQues2)
+                                              ? grey_aaaaaa
+                                              : black_121212,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -181,8 +190,12 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                               child: // What have you done?
                                   Text(controller.ques3.value,
                                       maxLines: 1,
-                                      style:  TextStyle(
-                                      color: controller.ques3.value.contains(SharePreData.strQues3) ? grey_aaaaaa : black_121212,
+                                      style: TextStyle(
+                                          color: controller.ques3.value
+                                                  .contains(
+                                                      SharePreData.strQues3)
+                                              ? grey_aaaaaa
+                                              : black_121212,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
                                           fontStyle: FontStyle.normal,
@@ -208,8 +221,12 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                               child: // What have you done?
                                   Text(controller.ques4.value,
                                       maxLines: 1,
-                                      style:  TextStyle(
-                                      color: controller.ques4.value.contains(SharePreData.strQues4) ? grey_aaaaaa : black_121212,
+                                      style: TextStyle(
+                                          color: controller.ques4.value
+                                                  .contains(
+                                                      SharePreData.strQues4)
+                                              ? grey_aaaaaa
+                                              : black_121212,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -236,8 +253,172 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                               child: // What have you done?
                                   Text(controller.ques5.value,
                                       maxLines: 1,
-                                      style:  TextStyle(
-                                      color: controller.ques5.value.contains(SharePreData.strQues5) ? grey_aaaaaa : black_121212,
+                                      style: TextStyle(
+                                          color: controller.ques5.value
+                                                  .contains(
+                                                      SharePreData.strQues5)
+                                              ? grey_aaaaaa
+                                              : black_121212,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      GestureDetector(
+                        onTap: () => showDoneDialog(context, 'q6'),
+                        child: Container(
+                          height: 48.h,
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: // What have you done?
+                                  Text(controller.ques6.value,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                          color: controller.ques6.value
+                                                  .contains(
+                                                      SharePreData.strQues6)
+                                              ? grey_aaaaaa
+                                              : black_121212,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      GestureDetector(
+                        onTap: () => showDoneDialog(context, 'q7'),
+                        child: Container(
+                          height: 48.h,
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: // What have you done?
+                                  Text(controller.ques7.value,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                          color: controller.ques7.value
+                                                  .contains(
+                                                      SharePreData.strQues7)
+                                              ? grey_aaaaaa
+                                              : black_121212,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      GestureDetector(
+                        onTap: () => showDoneDialog(context, 'q8'),
+                        child: Container(
+                          height: 48.h,
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: // What have you done?
+                                  Text(controller.ques8.value,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                          color: controller.ques8.value
+                                                  .contains(
+                                                      SharePreData.strQues8)
+                                              ? grey_aaaaaa
+                                              : black_121212,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      GestureDetector(
+                        onTap: () => showDoneDialog(context, 'q9'),
+                        child: Container(
+                          height: 48.h,
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: // What have you done?
+                                  Text(controller.ques9.value,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                          color: controller.ques9.value
+                                                  .contains(
+                                                      SharePreData.strQues9)
+                                              ? grey_aaaaaa
+                                              : black_121212,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      GestureDetector(
+                        onTap: () => showDoneDialog(context, 'q10'),
+                        child: Container(
+                          height: 48.h,
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: // What have you done?
+                                  Text(controller.ques10.value,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                          color: controller.ques10.value
+                                                  .contains(
+                                                      SharePreData.strQues10)
+                                              ? grey_aaaaaa
+                                              : black_121212,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -254,13 +435,28 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
               ),
             ),
             Padding(
-              padding:  EdgeInsets.all(24.r),
+              padding: EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
-                if (controller.q1Controller.value.text == "" || controller.q1Controller.value.text.isEmpty &&
-                    controller.q2Controller.value.text == "" || controller.q2Controller.value.text.isEmpty &&
-                    controller.q3Controller.value.text == "" || controller.q3Controller.value.text.isEmpty &&
-                    controller.q4Controller.value.text == "" || controller.q4Controller.value.text.isEmpty &&
-                    controller.q5Controller.value.text == "" || controller.q5Controller.value.text.isEmpty) {
+                if (controller.q1Controller.value.text == "" ||
+                    controller.q1Controller.value.text.isEmpty &&
+                        controller.q2Controller.value.text == "" ||
+                    controller.q2Controller.value.text.isEmpty &&
+                        controller.q3Controller.value.text == "" ||
+                    controller.q3Controller.value.text.isEmpty &&
+                        controller.q4Controller.value.text == "" ||
+                    controller.q4Controller.value.text.isEmpty &&
+                        controller.q5Controller.value.text == "" ||
+                    controller.q5Controller.value.text.isEmpty &&
+                        controller.q6Controller.value.text == "" ||
+                    controller.q6Controller.value.text.isEmpty &&
+                        controller.q7Controller.value.text == "" ||
+                    controller.q7Controller.value.text.isEmpty &&
+                        controller.q8Controller.value.text == "" ||
+                    controller.q8Controller.value.text.isEmpty &&
+                        controller.q9Controller.value.text == "" ||
+                    controller.q9Controller.value.text.isEmpty &&
+                        controller.q10Controller.value.text == "" ||
+                    controller.q10Controller.value.text.isEmpty) {
                   snackBar(context, 'Please answer the questions');
                 } else {
                   List ques = [{}];
@@ -296,6 +492,36 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                     ques.add({
                       '"question"': '"${SharePreData.strQues5}"',
                       '"answer"': '"${controller.q5Controller.value.text}"',
+                    });
+                  }
+                  if (controller.q6Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues6}"',
+                      '"answer"': '"${controller.q6Controller.value.text}"',
+                    });
+                  }
+                  if (controller.q7Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues7}"',
+                      '"answer"': '"${controller.q7Controller.value.text}"',
+                    });
+                  }
+                  if (controller.q8Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues8}"',
+                      '"answer"': '"${controller.q8Controller.value.text}"',
+                    });
+                  }
+                  if (controller.q9Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues9}"',
+                      '"answer"': '"${controller.q9Controller.value.text}"',
+                    });
+                  }
+                  if (controller.q10Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues10}"',
+                      '"answer"': '"${controller.q10Controller.value.text}"',
                     });
                   }
 

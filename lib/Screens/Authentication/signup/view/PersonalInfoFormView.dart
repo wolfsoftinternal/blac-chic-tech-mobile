@@ -423,8 +423,8 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                               left: 16.w, right: 16.w, top: 13.h, bottom: 12.h),
                           child: TextField(
                             controller: controller.aboutController.value,
-                            maxLines: 10,
-                            minLines: 7,
+                            maxLines: 6,
+                            minLines: 1,
                             textInputAction: TextInputAction.newline,
                             keyboardType: TextInputType.multiline,
                             style: TextStyle(

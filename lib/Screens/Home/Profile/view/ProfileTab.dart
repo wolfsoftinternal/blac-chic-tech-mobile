@@ -27,18 +27,20 @@ class _ProfileTabState extends State<ProfileTab> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (controller.details.value.questions != null) {
-      if (controller.details.value.questions!.length >= 4) {
-        if (controller.details.value.questions![3].answer!.isNotEmpty) {
-          if (controller.details.value.questions![3].answer!.length > 1) {
-            list.clear();
-            list = controller.details.value.questions![3].answer!.split(', ');
-          } else {
-            list.add(controller.details.value.questions![3].answer);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (controller.details.value.questions != null) {
+        if (controller.details.value.questions!.length >= 4) {
+          if (controller.details.value.questions![3].answer!.isNotEmpty) {
+            if (controller.details.value.questions![3].answer!.length > 1) {
+              list.clear();
+              list = controller.details.value.questions![3].answer!.split(', ');
+            } else {
+              list.add(controller.details.value.questions![3].answer);
+            }
           }
         }
       }
-    }
+    });
   }
 
   @override
@@ -406,18 +408,20 @@ class _ProfileTabState extends State<ProfileTab> {
                                                     SizedBox(
                                                       width: 8.w,
                                                     ),
-                                                    setHelceticaBold(
-                                                        controller
-                                                            .details
-                                                            .value
-                                                            .questions![0]
-                                                            .question!
-                                                            .toUpperCase(),
-                                                        12.sp,
-                                                        black_121212,
-                                                        FontWeight.w900,
-                                                        FontStyle.normal,
-                                                        0.0),
+                                                    Expanded(
+                                                      child: setHelceticaBold(
+                                                          controller
+                                                              .details
+                                                              .value
+                                                              .questions![0]
+                                                              .question!
+                                                              .toUpperCase(),
+                                                          12.sp,
+                                                          black_121212,
+                                                          FontWeight.w900,
+                                                          FontStyle.normal,
+                                                          0.0),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -515,15 +519,20 @@ class _ProfileTabState extends State<ProfileTab> {
                                                 SizedBox(
                                                   width: 8.w,
                                                 ),
-                                                setHelceticaBold(
-                                                    controller.details.value
-                                                        .questions![1].question!
-                                                        .toUpperCase(),
-                                                    12.sp,
-                                                    black_121212,
-                                                    FontWeight.w900,
-                                                    FontStyle.normal,
-                                                    0.0),
+                                                Expanded(
+                                                  child: setHelceticaBold(
+                                                      controller
+                                                          .details
+                                                          .value
+                                                          .questions![1]
+                                                          .question!
+                                                          .toUpperCase(),
+                                                      12.sp,
+                                                      black_121212,
+                                                      FontWeight.w900,
+                                                      FontStyle.normal,
+                                                      0.0),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -732,15 +741,20 @@ class _ProfileTabState extends State<ProfileTab> {
                                                 SizedBox(
                                                   width: 8.w,
                                                 ),
-                                                setHelceticaBold(
-                                                    controller.details.value
-                                                        .questions![3].question!
-                                                        .toUpperCase(),
-                                                    12.sp,
-                                                    black_121212,
-                                                    FontWeight.w900,
-                                                    FontStyle.normal,
-                                                    0.0),
+                                                Expanded(
+                                                  child: setHelceticaBold(
+                                                      controller
+                                                          .details
+                                                          .value
+                                                          .questions![3]
+                                                          .question!
+                                                          .toUpperCase(),
+                                                      12.sp,
+                                                      black_121212,
+                                                      FontWeight.w900,
+                                                      FontStyle.normal,
+                                                      0.0),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -795,7 +809,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                 ),
                               )
                             : Container(),
-                        controller.details.value.questions!.length >= 5
+                        controller.details.value.questions!.length >= 4
                             ? GestureDetector(
                                 onTap: () {
                                   if (controller.details.value.questions![4]
@@ -835,15 +849,20 @@ class _ProfileTabState extends State<ProfileTab> {
                                                 SizedBox(
                                                   width: 8.w,
                                                 ),
-                                                setHelceticaBold(
-                                                    controller.details.value
-                                                        .questions![4].question!
-                                                        .toUpperCase(),
-                                                    12.sp,
-                                                    black_121212,
-                                                    FontWeight.w900,
-                                                    FontStyle.normal,
-                                                    0.0),
+                                                Expanded(
+                                                  child: setHelceticaBold(
+                                                      controller
+                                                          .details
+                                                          .value
+                                                          .questions![4]
+                                                          .question!
+                                                          .toUpperCase(),
+                                                      12.sp,
+                                                      black_121212,
+                                                      FontWeight.w900,
+                                                      FontStyle.normal,
+                                                      0.0),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -858,6 +877,552 @@ class _ProfileTabState extends State<ProfileTab> {
                                                     .details
                                                     .value
                                                     .questions![4]
+                                                    .answer!
+                                                    .capitalizeFirst!
+                                                    .toString(),
+                                                trimLines: 2,
+                                                lessStyle: const TextStyle(
+                                                    height: 1.5,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontSize: 14,
+                                                    color: Colors.black87),
+                                                moreStyle: const TextStyle(
+                                                    height: 1.5,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontSize: 14,
+                                                    color: Colors.black87),
+                                                colorClickableText:
+                                                    Colors.red.shade300,
+                                                trimMode: TrimMode.Line,
+                                                trimCollapsedText:
+                                                    '  Read More',
+                                                trimExpandedText: '  Read Less',
+                                                delimiter: '',
+                                                style: const TextStyle(
+                                                    height: 1.5,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontSize: 16,
+                                                    color: grey_aaaaaa),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                        controller.details.value.questions!.length >= 5
+                            ? GestureDetector(
+                                onTap: () {
+                                  if (controller.details.value.questions![5]
+                                          .answer!.length >
+                                      3) {
+                                    // controller.q0Expand.value = false;
+                                    // controller.q1Expand.value = false;
+                                    // controller.q2Expand.value = false;
+                                    // controller.q3Expand.value = false;
+                                    controller.q4Expand.value =
+                                        !controller.q4Expand.value;
+                                  }
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: 16.h),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: white_ffffff,
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        border: Border.all(
+                                            color: light_grey_f2f2f2)),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 4.h),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 16.h, left: 16.w),
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(question_icon),
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                                Expanded(
+                                                  child: setHelceticaBold(
+                                                      controller
+                                                          .details
+                                                          .value
+                                                          .questions![5]
+                                                          .question!
+                                                          .toUpperCase(),
+                                                      12.sp,
+                                                      black_121212,
+                                                      FontWeight.w900,
+                                                      FontStyle.normal,
+                                                      0.0),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 12.h,
+                                                left: 40.w,
+                                                bottom: 12.h),
+                                            child: Container(
+                                              child: ReadMoreText(
+                                                controller
+                                                    .details
+                                                    .value
+                                                    .questions![5]
+                                                    .answer!
+                                                    .capitalizeFirst!
+                                                    .toString(),
+                                                trimLines: 2,
+                                                lessStyle: const TextStyle(
+                                                    height: 1.5,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontSize: 14,
+                                                    color: Colors.black87),
+                                                moreStyle: const TextStyle(
+                                                    height: 1.5,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontSize: 14,
+                                                    color: Colors.black87),
+                                                colorClickableText:
+                                                    Colors.red.shade300,
+                                                trimMode: TrimMode.Line,
+                                                trimCollapsedText:
+                                                    '  Read More',
+                                                trimExpandedText: '  Read Less',
+                                                delimiter: '',
+                                                style: const TextStyle(
+                                                    height: 1.5,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontSize: 16,
+                                                    color: grey_aaaaaa),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                        controller.details.value.questions!.length >= 6
+                            ? GestureDetector(
+                                onTap: () {
+                                  // controller.q0Expand.value = false;
+                                  controller.q6Expand.value =
+                                      !controller.q6Expand.value;
+                                  // controller.q2Expand.value = false;
+                                  // controller.q3Expand.value = false;
+                                  // controller.q4Expand.value = false;
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: 16.h),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: white_ffffff,
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        border: Border.all(
+                                            color: light_grey_f2f2f2)),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 4.h),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 16.h, left: 16.w),
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(question_icon),
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                                Expanded(
+                                                  child: setHelceticaBold(
+                                                      controller
+                                                          .details
+                                                          .value
+                                                          .questions![6]
+                                                          .question!
+                                                          .toUpperCase(),
+                                                      12.sp,
+                                                      black_121212,
+                                                      FontWeight.w900,
+                                                      FontStyle.normal,
+                                                      0.0),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 12.h,
+                                                left: 40.w,
+                                                bottom: 12.h),
+                                            child: Container(
+                                              child: ReadMoreText(
+                                                controller
+                                                    .details
+                                                    .value
+                                                    .questions![6]
+                                                    .answer!
+                                                    .capitalizeFirst!
+                                                    .toString(),
+                                                trimLines: 2,
+                                                lessStyle: const TextStyle(
+                                                    height: 1.5,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontSize: 14,
+                                                    color: Red_d32416),
+                                                moreStyle: const TextStyle(
+                                                    height: 1.5,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontSize: 14,
+                                                    color: Colors.black87),
+                                                colorClickableText:
+                                                    Colors.red.shade300,
+                                                trimMode: TrimMode.Line,
+                                                trimCollapsedText:
+                                                    '  Read More',
+                                                trimExpandedText: '  Read Less',
+                                                delimiter: '',
+                                                style: const TextStyle(
+                                                    height: 1.5,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontSize: 16,
+                                                    color: Colors.black87),
+                                              ),
+                                              // child: Center(
+                                              //   child: setHelveticaMedium(
+                                              //       controller.details.value
+                                              //           .questions![1].answer!.capitalizeFirst!,
+                                              //       16.sp,
+                                              //       grey_aaaaaa,
+                                              //       FontWeight.w500,
+                                              //       FontStyle.normal,
+                                              //       -0.32,
+                                              //       controller.q1Expand.value == true ? null : 3),
+                                              // )
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                        controller.details.value.questions!.length >= 7
+                            ? GestureDetector(
+                                onTap: () {
+                                  // controller.q0Expand.value = false;
+                                  // controller.q1Expand.value = false;
+                                  controller.q7Expand.value =
+                                      !controller.q7Expand.value;
+                                  // controller.q3Expand.value = false;
+                                  // controller.q4Expand.value = false;
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: 16.h),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: white_ffffff,
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        border: Border.all(
+                                            color: light_grey_f2f2f2)),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 4.h),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 16.h, left: 16.w),
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(question_icon),
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: setHelceticaBold(
+                                                      controller
+                                                          .details
+                                                          .value
+                                                          .questions![7]
+                                                          .question!
+                                                          .toUpperCase(),
+                                                      12.sp,
+                                                      black_121212,
+                                                      FontWeight.w900,
+                                                      FontStyle.normal,
+                                                      0.0),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 12.h,
+                                                left: 40.w,
+                                                bottom: 12.w),
+                                            child: Container(
+                                                child: ReadMoreText(
+                                              controller
+                                                  .details
+                                                  .value
+                                                  .questions![7]
+                                                  .answer!
+                                                  .capitalizeFirst!
+                                                  .toString(),
+                                              trimLines: 2,
+                                              lessStyle: const TextStyle(
+                                                  height: 1.5,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                  fontSize: 14,
+                                                  color: Red_d32416),
+                                              moreStyle: const TextStyle(
+                                                  height: 1.5,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                  fontSize: 14,
+                                                  color: green_2cbea7),
+                                              colorClickableText:
+                                                  Colors.red.shade300,
+                                              trimMode: TrimMode.Line,
+                                              trimCollapsedText: '  Read More',
+                                              trimExpandedText: '  Read Less',
+                                              delimiter: '',
+                                              style: const TextStyle(
+                                                  height: 1.5,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                  fontSize: 16,
+                                                  color: grey_aaaaaa),
+                                            )),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                        controller.details.value.questions!.length >= 8
+                            ? GestureDetector(
+                                onTap: () {
+                                  // controller.q0Expand.value = false;
+                                  // controller.q1Expand.value = false;
+                                  // controller.q2Expand.value = false;
+                                  controller.q8Expand.value =
+                                      !controller.q8Expand.value;
+                                  // controller.q4Expand.value = false;
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: 16.h),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: white_ffffff,
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        border: Border.all(
+                                            color: light_grey_f2f2f2)),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 4.h),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 16.h, left: 16.w),
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(question_icon),
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                                Expanded(
+                                                  child: setHelceticaBold(
+                                                      controller
+                                                          .details
+                                                          .value
+                                                          .questions![8]
+                                                          .question!
+                                                          .toUpperCase(),
+                                                      12.sp,
+                                                      black_121212,
+                                                      FontWeight.w900,
+                                                      FontStyle.normal,
+                                                      0.0),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 12.h,
+                                                left: 40.w,
+                                                bottom: 12.h),
+                                            child: Container(
+                                                child: ReadMoreText(
+                                              controller
+                                                  .details
+                                                  .value
+                                                  .questions![8]
+                                                  .answer!
+                                                  .capitalizeFirst!
+                                                  .toString(),
+                                              trimLines: 2,
+                                              lessStyle: const TextStyle(
+                                                  height: 1.5,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                  fontSize: 14,
+                                                  color: Colors.black87),
+                                              moreStyle: const TextStyle(
+                                                  height: 1.5,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                  fontSize: 14,
+                                                  color: Colors.black87),
+                                              colorClickableText:
+                                                  Colors.red.shade300,
+                                              trimMode: TrimMode.Line,
+                                              trimCollapsedText: '  Read More',
+                                              trimExpandedText: '  Read Less',
+                                              delimiter: '',
+                                              style: const TextStyle(
+                                                  height: 1.5,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily:
+                                                      helveticaNeueNeue_medium,
+                                                  fontSize: 16,
+                                                  color: grey_aaaaaa),
+                                            )),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                        controller.details.value.questions!.length >= 9
+                            ? GestureDetector(
+                                onTap: () {
+                                  if (controller.details.value.questions![9]
+                                          .answer!.length >
+                                      9) {
+                                    // controller.q0Expand.value = false;
+                                    // controller.q1Expand.value = false;
+                                    // controller.q2Expand.value = false;
+                                    // controller.q3Expand.value = false;
+                                    controller.q9Expand.value =
+                                        !controller.q9Expand.value;
+                                  }
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: 16.h),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: white_ffffff,
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        border: Border.all(
+                                            color: light_grey_f2f2f2)),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 4.h),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 16.h, left: 16.w),
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(question_icon),
+                                                SizedBox(
+                                                  width: 8.w,
+                                                ),
+                                                Expanded(
+                                                  child: setHelceticaBold(
+                                                      controller
+                                                          .details
+                                                          .value
+                                                          .questions![9]
+                                                          .question!
+                                                          .toUpperCase(),
+                                                      12.sp,
+                                                      black_121212,
+                                                      FontWeight.w900,
+                                                      FontStyle.normal,
+                                                      0.0),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 12.h,
+                                                left: 40.w,
+                                                bottom: 12.h),
+                                            child: Container(
+                                              child: ReadMoreText(
+                                                controller
+                                                    .details
+                                                    .value
+                                                    .questions![9]
                                                     .answer!
                                                     .capitalizeFirst!
                                                     .toString(),

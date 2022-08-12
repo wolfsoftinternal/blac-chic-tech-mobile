@@ -67,6 +67,11 @@ class StepsController extends GetxController {
   Rx<TextEditingController> q3Controller = TextEditingController().obs;
   Rx<TextEditingController> q4Controller = TextEditingController().obs;
   Rx<TextEditingController> q5Controller = TextEditingController().obs;
+  Rx<TextEditingController> q6Controller = TextEditingController().obs;
+  Rx<TextEditingController> q7Controller = TextEditingController().obs;
+  Rx<TextEditingController> q8Controller = TextEditingController().obs;
+  Rx<TextEditingController> q9Controller = TextEditingController().obs;
+  Rx<TextEditingController> q10Controller = TextEditingController().obs;
 
   Rx<TextEditingController> addtionalController = TextEditingController().obs;
 
@@ -77,6 +82,11 @@ class StepsController extends GetxController {
   RxString ques3 = SharePreData.strQues3.obs;
   RxString ques4 = SharePreData.strQues4.obs;
   RxString ques5 = SharePreData.strQues5.obs;
+  RxString ques6 = SharePreData.strQues6.obs;
+  RxString ques7 = SharePreData.strQues7.obs;
+  RxString ques8 = SharePreData.strQues8.obs;
+  RxString ques9 = SharePreData.strQues9.obs;
+  RxString ques10 = SharePreData.strQues10.obs;
 
   RxList questions = [].obs;
 
