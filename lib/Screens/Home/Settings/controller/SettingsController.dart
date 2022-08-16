@@ -26,6 +26,7 @@ class SettingsController extends GetxController {
   RxBool instagram = true.obs;
   RxBool website = true.obs;
   RxBool about = true.obs;
+  RxBool ques0 = true.obs;
   RxBool ques1 = true.obs;
   RxBool ques2 = true.obs;
   RxBool ques3 = true.obs;

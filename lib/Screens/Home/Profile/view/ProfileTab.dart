@@ -368,123 +368,6 @@ class _ProfileTabState extends State<ProfileTab> {
                                   ),
                                 )
                               : Container(),
-                          controller.details.value.questions!.isNotEmpty
-                              ? controller.details.value.questions![0].answer !=
-                                      null
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        controller.q0Expand.value =
-                                            !controller.q0Expand.value;
-                                        // controller.q1Expand.value = false;
-                                        // controller.q2Expand.value = false;
-                                        // controller.q3Expand.value = false;
-                                        // controller.q4Expand.value = false;
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.only(bottom: 16.h),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: white_ffffff,
-                                              borderRadius:
-                                                  BorderRadius.circular(4.r),
-                                              border: Border.all(
-                                                  color: light_grey_f2f2f2)),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsets.only(bottom: 4.h),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 16.h, left: 16.w),
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                          question_icon),
-                                                      SizedBox(
-                                                        width: 8.w,
-                                                      ),
-                                                      Expanded(
-                                                        child: setHelceticaBold(
-                                                            controller
-                                                                .details
-                                                                .value
-                                                                .questions![0]
-                                                                .question!
-                                                                .toUpperCase(),
-                                                            12.sp,
-                                                            black_121212,
-                                                            FontWeight.w900,
-                                                            FontStyle.normal,
-                                                            0.0),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 12.h,
-                                                      left: 40.w,
-                                                      bottom: 12.h),
-                                                  child: Container(
-                                                    child: ReadMoreText(
-                                                      controller
-                                                          .details
-                                                          .value
-                                                          .questions![0]
-                                                          .answer!
-                                                          .capitalizeFirst!
-                                                          .toString(),
-                                                      trimLines: 2,
-                                                      lessStyle: const TextStyle(
-                                                          height: 1.5,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontSize: 14,
-                                                          color:
-                                                              Colors.black87),
-                                                      moreStyle: const TextStyle(
-                                                          height: 1.5,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontSize: 14,
-                                                          color:
-                                                              Colors.black87),
-                                                      colorClickableText:
-                                                          Colors.black87,
-                                                      trimMode: TrimMode.Line,
-                                                      trimCollapsedText:
-                                                          '  Read More',
-                                                      trimExpandedText:
-                                                          '  Read Less',
-                                                      delimiter: '',
-                                                      style: const TextStyle(
-                                                          height: 1.5,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily:
-                                                              helveticaNeueNeue_medium,
-                                                          fontSize: 16,
-                                                          color: grey_aaaaaa),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  : Container()
-                              : Container(),
                           controller.details.value.questions!.length > 2
                               ? GestureDetector(
                                   onTap: () {
@@ -569,7 +452,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                                       fontFamily:
                                                           helveticaNeueNeue_medium,
                                                       fontSize: 14,
-                                                      color: Colors.black87),
+                                                      color: green_2cbea7),
                                                   colorClickableText:
                                                       Colors.red.shade300,
                                                   trimMode: TrimMode.Line,
@@ -585,7 +468,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                                       fontFamily:
                                                           helveticaNeueNeue_medium,
                                                       fontSize: 16,
-                                                      color: Colors.black87),
+                                                      color: grey_aaaaaa),
                                                 ),
                                                 // child: Center(
                                                 //   child: setHelveticaMedium(
@@ -1150,7 +1033,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                                       fontFamily:
                                                           helveticaNeueNeue_medium,
                                                       fontSize: 16,
-                                                      color: Colors.black87),
+                                                      color: grey_aaaaaa),
                                                 ),
                                                 // child: Center(
                                                 //   child: setHelveticaMedium(

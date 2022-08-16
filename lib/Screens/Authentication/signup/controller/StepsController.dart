@@ -62,6 +62,7 @@ class StepsController extends GetxController {
   RxList pastCompanyDetails = [].obs;
   RxList educationalDetails = [].obs;
 
+  Rx<TextEditingController> q0Controller = TextEditingController().obs;
   Rx<TextEditingController> q1Controller = TextEditingController().obs;
   Rx<TextEditingController> q2Controller = TextEditingController().obs;
   Rx<TextEditingController> q3Controller = TextEditingController().obs;
@@ -72,6 +73,7 @@ class StepsController extends GetxController {
   Rx<TextEditingController> q8Controller = TextEditingController().obs;
   Rx<TextEditingController> q9Controller = TextEditingController().obs;
   Rx<TextEditingController> q10Controller = TextEditingController().obs;
+  Rx<TextEditingController> q11Controller = TextEditingController().obs;
 
   Rx<TextEditingController> addtionalController = TextEditingController().obs;
 
@@ -645,6 +647,7 @@ class StepsController extends GetxController {
       if (res.statusCode == 200) {
         res.stream.bytesToString().then((value) async {
           String strData = value;
+          print("Que and Ans :: " + strData);
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 

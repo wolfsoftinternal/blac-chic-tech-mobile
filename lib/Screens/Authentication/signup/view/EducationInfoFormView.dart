@@ -127,7 +127,7 @@ class _EducationState extends State<EducationInfoFormView> {
                     ),
                     // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
                     Center(
-                      child: Text(str_personal_info_lorem,
+                      child: Text(str_Education_Lbl,
                           style: TextStyle(
                               color: grey_aaaaaa,
                               fontWeight: FontWeight.w500,

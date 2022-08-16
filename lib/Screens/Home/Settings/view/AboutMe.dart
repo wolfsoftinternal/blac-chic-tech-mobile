@@ -1,4 +1,5 @@
 import 'package:blackchecktech/Layout/BlackButton.dart';
+import 'package:blackchecktech/Layout/Chip.dart';
 import 'package:blackchecktech/Layout/InputTextLayoutDemo.dart';
 import 'package:blackchecktech/Layout/ToolbarWithHeaderCenterTitle.dart';
 import 'package:blackchecktech/Screens/Authentication/login/model/SignupModel.dart';
@@ -19,10 +20,12 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:material_tag_editor/tag_editor.dart';
 import 'package:readmore/readmore.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
@@ -114,46 +117,46 @@ class _AboutMeState extends State<AboutMe> {
         myModel!.data!.currentJobs!.website ?? "";
     // stepsController.q1Controller.value.text = myModel!.data!.aboutUs ?? "";
     stepsController.q1Controller.value.text =
-        myModel!.data!.questions!.length > 1
-            ? myModel!.data!.questions![0].answer ?? ""
-            : "";
-    stepsController.q2Controller.value.text =
         myModel!.data!.questions!.length > 2
             ? myModel!.data!.questions![1].answer ?? ""
             : "";
-    stepsController.q3Controller.value.text =
+    stepsController.q2Controller.value.text =
         myModel!.data!.questions!.length > 3
             ? myModel!.data!.questions![2].answer ?? ""
             : "";
-
-    stepsController.q4Controller.value.text =
+    stepsController.q3Controller.value.text =
         myModel!.data!.questions!.length > 4
             ? myModel!.data!.questions![3].answer ?? ""
             : "";
-    stepsController.q5Controller.value.text =
+
+    stepsController.q4Controller.value.text =
         myModel!.data!.questions!.length > 5
             ? myModel!.data!.questions![4].answer ?? ""
             : "";
-    stepsController.q6Controller.value.text =
+    stepsController.q5Controller.value.text =
         myModel!.data!.questions!.length > 6
             ? myModel!.data!.questions![5].answer ?? ""
             : "";
-    stepsController.q7Controller.value.text =
+    stepsController.q6Controller.value.text =
         myModel!.data!.questions!.length > 7
             ? myModel!.data!.questions![6].answer ?? ""
             : "";
-    stepsController.q8Controller.value.text =
+    stepsController.q7Controller.value.text =
         myModel!.data!.questions!.length > 8
             ? myModel!.data!.questions![7].answer ?? ""
             : "";
-    stepsController.q9Controller.value.text =
+    stepsController.q8Controller.value.text =
         myModel!.data!.questions!.length > 9
             ? myModel!.data!.questions![8].answer ?? ""
             : "";
-    stepsController.q10Controller.value.text =
+    stepsController.q9Controller.value.text =
         myModel!.data!.questions!.length > 10
             ? myModel!.data!.questions![9].answer ?? ""
             : "";
+    stepsController.q10Controller.value.text =
+        // myModel!.data!.questions!.length > 11
+        //  ?
+        myModel!.data!.questions![10].answer.toString();
 
     setState(() {});
     if (myModel != null) {
@@ -213,6 +216,12 @@ class _AboutMeState extends State<AboutMe> {
     }
 
     setState(() {});
+  }
+
+  _onDelete(index) {
+    setState(() {
+      stepsController.tagValues.removeAt(index);
+    });
   }
 
   @override
@@ -2188,6 +2197,197 @@ class _AboutMeState extends State<AboutMe> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues0
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                print("QC Click");
+                                                setState(() {
+                                                  controller.ques0.value =
+                                                      !controller.ques0.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques2.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques0.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q0Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TagEditor(
+                                                length: stepsController
+                                                    .tagValues.length,
+                                                // hasAddButton: true,
+                                                // resetTextOnSubmitted: true,
+                                                delimiters: const [',', ' '],
+                                                inputFormatters: <
+                                                    TextInputFormatter>[
+                                                  FilteringTextInputFormatter
+                                                      .allow(RegExp(
+                                                          r'^[a-z A-Z]+$')),
+                                                ],
+                                                textStyle: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helvetica_neu_bold,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                inputDecoration:
+                                                    InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helvetica_neu_bold,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 14.sp),
+                                                ),
+                                                onTagChanged: (newValue) {
+                                                  setState(() {
+                                                    stepsController.tagValues
+                                                        .add(newValue);
+                                                  });
+                                                },
+                                                onSubmitted: (newValue) {
+                                                  if (newValue.toString() !=
+                                                      '') {
+                                                    setState(() {
+                                                      stepsController.tagValues
+                                                          .add(newValue);
+                                                      stepsController
+                                                              .q0Controller
+                                                              .value
+                                                              .text =
+                                                          stepsController
+                                                              .tagValues
+                                                              .join(', ');
+                                                    });
+                                                  }
+                                                },
+                                                tagBuilder: (context, index) =>
+                                                    ChipLayout(
+                                                  index: index,
+                                                  label: stepsController
+                                                      .tagValues[index],
+                                                  onDeleted: _onDelete,
+                                                ),
+                                              ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                // stepsController.q1Controller.value.text == ""
+                                //     ? Container()
+                                //     :
+
+                                SizedBox(
+                                  height: 16.h,
+                                ),
                                 Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(4.r),
@@ -4262,52 +4462,6 @@ class _AboutMeState extends State<AboutMe> {
         endYearStatus = false;
       }
     }
-
-    if (stepsController.q1Controller.value.text.isNotEmpty) {
-      ques.add({
-        '"question"': '"${myModel!.data!.questions![0].question!}"',
-        '"answer"': '"${stepsController.q1Controller.value.text}"',
-      });
-    } else {
-      q1 = false;
-    }
-
-    if (stepsController.q2Controller.value.text.isNotEmpty) {
-      ques.add({
-        '"question"': '"${myModel!.data!.questions![1].question!}"',
-        '"answer"': '"${stepsController.q2Controller.value.text}"',
-      });
-    } else {
-      q2 = false;
-    }
-
-    if (stepsController.q3Controller.value.text.isNotEmpty) {
-      ques.add({
-        '"question"': '"${myModel!.data!.questions![2].question!}"',
-        '"answer"': '"${stepsController.q3Controller.value.text}"',
-      });
-    } else {
-      q3 = false;
-    }
-
-    if (stepsController.q4Controller.value.text.isNotEmpty) {
-      ques.add({
-        '"question"': '"${myModel!.data!.questions![3].question!}"',
-        '"answer"': '"${stepsController.q4Controller.value.text}"',
-      });
-    } else {
-      q4 = false;
-    }
-
-    if (stepsController.q5Controller.value.text.isNotEmpty) {
-      ques.add({
-        '"question"': '"${myModel!.data!.questions![4].question!}"',
-        '"answer"': '"${stepsController.q5Controller.value.text}"',
-      });
-    } else {
-      q5 = false;
-    }
-
     if (stepsController.currentTitleController.value.text.isEmpty) {
       snackBar(context, 'Enter current job title');
       return false;

@@ -24,6 +24,16 @@ var str_Experience = "Experience";
 var str_continue = "Continue";
 var str_personal_info_lorem =
     "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Massa nulla.";
+var additional_Question_Lbl2 =
+    "Make an impression here. Let your personality soar.";
+var additional_Question_Lbl1 =
+    "Make an impression in this section. Let your personality soar.";
+var str_Education_Lbl =
+    "Education is an important piece of the jigsaw in building your profile";
+var str_Experience_lbl =
+    "Are you just getting your feet wet or are you a veteran in your industry ?";
+var str_personal_Information =
+    "This is your elevator pitch. Tell us how awesome you are and make a connection.";
 var str_pwd_validation_text =
     "Password should be at least 8 characters long and contain a mixture of letters, numbers and other characters.";
 var str_about = "About you";

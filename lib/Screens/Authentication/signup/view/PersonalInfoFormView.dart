@@ -90,7 +90,7 @@ class _PersonalInformationState extends State<PersonalInfoFormView> {
                       ),
                       // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
                       Center(
-                        child: Text(str_personal_info_lorem,
+                        child: Text(str_personal_Information,
                             style: TextStyle(
                                 color: grey_aaaaaa,
                                 fontWeight: FontWeight.w500,

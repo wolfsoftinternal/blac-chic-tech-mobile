@@ -139,7 +139,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                       ),
                       // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
                       Center(
-                        child: Text(str_personal_info_lorem,
+                        child: Text(str_Experience_lbl,
                             style: TextStyle(
                                 color: grey_aaaaaa,
                                 fontWeight: FontWeight.w500,
@@ -161,7 +161,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                       //     TextInputType.emailAddress),
 
                       // YOUR CURRENT JOB
-                      Text("YOUR CURRENT JOB",
+                      Text("YOUR CURRENT ROLE",
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w900,
@@ -440,7 +440,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         height: 32.h,
                       ),
 
-                      Text("YOUR PAST JOBS",
+                      Text("YOUR PAST ROLE",
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w900,
@@ -453,7 +453,7 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                         height: 4.h,
                       ),
                       // you can add more then one.
-                      Text("you can add more then one.",
+                      Text("You can list more than one.",
                           style: TextStyle(
                               color: const Color(0xffaaaaaa),
                               fontWeight: FontWeight.w500,
