@@ -112,7 +112,7 @@ class _AboutMeState extends State<AboutMe> {
         myModel!.data!.currentJobs!.companyName ?? "";
     stepsController.currentCompanyWebsiteController.value.text =
         myModel!.data!.currentJobs!.website ?? "";
-    stepsController.q1Controller.value.text = myModel!.data!.aboutUs ?? "";
+    // stepsController.q1Controller.value.text = myModel!.data!.aboutUs ?? "";
     stepsController.q1Controller.value.text =
         myModel!.data!.questions!.length > 1
             ? myModel!.data!.questions![0].answer ?? ""
@@ -125,8 +125,7 @@ class _AboutMeState extends State<AboutMe> {
         myModel!.data!.questions!.length > 3
             ? myModel!.data!.questions![2].answer ?? ""
             : "";
-    // print("stepsController.q3Controller.value :: " +
-    //     myModel!.data!.questions![2].answer.toString());
+
     stepsController.q4Controller.value.text =
         myModel!.data!.questions!.length > 4
             ? myModel!.data!.questions![3].answer ?? ""
@@ -880,7 +879,7 @@ class _AboutMeState extends State<AboutMe> {
                                                                       context)
                                                                   .size
                                                                   .width *
-                                                              0.7,
+                                                              0.65,
                                                           child: Padding(
                                                             padding:
                                                                 EdgeInsets.only(
@@ -2189,143 +2188,152 @@ class _AboutMeState extends State<AboutMe> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (myModel!.data!.questions!.length > 1)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData.strQues1
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  print("QC Click");
-                                                  setState(() {
-                                                    controller.ques1.value =
-                                                        !controller.ques1.value;
-                                                    controller.ques2.value =
-                                                        true;
-                                                    controller.ques3.value =
-                                                        true;
-                                                    controller.ques4.value =
-                                                        true;
-                                                    controller.ques5.value =
-                                                        true;
-                                                    controller.ques6.value =
-                                                        true;
-                                                    controller.ques7.value =
-                                                        true;
-                                                    controller.ques8.value =
-                                                        true;
-                                                    controller.ques9.value =
-                                                        true;
-                                                    controller.ques10.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues1
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                print("QC Click");
+                                                setState(() {
+                                                  controller.ques1.value =
+                                                      !controller.ques1.value;
+                                                  controller.ques2.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques1.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController.q1Controller
-                                                        .value.text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        Colors.red.shade300,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q1Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques1.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q1Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q1Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: null,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -2333,195 +2341,181 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: null,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques1.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques1.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques1.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques1.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
+                                ),
                                 // stepsController.q1Controller.value.text == ""
                                 //     ? Container()
                                 //     :
-                                if (myModel!.data!.questions!.length > 1)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+
+                                SizedBox(
+                                  height: 16.h,
+                                ),
                                 // stepsController.q1Controller.value.text == ""
                                 //     ? Container()
                                 //     :
-                                if (myModel!.data!.questions!.length > 2)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData.strQues2
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.ques2.value =
-                                                        !controller.ques2.value;
-                                                    controller.ques1.value =
-                                                        true;
-                                                    controller.ques3.value =
-                                                        true;
-                                                    controller.ques4.value =
-                                                        true;
-                                                    controller.ques5.value =
-                                                        true;
-                                                    controller.ques6.value =
-                                                        true;
-                                                    controller.ques7.value =
-                                                        true;
-                                                    controller.ques8.value =
-                                                        true;
-                                                    controller.ques9.value =
-                                                        true;
-                                                    controller.ques10.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues2
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  controller.ques2.value =
+                                                      !controller.ques2.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques2.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController.q2Controller
-                                                        .value.text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        opcity_black_121212,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q2Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques2.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q2Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      opcity_black_121212,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q2Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: 10,
+                                                minLines: 1,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -2529,196 +2523,181 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques2.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques2.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques2.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques2.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
+                                ),
                                 // stepsController.q2Controller.value.text == ""
                                 //     ? Container()
                                 //     :
-                                if (myModel!.data!.questions!.length > 2)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+
+                                SizedBox(
+                                  height: 16.h,
+                                ),
                                 // stepsController.q2Controller.value.text == ""
                                 //     ? Container()
                                 //     :
-                                if (myModel!.data!.questions!.length > 3)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData.strQues3
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.ques3.value =
-                                                        !controller.ques3.value;
-                                                    controller.ques1.value =
-                                                        true;
-                                                    controller.ques2.value =
-                                                        true;
-                                                    controller.ques4.value =
-                                                        true;
-                                                    controller.ques5.value =
-                                                        true;
-                                                    controller.ques6.value =
-                                                        true;
-                                                    controller.ques7.value =
-                                                        true;
-                                                    controller.ques8.value =
-                                                        true;
-                                                    controller.ques9.value =
-                                                        true;
-                                                    controller.ques10.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues3
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  controller.ques3.value =
+                                                      !controller.ques3.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques2.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques3.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController.q3Controller
-                                                        .value.text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        Colors.red.shade300,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q3Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques3.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q3Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q3Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: 10,
+                                                minLines: 1,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -2726,197 +2705,182 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques3.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques3.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques3.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques3.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
+                                ),
                                 // stepsController.q3Controller.value.text == ""
                                 //     ? Container()
                                 //     :
-                                if (myModel!.data!.questions!.length > 3)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+
+                                SizedBox(
+                                  height: 16.h,
+                                ),
                                 // stepsController.q3Controller.value.text == ""
                                 //     ? Container()
                                 //
                                 //  :
-                                if (myModel!.data!.questions!.length > 4)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData.strQues4
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.ques4.value =
-                                                        !controller.ques4.value;
-                                                    controller.ques1.value =
-                                                        true;
-                                                    controller.ques3.value =
-                                                        true;
-                                                    controller.ques2.value =
-                                                        true;
-                                                    controller.ques5.value =
-                                                        true;
-                                                    controller.ques6.value =
-                                                        true;
-                                                    controller.ques7.value =
-                                                        true;
-                                                    controller.ques8.value =
-                                                        true;
-                                                    controller.ques9.value =
-                                                        true;
-                                                    controller.ques10.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues4
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  controller.ques4.value =
+                                                      !controller.ques4.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques2.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques4.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController.q4Controller
-                                                        .value.text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        Colors.red.shade300,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q4Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques4.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q4Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q4Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: 10,
+                                                minLines: 1,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -2924,199 +2888,181 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques4.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques4.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques4.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques4.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
+                                ),
                                 // stepsController.q4Controller.value.text == ""
                                 //     ? Container()
                                 //     :
-                                if (myModel!.data!.questions!.length > 4)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+
+                                SizedBox(
+                                  height: 16.h,
+                                ),
                                 // stepsController.q4Controller.value.text == ""
                                 //     ? Container()
                                 //     :
-                                if (myModel!.data!.questions!.length > 5)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              if (myModel!
-                                                      .data!.questions!.length >
-                                                  5)
-                                                SizedBox(
-                                                  width: 8.w,
-                                                ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData.strQues5
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.ques5.value =
-                                                        !controller.ques5.value;
-                                                    controller.ques1.value =
-                                                        true;
-                                                    controller.ques3.value =
-                                                        true;
-                                                    controller.ques4.value =
-                                                        true;
-                                                    controller.ques2.value =
-                                                        true;
-                                                    controller.ques6.value =
-                                                        true;
-                                                    controller.ques7.value =
-                                                        true;
-                                                    controller.ques8.value =
-                                                        true;
-                                                    controller.ques9.value =
-                                                        true;
-                                                    controller.ques10.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues5
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  controller.ques5.value =
+                                                      !controller.ques5.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques2.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques5.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController.q5Controller
-                                                        .value.text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        Colors.red.shade300,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q5Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques5.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q5Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q5Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: 10,
+                                                minLines: 1,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -3124,195 +3070,175 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques5.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques5.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques5.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques5.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
+                                ),
 
-                                if (myModel!.data!.questions!.length > 5)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
 
-                                if (myModel!.data!.questions!.length > 6)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              if (myModel!
-                                                      .data!.questions!.length >
-                                                  6)
-                                                SizedBox(
-                                                  width: 8.w,
-                                                ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData.strQues6
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.ques6.value =
-                                                        !controller.ques6.value;
-                                                    controller.ques1.value =
-                                                        true;
-                                                    controller.ques3.value =
-                                                        true;
-                                                    controller.ques4.value =
-                                                        true;
-                                                    controller.ques5.value =
-                                                        true;
-                                                    controller.ques2.value =
-                                                        true;
-                                                    controller.ques7.value =
-                                                        true;
-                                                    controller.ques8.value =
-                                                        true;
-                                                    controller.ques9.value =
-                                                        true;
-                                                    controller.ques10.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues6
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  controller.ques6.value =
+                                                      !controller.ques6.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques2.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques6.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController.q6Controller
-                                                        .value.text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        Colors.red.shade300,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q6Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques6.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q6Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q6Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: 10,
+                                                minLines: 1,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -3320,195 +3246,175 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques6.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques6.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques6.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques6.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
+                                ),
 
-                                if (myModel!.data!.questions!.length > 6)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
 
-                                if (myModel!.data!.questions!.length > 7)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              if (myModel!
-                                                      .data!.questions!.length >
-                                                  7)
-                                                SizedBox(
-                                                  width: 8.w,
-                                                ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData.strQues7
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.ques7.value =
-                                                        !controller.ques7.value;
-                                                    controller.ques1.value =
-                                                        true;
-                                                    controller.ques3.value =
-                                                        true;
-                                                    controller.ques4.value =
-                                                        true;
-                                                    controller.ques5.value =
-                                                        true;
-                                                    controller.ques6.value =
-                                                        true;
-                                                    controller.ques2.value =
-                                                        true;
-                                                    controller.ques8.value =
-                                                        true;
-                                                    controller.ques9.value =
-                                                        true;
-                                                    controller.ques10.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues7
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  controller.ques7.value =
+                                                      !controller.ques7.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques2.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques7.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController.q7Controller
-                                                        .value.text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        Colors.red.shade300,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q7Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques7.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q7Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q7Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: 10,
+                                                minLines: 1,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -3516,194 +3422,175 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques7.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques7.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques7.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques7.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
+                                ),
 
-                                if (myModel!.data!.questions!.length > 7)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
-                                if (myModel!.data!.questions!.length > 8)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              if (myModel!
-                                                      .data!.questions!.length >
-                                                  8)
-                                                SizedBox(
-                                                  width: 8.w,
-                                                ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData.strQues8
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.ques8.value =
-                                                        !controller.ques8.value;
-                                                    controller.ques1.value =
-                                                        true;
-                                                    controller.ques3.value =
-                                                        true;
-                                                    controller.ques4.value =
-                                                        true;
-                                                    controller.ques5.value =
-                                                        true;
-                                                    controller.ques6.value =
-                                                        true;
-                                                    controller.ques7.value =
-                                                        true;
-                                                    controller.ques2.value =
-                                                        true;
-                                                    controller.ques9.value =
-                                                        true;
-                                                    controller.ques10.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues8
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  controller.ques8.value =
+                                                      !controller.ques8.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques2.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques8.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController.q8Controller
-                                                        .value.text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        Colors.red.shade300,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q8Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques8.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q8Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q8Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: 10,
+                                                minLines: 1,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -3711,194 +3598,175 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques8.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques8.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques8.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques8.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
+                                ),
 
-                                if (myModel!.data!.questions!.length > 8)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
-                                if (myModel!.data!.questions!.length > 9)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              if (myModel!
-                                                      .data!.questions!.length >
-                                                  9)
-                                                SizedBox(
-                                                  width: 8.w,
-                                                ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData.strQues9
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.ques9.value =
-                                                        !controller.ques9.value;
-                                                    controller.ques1.value =
-                                                        true;
-                                                    controller.ques3.value =
-                                                        true;
-                                                    controller.ques4.value =
-                                                        true;
-                                                    controller.ques5.value =
-                                                        true;
-                                                    controller.ques6.value =
-                                                        true;
-                                                    controller.ques7.value =
-                                                        true;
-                                                    controller.ques8.value =
-                                                        true;
-                                                    controller.ques2.value =
-                                                        true;
-                                                    controller.ques10.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues9
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  controller.ques9.value =
+                                                      !controller.ques9.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques2.value = true;
+                                                  controller.ques10.value =
+                                                      true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques9.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController.q9Controller
-                                                        .value.text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        Colors.red.shade300,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q9Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques9.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q9Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q9Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: 10,
+                                                minLines: 1,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -3906,198 +3774,174 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques9.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques9.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques9.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques9.value = true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
-                                if (myModel!.data!.questions!.length > 9)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+                                ),
 
-                                if (myModel!.data!.questions!.length > 10)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        color: white_ffffff,
-                                        border: Border.all(
-                                            width: 1,
-                                            color: light_grey_f2f2f2)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                question_icon,
-                                                width: 16.w,
-                                                height: 16.h,
-                                              ),
-                                              if (myModel!
-                                                      .data!.questions!.length >
-                                                  10)
-                                                SizedBox(
-                                                  width: 8.w,
-                                                ),
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: // EDUCATION
-                                                      Text(
-                                                          SharePreData
-                                                              .strQues10
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  black_121212,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
-                                                              fontFamily:
-                                                                  helveticaNeue,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontSize: 12.sp),
-                                                          textAlign:
-                                                              TextAlign.left)),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.ques10.value =
-                                                        !controller
-                                                            .ques10.value;
-                                                    controller.ques1.value =
-                                                        true;
-                                                    controller.ques3.value =
-                                                        true;
-                                                    controller.ques4.value =
-                                                        true;
-                                                    controller.ques5.value =
-                                                        true;
-                                                    controller.ques6.value =
-                                                        true;
-                                                    controller.ques7.value =
-                                                        true;
-                                                    controller.ques8.value =
-                                                        true;
-                                                    controller.ques9.value =
-                                                        true;
-                                                    controller.ques2.value =
-                                                        true;
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  width: 24.w,
-                                                  height: 24.w,
-                                                  child: Center(
-                                                    child: SvgPicture.asset(
-                                                      icon_edit_blue,
-                                                      width: 12.w,
-                                                      height: 12.w,
-                                                    ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: white_ffffff,
+                                      border: Border.all(
+                                          width: 1, color: light_grey_f2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              question_icon,
+                                              width: 16.w,
+                                              height: 16.h,
+                                            ),
+                                            SizedBox(
+                                              width: 8.w,
+                                            ),
+                                            Expanded(
+                                                flex: 1,
+                                                child: // EDUCATION
+                                                    Text(
+                                                        SharePreData.strQues10
+                                                            .toUpperCase(),
+                                                        style: TextStyle(
+                                                            color: black_121212,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            fontFamily:
+                                                                helveticaNeue,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontSize: 14.sp),
+                                                        textAlign:
+                                                            TextAlign.left)),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  controller.ques10.value =
+                                                      !controller.ques10.value;
+                                                  controller.ques1.value = true;
+                                                  controller.ques3.value = true;
+                                                  controller.ques4.value = true;
+                                                  controller.ques5.value = true;
+                                                  controller.ques6.value = true;
+                                                  controller.ques7.value = true;
+                                                  controller.ques8.value = true;
+                                                  controller.ques9.value = true;
+                                                  controller.ques2.value = true;
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 24.w,
+                                                height: 24.w,
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    icon_edit_blue,
+                                                    width: 12.w,
+                                                    height: 12.w,
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          controller.ques10.value == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 24.w),
-                                                  child: ReadMoreText(
-                                                    stepsController
-                                                        .q10Controller
-                                                        .value
-                                                        .text,
-                                                    trimLines: 2,
-                                                    lessStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    moreStyle: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 14,
-                                                        color: Colors.black87),
-                                                    colorClickableText:
-                                                        Colors.red.shade300,
-                                                    trimMode: TrimMode.Line,
-                                                    trimCollapsedText:
-                                                        '  Read More',
-                                                    trimExpandedText:
-                                                        '  Read Less',
-                                                    delimiter: '',
-                                                    style: const TextStyle(
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontSize: 16,
-                                                        color: grey_aaaaaa),
-                                                  ))
-                                              : TextField(
-                                                  controller: stepsController
-                                                      .q10Controller.value,
-                                                  autofocus: true,
-                                                  style: TextStyle(
-                                                      color: black_121212,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        controller.ques10.value == true
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 24.w),
+                                                child: ReadMoreText(
+                                                  stepsController
+                                                      .q10Controller.value.text,
+                                                  trimLines: 2,
+                                                  lessStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  moreStyle: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 14,
+                                                      color: Colors.black87),
+                                                  colorClickableText:
+                                                      Colors.red.shade300,
+                                                  trimMode: TrimMode.Line,
+                                                  trimCollapsedText:
+                                                      '  Read More',
+                                                  trimExpandedText:
+                                                      '  Read Less',
+                                                  delimiter: '',
+                                                  style: const TextStyle(
+                                                      height: 1.5,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          helveticaNeueNeue_medium,
+                                                      fontSize: 16,
+                                                      color: grey_aaaaaa),
+                                                ))
+                                            : TextField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: stepsController
+                                                    .q10Controller.value,
+                                                autofocus: true,
+                                                style: TextStyle(
+                                                    color: black_121212,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily:
+                                                        helveticaNeueNeue_medium,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp),
+                                                maxLines: 10,
+                                                minLines: 1,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
+                                                  prefixIconConstraints:
+                                                      BoxConstraints(
+                                                          maxHeight: 21.h,
+                                                          maxWidth: 38.w),
+                                                  isDense: true,
+                                                  hintText:
+                                                      'Please type here..',
+                                                  hintStyle: TextStyle(
+                                                      color: grey_aaaaaa,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily:
@@ -4105,58 +3949,145 @@ class _AboutMeState extends State<AboutMe> {
                                                       fontStyle:
                                                           FontStyle.normal,
                                                       fontSize: 14.sp),
-                                                  maxLines: 10,
-                                                  minLines: 1,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 15,
-                                                            vertical: 15),
-                                                    prefixIconConstraints:
-                                                        BoxConstraints(
-                                                            maxHeight: 21.h,
-                                                            maxWidth: 38.w),
-                                                    isDense: true,
-                                                    hintText:
-                                                        'Please type here..',
-                                                    hintStyle: TextStyle(
-                                                        color: grey_aaaaaa,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily:
-                                                            helveticaNeueNeue_medium,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontSize: 14.sp),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  cursorColor: black_121212,
-                                                  onEditingComplete: () {
-                                                    controller.ques10.value =
-                                                        true;
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusScope.of(context)
-                                                        .nextFocus();
-                                                  },
-                                                  onSubmitted: (String value) {
-                                                    controller.ques10.value =
-                                                        true;
-                                                  },
+                                                  border: InputBorder.none,
                                                 ),
-                                        ],
-                                      ),
+                                                cursorColor: black_121212,
+                                                onEditingComplete: () {
+                                                  controller.ques10.value =
+                                                      true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                                onSubmitted: (String value) {
+                                                  controller.ques10.value =
+                                                      true;
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ),
+                                ),
 
-                                if (myModel!.data!.questions!.length > 10)
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
 
                                 BlackButton("Save", white_ffffff, () {
+                                  controller.ques1.value = true;
+                                  controller.ques2.value = true;
+                                  controller.ques3.value = true;
+                                  controller.ques4.value = true;
+                                  controller.ques5.value = true;
+                                  controller.ques6.value = true;
+                                  controller.ques7.value = true;
+                                  controller.ques8.value = true;
+                                  controller.ques9.value = true;
+                                  controller.ques10.value = true;
                                   FocusScope.of(context).unfocus();
+                                  if (stepsController
+                                      .q1Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues1}"',
+                                      '"answer"':
+                                          '"${stepsController.q1Controller.value.text}"',
+                                    });
+                                  }
+                                  if (stepsController
+                                      .q2Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues2}"',
+                                      '"answer"':
+                                          '"${stepsController.q2Controller.value.text}"',
+                                    });
+                                  }
+                                  if (stepsController
+                                      .q3Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues3}"',
+                                      '"answer"':
+                                          '"${stepsController.q3Controller.value.text}"',
+                                    });
+                                  }
+                                  if (stepsController
+                                      .q4Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues4}"',
+                                      '"answer"':
+                                          '"${stepsController.q4Controller.value.text}"',
+                                    });
+                                  }
+                                  if (stepsController
+                                      .q5Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues5}"',
+                                      '"answer"':
+                                          '"${stepsController.q5Controller.value.text}"',
+                                    });
+                                  }
+                                  if (stepsController
+                                      .q6Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues6}"',
+                                      '"answer"':
+                                          '"${stepsController.q6Controller.value.text}"',
+                                    });
+                                  }
+                                  if (stepsController
+                                      .q7Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues7}"',
+                                      '"answer"':
+                                          '"${stepsController.q7Controller.value.text}"',
+                                    });
+                                  }
+                                  if (stepsController
+                                      .q8Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues8}"',
+                                      '"answer"':
+                                          '"${stepsController.q8Controller.value.text}"',
+                                    });
+                                  }
+                                  if (stepsController
+                                      .q9Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues9}"',
+                                      '"answer"':
+                                          '"${stepsController.q9Controller.value.text}"',
+                                    });
+                                  }
+                                  if (stepsController
+                                      .q10Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues10}"',
+                                      '"answer"':
+                                          '"${stepsController.q10Controller.value.text}"',
+                                    });
+                                  }
+
+                                  print(ques);
+
+                                  List itemList = [];
+
+                                  itemList.clear();
+                                  for (var item in ques) {
+                                    print(ques.toString());
+                                    itemList.add(item);
+                                  }
+                                  stepsController.questions.clear();
+                                  stepsController.questions.value = itemList;
                                   if (checkValidation()) {
                                     // if (stepsController
                                     //         .industryController.value.text !=
@@ -4239,8 +4170,10 @@ class _AboutMeState extends State<AboutMe> {
                                       stepsController.questions.clear();
                                       stepsController.questions.value =
                                           itemQuesList;
-
                                       checkNet(context).then((value) {
+                                        stepsController.questionsInfoAPI(
+                                            context, 'normal');
+                                      }).then((value) {
                                         stepsController.personalInfoAPI(
                                             context, 'about_us');
                                       });
