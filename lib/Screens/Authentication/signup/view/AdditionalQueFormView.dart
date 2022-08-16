@@ -96,7 +96,7 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       ),
                       // Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nulla.
                       Center(
-                        child: Text(str_personal_info_lorem,
+                        child: Text(additional_Question_Lbl1,
                             style: TextStyle(
                                 color: grey_aaaaaa,
                                 fontWeight: FontWeight.w500,
@@ -109,6 +109,40 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                       ),
                       SizedBox(
                         height: 40.h,
+                      ),
+
+                      GestureDetector(
+                        onTap: () {
+                          showDoneDialog(context, 'q0');
+                        },
+                        child: Container(
+                          height: 48.h,
+                          width: double.infinity,
+                          decoration: EditTextDecoration,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              child: Text(controller.ques0.value,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                      color: controller.ques0.value
+                                              .contains(SharePreData.strQues0)
+                                          ? grey_aaaaaa
+                                          : black_121212,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: helveticaNeueNeue_medium,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 14.sp),
+                                  textAlign: TextAlign.left),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 16.h,
                       ),
 
                       GestureDetector(
@@ -437,7 +471,9 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
             Padding(
               padding: EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
-                if (controller.q1Controller.value.text == "" ||
+                if (controller.q0Controller.value.text == "" ||
+                    controller.q0Controller.value.text.isEmpty &&
+                        controller.q1Controller.value.text == "" ||
                     controller.q1Controller.value.text.isEmpty &&
                         controller.q2Controller.value.text == "" ||
                     controller.q2Controller.value.text.isEmpty &&
@@ -457,11 +493,19 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                     controller.q9Controller.value.text.isEmpty &&
                         controller.q10Controller.value.text == "" ||
                     controller.q10Controller.value.text.isEmpty) {
+                  print(controller.q0Controller.value.text);
                   snackBar(context, 'Please answer the questions');
                 } else {
                   List ques = [{}];
                   if (ques[0].toString() == "{}") {
                     ques.removeAt(0);
+                  }
+
+                  if (controller.q0Controller.value.text.isNotEmpty) {
+                    ques.add({
+                      '"question"': '"${SharePreData.strQues0}"',
+                      '"answer"': '"${controller.q0Controller.value.text}"',
+                    });
                   }
 
                   if (controller.q1Controller.value.text.isNotEmpty) {

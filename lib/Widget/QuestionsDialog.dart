@@ -46,37 +46,42 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                     top: 24.h, bottom: 16.h, left: 24.w, right: 24.w),
                 child: Center(
                   child: Text(
-                      widget.quesIndex == 'q1'
-                          ? SharePreData.strQues1.toUpperCase()
-                          : widget.quesIndex == 'q2'
-                              ? SharePreData.strQues2.toUpperCase()
-                              : widget.quesIndex == 'q3'
-                                  ? SharePreData.strQues3.toUpperCase()
-                                  : widget.quesIndex == 'q4'
-                                      ? SharePreData.strQues4.toUpperCase()
-                                      : widget.quesIndex == 'q5'
-                                          ? SharePreData.strQues5.toUpperCase()
-                                          : widget.quesIndex == 'q6'
-                                              ? SharePreData.strQues6
+                      widget.quesIndex == 'q0'
+                          ? SharePreData.strQues0.toUpperCase()
+                          : widget.quesIndex == 'q1'
+                              ? SharePreData.strQues1.toUpperCase()
+                              : widget.quesIndex == 'q2'
+                                  ? SharePreData.strQues2.toUpperCase()
+                                  : widget.quesIndex == 'q3'
+                                      ? SharePreData.strQues3.toUpperCase()
+                                      : widget.quesIndex == 'q4'
+                                          ? SharePreData.strQues4.toUpperCase()
+                                          : widget.quesIndex == 'q5'
+                                              ? SharePreData.strQues5
                                                   .toUpperCase()
-                                              : widget.quesIndex == 'q7'
-                                                  ? SharePreData.strQues7
+                                              : widget.quesIndex == 'q6'
+                                                  ? SharePreData.strQues6
                                                       .toUpperCase()
-                                                  : widget.quesIndex == 'q8'
-                                                      ? SharePreData.strQues8
+                                                  : widget.quesIndex == 'q7'
+                                                      ? SharePreData.strQues7
                                                           .toUpperCase()
-                                                      : widget.quesIndex == 'q9'
+                                                      : widget.quesIndex == 'q8'
                                                           ? SharePreData
-                                                              .strQues9
+                                                              .strQues8
                                                               .toUpperCase()
                                                           : widget.quesIndex ==
-                                                                  'q10'
+                                                                  'q9'
                                                               ? SharePreData
-                                                                  .strQues10
+                                                                  .strQues9
                                                                   .toUpperCase()
-                                                              : SharePreData
-                                                                  .strQues1
-                                                                  .toUpperCase(),
+                                                              : widget.quesIndex ==
+                                                                      'q10'
+                                                                  ? SharePreData
+                                                                      .strQues10
+                                                                      .toUpperCase()
+                                                                  : SharePreData
+                                                                      .strQues1
+                                                                      .toUpperCase(),
                       style: TextStyle(
                           color: black_121212,
                           fontWeight: FontWeight.w900,
@@ -92,7 +97,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                 color: Colors.black12,
               ),
 
-              widget.quesIndex == 'q4'
+              widget.quesIndex == 'q0'
                   ? Expanded(
                       flex: 1,
                       child: Padding(
@@ -126,13 +131,17 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                           onTagChanged: (newValue) {
                             setState(() {
                               controller.tagValues.add(newValue);
+
+                              controller.q0Controller.value.text =
+                                  controller.tagValues.join(', ');
                             });
                           },
                           onSubmitted: (newValue) {
                             if (newValue.toString() != '') {
-                              setState(() {
-                                controller.tagValues.add(newValue);
-                              });
+                              controller.tagValues.add(newValue);
+
+                              controller.q0Controller.value.text =
+                                  controller.tagValues.join(', ');
                             }
                           },
                           tagBuilder: (context, index) => ChipLayout(
@@ -149,39 +158,44 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                         padding: EdgeInsets.only(
                             top: 15.h, bottom: 15.h, right: 24.w, left: 24.w),
                         child: TextFormField(
-                          controller: widget.quesIndex == 'q1'
-                              ? controller.q1Controller.value
-                              : widget.quesIndex == 'q2'
-                                  ? controller.q2Controller.value
-                                  : widget.quesIndex == 'q3'
-                                      ? controller.q3Controller.value
-                                      : widget.quesIndex == 'q4'
-                                          ? controller.q4Controller.value
-                                          : widget.quesIndex == 'q5'
-                                              ? controller.q5Controller.value
-                                              : widget.quesIndex == 'q6'
+                          controller: widget.quesIndex == 'q0'
+                              ? controller.q0Controller.value
+                              : widget.quesIndex == 'q1'
+                                  ? controller.q1Controller.value
+                                  : widget.quesIndex == 'q2'
+                                      ? controller.q2Controller.value
+                                      : widget.quesIndex == 'q3'
+                                          ? controller.q3Controller.value
+                                          : widget.quesIndex == 'q4'
+                                              ? controller.q4Controller.value
+                                              : widget.quesIndex == 'q5'
                                                   ? controller
-                                                      .q6Controller.value
-                                                  : widget.quesIndex == 'q7'
+                                                      .q5Controller.value
+                                                  : widget.quesIndex == 'q6'
                                                       ? controller
-                                                          .q7Controller.value
-                                                      : widget.quesIndex == 'q8'
+                                                          .q6Controller.value
+                                                      : widget.quesIndex == 'q7'
                                                           ? controller
-                                                              .q8Controller
+                                                              .q7Controller
                                                               .value
                                                           : widget.quesIndex ==
-                                                                  'q9'
+                                                                  'q8'
                                                               ? controller
-                                                                  .q9Controller
+                                                                  .q8Controller
                                                                   .value
                                                               : widget.quesIndex ==
-                                                                      'q10'
+                                                                      'q9'
                                                                   ? controller
-                                                                      .q10Controller
+                                                                      .q9Controller
                                                                       .value
-                                                                  : controller
-                                                                      .q1Controller
-                                                                      .value,
+                                                                  : widget.quesIndex ==
+                                                                          'q10'
+                                                                      ? controller
+                                                                          .q10Controller
+                                                                          .value
+                                                                      : controller
+                                                                          .q1Controller
+                                                                          .value,
                           minLines: 2,
                           maxLines: 10,
                           keyboardType: TextInputType.multiline,
@@ -213,7 +227,14 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
               Padding(
                 padding: EdgeInsets.all(24.r),
                 child: BlackButtonDialog("Done", white_ffffff, () {
-                  if (widget.quesIndex == 'q1') {
+                  if (widget.quesIndex == 'q0') {
+                    if (controller.q0Controller.value.text == '') {
+                      controller.ques0.value = SharePreData.strQues1;
+                    } else {
+                      controller.ques0.value =
+                          controller.q0Controller.value.text;
+                    }
+                  } else if (widget.quesIndex == 'q1') {
                     if (controller.q1Controller.value.text == '') {
                       controller.ques1.value = SharePreData.strQues1;
                     } else {
@@ -235,14 +256,11 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                           controller.q3Controller.value.text;
                     }
                   } else if (widget.quesIndex == 'q4') {
-                    if (controller.tagValues != []) {
-                      controller.q4Controller.value.text = "";
-                      controller.q4Controller.value.text =
-                          controller.tagValues.join(', ');
+                    if (controller.q4Controller.value.text == '') {
+                      controller.ques4.value = SharePreData.strQues4;
+                    } else {
                       controller.ques4.value =
                           controller.q4Controller.value.text;
-                    } else {
-                      controller.ques4.value = SharePreData.strQues4;
                     }
                   } else if (widget.quesIndex == 'q5') {
                     if (controller.q5Controller.value.text == '') {

@@ -55,7 +55,6 @@ class _VideoListBctState extends State<VideoListBct> {
   }
 
   initScrolling(BuildContext context) {
-    
     controller.scrollListController.addListener(() async {
       if (controller.scrollListController.position.maxScrollExtent ==
           controller.scrollListController.position.pixels) {
@@ -63,23 +62,18 @@ class _VideoListBctState extends State<VideoListBct> {
         controller.isPaginationLoading.value = true;
         controller.pageNo = controller.pageNo + 1;
 
-        await controller.videoListApi(topicFilter: controller
-                                                  .selectIdTopic
-                                                  .toJson()
-                                                  .toString(),
-                                              languageFilter: controller
-                                                  .selectIdLanguage
-                                                  .toJson()
-                                                  .toString());
+        await controller.videoListApi(
+            topicFilter: controller.selectIdTopic.toJson().toString(),
+            languageFilter: controller.selectIdLanguage.toJson().toString());
         controller.isPaginationLoading.value = false;
       }
     });
   }
 
   void scrollDown() {
-    controller.scrollListController.jumpTo(controller.scrollListController.position.maxScrollExtent);
+    controller.scrollListController
+        .jumpTo(controller.scrollListController.position.maxScrollExtent);
   }
-
 
   @override
   void dispose() {
@@ -92,7 +86,6 @@ class _VideoListBctState extends State<VideoListBct> {
       controller.selectedLanguage.value = TopicListModel();
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -176,9 +169,9 @@ class _VideoListBctState extends State<VideoListBct> {
                             ),
 
                             Obx(
-                                  () => Text(
+                              () => Text(
                                   controller.totalVideoCount.value +
-                                      "+ Life & Tech Talks \nto help you navigate.",
+                                      "+ Life & Tech \nTalks to help you grow.",
                                   style: TextStyle(
                                       color: black_121212,
                                       fontWeight: FontWeight.w900,
@@ -204,16 +197,12 @@ class _VideoListBctState extends State<VideoListBct> {
                                     fontSize: 14.sp),
                                 textAlign: TextAlign.left),
 
-
                             SizedBox(
                               height: 30.h,
                             ),
-
-
                           ],
                         ),
                       ),
-
                     ],
                   ),
                 )
@@ -221,7 +210,6 @@ class _VideoListBctState extends State<VideoListBct> {
             },
             body: Column(
               children: [
-
                 Container(
                   color: light_grey_f2f2f2,
                   child: Column(
@@ -264,7 +252,7 @@ class _VideoListBctState extends State<VideoListBct> {
                               decoration: BoxDecoration(boxShadow: [
                                 BoxShadow(
                                   color:
-                                  const Color(0x17747796).withOpacity(0.07),
+                                      const Color(0x17747796).withOpacity(0.07),
                                   spreadRadius: 10,
                                   blurRadius: 5,
                                   offset: const Offset(
@@ -281,19 +269,20 @@ class _VideoListBctState extends State<VideoListBct> {
                                       begin: Alignment.topCenter,
                                       end: Alignment.bottomCenter,
                                       colors: [
-                                        Color.fromARGB(255, 36, 48, 69),  Color(0xff04080f)
+                                        Color.fromARGB(255, 36, 48, 69),
+                                        Color(0xff04080f)
                                       ],
                                       stops: [0.0, 1.0],
                                     ),
                                   ),
                                   child: ElevatedButton(
                                       child: //
-                                      Stack(
+                                          Stack(
                                         alignment: Alignment.centerRight,
                                         children: [
                                           Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                                MainAxisAlignment.center,
                                             children: [
                                               // setHelveticaBoldCenter(
                                               //     inputText,
@@ -306,16 +295,16 @@ class _VideoListBctState extends State<VideoListBct> {
                                               Text(
                                                 "Find a Speaker",
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.w700,
+                                                    fontWeight: FontWeight.w700,
                                                     fontFamily:
-                                                    helvetica_neu_bold,
+                                                        helvetica_neu_bold,
                                                     fontSize: 14.sp),
                                               ),
                                             ],
                                           ),
                                           Padding(
                                             padding:
-                                            EdgeInsets.only(right: 16.w),
+                                                EdgeInsets.only(right: 16.w),
                                             child: SvgPicture.asset(
                                               icon_next_arrow,
                                               width: 16.r,
@@ -328,7 +317,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                         setState(() {
                                           controller.isTextChange.value = false;
                                           controller.isLayoutFirst.value =
-                                          false;
+                                              false;
                                         });
                                         controller.selectedTopic.value =
                                             TopicListModel();
@@ -336,7 +325,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                             TopicListModel();
                                         controller.selectedTopic.value.id = -1;
                                         controller.selectedLanguage.value.id =
-                                        -1;
+                                            -1;
                                         controller.selectMutiTopicList.clear();
                                         controller.selectMutiLanguList.clear();
 
@@ -353,7 +342,7 @@ class _VideoListBctState extends State<VideoListBct> {
                                             horizontal: 0, vertical: 18),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(4),
+                                              BorderRadius.circular(4),
                                           side: const BorderSide(
                                               color: black_121212, width: 0),
                                         ),
@@ -370,20 +359,17 @@ class _VideoListBctState extends State<VideoListBct> {
                     ],
                   ),
                 ),
-
-
                 Container(
                     width: double.infinity,
                     height: 1,
                     decoration: const BoxDecoration(color: Color(0xffebebeb))),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          if(controller.clearFilter.value == true){
+                          if (controller.clearFilter.value == true) {
                             controller.selectedLanguage.value.id = -1;
                             controller.selectedTopic.value.id = -1;
                             controller.selectMutiTopicList.clear();
@@ -400,15 +386,14 @@ class _VideoListBctState extends State<VideoListBct> {
                             controller.isTextChange.value = true;
                             controller.isLayoutFirst.value = true;
                             setState(() {});
-                          }else if (controller.isTextChange.value =
-                          !controller.isTextChange.value) {
+                          } else if (controller.isTextChange.value =
+                              !controller.isTextChange.value) {
                             controller.isLayoutFirst.value = true;
                             controller.filter.value = 'Close filters';
                           } else {
                             controller.isLayoutFirst.value = false;
                             controller.filter.value = 'More filters';
                           }
-                          
                         });
                       },
                       child: Row(
@@ -423,8 +408,7 @@ class _VideoListBctState extends State<VideoListBct> {
                             width: 10.w,
                           ),
                           // More filters
-                          Text(
-                              controller.filter.value,
+                          Text(controller.filter.value,
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   fontFamily: roboto_bold,
@@ -438,7 +422,7 @@ class _VideoListBctState extends State<VideoListBct> {
                         width: 1,
                         height: 48.h,
                         decoration:
-                        const BoxDecoration(color: Color(0xffebebeb))),
+                            const BoxDecoration(color: Color(0xffebebeb))),
                     InkWell(
                       onTap: () {
                         controller.myPlayListAPI(search: "");
@@ -467,460 +451,436 @@ class _VideoListBctState extends State<VideoListBct> {
                     ),
                   ],
                 ),
-
                 Container(
                   width: double.infinity,
                   height: 1,
                   decoration: const BoxDecoration(color: Color(0xffebebeb)),
                 ),
-
                 Obx(
-                          () => Visibility(
-                            visible: controller.isLayoutFirst.value,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: 24.w,
-                                right: 24.w,
-                                top: 24.h,
-                              ),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 50.h,
-                                    width: double.infinity,
-                                    decoration: SpinnerDecorationBorder,
-                                    child: DropdownButtonHideUnderline(
-                                      child: DropdownButton2<TopicListModel>(
-                                          value: controller
-                                                      .selectedTopic.value.id ==
-                                                  -1
-                                              ? null
-                                              : controller.selectedTopic.value,
-                                          hint: Text("Topic",
-                                              style: TextStyle(
-                                                  color: grey_aaaaaa,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily:
-                                                      helveticaNeueNeue_medium,
-                                                  fontStyle: FontStyle.normal,
-                                                  fontSize: 14.sp),
-                                              textAlign: TextAlign.left),
-                                          icon: SvgPicture.asset(
-                                            icon_down_arrow_spinner,
-                                            width: 12.r,
-                                            height: 12.r,
-                                          ),
-                                          onChanged: (TopicListModel? value) {
-                                            controller.selectedTopic.value =
-                                                value!;
-                                            if (controller
-                                                    .selectedTopic.value.name !=
-                                                "SEE ALL TOPICS") {
-                                              if (!controller.selectMutiTopicList
-                                                  .contains(value)) {
-                                                controller.selectMutiTopicList
-                                                    .add(value);
-                                              }
-                                            } else {
-                                              controller.selectedTopic.value =
-                                                  TopicListModel(id: -1);
-                                              Get.to(FilterTopicList());
-                                            }
-                                            controller.selectedTopic.value.id =
-                                                -1;
-                                          },
-                                          isExpanded: true,
-                                          customItemsHeight: 4,
-                                          iconEnabledColor: black_121212,
-                                          iconDisabledColor: Colors.grey,
-                                          buttonHeight: 60,
-                                          buttonWidth: double.infinity,
-                                          buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                                          buttonDecoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(4),
-                                            color: white,
-                                          ),
-                                          itemHeight: 35,
-                                          itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                          items: controller.topicList
-                                              .map((TopicListModel value) {
-                                            return DropdownMenuItem<
-                                                TopicListModel>(
-                                              value: value,
-                                              child: Text(value.name.toString(),
-                                                  style: TextStyle(
-                                                      color: value.name ==
-                                                              "SEE ALL TOPICS"
-                                                          ? grey_aaaaaa
-                                                          : black_121925,
-                                                      fontWeight: FontWeight.w500,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontSize: 14.sp)),
-                                            );
-                                          }).toList()),
-                                    ),
+                  () => Visibility(
+                    visible: controller.isLayoutFirst.value,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 24.w,
+                        right: 24.w,
+                        top: 24.h,
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 50.h,
+                            width: double.infinity,
+                            decoration: SpinnerDecorationBorder,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton2<TopicListModel>(
+                                  value: controller.selectedTopic.value.id == -1
+                                      ? null
+                                      : controller.selectedTopic.value,
+                                  hint: Text("Topic",
+                                      style: TextStyle(
+                                          color: grey_aaaaaa,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                                  icon: SvgPicture.asset(
+                                    icon_down_arrow_spinner,
+                                    width: 12.r,
+                                    height: 12.r,
                                   ),
-                                  SizedBox(
-                                    height: 12.h,
+                                  onChanged: (TopicListModel? value) {
+                                    controller.selectedTopic.value = value!;
+                                    if (controller.selectedTopic.value.name !=
+                                        "SEE ALL TOPICS") {
+                                      if (!controller.selectMutiTopicList
+                                          .contains(value)) {
+                                        controller.selectMutiTopicList
+                                            .add(value);
+                                      }
+                                    } else {
+                                      controller.selectedTopic.value =
+                                          TopicListModel(id: -1);
+                                      Get.to(FilterTopicList());
+                                    }
+                                    controller.selectedTopic.value.id = -1;
+                                  },
+                                  isExpanded: true,
+                                  customItemsHeight: 4,
+                                  iconEnabledColor: black_121212,
+                                  iconDisabledColor: Colors.grey,
+                                  buttonHeight: 60,
+                                  buttonWidth: double.infinity,
+                                  buttonPadding: const EdgeInsets.only(
+                                      left: 14, right: 14),
+                                  buttonDecoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: white,
                                   ),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: Wrap(
-                                        direction: Axis.horizontal,
-                                        alignment: WrapAlignment.start,
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.start,
-                                        children: controller.selectMutiTopicList
-                                            .map((element) => Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      right: 6),
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      controller.selectMutiTopicList
-                                                          .remove(element);
-                                                    },
-                                                    child: Container(
-                                                        decoration: BoxDecoration(
-                                                            color: const Color(
-                                                                0xfff5f5f5),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(15)),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets.all(
-                                                                  8.0),
-                                                          child: Wrap(
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left: 4.0),
-                                                                child: Text(
-                                                                    element.name!,
-                                                                    style: TextStyle(
-                                                                        color:
-                                                                            black_121925,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontFamily:
-                                                                            helveticaNeueNeue_medium,
-                                                                        fontStyle:
-                                                                            FontStyle
-                                                                                .normal,
-                                                                        fontSize:
-                                                                            14.sp)),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top: 2.5,
-                                                                        left: 4),
-                                                                child: Icon(
-                                                                  Icons.close,
-                                                                  color:
-                                                                      grey_aaaaaa,
-                                                                  size: 13.r,
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        )),
-                                                  ),
-                                                ))
-                                            .toList()),
-                                  ),
-                                  if (controller.selectMutiTopicList.length != 0)
-                                    SizedBox(height: 12.h),
-                                  Container(
-                                    height: 50.h,
-                                    width: double.infinity,
-                                    decoration: SpinnerDecorationBorder,
-                                    child: DropdownButtonHideUnderline(
-                                      child: DropdownButton2<TopicListModel>(
-                                          value: controller.selectedLanguage.value
-                                                      .id ==
-                                                  -1
-                                              ? null
-                                              : controller.selectedLanguage.value,
-                                          hint: Text("Language",
-                                              style: TextStyle(
-                                                  color: grey_aaaaaa,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily:
-                                                      helveticaNeueNeue_medium,
-                                                  fontStyle: FontStyle.normal,
-                                                  fontSize: 14.sp),
-                                              textAlign: TextAlign.left),
-                                          icon: SvgPicture.asset(
-                                            icon_down_arrow_spinner,
-                                            width: 12.r,
-                                            height: 12.r,
-                                          ),
-                                          onChanged: (TopicListModel? value) {
-                                            controller.selectedLanguage.value =
-                                                value!;
-                                            if (controller.selectedLanguage.value
-                                                    .name !=
-                                                "SEE ALL LANGUAGE") {
-                                              if (!controller.selectMutiLanguList
-                                                  .contains(value)) {
-                                                controller.selectMutiLanguList
-                                                    .add(value);
-                                              }
-                                            } else {
-                                              controller.selectedLanguage.value =
-                                                  TopicListModel(id: -1);
-                                            }
-                                            controller.selectedLanguage.value.id =
-                                                -1;
-                                          },
-                                          isExpanded: true,
-                                          customItemsHeight: 4,
-                                          iconEnabledColor: black_121212,
-                                          iconDisabledColor: Colors.grey,
-                                          buttonHeight: 60,
-                                          buttonWidth: double.infinity,
-                                          buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                                          buttonDecoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(4),
-                                            color: white,
-                                          ),
-                                          itemHeight: 35,
-                                          itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                          items: controller.languageList
-                                              .map((TopicListModel value) {
-                                            return DropdownMenuItem<
-                                                TopicListModel>(
-                                              value: value,
-                                              child: Text(value.name.toString(),
-                                                  style: TextStyle(
-                                                      color: value.name
-                                                                  .toString() ==
-                                                              "SEE ALL LANGUAGE"
-                                                          ? grey_aaaaaa
-                                                          : black_121925,
-                                                      fontWeight: FontWeight.w500,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontSize: 14.sp)),
-                                            );
-                                          }).toList()),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 12.h,
-                                  ),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: Wrap(
-                                        direction: Axis.horizontal,
-                                        alignment: WrapAlignment.start,
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.start,
-                                        children: controller.selectMutiLanguList
-                                            .map((element) => Padding(
-                                                  padding: const EdgeInsets.only(
-                                                    right: 6,
-                                                  ),
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      controller.selectMutiLanguList
-                                                          .remove(element);
-                                                    },
-                                                    child: Container(
-                                                        decoration: BoxDecoration(
-                                                            color: const Color(
-                                                                0xfff5f5f5),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(15)),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets.all(
-                                                                  8.0),
-                                                          child: Wrap(
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left: 4.0),
-                                                                child: Text(
-                                                                    element.name!,
-                                                                    style: TextStyle(
-                                                                        color:
-                                                                            black_121925,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontFamily:
-                                                                            helveticaNeueNeue_medium,
-                                                                        fontStyle:
-                                                                            FontStyle
-                                                                                .normal,
-                                                                        fontSize:
-                                                                            14.sp)),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top: 2.5,
-                                                                        left: 4),
-                                                                child: Icon(
-                                                                  Icons.close,
-                                                                  size: 13.r,
-                                                                  color:
-                                                                      grey_aaaaaa,
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        )),
-                                                  ),
-                                                ))
-                                            .toList()),
-                                  ),
-                                  SizedBox(
-                                    height: 12.h,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: InkWell(
-                                          onTap: () {
-                                            controller.selectIdTopic.clear();
-                                            controller.selectIdLanguage.clear();
-
-                                            if (controller.selectMutiTopicList
-                                                    .isNotEmpty ||
-                                                controller.selectMutiLanguList
-                                                    .isNotEmpty) {
-                                              controller.selectMutiTopicList
-                                                  .forEach((element) {
-                                                controller.selectIdTopic
-                                                    .add(element.name!);
-                                              });
-
-                                              controller.selectMutiLanguList
-                                                  .forEach((element) {
-                                                controller.selectIdLanguage
-                                                    .add(element.name!);
-                                              });
-                                              controller.videoList.clear();
-                                              controller.pageNo.value = 0;
-                                              controller.isLoadingBCT.value = true;
-                                              topic = controller
-                                                      .selectIdTopic
-                                                      .toJson()
-                                                      .toString();
-                                              language = controller
-                                                      .selectIdLanguage
-                                                      .toJson()
-                                                      .toString();
-                                              controller.videoListApi(
-                                                  topicFilter: controller
-                                                      .selectIdTopic
-                                                      .toJson()
-                                                      .toString(),
-                                                  languageFilter: controller
-                                                      .selectIdLanguage
-                                                      .toJson()
-                                                      .toString());
-                                              controller.filter.value = 'Clear filters';
-                                              controller.clearFilter.value = true;
-                                              controller.isTextChange.value = false;
-                                              controller.isLayoutFirst.value = false;
-                                              setState(() {});
-                                            }
-                                          },
-                                          child: Container(
-                                            height: 50.h,
-                                            decoration: BoxDecoration(
-                                              gradient: const LinearGradient(
-                                                begin: Alignment.topCenter,
-                                                end: Alignment.bottomCenter,
-                                                colors: [ Color.fromARGB(255, 36, 48, 69),  Color(0xff04080f)],
-                                                stops: [0.0, 1.0],
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(4.r),
-                                            ),
-                                            child: Center(
-                                              child: Text("Apply Filter",
-                                                  style: TextStyle(
-                                                      color: white_ffffff,
-                                                      fontWeight: FontWeight.w700,
-                                                      fontFamily: helveticaNeue,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontSize: 12.sp),
-                                                  textAlign: TextAlign.left),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 15.w,
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: InkWell(
-                                          onTap: () {
-                                            controller.selectedLanguage.value.id =
-                                                -1;
-                                            controller.selectedTopic.value.id = -1;
-                                            controller.selectMutiTopicList.clear();
-                                            controller.selectMutiLanguList.clear();
-                                            controller.selectIdTopic.clear();
-                                            controller.selectIdLanguage.clear();
-
-                                            controller.videoList.clear();
-                                            controller.pageNo.value = 1;
-                                            controller.isLoadingBCT.value = true;
-                                            controller.videoListApi();
-                                            controller.filter.value = 'More filters';
-                                            controller.clearFilter.value = false;
-                                            controller.isTextChange.value = false;
-                                            controller.isLayoutFirst.value = false;
-                                            setState(() {});
-                                          },
-                                          child: Container(
-                                            height: 50.h,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xfff5f5f5),
-                                              borderRadius:
-                                                  BorderRadius.circular(4.r),
-                                            ),
-                                            child: Center(
-                                              child: Text("Clear",
-                                                  style: TextStyle(
-                                                      color:
-                                                          const Color(0xff121212),
-                                                      fontWeight: FontWeight.w700,
-                                                      fontFamily: helveticaNeue,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontSize: 12.sp),
-                                                  textAlign: TextAlign.left),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                                  itemHeight: 35,
+                                  itemPadding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
+                                  items: controller.topicList
+                                      .map((TopicListModel value) {
+                                    return DropdownMenuItem<TopicListModel>(
+                                      value: value,
+                                      child: Text(value.name.toString(),
+                                          style: TextStyle(
+                                              color:
+                                                  value.name == "SEE ALL TOPICS"
+                                                      ? grey_aaaaaa
+                                                      : black_121925,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 14.sp)),
+                                    );
+                                  }).toList()),
                             ),
                           ),
-                        ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Wrap(
+                                direction: Axis.horizontal,
+                                alignment: WrapAlignment.start,
+                                crossAxisAlignment: WrapCrossAlignment.start,
+                                children: controller.selectMutiTopicList
+                                    .map((element) => Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 6),
+                                          child: InkWell(
+                                            onTap: () {
+                                              controller.selectMutiTopicList
+                                                  .remove(element);
+                                            },
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    color:
+                                                        const Color(0xfff5f5f5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Wrap(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 4.0),
+                                                        child: Text(element.name!,
+                                                            style: TextStyle(
+                                                                color:
+                                                                    black_121925,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontFamily:
+                                                                    helveticaNeueNeue_medium,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                                fontSize:
+                                                                    14.sp)),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                top: 2.5,
+                                                                left: 4),
+                                                        child: Icon(
+                                                          Icons.close,
+                                                          color: grey_aaaaaa,
+                                                          size: 13.r,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )),
+                                          ),
+                                        ))
+                                    .toList()),
+                          ),
+                          if (controller.selectMutiTopicList.length != 0)
+                            SizedBox(height: 12.h),
+                          Container(
+                            height: 50.h,
+                            width: double.infinity,
+                            decoration: SpinnerDecorationBorder,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton2<TopicListModel>(
+                                  value:
+                                      controller.selectedLanguage.value.id == -1
+                                          ? null
+                                          : controller.selectedLanguage.value,
+                                  hint: Text("Language",
+                                      style: TextStyle(
+                                          color: grey_aaaaaa,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: helveticaNeueNeue_medium,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp),
+                                      textAlign: TextAlign.left),
+                                  icon: SvgPicture.asset(
+                                    icon_down_arrow_spinner,
+                                    width: 12.r,
+                                    height: 12.r,
+                                  ),
+                                  onChanged: (TopicListModel? value) {
+                                    controller.selectedLanguage.value = value!;
+                                    if (controller
+                                            .selectedLanguage.value.name !=
+                                        "SEE ALL LANGUAGE") {
+                                      if (!controller.selectMutiLanguList
+                                          .contains(value)) {
+                                        controller.selectMutiLanguList
+                                            .add(value);
+                                      }
+                                    } else {
+                                      controller.selectedLanguage.value =
+                                          TopicListModel(id: -1);
+                                    }
+                                    controller.selectedLanguage.value.id = -1;
+                                  },
+                                  isExpanded: true,
+                                  customItemsHeight: 4,
+                                  iconEnabledColor: black_121212,
+                                  iconDisabledColor: Colors.grey,
+                                  buttonHeight: 60,
+                                  buttonWidth: double.infinity,
+                                  buttonPadding: const EdgeInsets.only(
+                                      left: 14, right: 14),
+                                  buttonDecoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: white,
+                                  ),
+                                  itemHeight: 35,
+                                  itemPadding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
+                                  items: controller.languageList
+                                      .map((TopicListModel value) {
+                                    return DropdownMenuItem<TopicListModel>(
+                                      value: value,
+                                      child: Text(value.name.toString(),
+                                          style: TextStyle(
+                                              color: value.name.toString() ==
+                                                      "SEE ALL LANGUAGE"
+                                                  ? grey_aaaaaa
+                                                  : black_121925,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 14.sp)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Wrap(
+                                direction: Axis.horizontal,
+                                alignment: WrapAlignment.start,
+                                crossAxisAlignment: WrapCrossAlignment.start,
+                                children: controller.selectMutiLanguList
+                                    .map((element) => Padding(
+                                          padding: const EdgeInsets.only(
+                                            right: 6,
+                                          ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              controller.selectMutiLanguList
+                                                  .remove(element);
+                                            },
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    color:
+                                                        const Color(0xfff5f5f5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Wrap(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 4.0),
+                                                        child: Text(element.name!,
+                                                            style: TextStyle(
+                                                                color:
+                                                                    black_121925,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontFamily:
+                                                                    helveticaNeueNeue_medium,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                                fontSize:
+                                                                    14.sp)),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                top: 2.5,
+                                                                left: 4),
+                                                        child: Icon(
+                                                          Icons.close,
+                                                          size: 13.r,
+                                                          color: grey_aaaaaa,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )),
+                                          ),
+                                        ))
+                                    .toList()),
+                          ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.selectIdTopic.clear();
+                                    controller.selectIdLanguage.clear();
 
+                                    if (controller
+                                            .selectMutiTopicList.isNotEmpty ||
+                                        controller
+                                            .selectMutiLanguList.isNotEmpty) {
+                                      controller.selectMutiTopicList
+                                          .forEach((element) {
+                                        controller.selectIdTopic
+                                            .add(element.name!);
+                                      });
+
+                                      controller.selectMutiLanguList
+                                          .forEach((element) {
+                                        controller.selectIdLanguage
+                                            .add(element.name!);
+                                      });
+                                      controller.videoList.clear();
+                                      controller.pageNo.value = 0;
+                                      controller.isLoadingBCT.value = true;
+                                      topic = controller.selectIdTopic
+                                          .toJson()
+                                          .toString();
+                                      language = controller.selectIdLanguage
+                                          .toJson()
+                                          .toString();
+                                      controller.videoListApi(
+                                          topicFilter: controller.selectIdTopic
+                                              .toJson()
+                                              .toString(),
+                                          languageFilter: controller
+                                              .selectIdLanguage
+                                              .toJson()
+                                              .toString());
+                                      controller.filter.value = 'Clear filters';
+                                      controller.clearFilter.value = true;
+                                      controller.isTextChange.value = false;
+                                      controller.isLayoutFirst.value = false;
+                                      setState(() {});
+                                    }
+                                  },
+                                  child: Container(
+                                    height: 50.h,
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Color.fromARGB(255, 36, 48, 69),
+                                          Color(0xff04080f)
+                                        ],
+                                        stops: [0.0, 1.0],
+                                      ),
+                                      borderRadius: BorderRadius.circular(4.r),
+                                    ),
+                                    child: Center(
+                                      child: Text("Apply Filter",
+                                          style: TextStyle(
+                                              color: white_ffffff,
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: helveticaNeue,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 12.sp),
+                                          textAlign: TextAlign.left),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15.w,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.selectedLanguage.value.id = -1;
+                                    controller.selectedTopic.value.id = -1;
+                                    controller.selectMutiTopicList.clear();
+                                    controller.selectMutiLanguList.clear();
+                                    controller.selectIdTopic.clear();
+                                    controller.selectIdLanguage.clear();
+
+                                    controller.videoList.clear();
+                                    controller.pageNo.value = 1;
+                                    controller.isLoadingBCT.value = true;
+                                    controller.videoListApi();
+                                    controller.filter.value = 'More filters';
+                                    controller.clearFilter.value = false;
+                                    controller.isTextChange.value = false;
+                                    controller.isLayoutFirst.value = false;
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                    height: 50.h,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xfff5f5f5),
+                                      borderRadius: BorderRadius.circular(4.r),
+                                    ),
+                                    child: Center(
+                                      child: Text("Clear",
+                                          style: TextStyle(
+                                              color: const Color(0xff121212),
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: helveticaNeue,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 12.sp),
+                                          textAlign: TextAlign.left),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 Expanded(
                   flex: 1,
                   child: SingleChildScrollView(
@@ -931,12 +891,10 @@ class _VideoListBctState extends State<VideoListBct> {
                     ),
                   ),
                 )
-
               ],
             ),
           ),
         ),
-        
       ]),
     );
   }

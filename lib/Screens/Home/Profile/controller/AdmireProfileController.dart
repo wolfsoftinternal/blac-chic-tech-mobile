@@ -102,6 +102,7 @@ class AdmireProfileController extends GetxController {
   RxBool q8Expand = false.obs;
   RxBool q9Expand = false.obs;
   RxBool q10Expand = false.obs;
+  RxBool q11Expand = false.obs;
 
   initUserScrolling(BuildContext context, id) {
     userScrollController.addListener(() async {

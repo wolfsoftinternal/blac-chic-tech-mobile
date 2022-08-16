@@ -362,7 +362,7 @@ class _UploadVideoDetailState extends State<UploadVideoDetail> {
                                               errorBorder: InputBorder.none,
                                               disabledBorder: InputBorder.none,
                                               hintText:
-                                                  'Write a Description...',
+                                                  'Write a short description...',
                                               hintStyle: TextStyle(
                                                   color: grey_aaaaaa,
                                                   fontWeight: FontWeight.w500,

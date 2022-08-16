@@ -116,47 +116,106 @@ class _AboutMeState extends State<AboutMe> {
     stepsController.currentCompanyWebsiteController.value.text =
         myModel!.data!.currentJobs!.website ?? "";
     // stepsController.q1Controller.value.text = myModel!.data!.aboutUs ?? "";
-    stepsController.q1Controller.value.text =
-        myModel!.data!.questions!.length > 2
-            ? myModel!.data!.questions![1].answer ?? ""
-            : "";
-    stepsController.q2Controller.value.text =
-        myModel!.data!.questions!.length > 3
-            ? myModel!.data!.questions![2].answer ?? ""
-            : "";
-    stepsController.q3Controller.value.text =
-        myModel!.data!.questions!.length > 4
-            ? myModel!.data!.questions![3].answer ?? ""
-            : "";
+    if (myModel!.data!.questions![0].question ==
+        "What should the world know about you ?") {
+      stepsController.q0Controller.value.text =
+          myModel!.data!.questions!.length > 2
+              ? myModel!.data!.questions![1].answer ?? ""
+              : "";
+      stepsController.tagValues =
+          stepsController.q0Controller.value.text.split(',');
 
-    stepsController.q4Controller.value.text =
-        myModel!.data!.questions!.length > 5
-            ? myModel!.data!.questions![4].answer ?? ""
-            : "";
-    stepsController.q5Controller.value.text =
-        myModel!.data!.questions!.length > 6
-            ? myModel!.data!.questions![5].answer ?? ""
-            : "";
-    stepsController.q6Controller.value.text =
-        myModel!.data!.questions!.length > 7
-            ? myModel!.data!.questions![6].answer ?? ""
-            : "";
-    stepsController.q7Controller.value.text =
-        myModel!.data!.questions!.length > 8
-            ? myModel!.data!.questions![7].answer ?? ""
-            : "";
-    stepsController.q8Controller.value.text =
-        myModel!.data!.questions!.length > 9
-            ? myModel!.data!.questions![8].answer ?? ""
-            : "";
-    stepsController.q9Controller.value.text =
-        myModel!.data!.questions!.length > 10
-            ? myModel!.data!.questions![9].answer ?? ""
-            : "";
-    stepsController.q10Controller.value.text =
-        // myModel!.data!.questions!.length > 11
-        //  ?
-        myModel!.data!.questions![10].answer.toString();
+      stepsController.q1Controller.value.text =
+          myModel!.data!.questions!.length > 3
+              ? myModel!.data!.questions![2].answer ?? ""
+              : "";
+      stepsController.q2Controller.value.text =
+          myModel!.data!.questions!.length > 4
+              ? myModel!.data!.questions![3].answer ?? ""
+              : "";
+      stepsController.q3Controller.value.text =
+          myModel!.data!.questions!.length > 5
+              ? myModel!.data!.questions![4].answer ?? ""
+              : "";
+
+      stepsController.q4Controller.value.text =
+          myModel!.data!.questions!.length > 6
+              ? myModel!.data!.questions![5].answer ?? ""
+              : "";
+      stepsController.q5Controller.value.text =
+          myModel!.data!.questions!.length > 7
+              ? myModel!.data!.questions![6].answer ?? ""
+              : "";
+      stepsController.q6Controller.value.text =
+          myModel!.data!.questions!.length > 8
+              ? myModel!.data!.questions![7].answer ?? ""
+              : "";
+      stepsController.q7Controller.value.text =
+          myModel!.data!.questions!.length > 9
+              ? myModel!.data!.questions![8].answer ?? ""
+              : "";
+      stepsController.q8Controller.value.text =
+          myModel!.data!.questions!.length > 10
+              ? myModel!.data!.questions![9].answer ?? ""
+              : "";
+      stepsController.q9Controller.value.text =
+          myModel!.data!.questions!.length > 11
+              ? myModel!.data!.questions![10].answer ?? ""
+              : "";
+      stepsController.q10Controller.value.text =
+          myModel!.data!.questions!.length >= 12
+              ? myModel!.data!.questions![11].answer.toString()
+              : "";
+    } else {
+      stepsController.q0Controller.value.text =
+          myModel!.data!.questions!.length > 1
+              ? myModel!.data!.questions![0].answer ?? ""
+              : "";
+      stepsController.tagValues =
+          stepsController.q0Controller.value.text.split(',');
+
+      stepsController.q1Controller.value.text =
+          myModel!.data!.questions!.length > 1
+              ? myModel!.data!.questions![1].answer ?? ""
+              : "";
+      stepsController.q2Controller.value.text =
+          myModel!.data!.questions!.length > 3
+              ? myModel!.data!.questions![2].answer ?? ""
+              : "";
+      stepsController.q3Controller.value.text =
+          myModel!.data!.questions!.length > 4
+              ? myModel!.data!.questions![3].answer ?? ""
+              : "";
+
+      stepsController.q4Controller.value.text =
+          myModel!.data!.questions!.length > 5
+              ? myModel!.data!.questions![4].answer ?? ""
+              : "";
+      stepsController.q5Controller.value.text =
+          myModel!.data!.questions!.length > 6
+              ? myModel!.data!.questions![5].answer ?? ""
+              : "";
+      stepsController.q6Controller.value.text =
+          myModel!.data!.questions!.length > 7
+              ? myModel!.data!.questions![6].answer ?? ""
+              : "";
+      stepsController.q7Controller.value.text =
+          myModel!.data!.questions!.length > 8
+              ? myModel!.data!.questions![7].answer ?? ""
+              : "";
+      stepsController.q8Controller.value.text =
+          myModel!.data!.questions!.length > 9
+              ? myModel!.data!.questions![8].answer ?? ""
+              : "";
+      stepsController.q9Controller.value.text =
+          myModel!.data!.questions!.length > 10
+              ? myModel!.data!.questions![9].answer ?? ""
+              : "";
+      stepsController.q10Controller.value.text =
+          myModel!.data!.questions!.length > 11
+              ? myModel!.data!.questions![10].answer.toString()
+              : "";
+    }
 
     setState(() {});
     if (myModel != null) {
@@ -812,7 +871,7 @@ class _AboutMeState extends State<AboutMe> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("PAST JOBS",
+                                Text("PAST ROLES",
                                     style: TextStyle(
                                         color: black_121212,
                                         fontWeight: FontWeight.w900,
@@ -2240,7 +2299,6 @@ class _AboutMeState extends State<AboutMe> {
                                                             TextAlign.left)),
                                             InkWell(
                                               onTap: () {
-                                                print("QC Click");
                                                 setState(() {
                                                   controller.ques0.value =
                                                       !controller.ques0.value;
@@ -2258,8 +2316,8 @@ class _AboutMeState extends State<AboutMe> {
                                                 });
                                               },
                                               child: SizedBox(
-                                                width: 24.w,
-                                                height: 24.w,
+                                                width: 26.w,
+                                                height: 26.w,
                                                 child: Center(
                                                   child: SvgPicture.asset(
                                                     icon_edit_blue,
@@ -2318,7 +2376,7 @@ class _AboutMeState extends State<AboutMe> {
                                             : TagEditor(
                                                 length: stepsController
                                                     .tagValues.length,
-                                                // hasAddButton: true,
+                                                hasAddButton: false,
                                                 // resetTextOnSubmitted: true,
                                                 delimiters: const [',', ' '],
                                                 inputFormatters: <
@@ -2336,6 +2394,8 @@ class _AboutMeState extends State<AboutMe> {
                                                     fontSize: 14.sp),
                                                 inputDecoration:
                                                     InputDecoration(
+                                                  hintText:
+                                                      'Please type here...',
                                                   border: InputBorder.none,
                                                   hintStyle: TextStyle(
                                                       color: grey_aaaaaa,
@@ -2351,6 +2411,15 @@ class _AboutMeState extends State<AboutMe> {
                                                   setState(() {
                                                     stepsController.tagValues
                                                         .add(newValue);
+                                                    stepsController.q0Controller
+                                                            .value.text =
+                                                        stepsController
+                                                            .tagValues
+                                                            .join(', ');
+                                                    controller.ques0.value =
+                                                        true;
+                                                    FocusScope.of(context)
+                                                        .unfocus();
                                                   });
                                                 },
                                                 onSubmitted: (newValue) {
@@ -2366,6 +2435,11 @@ class _AboutMeState extends State<AboutMe> {
                                                           stepsController
                                                               .tagValues
                                                               .join(', ');
+
+                                                      controller.ques0.value =
+                                                          true;
+                                                      FocusScope.of(context)
+                                                          .unfocus();
                                                     });
                                                   }
                                                 },
@@ -2435,6 +2509,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques1.value =
                                                       !controller.ques1.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques2.value = true;
                                                   controller.ques3.value = true;
                                                   controller.ques4.value = true;
@@ -2616,6 +2691,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques2.value =
                                                       !controller.ques2.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques1.value = true;
                                                   controller.ques3.value = true;
                                                   controller.ques4.value = true;
@@ -2798,6 +2874,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques3.value =
                                                       !controller.ques3.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques1.value = true;
                                                   controller.ques2.value = true;
                                                   controller.ques4.value = true;
@@ -2981,6 +3058,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques4.value =
                                                       !controller.ques4.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques1.value = true;
                                                   controller.ques3.value = true;
                                                   controller.ques2.value = true;
@@ -3163,6 +3241,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques5.value =
                                                       !controller.ques5.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques1.value = true;
                                                   controller.ques3.value = true;
                                                   controller.ques4.value = true;
@@ -3339,6 +3418,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques6.value =
                                                       !controller.ques6.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques1.value = true;
                                                   controller.ques3.value = true;
                                                   controller.ques4.value = true;
@@ -3515,6 +3595,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques7.value =
                                                       !controller.ques7.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques1.value = true;
                                                   controller.ques3.value = true;
                                                   controller.ques4.value = true;
@@ -3691,6 +3772,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques8.value =
                                                       !controller.ques8.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques1.value = true;
                                                   controller.ques3.value = true;
                                                   controller.ques4.value = true;
@@ -3867,6 +3949,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques9.value =
                                                       !controller.ques9.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques1.value = true;
                                                   controller.ques3.value = true;
                                                   controller.ques4.value = true;
@@ -4043,6 +4126,7 @@ class _AboutMeState extends State<AboutMe> {
                                                 setState(() {
                                                   controller.ques10.value =
                                                       !controller.ques10.value;
+                                                  controller.ques0.value = true;
                                                   controller.ques1.value = true;
                                                   controller.ques3.value = true;
                                                   controller.ques4.value = true;
@@ -4175,6 +4259,7 @@ class _AboutMeState extends State<AboutMe> {
                                 ),
 
                                 BlackButton("Save", white_ffffff, () {
+                                  controller.ques0.value = true;
                                   controller.ques1.value = true;
                                   controller.ques2.value = true;
                                   controller.ques3.value = true;
@@ -4186,6 +4271,15 @@ class _AboutMeState extends State<AboutMe> {
                                   controller.ques9.value = true;
                                   controller.ques10.value = true;
                                   FocusScope.of(context).unfocus();
+                                  if (stepsController
+                                      .q0Controller.value.text.isNotEmpty) {
+                                    ques.add({
+                                      '"question"':
+                                          '"${SharePreData.strQues0}"',
+                                      '"answer"':
+                                          '"${stepsController.q0Controller.value.text}"',
+                                    });
+                                  }
                                   if (stepsController
                                       .q1Controller.value.text.isNotEmpty) {
                                     ques.add({

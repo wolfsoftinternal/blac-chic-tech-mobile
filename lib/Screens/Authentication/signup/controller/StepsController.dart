@@ -78,7 +78,7 @@ class StepsController extends GetxController {
   Rx<TextEditingController> addtionalController = TextEditingController().obs;
 
   List<String> tagValues = [];
-
+  RxString ques0 = SharePreData.strQues0.obs;
   RxString ques1 = SharePreData.strQues1.obs;
   RxString ques2 = SharePreData.strQues2.obs;
   RxString ques3 = SharePreData.strQues3.obs;
