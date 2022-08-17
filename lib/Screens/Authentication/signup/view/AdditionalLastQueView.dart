@@ -184,7 +184,8 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
                   controller.questions.clear();
                   controller.questions.add({
                     '"question"': '"What should the world know about you ?"',
-                    '"answer"': '"${controller.q5Controller.value.text}"',
+                    '"answer"':
+                        '"${controller.addtionalController.value.text}"',
                   });
                   // = controller.addtionalController.value.text;
                   checkNet(context).then((value) {
