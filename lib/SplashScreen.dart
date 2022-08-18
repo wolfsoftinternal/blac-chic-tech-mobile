@@ -56,7 +56,11 @@ class _SplashScreenState extends State<SplashScreen> {
       // }else{
       //   Get.offAll(BottomNavigation());
       // }
-      Future.delayed(Duration(milliseconds: 150), (){setState((){isSplash = false;});});
+      Future.delayed(Duration(milliseconds: 150), () {
+        setState(() {
+          isSplash = false;
+        });
+      });
       if (myModel == null) {
         Get.offAll(const Welcome());
       } else if (myModel.data!.aboutUs == "" || myModel.data!.aboutUs == null) {
@@ -98,16 +102,17 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Route _createRoute() {
-  return PageRouteBuilder(
-    transitionDuration: Duration(seconds: 2),
+    return PageRouteBuilder(
+      transitionDuration: Duration(seconds: 2),
       pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;
         const curve = Curves.ease;
-  
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-  
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
         return SlideTransition(
           position: animation.drive(tween),
           child: child,
@@ -121,9 +126,8 @@ class _SplashScreenState extends State<SplashScreen> {
     var preferences = MySharedPref();
     bool val = await preferences.getStringValue(SharePreData.strIfc);
     setState(() {
-      if(val == true){
-         
-      }else if(ifc == true){
+      if (val == true) {
+      } else if (ifc == true) {
         preferences.clear();
       }
     });
@@ -137,13 +141,13 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Visibility(
         visible: isSplash,
         child: Center(
-        child: SvgPicture.asset(
-          logo,
-          width: 126,
-          height: 126,
+          child: SvgPicture.asset(
+            logo,
+            width: 126,
+            height: 126,
+          ),
         ),
-      ),),
-      
+      ),
     );
   }
 }

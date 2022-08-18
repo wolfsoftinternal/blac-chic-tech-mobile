@@ -49,11 +49,8 @@ class _ProfileTabState extends State<ProfileTab> {
       backgroundColor: white_ffffff,
       body: Obx(
         () => Center(
-          child: controller.details.value.pastJobs.toString() == "[]" ||
-                  controller.details.value.pastJobs == null &&
-                      controller.details.value.educations.toString() == "[]" ||
+          child: controller.details.value.educations.toString() == "[]" ||
                   controller.details.value.educations == null &&
-                      controller.details.value.dateOfBirth == null &&
                       controller.details.value.questions.toString() == "[]" ||
                   controller.details.value.questions == null
               ? SizedBox(

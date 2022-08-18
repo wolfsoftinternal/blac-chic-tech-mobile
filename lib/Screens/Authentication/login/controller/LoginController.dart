@@ -41,12 +41,14 @@ class LoginController extends GetxController {
 
   checker() async {
     var preferences = MySharedPref();
-    var rememberMe = await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
-    
-    if(rememberMe == null){
+    var rememberMe =
+        await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
+
+    if (rememberMe == null) {
       await preferences.setBool(SharePreData.keyRememberedUserInfo, false);
     }
-    boolRemember.value = await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
+    boolRemember.value =
+        await preferences.getBoolValue(SharePreData.keyRememberedUserInfo);
 
     if (boolRemember.value == true) {
       getStoredUserDetails();
@@ -87,7 +89,7 @@ class LoginController extends GetxController {
                   SharePreData.keyRememberedUserInfo, true);
               await preferences.setString(SharePreData.keyRememberPassword,
                   pswdText.value.text.toString());
-            }else{
+            } else {
               await preferences.setBool(
                   SharePreData.keyRememberedUserInfo, false);
             }
@@ -122,9 +124,11 @@ class LoginController extends GetxController {
               } else if (lastQuestionsInfo != "Done") {
                 Get.offAll(const AdditionalLastQueView());
               } else {
+                print(":::::::::::1::::::::::::");
                 Get.offAll(HomePage());
               }
             } else {
+              print(":::::::::::2::::::::::::");
               Get.offAll(HomePage());
             }
           } else {
@@ -185,13 +189,12 @@ class LoginController extends GetxController {
           if (model.statusCode == 200) {
             SignupModel loginInModel = SignupModel.fromJson(userModel);
             var preferences = MySharedPref();
-            
+
             await preferences.setSignupModel(
                 loginInModel, SharePreData.keySignupModel);
 
             await preferences.setString(
                 SharePreData.keytoken, loginInModel.data!.token.toString());
-
 
             SignupModel? myModel =
                 await preferences.getSignupModel(SharePreData.keySignupModel);
