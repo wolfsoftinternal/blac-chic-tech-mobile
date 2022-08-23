@@ -28,7 +28,7 @@ class SharePreData {
   static String strQues4 =
       "WHAT HILL ARE YOU WILLING TO DIE ON ? (UNPOPULAR OPINION)";
   static String strQues5 = "WHAT ARE YOU MOST PROUD OF ?";
-  static String strQues6 = "WHAT OPPOTUNITIES ARE YOU SEEKING ?";
+  static String strQues6 = "WHAT OPPORTUNITIES ARE YOU SEEKING ?";
   static String strQues7 = "WHAT AREAS DO YOU NEED SUPPORT ?";
   static String strQues8 = "WHAT CAUSES DO YOU CARE ABOUT ?";
   static String strQues9 = "WHAT ARE YOU AFRAID TO TRY ?";

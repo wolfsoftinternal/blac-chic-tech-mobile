@@ -7,18 +7,22 @@ import '../Styles/my_icons.dart';
 
 class BackLayout extends StatelessWidget {
   String? argument;
-  BackLayout({this.argument});
+  VoidCallback? onTap;
+  BackLayout({this.argument, this.onTap});
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 24.w),
       child: GestureDetector(
         onTap: () {
-          FocusScope.of(context).unfocus();
-          if (argument != null) {
-            Get.back(result: argument);
+          if (onTap != null) {
+            onTap!();
           } else {
-            Get.back();
+            if (argument != null) {
+              Get.back(result: argument);
+            } else {
+              Get.back();
+            }
           }
         },
         child: Container(
