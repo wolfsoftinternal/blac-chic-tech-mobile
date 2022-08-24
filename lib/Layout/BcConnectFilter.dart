@@ -29,11 +29,12 @@ class BcConnectFilter extends StatefulWidget {
 }
 
 class _BcConnectFilterState extends State<BcConnectFilter> {
-  EventDetailController eventDetailController = Get.put(EventDetailController());
+  EventDetailController eventDetailController =
+      Get.put(EventDetailController());
   VideoController videoController = Get.put(VideoController());
   BCConnectController controller = Get.put(BCConnectController());
   StepsController stepsController = Get.put(StepsController());
-  
+
   bool checkColor = false;
   bool checkFillColor = true;
   bool _hasBeenPressednBidNow = false;
@@ -80,59 +81,64 @@ class _BcConnectFilterState extends State<BcConnectFilter> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 2.h),
                     child: TextField(
-                  style: TextStyle(
-                    fontFamily: helveticaNeueNeue_medium,
-                    fontSize: 14.sp,
-                    color: black_121212
-                  ),
-                  controller: videoController.searchController.value,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                    filled: false,
-                    hintText: "Search people",
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
-                    // fillColor: const Color(0xfff5f5f5),
-                    hintStyle: TextStyle(
-                      fontSize: 14.sp,
-                      fontFamily: helveticaNeueNeue_medium,
-                      color: grey_aaaaaa
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(4.r),
-                    ),
-                  ),
-                  onChanged: (value){
-                    if (value.isNotEmpty) {
-                      setState(() {
-                        checkFillColor = false;
-                        checkColor = true;
-                      });
-                    } else {
-                      setState(() {
-                        checkFillColor = true;
-                      });
-                    }
+                      style: TextStyle(
+                          fontFamily: helveticaNeueNeue_medium,
+                          fontSize: 14.sp,
+                          color: black_121212),
+                      controller: videoController.searchController.value,
+                      autofocus: false,
+                      decoration: InputDecoration(
+                        filled: false,
+                        hintText: "Search people",
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 12.h),
+                        // fillColor: const Color(0xfff5f5f5),
+                        hintStyle: TextStyle(
+                            fontSize: 14.sp,
+                            fontFamily: helveticaNeueNeue_medium,
+                            color: grey_aaaaaa),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                      ),
+                      onChanged: (value) {
+                        if (value.isNotEmpty) {
+                          setState(() {
+                            checkFillColor = false;
+                            checkColor = true;
+                          });
+                        } else {
+                          setState(() {
+                            checkFillColor = true;
+                          });
+                        }
 
-                    if(stepsController.industryName == '' || stepsController.industryName == null){
-                      if(stepsController.industryController.value.text != ''){
-                        stepsController.industryName = stepsController.industryController.value.text;
-                      }
-                    }
-                    
-                    checkNet(context).then((value) {
-                      videoController.PageNumber.value = 1;
-                      dynamic data = {
-                        'search': videoController.searchController.value.text.toString(),
-                        'page': videoController.PageNumber.toString(),
-                        // 'country': stepsController.strCountryId.value,
-                        // 'industry': stepsController.industryName.toString(),
-                        // 'type': strRole.toString()
-                      };
-                      videoController.userListAPI(context, true, null, data);
-                    });
-                  },
-                ),
+                        if (stepsController.industryName == '' ||
+                            stepsController.industryName == null) {
+                          if (stepsController.industryController.value.text !=
+                              '') {
+                            stepsController.industryName =
+                                stepsController.industryController.value.text;
+                          }
+                        }
+
+                        checkNet(context).then((value) {
+                          videoController.PageNumber.value = 1;
+                          dynamic data = {
+                            'search': videoController
+                                .searchController.value.text
+                                .toString(),
+                            'page': videoController.PageNumber.toString(),
+                            // 'country': stepsController.strCountryId.value,
+                            // 'industry': stepsController.industryName.toString(),
+                            // 'type': strRole.toString()
+                          };
+                          videoController.userListAPI(
+                              context, true, null, data);
+                        });
+                      },
+                    ),
                   ),
                 ),
                 InkWell(
@@ -156,7 +162,8 @@ class _BcConnectFilterState extends State<BcConnectFilter> {
                           color: Colors.grey.withOpacity(0.1),
                           spreadRadius: 6,
                           blurRadius: 10,
-                          offset: const Offset(1, 4), // changes position of shadow
+                          offset:
+                              const Offset(1, 4), // changes position of shadow
                         ),
                       ],
                     ),
@@ -207,7 +214,7 @@ class _BcConnectFilterState extends State<BcConnectFilter> {
                             stepsController.industryName = null;
                             strCountryName = null;
                             stepsController.strCountryId.value = '';
-                            
+
                             videoController.PageNumber.value = 0;
                             videoController.initScrolling(context, true);
                             checkNet(context).then((value) {
@@ -237,142 +244,153 @@ class _BcConnectFilterState extends State<BcConnectFilter> {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Container(
-                        height: 36.h,
-                        decoration: BoxDecoration(
-                          color: grey_f5f5f5,
-                          borderRadius: BorderRadius.circular(4.r),
-                          // border: Border.all(color: Colors.black,width: 1)
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton2<String>(
-                            buttonPadding: EdgeInsets.only(left: 15.w),
-                            hint: Text("Role",
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 36.h,
+                            decoration: BoxDecoration(
+                              color: grey_f5f5f5,
+                              borderRadius: BorderRadius.circular(4.r),
+                              // border: Border.all(color: Colors.black,width: 1)
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton2<String>(
+                                buttonPadding: EdgeInsets.only(left: 36.5.w),
+                                hint: Text("Role",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontSize: 14.0.sp)),
+                                value: strRole,
+                                isExpanded: true,
+                                icon: Padding(
+                                  padding: EdgeInsets.only(right: 8.w),
+                                  child: SvgPicture.asset(
+                                    icon_down_arrow_spinner,
+                                    color: grey_aaaaaa,
+                                    height: 15.h,
+                                    width: 15.w,
+                                  ),
+                                ),
+                                iconSize: 20.sp,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontFamily: helveticaNeueNeue_medium,
-                                    fontSize: 14.0.sp)),
-                            value: strRole,
-                            isExpanded: true,
-                            icon: Padding(
-                              padding: EdgeInsets.only(right: 8.w),
-                              child: SvgPicture.asset(
-                                icon_down_arrow_spinner,
-                                color: grey_aaaaaa,
-                                height: 15.h,
-                                width: 15.w,
+                                    fontSize: 14.sp,
+                                    fontFamily: helveticaNeueNeue_medium),
+                                // underline: Container(
+                                //   height: 2,
+                                //   color: Colors.deepPurpleAccent,
+                                // ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    strRole = newValue!;
+                                  });
+                                },
+                                customItemsHeight: 4,
+                                iconEnabledColor: black_121212,
+                                iconDisabledColor: Colors.grey,
+                                buttonHeight: 60,
+                                buttonWidth: double.infinity,
+                                buttonDecoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: grey_f5f5f5,
+                                ),
+                                itemHeight: 35,
+                                itemPadding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
+                                items: stepsController.countrylist.map((value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value.id.toString(),
+                                    child: Text(
+                                      value.name.toString(),
+                                      style: TextStyle(fontSize: 14.sp),
+                                    ),
+                                  );
+                                }).toList(),
                               ),
                             ),
-                            iconSize: 20.sp,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.sp,
-                                fontFamily: helveticaNeueNeue_medium),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                strRole = newValue!;
-                              });
-                            },
-                            customItemsHeight: 4,
-                            iconEnabledColor: black_121212,
-                            iconDisabledColor: Colors.grey,
-                            buttonHeight: 60,
-                            buttonWidth: double.infinity,
-                            buttonDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: grey_f5f5f5,
-                            ),
-                            itemHeight: 35,
-                            itemPadding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
-                            items: stepsController.countrylist
-                                .map((value) {
-                              return DropdownMenuItem<String>(
-                                value: value.id.toString(),
-                                child: Text(value.name.toString(), style: TextStyle(fontSize: 14.sp),),
-                              );
-                            }).toList(),
                           ),
-                        ),
+                          Container(
+                              margin: EdgeInsets.only(top: 12, left: 16.w),
+                              child: SvgPicture.asset(
+                                icon_ticket,
+                                height: 12.h,
+                                width: 12.w,
+                              )),
+                        ],
                       ),
                     ),
-                    SizedBox(width: 10.w,),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                     Expanded(
                       flex: 1,
-                      child: Container(
-                        height: 36.h,
-                        decoration: BoxDecoration(
-                          color: grey_f5f5f5,
-                          borderRadius: BorderRadius.circular(4.r),
-                        ),
-                        child: stepsController.industryName != null && stepsController.industryName == 'other'
-                        ? Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 17.w, right: 17.w),
-                            child: Center(
-                              child: setTextFieldNext(
-                                stepsController.industryController.value,
-                                "Enter Industry",
-                                false,
-                                TextInputType.name,
-                                false,
-                                "",
-                                TextInputAction.next,
-                                (val) => {
-                                  if(val == ''){
-                                    stepsController.industryName = null,
-                                    setState((){})
-                                  }
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 36.h,
+                            decoration: BoxDecoration(
+                              color: grey_f5f5f5,
+                              borderRadius: BorderRadius.circular(4.r),
+                              // border: Border.all(color: Colors.black,width: 1)
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton2<String>(
+                                buttonPadding: EdgeInsets.only(left: 36.5.w),
+                                hint: Text("Select Industry",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: helveticaNeueNeue_medium,
+                                        fontSize: 14.0.sp)),
+                                value: stepsController.industryName,
+                                isExpanded: true,
+                                icon: Padding(
+                                  padding: EdgeInsets.only(right: 8.w),
+                                  child: SvgPicture.asset(
+                                    icon_down_arrow_spinner,
+                                    color: grey_aaaaaa,
+                                    height: 15.h,
+                                    width: 15.w,
+                                  ),
+                                ),
+                                iconSize: 20.sp,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14.sp,
+                                    fontFamily: helveticaNeueNeue_medium),
+                                // underline: Container(
+                                //   height: 2,
+                                //   color: Colors.deepPurpleAccent,
+                                // ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    stepsController.industryName = newValue!;
+                                  });
                                 },
-                                () {},
-                                false,
-                                true
+                                customItemsHeight: 4,
+                                iconEnabledColor: black_121212,
+                                iconDisabledColor: Colors.grey,
+                                buttonHeight: 60,
+                                buttonWidth: double.infinity,
+                                buttonDecoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: grey_f5f5f5,
+                                ),
+                                itemHeight: 35,
+                                itemPadding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
+                                items: stepsController.dropDownIndustryItems,
                               ),
                             ),
                           ),
-                        )
-                        : DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                            value: stepsController.industryName,
-                            hint: Text("Select Industry",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: helveticaNeueNeue_medium,
-                                fontSize: 14.sp
-                              ),
-                              textAlign: TextAlign.left
-                            ),
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14.sp,
-                              fontFamily: helveticaNeueNeue_medium
-                            ),
-                            icon: SvgPicture.asset(
-                              icon_down_arrow_spinner,
-                              color: grey_aaaaaa,
-                              height: 15.h,
-                              width: 15.w,
-                            ),
-                            isExpanded: true,
-                            customItemsHeight: 4,
-                            iconEnabledColor: black_121212,
-                            iconDisabledColor: Colors.grey,
-                            // buttonHeight: 60,
-                            buttonWidth: double.infinity,
-                            buttonPadding: const EdgeInsets.only(left: 14, right: 8),
-                            buttonDecoration: EditTextDecoration,
-                            itemHeight: 42,
-                            itemPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                stepsController.industryName =
-                                    newValue!;
-                              });
-                            },
-                            items: stepsController.dropDownIndustryItems
-                        ),
-                        )
+                          Container(
+                              margin: EdgeInsets.only(top: 12, left: 16.w),
+                              child: SvgPicture.asset(
+                                icon_ticket,
+                                height: 12.h,
+                                width: 12.w,
+                              )),
+                        ],
                       ),
                     ),
                   ],
@@ -380,63 +398,82 @@ class _BcConnectFilterState extends State<BcConnectFilter> {
                 SizedBox(
                   height: 8.h,
                 ),
-                Container(
-                  height: 36.h,
-                  decoration: BoxDecoration(
-                    color: grey_f5f5f5,
-                    borderRadius: BorderRadius.circular(4.r),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton2<String>(
-                      buttonPadding: EdgeInsets.only(left: 15.w),
-                      hint: Text("Country",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: helveticaNeueNeue_medium,
-                          fontSize: 14.sp
-                        )
+                Stack(
+                  children: [
+                    Container(
+                      height: 36.h,
+                      decoration: BoxDecoration(
+                        color: grey_f5f5f5,
+                        borderRadius: BorderRadius.circular(4.r),
+                        // border: Border.all(color: Colors.black,width: 1)
                       ),
-                      value: strCountryName,
-                      icon: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: SvgPicture.asset(
-                          icon_down_arrow_spinner,
-                          color: grey_aaaaaa,
-                          height: 15.h,
-                          width: 15.w,
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton2<String>(
+                          buttonPadding: const EdgeInsets.only(left: 36.0),
+                          hint: Text("Country",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: helveticaNeueNeue_medium,
+                                  fontSize: 14.sp)),
+
+                          value: strCountryName,
+                          icon: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: SvgPicture.asset(
+                              icon_down_arrow_spinner,
+                              color: grey_aaaaaa,
+                              height: 15.h,
+                              width: 15.w,
+                            ),
+                          ),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14.sp,
+                              fontFamily: helveticaNeueNeue_medium),
+                          // underline: Container(
+                          //   height: 2,
+                          //   color: Colors.deepPurpleAccent,
+                          // ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              strCountryName = newValue!;
+                            });
+                          },
+                          isExpanded: true,
+                          customItemsHeight: 4,
+                          iconEnabledColor: black_121212,
+                          iconDisabledColor: Colors.grey,
+                          buttonHeight: 60,
+                          buttonWidth: double.infinity,
+                          buttonDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: grey_f5f5f5,
+                          ),
+                          itemHeight: 35,
+                          itemPadding:
+                              const EdgeInsets.symmetric(horizontal: 8.0),
+                          items: stepsController.countrylist
+                              .map<DropdownMenuItem<String>>(
+                                  (CountryDatum value) {
+                            return DropdownMenuItem<String>(
+                              value: value.id.toString(),
+                              child: Text(
+                                value.name!.capitalizeFirst.toString(),
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                            );
+                          }).toList(),
                         ),
                       ),
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.sp,
-                          fontFamily: helveticaNeueNeue_medium),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          strCountryName = newValue!;
-                          stepsController.strCountryId.value = newValue;
-                        });
-                      },
-                      isExpanded: true,
-                      customItemsHeight: 4,
-                      iconEnabledColor: black_121212,
-                      iconDisabledColor: Colors.grey,
-                      buttonHeight: 60,
-                      buttonWidth: double.infinity,
-                      buttonDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: grey_f5f5f5,
-                      ),
-                      itemHeight: 35,
-                      itemPadding:
-                          const EdgeInsets.symmetric(horizontal: 8.0),
-                      items: stepsController.countrylist.map((CountryDatum value) {
-                        return DropdownMenuItem<String>(
-                          value: value.id.toString(),
-                          child: Text(value.name!.capitalizeFirst.toString(), style: TextStyle(fontSize: 14.sp),),
-                        );
-                      }).toList(),
                     ),
-                  ),
+                    Container(
+                        margin: EdgeInsets.only(top: 12, left: 16.w),
+                        child: SvgPicture.asset(
+                          icon_location,
+                          height: 12.h,
+                          width: 12.w,
+                        )),
+                  ],
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 15.h),
@@ -448,7 +485,8 @@ class _BcConnectFilterState extends State<BcConnectFilter> {
                         'name': videoController.searchController.value.text,
                         'role': strRole.toString(),
                         'industry': stepsController.industryName.toString(),
-                        'country': stepsController.strCountryId.value.toString(),
+                        'country':
+                            stepsController.strCountryId.value.toString(),
                       };
                       videoController.userListAPI(context, true, null, data);
                     });

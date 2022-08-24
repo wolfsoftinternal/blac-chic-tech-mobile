@@ -123,7 +123,7 @@ class Request {
     return response;
   }
 
-    Future<http.StreamedResponse> postAPI(url, body, token) async {
+  Future<http.StreamedResponse> postAPI(url, body, token) async {
     Map<String, String> headersWithBearer = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
@@ -148,41 +148,41 @@ class Request {
 
       return response;
     }
-  }  
-}
-Future<dynamic> peerPostAPI(FormData params, BuildContext context) async {
-    try{
-      var header = Options(
-        headers: {
-          'Authorization': 'a4b63c2694605fc4d43f63bd6432cedb',
-        },
-      );
-      var response =
-          await Dio().post('https://api.peerboard.com/v1/members', data: {
-      "email": "elon@musk.org",
-      "name": "Elon",
-      "last_name": "Musk",
-      "bio": "Space X and Tesla Motors CEO and cool guy",
-      "external_id": "id_from_your_system",
-      "groups": [
-        {
-          "id": 68840604
-        }
-      ]
-    }, options: header);
-          print(response);
-      var responseJson = json.decode(response.data!);
-      print(responseJson);
-      if (response.statusCode == 200) {
-        return responseJson;
-      } else {
-        print(responseJson['message']);
-        return null;
-      }
-    }catch(e){
-      if (e is DioError) {
-        print(e.message.toString());
-      }
-      return e.toString();
-    }
   }
+}
+
+Future<dynamic> peerPostAPI(FormData params, BuildContext context) async {
+  try {
+    var header = Options(
+      headers: {
+        'Authorization': 'a4b63c2694605fc4d43f63bd6432cedb',
+      },
+    );
+    var response = await Dio().post('https://api.peerboard.com/v1/members',
+        data: {
+          "email": "elon@musk.org",
+          "name": "Elon",
+          "last_name": "Musk",
+          "bio": "Space X and Tesla Motors CEO and cool guy",
+          "external_id": "id_from_your_system",
+          "groups": [
+            {"id": 68840604}
+          ]
+        },
+        options: header);
+    print(response);
+    var responseJson = json.decode(response.data!);
+    print(responseJson);
+    if (response.statusCode == 200) {
+      return responseJson;
+    } else {
+      print(responseJson['message']);
+      return null;
+    }
+  } catch (e) {
+    if (e is DioError) {
+      print(e.message.toString());
+    }
+    return e.toString();
+  }
+}

@@ -34,7 +34,8 @@ class InputTextStaicFilter extends StatefulWidget {
 }
 
 class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
-  EventDetailController eventDetailController = Get.put(EventDetailController());
+  EventDetailController eventDetailController =
+      Get.put(EventDetailController());
   String? strCityName;
   String? strType;
   String? strDate = '';
@@ -389,13 +390,16 @@ class _InputTextStaicFilterState extends State<InputTextStaicFilter> {
                                   color: grey_f5f5f5,
                                 ),
                                 itemHeight: 35,
-                                itemPadding:
-                                    const EdgeInsets.symmetric(horizontal: 15.0),
+                                itemPadding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
                                 items: eventDetailController.cityList
                                     .map((CityDatum value) {
                                   return DropdownMenuItem<String>(
                                     value: value.id.toString(),
-                                    child: Text(value.name.toString(), style: TextStyle(fontSize: 14.sp),),
+                                    child: Text(
+                                      value.name.toString(),
+                                      style: TextStyle(fontSize: 14.sp),
+                                    ),
                                   );
                                 }).toList(),
                               ),

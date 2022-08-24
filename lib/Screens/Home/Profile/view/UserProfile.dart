@@ -579,12 +579,13 @@ class _UserProfileState extends State<UserProfile> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print("Page No ::" + widget.index.toString());
     checkNet(context).then(
       (value) {
         if (widget.index != null) {
           i = widget.index;
         }
-        videoController.PageNumber.value = 0;
+        videoController.PageNumber.value = i;
         // videoController.userListAPI(context, false, widget.selectedUserId);
         videoController.userListAPI(context, false);
         controller.admireListAPI(context, widget.selectedUserId);
@@ -592,6 +593,7 @@ class _UserProfileState extends State<UserProfile> {
             context, widget.selectedUserId, null, 'transaction'));
       },
     );
+    pageController = PageController(initialPage: widget.index);
     controller.addListener(() {});
   }
 
@@ -615,11 +617,16 @@ class _UserProfileState extends State<UserProfile> {
                       : Expanded(
                           child: Stack(
                             children: [
-                              GestureDetector(
-                                onVerticalDragEnd: (dragEndDetails) {
-                                  if (i ==
-                                      videoController.userList.length - 1) {
-                                    i = 0;
+                              PageView.builder(
+                                  onPageChanged: (index) {
+                                    setState(() {
+                                      i = index;
+                                    });
+                                    print("Page No :: " +
+                                        i.toString() +
+                                        " :: " +
+                                        videoController.userList[i].userName
+                                            .toString());
                                     controller.admireListAPI(
                                         context,
                                         videoController.userList[i].id
@@ -630,58 +637,371 @@ class _UserProfileState extends State<UserProfile> {
                                             videoController.userList[i].id,
                                             null,
                                             'transaction'));
-                                    return;
-                                  } else if (dragEndDetails
-                                          .velocity.pixelsPerSecond.dx <
-                                      1) {
-                                    setState(() {
-                                      if (i <=
-                                          videoController.userList.length) {
-                                        i++; //right swipe
-                                        controller.admireListAPI(
-                                            context,
-                                            videoController.userList[i].id
-                                                .toString());
-                                        checkNet(context).then((value) =>
-                                            controller.admireProfileAPI(
-                                                context,
-                                                videoController.userList[i].id,
-                                                null,
-                                                'transaction'));
-                                        return;
-                                      }
-                                    });
-                                  } else {
-                                    setState(() {
-                                      if (i != 0) {
-                                        i--; //left swipe
-                                        controller.admireListAPI(
-                                            context,
-                                            videoController.userList[i].id
-                                                .toString());
-                                        checkNet(context).then((value) =>
-                                            controller.admireProfileAPI(
-                                                context,
-                                                videoController.userList[i].id,
-                                                null,
-                                                'transaction'));
-                                        return;
-                                      }
-                                    });
-                                  }
-                                },
-                                child: PageView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    controller: pageController,
-                                    itemCount: widget.isFrom == true
-                                        ? 1
-                                        : videoController.userList.length,
-                                    itemBuilder: (BuildContext context, index) {
-                                      return OtherUserList(
-                                          videoController.userList[i]);
-                                    }),
-                              ),
+                                    //   return;
+                                    // } else if (dragEndDetails
+                                    //         .velocity.pixelsPerSecond.dx <
+                                    //     1) {
+                                    //   setState(() {
+                                    //     if (i <=
+                                    //         videoController.userList.length) {
+                                    //       i++; //right swipe
+                                    //       controller.admireListAPI(
+                                    //           context,
+                                    //           videoController.userList[i].id
+                                    //               .toString());
+                                    //       checkNet(context).then((value) =>
+                                    //           controller.admireProfileAPI(
+                                    //               context,
+                                    //               videoController
+                                    //                   .userList[i].id,
+                                    //               null,
+                                    //               'transaction'));
+                                    //       return;
+                                    //     }
+                                    //   });
+                                    // } else {
+                                    //   setState(() {
+                                    //     if (i != 0) {
+                                    //       i--; //left swipe
+                                    //       controller.admireListAPI(
+                                    //           context,
+                                    //           videoController.userList[i].id
+                                    //               .toString());
+                                    //       checkNet(context).then((value) =>
+                                    //           controller.admireProfileAPI(
+                                    //               context,
+                                    //               videoController
+                                    //                   .userList[i].id,
+                                    //               null,
+                                    //               'transaction'));
+                                    //       return;
+                                    //     }
+                                    //   });
+                                    // }
+                                  },
+                                  //  physics: const NeverScrollableScrollPhysics(),
+                                  controller: pageController,
+                                  itemCount: videoController.userList.length,
+                                  itemBuilder: (BuildContext context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        setState(() {});
+                                        checkNet(context)
+                                            .then((value) =>
+                                                controller.admireProfileAPI(
+                                                    context,
+                                                    videoController
+                                                        .userList[index].id,
+                                                    null,
+                                                    'transaction'))
+                                            .then(
+                                              (value) => Get.to(Profile(),
+                                                  duration: Duration(
+                                                      milliseconds: 500),
+                                                  transition:
+                                                      Transition.downToUp),
+                                            );
+                                      },
+                                      child: Stack(
+                                        children: [
+                                          videoController
+                                                      .userList[index].image ==
+                                                  null
+                                              ? SvgPicture.asset(
+                                                  placeholder,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      .83,
+                                                  width: double.infinity,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : CachedNetworkImage(
+                                                  imageUrl: videoController
+                                                      .userList[index].image!,
+                                                  // widget.admireList.admireDetails!.image!,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      .83,
+                                                  width: double.infinity,
+                                                  fit: BoxFit.cover,
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                              downloadProgress) =>
+                                                          SvgPicture.asset(
+                                                    placeholder,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            .83,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          SvgPicture.asset(
+                                                    placeholder,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            .83,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                          Container(
+                                            color:
+                                                Colors.black.withOpacity(0.3),
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                .83,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(top: 60.h),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.50,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.068,
+                                                  child: FittedBox(
+                                                    child: setHelceticaBold(
+                                                        videoController
+                                                                    .userList[
+                                                                        index]
+                                                                    .userName !=
+                                                                null
+                                                            ? videoController
+                                                                .userList[index]
+                                                                .userName!
+                                                                .replaceAll(
+                                                                    '@', '')
+                                                            : videoController
+                                                                .userList[index]
+                                                                .firstName!,
+                                                        20.sp,
+                                                        white_ffffff,
+                                                        FontWeight.w600,
+                                                        FontStyle.normal,
+                                                        -0.8),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 24.w, right: 24.w),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            .52),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.80,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.13,
+                                                      child: FittedBox(
+                                                        child:
+                                                            setInterExtraBold(
+                                                                videoController.userList[index].firstName !=
+                                                                            null &&
+                                                                        videoController.userList[index].lastName !=
+                                                                            null
+                                                                    ? videoController
+                                                                            .userList[
+                                                                                index]
+                                                                            .firstName!
+                                                                            .toUpperCase() +
+                                                                        " " +
+                                                                        videoController
+                                                                            .userList[
+                                                                                index]
+                                                                            .lastName!
+                                                                            .toUpperCase()
+                                                                    : videoController.userList[index].firstName !=
+                                                                            null
+                                                                        ? videoController
+                                                                            .userList[
+                                                                                index]
+                                                                            .firstName!
+                                                                            .toUpperCase()
+                                                                        : videoController.userList[index].lastName !=
+                                                                                null
+                                                                            ? videoController.userList[index].lastName!
+                                                                                .toUpperCase()
+                                                                            : "",
+                                                                40.sp,
+                                                                white_ffffff,
+                                                                FontWeight.w600,
+                                                                FontStyle
+                                                                    .normal,
+                                                                -1.6),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 24.h,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(
+                                                        videoController
+                                                                    .userList[
+                                                                        index]
+                                                                    .currentJobs !=
+                                                                null
+                                                            ? videoController
+                                                                            .userList[
+                                                                                index]
+                                                                            .currentJobs!
+                                                                            .title !=
+                                                                        null &&
+                                                                    videoController
+                                                                            .userList[
+                                                                                index]
+                                                                            .currentJobs!
+                                                                            .companyName !=
+                                                                        null
+                                                                ? "${videoController.userList[index].currentJobs!.title!.toUpperCase()} - ${videoController.userList[index].currentJobs!.companyName!.toUpperCase()}"
+                                                                // widget.otherUser.currentJobs!
+                                                                //     .companyName!
+                                                                //     .toUpperCase()
+                                                                : videoController
+                                                                            .userList[
+                                                                                index]
+                                                                            .currentJobs!
+                                                                            .title !=
+                                                                        null
+                                                                    ? videoController
+                                                                        .userList[
+                                                                            index]
+                                                                        .currentJobs!
+                                                                        .title!
+                                                                        .toUpperCase()
+                                                                    : videoController.userList[index].currentJobs!.companyName !=
+                                                                            null
+                                                                        ? videoController
+                                                                            .userList[index]
+                                                                            .currentJobs!
+                                                                            .companyName!
+                                                                            .toUpperCase()
+                                                                        : ""
+                                                            : "",
+                                                        softWrap: true,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontSize: 16.sp,
+                                                          fontFamily:
+                                                              interMedium,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: Colors.white60,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          letterSpacing: 6.4,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 24.w, right: 24.w),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      .76,
+                                                  // height: MediaQuery.of(context).size.height * .69,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    videoController
+                                                                .userList[index]
+                                                                .cityDetails !=
+                                                            null
+                                                        ? const Icon(
+                                                            Icons.location_on,
+                                                            size: 12,
+                                                            color:
+                                                                orange_ff881a,
+                                                          )
+                                                        : Container(),
+                                                    setInterRegular(
+                                                      videoController
+                                                                  .userList[
+                                                                      index]
+                                                                  .cityDetails !=
+                                                              null
+                                                          ?
+                                                          //  widget.otherUser.cityDetails!.name! +
+                                                          //     ', ' +
+                                                          videoController
+                                                                  .userList[
+                                                                      index]
+                                                                  .stateDetails!
+                                                                  .name! +
+                                                              ', ' +
+                                                              videoController
+                                                                  .userList[
+                                                                      index]
+                                                                  .countryDetails!
+                                                                  .name!
+                                                          : "",
+                                                      10.sp,
+                                                      Colors.white70,
+                                                      FontWeight.w600,
+                                                      FontStyle.normal,
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }),
                               Padding(
                                 padding: EdgeInsets.only(left: 24.w, top: 50.h),
                                 child: Row(

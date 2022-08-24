@@ -47,6 +47,7 @@ class _AdmireProfileState extends State<AdmireProfile> {
     );
     controller.addListener(() {});
     init();
+    controller.userProfileAPI(context, true);
   }
 
   init() async {

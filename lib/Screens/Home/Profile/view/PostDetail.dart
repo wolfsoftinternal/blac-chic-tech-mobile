@@ -57,9 +57,7 @@ class _PostDetailState extends State<PostDetail> {
 
   init() async {
     var preferences = MySharedPref();
-    myModel =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
-    
+    myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
   }
 
   @override
@@ -84,18 +82,19 @@ class _PostDetailState extends State<PostDetail> {
                   child: GestureDetector(
                     onTap: () {
                       if (myModel?.data!.id == controller.details.value.id) {
-                          Get.to(AdmireProfile());
-                        } else {
-                          videoController.userList.clear();
-                          Get.to(UserProfile(
-                            selectedUserId: controller.details.value.id.toString(),
-                            isFrom: true,
-                          ));
-                        }
+                        Get.to(AdmireProfile());
+                      } else {
+                        videoController.userList.clear();
+                        Get.to(UserProfile(
+                          selectedUserId:
+                              controller.details.value.id.toString(),
+                          isFrom: true,
+                        ));
+                      }
                     },
                     child: CircularProfileAvatar(
-                                '',
-                                radius: 24,
+                      '',
+                      radius: 24,
                       child: controller.details.value.image == null
                           ? SvgPicture.asset(
                               placeholder,
@@ -200,204 +199,262 @@ class _PostDetailState extends State<PostDetail> {
           Expanded(
             child: SingleChildScrollView(
               controller: controller.postScrollController,
-            child: ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: controller.postList.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding:
-                        EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: white_ffffff,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0x17747796).withOpacity(0.07),
-                            spreadRadius: 10,
-                            blurRadius: 5,
-                            offset: const Offset(
-                                0, 10), // changes position of shadow
-                          ),
-                        ],
-                        borderRadius: BorderRadius.all(Radius.circular(4.r)),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(16.r),
-                        child: Column(
-                          children: [
-                            Stack(
-                              children: [
-                                InkWell(
-                                  onDoubleTap: (){
-                                    setState(() {
-                                      if(controller.postList[index].isLike == 0){
-                                        controller.postList[index].isLike = 1;
-                                        controller.postList[index].totalLikes = controller.postList[index].totalLikes! + 1;
-                                        checkNet(context).then((value) {
-                                          controller.postLikeApi(context, controller.postList[index].id);
-                                        });
-                                      }
-                                    });
-                                  },
-                                  child: SizedBox(
-                                    height: 270.h,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: controller
-                                                .postList[index].image ==
-                                            null
-                                        ? SvgPicture.asset(
-                                          placeholder,
-                                          // fit: BoxFit.fill,
-                                        )
-                                        : ClipRRect(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(4.r)),
-                                            child: CachedNetworkImage(
-                                              imageUrl: controller
-                                                  .postList[index].image!,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: controller.postList.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          left: 16.w, right: 16.w, bottom: 16.h),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: white_ffffff,
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0x17747796).withOpacity(0.07),
+                              spreadRadius: 10,
+                              blurRadius: 5,
+                              offset: const Offset(
+                                  0, 10), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(Radius.circular(4.r)),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(16.r),
+                          child: Column(
+                            children: [
+                              Stack(
+                                children: [
+                                  InkWell(
+                                    onDoubleTap: () {
+                                      setState(() {
+                                        if (controller.postList[index].isLike ==
+                                            0) {
+                                          controller.postList[index].isLike = 1;
+                                          controller.postList[index]
+                                              .totalLikes = controller
+                                                  .postList[index].totalLikes! +
+                                              1;
+                                          checkNet(context).then((value) {
+                                            controller.postLikeApi(context,
+                                                controller.postList[index].id);
+                                          });
+                                        }
+                                      });
+                                    },
+                                    child: SizedBox(
+                                      height: 270.h,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: controller.postList[index].image ==
+                                              null
+                                          ? SvgPicture.asset(
+                                              placeholder,
                                               // fit: BoxFit.fill,
-                                              progressIndicatorBuilder: (context,
-                                                      url, downloadProgress) =>
-                                                  SvgPicture.asset(
-                                                placeholder,
+                                            )
+                                          : ClipRRect(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(4.r)),
+                                              child: CachedNetworkImage(
+                                                imageUrl: controller
+                                                    .postList[index].image!,
                                                 // fit: BoxFit.fill,
-                                              ),
-                                            )),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Positioned(
-                                  bottom: 15.h,
-                                  left: 15.w,
-                                  child: Container(
-                                    height: 37.h,
-                                    // width: 110.w,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(colors: [
-                                        Color(0xff1c2535),
-                                        Color(0xff04080f)
-                                      ]),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(40.r)),
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                            downloadProgress) =>
+                                                        SvgPicture.asset(
+                                                  placeholder,
+                                                  // fit: BoxFit.fill,
+                                                ),
+                                              )),
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            controller.postList[index].isLike == 1 ?
-                                            InkWell(
-                                              onTap: (){
-                                                setState(() {
-                                                  controller.postList[index].isLike = 0;
-                                                  controller.postList[index].totalLikes = controller.postList[index].totalLikes! - 1;
-                                                  checkNet(context).then((value) {
-                                                    controller.postDisLikeApi(context, controller.postList[index].id);
-                                                  });
-                                                });
-                                              },
-                                              child: SvgPicture.asset(
-                                              icon_heart,
-                                              width: 17.w,
-                                              height: 17.h,
-                                              color:Colors.red,
-                                            )) :
-                                            InkWell(
-                                              onTap: (){
-                                                setState(() {
-                                                  controller.postList[index].isLike = 1;
-                                                  controller.postList[index].totalLikes = controller.postList[index].totalLikes! + 1;
-                                                  checkNet(context).then((value) {
-                                                    controller.postLikeApi(context, controller.postList[index].id);
-                                                  });
-                                                });
-                                              },
-                                              child: Image.asset(
-                                              heart,
-                                              width: 17.w,
-                                              height: 17.h,
-                                              color: Colors.white,
-                                            )),
-                                            SizedBox(
-                                              width: 5.w,
-                                            ),
-                                            setHelceticaBold(
-                                                "${controller.postList[index].totalLikes} likes",
-                                                14.sp,
-                                                white_ffffff,
-                                                FontWeight.w500,
-                                                FontStyle.normal)
-                                          ],
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Positioned(
+                                    bottom: 15.h,
+                                    left: 15.w,
+                                    child: Container(
+                                      height: 37.h,
+                                      // width: 110.w,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(colors: [
+                                          Color(0xff1c2535),
+                                          Color(0xff04080f)
+                                        ]),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(40.r)),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 15.0, right: 15.0),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              controller.postList[index]
+                                                          .isLike ==
+                                                      1
+                                                  ? InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller
+                                                              .postList[index]
+                                                              .isLike = 0;
+                                                          controller
+                                                              .postList[index]
+                                                              .totalLikes = controller
+                                                                  .postList[
+                                                                      index]
+                                                                  .totalLikes! -
+                                                              1;
+                                                          checkNet(context)
+                                                              .then((value) {
+                                                            controller
+                                                                .postDisLikeApi(
+                                                                    context,
+                                                                    controller
+                                                                        .postList[
+                                                                            index]
+                                                                        .id);
+                                                          });
+                                                        });
+                                                      },
+                                                      child: SvgPicture.asset(
+                                                        icon_heart,
+                                                        width: 17.w,
+                                                        height: 17.h,
+                                                        color: Colors.red,
+                                                      ))
+                                                  : InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          controller
+                                                              .postList[index]
+                                                              .isLike = 1;
+                                                          controller
+                                                              .postList[index]
+                                                              .totalLikes = controller
+                                                                  .postList[
+                                                                      index]
+                                                                  .totalLikes! +
+                                                              1;
+                                                          checkNet(context)
+                                                              .then((value) {
+                                                            controller.postLikeApi(
+                                                                context,
+                                                                controller
+                                                                    .postList[
+                                                                        index]
+                                                                    .id);
+                                                          });
+                                                        });
+                                                      },
+                                                      child: Image.asset(
+                                                        heart,
+                                                        width: 17.w,
+                                                        height: 17.h,
+                                                        color: Colors.white,
+                                                      )),
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              setHelceticaBold(
+                                                  "${controller.postList[index].totalLikes} likes",
+                                                  14.sp,
+                                                  white_ffffff,
+                                                  FontWeight.w500,
+                                                  FontStyle.normal)
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text.rich(
-                                TextSpan(
-                                  children: [
-                                    for (int i = 0; i < controller.postList[index].taggedUsers!.length; i++)
-                                    TextSpan(
-                                      text: controller.postList[index].taggedUsers![i].userDetails == null ? "" : 
-                                          "${"@" + controller.postList[index].taggedUsers![i].userDetails!.userName!.replaceAll("@", '') + " "}",
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        fontFamily: helvetica_neu_bold,
-                                        fontWeight: FontWeight.w700,
-                                        color: black_121212,
-                                        height: 1.4,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                        text: controller
-                                            .postList[index].caption!,
-                                        style: TextStyle(
+                                ],
+                              ),
+                              SizedBox(
+                                height: 16.h,
+                              ),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      for (int i = 0;
+                                          i <
+                                              controller.postList[index]
+                                                  .taggedUsers!.length;
+                                          i++)
+                                        TextSpan(
+                                          text: controller
+                                                      .postList[index]
+                                                      .taggedUsers![i]
+                                                      .userDetails ==
+                                                  null
+                                              ? ""
+                                              : "${"@" + controller.postList[index].taggedUsers![i].userDetails!.userName!.replaceAll("@", '') + " "}",
+                                          style: TextStyle(
                                             fontSize: 12.sp,
-                                            fontFamily:
-                                                helveticaNeueNeue_medium,
-                                            fontWeight: FontWeight.w400,
-                                            color: grey_3f3f3f, height: 1.4)),
-                                  ],
+                                            fontFamily: helvetica_neu_bold,
+                                            fontWeight: FontWeight.w700,
+                                            color: black_121212,
+                                            height: 1.4,
+                                          ),
+                                        ),
+                                      TextSpan(
+                                          text: controller
+                                              .postList[index].caption!,
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontFamily:
+                                                  helveticaNeueNeue_medium,
+                                              fontWeight: FontWeight.w400,
+                                              color: grey_3f3f3f,
+                                              height: 1.4)),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
+                              Padding(
                                 padding: const EdgeInsets.only(top: 10.0),
                                 child: Row(
                                   children: [
-                                    SvgPicture.asset(calendar_icon, color: grey_aaaaaa, height: 14.h, width: 14.w,),
-                                    SizedBox(width: 5,),
-                                    Text(Jiffy(DateFormat('yyyy-MM-dd').format(controller.postList[index].createdAt!)).fromNow(),
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    helveticaNeueNeue_medium,
-                                                fontWeight: FontWeight.w400,
-                                                color: grey_aaaaaa)),
+                                    SvgPicture.asset(
+                                      calendar_icon,
+                                      color: grey_aaaaaa,
+                                      height: 14.h,
+                                      width: 14.w,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                        Jiffy(DateFormat('yyyy-MM-dd').format(
+                                                controller.postList[index]
+                                                    .createdAt!))
+                                            .fromNow(),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily:
+                                                helveticaNeueNeue_medium,
+                                            fontWeight: FontWeight.w400,
+                                            color: grey_aaaaaa)),
                                   ],
                                 ),
                               )
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }),
-          ),
+                    );
+                  }),
+            ),
           ),
           if (controller.isPostPaginationLoading.value == true)
-                PaginationUtils().loader(),
+            PaginationUtils().loader(),
         ]),
       ),
     );

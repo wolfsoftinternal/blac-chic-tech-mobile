@@ -682,9 +682,10 @@ class StepsController extends GetxController {
                 Get.offAll(const AdditionalQueFormView());
               } else if (lastQuestionsInfo != "Done") {
                 Get.offAll(const HomePage());
-              } else {
-                Get.offAll(HomePage());
               }
+              // else {
+              //   Get.offAll(HomePage());
+              // }
             } else {
               Get.offAll(HomePage());
             }

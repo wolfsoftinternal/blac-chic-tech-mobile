@@ -36,7 +36,7 @@ class EventListDetail extends StatefulWidget {
 
 class _EventListDetailState extends State<EventListDetail> {
   AdmireProfileController controller = Get.put(AdmireProfileController());
-  VideoController videoController = Get.put(VideoController());  
+  VideoController videoController = Get.put(VideoController());
   SignupModel? myModel;
 
   @override
@@ -57,8 +57,7 @@ class _EventListDetailState extends State<EventListDetail> {
 
   init() async {
     var preferences = MySharedPref();
-    myModel =
-        await preferences.getSignupModel(SharePreData.keySignupModel);
+    myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
   }
 
   @override
@@ -83,14 +82,15 @@ class _EventListDetailState extends State<EventListDetail> {
                   child: GestureDetector(
                     onTap: () {
                       if (myModel?.data!.id == controller.details.value.id) {
-                          Get.to(AdmireProfile());
-                        } else {
-                          videoController.userList.clear();
-                          Get.to(UserProfile(
-                            selectedUserId: controller.details.value.id.toString(),
-                            isFrom: true,
-                          ));
-                        }
+                        Get.to(AdmireProfile());
+                      } else {
+                        videoController.userList.clear();
+                        Get.to(UserProfile(
+                          selectedUserId:
+                              controller.details.value.id.toString(),
+                          isFrom: true,
+                        ));
+                      }
                     },
                     child: CircularProfileAvatar(
                       '',
@@ -155,7 +155,7 @@ class _EventListDetailState extends State<EventListDetail> {
                       ),
                 myModel?.data!.id == controller.details.value.id
                     ? Padding(
-                        padding:  EdgeInsets.only(right: 15.w),
+                        padding: EdgeInsets.only(right: 15.w),
                         child: GestureDetector(
                           onTap: () {
                             Get.to(ProfileSetting())!.then((value) {
@@ -202,20 +202,19 @@ class _EventListDetailState extends State<EventListDetail> {
           ),
           controller.eventList.isEmpty
               ? Container(
-                height: MediaQuery.of(context).size.height * 0.75,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: black, 
-                    strokeWidth: 2
-                  )
-                ),
-              )
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  child: Center(
+                      child: CircularProgressIndicator(
+                          color: black, strokeWidth: 2)),
+                )
               : Expanded(
                   child: SingleChildScrollView(
                     controller: controller.eventScrollController,
                     child: Column(
                       children: [
-                        SizedBox(height: 20.h,),
+                        SizedBox(
+                          height: 20.h,
+                        ),
                         ListView.builder(
                             shrinkWrap: true,
                             primary: false,
@@ -224,18 +223,23 @@ class _EventListDetailState extends State<EventListDetail> {
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding:
-                                     EdgeInsets.only(left: 16.w, right: 16.w),
+                                    EdgeInsets.only(left: 16.w, right: 16.w),
                                 child: GestureDetector(
                                   onTap: () {
                                     checkNet(context).then((value) {
-                                      if(myModel!.data!.id == controller.eventList[index].userId){
-                                        controller.eventDetailAPI(context,
-                                          controller.eventList[index].id, );
-                                      }else{
-                                        controller.eventDetailAPI(context,
-                                          controller.eventList[index].id, controller.eventList[index].event_type);
+                                      if (myModel!.data!.id ==
+                                          controller.eventList[index].userId) {
+                                        controller.eventDetailAPI(
+                                          context,
+                                          controller.eventList[index].id,
+                                        );
+                                      } else {
+                                        controller.eventDetailAPI(
+                                            context,
+                                            controller.eventList[index].id,
+                                            controller
+                                                .eventList[index].event_type);
                                       }
-
                                     });
                                   },
                                   child: Padding(
@@ -243,33 +247,39 @@ class _EventListDetailState extends State<EventListDetail> {
                                     child: Stack(
                                       children: [
                                         SizedBox(
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 207.h,
-                                          child: controller
-                                                      .eventList[index].poster ==
+                                          child: controller.eventList[index]
+                                                      .poster ==
                                                   null
                                               ? ClipRRect(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(5.r)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5.r)),
                                                   child: SvgPicture.asset(
                                                     placeholder,
                                                     fit: BoxFit.cover,
-                                                    width: MediaQuery.of(context)
-                                                        .size
-                                                        .width,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
                                                     height: 207.h,
                                                   ),
                                                 )
                                               : ClipRRect(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(5.r)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5.r)),
                                                   child: CachedNetworkImage(
                                                     imageUrl: controller
-                                                        .eventList[index].poster!,
+                                                        .eventList[index]
+                                                        .poster!,
                                                     fit: BoxFit.cover,
-                                                    width: MediaQuery.of(context)
-                                                        .size
-                                                        .width,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
                                                     height: 207.h,
                                                     progressIndicatorBuilder:
                                                         (context, url,
@@ -277,9 +287,10 @@ class _EventListDetailState extends State<EventListDetail> {
                                                             SvgPicture.asset(
                                                       placeholder,
                                                       fit: BoxFit.cover,
-                                                      width: MediaQuery.of(context)
-                                                          .size
-                                                          .width,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
                                                       height: 207.h,
                                                     ),
                                                     errorWidget:
@@ -287,16 +298,18 @@ class _EventListDetailState extends State<EventListDetail> {
                                                             SvgPicture.asset(
                                                       placeholder,
                                                       fit: BoxFit.cover,
-                                                      width: MediaQuery.of(context)
-                                                          .size
-                                                          .width,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
                                                       height: 207.h,
                                                     ),
                                                   ),
                                                 ),
                                         ),
                                         Container(
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 207.h,
                                           decoration: BoxDecoration(
                                               borderRadius:
@@ -319,9 +332,12 @@ class _EventListDetailState extends State<EventListDetail> {
                                                   top: 8.h, left: 8.w),
                                               child: Container(
                                                   decoration: BoxDecoration(
-                                                    color: orange.withOpacity(0.7),
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(40.r)),
+                                                    color:
+                                                        orange.withOpacity(0.7),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                40.r)),
                                                   ),
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
@@ -330,14 +346,27 @@ class _EventListDetailState extends State<EventListDetail> {
                                                         top: 7.h,
                                                         bottom: 7.h),
                                                     child: Text(
-                                                        controller.eventList[index].type! == 'ticket_price' ? 'Paid' : controller.eventList[index].type! == 'free' ? 'Free' : 'Invite Only',
+                                                        controller
+                                                                    .eventList[
+                                                                        index]
+                                                                    .type! ==
+                                                                'ticket_price'
+                                                            ? 'Paid'
+                                                            : controller
+                                                                        .eventList[
+                                                                            index]
+                                                                        .type! ==
+                                                                    'free'
+                                                                ? 'Free'
+                                                                : 'Invite Only',
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontWeight:
                                                                 FontWeight.w700,
-                                                            fontFamily: roboto_bold,
-                                                            fontStyle:
-                                                                FontStyle.normal,
+                                                            fontFamily:
+                                                                roboto_bold,
+                                                            fontStyle: FontStyle
+                                                                .normal,
                                                             fontSize: 12.sp),
                                                         textAlign:
                                                             TextAlign.center),
@@ -353,8 +382,8 @@ class _EventListDetailState extends State<EventListDetail> {
                                             controller.eventList[index].hosts
                                                         .toString()
                                                         .isEmpty ||
-                                                    controller
-                                                            .eventList[index].hosts
+                                                    controller.eventList[index]
+                                                            .hosts
                                                             .toString() ==
                                                         '[]'
                                                 ? Container()
@@ -363,112 +392,115 @@ class _EventListDetailState extends State<EventListDetail> {
                                                         top: 8.h, right: 8.w),
                                                     child: Container(
                                                         height: 29.h,
-                                                        decoration: BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              colors: [
-                                                                Color(0xff1c2535).withOpacity(0.7),
-                                                                Color(0xff04080f).withOpacity(0.7)
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: [
+                                                                Color(0xff1c2535)
+                                                                    .withOpacity(
+                                                                        0.7),
+                                                                Color(0xff04080f)
+                                                                    .withOpacity(
+                                                                        0.7)
                                                               ]),
                                                           borderRadius:
                                                               BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      4.r)),
+                                                                  Radius
+                                                                      .circular(
+                                                                          4.r)),
                                                         ),
                                                         child: Row(
                                                           children: [
                                                             Padding(
-                                                              padding:
-                                                                  EdgeInsets.only(
+                                                              padding: EdgeInsets
+                                                                  .only(
                                                                       left: 6.w,
-                                                                      right: 6.w),
+                                                                      right:
+                                                                          6.w),
                                                               child:
                                                                   CircularProfileAvatar(
                                                                 '',
                                                                 radius: 7.5,
                                                                 borderColor:
-                                                                    Colors.black,
-                                                                child: controller
-                                                                        .eventList[
-                                                                            index]
-                                                                        .hosts ==
-                                                                    null || controller.eventList[index].hosts.toString() == '[]'
+                                                                    Colors
+                                                                        .black,
+                                                                child: controller.eventList[index].hosts ==
+                                                                            null ||
+                                                                        controller.eventList[index].hosts.toString() ==
+                                                                            '[]'
                                                                     ? Icon(
                                                                         Icons
                                                                             .person,
-                                                                        size: 15.r,
+                                                                        size: 15
+                                                                            .r,
                                                                         color:
                                                                             grey_aaaaaa,
                                                                       )
-                                                                    : controller
-                                                                                .eventList[index]
-                                                                                .hosts![0]
-                                                                                .image
-                                                                                .toString() ==
-                                                                            '' || controller
-                                                                        .eventList[
-                                                                            index]
-                                                                        .hosts![0].image == null
+                                                                    : controller.eventList[index].hosts![0].image.toString() ==
+                                                                                '' ||
+                                                                            controller.eventList[index].hosts![0].image ==
+                                                                                null
                                                                         ? Icon(
-                                                                            Icons
-                                                                                .person,
-                                                                            size: 15
-                                                                                .r,
+                                                                            Icons.person,
+                                                                            size:
+                                                                                15.r,
                                                                             color:
                                                                                 grey_aaaaaa,
                                                                           )
                                                                         : CachedNetworkImage(
-                                                                            imageUrl: controller
-                                                                                .eventList[index]
-                                                                                .hosts![0]
-                                                                                .image!,
+                                                                            imageUrl:
+                                                                                controller.eventList[index].hosts![0].image!,
                                                                             height:
                                                                                 15.h,
                                                                             width:
                                                                                 15.w,
-                                                                            fit: BoxFit
-                                                                                .cover,
-                                                                            progressIndicatorBuilder: (context,
-                                                                                    url,
-                                                                                    downloadProgress) =>
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                            progressIndicatorBuilder: (context, url, downloadProgress) =>
                                                                                 Icon(
-                                                                              Icons
-                                                                                  .person,
-                                                                              size:
-                                                                                  15.r,
-                                                                              color:
-                                                                                  grey_aaaaaa,
+                                                                              Icons.person,
+                                                                              size: 15.r,
+                                                                              color: grey_aaaaaa,
                                                                             ),
-                                                                            errorWidget: (context,
-                                                                                    url,
-                                                                                    error) =>
+                                                                            errorWidget: (context, url, error) =>
                                                                                 Icon(
-                                                                              Icons
-                                                                                  .person,
-                                                                              size:
-                                                                                  15.r,
-                                                                              color:
-                                                                                  grey_aaaaaa,
+                                                                              Icons.person,
+                                                                              size: 15.r,
+                                                                              color: grey_aaaaaa,
                                                                             ),
                                                                           ),
                                                               ),
                                                             ),
                                                             setHelceticaBold(
-                                                          "Hosted By ", 11.sp, grey_aaaaaa, FontWeight.w500, FontStyle.normal),
+                                                                "Hosted By ",
+                                                                11.sp,
+                                                                grey_aaaaaa,
+                                                                FontWeight.w500,
+                                                                FontStyle
+                                                                    .normal),
                                                             setHelceticaBold(
                                                                 controller
                                                                         .eventList[
                                                                             index]
-                                                                        .hosts![0]
-                                                                        .firstName!.toString().capitalizeFirst! + ' ' +
+                                                                        .hosts![
+                                                                            0]
+                                                                        .firstName!
+                                                                        .toString()
+                                                                        .capitalizeFirst! +
+                                                                    ' ' +
                                                                     controller
                                                                         .eventList[
                                                                             index]
-                                                                        .hosts![0]
-                                                                        .lastName!.capitalizeFirst!,
+                                                                        .hosts![
+                                                                            0]
+                                                                        .lastName!
+                                                                        .capitalizeFirst!,
                                                                 11.sp,
                                                                 white_ffffff,
                                                                 FontWeight.w500,
-                                                                FontStyle.normal,
+                                                                FontStyle
+                                                                    .normal,
                                                                 -0.22),
                                                             SizedBox(
                                                               width: 6.w,
@@ -481,7 +513,8 @@ class _EventListDetailState extends State<EventListDetail> {
                                         Positioned(
                                             bottom: 19.h,
                                             child: Padding(
-                                              padding: EdgeInsets.only(left: 16.w),
+                                              padding:
+                                                  EdgeInsets.only(left: 16.w),
                                               child: Row(
                                                 children: [
                                                   SvgPicture.asset(
@@ -490,8 +523,8 @@ class _EventListDetailState extends State<EventListDetail> {
                                                     width: 12.w,
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        EdgeInsets.only(left: 4.w),
+                                                    padding: EdgeInsets.only(
+                                                        left: 4.w),
                                                     child: setHelveticaMedium(
                                                         '${DateFormat("MMM dd, yyyy").format(controller.eventList[index].startDateTime!)} at ${DateFormat("hh:mm a").format(controller.eventList[index].startDateTime!)}',
                                                         10.sp,
@@ -507,15 +540,18 @@ class _EventListDetailState extends State<EventListDetail> {
                                             bottom: 19.h,
                                             right: 16.w,
                                             child: Padding(
-                                              padding: EdgeInsets.only(left: 16.w),
+                                              padding:
+                                                  EdgeInsets.only(left: 16.w),
                                               child: Row(
                                                 children: [
                                                   Padding(
-                                                    padding:
-                                                        EdgeInsets.only(right: 4.w),
+                                                    padding: EdgeInsets.only(
+                                                        right: 4.w),
                                                     child: setHelveticaMedium(
-                                                        controller.eventList[index]
-                                                            .venue!.capitalize!,
+                                                        controller
+                                                            .eventList[index]
+                                                            .venue!
+                                                            .capitalize!,
                                                         10.sp,
                                                         white_ffffff,
                                                         FontWeight.w100,
@@ -533,10 +569,11 @@ class _EventListDetailState extends State<EventListDetail> {
                                         Positioned(
                                             bottom: 40.h,
                                             child: Padding(
-                                              padding: EdgeInsets.only(left: 16.w),
+                                              padding:
+                                                  EdgeInsets.only(left: 16.w),
                                               child: setHelceticaBold(
-                                                  controller
-                                                      .eventList[index].title!.capitalize!,
+                                                  controller.eventList[index]
+                                                      .title!.capitalize!,
                                                   22.sp,
                                                   white_ffffff,
                                                   FontWeight.w500,
