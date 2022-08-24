@@ -917,76 +917,80 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
               padding: EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
                 print("Card :: " + pastJobId.length.toString());
-                if (pastJobId.length != 0) {
-                  if (controller.checkExperienceValidation(context)) {
-                    if (pastCompanyNameController.last.text == '' &&
-                        pastCompanyTitleController.last.text == '' &&
-                        pastCompanyWebsiteController.last.value.text == '') {
-                      pastCompanyNameController.removeLast();
-                      pastCompanyTitleController.removeLast();
-                      pastCompanyWebsiteController.removeLast();
-                      pastJobImage.removeLast();
-                      pastJobId.removeLast();
-                    }
-                    String status = '';
-                    for (var item in pastCompanyNameController) {
-                      if (item.text == '') {
-                        snackBar(context, 'Enter company name');
-                        status = 'pending';
-                      } else {
-                        status = 'done';
-                      }
-                    }
+                // if (pastJobId.length != 0) {
+                //   if (controller.checkExperienceValidation(context)) {
+                //     if (pastCompanyNameController.last.text == '' &&
+                //         pastCompanyTitleController.last.text == '' &&
+                //         pastCompanyWebsiteController.last.value.text == '') {
+                //       pastCompanyNameController.removeLast();
+                //       pastCompanyTitleController.removeLast();
+                //       pastCompanyWebsiteController.removeLast();
+                //       pastJobImage.removeLast();
+                //       pastJobId.removeLast();
+                //     }
+                //     String status = '';
+                //     for (var item in pastCompanyNameController) {
+                //       if (item.text == '') {
+                //         snackBar(context, 'Enter company name');
+                //         status = 'pending';
+                //       } else {
+                //         status = 'done';
+                //       }
+                //     }
 
-                    for (var item in pastCompanyTitleController) {
-                      if (item.text == '') {
-                        snackBar(context, 'Enter company title');
-                        status = 'pending';
-                      } else {
-                        status = 'done';
-                      }
-                    }
+                //     for (var item in pastCompanyTitleController) {
+                //       if (item.text == '') {
+                //         snackBar(context, 'Enter company title');
+                //         status = 'pending';
+                //       } else {
+                //         status = 'done';
+                //       }
+                //     }
 
-                    for (var item in pastCompanyWebsiteController) {
-                      if (item.text == '') {
-                        snackBar(context, 'Enter company website');
-                        status = 'pending';
-                      } else {
-                        status = 'done';
-                      }
-                    }
+                //     for (var item in pastCompanyWebsiteController) {
+                //       if (item.text == '') {
+                //         snackBar(context, 'Enter company website');
+                //         status = 'pending';
+                //       } else {
+                //         status = 'done';
+                //       }
+                //     }
 
-                    if (status == 'done') {
-                      companyDetails.clear();
-
-                      for (int i = 0; i < pastJobId.length; i++) {
-                        companyDetails.add({
-                          '"title"': '"${pastCompanyTitleController[i].text}"',
-                          '"company_name"':
-                              '"${pastCompanyNameController[i].text}"',
-                          '"website"':
-                              '"${pastCompanyWebsiteController[i].text}"',
-                          '"logo"': '"${pastJobId[i].toString()}"'
-                        });
-                      }
-
-                      List itemList = [];
-
-                      itemList.clear();
-                      for (var item in companyDetails) {
-                        itemList.add(item);
-                      }
-                      controller.pastCompanyDetails.value = itemList;
-                      print(controller.pastCompanyDetails.value);
-
-                      checkNet(context).then((value) {
-                        controller.experienceInfoAPI(context);
-                      });
-                    }
+                //if (status == 'done') {
+                companyDetails.clear();
+                if (pastJobId.isNotEmpty) {
+                  for (int i = 0; i < pastJobId.length; i++) {
+                    companyDetails.add({
+                      '"title"': '"${pastCompanyTitleController[i].text}"',
+                      '"company_name"':
+                          '"${pastCompanyNameController[i].text}"',
+                      '"website"': '"${pastCompanyWebsiteController[i].text}"',
+                      '"logo"': '"${pastJobId[i].toString()}"'
+                    });
                   }
                 } else {
-                  snackBar(context, 'Add Past Job');
+                  pastJobId = [];
                 }
+
+                List itemList = [];
+
+                itemList.clear();
+                if (companyDetails.isNotEmpty) {
+                  for (var item in companyDetails) {
+                    itemList.add(item);
+                  }
+                }
+                controller.pastCompanyDetails.value = itemList;
+                print(controller.pastCompanyDetails.value);
+
+                checkNet(context).then((value) {
+                  controller.experienceInfoAPI(context);
+                });
+                // }
+                //   }
+                // } else {
+                //   snackBar(context, 'Add Past Job');
+                // }
               }),
             )
           ],

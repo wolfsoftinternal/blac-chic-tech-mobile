@@ -563,6 +563,8 @@ class StepsController extends GetxController {
             } else {
               Get.offAll(HomePage());
             }
+          } else {
+            snackBar(context, model.message.toString());
           }
         });
       } else {

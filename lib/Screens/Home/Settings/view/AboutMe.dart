@@ -4471,224 +4471,6 @@ class _AboutMeState extends State<AboutMe> {
                                   SizedBox(
                                     height: 16.h,
                                   ),
-
-                                  BlackButton("Save", white_ffffff, () {
-                                    controller.ques0.value = true;
-                                    controller.ques1.value = true;
-                                    controller.ques2.value = true;
-                                    controller.ques3.value = true;
-                                    controller.ques4.value = true;
-                                    controller.ques5.value = true;
-                                    controller.ques6.value = true;
-                                    controller.ques7.value = true;
-                                    controller.ques8.value = true;
-                                    controller.ques9.value = true;
-                                    controller.ques10.value = true;
-                                    FocusScope.of(context).unfocus();
-                                    if (stepsController
-                                        .q0Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues0}"',
-                                        '"answer"':
-                                            '"${stepsController.q0Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q1Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues1}"',
-                                        '"answer"':
-                                            '"${stepsController.q1Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q2Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues2}"',
-                                        '"answer"':
-                                            '"${stepsController.q2Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q3Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues3}"',
-                                        '"answer"':
-                                            '"${stepsController.q3Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q4Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues4}"',
-                                        '"answer"':
-                                            '"${stepsController.q4Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q5Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues5}"',
-                                        '"answer"':
-                                            '"${stepsController.q5Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q6Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues6}"',
-                                        '"answer"':
-                                            '"${stepsController.q6Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q7Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues7}"',
-                                        '"answer"':
-                                            '"${stepsController.q7Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q8Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues8}"',
-                                        '"answer"':
-                                            '"${stepsController.q8Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q9Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues9}"',
-                                        '"answer"':
-                                            '"${stepsController.q9Controller.value.text}"',
-                                      });
-                                    }
-                                    if (stepsController
-                                        .q10Controller.value.text.isNotEmpty) {
-                                      ques.add({
-                                        '"question"':
-                                            '"${SharePreData.strQues10}"',
-                                        '"answer"':
-                                            '"${stepsController.q10Controller.value.text}"',
-                                      });
-                                    }
-
-                                    print(ques);
-
-                                    List itemList = [];
-
-                                    itemList.clear();
-                                    for (var item in ques) {
-                                      print(ques.toString());
-                                      itemList.add(item);
-                                    }
-                                    stepsController.questions.clear();
-                                    stepsController.questions.value = itemList;
-                                    if (checkValidation()) {
-                                      // if (stepsController
-                                      //         .industryController.value.text !=
-                                      //     '') {
-                                      //   stepsController.industryName =
-                                      //       stepsController
-                                      //           .industryController.value.text;
-                                      // }
-
-                                      companyDetails.clear();
-                                      for (int i = 0; i < cards.length; i++) {
-                                        companyDetails.add({
-                                          '"title"':
-                                              '"${pastCompanyTitleController[i].text}"',
-                                          '"company_name"':
-                                              '"${pastCompanyNameController[i].text}"',
-                                          '"website"':
-                                              '"${pastCompanyWebsiteController[i].text}"',
-                                          '"logo"':
-                                              '"${pastJobId[i].toString()}"'
-                                        });
-                                      }
-
-                                      List itemList = [];
-
-                                      itemList.clear();
-                                      for (var item in companyDetails) {
-                                        itemList.add(item);
-                                      }
-                                      stepsController.pastCompanyDetails.value =
-                                          itemList;
-                                      print(stepsController
-                                          .pastCompanyDetails.value);
-
-                                      details.clear();
-
-                                      for (int i = 0;
-                                          i < cardsEducation.length;
-                                          i++) {
-                                        details.add({
-                                          '"university_school_name"':
-                                              '"${universityController[i].text}"',
-                                          '"start_year"':
-                                              '"${startyearController[i].text}"',
-                                          '"end_year"':
-                                              '"${endyearController[i].text}"',
-                                        });
-                                      }
-
-                                      if (!details.toString().contains("[{"
-                                          '"university_school_name"'
-                                          ": "
-                                          '""'
-                                          ", "
-                                          '"start_year"'
-                                          ": "
-                                          '""'
-                                          ", "
-                                          '"end_year"'
-                                          ": "
-                                          '""'
-                                          "}]")) {
-                                        List itemeduList = [];
-
-                                        itemeduList.clear();
-                                        for (var item in details) {
-                                          itemeduList.add(item);
-                                        }
-                                        stepsController.educationalDetails
-                                            .clear();
-                                        stepsController.educationalDetails
-                                            .value = itemeduList;
-                                        print(stepsController
-                                            .educationalDetails.value);
-
-                                        List itemQuesList = [];
-                                        itemQuesList.clear();
-                                        for (var item in ques) {
-                                          itemQuesList.add(item);
-                                        }
-                                        stepsController.questions.clear();
-                                        stepsController.questions.value =
-                                            itemQuesList;
-                                        checkNet(context).then((value) {
-                                          stepsController.questionsInfoAPI(
-                                              context, 'normal');
-                                        }).then((value) {
-                                          stepsController.personalInfoAPI(
-                                              context, 'about_us');
-                                        });
-                                      }
-                                    }
-                                  })
                                 ],
                               ),
                             ),
@@ -4697,6 +4479,178 @@ class _AboutMeState extends State<AboutMe> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: BlackButton("Save", white_ffffff, () {
+                controller.ques0.value = true;
+                controller.ques1.value = true;
+                controller.ques2.value = true;
+                controller.ques3.value = true;
+                controller.ques4.value = true;
+                controller.ques5.value = true;
+                controller.ques6.value = true;
+                controller.ques7.value = true;
+                controller.ques8.value = true;
+                controller.ques9.value = true;
+                controller.ques10.value = true;
+                FocusScope.of(context).unfocus();
+                if (stepsController.q0Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues0}"',
+                    '"answer"': '"${stepsController.q0Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q1Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues1}"',
+                    '"answer"': '"${stepsController.q1Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q2Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues2}"',
+                    '"answer"': '"${stepsController.q2Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q3Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues3}"',
+                    '"answer"': '"${stepsController.q3Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q4Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues4}"',
+                    '"answer"': '"${stepsController.q4Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q5Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues5}"',
+                    '"answer"': '"${stepsController.q5Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q6Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues6}"',
+                    '"answer"': '"${stepsController.q6Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q7Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues7}"',
+                    '"answer"': '"${stepsController.q7Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q8Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues8}"',
+                    '"answer"': '"${stepsController.q8Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q9Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues9}"',
+                    '"answer"': '"${stepsController.q9Controller.value.text}"',
+                  });
+                }
+                if (stepsController.q10Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues10}"',
+                    '"answer"': '"${stepsController.q10Controller.value.text}"',
+                  });
+                }
+
+                print(ques);
+
+                List itemList = [];
+
+                itemList.clear();
+                for (var item in ques) {
+                  print(ques.toString());
+                  itemList.add(item);
+                }
+                stepsController.questions.clear();
+                stepsController.questions.value = itemList;
+                if (checkValidation()) {
+                  // if (stepsController
+                  //         .industryController.value.text !=
+                  //     '') {
+                  //   stepsController.industryName =
+                  //       stepsController
+                  //           .industryController.value.text;
+                  // }
+
+                  companyDetails.clear();
+                  for (int i = 0; i < cards.length; i++) {
+                    companyDetails.add({
+                      '"title"': '"${pastCompanyTitleController[i].text}"',
+                      '"company_name"':
+                          '"${pastCompanyNameController[i].text}"',
+                      '"website"': '"${pastCompanyWebsiteController[i].text}"',
+                      '"logo"': '"${pastJobId[i].toString()}"'
+                    });
+                  }
+
+                  List itemList = [];
+
+                  itemList.clear();
+                  for (var item in companyDetails) {
+                    itemList.add(item);
+                  }
+                  stepsController.pastCompanyDetails.value = itemList;
+                  print(stepsController.pastCompanyDetails.value);
+
+                  details.clear();
+
+                  for (int i = 0; i < cardsEducation.length; i++) {
+                    details.add({
+                      '"university_school_name"':
+                          '"${universityController[i].text}"',
+                      '"start_year"': '"${startyearController[i].text}"',
+                      '"end_year"': '"${endyearController[i].text}"',
+                    });
+                  }
+
+                  if (!details.toString().contains("[{"
+                      '"university_school_name"'
+                      ": "
+                      '""'
+                      ", "
+                      '"start_year"'
+                      ": "
+                      '""'
+                      ", "
+                      '"end_year"'
+                      ": "
+                      '""'
+                      "}]")) {
+                    List itemeduList = [];
+
+                    itemeduList.clear();
+                    for (var item in details) {
+                      itemeduList.add(item);
+                    }
+                    stepsController.educationalDetails.clear();
+                    stepsController.educationalDetails.value = itemeduList;
+                    print(stepsController.educationalDetails.value);
+
+                    List itemQuesList = [];
+                    itemQuesList.clear();
+                    for (var item in ques) {
+                      itemQuesList.add(item);
+                    }
+                    stepsController.questions.clear();
+                    stepsController.questions.value = itemQuesList;
+                    checkNet(context).then((value) {
+                      stepsController.questionsInfoAPI(context, 'normal');
+                    }).then((value) {
+                      stepsController.personalInfoAPI(context, 'about_us');
+                    });
+                  }
+                }
+              }),
+            )
           ],
         ),
       ),
