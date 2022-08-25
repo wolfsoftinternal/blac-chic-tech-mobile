@@ -41,7 +41,6 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
     myModel = await preferences.getSignupModel(SharePreData.keySignupModel);
     userId = myModel?.data?.id?.toInt() ?? 0;
     setState(() {});
-    controller.userProfileAPI(context, true);
   }
 
   @override
@@ -54,11 +53,11 @@ class _AdmireProfileListState extends State<AdmireProfileList> {
           )
         : GestureDetector(
             onVerticalDragEnd: (val) {
-              // controller.userProfileAPI(context, true).then((val) {
-              Get.to(Profile(),
-                  duration: Duration(milliseconds: 500),
-                  transition: Transition.downToUp);
-              // });
+              controller.userProfileAPI(context, true).then((val) {
+                Get.to(Profile(),
+                    duration: Duration(milliseconds: 500),
+                    transition: Transition.downToUp);
+              });
             },
             child: Stack(
               children: [
