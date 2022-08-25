@@ -111,26 +111,37 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         height: 40.h,
                       ),
 
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues0,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
+                      ),
                       GestureDetector(
                         onTap: () {
                           showDoneDialog(context, 'q0');
                         },
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: Text(controller.ques0.value,
                                   maxLines: 1,
                                   style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: controller.ques0.value
-                                              .contains(SharePreData.strQues0)
-                                          ? grey_aaaaaa
-                                          : black_121212,
+                                      color: grey_aaaaaa,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: helveticaNeueNeue_medium,
                                       fontStyle: FontStyle.normal,
@@ -140,31 +151,41 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                           ),
                         ),
                       ),
-
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
                       ),
 
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues1,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
+                      ),
                       GestureDetector(
                         onTap: () {
                           showDoneDialog(context, 'q1');
                         },
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: Text(controller.ques1.value,
                                   maxLines: 1,
                                   style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: controller.ques1.value
-                                              .contains(SharePreData.strQues1)
-                                          ? grey_aaaaaa
-                                          : black_121212,
+                                      color: grey_aaaaaa,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: helveticaNeueNeue_medium,
                                       fontStyle: FontStyle.normal,
@@ -175,29 +196,40 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues2,
+                            maxLines: 1,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
                       ),
                       GestureDetector(
                         onTap: () {
                           showDoneDialog(context, 'q2');
                         },
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: // What have you done?
                                   Text(controller.ques2.value,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          color: controller.ques2.value
-                                                  .contains(
-                                                      SharePreData.strQues2)
-                                              ? grey_aaaaaa
-                                              : black_121212,
+                                          color: grey_aaaaaa,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -209,27 +241,38 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues3,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q3'),
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: // What have you done?
                                   Text(controller.ques3.value,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          color: controller.ques3.value
-                                                  .contains(
-                                                      SharePreData.strQues3)
-                                              ? grey_aaaaaa
-                                              : black_121212,
+                                          color: grey_aaaaaa,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
                                           fontStyle: FontStyle.normal,
@@ -240,27 +283,38 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues4,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q4'),
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: // What have you done?
                                   Text(controller.ques4.value,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          color: controller.ques4.value
-                                                  .contains(
-                                                      SharePreData.strQues4)
-                                              ? grey_aaaaaa
-                                              : black_121212,
+                                          color: grey_aaaaaa,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -272,27 +326,38 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues5,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q5'),
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: // What have you done?
                                   Text(controller.ques5.value,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          color: controller.ques5.value
-                                                  .contains(
-                                                      SharePreData.strQues5)
-                                              ? grey_aaaaaa
-                                              : black_121212,
+                                          color: grey_aaaaaa,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -304,27 +369,38 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues6,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q6'),
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: // What have you done?
                                   Text(controller.ques6.value,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          color: controller.ques6.value
-                                                  .contains(
-                                                      SharePreData.strQues6)
-                                              ? grey_aaaaaa
-                                              : black_121212,
+                                          color: grey_aaaaaa,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -336,27 +412,38 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues7,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q7'),
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: // What have you done?
                                   Text(controller.ques7.value,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          color: controller.ques7.value
-                                                  .contains(
-                                                      SharePreData.strQues7)
-                                              ? grey_aaaaaa
-                                              : black_121212,
+                                          color: grey_aaaaaa,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -368,27 +455,38 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues8,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q8'),
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: // What have you done?
                                   Text(controller.ques8.value,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          color: controller.ques8.value
-                                                  .contains(
-                                                      SharePreData.strQues8)
-                                              ? grey_aaaaaa
-                                              : black_121212,
+                                          color: grey_aaaaaa,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -400,27 +498,38 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues9,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q9'),
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: // What have you done?
                                   Text(controller.ques9.value,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          color: controller.ques9.value
-                                                  .contains(
-                                                      SharePreData.strQues9)
-                                              ? grey_aaaaaa
-                                              : black_121212,
+                                          color: grey_aaaaaa,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,
@@ -432,27 +541,38 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 18.h,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 0.w, right: 16.w, top: 4.h, bottom: 10.h),
+                        child: Text(SharePreData.strQues10,
+                            maxLines: 2,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: black_121212,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: helveticaNeueNeue_medium,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14.sp),
+                            textAlign: TextAlign.left),
                       ),
                       GestureDetector(
                         onTap: () => showDoneDialog(context, 'q10'),
                         child: Container(
-                          height: 48.h,
+                          height: 46.h,
                           width: double.infinity,
                           decoration: EditTextDecoration,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
                               child: // What have you done?
                                   Text(controller.ques10.value,
                                       maxLines: 1,
                                       style: TextStyle(
-                                          color: controller.ques10.value
-                                                  .contains(
-                                                      SharePreData.strQues10)
-                                              ? grey_aaaaaa
-                                              : black_121212,
+                                          color: grey_aaaaaa,
                                           overflow: TextOverflow.ellipsis,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: helveticaNeueNeue_medium,

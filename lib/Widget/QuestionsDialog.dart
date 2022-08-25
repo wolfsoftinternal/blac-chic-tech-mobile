@@ -229,42 +229,42 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                 child: BlackButtonDialog("Done", white_ffffff, () {
                   if (widget.quesIndex == 'q0') {
                     if (controller.q0Controller.value.text == '') {
-                      controller.ques0.value = SharePreData.strQues1;
+                      controller.ques0.value = "";
                     } else {
                       controller.ques0.value =
                           controller.q0Controller.value.text;
                     }
                   } else if (widget.quesIndex == 'q1') {
                     if (controller.q1Controller.value.text == '') {
-                      controller.ques1.value = SharePreData.strQues1;
+                      controller.ques1.value = "";
                     } else {
                       controller.ques1.value =
                           controller.q1Controller.value.text;
                     }
                   } else if (widget.quesIndex == 'q2') {
                     if (controller.q2Controller.value.text == '') {
-                      controller.ques2.value = SharePreData.strQues2;
+                      controller.ques2.value = "";
                     } else {
                       controller.ques2.value =
                           controller.q2Controller.value.text;
                     }
                   } else if (widget.quesIndex == 'q3') {
                     if (controller.q3Controller.value.text == '') {
-                      controller.ques3.value = SharePreData.strQues3;
+                      controller.ques3.value = "";
                     } else {
                       controller.ques3.value =
                           controller.q3Controller.value.text;
                     }
                   } else if (widget.quesIndex == 'q4') {
                     if (controller.q4Controller.value.text == '') {
-                      controller.ques4.value = SharePreData.strQues4;
+                      controller.ques4.value = "";
                     } else {
                       controller.ques4.value =
                           controller.q4Controller.value.text;
                     }
                   } else if (widget.quesIndex == 'q5') {
                     if (controller.q5Controller.value.text == '') {
-                      controller.ques5.value = SharePreData.strQues5;
+                      controller.ques5.value = "";
                     } else {
                       controller.ques5.value =
                           controller.q5Controller.value.text;
@@ -272,7 +272,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                   }
                   if (widget.quesIndex == 'q6') {
                     if (controller.q6Controller.value.text == '') {
-                      controller.ques6.value = SharePreData.strQues6;
+                      controller.ques6.value = "";
                     } else {
                       controller.ques6.value =
                           controller.q6Controller.value.text;
@@ -280,7 +280,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                   }
                   if (widget.quesIndex == 'q7') {
                     if (controller.q7Controller.value.text == '') {
-                      controller.ques7.value = SharePreData.strQues7;
+                      controller.ques7.value = "";
                     } else {
                       controller.ques7.value =
                           controller.q7Controller.value.text;
@@ -288,7 +288,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                   }
                   if (widget.quesIndex == 'q8') {
                     if (controller.q8Controller.value.text == '') {
-                      controller.ques8.value = SharePreData.strQues8;
+                      controller.ques8.value = "";
                     } else {
                       controller.ques8.value =
                           controller.q8Controller.value.text;
@@ -296,7 +296,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                   }
                   if (widget.quesIndex == 'q9') {
                     if (controller.q9Controller.value.text == '') {
-                      controller.ques9.value = SharePreData.strQues9;
+                      controller.ques9.value = "";
                     } else {
                       controller.ques9.value =
                           controller.q9Controller.value.text;
@@ -304,7 +304,7 @@ class _QuestionsDialogState extends State<QuestionsDialog> {
                   }
                   if (widget.quesIndex == 'q10') {
                     if (controller.q10Controller.value.text == '') {
-                      controller.ques10.value = SharePreData.strQues10;
+                      controller.ques10.value = "";
                     } else {
                       controller.ques10.value =
                           controller.q10Controller.value.text;
