@@ -119,47 +119,47 @@ class _AboutMeState extends State<AboutMe> {
     if (myModel!.data!.questions![0].question ==
         "What should the world know about you ?") {
       stepsController.q0Controller.value.text =
-          myModel!.data!.questions!.length > 2
+          myModel!.data!.questions!.length >= 2
               ? myModel!.data!.questions![1].answer ?? ""
               : "";
       stepsController.tagValues =
           stepsController.q0Controller.value.text.split(',');
 
       stepsController.q1Controller.value.text =
-          myModel!.data!.questions!.length > 3
+          myModel!.data!.questions!.length >= 3
               ? myModel!.data!.questions![2].answer ?? ""
               : "";
       stepsController.q2Controller.value.text =
-          myModel!.data!.questions!.length > 4
+          myModel!.data!.questions!.length >= 4
               ? myModel!.data!.questions![3].answer ?? ""
               : "";
       stepsController.q3Controller.value.text =
-          myModel!.data!.questions!.length > 5
+          myModel!.data!.questions!.length >= 5
               ? myModel!.data!.questions![4].answer ?? ""
               : "";
 
       stepsController.q4Controller.value.text =
-          myModel!.data!.questions!.length > 6
+          myModel!.data!.questions!.length >= 6
               ? myModel!.data!.questions![5].answer ?? ""
               : "";
       stepsController.q5Controller.value.text =
-          myModel!.data!.questions!.length > 7
+          myModel!.data!.questions!.length >= 7
               ? myModel!.data!.questions![6].answer ?? ""
               : "";
       stepsController.q6Controller.value.text =
-          myModel!.data!.questions!.length > 8
+          myModel!.data!.questions!.length >= 8
               ? myModel!.data!.questions![7].answer ?? ""
               : "";
       stepsController.q7Controller.value.text =
-          myModel!.data!.questions!.length > 9
+          myModel!.data!.questions!.length >= 9
               ? myModel!.data!.questions![8].answer ?? ""
               : "";
       stepsController.q8Controller.value.text =
-          myModel!.data!.questions!.length > 10
+          myModel!.data!.questions!.length >= 10
               ? myModel!.data!.questions![9].answer ?? ""
               : "";
       stepsController.q9Controller.value.text =
-          myModel!.data!.questions!.length > 11
+          myModel!.data!.questions!.length >= 11
               ? myModel!.data!.questions![10].answer ?? ""
               : "";
       stepsController.q10Controller.value.text =
@@ -167,52 +167,59 @@ class _AboutMeState extends State<AboutMe> {
               ? myModel!.data!.questions![11].answer.toString()
               : "";
     } else {
+      print("Question :: " + myModel!.data!.questions!.length.toString());
+      for (int i = 0; i < myModel!.data!.questions!.length; i++) {
+        print("Question :: " +
+            i.toString() +
+            myModel!.data!.questions![i].answer.toString());
+      }
+
       stepsController.q0Controller.value.text =
-          myModel!.data!.questions!.length > 1
+          myModel!.data!.questions!.length >= 1
               ? myModel!.data!.questions![0].answer ?? ""
               : "";
       stepsController.tagValues =
           stepsController.q0Controller.value.text.split(',');
 
       stepsController.q1Controller.value.text =
-          myModel!.data!.questions!.length > 1
+          myModel!.data!.questions!.length >= 2
               ? myModel!.data!.questions![1].answer ?? ""
               : "";
       stepsController.q2Controller.value.text =
-          myModel!.data!.questions!.length > 3
+          myModel!.data!.questions!.length >= 3
               ? myModel!.data!.questions![2].answer ?? ""
               : "";
       stepsController.q3Controller.value.text =
-          myModel!.data!.questions!.length > 4
+          myModel!.data!.questions!.length >= 4
               ? myModel!.data!.questions![3].answer ?? ""
               : "";
 
       stepsController.q4Controller.value.text =
-          myModel!.data!.questions!.length > 5
+          myModel!.data!.questions!.length >= 5
               ? myModel!.data!.questions![4].answer ?? ""
               : "";
       stepsController.q5Controller.value.text =
-          myModel!.data!.questions!.length > 6
+          myModel!.data!.questions!.length >= 6
               ? myModel!.data!.questions![5].answer ?? ""
               : "";
       stepsController.q6Controller.value.text =
-          myModel!.data!.questions!.length > 7
+          myModel!.data!.questions!.length >= 7
               ? myModel!.data!.questions![6].answer ?? ""
               : "";
       stepsController.q7Controller.value.text =
-          myModel!.data!.questions!.length > 8
+          myModel!.data!.questions!.length >= 8
               ? myModel!.data!.questions![7].answer ?? ""
               : "";
       stepsController.q8Controller.value.text =
-          myModel!.data!.questions!.length > 9
+          myModel!.data!.questions!.length >= 9
               ? myModel!.data!.questions![8].answer ?? ""
               : "";
       stepsController.q9Controller.value.text =
-          myModel!.data!.questions!.length > 10
+          myModel!.data!.questions!.length >= 10
               ? myModel!.data!.questions![9].answer ?? ""
               : "";
       stepsController.q10Controller.value.text =
-          myModel!.data!.questions!.length > 11
+          myModel!.data!.questions!.length >= 11
               ? myModel!.data!.questions![10].answer.toString()
               : "";
     }
@@ -4576,83 +4583,72 @@ class _AboutMeState extends State<AboutMe> {
                   controller.ques9.value = true;
                   controller.ques10.value = true;
                   FocusScope.of(context).unfocus();
-                  if (stepsController.q0Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues0}"',
-                      '"answer"':
-                          '"${stepsController.q0Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q1Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues1}"',
-                      '"answer"':
-                          '"${stepsController.q1Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q2Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues2}"',
-                      '"answer"':
-                          '"${stepsController.q2Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q3Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues3}"',
-                      '"answer"':
-                          '"${stepsController.q3Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q4Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues4}"',
-                      '"answer"':
-                          '"${stepsController.q4Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q5Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues5}"',
-                      '"answer"':
-                          '"${stepsController.q5Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q6Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues6}"',
-                      '"answer"':
-                          '"${stepsController.q6Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q7Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues7}"',
-                      '"answer"':
-                          '"${stepsController.q7Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q8Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues8}"',
-                      '"answer"':
-                          '"${stepsController.q8Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q9Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues9}"',
-                      '"answer"':
-                          '"${stepsController.q9Controller.value.text}"',
-                    });
-                  }
-                  if (stepsController.q10Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues10}"',
-                      '"answer"':
-                          '"${stepsController.q10Controller.value.text}"',
-                    });
-                  }
+                  // if (stepsController.q0Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues0}"',
+                    '"answer"': '"${stepsController.q0Controller.value.text}"',
+                  });
+                  // }
+                  // if (stepsController.q1Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues1}"',
+                    '"answer"': '"${stepsController.q1Controller.value.text}"',
+                  });
+                  // }
+                  // if (stepsController.q2Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues2}"',
+                    '"answer"': '"${stepsController.q2Controller.value.text}"',
+                  });
+                  // }
+                  // if (stepsController.q3Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues3}"',
+                    '"answer"': '"${stepsController.q3Controller.value.text}"',
+                  });
+                  // }
+                  //  if (stepsController.q4Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues4}"',
+                    '"answer"': '"${stepsController.q4Controller.value.text}"',
+                  });
+                  // }
+                  // if (stepsController.q5Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues5}"',
+                    '"answer"': '"${stepsController.q5Controller.value.text}"',
+                  });
+                  //}
+                  // if (stepsController.q6Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues6}"',
+                    '"answer"': '"${stepsController.q6Controller.value.text}"',
+                  });
+                  //}
+                  // if (stepsController.q7Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues7}"',
+                    '"answer"': '"${stepsController.q7Controller.value.text}"',
+                  });
+                  // }
+                  //  if (stepsController.q8Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues8}"',
+                    '"answer"': '"${stepsController.q8Controller.value.text}"',
+                  });
+                  //}
+                  //if (stepsController.q9Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues9}"',
+                    '"answer"': '"${stepsController.q9Controller.value.text}"',
+                  });
+                  //}
+                  // if (stepsController.q10Controller.value.text.isNotEmpty) {
+                  ques.add({
+                    '"question"': '"${SharePreData.strQues10}"',
+                    '"answer"': '"${stepsController.q10Controller.value.text}"',
+                  });
+                  // }
 
                   print(ques);
 
@@ -4737,9 +4733,13 @@ class _AboutMeState extends State<AboutMe> {
                       stepsController.questions.clear();
                       stepsController.questions.value = itemQuesList;
                       checkNet(context).then((value) {
-                        stepsController.questionsInfoAPI(context, 'normal');
+                        stepsController.questionsInfoAPI(context, 'normal',
+                            ScreenMove: "Edit Profile");
                       }).then((value) {
-                        stepsController.personalInfoAPI(context, 'about_us');
+                        stepsController.personalInfoAPI(
+                          context,
+                          'about_us',
+                        );
                       });
                     }
                   }

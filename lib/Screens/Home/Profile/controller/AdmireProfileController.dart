@@ -382,10 +382,10 @@ class AdmireProfileController extends GetxController {
 
             if (goToProfileScreen) {
               if (isFrom != null) {
-                Get.back();
-                // Get.to(Profile());
+                // Get.back();
+                Get.to(Profile());
               } else {
-                // Get.to(Profile());
+                Get.to(Profile());
               }
             }
           }

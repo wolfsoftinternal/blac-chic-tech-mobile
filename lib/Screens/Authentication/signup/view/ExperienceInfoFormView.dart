@@ -491,8 +491,12 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                                     top: 5.h,
                                                     bottom: 5.h),
                                                 child: setTextFieldNext(
-                                                    pastCompanyTitleController[
-                                                        index],
+                                                    pastCompanyTitleController
+                                                            .isEmpty
+                                                        ? TextEditingController(
+                                                            text: "")
+                                                        : pastCompanyTitleController[
+                                                            index],
                                                     "Title",
                                                     false,
                                                     TextInputType.name,
@@ -559,15 +563,17 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                                                                   .width *
                                                               0.20.w,
                                                           child: Text(
-                                                              pastCompanyNameController[
+                                                              pastCompanyNameController
+                                                                      .isEmpty
+                                                                  ? ""
+                                                                  : pastCompanyNameController[index]
+                                                                              .value
+                                                                              .text ==
+                                                                          ''
+                                                                      ? 'Company Name'
+                                                                      : pastCompanyNameController[
                                                                               index]
-                                                                          .value
-                                                                          .text ==
-                                                                      ''
-                                                                  ? 'Company Name'
-                                                                  : pastCompanyNameController[
-                                                                          index]
-                                                                      .text,
+                                                                          .text,
                                                               style: TextStyle(
                                                                 color: pastCompanyNameController[index]
                                                                             .value
@@ -957,40 +963,52 @@ class _ExperienceState extends State<ExperienceInfoFormView> {
                 //     }
 
                 //if (status == 'done') {
-                companyDetails.clear();
-                if (pastJobId.isNotEmpty) {
-                  for (int i = 0; i < pastJobId.length; i++) {
-                    companyDetails.add({
-                      '"title"': '"${pastCompanyTitleController[i].text}"',
-                      '"company_name"':
-                          '"${pastCompanyNameController[i].text}"',
-                      '"website"': '"${pastCompanyWebsiteController[i].text}"',
-                      '"logo"': '"${pastJobId[i].toString()}"'
-                    });
+                if (controller.checkExperienceValidation(context)) {
+                  if (pastCompanyNameController.last.text == '' &&
+                      pastCompanyTitleController.last.text == '' &&
+                      pastCompanyWebsiteController.last.value.text == '') {
+                    pastCompanyNameController.removeLast();
+                    pastCompanyTitleController.removeLast();
+                    pastCompanyWebsiteController.removeLast();
+                    pastJobImage.removeLast();
+                    pastJobId.removeLast();
                   }
-                } else {
-                  pastJobId = [];
-                }
-
-                List itemList = [];
-
-                itemList.clear();
-                if (companyDetails.isNotEmpty) {
-                  for (var item in companyDetails) {
-                    itemList.add(item);
+                  companyDetails.clear();
+                  if (pastJobId.isNotEmpty) {
+                    for (int i = 0; i < pastJobId.length; i++) {
+                      companyDetails.add({
+                        '"title"': '"${pastCompanyTitleController[i].text}"',
+                        '"company_name"':
+                            '"${pastCompanyNameController[i].text}"',
+                        '"website"':
+                            '"${pastCompanyWebsiteController[i].text}"',
+                        '"logo"': '"${pastJobId[i].toString()}"'
+                      });
+                    }
+                  } else {
+                    pastJobId = [];
                   }
-                }
-                controller.pastCompanyDetails.value = itemList;
-                print(controller.pastCompanyDetails.value);
 
-                checkNet(context).then((value) {
-                  controller.experienceInfoAPI(context);
-                });
-                // }
-                //   }
-                // } else {
-                //   snackBar(context, 'Add Past Job');
-                // }
+                  List itemList = [];
+
+                  itemList.clear();
+                  if (companyDetails.isNotEmpty) {
+                    for (var item in companyDetails) {
+                      itemList.add(item);
+                    }
+                  }
+                  controller.pastCompanyDetails.value = itemList;
+                  print(controller.pastCompanyDetails.value);
+
+                  checkNet(context).then((value) {
+                    controller.experienceInfoAPI(context);
+                  });
+                  // }
+                  //   }
+                  // } else {
+                  //   snackBar(context, 'Add Past Job');
+                  // }
+                }
               }),
             )
           ],

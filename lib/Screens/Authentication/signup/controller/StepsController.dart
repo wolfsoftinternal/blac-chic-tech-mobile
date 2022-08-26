@@ -224,7 +224,7 @@ class StepsController extends GetxController {
   }
 
   Future<void> personalInfoAPI(BuildContext context, isFrom,
-      [visibility]) async {
+      [visibility, String? ScreenMove]) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -632,7 +632,7 @@ class StepsController extends GetxController {
     });
   }
 
-  questionsInfoAPI(BuildContext context, type) async {
+  questionsInfoAPI(BuildContext context, type, {String? ScreenMove}) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -673,25 +673,20 @@ class StepsController extends GetxController {
                 myModel?.data!.questions.toString() != '[]') {
               String questionsInfo = "";
               String lastQuestionsInfo = "";
-              for (int i = 0; i < myModel!.data!.questions!.length; i++) {
-                if (myModel.data!.questions![i].type == "normal") {
-                  questionsInfo = "Done";
-                } else {
-                  lastQuestionsInfo = "Done";
-                }
-              }
-              if (questionsInfo != "Done") {
-                Get.offAll(const AdditionalQueFormView());
-              } else if (lastQuestionsInfo != "Done") {
-                Get.offAll(const HomePage());
-              }
-              // else {
-              //   Get.offAll(HomePage());
-              // }
-            } else {
-              Get.offAll(HomePage());
             }
           }
+          // else {
+          //   Get.offAll(HomePage());
+          // }
+
+          if (ScreenMove == "Register_Flow_Que") {
+            print("ScreenName ::" + ScreenMove.toString());
+            Get.to(const AdditionalLastQueView());
+          }
+          if (ScreenMove == "additional") {
+            Get.offAll(const HomePage());
+          }
+          if (ScreenMove == "Edit Profile") {}
         });
       } else {
         print(res.reasonPhrase);
@@ -712,22 +707,25 @@ class StepsController extends GetxController {
     } else if (strCityId.value.isEmpty) {
       snackBar(context, "Enter City");
       return false;
-    } else if (dobController.value.text.isEmpty) {
-      snackBar(context, "Enter Date of Birth");
-      return false;
-    } else if (aboutController.value.text.isEmpty) {
-      snackBar(context, "Enter About yourself");
-      return false;
-      // } else if (linkedinController.value.text.isEmpty) {
-      //   snackBar(context, "Enter Linkedin Account");
-      //   return false;
-      // } else if (twitterController.value.text.isEmpty) {
-      //   snackBar(context, "Entered Twitter Account");
-      //   return false;
-      // } else if (instagramController.value.text.isEmpty) {
-      //   snackBar(context, "Entered Instagram Account");
-      //   return false;
-    } else {
+    }
+    // else if (dobController.value.text.isEmpty) {
+    //   snackBar(context, "Enter Date of Birth");
+    //   return false;
+    //}
+    // } else if (aboutController.value.text.isEmpty) {
+    //   snackBar(context, "Enter About yourself");
+    //   return false;
+    // } else if (linkedinController.value.text.isEmpty) {
+    //   snackBar(context, "Enter Linkedin Account");
+    //   return false;
+    // } else if (twitterController.value.text.isEmpty) {
+    //   snackBar(context, "Entered Twitter Account");
+    //   return false;
+    // } else if (instagramController.value.text.isEmpty) {
+    //   snackBar(context, "Entered Instagram Account");
+    //   return false;
+
+    else {
       return true;
     }
   }

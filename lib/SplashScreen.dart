@@ -63,7 +63,8 @@ class _SplashScreenState extends State<SplashScreen> {
       });
       if (myModel == null) {
         Get.offAll(const Welcome());
-      } else if (myModel.data!.aboutUs == "" || myModel.data!.aboutUs == null) {
+      } else if (myModel.data!.countryDetails!.name == "" ||
+          myModel.data!.countryDetails!.name == null) {
         Get.offAll(const PersonalInfoFormView());
       } else if (myModel.data!.currentJobs == null ||
           myModel.data!.currentJobs.toString() == '[]') {

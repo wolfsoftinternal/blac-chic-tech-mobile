@@ -28,6 +28,12 @@ class AdditionalQueFormView extends StatefulWidget {
 class _AdditionalQueState extends State<AdditionalQueFormView> {
   StepsController controller = Get.put(StepsController());
   final List<String> _values = [];
+  @override
+  void initState() {
+    super.initState();
+    print(":::::::::::::Call Review::::::::::::::");
+  }
+
   _onDelete(index) {
     setState(() {
       _values.removeAt(index);
@@ -591,121 +597,122 @@ class _AdditionalQueState extends State<AdditionalQueFormView> {
             Padding(
               padding: EdgeInsets.all(24.r),
               child: BlackNextButton(str_continue, black_121212, () {
-                if (controller.q0Controller.value.text == "" ||
-                    controller.q0Controller.value.text.isEmpty &&
-                        controller.q1Controller.value.text == "" ||
-                    controller.q1Controller.value.text.isEmpty &&
-                        controller.q2Controller.value.text == "" ||
-                    controller.q2Controller.value.text.isEmpty &&
-                        controller.q3Controller.value.text == "" ||
-                    controller.q3Controller.value.text.isEmpty &&
-                        controller.q4Controller.value.text == "" ||
-                    controller.q4Controller.value.text.isEmpty &&
-                        controller.q5Controller.value.text == "" ||
-                    controller.q5Controller.value.text.isEmpty &&
-                        controller.q6Controller.value.text == "" ||
-                    controller.q6Controller.value.text.isEmpty &&
-                        controller.q7Controller.value.text == "" ||
-                    controller.q7Controller.value.text.isEmpty &&
-                        controller.q8Controller.value.text == "" ||
-                    controller.q8Controller.value.text.isEmpty &&
-                        controller.q9Controller.value.text == "" ||
-                    controller.q9Controller.value.text.isEmpty &&
-                        controller.q10Controller.value.text == "" ||
-                    controller.q10Controller.value.text.isEmpty) {
-                  print(controller.q0Controller.value.text);
-                  snackBar(context, 'Please answer the questions');
-                } else {
-                  List ques = [{}];
-                  if (ques[0].toString() == "{}") {
-                    ques.removeAt(0);
-                  }
-
-                  if (controller.q0Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues0}"',
-                      '"answer"': '"${controller.q0Controller.value.text}"',
-                    });
-                  }
-
-                  if (controller.q1Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues1}"',
-                      '"answer"': '"${controller.q1Controller.value.text}"',
-                    });
-                  }
-                  if (controller.q2Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues2}"',
-                      '"answer"': '"${controller.q2Controller.value.text}"',
-                    });
-                  }
-                  if (controller.q3Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues3}"',
-                      '"answer"': '"${controller.q3Controller.value.text}"',
-                    });
-                  }
-                  if (controller.q4Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues4}"',
-                      '"answer"': '"${controller.q4Controller.value.text}"',
-                    });
-                  }
-                  if (controller.q5Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues5}"',
-                      '"answer"': '"${controller.q5Controller.value.text}"',
-                    });
-                  }
-                  if (controller.q6Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues6}"',
-                      '"answer"': '"${controller.q6Controller.value.text}"',
-                    });
-                  }
-                  if (controller.q7Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues7}"',
-                      '"answer"': '"${controller.q7Controller.value.text}"',
-                    });
-                  }
-                  if (controller.q8Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues8}"',
-                      '"answer"': '"${controller.q8Controller.value.text}"',
-                    });
-                  }
-                  if (controller.q9Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues9}"',
-                      '"answer"': '"${controller.q9Controller.value.text}"',
-                    });
-                  }
-                  if (controller.q10Controller.value.text.isNotEmpty) {
-                    ques.add({
-                      '"question"': '"${SharePreData.strQues10}"',
-                      '"answer"': '"${controller.q10Controller.value.text}"',
-                    });
-                  }
-
-                  print(ques);
-
-                  List itemList = [];
-
-                  itemList.clear();
-                  for (var item in ques) {
-                    itemList.add(item);
-                  }
-                  controller.questions.clear();
-                  controller.questions.value = itemList;
-
-                  print(controller.questions.value);
-                  checkNet(context).then((value) {
-                    controller.questionsInfoAPI(context, 'normal');
-                  });
-                  print(ques);
+                // if (controller.q0Controller.value.text == "" ||
+                //     controller.q0Controller.value.text.isEmpty &&
+                //         controller.q1Controller.value.text == "" ||
+                //     controller.q1Controller.value.text.isEmpty &&
+                //         controller.q2Controller.value.text == "" ||
+                //     controller.q2Controller.value.text.isEmpty &&
+                //         controller.q3Controller.value.text == "" ||
+                //     controller.q3Controller.value.text.isEmpty &&
+                //         controller.q4Controller.value.text == "" ||
+                //     controller.q4Controller.value.text.isEmpty &&
+                //         controller.q5Controller.value.text == "" ||
+                //     controller.q5Controller.value.text.isEmpty &&
+                //         controller.q6Controller.value.text == "" ||
+                //     controller.q6Controller.value.text.isEmpty &&
+                //         controller.q7Controller.value.text == "" ||
+                //     controller.q7Controller.value.text.isEmpty &&
+                //         controller.q8Controller.value.text == "" ||
+                //     controller.q8Controller.value.text.isEmpty &&
+                //         controller.q9Controller.value.text == "" ||
+                //     controller.q9Controller.value.text.isEmpty &&
+                //         controller.q10Controller.value.text == "" ||
+                //     controller.q10Controller.value.text.isEmpty) {
+                //   print(controller.q0Controller.value.text);
+                //   snackBar(context, 'Please answer the questions');
+                // } else {
+                List ques = [{}];
+                if (ques[0].toString() == "{}") {
+                  ques.removeAt(0);
                 }
+
+                // if (controller.q0Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues0}"',
+                  '"answer"': '"${controller.q0Controller.value.text}"',
+                });
+                //  }
+
+                // if (controller.q1Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues1}"',
+                  '"answer"': '"${controller.q1Controller.value.text}"',
+                });
+                // }
+                // if (controller.q2Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues2}"',
+                  '"answer"': '"${controller.q2Controller.value.text}"',
+                });
+                //  }
+                //  if (controller.q3Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues3}"',
+                  '"answer"': '"${controller.q3Controller.value.text}"',
+                });
+                //  }
+                // if (controller.q4Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues4}"',
+                  '"answer"': '"${controller.q4Controller.value.text}"',
+                });
+                //  }
+                //  if (controller.q5Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues5}"',
+                  '"answer"': '"${controller.q5Controller.value.text}"',
+                });
+                //  }
+                //  if (controller.q6Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues6}"',
+                  '"answer"': '"${controller.q6Controller.value.text}"',
+                });
+                //   }
+                //  if (controller.q7Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues7}"',
+                  '"answer"': '"${controller.q7Controller.value.text}"',
+                });
+                //   }
+                // if (controller.q8Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues8}"',
+                  '"answer"': '"${controller.q8Controller.value.text}"',
+                });
+                // }
+                //  if (controller.q9Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues9}"',
+                  '"answer"': '"${controller.q9Controller.value.text}"',
+                });
+                //  }
+                //  if (controller.q10Controller.value.text.isNotEmpty) {
+                ques.add({
+                  '"question"': '"${SharePreData.strQues10}"',
+                  '"answer"': '"${controller.q10Controller.value.text}"',
+                });
+                // }
+
+                print(ques);
+
+                List itemList = [];
+
+                itemList.clear();
+                for (var item in ques) {
+                  itemList.add(item);
+                }
+                controller.questions.clear();
+                controller.questions.value = itemList;
+
+                print(controller.questions.value);
+                checkNet(context).then((value) {
+                  controller.questionsInfoAPI(context, 'normal',
+                      ScreenMove: "Register_Flow_Que");
+                });
+                print(ques);
+                //}
               }),
             )
           ],

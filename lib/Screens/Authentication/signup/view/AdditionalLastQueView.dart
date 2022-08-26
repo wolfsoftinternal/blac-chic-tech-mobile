@@ -173,25 +173,25 @@ class _AdditionalQueSecondState extends State<AdditionalLastQueView> {
             Padding(
               padding: EdgeInsets.all(24.r),
               child: BlackNextButton(str_done, black_121212, () {
-                if (controller.addtionalController.value.text.isEmpty) {
-                  snackBar(context, 'Please answer the question');
-                } else if (RegExp(r"[\w-._]+")
-                        .allMatches(controller.addtionalController.value.text)
-                        .length <
-                    10) {
-                  snackBar(context, 'Minimum 10 words required');
-                } else {
-                  controller.questions.clear();
-                  controller.questions.add({
-                    '"question"': '"What should the world know about you ?"',
-                    '"answer"':
-                        '"${controller.addtionalController.value.text}"',
-                  });
-                  // = controller.addtionalController.value.text;
-                  checkNet(context).then((value) {
-                    controller.questionsInfoAPI(context, 'additional');
-                  });
-                }
+                // if (controller.addtionalController.value.text.isEmpty) {
+                //   snackBar(context, 'Please answer the question');
+                // } else if (RegExp(r"[\w-._]+")
+                //         .allMatches(controller.addtionalController.value.text)
+                //         .length <
+                //     10) {
+                //   snackBar(context, 'Minimum 10 words required');
+                // } else {
+                controller.questions.clear();
+                controller.questions.add({
+                  '"question"': '"What should the world know about you ?"',
+                  '"answer"': '"${controller.addtionalController.value.text}"',
+                });
+                // = controller.addtionalController.value.text;
+                checkNet(context).then((value) {
+                  controller.questionsInfoAPI(context, 'additional',
+                      ScreenMove: "additional");
+                });
+                //}
               }),
             )
           ],

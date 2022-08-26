@@ -606,53 +606,53 @@ class _EducationState extends State<EducationInfoFormView> {
           Padding(
             padding: EdgeInsets.all(24.sp),
             child: BlackNextButton(str_continue, black_121212, () {
-              if (universityController.last.value.text == '') {
-                snackBar(context, 'Enter university');
-              } else if (startyearController.last.value.text == '') {
-                snackBar(context, 'Enter Start Year');
-              } else if (endyearController.last.value.text == '') {
-                snackBar(context, 'Enter End Year');
-              } else {
-                details.clear();
+              // if (universityController.last.value.text == '') {
+              //   snackBar(context, 'Enter university');
+              // } else if (startyearController.last.value.text == '') {
+              //   snackBar(context, 'Enter Start Year');
+              // } else if (endyearController.last.value.text == '') {
+              //   snackBar(context, 'Enter End Year');
+              // } else {
+              details.clear();
 
-                for (int i = 0; i < cards.length; i++) {
-                  details.add({
-                    '"university_school_name"':
-                        '"${universityController[i].text}"',
-                    '"start_year"': '"${startyearController[i].text}"',
-                    '"end_year"': '"${endyearController[i].text}"',
-                  });
-                }
-
-                if (!details.toString().contains("[{"
-                    '"university_school_name"'
-                    ": "
-                    '""'
-                    ", "
-                    '"start_year"'
-                    ": "
-                    '""'
-                    ", "
-                    '"end_year"'
-                    ": "
-                    '""'
-                    "}]")) {
-                  List itemList = [];
-
-                  itemList.clear();
-                  for (var item in details) {
-                    itemList.add(item);
-                  }
-                  controller.educationalDetails.clear();
-                  controller.educationalDetails.value = itemList;
-
-                  checkNet(context).then((value) {
-                    controller.educationalInfoAPI(context);
-                  });
-                } else {
-                  snackBar(context, 'Add educational details');
-                }
+              for (int i = 0; i < cards.length; i++) {
+                details.add({
+                  '"university_school_name"':
+                      '"${universityController[i].text}"',
+                  '"start_year"': '"${startyearController[i].text}"',
+                  '"end_year"': '"${endyearController[i].text}"',
+                });
               }
+
+              // if (!details.toString().contains("[{"
+              //     '"university_school_name"'
+              //     ": "
+              //     '""'
+              //     ", "
+              //     '"start_year"'
+              //     ": "
+              //     '""'
+              //     ", "
+              //     '"end_year"'
+              //     ": "
+              //     '""'
+              //     "}]")) {
+              List itemList = [];
+
+              itemList.clear();
+              for (var item in details) {
+                itemList.add(item);
+              }
+              controller.educationalDetails.clear();
+              controller.educationalDetails.value = itemList;
+
+              checkNet(context).then((value) {
+                controller.educationalInfoAPI(context);
+              });
+              // } else {
+              //   snackBar(context, 'Add educational details');
+              // }
+              // }
             }),
           )
         ],
