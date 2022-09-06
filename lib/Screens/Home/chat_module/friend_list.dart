@@ -4,11 +4,13 @@ import 'package:blackchecktech/Screens/Home/chat_module/view/RemaingAdmiresListF
 import 'package:blackchecktech/Styles/font.dart';
 import 'package:blackchecktech/Utilities/Constant.dart';
 import 'package:blackchecktech/Utilities/common_functions.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../Styles/my_colors.dart';
 import '../../../Styles/my_icons.dart';
@@ -173,35 +175,44 @@ class _FriendListScreenState extends State<FriendListScreen> {
     return Scaffold(
       backgroundColor: white,
       body: Column(
-    mainAxisSize: MainAxisSize.max,
-    children: [
-      SizedBox(height: 30.0,),
-      myBody(),
-      isLoading
-          ? Expanded(child: myLoader())
-          : Expanded(
-              child: mySearchedFriends.isEmpty
-                  ? searchValue.isNotEmpty
-                      ? Padding(
-                          padding: EdgeInsets.all(50),
-                          child: Center(child: noDataWidget()))
-                      : signupModel != null
-                          ? myConvo2()
-                          : initiateSignUpModel()
-                  : myAllFriends.isEmpty
-                      ? Padding(
-                          padding: EdgeInsets.all(50),
-                          child: Center(child: noDataWidget()))
-                      : searchListColumn())
-      // mySearchedFriends.length > 0 ? searchListColumn() : myConvo2(),
-    ],
-    // ),
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          SizedBox(
+            height: 30.0,
+          ),
+          myBody(),
+          isLoading
+              ? Expanded(child: myLoader())
+              : Expanded(
+                  child: mySearchedFriends.isEmpty
+                      ? searchValue.isNotEmpty
+                          ? Padding(
+                              padding: EdgeInsets.all(50),
+                              child: Center(child: noDataWidget()))
+                          : signupModel != null
+                              ? myConvo2()
+                              : initiateSignUpModel()
+                      : myAllFriends.isEmpty
+                          ? Padding(
+                              padding: EdgeInsets.all(50),
+                              child: Center(child: noDataWidget()))
+                          : searchListColumn())
+          // mySearchedFriends.length > 0 ? searchListColumn() : myConvo2(),
+        ],
+        // ),
       ),
     );
   }
 
   Widget myLoader() {
-    return Container(height: MediaQuery.of(context).size.height * 0.75,child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,),));
+    return Container(
+        height: MediaQuery.of(context).size.height * 0.75,
+        child: Center(
+          child: CircularProgressIndicator(
+            color: black,
+            strokeWidth: 2,
+          ),
+        ));
   }
 
   noDataWidget() {
@@ -248,7 +259,8 @@ class _FriendListScreenState extends State<FriendListScreen> {
                         color: Colors.grey.withOpacity(0.1),
                         spreadRadius: 6,
                         blurRadius: 10,
-                        offset: const Offset(1, 4), // changes position of shadow
+                        offset:
+                            const Offset(1, 4), // changes position of shadow
                       ),
                     ],
                   ),
@@ -265,13 +277,12 @@ class _FriendListScreenState extends State<FriendListScreen> {
               Text(
                 "Chats",
                 style: TextStyle(
-                  color: black,
-                  fontWeight: FontWeight.w800,
-                  fontFamily: helvetica_neu_bold,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 22.sp,
-                  letterSpacing: 0.5
-                ),
+                    color: black,
+                    fontWeight: FontWeight.w800,
+                    fontFamily: helvetica_neu_bold,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 22.sp,
+                    letterSpacing: 0.5),
                 textAlign: TextAlign.left,
               ),
               Container(
@@ -290,8 +301,9 @@ class _FriendListScreenState extends State<FriendListScreen> {
                   ],
                 ),
                 child: GestureDetector(
-                  onTap: (){
-                    Get.to(RemaingAdmiresListForChat(admireList: userListController.admireList));
+                  onTap: () {
+                    Get.to(RemaingAdmiresListForChat(
+                        admireList: userListController.admireList));
                   },
                   child: Padding(
                     padding: EdgeInsets.all(10.r),
@@ -308,7 +320,6 @@ class _FriendListScreenState extends State<FriendListScreen> {
           // Rectangle 1775
 
           searchBox(),
-
         ],
       ),
     );
@@ -381,13 +392,12 @@ class _FriendListScreenState extends State<FriendListScreen> {
 
           print("no of items " + (snapshot.data!.docs.length).toString());
 
-        //
+          //
 
           print("myrooms, get");
           // init();
 
-
-           userListController.RemainingAdmireListAPI(context, null, myRooms);
+          userListController.RemainingAdmireListAPI(context, null, myRooms);
 
           return handleChatListItem();
 
@@ -407,40 +417,35 @@ class _FriendListScreenState extends State<FriendListScreen> {
     //---------_Sorting_-------------
     // Last seen sorting
 
+    widget.isDataSetInList = true;
 
-      widget.isDataSetInList = true;
+    myRooms.sort((docA, docB) {
+      var a = docA.data() as Map<dynamic, dynamic>;
+      var b = docB.data() as Map<dynamic, dynamic>;
+      DateTime a1 = DateTime.now();
+      DateTime b1 = DateTime.now();
+      // if (a["last_seen"] != null && b["last_seen"] != null) {
+      //   a1 = checkIfDateNull(a["last_seen"] ?? "");
+      //   b1 = checkIfDateNull(b["last_seen"] ?? "");
+      // }
+      if (a["last_message_time"] != null && b["last_message_time"] != null) {
+        a1 = checkIfDateNull(a["last_message_time"] ?? "");
+        b1 = checkIfDateNull(b["last_message_time"] ?? "");
+      }
+      return b1.compareTo(a1);
+      // return b["last_seen"].compareTo(a["last_seen"]);
+    });
+    // Unread messages sorting
+    // myRooms.sort((docA, docB) {
+    //   var a = docA.data() as Map<dynamic, dynamic>;
+    //   var b = docB.data() as Map<dynamic, dynamic>;
 
-      myRooms.sort((docA, docB) {
-        var a = docA.data() as Map<dynamic, dynamic>;
-        var b = docB.data() as Map<dynamic, dynamic>;
-        DateTime a1 = DateTime.now();
-        DateTime b1 = DateTime.now();
-        // if (a["last_seen"] != null && b["last_seen"] != null) {
-        //   a1 = checkIfDateNull(a["last_seen"] ?? "");
-        //   b1 = checkIfDateNull(b["last_seen"] ?? "");
-        // }
-        if (a["last_message_time"] != null && b["last_message_time"] != null) {
-          a1 = checkIfDateNull(a["last_message_time"] ?? "");
-          b1 = checkIfDateNull(b["last_message_time"] ?? "");
-        }
-        return b1.compareTo(a1);
-        // return b["last_seen"].compareTo(a["last_seen"]);
-      });
-      // Unread messages sorting
-      // myRooms.sort((docA, docB) {
-      //   var a = docA.data() as Map<dynamic, dynamic>;
-      //   var b = docB.data() as Map<dynamic, dynamic>;
+    //   return b["unread_message_count"] ??
+    //       0.compareTo(a["unread_message_count"] ?? 0);
+    // });
+    // return Container()
 
-      //   return b["unread_message_count"] ??
-      //       0.compareTo(a["unread_message_count"] ?? 0);
-      // });
-      // return Container()
-
-
-
-
-
-    if(userListController.admireList.length <= myRooms.length){
+    if (userListController.admireList.length <= myRooms.length) {
       return ListView.builder(
         // reverse: true,
         // shrinkWrap: true,
@@ -458,7 +463,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
           // if (roomData["last_seen"] != null) {
           if (roomData["last_message_time"] != null) {
             DateTime sentAt =
-            (roomData["last_message_time"] as Timestamp).toDate();
+                (roomData["last_message_time"] as Timestamp).toDate();
             timeDifference =
                 calculateTimeDifference(start: sentAt, end: DateTime.now());
             print("--> " + timeDifference);
@@ -479,7 +484,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
               timeDifference: timeDifference);
         },
       );
-    }else{
+    } else {
       return ListView.builder(
         // reverse: true,
         // shrinkWrap: true,
@@ -497,7 +502,7 @@ class _FriendListScreenState extends State<FriendListScreen> {
           // if (roomData["last_seen"] != null) {
           if (roomData["last_message_time"] != null) {
             DateTime sentAt =
-            (roomData["last_message_time"] as Timestamp).toDate();
+                (roomData["last_message_time"] as Timestamp).toDate();
             timeDifference =
                 calculateTimeDifference(start: sentAt, end: DateTime.now());
             print("--> " + timeDifference);
@@ -517,11 +522,9 @@ class _FriendListScreenState extends State<FriendListScreen> {
               ),
               timeDifference: timeDifference);
         },
-      );;
+      );
+      ;
     }
-
-
-
   }
 
   Widget searchBox() {
@@ -635,14 +638,6 @@ class _FriendListScreenState extends State<FriendListScreen> {
             padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 12.w),
             decoration: BoxDecoration(
               color: Colors.white,
-              // borderRadius: BorderRadius.circular(8.r),
-              // boxShadow: [
-              //   BoxShadow(
-              //       color: Color(0x144343b2),
-              //       offset: Offset(0, 0),
-              //       blurRadius: 20,
-              //       spreadRadius: 2)
-              // ],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -686,19 +681,20 @@ class _FriendListScreenState extends State<FriendListScreen> {
                         height: 4.h,
                       ),
                       lastMessageType == "0" ||
-                          lastMessageType == "1" ||
-                          lastMessageType == "2" ?
-                        Text(
-                          user["last_message"] ?? "",
-                          maxLines: 1,
-                          style: TextStyle(
-                            overflow: TextOverflow.ellipsis,
-                            color: Color(0xff595959),
-                            fontSize: 14.sp,
-                            fontFamily: roboto_medium,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ) : Container(),
+                              lastMessageType == "1" ||
+                              lastMessageType == "2"
+                          ? Text(
+                              user["last_message"] ?? "",
+                              maxLines: 1,
+                              style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                color: Color(0xff595959),
+                                fontSize: 14.sp,
+                                fontFamily: roboto_medium,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          : Container(),
                       // if (lastMessageType == "1" || lastMessageType == "2")
                       //   Row(
                       //       mainAxisAlignment: MainAxisAlignment.start,
@@ -846,9 +842,84 @@ class _FriendListScreenState extends State<FriendListScreen> {
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container();
+          // return Container();
 
-          return myLoader();
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 26),
+            child: ListView.builder(
+                shrinkWrap: true,
+                primary: false,
+                itemCount: 12,
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, i) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 16.h),
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey.shade300,
+                      highlightColor: Colors.grey.shade100,
+                      enabled: true,
+                      child: SizedBox(
+                          width: double.infinity,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(25),
+                                child: CachedNetworkImage(
+                                  imageUrl: "",
+                                  height: 45.h,
+                                  width: 45.w,
+                                  fit: BoxFit.cover,
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          SvgPicture.asset(
+                                    placeholder,
+                                    height: 45.h,
+                                    width: 45.w,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      SvgPicture.asset(
+                                    placeholder,
+                                    height: 45.h,
+                                    width: 45.w,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 16.w,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                      height: 12,
+                                      width: 150,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: Colors.black)),
+                                  SizedBox(
+                                    height: 6.h,
+                                  ),
+                                  Container(
+                                      height: 8,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: Colors.black)),
+                                ],
+                              )
+                            ],
+                          )),
+                    ),
+                  );
+                }),
+          );
         }
 
         if (snapshot.hasData) {

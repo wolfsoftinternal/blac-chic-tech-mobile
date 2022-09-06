@@ -15,6 +15,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -103,73 +104,77 @@ class _VideoDetailTabState extends State<VideoDetailTab>
       onWillPop: () => backButton(),
       child: Scaffold(
         backgroundColor: fullScreen == false ? Colors.white : Colors.black,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 35.h,
-            ),
-            if (fullScreen == false)
+        body: Obx(
+          () => Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               SizedBox(
-                height: 5.h,
+                height: 35.h,
               ),
-            if (fullScreen == false)
-              GestureDetector(
-                onTap: () {
-                  controller.detailsVideoPage.value = 1;
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 10.w),
-                  width: 48.r,
-                  height: 48.r,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(12.0.r),
-                    child: SvgPicture.asset(
-                      icon_back_black_arrow,
-                      width: 24.w,
-                      height: 24.w,
+              if (fullScreen == false)
+                SizedBox(
+                  height: 5.h,
+                ),
+              if (fullScreen == false)
+                GestureDetector(
+                  onTap: () {
+                    controller.detailsVideoPage.value = 1;
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(left: 10.w),
+                    width: 48.r,
+                    height: 48.r,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(12.0.r),
+                      child: SvgPicture.asset(
+                        icon_back_black_arrow,
+                        width: 24.w,
+                        height: 24.w,
+                      ),
                     ),
                   ),
                 ),
+              SizedBox(
+                height: 5.h,
               ),
-            SizedBox(
-              height: 5.h,
-            ),
-            if (fullScreen == false)
-              Container(
-                  width: double.infinity,
-                  height: 1,
-                  decoration: const BoxDecoration(color: view_line_f4f6f6)),
-            Expanded(
-              flex: 1,
-              child: SingleChildScrollView(
-                controller: controller.scrollListDetailController,
-                child: Obx(
-                  () => Column(
+              if (fullScreen == false)
+                Container(
+                    width: double.infinity,
+                    height: 1,
+                    decoration: const BoxDecoration(color: view_line_f4f6f6)),
+              Expanded(
+                flex: 1,
+                child: SingleChildScrollView(
+                  controller: controller.scrollListDetailController,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       controller.playerController.isEmpty
-                          ? SizedBox(
-                              height: 302.h,
-                              width: MediaQuery.of(context).size.width,
-                              child: const Center(
-                                  child: SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      Color(0xff04080f)),
-                                ),
-                              )),
-                            )
+                          ? Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: fullScreen == true
+                                      ? MediaQuery.of(context).size.height
+                                      : 302.h,
+                                  color: Colors.black,
+                                  child: const Center(
+                                      child: SizedBox(
+                                          height: 60,
+                                          width: 60,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    Colors.white),
+                                          )))))
                           : Container(
                               width: MediaQuery.of(context).size.width,
                               height: fullScreen == true
@@ -487,118 +492,130 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                                       ),
 
                                       // Product manager and brand strategist @capitalone
-                                      Row(
-                                        children: [
-                                          CircularProfileAvatar(
-                                            '',
-                                            radius: 10.5,
-                                            child: controller
-                                                        .videoDetail
-                                                        .value
-                                                        .userDetails!
-                                                        .currentJobs!
-                                                        .logo ==
-                                                    null
-                                                ? Image.asset(
-                                                    appleLogo,
-                                                    height: 28.h,
-                                                    width: 28.w,
-                                                    fit: BoxFit.cover,
-                                                  )
-                                                : CachedNetworkImage(
-                                                    imageUrl: controller
-                                                        .videoDetail
-                                                        .value
-                                                        .userDetails!
-                                                        .currentJobs!
-                                                        .logo,
-                                                    height:
-                                                        MediaQuery.of(context)
+                                      if (controller
+                                              .videoDetail.value.userDetails !=
+                                          null)
+                                        Row(
+                                          children: [
+                                            CircularProfileAvatar(
+                                              '',
+                                              radius: 10.5,
+                                              child: controller
+                                                          .videoDetail
+                                                          .value
+                                                          .userDetails!
+                                                          .currentJobs!
+                                                          .logo ==
+                                                      null
+                                                  ? Image.asset(
+                                                      appleLogo,
+                                                      height: 28.h,
+                                                      width: 28.w,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : CachedNetworkImage(
+                                                      imageUrl: controller
+                                                          .videoDetail
+                                                          .value
+                                                          .userDetails!
+                                                          .currentJobs!
+                                                          .logo,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              .78,
+                                                      width: double.infinity,
+                                                      fit: BoxFit.cover,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              SvgPicture.asset(
+                                                        placeholder,
+                                                        height: MediaQuery.of(
+                                                                    context)
                                                                 .size
                                                                 .height *
                                                             .78,
-                                                    width: double.infinity,
-                                                    fit: BoxFit.cover,
-                                                    progressIndicatorBuilder:
-                                                        (context, url,
-                                                                downloadProgress) =>
-                                                            SvgPicture.asset(
-                                                      placeholder,
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              .78,
-                                                      width: double.infinity,
-                                                      fit: BoxFit.cover,
+                                                        width: double.infinity,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          SvgPicture.asset(
+                                                        placeholder,
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            .78,
+                                                        width: double.infinity,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
-                                                    errorWidget:
-                                                        (context, url, error) =>
-                                                            SvgPicture.asset(
-                                                      placeholder,
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              .78,
-                                                      width: double.infinity,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                          ),
-                                          SizedBox(width: 4.h,),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                  controller.videoDetail.value
-                                                              .userDetails ==
-                                                          null
-                                                      ? ""
-                                                      : controller
-                                                              .videoDetail
-                                                              .value
-                                                              .userDetails!
-                                                              .currentJobs!
-                                                              .title
-                                                              .toString()
-                                                              .capitalize!,
-                                                  style: TextStyle(
-                                                      color:
-                                                          const Color(0xff3f3f3f),
-                                                      fontWeight: FontWeight.w500,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontSize: 12.sp),
-                                                  textAlign: TextAlign.left),
-                                              Text(
-                                                  controller.videoDetail.value
-                                                              .userDetails ==
-                                                          null
-                                                      ? ""
-                                                      : " @" + controller
-                                                              .videoDetail
-                                                              .value
-                                                              .userDetails!
-                                                              .currentJobs!
-                                                              .companyName
-                                                              .toString()
-                                                              .capitalize!,
-                                                  style: TextStyle(
-                                                      color:
-                                                          const Color(0xff3f3f3f),
-                                                      fontWeight: FontWeight.w500,
-                                                      fontFamily:
-                                                          helveticaNeueNeue_medium,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontSize: 12.sp),
-                                                  textAlign: TextAlign.left),
-                                            ],
-                                          ),
-                                        ],
-                                      )
+                                            ),
+                                            SizedBox(
+                                              width: 4.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                    controller.videoDetail.value
+                                                                .userDetails ==
+                                                            null
+                                                        ? ""
+                                                        : controller
+                                                            .videoDetail
+                                                            .value
+                                                            .userDetails!
+                                                            .currentJobs!
+                                                            .title
+                                                            .toString()
+                                                            .capitalize!,
+                                                    style: TextStyle(
+                                                        color: const Color(
+                                                            0xff3f3f3f),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 12.sp),
+                                                    textAlign: TextAlign.left),
+                                                Text(
+                                                    controller.videoDetail.value
+                                                                .userDetails ==
+                                                            null
+                                                        ? ""
+                                                        : " @" +
+                                                            controller
+                                                                .videoDetail
+                                                                .value
+                                                                .userDetails!
+                                                                .currentJobs!
+                                                                .companyName
+                                                                .toString()
+                                                                .capitalize!,
+                                                    style: TextStyle(
+                                                        color: const Color(
+                                                            0xff3f3f3f),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            helveticaNeueNeue_medium,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: 12.sp),
+                                                    textAlign: TextAlign.left),
+                                              ],
+                                            ),
+                                          ],
+                                        )
                                     ],
                                   )
                                 ],
@@ -1185,8 +1202,8 @@ class _VideoDetailTabState extends State<VideoDetailTab>
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

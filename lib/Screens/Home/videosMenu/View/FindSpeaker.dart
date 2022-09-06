@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../Layout/SearchBarWithRightIcon.dart';
 import '../../../../Layout/ToolbarWithHeaderCenterTitle.dart';
@@ -29,10 +30,12 @@ class _FindSpeakerState extends State<FindSpeaker> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller.isShimmerSpeaker.value = true;
     initScrolling(context);
     if (mounted) {
       controller.isLoading.value = true;
       controller.isLoadingButton.value = false;
+      controller.findSpeakerApi(search: "");
     }
   }
 
@@ -43,7 +46,8 @@ class _FindSpeakerState extends State<FindSpeaker> {
         scrollDown();
         controller.isPaginationLoading.value = true;
         controller.speakerPageNo = controller.speakerPageNo + 1;
-        await controller.findSpeakerApi(search: search);
+        controller.findSpeakerApi(search: search);
+
         controller.isPaginationLoading.value = false;
       }
     });
@@ -110,7 +114,91 @@ class _FindSpeakerState extends State<FindSpeaker> {
                       Container(
                         margin:
                             EdgeInsets.only(top: 16.h, left: 24.w, right: 24.w),
-                        child:
+                        child: controller.isShimmerSpeaker.value
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                primary: false,
+                                itemCount: 12,
+                                padding: EdgeInsets.zero,
+                                itemBuilder: (context, i) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: 16.h),
+                                    child: Shimmer.fromColors(
+                                      baseColor: Colors.grey.shade300,
+                                      highlightColor: Colors.grey.shade100,
+                                      enabled: true,
+                                      child: SizedBox(
+                                          width: double.infinity,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(25),
+                                                child: CachedNetworkImage(
+                                                  imageUrl: "",
+                                                  height: 42.h,
+                                                  width: 42.w,
+                                                  fit: BoxFit.cover,
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                              downloadProgress) =>
+                                                          SvgPicture.asset(
+                                                    placeholder,
+                                                    height: 42.h,
+                                                    width: 42.w,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          SvgPicture.asset(
+                                                    placeholder,
+                                                    height: 42.h,
+                                                    width: 42.w,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 16.w,
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      height: 12,
+                                                      width: 150,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(2),
+                                                          color: Colors.black)),
+                                                  SizedBox(
+                                                    height: 6.h,
+                                                  ),
+                                                  Container(
+                                                      height: 8,
+                                                      width: 80,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(2),
+                                                          color: Colors.black)),
+                                                ],
+                                              )
+                                            ],
+                                          )),
+                                    ),
+                                  );
+                                })
+                            :
+
                             // controller.isLoading.value
                             //     ? SizedBox(
                             //         width: double.infinity,
@@ -126,7 +214,7 @@ class _FindSpeakerState extends State<FindSpeaker> {
                             //           ),
                             //         )))
                             //     :
-                            controller.findSpeakerList == null
+                            controller.findSpeakerList.isEmpty
                                 ? SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.5,
@@ -159,7 +247,14 @@ class _FindSpeakerState extends State<FindSpeaker> {
                                             Get.to((SpeakersVideos(
                                                 id: int.parse(controller
                                                     .findSpeakerList[i].id
-                                                    .toString()), name: controller.findSpeakerList[i].fullName ?? controller.findSpeakerList[i].userName ?? "")));
+                                                    .toString()),
+                                                name: controller
+                                                        .findSpeakerList[i]
+                                                        .fullName ??
+                                                    controller
+                                                        .findSpeakerList[i]
+                                                        .userName ??
+                                                    "")));
                                           },
                                           child: SizedBox(
                                               width: double.infinity,
@@ -228,7 +323,8 @@ class _FindSpeakerState extends State<FindSpeaker> {
                                                                 .findSpeakerList[
                                                                     i]
                                                                 .fullName
-                                                                .toString().capitalize!,
+                                                                .toString()
+                                                                .capitalize!,
                                                         style: const TextStyle(
                                                             fontFamily:
                                                                 helveticaNeueNeue_medium,
@@ -269,7 +365,7 @@ class _FindSpeakerState extends State<FindSpeaker> {
                 ),
               ),
               if (controller.isPaginationLoading.value == true)
-                        PaginationUtils().loader(),
+                PaginationUtils().loader(),
             ],
           ),
         ),

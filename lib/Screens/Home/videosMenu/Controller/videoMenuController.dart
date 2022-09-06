@@ -102,6 +102,8 @@ class VideoMenuController extends GetxController {
   RxInt searchListPageNo = 1.obs;
   RxInt speakerPageNo = 1.obs;
   RxInt videoPageNo = 0.obs;
+  RxBool isShimmerEffect = false.obs;
+  RxBool isShimmerSpeaker = false.obs;
 
   @override
   void onInit() {
@@ -113,7 +115,7 @@ class VideoMenuController extends GetxController {
     super.onInit();
   }
 
-  videoListApi({String? topicFilter, String? languageFilter}) async{
+  videoListApi({String? topicFilter, String? languageFilter}) async {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
@@ -159,7 +161,7 @@ class VideoMenuController extends GetxController {
     };
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
-      if(pageNo.value == 1){
+      if (pageNo.value == 1) {
         videoList.clear();
       }
       http.StreamedResponse res = value;
@@ -174,12 +176,14 @@ class VideoMenuController extends GetxController {
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 500) {
+            isLoadingBCT.value = false;
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             videoListApi();
           } else if (model.statusCode == 200) {
-            SpeakerVideoModel admireListModel = SpeakerVideoModel.fromJson(userModel);
+            SpeakerVideoModel admireListModel =
+                SpeakerVideoModel.fromJson(userModel);
             videoList.addAll(admireListModel.data!);
 
             print(videoList.length);
@@ -192,7 +196,6 @@ class VideoMenuController extends GetxController {
 
             videoMenuPageMethod();
           }
-          isLoadingBCT.value = false;
         });
       } else {
         isLoadingBCT.value = false;
@@ -352,17 +355,19 @@ class VideoMenuController extends GetxController {
     isLoading.value = true;
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
-    
-    
+
     print("ddd $searchListPageNo");
-    dynamic body = {'search': topicFilter.toString(), 'page': searchListPageNo.value.toString()};
+    dynamic body = {
+      'search': topicFilter.toString(),
+      'page': searchListPageNo.value.toString()
+    };
     //FormData formData = new FormData.fromMap(body);
 
     String url = urlBase + urlHomeVideoList;
     final apiReq = Request();
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       isLoading.value = false;
-      if(searchListPageNo.value == 1){
+      if (searchListPageNo.value == 1) {
         videoAllList.clear();
       }
       http.StreamedResponse res = value;
@@ -382,7 +387,8 @@ class VideoMenuController extends GetxController {
 
             videoListSearchAPI();
           } else if (model.statusCode == 200) {
-            SpeakerVideoModel admireListModel = SpeakerVideoModel.fromJson(userModel);
+            SpeakerVideoModel admireListModel =
+                SpeakerVideoModel.fromJson(userModel);
             videoAllList.addAll(admireListModel.data!);
 
             searchVideoMethod();
@@ -462,8 +468,6 @@ class VideoMenuController extends GetxController {
       );
       searchVideoList.add(controller);
     }
-
-    
   }
 
   videoListDetailApi({VideoList? videoListData, id}) async {
@@ -475,9 +479,7 @@ class VideoMenuController extends GetxController {
     final apiReq = Request();
     detailPageNo = detailPageNo + 1;
     print("page no" + detailPageNo.toString());
-    dynamic body = {
-      'page': detailPageNo.value.toString()
-    };
+    dynamic body = {'page': detailPageNo.value.toString()};
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
       if (detailPageNo == 1) {
@@ -500,18 +502,19 @@ class VideoMenuController extends GetxController {
 
             videoListDetailApi();
           } else if (model.statusCode == 200) {
-            SpeakerVideoModel admireListModel = SpeakerVideoModel.fromJson(userModel);
+            SpeakerVideoModel admireListModel =
+                SpeakerVideoModel.fromJson(userModel);
             videoDetailsList.addAll(admireListModel.data!);
             print(videoDetailsList.length);
             List list = [];
 
-            for(var item in videoDetailsList){
-              if(id == item.id){
+            for (var item in videoDetailsList) {
+              if (id == item.id) {
                 list.add(item);
               }
             }
 
-            for(var item in list){
+            for (var item in list) {
               videoDetailsList.remove(item);
             }
 
@@ -833,15 +836,18 @@ class VideoMenuController extends GetxController {
     isLoading.value = true;
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
-    
+
     String url = urlBase + urlMyPlayList;
     final apiReq = Request();
     playlistPageNo = playlistPageNo + 1;
     print("dsd $playlistPageNo");
-    dynamic body = {'search': search.toString(), 'page': playlistPageNo.value.toString()};
+    dynamic body = {
+      'search': search.toString(),
+      'page': playlistPageNo.value.toString()
+    };
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
-      if(playlistPageNo.value == 1){
+      if (playlistPageNo.value == 1) {
         myPlayList.clear();
       }
 
@@ -862,11 +868,12 @@ class VideoMenuController extends GetxController {
 
             myPlayListAPI();
           } else if (model.statusCode == 200) {
-            SpeakerVideoModel admireListModel = SpeakerVideoModel.fromJson(userModel);
+            SpeakerVideoModel admireListModel =
+                SpeakerVideoModel.fromJson(userModel);
             myPlayList.addAll(admireListModel.data!);
 
             pageMyPlayListAdd();
-          }else{
+          } else {
             isLoading.value = false;
           }
           isLoadingBCT.value = false;
@@ -1169,14 +1176,17 @@ class VideoMenuController extends GetxController {
     var preferences = MySharedPref();
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
-    dynamic body = {'search': search.toString(), 'page': speakerPageNo.value.toString()};
+    dynamic body = {
+      'search': search.toString(),
+      'page': speakerPageNo.value.toString()
+    };
     //FormData formData = new FormData.fromMap(body);
 
     String url = urlBase + urlFindSpeaker;
     final apiReq = Request();
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
-      if(speakerPageNo.value == 1){
+      if (speakerPageNo.value == 1) {
         findSpeakerList.clear();
       }
 
@@ -1194,19 +1204,23 @@ class VideoMenuController extends GetxController {
             isLoading.value = false;
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
-
+            isShimmerSpeaker.value = false;
             myPlayListAPI();
           } else if (model.statusCode == 200) {
-            FindSpeakerModel admireListModel = FindSpeakerModel.fromJson(userModel);
+            FindSpeakerModel admireListModel =
+                FindSpeakerModel.fromJson(userModel);
             findSpeakerList.addAll(admireListModel.data!);
             // pageAdd();
             isLoading.value = false;
-          }else{
+            isShimmerSpeaker.value = false;
+          } else {
             isLoading.value = false;
+            isShimmerSpeaker.value = false;
           }
           isLoadingBCT.value = false;
         });
       } else {
+        isShimmerSpeaker.value = false;
         isLoadingBCT.value = false;
       }
     });
@@ -1246,7 +1260,7 @@ class VideoMenuController extends GetxController {
     final apiReq = Request();
 
     await apiReq.postAPI(url, body, token.toString()).then((value) {
-      if(videoPageNo.value == 1){
+      if (videoPageNo.value == 1) {
         speakerList.clear();
       }
 
@@ -1267,10 +1281,14 @@ class VideoMenuController extends GetxController {
 
             myPlayListAPI();
           } else if (model.statusCode == 200) {
-            SpeakerVideoModel admireListModel = SpeakerVideoModel.fromJson(userModel);
+            SpeakerVideoModel admireListModel =
+                SpeakerVideoModel.fromJson(userModel);
+            if (admireListModel.data!.length == 0) {
+              isLoading.value = false;
+            }
             speakerList.addAll(admireListModel.data!);
             speakerDataVideoPageAdd();
-          }else{
+          } else {
             isLoading.value = false;
           }
           isLoadingBCT.value = false;
@@ -1349,6 +1367,7 @@ class VideoMenuController extends GetxController {
         ),
       );
       speakerVideoController.add(controller);
+      isLoading.value = false;
     }
   }
 }

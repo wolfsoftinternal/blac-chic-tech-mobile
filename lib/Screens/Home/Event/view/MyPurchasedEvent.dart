@@ -15,6 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MyPurchasedEvent extends StatefulWidget {
   @override
@@ -152,13 +153,174 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
             /*--------------- Upcoming Tab --------------*/
             controller.isLoading.value == true
                 ? Container(
-                    height: MediaQuery.of(context).size.height * 0.60,
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        color: black,
-                        strokeWidth: 2,
-                      ),
-                    ))
+                    height: MediaQuery.of(context).size.height * 0.74,
+                    width: double.infinity,
+                    margin: EdgeInsets.only(left: 16.w, right: 16.w),
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: 4,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, i) {
+                          return Padding(
+                            padding: EdgeInsets.only(bottom: 16.h),
+                            child: Center(
+                              child: Stack(
+                                children: [
+                                  SizedBox(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 180.h,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5.r)),
+                                        child: SvgPicture.asset(
+                                          placeholder,
+                                          fit: BoxFit.cover,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 180.h,
+                                        ),
+                                      )),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                          top: 8.h, left: 8.w, right: 8.w),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Shimmer.fromColors(
+                                            baseColor: Colors.grey.shade400,
+                                            highlightColor:
+                                                Colors.grey.shade200,
+                                            enabled: true,
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 15.w,
+                                                  vertical: 8.w),
+                                              height: 20.h,
+                                              decoration: BoxDecoration(
+                                                color: orange.withOpacity(0.7),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(25.r)),
+                                              ),
+                                              child: const Center(
+                                                child: SizedBox(
+                                                  width: 30,
+                                                  height: 10,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Shimmer.fromColors(
+                                            baseColor: Colors.grey.shade400,
+                                            highlightColor:
+                                                Colors.grey.shade200,
+                                            enabled: true,
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 15.w,
+                                                  vertical: 8.w),
+                                              height: 20.h,
+                                              decoration: BoxDecoration(
+                                                color: orange.withOpacity(0.7),
+                                              ),
+                                              child: const Center(
+                                                child: SizedBox(
+                                                  width: 60,
+                                                  height: 10,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                      bottom: 19.h,
+                                      child: Row(
+                                        children: [
+                                          SizedBox(width: 10),
+                                          SvgPicture.asset(
+                                            calendar_icon,
+                                            height: 12.h,
+                                            width: 12.w,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Shimmer.fromColors(
+                                            baseColor: Colors.grey.shade400,
+                                            highlightColor:
+                                                Colors.grey.shade200,
+                                            enabled: true,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.black,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8)),
+                                              height: 15,
+                                              width: 140,
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                  Positioned(
+                                      bottom: 19.h,
+                                      right: 16.w,
+                                      child: Row(
+                                        children: [
+                                          SizedBox(width: 10),
+                                          Shimmer.fromColors(
+                                            baseColor: Colors.grey.shade400,
+                                            highlightColor:
+                                                Colors.grey.shade200,
+                                            enabled: true,
+                                            child: Container(
+                                              height: 10,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.black,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8)),
+                                            ),
+                                          ),
+                                          SvgPicture.asset(
+                                            icon_location,
+                                            height: 12.h,
+                                            width: 12.w,
+                                          ),
+                                        ],
+                                      )),
+                                  // Positioned(
+                                  //     bottom: 40.h,
+                                  //     child: Padding(
+                                  //       padding:
+                                  //           EdgeInsets.only(left: 16.w),
+                                  //       child: Padding(
+                                  //         padding: EdgeInsets.only(
+                                  //             left: 4.w),
+                                  //         child: Shimmer.fromColors(
+                                  //           baseColor:
+                                  //               Colors.grey.shade400,
+                                  //           highlightColor:
+                                  //               Colors.grey.shade200,
+                                  //           enabled: true,
+                                  //           child: Container(
+                                  //             height: 15,
+                                  //             width: 200,
+                                  //             color: Colors.black,
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //     )),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                  )
                 : _isFirstLayout == true
                     ? controller.upcomingEventList.isEmpty
                         ? SizedBox(
@@ -421,27 +583,21 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                   child: Center(
                                     child: Text(
                                       _isFirstLayout == true
-                                          ? controller
-                                              .upcomingEventList[i].type! ==
-                                                                'ticket_price'
-                                                            ? 'Paid'
-                                                            : controller
-                                                                        .eventList[
-                                                                            i]
-                                                                        .type! ==
-                                                                    'free'
-                                                                ? 'Free'
-                                                                : 'Invite Only'
+                                          ? controller.upcomingEventList[i]
+                                                      .type! ==
+                                                  'ticket_price'
+                                              ? 'Paid'
+                                              : controller.eventList[i].type! ==
+                                                      'free'
+                                                  ? 'Free'
+                                                  : 'Invite Only'
                                           : controller.pastEventList[i].type! ==
-                                                                'ticket_price'
-                                                            ? 'Paid'
-                                                            : controller
-                                                                        .eventList[
-                                                                            i]
-                                                                        .type! ==
-                                                                    'free'
-                                                                ? 'Free'
-                                                                : 'Invite Only',
+                                                  'ticket_price'
+                                              ? 'Paid'
+                                              : controller.eventList[i].type! ==
+                                                      'free'
+                                                  ? 'Free'
+                                                  : 'Invite Only',
                                       style: TextStyle(
                                           fontSize: 12.sp,
                                           color: Colors.white,
@@ -600,12 +756,12 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                                                     i]
                                                                 .hosts ==
                                                             null
-                                                    ? "" : controller
-                                                            .upcomingEventList[
-                                                                i]
-                                                            .hosts![0]
-                                                            .firstName!.capitalizeFirst!
-                                                    
+                                                    ? ""
+                                                    : controller
+                                                        .upcomingEventList[i]
+                                                        .hosts![0]
+                                                        .firstName!
+                                                        .capitalizeFirst!
                                                 : controller.pastEventList[i]
                                                                 .hosts
                                                                 .toString() ==
@@ -615,11 +771,12 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                                                     i]
                                                                 .hosts ==
                                                             null
-                                                    ? "" : controller
-                                                            .pastEventList[i]
-                                                            .hosts![0]
-                                                            .firstName!.capitalizeFirst!
-                                                    ,
+                                                    ? ""
+                                                    : controller
+                                                        .pastEventList[i]
+                                                        .hosts![0]
+                                                        .firstName!
+                                                        .capitalizeFirst!,
                                             11.sp,
                                             white_ffffff,
                                             FontWeight.w500,
@@ -670,8 +827,8 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                                         _isFirstLayout == true
                                             ? controller
                                                 .upcomingEventList[i].venue!
-                                            : controller
-                                                .pastEventList[i].venue!.capitalize!,
+                                            : controller.pastEventList[i].venue!
+                                                .capitalize!,
                                         10.sp,
                                         white_ffffff,
                                         FontWeight.w100,
@@ -693,7 +850,8 @@ class _MyPurchasedEventState extends State<MyPurchasedEvent> {
                               child: setHelceticaBold(
                                   _isFirstLayout == true
                                       ? controller.upcomingEventList[i].title!
-                                      : controller.pastEventList[i].title!.capitalize!,
+                                      : controller
+                                          .pastEventList[i].title!.capitalize!,
                                   22.sp,
                                   white_ffffff,
                                   FontWeight.w500,

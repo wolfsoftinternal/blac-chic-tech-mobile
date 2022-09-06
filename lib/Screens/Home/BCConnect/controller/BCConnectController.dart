@@ -64,27 +64,26 @@ class BCConnectController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             topicListAPI(context);
-          }else if(model.statusCode==200){
-            TopicListModel detail =
-            TopicListModel.fromJson(userModel);
+          } else if (model.statusCode == 200) {
+            TopicListModel detail = TopicListModel.fromJson(userModel);
 
             topicList.value = detail.data!;
-            
+
             if (topicList.isNotEmpty) {
-            for (var item in topicList) {
-              topicNameList.add(item.name);
+              for (var item in topicList) {
+                topicNameList.add(item.name);
+              }
+              dropDownTopicItems = getDropDownTopicItems();
+              topicName.value = dropDownTopicItems![0].value!;
             }
-            dropDownTopicItems = getDropDownTopicItems();
-            topicName.value = dropDownTopicItems![0].value!;
-        }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -125,14 +124,13 @@ class BCConnectController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             languageListAPI(context);
-          }else if(model.statusCode==200){
-            TopicListModel detail =
-            TopicListModel.fromJson(userModel);
+          } else if (model.statusCode == 200) {
+            TopicListModel detail = TopicListModel.fromJson(userModel);
 
             languageList.value = detail.data!;
 
@@ -145,7 +143,7 @@ class BCConnectController extends GetxController {
             }
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -169,10 +167,8 @@ class BCConnectController extends GetxController {
     return items;
   }
 
-
   // Create admire
   createAdmireAPI(BuildContext context, id, position) async {
-
     isFollowUnfollowChanged.value = false;
 
     var preferences = MySharedPref();
@@ -264,7 +260,7 @@ class BCConnectController extends GetxController {
     var token = await preferences.getStringValue(SharePreData.keytoken);
 
     dynamic body = {
-      'search' : search.toString(),
+      'search': search.toString(),
     };
 
     String url = urlBase + urlUserList;
@@ -277,29 +273,26 @@ class BCConnectController extends GetxController {
           String strData = value;
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
-          print("BCConnect user list get base model" + model.statusCode.toString());
-          if(model.statusCode == 500){
-
+          print("BCConnect user list get base model" +
+              model.statusCode.toString());
+          if (model.statusCode == 500) {
             print("BCConnect user list update token");
 
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             userListAPI(context, search);
-          }else if(model.statusCode==200){
-
+          } else if (model.statusCode == 200) {
             print("BCConnect user list get data");
 
-            UserListModel detail =
-            UserListModel.fromJson(userModel);
+            UserListModel detail = UserListModel.fromJson(userModel);
 
             userList.value = detail.data!;
 
             print("BCConnect user list " + userModel.toString());
-
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -310,12 +303,12 @@ class BCConnectController extends GetxController {
     var token = await preferences.getStringValue(SharePreData.keytoken);
     List speaker = [];
 
-    for(var item in selectedList){    
+    for (var item in selectedList) {
       speaker.add(item.id);
     }
 
     dynamic body = {
-      'description' : descController.value.text,
+      'description': descController.value.text,
       'topic': topicName.value,
       'language': languageName.value,
       'speakers': speaker.join(','),
@@ -335,17 +328,17 @@ class BCConnectController extends GetxController {
           Map<String, dynamic> userModel = json.decode(strData);
           BaseModel model = BaseModel.fromJson(userModel);
 
-          if(model.statusCode == 500){
+          if (model.statusCode == 500) {
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             createVideoApi(context);
-          }else if(model.statusCode==200){
+          } else if (model.statusCode == 200) {
             snackBar(context, 'Video Uploaded');
             Get.back();
           }
         });
-      }else{
+      } else {
         print(res.reasonPhrase);
       }
     });
@@ -358,7 +351,9 @@ class BCConnectController extends GetxController {
     } else if (linkController.value.text.isEmpty) {
       snackBar(context, "Enter video link");
       return false;
-    } else if(!RegExp(r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?').hasMatch(linkController.value.text)){
+    } else if (!RegExp(
+            r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?')
+        .hasMatch(linkController.value.text)) {
       snackBar(context, "Enter valid video link");
       return false;
     } else if (descController.value.text.isEmpty) {

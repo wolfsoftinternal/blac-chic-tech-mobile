@@ -39,7 +39,7 @@ class VideoController extends GetxController {
 
   RxList<UserList> userList = <UserList>[].obs;
   RxList<UserList> selectedList = <UserList>[].obs;
-
+  RxBool isShimmer = false.obs;
   ScrollController scrollController = ScrollController();
   RxInt PageNumber = 0.obs;
   RxBool isPaginationLoading = false.obs;
@@ -200,7 +200,7 @@ class VideoController extends GetxController {
         };
       }
     } else {
-      if(userId == null && data != null){
+      if (userId == null && data != null) {
         PageNumber.value = 0;
       }
       PageNumber = PageNumber + 1;
@@ -236,11 +236,13 @@ class VideoController extends GetxController {
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 500) {
+            isShimmer.value = false;
             final tokenUpdate = TokenUpdateRequest();
             await tokenUpdate.updateToken();
 
             userListAPI(context, pagination, [userId]);
           } else if (model.statusCode == 200) {
+            isShimmer.value = false;
             UserListModel detail = UserListModel.fromJson(userModel);
             userCount.value = detail.user_count!;
 
@@ -257,6 +259,7 @@ class VideoController extends GetxController {
           }
         });
       } else {
+        isShimmer.value = false;
         print(res.reasonPhrase);
       }
     });

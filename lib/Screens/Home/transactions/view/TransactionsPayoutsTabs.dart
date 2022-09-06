@@ -12,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../Layout/ToolbarWithHeaderCenterTitle.dart';
 import '../../../../Model/TransactionsModel.dart';
@@ -33,7 +34,8 @@ class TransactionsPayoutsTabs extends StatefulWidget {
 class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
   TransactionsController transactionController =
       Get.put(TransactionsController());
-  AdmireProfileController admireProfileController = Get.put(AdmireProfileController());
+  AdmireProfileController admireProfileController =
+      Get.put(AdmireProfileController());
 
   bool Bg1 = true;
   bool Bg2 = false;
@@ -108,8 +110,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
 
               /*----- Wallet Balance Layout ------*/
               Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                 margin: EdgeInsets.only(left: 24.w, right: 24.w, top: 42.h),
                 decoration: BoxDecoration(
                   color: black_121925,
@@ -132,7 +133,9 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                                 fontWeight: FontWeight.w500,
                                 color: opcity_white_ffffff),
                           ),
-                          SizedBox(height: 5.h,),
+                          SizedBox(
+                            height: 5.h,
+                          ),
                           Text(
                             SharePreData.strDollar +
                                 (transactionController
@@ -148,7 +151,7 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if(transactionController.isPaid.value != true){
+                        if (transactionController.isPaid.value != true) {
                           Get.to(WithdrawChooseBankAccount(
                             walletAmount: transactionController
                                     .userDetails.value.wallet ??
@@ -160,7 +163,9 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 16.w, vertical: 8.h),
                         decoration: BoxDecoration(
-                          color: transactionController.isPaid.value == true ? orange.withOpacity(0.5) : orange_ff881a,
+                          color: transactionController.isPaid.value == true
+                              ? orange.withOpacity(0.5)
+                              : orange_ff881a,
                           borderRadius: BorderRadius.circular(4.r),
                         ),
                         child: Text(
@@ -195,19 +200,22 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                             _isSecondLayout = false;
 
                             checkNet(context).then(
-                                  (value) {
-                                transactionController.PageNumberOfTransactions.value = 0;
+                              (value) {
+                                transactionController
+                                    .PageNumberOfTransactions.value = 0;
                                 // transactionController.allTransactionListApi(context);
-                                transactionController.stopScrollingForPayouts(context);
+                                transactionController
+                                    .stopScrollingForPayouts(context);
                                 transactionController.transactionList.clear();
                                 transactionController.payoutList.clear();
-                                transactionController.scrollControllerForTransactions = ScrollController();
+                                transactionController
+                                        .scrollControllerForTransactions =
+                                    ScrollController();
                                 transactionController.initScrolling(context);
-                                transactionController.allTransactionListApi(context);
-
+                                transactionController
+                                    .allTransactionListApi(context);
                               },
                             );
-
                           });
                         },
                         child: Container(
@@ -244,20 +252,23 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                             _isSecondLayout = true;
 
                             checkNet(context).then(
-                                  (value) {
-                                transactionController.PageNumberForPayouts.value = 0;
+                              (value) {
+                                transactionController
+                                    .PageNumberForPayouts.value = 0;
                                 // transactionController.allPayoutListApi(context);
-                                transactionController.stopScrollingForTransactions(context);
+                                transactionController
+                                    .stopScrollingForTransactions(context);
                                 transactionController.transactionList.clear();
                                 transactionController.payoutList.clear();
-                                transactionController.scrollControllerForPayouts = ScrollController();
-                                transactionController.initScrollingForPayouts(context);
+                                transactionController
+                                        .scrollControllerForPayouts =
+                                    ScrollController();
+                                transactionController
+                                    .initScrollingForPayouts(context);
                                 transactionController.allPayoutListApi(context);
                                 transactionController.payoutList.clear();
-
                               },
                             );
-
                           });
                         },
                         child: Container(
@@ -282,382 +293,827 @@ class _TransactionsPayoutsTabsState extends State<TransactionsPayoutsTabs> {
                   ],
                 ),
               ),
-              
-
               Expanded(
                 child: SingleChildScrollView(
-                  controller: transactionController.scrollControllerForTransactions,
-                  child: Column(children: [
-
-                    /*--------------- Transactions Tab --------------*/
-                    _isFirstLayout
-                        ? Visibility(
-                      visible: _isFirstLayout,
-                      child: transactionController.isTransactionLoading.value == true
-                      ? Container(height: MediaQuery.of(context).size.height * 0.60,
-                      child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,)))
-                      : transactionController.transactionList.isEmpty
-                      ? Container(
-                        height: MediaQuery.of(context).size.height * 0.60,
-                        child: Center(
-                          child: setHelveticaMedium("No Transactions Yet", 14.sp, grey_aaaaaa, FontWeight.w500, FontStyle.normal),
-                        )
-                      )
-                      : Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding:  EdgeInsets.only(left: 24.w,right: 24.w,top: 16.h),
-                            child: SearchBarTag(
-                              placeholder: "Search",
-                              autoFocus: false,
-                              onSubmit: (value) {
-                                checkNet(context).then((value) {
-                                  transactionController.PageNumberOfTransactions.value = 0;
-                                  transactionController.allTransactionListApi(context);
-                                });
-                              },
-                              controller: transactionController.searchControllerForTransactions.value,
-                            ),
-                          ),
-
-                          Container(
-                            margin: EdgeInsets.only(
-                                top: 16.h, left: 24.w, right: 24.w),
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                primary: false,
-                                itemCount: transactionController
-                                    .transactionList.length,
-                                padding: EdgeInsets.zero,
-                                itemBuilder: (context, i) {
-                                  return InkWell(
-                                    onTap: (){
-                                      // checkNet(context).then((value) {
-                                      //   admireProfileController.eventDetailAPI(context, transactionController.transactionList[i].event_details!.id);
-                                      // });
-                                      Get.to(TransactionStatus(transactionController.transactionList[i]));
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 10.h),
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 16.h, horizontal: 16.w),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                          BorderRadius.circular(4.r),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:  Color(0x0fff5f5f5),
-                                              offset: const Offset(
-                                                0.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 10.0,
-                                              spreadRadius: 5.0,
-                                            ), //BoxShadow
-                                          ],
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment
-                                                  .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  transactionController
-                                                      .transactionList[i]
-                                                      .transaction_id ??
-                                                      "",
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      roboto_regular,
-                                                      fontSize: 11.sp,
-                                                      color: black_121212),
-                                                ),
-                                                Text(transactionController
-                                                      .transactionList[i]
-                                                      .createdAt == null || transactionController
-                                                      .transactionList[i]
-                                                      .createdAt.toString() == '' ? "" :
-                                                  DateFormat("MMM dd yyyy 'at' hh:mm a").format(transactionController.transactionList[i].createdAt!),
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      roboto_regular,
-                                                      fontSize: 11.sp,
-                                                      color: grey_aaaaaa),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .start,
-                                                    children: [
-                                                      Text(
-                                                        "Event Name",
-                                                        style: TextStyle(
-                                                            fontSize: 12.sp,
-                                                            fontFamily:
-                                                            roboto_regular,
-                                                            color:
-                                                            grey_aaaaaa),
+                  controller:
+                      transactionController.scrollControllerForTransactions,
+                  child: Column(
+                    children: [
+                      /*--------------- Transactions Tab --------------*/
+                      _isFirstLayout
+                          ? Visibility(
+                              visible: _isFirstLayout,
+                              child:
+                                  transactionController
+                                              .isTransactionLoading.value ==
+                                          true
+                                      ? Container(
+                                          margin: EdgeInsets.only(
+                                              top: 16.h,
+                                              left: 24.w,
+                                              right: 24.w),
+                                          child: ListView.builder(
+                                              shrinkWrap: true,
+                                              primary: false,
+                                              itemCount: 5,
+                                              padding: EdgeInsets.zero,
+                                              itemBuilder: (context, i) {
+                                                return Padding(
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 10.h),
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 16.h,
+                                                            horizontal: 16.w),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.r),
+                                                      boxShadow: const [
+                                                        BoxShadow(
+                                                          color: Color(
+                                                              0x0fff5f5f5),
+                                                          offset: Offset(
+                                                            0.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 10.0,
+                                                          spreadRadius: 5.0,
+                                                        ), //BoxShadow
+                                                      ],
+                                                    ),
+                                                    child: Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey.shade300,
+                                                      highlightColor:
+                                                          Colors.grey.shade100,
+                                                      enabled: true,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Container(
+                                                                width: 100.w,
+                                                                height: 10.h,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            4)),
+                                                              ),
+                                                              Container(
+                                                                width: 50.w,
+                                                                height: 10.h,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            4)),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10.h,
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      "Event Name",
+                                                                      style: TextStyle(
+                                                                          fontSize: 12
+                                                                              .sp,
+                                                                          fontFamily:
+                                                                              roboto_regular,
+                                                                          color:
+                                                                              grey_aaaaaa),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height:
+                                                                          7.h,
+                                                                    ),
+                                                                    Container(
+                                                                      width:
+                                                                          200.w,
+                                                                      height:
+                                                                          10.h,
+                                                                      decoration: BoxDecoration(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(4)),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                width: 50.w,
+                                                                height: 14.h,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            4)),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        ],
                                                       ),
-                                                      SizedBox(
-                                                        height: 5.h,
-                                                      ),
-                                                      Text(
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        )
+                                      : transactionController
+                                              .transactionList.isEmpty
+                                          ? Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.60,
+                                              child: Center(
+                                                child: setHelveticaMedium(
+                                                    "No Transactions Yet",
+                                                    14.sp,
+                                                    grey_aaaaaa,
+                                                    FontWeight.w500,
+                                                    FontStyle.normal),
+                                              ))
+                                          : Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 24.w,
+                                                      right: 24.w,
+                                                      top: 16.h),
+                                                  child: SearchBarTag(
+                                                    placeholder: "Search",
+                                                    autoFocus: false,
+                                                    onSubmit: (value) {
+                                                      checkNet(context)
+                                                          .then((value) {
                                                         transactionController
-                                                            .transactionList[
-                                                        i]
-                                                            .event_details
-                                                            ?.title ??
-                                                            "",
-                                                        style: TextStyle(
-                                                            fontSize: 16.sp,
-                                                            fontFamily:
-                                                            roboto_bold,
-                                                            fontWeight: FontWeight.w600,
-                                                            color:
-                                                            black_121212),
-                                                      ),
-                                                    ],
+                                                            .PageNumberOfTransactions
+                                                            .value = 0;
+                                                        transactionController
+                                                            .allTransactionListApi(
+                                                                context);
+                                                      });
+                                                    },
+                                                    controller:
+                                                        transactionController
+                                                            .searchControllerForTransactions
+                                                            .value,
                                                   ),
                                                 ),
-                                                Text(
-                                                  transactionController
-                                                      .transactionList[i]
-                                                      .total_price ??
-                                                      "",
-                                                  style: TextStyle(
-                                                      fontSize: 16.sp,
-                                                      fontFamily: roboto_bold,
-                                                      fontWeight: FontWeight.w600,
-                                                      color: transactionController.transactionList[i].payment_type == 'out' ? Colors.red : parrot_1ad04d),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 16.h,
+                                                      left: 24.w,
+                                                      right: 24.w),
+                                                  child: ListView.builder(
+                                                      shrinkWrap: true,
+                                                      primary: false,
+                                                      itemCount:
+                                                          transactionController
+                                                              .transactionList
+                                                              .length,
+                                                      padding: EdgeInsets.zero,
+                                                      itemBuilder:
+                                                          (context, i) {
+                                                        return InkWell(
+                                                          onTap: () {
+                                                            // checkNet(context).then((value) {
+                                                            //   admireProfileController.eventDetailAPI(context, transactionController.transactionList[i].event_details!.id);
+                                                            // });
+                                                            Get.to(TransactionStatus(
+                                                                transactionController
+                                                                        .transactionList[
+                                                                    i]));
+                                                          },
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    bottom:
+                                                                        10.h),
+                                                            child: Container(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          16.h,
+                                                                      horizontal:
+                                                                          16.w),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4.r),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Color(
+                                                                        0x0fff5f5f5),
+                                                                    offset:
+                                                                        const Offset(
+                                                                      0.0,
+                                                                      5.0,
+                                                                    ),
+                                                                    blurRadius:
+                                                                        10.0,
+                                                                    spreadRadius:
+                                                                        5.0,
+                                                                  ), //BoxShadow
+                                                                ],
+                                                              ),
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Text(
+                                                                        transactionController.transactionList[i].transaction_id ??
+                                                                            "",
+                                                                        style: TextStyle(
+                                                                            fontFamily:
+                                                                                roboto_regular,
+                                                                            fontSize:
+                                                                                11.sp,
+                                                                            color: black_121212),
+                                                                      ),
+                                                                      Text(
+                                                                        transactionController.transactionList[i].createdAt == null ||
+                                                                                transactionController.transactionList[i].createdAt.toString() == ''
+                                                                            ? ""
+                                                                            : DateFormat("MMM dd yyyy 'at' hh:mm a").format(transactionController.transactionList[i].createdAt!),
+                                                                        style: TextStyle(
+                                                                            fontFamily:
+                                                                                roboto_regular,
+                                                                            fontSize:
+                                                                                11.sp,
+                                                                            color: grey_aaaaaa),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height:
+                                                                        10.h,
+                                                                  ),
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              "Event Name",
+                                                                              style: TextStyle(fontSize: 12.sp, fontFamily: roboto_regular, color: grey_aaaaaa),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              height: 5.h,
+                                                                            ),
+                                                                            Text(
+                                                                              transactionController.transactionList[i].event_details?.title ?? "",
+                                                                              style: TextStyle(fontSize: 16.sp, fontFamily: roboto_bold, fontWeight: FontWeight.w600, color: black_121212),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        transactionController.transactionList[i].total_price ??
+                                                                            "",
+                                                                        style: TextStyle(
+                                                                            fontSize: 16
+                                                                                .sp,
+                                                                            fontFamily:
+                                                                                roboto_bold,
+                                                                            fontWeight: FontWeight
+                                                                                .w600,
+                                                                            color: transactionController.transactionList[i].payment_type == 'out'
+                                                                                ? Colors.red
+                                                                                : parrot_1ad04d),
+                                                                      ),
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
                                                 ),
                                               ],
-                                            )
+                                            ),
+                            )
+                          : SizedBox(),
+                      if (transactionController
+                              .isPaginationLoadingForTransactions.value ==
+                          true)
+                        PaginationUtils().loader(),
+
+                      /*--------------- Payouts Tab --------------*/
+                      _isSecondLayout
+                          ? Visibility(
+                              visible: _isSecondLayout,
+                              child: transactionController
+                                          .isPayoutsLoading.value ==
+                                      true
+                                  ? Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 24.w,
+                                              right: 24.w,
+                                              top: 16.h),
+                                          child: SearchBarTag(
+                                            placeholder: "Search",
+                                            autoFocus: false,
+                                            onSubmit: (value) {
+                                              checkNet(context).then((value) {
+                                                transactionController
+                                                    .PageNumberForPayouts
+                                                    .value = 0;
+                                                transactionController
+                                                    .allPayoutListApi(context);
+                                              });
+                                            },
+                                            controller: transactionController
+                                                .searchControllerForPayouts
+                                                .value,
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 16.h,
+                                              left: 24.w,
+                                              right: 24.w),
+                                          child: ListView.builder(
+                                              shrinkWrap: true,
+                                              primary: false,
+                                              itemCount: 5,
+                                              padding: EdgeInsets.zero,
+                                              itemBuilder: (context, i) {
+                                                return Padding(
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 10.h),
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 20.h,
+                                                            horizontal: 16.w),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.r),
+                                                      boxShadow: const [
+                                                        BoxShadow(
+                                                          color: Color(
+                                                              0x0fff5f5f5),
+                                                          offset: const Offset(
+                                                            0.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 10.0,
+                                                          spreadRadius: 5.0,
+                                                        ), //BoxShadow
+                                                      ],
+                                                    ),
+                                                    child: Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey.shade300,
+                                                      highlightColor:
+                                                          Colors.grey.shade100,
+                                                      enabled: true,
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  "Account",
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          roboto_regular,
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      color:
+                                                                          grey_aaaaaa),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 5.h,
+                                                                ),
+                                                                Container(
+                                                                  width: 50.w,
+                                                                  height: 12.h,
+                                                                  decoration: BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              2)),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            flex: 1,
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  height: 2.h,
+                                                                ),
+                                                                Text(
+                                                                  "On",
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          roboto_regular,
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      color:
+                                                                          grey_aaaaaa),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 5.h,
+                                                                ),
+                                                                Container(
+                                                                  width: 140.w,
+                                                                  height: 8.h,
+                                                                  decoration: BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              2)),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            flex: 2,
+                                                          ),
+                                                          Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text(
+                                                                "Requested",
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        roboto_regular,
+                                                                    fontSize:
+                                                                        11.sp,
+                                                                    color:
+                                                                        orange_ff881a),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 5.h,
+                                                              ),
+                                                              Container(
+                                                                width: 40.w,
+                                                                height: 12.h,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            2)),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        ),
+                                      ],
+                                    )
+                                  : transactionController.payoutList.isEmpty
+                                      ? Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.60,
+                                          child: Center(
+                                            child: setHelveticaMedium(
+                                                "No Payouts Yet",
+                                                14.sp,
+                                                grey_aaaaaa,
+                                                FontWeight.w500,
+                                                FontStyle.normal),
+                                          ))
+                                      : Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 24.w,
+                                                  right: 24.w,
+                                                  top: 16.h),
+                                              child: SearchBarTag(
+                                                placeholder: "Search",
+                                                autoFocus: false,
+                                                onSubmit: (value) {
+                                                  checkNet(context)
+                                                      .then((value) {
+                                                    transactionController
+                                                        .PageNumberForPayouts
+                                                        .value = 0;
+                                                    transactionController
+                                                        .allPayoutListApi(
+                                                            context);
+                                                  });
+                                                },
+                                                controller: transactionController
+                                                    .searchControllerForPayouts
+                                                    .value,
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  top: 16.h,
+                                                  left: 24.w,
+                                                  right: 24.w),
+                                              child: ListView.builder(
+                                                  shrinkWrap: true,
+                                                  primary: false,
+                                                  itemCount:
+                                                      transactionController
+                                                          .payoutList.length,
+                                                  padding: EdgeInsets.zero,
+                                                  itemBuilder: (context, i) {
+                                                    return Padding(
+                                                      padding: EdgeInsets.only(
+                                                          bottom: 10.h),
+                                                      child: Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 20.h,
+                                                                horizontal:
+                                                                    16.w),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      4.r),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Color(
+                                                                  0x0fff5f5f5),
+                                                              offset:
+                                                                  const Offset(
+                                                                0.0,
+                                                                5.0,
+                                                              ),
+                                                              blurRadius: 10.0,
+                                                              spreadRadius: 5.0,
+                                                            ), //BoxShadow
+                                                          ],
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Expanded(
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    "Account",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            roboto_regular,
+                                                                        fontSize: 11
+                                                                            .sp,
+                                                                        color:
+                                                                            grey_aaaaaa),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 2.h,
+                                                                  ),
+                                                                  Text(
+                                                                    transactionController.payoutList[i].bankDetails ==
+                                                                            null
+                                                                        ? ""
+                                                                        : transactionController.payoutList[i].bankDetails!.accountNumber ==
+                                                                                null
+                                                                            ? ""
+                                                                            : "****" +
+                                                                                transactionController.payoutList[i].bankDetails!.accountNumber!.substring(transactionController.payoutList[i].bankDetails!.accountNumber!.length - 4),
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            roboto_bold,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w600,
+                                                                        fontSize: 14
+                                                                            .sp,
+                                                                        color:
+                                                                            black_121212),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              flex: 1,
+                                                            ),
+                                                            Expanded(
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    height: 2.h,
+                                                                  ),
+                                                                  Text(
+                                                                    "On",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            roboto_regular,
+                                                                        fontSize: 11
+                                                                            .sp,
+                                                                        color:
+                                                                            grey_aaaaaa),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 2.h,
+                                                                  ),
+                                                                  Text(
+                                                                    DateFormat(
+                                                                            'MMM dd yyyy, hh:mm a')
+                                                                        .format(transactionController
+                                                                            .payoutList[i]
+                                                                            .createdAt!),
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            roboto_regular,
+                                                                        fontSize: 11
+                                                                            .sp,
+                                                                        color:
+                                                                            black_121212),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              flex: 2,
+                                                            ),
+                                                            Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .end,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Text(
+                                                                  transactionController
+                                                                              .payoutList[i]
+                                                                              .paid_date ==
+                                                                          null
+                                                                      ? "Requested"
+                                                                      : "Received",
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          roboto_regular,
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      color: transactionController.payoutList[i].paid_date ==
+                                                                              null
+                                                                          ? orange_ff881a
+                                                                          : green),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 2.h,
+                                                                ),
+                                                                Text(
+                                                                  transactionController
+                                                                          .payoutList[
+                                                                              i]
+                                                                          .amount ??
+                                                                      "",
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          roboto_bold,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      fontSize:
+                                                                          16.sp,
+                                                                      color:
+                                                                          black_121212),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }),
+                                            ),
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                }),
-
-
-
-                          ),
-                        ],
-                      ),
-                    )
-
-                        : SizedBox(),
-
-                    if (transactionController.isPaginationLoadingForTransactions.value == true)
-                      PaginationUtils().loader(),
-
-                    /*--------------- Payouts Tab --------------*/
-                    _isSecondLayout
-                        ? Visibility(
-                      visible: _isSecondLayout,
-                      child: transactionController.isPayoutsLoading.value == true
-                      ? Container(height: MediaQuery.of(context).size.height * 0.60,
-                      child: Center(child: CircularProgressIndicator(color: black, strokeWidth: 2,)))
-                      : transactionController.payoutList.isEmpty
-                      ? Container(
-                        height: MediaQuery.of(context).size.height * 0.60,
-                        child: Center(
-                          child: setHelveticaMedium("No Payouts Yet", 14.sp, grey_aaaaaa, FontWeight.w500, FontStyle.normal),
-                        )
-                      ): Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding:  EdgeInsets.only(left: 24.w,right: 24.w,top: 16.h),
-                            child: SearchBarTag(
-                              placeholder: "Search",
-                              autoFocus: false,
-                              onSubmit: (value) {
-                                checkNet(context).then((value) {
-                                  transactionController.PageNumberForPayouts.value = 0;
-                                  transactionController.allPayoutListApi(context);
-                                });
-                              },
-                              controller: transactionController.searchControllerForPayouts.value,
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                                top: 16.h, left: 24.w, right: 24.w),
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                primary: false,
-                                itemCount:
-                                transactionController.payoutList.length,
-                                padding: EdgeInsets.zero,
-                                itemBuilder: (context, i) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(bottom: 10.h),
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 20.h, horizontal: 16.w),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                        BorderRadius.circular(4.r),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color(0x0fff5f5f5),
-                                            offset: const Offset(
-                                              0.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 10.0,
-                                            spreadRadius: 5.0,
-                                          ), //BoxShadow
-                                        ],
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Account",
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      roboto_regular,
-                                                      fontSize: 11.sp,
-                                                      color: grey_aaaaaa),
-                                                ),
-                                                SizedBox(
-                                                  height: 2.h,
-                                                ),
-                                                Text(transactionController.payoutList[i].bankDetails == null ? ""
-                                                  : transactionController.payoutList[i].bankDetails!.accountNumber == null ? ""
-                                                  : "****" + transactionController.payoutList[i].bankDetails!.accountNumber!.substring(transactionController.payoutList[i].bankDetails!.accountNumber!.length - 4),
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      roboto_bold,
-                                                      fontWeight: FontWeight.w600,
-                                                      fontSize: 14.sp,
-                                                      color: black_121212),
-                                                ),
-                                              ],
-                                            ),
-                                            flex: 1,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  height: 2.h,
-                                                ),
-                                                Text(
-                                                  "On",
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      roboto_regular,
-                                                      fontSize: 11.sp,
-                                                      color: grey_aaaaaa),
-                                                ),
-                                                SizedBox(
-                                                  height: 2.h,
-                                                ),
-                                                Text(
-                                                  DateFormat('MMM dd yyyy, hh:mm a').format(transactionController
-                                                      .payoutList[i]
-                                                      .createdAt!),
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      roboto_regular,
-                                                      fontSize: 11.sp,
-                                                      color: black_121212),
-                                                ),
-                                              ],
-                                            ),
-                                            flex: 2,
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                transactionController.payoutList[i].paid_date == null ? "Requested" : "Received",
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                    roboto_regular,
-                                                    fontSize: 11.sp,
-                                                    color: transactionController.payoutList[i].paid_date == null ? orange_ff881a : green),
-                                              ),
-                                              SizedBox(
-                                                height: 2.h,
-                                              ),
-                                              Text(
-                                                transactionController
-                                                    .payoutList[i]
-                                                    .amount ??
-                                                    "",
-                                                style: TextStyle(
-                                                    fontFamily: roboto_bold,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 16.sp,
-                                                    color: black_121212),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }),
-                          ),
-                        ],
-                      ),
-                    )
-                        : SizedBox(),
-
-                    if (transactionController.isPaginationLoadingForPayouts.value == true)
-                      PaginationUtils().loader(),
-                  ],),
+                            )
+                          : SizedBox(),
+                      if (transactionController
+                              .isPaginationLoadingForPayouts.value ==
+                          true)
+                        PaginationUtils().loader(),
+                    ],
+                  ),
                 ),
               )
-
-
             ],
           ),
         ),

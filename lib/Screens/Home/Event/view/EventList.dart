@@ -16,6 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../Layout/ToolbarBackOnly.dart';
 
@@ -35,6 +36,7 @@ class _EventListState extends State<EventList> {
   @override
   void initState() {
     super.initState();
+    controller.isLoading.value = true;
     controller.pageNumber = controller.pageNumber + 1;
     dynamic body = {
       'page': controller.pageNumber.toString(),
@@ -79,6 +81,7 @@ class _EventListState extends State<EventList> {
               onTap: () {
                 controller.isLoading.value = true;
                 Get.to(MyPurchasedEvent())!.then((value) {
+                  controller.isLoading.value = true;
                   controller.eventList.clear();
                   controller.pageNumber.value = 0;
                   dynamic body = {
@@ -86,7 +89,6 @@ class _EventListState extends State<EventList> {
                     'event_type': 'upcoming',
                   };
                   checkNet(context).then((value) async {
-                    controller.isLoading.value = true;
                     await controller.allEventListApi(body);
                   });
                 });
@@ -146,13 +148,190 @@ class _EventListState extends State<EventList> {
                     ),
                     controller.isLoading.value == true
                         ? Container(
-                            height: MediaQuery.of(context).size.height * 0.60,
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                color: black,
-                                strokeWidth: 2,
-                              ),
-                            ))
+                            margin: EdgeInsets.only(left: 16.w, right: 16.w),
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                primary: false,
+                                itemCount: 4,
+                                padding: EdgeInsets.zero,
+                                itemBuilder: (context, i) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: 16.h),
+                                    child: Center(
+                                      child: Stack(
+                                        children: [
+                                          SizedBox(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 207.h,
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.r)),
+                                                child: SvgPicture.asset(
+                                                  placeholder,
+                                                  fit: BoxFit.cover,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: 207.h,
+                                                ),
+                                              )),
+                                          Align(
+                                            alignment: Alignment.topRight,
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                  top: 8.h,
+                                                  left: 8.w,
+                                                  right: 8.w),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Shimmer.fromColors(
+                                                    baseColor:
+                                                        Colors.grey.shade400,
+                                                    highlightColor:
+                                                        Colors.grey.shade200,
+                                                    enabled: true,
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 15.w,
+                                                              vertical: 8.w),
+                                                      height: 20.h,
+                                                      decoration: BoxDecoration(
+                                                        color: orange
+                                                            .withOpacity(0.7),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    25.r)),
+                                                      ),
+                                                      child: const Center(
+                                                        child: SizedBox(
+                                                          width: 30,
+                                                          height: 10,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Shimmer.fromColors(
+                                                    baseColor:
+                                                        Colors.grey.shade400,
+                                                    highlightColor:
+                                                        Colors.grey.shade200,
+                                                    enabled: true,
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 15.w,
+                                                              vertical: 8.w),
+                                                      height: 20.h,
+                                                      decoration: BoxDecoration(
+                                                        color: orange
+                                                            .withOpacity(0.7),
+                                                      ),
+                                                      child: const Center(
+                                                        child: SizedBox(
+                                                          width: 60,
+                                                          height: 10,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                              bottom: 19.h,
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(width: 10),
+                                                  SvgPicture.asset(
+                                                    calendar_icon,
+                                                    height: 12.h,
+                                                    width: 12.w,
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Shimmer.fromColors(
+                                                    baseColor:
+                                                        Colors.grey.shade400,
+                                                    highlightColor:
+                                                        Colors.grey.shade200,
+                                                    enabled: true,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.black,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8)),
+                                                      height: 15,
+                                                      width: 140,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )),
+                                          Positioned(
+                                              bottom: 19.h,
+                                              right: 16.w,
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(width: 10),
+                                                  Shimmer.fromColors(
+                                                    baseColor:
+                                                        Colors.grey.shade400,
+                                                    highlightColor:
+                                                        Colors.grey.shade200,
+                                                    enabled: true,
+                                                    child: Container(
+                                                      height: 10,
+                                                      width: 60,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.black,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8)),
+                                                    ),
+                                                  ),
+                                                  SvgPicture.asset(
+                                                    icon_location,
+                                                    height: 12.h,
+                                                    width: 12.w,
+                                                  ),
+                                                ],
+                                              )),
+                                          // Positioned(
+                                          //     bottom: 40.h,
+                                          //     child: Padding(
+                                          //       padding:
+                                          //           EdgeInsets.only(left: 16.w),
+                                          //       child: Padding(
+                                          //         padding: EdgeInsets.only(
+                                          //             left: 4.w),
+                                          //         child: Shimmer.fromColors(
+                                          //           baseColor:
+                                          //               Colors.grey.shade400,
+                                          //           highlightColor:
+                                          //               Colors.grey.shade200,
+                                          //           enabled: true,
+                                          //           child: Container(
+                                          //             height: 15,
+                                          //             width: 200,
+                                          //             color: Colors.black,
+                                          //           ),
+                                          //         ),
+                                          //       ),
+                                          //     )),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          )
                         : controller.eventList.isEmpty
                             ? SizedBox(
                                 width: double.infinity,

@@ -120,24 +120,22 @@ class EventDetailController extends GetxController {
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 200) {
-
             EventListModel detail = EventListModel.fromJson(userModel);
             // eventList.addAll(detail.data!);
             pastEventList.clear();
             upcomingEventList.clear();
-            for(var item in detail.data!){
-              if(item.event_status == 1){
+            for (var item in detail.data!) {
+              if (item.event_status == 1) {
                 pastEventList.add(item);
-              }else{
+              } else {
                 upcomingEventList.add(item);
               }
-            
             }
 
             print(pastEventList.length);
             print(upcomingEventList.length);
-            
-            isLoading.value = false; 
+
+            isLoading.value = false;
             isPastUpcomingPaginationLoading.value = false;
           } else {
             print(res.reasonPhrase);
@@ -155,8 +153,6 @@ class EventDetailController extends GetxController {
     String url = urlBase + urlallEventList;
     final apiReq = Request();
 
-
-
     apiReq.postAPI(url, body, token.toString()).then((value) {
       if (pageNumber == 1) {
         eventList.clear();
@@ -173,11 +169,10 @@ class EventDetailController extends GetxController {
           BaseModel model = BaseModel.fromJson(userModel);
 
           if (model.statusCode == 200) {
-
             EventListModel detail = EventListModel.fromJson(userModel);
             eventList.addAll(detail.data!);
-          
-            isLoading.value = false;    
+
+            isLoading.value = false;
             isPaginationLoading.value = false;
           } else {
             print(res.reasonPhrase);
@@ -189,4 +184,3 @@ class EventDetailController extends GetxController {
     });
   }
 }
-

@@ -237,8 +237,6 @@ class _VideoListBctState extends State<VideoListBct> {
                                 controller.selectMutiTopicList.clear();
                                 controller.selectMutiLanguList.clear();
 
-                                controller.findSpeakerApi(search: "");
-
                                 Get.to(SearchVideoList());
                               },
                               onChanged: (text) {},
@@ -328,8 +326,6 @@ class _VideoListBctState extends State<VideoListBct> {
                                             -1;
                                         controller.selectMutiTopicList.clear();
                                         controller.selectMutiLanguList.clear();
-
-                                        controller.findSpeakerApi(search: "");
 
                                         Get.to(FindSpeaker());
                                       },

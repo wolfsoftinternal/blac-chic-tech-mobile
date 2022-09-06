@@ -261,34 +261,31 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 borderColor: Colors.transparent,
                 child: myModel?.data?.image == null
                     ? SvgPicture.asset(
-                  placeholder,
-                  height: 20.h,
-                  width: 20.w,
-                  fit: BoxFit.cover,
-                )
+                        placeholder,
+                        height: 20.h,
+                        width: 20.w,
+                        fit: BoxFit.cover,
+                      )
                     : CachedNetworkImage(
-                  imageUrl: myModel!.data!.image!,
-                  height: 20.h,
-                  width: 20.w,
-                  fit: BoxFit.cover,
-                  progressIndicatorBuilder: (context,
-                      url, downloadProgress) =>
-                      SvgPicture.asset(
-                        placeholder,
+                        imageUrl: myModel!.data!.image!,
                         height: 20.h,
                         width: 20.w,
                         fit: BoxFit.cover,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                SvgPicture.asset(
+                          placeholder,
+                          height: 20.h,
+                          width: 20.w,
+                          fit: BoxFit.cover,
+                        ),
+                        errorWidget: (context, url, error) => SvgPicture.asset(
+                          placeholder,
+                          height: 20.h,
+                          width: 20.w,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                  errorWidget:
-                      (context, url, error) =>
-                      SvgPicture.asset(
-                        placeholder,
-                        height: 20.h,
-                        width: 20.w,
-                        fit: BoxFit.cover,
-                      ),
-                ),
-
               ),
             ),
 

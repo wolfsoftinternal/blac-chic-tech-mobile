@@ -84,7 +84,7 @@ dependencies:
   photo_manager: ^2.1.1
   reorderable_grid_view: ^2.2.0
   social_share: ^2.2.1
-
+  shimmer: ^2.0.0
   # flutter_social_content_share: ^1.0.2
   dropdown_button2: ^1.6.3
   is_first_run: ^1.0.0

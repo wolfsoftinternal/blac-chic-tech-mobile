@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../../Layout/SearchBarWithRightIcon.dart';
@@ -20,7 +21,8 @@ import '../../../../Utilities/Constant.dart';
 class SpeakersVideos extends StatefulWidget {
   int id;
   String name;
-  SpeakersVideos({required this.id, required this.name, Key? key}) : super(key: key);
+  SpeakersVideos({required this.id, required this.name, Key? key})
+      : super(key: key);
 
   @override
   _SpeakersVideosState createState() => _SpeakersVideosState();
@@ -53,16 +55,17 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
           controller.scrollVideoController.position.pixels) {
         scrollDown();
         controller.isPaginationLoading.value = true;
-        
-        await controller.speakerDataVideoAPI(search: search, videoId: widget.id);
+
+        await controller.speakerDataVideoAPI(
+            search: search, videoId: widget.id);
         controller.isPaginationLoading.value = false;
       }
     });
   }
 
   void scrollDown() {
-    controller.scrollVideoController.jumpTo(
-        controller.scrollVideoController.position.maxScrollExtent);
+    controller.scrollVideoController
+        .jumpTo(controller.scrollVideoController.position.maxScrollExtent);
   }
 
   @override
@@ -77,7 +80,6 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -88,19 +90,19 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
             Container(
-                          margin: EdgeInsets.only(top: 15.h),
-                          child:
-                              ToolbarWithHeaderCenterTitle(widget.name.capitalize)),
-                      SearchBarWithRightIcon(
-                        onSearch: (value) {
-                          controller.speakerList.clear();
-                          controller.videoPageNo.value = 0;
-                          search = value;
-                          controller.speakerDataVideoAPI(search: value.toString(), videoId: widget.id);
-                        }
-                      ),
+                margin: EdgeInsets.only(top: 15.h),
+                child: ToolbarWithHeaderCenterTitle(widget.name.capitalize)),
+            SearchBarWithRightIcon(onSearch: (value) {
+              controller.speakerList.clear();
+              controller.videoPageNo.value = 0;
+              search = value;
+              controller.speakerDataVideoAPI(
+                  search: value.toString(), videoId: widget.id);
+            }),
             Expanded(
               child: SingleChildScrollView(
                 controller: controller.scrollVideoController,
@@ -109,33 +111,244 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
-
-                      
                       Container(
-                        margin: EdgeInsets.only(
-                            top: 24.h, left: 24.w, right: 24.w),
-                        child: 
-                        // controller.isLoading.value
-                        //     ? const SizedBox(
-                        //         width: double.infinity,
-                        //         height: 100,
-                        //         child: Center(
-                        //             child: SizedBox(
-                        //           height: 20,
-                        //           width: 20,
-                        //           child: CircularProgressIndicator(
-                        //             strokeWidth: 2,
-                        //             valueColor: AlwaysStoppedAnimation<Color>(
-                        //                 Color(0xff04080f)),
-                        //           ),
-                        //         )))
-                        //     : 
-                            controller.speakerList.length == 0
+                        margin:
+                            EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
+                        child: controller.isLoading.value
+                            ? Container(
+                                // height:
+                                //     MediaQuery.of(context).size.height * 0.99,
+                                // width: double.infinity,
+                                margin: EdgeInsets.only(
+                                    top: 0.h, left: 0.w, right: 0.w),
+                                child: ListView.builder(
+                                    physics: ScrollPhysics(),
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    itemCount: 8,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 0.w),
+                                    itemBuilder: (context, i) {
+                                      // if (i < controller.videoList.length) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(bottom: 20.h),
+                                        child: SizedBox(
+                                            width: double.infinity,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Stack(
+                                                  alignment: Alignment.center,
+                                                  children: [
+                                                    Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey.shade300,
+                                                      highlightColor:
+                                                          Colors.grey.shade100,
+                                                      enabled: true,
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.black,
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        6.r))),
+                                                        height: 70.h,
+                                                        width: 100.w,
+                                                      ),
+                                                    ),
+                                                    SvgPicture.asset(
+                                                      icon_play,
+                                                      width: 25,
+                                                      height: 25,
+                                                    ),
+                                                  ],
+                                                ),
+                                                // SizedBox(
+                                                //         height: 80.h,
+                                                //         width: 120.w,
+                                                //         child: ClipRRect(
+                                                //           borderRadius:
+                                                //               const BorderRadius
+                                                //                       .all(
+                                                //                   Radius.circular(
+                                                //                       15)),
+                                                //           child: Html(
+                                                //               data: controller
+                                                //                   .videoList[
+                                                //                       i]
+                                                //                   .embededCode),
+                                                //         )),
+                                                // Stack(
+                                                //   alignment:
+                                                //       Alignment.bottomRight,
+                                                //   children: [
+
+                                                // Positioned(
+                                                //   bottom: 2,
+                                                //   right: 3,
+                                                //   child: Container(
+                                                //     margin:
+                                                //         EdgeInsets.only(
+                                                //             right: 6.w,
+                                                //             bottom:
+                                                //                 6.h),
+                                                //     padding: EdgeInsets
+                                                //         .symmetric(
+                                                //             vertical:
+                                                //                 1.5.h,
+                                                //             horizontal:
+                                                //                 6.w),
+                                                //     decoration:
+                                                //         BoxDecoration(
+                                                //       borderRadius:
+                                                //           BorderRadius
+                                                //               .circular(
+                                                //                   4),
+                                                //       gradient:
+                                                //           const LinearGradient(
+                                                //         begin: Alignment
+                                                //             .topCenter,
+                                                //         end: Alignment
+                                                //             .bottomCenter,
+                                                //         colors: [
+                                                //           Color(
+                                                //               0xff1c2535),
+                                                //           Color(
+                                                //               0xff04080f)
+                                                //         ],
+                                                //         stops: [
+                                                //           0.0,
+                                                //           5.0
+                                                //         ],
+                                                //       ),
+                                                //     ),
+                                                //     child: Text(
+                                                //       "3.05",
+                                                //       style: TextStyle(
+                                                //           fontSize:
+                                                //               11.sp,
+                                                //           color: Colors
+                                                //               .white,
+                                                //           fontFamily:
+                                                //               helveticaNeueNeue_medium),
+                                                //     ),
+                                                //   ),
+                                                // ),
+                                                //   ],
+                                                // ),
+                                                Expanded(
+                                                  child: Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 8.w, right: 10.w),
+                                                    child: Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey.shade300,
+                                                      highlightColor:
+                                                          Colors.grey.shade100,
+                                                      enabled: true,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          // SizedBox(
+                                                          //   height: 3.h,
+                                                          // ),
+                                                          Container(
+                                                            height: 12,
+                                                            width:
+                                                                double.infinity,
+                                                            decoration: BoxDecoration(
+                                                                color: Colors
+                                                                    .black,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10)),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 8.h,
+                                                          ),
+                                                          Container(
+                                                            height: 8,
+                                                            width: 100,
+                                                            decoration: BoxDecoration(
+                                                                color: Colors
+                                                                    .black,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10)),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 2.h,
+                                                          ),
+                                                          Container(
+                                                            height: 8,
+                                                            width: 100,
+                                                            decoration: BoxDecoration(
+                                                                color: Colors
+                                                                    .black,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10)),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )),
+                                      );
+
+                                      // } else {
+                                      //   return controller.hasDataMore.value ==
+                                      //           true
+                                      //       ? const SizedBox(
+                                      //           width: double.infinity,
+                                      //           height: 50,
+                                      //           child: Center(
+                                      //               child: SizedBox(
+                                      //             height: 20,
+                                      //             width: 20,
+                                      //             child: CircularProgressIndicator(
+                                      //                 strokeWidth: 2,
+                                      //                 valueColor:
+                                      //                     AlwaysStoppedAnimation<
+                                      //                             Color>(
+                                      //                         Color(
+                                      //                             0xff04080f))),
+                                      //           )))
+                                      //       : Container(
+                                      //           margin: EdgeInsets.only(
+                                      //               bottom: 25.h),
+                                      //           child: Center(
+                                      //               child:
+                                      //                   Text("No More Data",
+                                      //                       style: TextStyle(
+                                      //                         fontFamily:
+                                      //                             roboto_bold,
+                                      //                         fontSize: 14.sp,
+                                      //                         color: const Color(
+                                      //                             0xff04080f),
+                                      //                       ))),
+                                      //         );
+                                      // }
+                                    }),
+                              )
+                            : controller.speakerList.length == 0
                                 ? SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height *
-                                            0.5,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.5,
                                     width: double.infinity,
                                     child: const Center(
                                         child: Text("No Data Found",
@@ -150,162 +363,154 @@ class _SpeakersVideosState extends State<SpeakersVideos> {
                                 : ListView.builder(
                                     shrinkWrap: true,
                                     primary: false,
-                                    itemCount:
-                                        controller.speakerList.length,
+                                    itemCount: controller.speakerList.length,
                                     padding: EdgeInsets.zero,
                                     itemBuilder: (context, i) {
                                       // if (i < controller.speakerList.length) {
                                       //   print(
                                       //       "::::::::::::UPDATE 00:::::::::::");
-                                        return Padding(
-                                          padding:
-                                              EdgeInsets.only(bottom: 20.h),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Get.to(VideoDetailTab(
-                                                  videoList: controller
-                                                      .speakerList[i]));
-                                            },
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
-                                              children: [
-                                                Stack(
-                                                  alignment: Alignment.center,
-                                                  children: [
-                                                    SizedBox(
-                                                                height: 66.h,
-                                                              width: 110.w,
-                                                                child: FittedBox(
-                                                                  fit: BoxFit.fill,
-                                                                  child: ClipRRect(
-                                                                    borderRadius: BorderRadius
-                                                                        .all(Radius
-                                                                            .circular(
-                                                                                15.r)),
-                                                                    child:
-                                                                        YoutubePlayerBuilder(
-                                                                            onEnterFullScreen:
-                                                                                () {
-                                                                              fullScreen =
-                                                                                  false;
-                                                                            },
-                                                                            player:
-                                                                                YoutubePlayer(
-                                                                              bottomActions: const [
-                                                                                SizedBox(width: 14.0),
-                                                                                // CurrentPosition(),
-                                                                                // const SizedBox(width: 8.0),
-                                                                                // ProgressBar(),
-                                                                                // RemainingDuration(),
-                                                                                // const PlaybackSpeedButton(),
-                                                                              ],
-                                                                              controller: controller
-                                                                                  .speakerVideoController
-                                                                                  .value[i],
-                                                                            ),
-                                                                            builder:
-                                                                                (context,
-                                                                                    player) {
-                                                                              return Column(
-                                                                                children: [
-                                                                                  player,
-                                                                                ],
-                                                                              );
-                                                                            }),
-                                                                  ),
+                                      return Padding(
+                                        padding: EdgeInsets.only(bottom: 20.h),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Get.to(VideoDetailTab(
+                                                videoList:
+                                                    controller.speakerList[i]));
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Stack(
+                                                alignment: Alignment.center,
+                                                children: [
+                                                  SizedBox(
+                                                    height: 66.h,
+                                                    width: 110.w,
+                                                    child: FittedBox(
+                                                      fit: BoxFit.fill,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    15.r)),
+                                                        child:
+                                                            YoutubePlayerBuilder(
+                                                                onEnterFullScreen:
+                                                                    () {
+                                                                  fullScreen =
+                                                                      false;
+                                                                },
+                                                                player:
+                                                                    YoutubePlayer(
+                                                                  bottomActions: const [
+                                                                    SizedBox(
+                                                                        width:
+                                                                            14.0),
+                                                                    // CurrentPosition(),
+                                                                    // const SizedBox(width: 8.0),
+                                                                    // ProgressBar(),
+                                                                    // RemainingDuration(),
+                                                                    // const PlaybackSpeedButton(),
+                                                                  ],
+                                                                  controller: controller
+                                                                      .speakerVideoController
+                                                                      .value[i],
                                                                 ),
-                                                              ),
-                                                              SvgPicture
-                                                                  .asset(
-                                                                      icon_play,width: 25,height: 25,),
-                                                  ],
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                    margin:
-                                                        EdgeInsets.only(
-                                                            left: 8.w,
-                                                            right: 10.w),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        // SizedBox(
-                                                        //   height: 3.h,
-                                                        // ),
-                                                        Text(
-                                                          controller
-                                                              .speakerList[
-                                                                  i]
-                                                              .title
-                                                              .toString(),
-                                                          softWrap: true,
-                                                          overflow:
-                                                              TextOverflow
-                                                                  .ellipsis,
-                                                          maxLines: 1,
-                                                          style: const TextStyle(
-                                                              fontFamily:
-                                                                  helvetica_neu_bold,
-                                                              color:
-                                                                  black_121212,
-                                                              fontSize:
-                                                                  14),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 8.h,
-                                                        ),
-                                                        Text(
-                                                          controller
-                                                              .speakerList[
-                                                                  i]
-                                                              .userDetails!
-                                                              .fullName
-                                                              .toString(),
-                                                          style: const TextStyle(
-                                                              fontFamily:
-                                                                  helveticaNeueNeue_medium,
-                                                              color:
-                                                                  opcity_black_121212,
-                                                              fontSize:
-                                                                  10),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 2.h,
-                                                        ),
-                                                        Text(
-                                                          "Posted " +
-                                                              DateFormat
-                                                                      .yMMMM()
-                                                                  .format(DateTime.parse(controller
-                                                                      .speakerList[i]
-                                                                      .createdAt
-                                                                      .toString()))
-                                                                  .toString(),
-                                                          style: const TextStyle(
-                                                              fontFamily:
-                                                                  helveticaNeueNeue_medium,
-                                                              color:
-                                                                  opcity_black_121212,
-                                                              fontSize:
-                                                                  8),
-                                                        ),
-                                                      ],
+                                                                builder:
+                                                                    (context,
+                                                                        player) {
+                                                                  return Column(
+                                                                    children: [
+                                                                      player,
+                                                                    ],
+                                                                  );
+                                                                }),
+                                                      ),
                                                     ),
                                                   ),
+                                                  SvgPicture.asset(
+                                                    icon_play,
+                                                    width: 25,
+                                                    height: 25,
+                                                  ),
+                                                ],
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      left: 8.w, right: 10.w),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      // SizedBox(
+                                                      //   height: 3.h,
+                                                      // ),
+                                                      Text(
+                                                        controller
+                                                            .speakerList[i]
+                                                            .title
+                                                            .toString(),
+                                                        softWrap: true,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 1,
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                                helvetica_neu_bold,
+                                                            color: black_121212,
+                                                            fontSize: 14),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 8.h,
+                                                      ),
+                                                      Text(
+                                                        controller
+                                                            .speakerList[i]
+                                                            .userDetails!
+                                                            .fullName
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                                helveticaNeueNeue_medium,
+                                                            color:
+                                                                opcity_black_121212,
+                                                            fontSize: 10),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 2.h,
+                                                      ),
+                                                      Text(
+                                                        "Posted " +
+                                                            DateFormat.yMMMM()
+                                                                .format(DateTime
+                                                                    .parse(controller
+                                                                        .speakerList[
+                                                                            i]
+                                                                        .createdAt
+                                                                        .toString()))
+                                                                .toString(),
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                                helveticaNeueNeue_medium,
+                                                            color:
+                                                                opcity_black_121212,
+                                                            fontSize: 8),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                        );
+                                        ),
+                                      );
                                       // } else {
                                       //   return controller.hasMore.value ==
                                       //           false

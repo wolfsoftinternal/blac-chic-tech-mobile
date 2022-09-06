@@ -37,6 +37,7 @@ class _SearchVideoListState extends State<SearchVideoList> {
     if (mounted) {
       controller.isLoading.value = false;
       controller.isLoadingButton.value = false;
+      controller.findSpeakerApi(search: "");
     }
   }
 
@@ -46,7 +47,7 @@ class _SearchVideoListState extends State<SearchVideoList> {
           controller.scrollSearchListController.position.pixels) {
         scrollDown();
         controller.isPaginationLoading.value = true;
-        controller.searchListPageNo =  controller.searchListPageNo + 1;
+        controller.searchListPageNo = controller.searchListPageNo + 1;
         await controller.videoListSearchAPI(topicFilter: search);
         controller.isPaginationLoading.value = false;
       }
@@ -73,7 +74,7 @@ class _SearchVideoListState extends State<SearchVideoList> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.only( top: 50.h, right: 24.w),
+        padding: EdgeInsets.only(top: 50.h, right: 24.w),
         child: Column(
           children: [
             Row(
@@ -127,7 +128,10 @@ class _SearchVideoListState extends State<SearchVideoList> {
                               textAlign: TextAlign.left)),
                 ),
                 Spacer(),
-                Container(height: 48.h, width: 48.h,),
+                Container(
+                  height: 48.h,
+                  width: 48.h,
+                ),
               ],
             ),
             SizedBox(
@@ -147,7 +151,6 @@ class _SearchVideoListState extends State<SearchVideoList> {
                 fillcolor: Color(0xfff5f5f5),
               ),
             ),
-
             SizedBox(
               height: 14.h,
             ),
@@ -158,9 +161,10 @@ class _SearchVideoListState extends State<SearchVideoList> {
                   () => Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 10.h, left: 24.w, right: 0.w),
-                        child: 
-                        // controller.isLoading.value
+                        margin:
+                            EdgeInsets.only(top: 10.h, left: 24.w, right: 0.w),
+                        child:
+                            // controller.isLoading.value
                             // ? SizedBox(
                             //     width: double.infinity,
                             //     height: MediaQuery.of(context).size.height * 0.60,
@@ -170,36 +174,40 @@ class _SearchVideoListState extends State<SearchVideoList> {
                             //       valueColor: AlwaysStoppedAnimation<Color>(
                             //           Color(0xff04080f)),
                             //     )))
-                            // : 
+                            // :
                             controller.videoAllList.length == 0
                                 ? SizedBox(
-                                    height: MediaQuery.of(context).size.height * 0.5,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.5,
                                     width: double.infinity,
                                     child: const Center(
                                         child: Text("No Data Found",
                                             style: TextStyle(
                                                 color: grey_aaaaaa,
                                                 fontWeight: FontWeight.w500,
-                                                fontFamily: helveticaNeueNeue_medium,
+                                                fontFamily:
+                                                    helveticaNeueNeue_medium,
                                                 fontStyle: FontStyle.normal,
                                                 fontSize: 14))),
                                   )
                                 : ListView.builder(
-                                  physics: ScrollPhysics(),
+                                    physics: ScrollPhysics(),
                                     shrinkWrap: true,
                                     primary: false,
                                     itemCount: controller.videoAllList.length,
                                     padding: EdgeInsets.zero,
                                     itemBuilder: (context, i) {
                                       if (i < controller.videoAllList.length) {
-                                        print("::::::::::::UPDATE 00:::::::::::");
+                                        print(
+                                            "::::::::::::UPDATE 00:::::::::::");
                                         return Padding(
-                                          padding: EdgeInsets.only(bottom: 20.h),
+                                          padding:
+                                              EdgeInsets.only(bottom: 20.h),
                                           child: InkWell(
                                             onTap: () {
                                               Get.to(VideoDetailTab(
-                                                  videoList:
-                                                      controller.videoAllList[i]));
+                                                  videoList: controller
+                                                      .videoAllList[i]));
                                             },
                                             child: SizedBox(
                                                 width: double.infinity,
@@ -214,37 +222,40 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                                           Alignment.center,
                                                       children: [
                                                         SizedBox(
-                                                        height: 66.h,
-                                                              width: 110.w,
-                                                        child: FittedBox(
-                                                          fit: BoxFit.fill,
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        15.r)),
-                                                            child:
-                                                                YoutubePlayerBuilder(
-                                                                    player:
-                                                                        YoutubePlayer(
-                                                                      controller:
-                                                                          controller
-                                                                              .searchVideoList[i],
-                                                                    ),
-                                                                    builder:
-                                                                        (context,
-                                                                            player) {
-                                                                      return Column(
-                                                                        children: [
-                                                                          player,
-                                                                        ],
-                                                                      );
-                                                                    }),
+                                                          height: 66.h,
+                                                          width: 110.w,
+                                                          child: FittedBox(
+                                                            fit: BoxFit.fill,
+                                                            child: ClipRRect(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          15.r)),
+                                                              child:
+                                                                  YoutubePlayerBuilder(
+                                                                      player:
+                                                                          YoutubePlayer(
+                                                                        controller:
+                                                                            controller.searchVideoList[i],
+                                                                      ),
+                                                                      builder:
+                                                                          (context,
+                                                                              player) {
+                                                                        return Column(
+                                                                          children: [
+                                                                            player,
+                                                                          ],
+                                                                        );
+                                                                      }),
+                                                            ),
                                                           ),
                                                         ),
+                                                        SvgPicture.asset(
+                                                          icon_play,
+                                                          width: 25,
+                                                          height: 25,
                                                         ),
-                                                            SvgPicture.asset(icon_play,width: 25,height: 25,),
-                                                          
+
                                                         // Positioned(
                                                         //   bottom: 2,
                                                         //   right: 3,
@@ -288,10 +299,12 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                                     Expanded(
                                                       child: Container(
                                                         margin: EdgeInsets.only(
-                                                            left: 8.w, right: 10.w),
+                                                            left: 8.w,
+                                                            right: 10.w),
                                                         child: Column(
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment.start,
+                                                              MainAxisAlignment
+                                                                  .start,
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,
@@ -301,17 +314,20 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                                             // ),
                                                             Text(
                                                               controller
-                                                                  .videoAllList[i]
+                                                                  .videoAllList[
+                                                                      i]
                                                                   .title
                                                                   .toString(),
                                                               softWrap: true,
-                                                              overflow: TextOverflow
-                                                                  .ellipsis,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
                                                               maxLines: 1,
                                                               style: const TextStyle(
                                                                   fontFamily:
                                                                       helvetica_neu_bold,
-                                                                  color: black_121212,
+                                                                  color:
+                                                                      black_121212,
                                                                   fontSize: 14),
                                                             ),
                                                             SizedBox(
@@ -319,7 +335,8 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                                             ),
                                                             Text(
                                                               controller
-                                                                  .videoAllList[i]
+                                                                  .videoAllList[
+                                                                      i]
                                                                   .userDetails!
                                                                   .fullName
                                                                   .toString(),
@@ -335,13 +352,13 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                                             ),
                                                             Text(
                                                               "Posted " +
-                                                                  DateFormat.yMMMM()
-                                                                      .format(DateTime
-                                                                          .parse(controller
-                                                                              .videoAllList[
-                                                                                  i]
-                                                                              .createdAt
-                                                                              .toString()))
+                                                                  DateFormat
+                                                                          .yMMMM()
+                                                                      .format(DateTime.parse(controller
+                                                                          .videoAllList[
+                                                                              i]
+                                                                          .createdAt
+                                                                          .toString()))
                                                                       .toString(),
                                                               style: const TextStyle(
                                                                   fontFamily:
@@ -362,18 +379,21 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                         return controller.hasMore.value == false
                                             ? const SizedBox()
                                             : Container(
-                                                margin: EdgeInsets.only(bottom: 25.h),
+                                                margin: EdgeInsets.only(
+                                                    bottom: 25.h),
                                                 child: Center(
                                                   child: TextButton(
                                                     onPressed: () {
+                                                      controller.searchVideoPage
+                                                          .value++;
                                                       controller
-                                                          .searchVideoPage.value++;
-                                                      controller.searchVideoMethod();
+                                                          .searchVideoMethod();
                                                     },
                                                     child: Text(
                                                       "Load More",
                                                       style: TextStyle(
-                                                          fontFamily: roboto_bold,
+                                                          fontFamily:
+                                                              roboto_bold,
                                                           fontSize: 14.sp,
                                                           color: blue_0a84ff),
                                                     ),
@@ -384,7 +404,7 @@ class _SearchVideoListState extends State<SearchVideoList> {
                                     }),
                       ),
                       if (controller.isPaginationLoading.value == true)
-                                PaginationUtils().loader(),
+                        PaginationUtils().loader(),
                     ],
                   ),
                 ),
